@@ -29,8 +29,16 @@ function tick(){if(!running)return;const now=performance.now(),delta=Math.max(0,
 last-=delta%1000;if(elapsed>=total){finish();return}draw()}
 function start(){if(finished)return;running=true;last=performance.now();timer=setInterval(tick,200);draw()}
 function seek(direction){if(finished)return;stop();const current=Math.floor(elapsed/block);elapsed=Math.min(total-1,Math.max(0,(current+direction)*block));el('player-status').textContent='Paused. Navigation does not count skipped time as a completed workout.';draw()}
-el('player-toggle').addEventListener('click',()=>running?stop():start());el('player-prev').addEventListener('click',()=>seek(-1));el('player-next').addEventListener('click',()=>seek(1));el('player-close').addEventListener('click',()=>{stop();el('tai-player').hidden=true});el('player-restart').addEventListener('click',()=>{if(running)stop();if(elapsed>0&&!confirm('Restart your Tai Chi session from the beginning?'))return;elapsed=0;activeSeconds=0;finished=false;saving=false;el('player-status').textContent='Complete the full 30-minute timer to save your workout.';draw()});
+el('player-toggle').addEventListener('click',()=>running?stop():start());el('player-prev').addEventListener('click',()=>seek(-1));el('player-next').addEventListener('click',()=>seek(1));el('player-close').addEventListener('click',()=>{stop();el('tai-player').hidden=true;if(window.SoulanovaClasses)window.SoulanovaClasses.open()});el('player-restart').addEventListener('click',()=>{if(running)stop();if(elapsed>0&&!confirm('Restart your Tai Chi session from the beginning?'))return;elapsed=0;activeSeconds=0;finished=false;saving=false;el('player-status').textContent='Complete the full 30-minute timer to save your workout.';draw()});
 window.SoulanovaPlayer={open(){el('tai-player').hidden=false;draw();el('tai-player').scrollIntoView({behavior:'smooth',block:'start'})}};
+const library=el('tai-library'), detail=el('class-detail'), workoutsPanel=el('workouts'), player=el('tai-player');
+const list=el('class-movements');moves.forEach((move,i)=>{const li=document.createElement('li');li.textContent=`${i+1}. ${move[0]}`;list.append(li)});
+function showLibrary(preview=false){stop();player.hidden=true;library.hidden=false;detail.hidden=!preview;document.querySelector('.sectionhead').hidden=true;el('workout-list').hidden=true;el('selected-workout').hidden=true;library.scrollIntoView({block:'start'});}
+function leaveLibrary(){stop();player.hidden=true;library.hidden=true;detail.hidden=true;document.querySelector('.sectionhead').hidden=false;el('workout-list').hidden=false;el('selected-workout').hidden=false;workoutsPanel.scrollIntoView({block:'start'});}
+function launch(){library.hidden=true;detail.hidden=true;window.SoulanovaPlayer.open()}
+el('library-back').addEventListener('click',leaveLibrary);el('detail-back').addEventListener('click',()=>showLibrary(false));el('class-preview').addEventListener('click',()=>showLibrary(true));el('class-start').addEventListener('click',launch);el('detail-start').addEventListener('click',launch);
+window.SoulanovaClasses={open:()=>showLibrary(false),close:leaveLibrary};
+
 // Pause when tab/app is backgrounded so inactive time is not logged.
 document.addEventListener('visibilitychange',()=>{if(document.hidden&&running){stop();el('player-status').textContent='Paused while the app was in the background. Tap Resume when ready.'}});
 draw();
