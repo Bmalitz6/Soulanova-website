@@ -1,1 +1,7 @@
-{"cleanUrls":true,"trailingSlash":true}
+{
+  "cleanUrls": true,
+  "trailingSlash": false,
+  "redirects": [
+    { "source": "/app/", "destination": "/app", "permanent": false }
+  ]
+}
