@@ -41,10 +41,17 @@ const authMessage=document.getElementById('auth-message');
 const authForm=document.getElementById('auth-form');
 const authSubmit=document.getElementById('auth-submit');
 let client=null,currentUser=null,authMode='signin';
+const accountRedirectUrl=new URL('/app/',window.location.origin).href; // Add the preview origin to Supabase Auth URL allowlist when testing.
+const recoveryRedirectUrl=new URL('/app/?mode=recover',window.location.origin).href;
+const recoveryRequested=new URLSearchParams(window.location.search).get('mode')==='recover';
+let recoveryActive=recoveryRequested;
+
 function message(s,error=false){authMessage.textContent=s;authMessage.classList.toggle('error',error)}
-function setMode(mode){authMode=mode;document.querySelectorAll('[data-auth-mode]').forEach(b=>b.classList.toggle('active',b.dataset.authMode===mode));document.getElementById('password-field').hidden=mode==='reset';document.getElementById('auth-password').required=mode!=='reset';document.getElementById('confirm-field').hidden=mode!=='signup';document.getElementById('auth-confirm').required=mode==='signup';document.getElementById('auth-password').autocomplete=mode==='signup'?'new-password':'current-password';authSubmit.textContent=mode==='signup'?'Create account':mode==='reset'?'Send reset email':'Sign in';message('')}
+function setMode(mode){authMode=mode;document.querySelectorAll('[data-auth-mode]').forEach(b=>b.classList.toggle('active',b.dataset.authMode===mode));document.getElementById('password-field').hidden=mode==='reset';document.getElementById('auth-password').required=mode!=='reset';document.getElementById('confirm-field').hidden=mode!=='signup';document.getElementById('name-field').hidden=mode!=='signup';document.getElementById('marketing-field').hidden=mode!=='signup';document.getElementById('auth-confirm').required=mode==='signup';document.getElementById('auth-password').autocomplete=mode==='signup'?'new-password':'current-password';authSubmit.textContent=mode==='signup'?'Create account':mode==='reset'?'Send reset email':'Sign in';message('');document.getElementById('signin-hint').hidden=mode!=='signup'}
 document.querySelectorAll('[data-auth-mode]').forEach(b=>b.addEventListener('click',()=>setMode(b.dataset.authMode)));
-function setUser(user){currentUser=user;authBox.hidden=!!user;memberApp.hidden=!user;signOut.hidden=!user;memberLabel.textContent=user?.email||'Not signed in';if(!user){state.history=[];renderStats()}}
+document.getElementById('existing-member-link').addEventListener('click',()=>setMode('signin'));
+const requestedMode=new URLSearchParams(window.location.search).get('mode');if(['signin','signup','reset'].includes(requestedMode))setMode(requestedMode);
+function setUser(user){currentUser=user;authBox.hidden=recoveryActive?false:!!user;memberApp.hidden=recoveryActive?true:!user;signOut.hidden=!user;memberLabel.textContent=user?.email||'Not signed in';const opt=document.getElementById('account-marketing');if(opt)opt.checked=user?.user_metadata?.marketing_opt_in===true;if(!user){state.history=[];renderStats()}}
 async function refreshWorkouts(){if(!currentUser)return;const {data,error}=await client.from('workout_sessions').select('id,workout_name,category,duration_minutes,completed_at').eq('user_id',currentUser.id).order('completed_at',{ascending:true}).limit(1000);if(error)throw error;state.history=(data||[]).map(r=>({id:workouts.find(w=>w.title===r.workout_name&&w.category===r.category)?.id||'',at:r.completed_at,dbid:r.id,minutes:r.duration_minutes,name:r.workout_name,category:r.category}));renderStats()}
 async function addWorkout(w){if(!currentUser)throw Error('Please sign in first');const {error}=await client.from('workout_sessions').insert({user_id:currentUser.id,workout_name:w.title,category:w.category,duration_minutes:w.minutes});if(error)throw error;await refreshWorkouts()}
 async function deleteWorkout(id){if(!currentUser)return;const {error}=await client.from('workout_sessions').delete().eq('id',id).eq('user_id',currentUser.id);if(error)throw error;await refreshWorkouts()}
@@ -53,10 +60,52 @@ async function clearWorkouts(){if(!currentUser)return;const {error}=await client
 const cfg=window.SOULANOVA_SUPABASE||{};
 if(!cfg.url||!cfg.publishableKey||cfg.publishableKey.includes('PASTE_')||!window.supabase){message('Member login is not connected yet. Set the publishable key in app/config.js and refresh.',true);authSubmit.disabled=true}
 else{client=window.supabase.createClient(cfg.url,cfg.publishableKey,{auth:{flowType:'pkce',detectSessionInUrl:true,autoRefreshToken:true,persistSession:true}});
- client.auth.onAuthStateChange((event,session)=>{const user=session?.user||null;setUser(user);if(user){setTimeout(()=>refreshWorkouts().catch(e=>message('Unable to load workouts: '+e.message,true)),0)}});
- client.auth.getUser().then(({data,error})=>{if(error&&!error.message?.includes('session'))message(error.message,true);setUser(data?.user||null);if(data?.user)refreshWorkouts().catch(e=>message(e.message,true))}).catch(e=>message(e.message,true));}
-authForm.addEventListener('submit',async e=>{e.preventDefault();if(!client)return;const email=document.getElementById('auth-email').value.trim(),password=document.getElementById('auth-password').value;authSubmit.disabled=true;message('Please wait…');try{let result;if(authMode==='signup'){if(password!==document.getElementById('auth-confirm').value)throw Error('Passwords do not match.');result=await client.auth.signUp({email,password,options:{emailRedirectTo:'https://www.soulanova.com/app/'}});if(result.error)throw result.error;message('Check your email for a verification link, then return here to sign in.')}else if(authMode==='reset'){result=await client.auth.resetPasswordForEmail(email,{redirectTo:'https://www.soulanova.com/app/'});if(result.error)throw result.error;message('If an account exists for this address, a reset email will arrive shortly.')}else{result=await client.auth.signInWithPassword({email,password});if(result.error)throw result.error;message('Signed in successfully.')}}catch(err){message(err.message||'Something went wrong.',true)}finally{authSubmit.disabled=false}});
+ client.auth.onAuthStateChange((event,session)=>{const user=session?.user||null;if(event==='PASSWORD_RECOVERY')recoveryActive=true;setUser(user);if(recoveryActive){showPasswordUpdate(!!user);return}if(user){setTimeout(()=>refreshWorkouts().catch(e=>message('Unable to load workouts: '+e.message,true)),0)}});
+ client.auth.getUser().then(({data,error})=>{if(error&&!error.message?.includes('session'))message(error.message,true);setUser(data?.user||null);if(recoveryActive)showPasswordUpdate(!!data?.user);else if(data?.user)refreshWorkouts().catch(e=>message(e.message,true))}).catch(e=>message(e.message,true));}
+authForm.addEventListener('submit',async e=>{e.preventDefault();if(!client)return;const email=document.getElementById('auth-email').value.trim(),password=document.getElementById('auth-password').value;authSubmit.disabled=true;message('Please wait…');try{let result;if(authMode==='signup'){if(password!==document.getElementById('auth-confirm').value)throw Error('Passwords do not match.');result=await client.auth.signUp({email,password,options:{emailRedirectTo:accountRedirectUrl,data:{full_name:document.getElementById('auth-name').value.trim(),marketing_opt_in:document.getElementById('marketing-consent').checked,marketing_consent_at:document.getElementById('marketing-consent').checked?new Date().toISOString():null}}});if(result.error)throw result.error;message('Check your email for a verification link, then return here to sign in.')}else if(authMode==='reset'){result=await client.auth.resetPasswordForEmail(email,{redirectTo:recoveryRedirectUrl});if(result.error)throw result.error;message('If an account exists for this address, a reset email will arrive shortly.')}else{result=await client.auth.signInWithPassword({email,password});if(result.error)throw result.error;message('Signed in successfully.')}}catch(err){message(err.message||'Something went wrong.',true)}finally{authSubmit.disabled=false}});
 signOut.addEventListener('click',async()=>{if(!client)return;const {error}=await client.auth.signOut();if(error)message(error.message,true);else{setUser(null);setMode('signin')}});
-client?.auth.onAuthStateChange((event)=>{if(event==='PASSWORD_RECOVERY'){showPasswordUpdate()}});
+// Recovery is an explicit route because SIGNED_IN can occur instead of PASSWORD_RECOVERY
+// when the same browser already has an authenticated Supabase session.
+function showPasswordUpdate(hasSession){
+ recoveryActive=true;
+ authBox.hidden=false;memberApp.hidden=true;
+ document.getElementById('auth-form-area').hidden=true;
+ const intro=authBox.querySelector('.auth-intro');
+ intro.querySelector('h2').textContent='Choose a new password';
+ intro.querySelector('p:last-child').textContent='Create a new password to secure your Soulanova account.';
+ let form=document.getElementById('recovery-form');
+ if(!form){
+  form=document.createElement('form');form.id='recovery-form';
+  form.innerHTML='<label>New password<input id="new-password" type="password" minlength="12" autocomplete="new-password" required></label><label>Confirm new password<input id="confirm-new-password" type="password" minlength="12" autocomplete="new-password" required></label><button class="action" id="recovery-submit" type="submit">Save new password</button>';
+  authBox.insertBefore(form,authMessage);
+  form.addEventListener('submit',async e=>{
+   e.preventDefault();
+   const password=document.getElementById('new-password').value;
+   const confirmPassword=document.getElementById('confirm-new-password').value;
+   if(password!==confirmPassword){message('Passwords do not match.',true);return}
+   const submit=document.getElementById('recovery-submit');submit.disabled=true;
+   message('Updating your password…');
+   try{
+    const {data:{session},error:sessionError}=await client.auth.getSession();
+    if(sessionError||!session)throw Error('This recovery link is invalid or has expired. Request a new reset email.');
+    const {error}=await client.auth.updateUser({password});if(error)throw error;
+    // End the recovery session; require the user to sign in with their new password.
+    const {error:signOutError}=await client.auth.signOut();if(signOutError)throw signOutError;
+    recoveryActive=false;
+    history.replaceState(null,'',new URL('/app/?mode=signin',window.location.origin).href);
+    form.hidden=true;document.getElementById('auth-form-area').hidden=false;
+    intro.querySelector('h2').textContent='Welcome to your wellness space';
+    intro.querySelector('p:last-child').textContent='Create an account or sign in to save your workouts securely and access them on different devices.';
+    setUser(null);setMode('signin');message('Password updated. Please sign in with your new password.');
+   }catch(err){message(err.message||'Could not update the password.',true)}
+   finally{submit.disabled=false}
+  });
+ }
+ form.hidden=!hasSession;
+ if(hasSession)message('Enter and confirm a new password.');
+ else message('Checking your password-reset link… If this message remains, request a new reset email.');
+}
+if(recoveryRequested)showPasswordUpdate(false);
 
-function showPasswordUpdate(){authBox.hidden=false;memberApp.hidden=true;const area=document.getElementById('auth-form-area');area.hidden=true;let f=document.getElementById('recovery-form');if(!f){f=document.createElement('form');f.id='recovery-form';f.innerHTML='<label>New password<input id="new-password" type="password" minlength="12" autocomplete="new-password" required></label><button class="action" type="submit">Update password</button>';authBox.insertBefore(f,authMessage);f.addEventListener('submit',async e=>{e.preventDefault();const {error}=await client.auth.updateUser({password:document.getElementById('new-password').value});if(error){message(error.message,true);return}f.hidden=true;area.hidden=false;message('Password updated. You can now use your account.');const {data}=await client.auth.getUser();setUser(data?.user||null)})}f.hidden=false;message('Choose a new password to finish resetting your account.')}
+// Member preference is saved in Supabase Auth user metadata, not in a public list.
+document.getElementById('save-preferences').addEventListener('click',async()=>{const status=document.getElementById('preferences-message');if(!client||!currentUser){status.textContent='Sign in to update preferences.';return}const opt=document.getElementById('account-marketing').checked;const {data,error}=await client.auth.updateUser({data:{marketing_opt_in:opt,marketing_consent_at:opt?new Date().toISOString():null}});status.textContent=error?'Could not save: '+error.message:'Preference saved.';if(!error)setUser(data.user)});

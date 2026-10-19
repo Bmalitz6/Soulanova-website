@@ -19,7 +19,8 @@ const moves=[
 ['Closing Form','Return to an easy stance. Lower your arms, release tension and finish with several quiet breaths.']
 ];
 const el = id => document.getElementById(id);
-const videoSources={'Cloud Hands':'/app/videos/068_Cloud_Hands.mp4'};
+// No third-party exercise footage is used. Unreleased movements display the Coming Soon placeholder.
+const videoSources={};
 const video=el('player-video'), videoPlaceholder=el('player-video-placeholder');
 let shownMove='';
 function syncVideo(name){if(shownMove===name)return;shownMove=name;video.pause();const src=videoSources[name];if(src){video.src=src;video.hidden=false;videoPlaceholder.hidden=true;video.load();if(running)video.play().catch(()=>{});}else{video.removeAttribute('src');video.load();video.hidden=true;videoPlaceholder.hidden=false;}}
@@ -40,6 +41,7 @@ const list=el('class-movements');moves.forEach((move,i)=>{const li=document.crea
 function showLibrary(preview=false){stop();player.hidden=true;library.hidden=false;detail.hidden=!preview;document.querySelector('.sectionhead').hidden=true;el('workout-list').hidden=true;el('selected-workout').hidden=true;library.scrollIntoView({block:'start'});}
 function leaveLibrary(){stop();player.hidden=true;library.hidden=true;detail.hidden=true;document.querySelector('.sectionhead').hidden=false;el('workout-list').hidden=false;el('selected-workout').hidden=false;workoutsPanel.scrollIntoView({block:'start'});}
 function launch(){library.hidden=true;detail.hidden=true;window.SoulanovaPlayer.open()}
+el('marching-step-open').addEventListener('click',()=>{leaveLibrary();const tab=document.querySelector('[data-tab="free-library"]');if(tab)tab.click();document.querySelector('.free-video')?.scrollIntoView({behavior:'smooth',block:'center'});});
 el('library-back').addEventListener('click',leaveLibrary);el('detail-back').addEventListener('click',()=>showLibrary(false));el('class-preview').addEventListener('click',()=>showLibrary(true));el('class-start').addEventListener('click',launch);el('detail-start').addEventListener('click',launch);
 window.SoulanovaClasses={open:()=>showLibrary(false),close:leaveLibrary};
 
