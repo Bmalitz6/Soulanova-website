@@ -41,6 +41,7 @@ const list=el('class-movements');moves.forEach((move,i)=>{const li=document.crea
 function showLibrary(preview=false){stop();player.hidden=true;library.hidden=false;detail.hidden=!preview;document.querySelector('.sectionhead').hidden=true;el('workout-list').hidden=true;el('selected-workout').hidden=true;library.scrollIntoView({block:'start'});}
 function leaveLibrary(){stop();player.hidden=true;library.hidden=true;detail.hidden=true;document.querySelector('.sectionhead').hidden=false;el('workout-list').hidden=false;el('selected-workout').hidden=false;workoutsPanel.scrollIntoView({block:'start'});}
 function launch(){library.hidden=true;detail.hidden=true;window.SoulanovaPlayer.open()}
+el('marching-step-open').addEventListener('click',()=>{leaveLibrary();const tab=document.querySelector('[data-tab="free-library"]');if(tab)tab.click();document.querySelector('.free-video')?.scrollIntoView({behavior:'smooth',block:'center'});});
 el('library-back').addEventListener('click',leaveLibrary);el('detail-back').addEventListener('click',()=>showLibrary(false));el('class-preview').addEventListener('click',()=>showLibrary(true));el('class-start').addEventListener('click',launch);el('detail-start').addEventListener('click',launch);
 window.SoulanovaClasses={open:()=>showLibrary(false),close:leaveLibrary};
 
