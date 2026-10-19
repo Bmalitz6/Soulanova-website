@@ -19,7 +19,8 @@ const moves=[
 ['Closing Form','Return to an easy stance. Lower your arms, release tension and finish with several quiet breaths.']
 ];
 const el = id => document.getElementById(id);
-const videoSources={'Cloud Hands':'/app/videos/068_Cloud_Hands.mp4'};
+// No third-party exercise footage is used. Unreleased movements display the Coming Soon placeholder.
+const videoSources={};
 const video=el('player-video'), videoPlaceholder=el('player-video-placeholder');
 let shownMove='';
 function syncVideo(name){if(shownMove===name)return;shownMove=name;video.pause();const src=videoSources[name];if(src){video.src=src;video.hidden=false;videoPlaceholder.hidden=true;video.load();if(running)video.play().catch(()=>{});}else{video.removeAttribute('src');video.load();video.hidden=true;videoPlaceholder.hidden=false;}}
