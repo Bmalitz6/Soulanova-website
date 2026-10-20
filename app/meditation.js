@@ -7,6 +7,38 @@ const startButton=document.getElementById('meditation-play'),stopButton=document
 let selected=null,elapsed=0,playing=false,voiceOn=true,lastTick=0,interval=null,lastCue=-1,finished=false;
 let musicOn=true,musicVolume=25,audioContext=null,master=null,oscillators=[],modulators=[];
 const musicButton=document.getElementById('meditation-music'),volumeInput=document.getElementById('meditation-volume'),volumeLabel=document.getElementById('meditation-volume-label');
+
+const waveButton=document.getElementById('meditation-waves');
+let wavesOn=false,waveSource=null,waveGain=null,waveFilter=null,waveTimer=null;
+function waveLevel(){return wavesOn&&playing ? .085*musicVolume/100 : 0}
+function setWaveLevel(){if(waveGain&&audioContext)waveGain.gain.setTargetAtTime(waveLevel(),audioContext.currentTime,.8)}
+function stopWaves(){if(waveTimer){clearInterval(waveTimer);waveTimer=null}if(waveGain&&audioContext)waveGain.gain.setTargetAtTime(0,audioContext.currentTime,.8);if(waveSource){const old=waveSource;waveSource=null;setTimeout(()=>{try{old.stop();old.disconnect()}catch(e){}},1800)}}
+function startWaves(){if(!wavesOn||!selected)return;
+const C=window.AudioContext||window.webkitAudioContext;if(!C)return;
+try{
+if(!audioContext){audioContext=new C();master=audioContext.createGain();master.gain.value=0;master.connect(audioContext.destination)}
+audioContext.resume();if(waveSource){setWaveLevel();return}
+const buffer=audioContext.createBuffer(1,audioContext.sampleRate*9,audioContext.sampleRate);
+const data=buffer.getChannelData(0);let filtered=0;
+for(let i=0;i<data.length;i++){filtered=filtered*.88+(Math.random()*2-1)*.12;data[i]=filtered}
+const src=audioContext.createBufferSource();src.buffer=buffer;src.loop=true;
+const low=audioContext.createBiquadFilter();low.type='lowpass';low.frequency.value=680;
+const gain=audioContext.createGain();gain.gain.value=0;
+src.connect(low);low.connect(gain);gain.connect(audioContext.destination);
+src.start();waveSource=src;waveFilter=low;waveGain=gain;
+const beginning=audioContext.currentTime;
+function animateWaves(){
+if(!waveGain||!audioContext)return;
+const t=audioContext.currentTime-beginning;
+const swell=.35+.65*(.5+.5*Math.sin(t*Math.PI/4.6-Math.PI/2));
+const target=waveLevel()*swell;
+waveGain.gain.setTargetAtTime(target,audioContext.currentTime,.6);
+waveFilter.frequency.setTargetAtTime(450+420*swell,audioContext.currentTime,.8)
+}
+animateWaves();waveTimer=setInterval(animateWaves,300);
+}catch(e){wavesOn=false;waveButton.textContent='Ocean waves unavailable';waveButton.disabled=true}
+}
+
 function closeMusic(){if(master&&audioContext){master.gain.setTargetAtTime(0,audioContext.currentTime,.35)}if(oscillators.length){const old=oscillators;oscillators=[];setTimeout(()=>{old.forEach(o=>{try{o.stop();o.disconnect()}catch(e){}})},1800)}modulators.forEach(o=>{try{o.stop();o.disconnect()}catch(e){}});modulators=[]}
 function musicTarget(){return musicOn&&playing?(.12*musicVolume/100):0}
 function setMusicLevel(duck=false){if(master&&audioContext)master.gain.setTargetAtTime(musicTarget()*(duck?.32:1),audioContext.currentTime,.55)}
@@ -26,12 +58,12 @@ const endings=[
 return openers[phase]+base+'. '+endings[phase]}
 function currentText(){return passage(cueIndex())}
 function update(){if(!selected)return;const total=selected.minutes*60;heading.textContent=selected.title;timer.textContent=fmt(Math.max(0,total-Math.floor(elapsed)));progress.style.width=(100*Math.min(1,elapsed/total))+'%';const i=cueIndex();info.textContent=currentText();startButton.textContent=finished?'Completed':playing?'Pause':'Start / Resume';startButton.disabled=finished;status.textContent=finished?'Session complete':playing?'Playing · relaxed spaces of quiet are intentional':'Paused / Ready'}
-function pause(){playing=false;setMusicLevel();if(interval)clearInterval(interval);interval=null;if('speechSynthesis' in window)window.speechSynthesis.cancel();update()}
+function pause(){playing=false;setMusicLevel();setWaveLevel();if(interval)clearInterval(interval);interval=null;if('speechSynthesis' in window)window.speechSynthesis.cancel();update()}
 function complete(){pause();finished=true;update();if(typeof addWorkout==='function'){addWorkout({title:'Meditation: '+selected.title,category:'Meditation',minutes:selected.minutes}).then(()=>{status.textContent='Session completed and saved to My progress'}).catch(()=>{status.textContent='Session complete; progress could not be saved'})}}
 function step(){if(!playing)return;const now=performance.now();elapsed+=(now-lastTick)/1000;lastTick=now;if(elapsed>=selected.minutes*60){elapsed=selected.minutes*60;complete();return}const i=cueIndex();if(i!==lastCue){lastCue=i;speak(passage(i))}update()}
-function show(s){pause();closeMusic();selected=s;elapsed=0;lastCue=-1;finished=false;controls.hidden=false;choose.querySelectorAll('button').forEach(b=>b.setAttribute('aria-pressed',String(b.dataset.id===s.id)));update();controls.scrollIntoView({behavior:'smooth',block:'nearest'})}
+function show(s){pause();closeMusic();stopWaves();selected=s;wavesOn=s.id==='long2';waveButton.textContent=wavesOn?'Ocean waves: On':'Ocean waves: Off';waveButton.setAttribute('aria-pressed',String(wavesOn));elapsed=0;lastCue=-1;finished=false;controls.hidden=false;choose.querySelectorAll('button').forEach(b=>b.setAttribute('aria-pressed',String(b.dataset.id===s.id)));update();controls.scrollIntoView({behavior:'smooth',block:'nearest'})}
 function makeCards(){for(const track of [1,2]){const section=document.createElement('section');const h=document.createElement('h3');h.textContent=track===1?'Track 1 · Seven 10-minute meditations':'Track 2 · Ten 20-minute meditations';section.append(h);const grid=document.createElement('div');grid.className='meditation-grid';for(const s of sessions.filter(x=>x.track===track)){const card=document.createElement('article');card.className='meditation-card';const title=document.createElement('h4');title.textContent=s.title;const desc=document.createElement('p');desc.textContent=s.subtitle;const btn=document.createElement('button');btn.type='button';btn.className='quiet';btn.dataset.id=s.id;btn.textContent='Open '+s.minutes+'-minute session';btn.addEventListener('click',()=>show(s));card.append(title,desc,btn);grid.append(card)}section.append(grid);choose.append(section)}}
-startButton.addEventListener('click',()=>{if(!selected||finished)return;if(playing){pause();return}playing=true;startMusic();lastTick=performance.now();const i=cueIndex();lastCue=i;speak(passage(i));interval=setInterval(step,250);update()});stopButton.addEventListener('click',()=>{pause();elapsed=0;lastCue=-1;finished=false;update()});musicButton.addEventListener('click',()=>{musicOn=!musicOn;musicButton.textContent=musicOn?'Music: On':'Music: Off';musicButton.setAttribute('aria-pressed',String(musicOn));if(musicOn&&playing)startMusic();else setMusicLevel()});volumeInput.addEventListener('input',()=>{musicVolume=Number(volumeInput.value);volumeLabel.textContent=musicVolume+'%';setMusicLevel()});voiceButton.addEventListener('click',()=>{voiceOn=!voiceOn;if(!voiceOn&&'speechSynthesis' in window)window.speechSynthesis.cancel();voiceButton.textContent=voiceOn?'Voice: On':'Voice: Off';voiceButton.setAttribute('aria-pressed',String(voiceOn))});backButton.addEventListener('click',()=>{pause();root.hidden=true;document.getElementById('workout-list').hidden=false;document.getElementById('selected-workout').hidden=false;document.querySelector('#workouts .sectionhead').hidden=false});
+startButton.addEventListener('click',()=>{if(!selected||finished)return;if(playing){pause();return}playing=true;startMusic();startWaves();lastTick=performance.now();const i=cueIndex();lastCue=i;speak(passage(i));interval=setInterval(step,250);update()});stopButton.addEventListener('click',()=>{pause();elapsed=0;lastCue=-1;finished=false;update()});waveButton.addEventListener('click',()=>{wavesOn=!wavesOn;waveButton.textContent=wavesOn?'Ocean waves: On':'Ocean waves: Off';waveButton.setAttribute('aria-pressed',String(wavesOn));if(wavesOn&&playing)startWaves();else setWaveLevel()});musicButton.addEventListener('click',()=>{musicOn=!musicOn;musicButton.textContent=musicOn?'Music: On':'Music: Off';musicButton.setAttribute('aria-pressed',String(musicOn));if(musicOn&&playing)startMusic();else setMusicLevel()});volumeInput.addEventListener('input',()=>{musicVolume=Number(volumeInput.value);volumeLabel.textContent=musicVolume+'%';setMusicLevel();setWaveLevel()});voiceButton.addEventListener('click',()=>{voiceOn=!voiceOn;if(!voiceOn&&'speechSynthesis' in window)window.speechSynthesis.cancel();voiceButton.textContent=voiceOn?'Voice: On':'Voice: Off';voiceButton.setAttribute('aria-pressed',String(voiceOn))});backButton.addEventListener('click',()=>{pause();root.hidden=true;document.getElementById('workout-list').hidden=false;document.getElementById('selected-workout').hidden=false;document.querySelector('#workouts .sectionhead').hidden=false});
 document.addEventListener('visibilitychange',()=>{if(document.hidden&&playing)pause()});
 window.SoulanovaMeditation={open(){if(window.SoulanovaClasses)try{window.SoulanovaClasses.close()}catch(e){};document.querySelector('#workouts .sectionhead').hidden=true;document.getElementById('workout-list').hidden=true;document.getElementById('selected-workout').hidden=true;root.hidden=false;root.scrollIntoView({behavior:'smooth',block:'start'})}};
 if(!('speechSynthesis' in window)){voiceOn=false;voiceButton.textContent='Voice unavailable on this device';voiceButton.disabled=true}makeCards();
