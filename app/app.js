@@ -24,7 +24,101 @@ function tab(name){document.querySelectorAll('.tabs button').forEach(b=>{let act
 document.querySelectorAll('[data-tab]').forEach(b=>b.addEventListener('click',()=>tab(b.dataset.tab)));document.querySelectorAll('[data-goto]').forEach(b=>b.addEventListener('click',()=>tab(b.dataset.goto)));
 document.getElementById('today').textContent=new Intl.DateTimeFormat('en-US',{weekday:'long',month:'short',day:'numeric'}).format(new Date());
 const category=document.getElementById('category');[...new Set(workouts.map(w=>w.category))].forEach(c=>category.add(new Option(c,c)));category.addEventListener('change',renderWorkouts);
-function renderWorkouts(){const box=document.getElementById('workout-list');box.replaceChildren();workouts.filter(w=>category.value==='all'||category.value===w.category).forEach(w=>{let a=document.createElement('article');a.className='workout';a.innerHTML=`<div class="icon" aria-hidden="true">${w.icon}</div><small>${w.category} · ${w.minutes} min</small><h3>${w.title}</h3><p>Suggested movement plan at your own pace. Stop if anything feels uncomfortable.</p>`;let b=document.createElement('button');b.className='action';b.textContent='Choose this session →';b.addEventListener('click',()=>{state.selected=w.id;save();if(w.id==='tai'&&window.SoulanovaClasses){window.SoulanovaClasses.open();return}if(w.id==='meditation'&&window.SoulanovaMeditation){window.SoulanovaMeditation.open();return}renderSelected();document.getElementById('selected-workout').scrollIntoView({behavior:'smooth',block:'start'})});a.append(b);box.append(a)})}
+
+const workoutCardMeta = {
+  tai: {label:'TAI CHI', cta:'View Classes', image:'/app/images/workouts/tai-chi.jpg'},
+  yoga: {label:'YOGA', cta:'View Session', image:'/app/images/workouts/yoga.jpg'},
+  pilates: {label:'PILATES', cta:'View Session', image:'/app/images/workouts/pilates.jpg'},
+  strength: {label:'STRENGTH', cta:'View Session', image:'/app/images/workouts/strength.jpg'},
+  mobility: {label:'STRETCH & MOBILITY', cta:'View Session', image:'/app/images/workouts/mobility.jpg'},
+  cardio: {label:'LOW-IMPACT CARDIO', cta:'View Session', image:'/app/images/workouts/cardio.jpg'},
+  meditation: {label:'MEDITATION', cta:'View Sessions', image:'/app/images/workouts/meditation.jpg'}
+};
+
+function openWorkout(w){
+  state.selected=w.id;
+  save();
+
+  if(w.id==='tai' && window.SoulanovaClasses){
+    window.SoulanovaClasses.open();
+    return;
+  }
+
+  if(w.id==='meditation' && window.SoulanovaMeditation){
+    window.SoulanovaMeditation.open();
+    return;
+  }
+
+  renderSelected();
+  document.getElementById('selected-workout')
+    .scrollIntoView({behavior:'smooth',block:'start'});
+}
+
+function renderWorkouts(){
+  const box=document.getElementById('workout-list');
+  box.replaceChildren();
+
+  workouts
+    .filter(w=>category.value==='all'||category.value===w.category)
+    .forEach(w=>{
+      const meta=workoutCardMeta[w.id] || {label:w.category, cta:'View Session', image:''};
+
+      const card=document.createElement('article');
+      card.className='workout workout-card workout-'+w.id;
+
+      const media=document.createElement('div');
+      media.className='workout-card-media';
+
+      const image=document.createElement('div');
+      image.className='workout-card-image';
+      if(meta.image){
+        image.style.backgroundImage=`url('${meta.image}')`;
+      }
+
+      const overlay=document.createElement('div');
+      overlay.className='workout-card-overlay';
+
+      const topRow=document.createElement('div');
+      topRow.className='workout-card-top';
+
+      const label=document.createElement('span');
+      label.className='workout-card-badge';
+      label.textContent=meta.label;
+
+      const icon=document.createElement('span');
+      icon.className='workout-card-icon';
+      icon.textContent=w.icon;
+      icon.setAttribute('aria-hidden','true');
+
+      topRow.append(label,icon);
+      overlay.append(topRow);
+      image.append(overlay);
+      media.append(image);
+
+      const body=document.createElement('div');
+      body.className='workout-card-body';
+
+      const duration=document.createElement('small');
+      duration.className='workout-card-meta';
+      duration.textContent=w.minutes+' MIN · '+w.category;
+
+      const title=document.createElement('h3');
+      title.className='workout-card-title';
+      title.textContent=w.title;
+
+      const button=document.createElement('button');
+      button.type='button';
+      button.className='workout-card-cta';
+      button.textContent=meta.cta+' →';
+      button.addEventListener('click',()=>openWorkout(w));
+
+      body.append(duration,title,button);
+      card.append(media,body);
+
+      box.append(card);
+    });
+}
+
 function renderSelected(){let area=document.getElementById('selected-workout');let w=workouts.find(x=>x.id===state.selected);area.replaceChildren();if(!w){area.innerHTML='<h3>Choose a movement session</h3><p>Pick one of the six options above to view its suggested outline.</p>';return}let title=document.createElement('h3');title.textContent=`Your plan: ${w.title}`;let info=document.createElement('p');info.textContent=`${w.category} · ${w.minutes} minutes · Self-guided preview (no video yet)`;let ol=document.createElement('ol');w.steps.forEach(step=>{let li=document.createElement('li');li.textContent=step;ol.append(li)});if(w.id==='tai'){let start=document.createElement('button');start.className='action';start.textContent='Open guided 30-minute player →';start.addEventListener('click',()=>window.SoulanovaPlayer.open());area.append(title,info,ol,start);return}let done=document.createElement('button');done.className='action';done.textContent='Mark session complete ✓';done.addEventListener('click',async()=>{done.disabled=true;try{await addWorkout(w);done.textContent='Logged! Mark another completion'}catch(err){alert('Could not save workout: '+err.message)}finally{done.disabled=false}});area.append(title,info,ol,done)}
 const mealDay=document.getElementById('meal-day');for(let i=0;i<7;i++)mealDay.add(new Option('Day '+(i+1),String(i)));mealDay.addEventListener('change',renderMeals);
 function renderMeals(){let box=document.getElementById('meal-cards');box.replaceChildren();days[Number(mealDay.value)].forEach(([type,name])=>{let a=document.createElement('article');a.className='meal';let t=document.createElement('span');t.textContent=type.toUpperCase();let h=document.createElement('h3');h.textContent=name;let p=document.createElement('p');p.textContent='Flexible inspiration; adjust ingredients and portions to your needs.';a.append(t,h,p);box.append(a)})}

@@ -105,3 +105,202 @@ body{width:100%;max-width:100%;overflow-x:hidden}
   outline: 3px solid #719678;
   outline-offset: 3px;
 }
+
+
+/* Workout card refresh */
+.workout-card {
+  padding: 0;
+  overflow: hidden;
+  border-radius: 22px;
+  display: flex;
+  flex-direction: column;
+  min-height: 355px;
+  background: #fff;
+  border: 1px solid #d7e5de;
+  box-shadow: 0 5px 16px rgba(11,75,83,.06);
+  transition: transform .2s ease, box-shadow .2s ease;
+}
+
+.workout-card:hover {
+  transform: translateY(-3px);
+  box-shadow: 0 12px 24px rgba(11,75,83,.12);
+}
+
+.workout-card-media {
+  padding: 0;
+}
+
+.workout-card-image {
+  min-height: 180px;
+  background-color: #dbe7e1;
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+  position: relative;
+}
+
+.workout-card-overlay {
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(to bottom, rgba(11,75,83,.35), rgba(11,75,83,.12));
+  padding: 18px;
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
+}
+
+.workout-card-top {
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+  gap: 12px;
+}
+
+.workout-card-badge {
+  padding: 8px 12px;
+  border-radius: 999px;
+  background: rgba(255,255,255,.18);
+  border: 1px solid rgba(255,255,255,.35);
+  color: #fff;
+  font-size: 12px;
+  font-weight: 700;
+  letter-spacing: 1px;
+  backdrop-filter: blur(2px);
+}
+
+.workout-card-icon {
+  font-size: 44px;
+  line-height: 1;
+  color: #fff;
+  text-shadow: 0 1px 6px rgba(0,0,0,.18);
+}
+
+.workout-card-body {
+  padding: 20px 22px 22px;
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  flex: 1;
+}
+
+.workout-card-meta {
+  font-size: 12px;
+  color: #69847d;
+  text-transform: uppercase;
+  letter-spacing: .5px;
+}
+
+.workout-card-title {
+  margin: 0;
+  color: #0b4b53;
+  font-family: Georgia, serif;
+  font-size: 29px;
+  line-height: 1.15;
+}
+
+.workout-card-cta {
+  margin-top: auto;
+  background: #0b4b53;
+  color: white;
+  border: none;
+  border-radius: 25px;
+  padding: 12px 18px;
+  font-size: 14px;
+  font-weight: 700;
+  cursor: pointer;
+}
+
+.workout-card-cta:hover {
+  background: #146b73;
+}
+
+@media(max-width:700px) {
+  .workout-card-title {
+    font-size: 25px;
+  }
+  .workout-card-image {
+    min-height: 160px;
+  }
+}
+
+
+/* Fix Soulanova workout image display */
+.workout-card .workout-card-media {
+  display: block;
+  width: 100%;
+  min-width: 0;
+  height: 180px;
+  min-height: 180px;
+  padding: 0;
+  position: relative;
+  overflow: hidden;
+}
+
+.workout-card .workout-card-image {
+  display: block;
+  width: 100%;
+  height: 100%;
+  min-height: 180px;
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+}
+
+.workout-card .workout-card-overlay {
+  width: 100%;
+  height: 100%;
+  box-sizing: border-box;
+}
+
+/* Final workout photography adjustments */
+.workout-card .workout-card-media {
+  height: 220px;
+  min-height: 220px;
+}
+
+.workout-card .workout-card-image {
+  height: 100%;
+  min-height: 220px;
+  background-position: center 35%;
+}
+
+.workout-card .workout-card-icon {
+  display: none;
+}
+
+@media (max-width:700px) {
+  .workout-card .workout-card-media,
+  .workout-card .workout-card-image {
+    height: 190px;
+    min-height: 190px;
+  }
+}
+
+/* Per-card image framing fixes */
+.workout-tai .workout-card-image {
+  background-position: center 12%;
+}
+
+.workout-yoga .workout-card-image {
+  background-position: center 10%;
+}
+
+.workout-pilates .workout-card-image {
+  background-position: center 35%;
+}
+
+.workout-strength .workout-card-image {
+  background-position: center 8%;
+}
+
+.workout-mobility .workout-card-image {
+  background-position: center 30%;
+}
+
+.workout-cardio .workout-card-image {
+  background-position: center 12%;
+}
+
+.workout-meditation .workout-card-image {
+  background-position: center 18%;
+}
