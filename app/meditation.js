@@ -5,6 +5,26 @@ const root=document.getElementById('meditation-library');if(!root)return;
 const choose=document.getElementById('meditation-session-list'),heading=document.getElementById('meditation-now-title'),info=document.getElementById('meditation-cue'),timer=document.getElementById('meditation-clock'),status=document.getElementById('meditation-status'),progress=document.getElementById('meditation-progress'),controls=document.getElementById('meditation-controls');
 const startButton=document.getElementById('meditation-play'),stopButton=document.getElementById('meditation-stop'),voiceButton=document.getElementById('meditation-voice'),backButton=document.getElementById('meditation-back');
 let selected=null,elapsed=0,playing=false,voiceOn=true,lastTick=0,interval=null,lastCue=-1,finished=false;
+
+const recordedTracks = {
+  short6: '/app/meditation-audio/production/Soulanova_Mindful_Focus_Voice.mp3'
+};
+const recordedAudio = new Audio();
+const recordedOcean = new Audio();
+
+recordedOcean.preload = 'metadata';
+
+recordedOcean.src =
+  '/app/meditation-audio/production/Soulanova_Mindful_Focus_Ocean.mp3';
+
+function setRecordedLevels() {
+  recordedAudio.volume = voiceOn ? 1 : 0;
+  recordedOcean.volume = wavesOn ? musicVolume / 100 : 0;
+}
+
+recordedAudio.preload = 'metadata';
+const isRecorded = () => !!(selected && recordedTracks[selected.id]);
+
 let musicOn=false,musicVolume=65,audioContext=null,master=null,oscillators=[],modulators=[];
 const musicButton=document.getElementById('meditation-music'),volumeInput=document.getElementById('meditation-volume'),volumeLabel=document.getElementById('meditation-volume-label');
 
@@ -57,14 +77,96 @@ const endings=[
 'Allow a little space around the thought. Notice the support beneath your body. Rest here as you are, with kindness and patience.'];
 return openers[phase]+base+'. '+endings[phase]}
 function currentText(){return passage(cueIndex())}
-function update(){if(!selected)return;const total=selected.minutes*60;heading.textContent=selected.title;timer.textContent=fmt(Math.max(0,total-Math.floor(elapsed)));progress.style.width=(100*Math.min(1,elapsed/total))+'%';const i=cueIndex();info.textContent=currentText();startButton.textContent=finished?'Completed':playing?'Pause':'Start / Resume';startButton.disabled=finished;status.textContent=finished?'Session complete':playing?'Playing · relaxed spaces of quiet are intentional':'Paused / Ready'}
-function pause(){playing=false;setMusicLevel();setWaveLevel();if(interval)clearInterval(interval);interval=null;if('speechSynthesis' in window)window.speechSynthesis.cancel();update()}
-function complete(){pause();finished=true;update();if(typeof addWorkout==='function'){addWorkout({title:'Meditation: '+selected.title,category:'Meditation',minutes:selected.minutes}).then(()=>{status.textContent='Session completed and saved to My progress'}).catch(()=>{status.textContent='Session complete; progress could not be saved'})}}
-function step(){if(!playing)return;const now=performance.now();elapsed+=(now-lastTick)/1000;lastTick=now;if(elapsed>=selected.minutes*60){elapsed=selected.minutes*60;complete();return}const i=cueIndex();if(i!==lastCue){lastCue=i;speak(passage(i))}update()}
-function show(s){pause();closeMusic();stopWaves();selected=s;wavesOn=true;waveButton.textContent=wavesOn?'Ocean waves: On':'Ocean waves: Off';waveButton.setAttribute('aria-pressed',String(wavesOn));elapsed=0;lastCue=-1;finished=false;controls.hidden=false;choose.querySelectorAll('button').forEach(b=>b.setAttribute('aria-pressed',String(b.dataset.id===s.id)));update();controls.scrollIntoView({behavior:'smooth',block:'nearest'})}
+function update(){if(!selected)return;const total=selected.minutes*60;heading.textContent=selected.title;timer.textContent=fmt(Math.max(0,total-Math.floor(elapsed)));progress.style.width=(100*Math.min(1,elapsed/total))+'%';const i=cueIndex();
+info.textContent=isRecorded()
+  ? 'Professionally guided meditation with gentle ocean waves.'
+  : currentText();
+startButton.textContent=finished?'Completed':playing?'Pause':'Start / Resume';startButton.disabled=finished;status.textContent=finished?'Session complete':playing?'Playing · relaxed spaces of quiet are intentional':'Paused / Ready'}
+function pause(){if(isRecorded()){
+  recordedAudio.pause();
+  recordedOcean.pause();
+}
+playing=false;setMusicLevel();setWaveLevel();if(interval)clearInterval(interval);interval=null;if('speechSynthesis' in window)window.speechSynthesis.cancel();update()}
+function complete(){if(finished)return;pause();finished=true;update();if(typeof addWorkout==='function'){addWorkout({title:'Meditation: '+selected.title,category:'Meditation',minutes:selected.minutes}).then(()=>{status.textContent='Session completed and saved to My progress'}).catch(()=>{status.textContent='Session complete; progress could not be saved'})}}
+function step(){if(!playing||isRecorded())return;const now=performance.now();elapsed+=(now-lastTick)/1000;lastTick=now;if(elapsed>=selected.minutes*60){elapsed=selected.minutes*60;complete();return}const i=cueIndex();if(i!==lastCue){lastCue=i;speak(passage(i))}update()}
+function show(s){
+pause();closeMusic();stopWaves();
+recordedAudio.pause();
+recordedAudio.removeAttribute('src');
+recordedAudio.load();
+selected=s;
+if(isRecorded()){
+  recordedAudio.src=recordedTracks[s.id];
+  recordedAudio.load();
+  recordedOcean.pause();
+  recordedOcean.currentTime=0;
+  setRecordedLevels();
+}
+wavesOn=true;waveButton.textContent=wavesOn?'Ocean waves: On':'Ocean waves: Off';waveButton.setAttribute('aria-pressed',String(wavesOn));elapsed=0;lastCue=-1;finished=false;controls.hidden=false;choose.querySelectorAll('button').forEach(b=>b.setAttribute('aria-pressed',String(b.dataset.id===s.id)));update();voiceButton.disabled=false;
+waveButton.disabled=false;
+volumeInput.disabled=false;
+voiceButton.title=isRecorded()?'Narration is included in the recording':'';
+waveButton.title=isRecorded()?'Ocean waves are included in the recording':'';
+controls.scrollIntoView({behavior:'smooth',block:'nearest'})}
 function makeCards(){for(const track of [1,2]){const section=document.createElement('section');const h=document.createElement('h3');h.textContent=track===1?'Track 1 · Seven 10-minute meditations':'Track 2 · Ten 20-minute meditations';section.append(h);const grid=document.createElement('div');grid.className='meditation-grid';for(const s of sessions.filter(x=>x.track===track)){const card=document.createElement('article');card.className='meditation-card';const title=document.createElement('h4');title.textContent=s.title;const desc=document.createElement('p');desc.textContent=s.subtitle;const btn=document.createElement('button');btn.type='button';btn.className='quiet';btn.dataset.id=s.id;btn.textContent='Open '+s.minutes+'-minute session';btn.addEventListener('click',()=>show(s));card.append(title,desc,btn);grid.append(card)}section.append(grid);choose.append(section)}}
-startButton.addEventListener('click',()=>{if(!selected||finished)return;if(playing){pause();return}playing=true;startMusic();startWaves();lastTick=performance.now();const i=cueIndex();lastCue=i;speak(passage(i));interval=setInterval(step,250);update()});stopButton.addEventListener('click',()=>{pause();elapsed=0;lastCue=-1;finished=false;update()});waveButton.addEventListener('click',()=>{wavesOn=!wavesOn;waveButton.textContent=wavesOn?'Ocean waves: On':'Ocean waves: Off';waveButton.setAttribute('aria-pressed',String(wavesOn));if(wavesOn&&playing)startWaves();else setWaveLevel()});musicButton.disabled=true;musicButton.hidden=true;musicButton.title='Synthetic background music removed; ocean ambience is the default';volumeInput.addEventListener('input',()=>{musicVolume=Number(volumeInput.value);volumeLabel.textContent=musicVolume+'%';setMusicLevel();setWaveLevel()});voiceButton.addEventListener('click',()=>{voiceOn=!voiceOn;if(!voiceOn&&'speechSynthesis' in window)window.speechSynthesis.cancel();voiceButton.textContent=voiceOn?'Voice: On':'Voice: Off';voiceButton.setAttribute('aria-pressed',String(voiceOn))});backButton.addEventListener('click',()=>{pause();root.hidden=true;document.getElementById('workout-list').hidden=false;document.getElementById('selected-workout').hidden=false;document.querySelector('#workouts .sectionhead').hidden=false});
-document.addEventListener('visibilitychange',()=>{if(document.hidden&&playing)pause()});
+startButton.addEventListener('click',()=>{if(!selected||finished)return;if(playing){pause();return}if(isRecorded()){
+  recordedAudio.currentTime=elapsed;
+  recordedOcean.currentTime=elapsed;
+  setRecordedLevels();
+
+  recordedAudio.play().then(()=>{
+    recordedOcean.play().catch(()=>{});
+
+    playing=true;
+    update();
+  }).catch(()=>{
+    playing=false;
+    status.textContent='Audio could not play. Please try again.';
+    update();
+    status.textContent='Audio could not play. Please try again.';
+  });
+  return;
+}
+playing=true;startMusic();startWaves();lastTick=performance.now();const i=cueIndex();lastCue=i;speak(passage(i));interval=setInterval(step,250);update()});stopButton.addEventListener('click',()=>{pause();if(isRecorded()){
+  recordedAudio.currentTime=0;
+  recordedOcean.currentTime=0;
+}
+elapsed=0;lastCue=-1;finished=false;update()});waveButton.addEventListener('click',()=>{wavesOn=!wavesOn;waveButton.textContent=wavesOn?'Ocean waves: On':'Ocean waves: Off';waveButton.setAttribute('aria-pressed',String(wavesOn));if(isRecorded()){
+  setRecordedLevels();
+}else if(wavesOn&&playing){
+  startWaves();
+}else{
+  setWaveLevel();
+}});musicButton.disabled=true;musicButton.hidden=true;musicButton.title='Synthetic background music removed; ocean ambience is the default';volumeInput.addEventListener('input',()=>{musicVolume=Number(volumeInput.value);volumeLabel.textContent=musicVolume+'%';setMusicLevel();setWaveLevel();if(isRecorded())setRecordedLevels()});voiceButton.addEventListener('click',()=>{voiceOn=!voiceOn;if(!voiceOn&&'speechSynthesis' in window)window.speechSynthesis.cancel();voiceButton.textContent=voiceOn?'Voice: On':'Voice: Off';voiceButton.setAttribute('aria-pressed',String(voiceOn));if(isRecorded())setRecordedLevels()});backButton.addEventListener('click',()=>{pause();root.hidden=true;document.getElementById('workout-list').hidden=false;document.getElementById('selected-workout').hidden=false;document.querySelector('#workouts .sectionhead').hidden=false});
+recordedAudio.addEventListener('timeupdate',()=>{
+  if(!isRecorded()||finished)return;
+  elapsed=Math.min(selected.minutes*60,recordedAudio.currentTime);
+
+  if(playing && !recordedOcean.paused &&
+     Math.abs(recordedOcean.currentTime-recordedAudio.currentTime)>0.35){
+    recordedOcean.currentTime=recordedAudio.currentTime;
+  }
+  update();
+});
+
+recordedAudio.addEventListener('ended',()=>{
+  if(isRecorded()&&!finished){
+    elapsed=selected.minutes*60;
+    complete();
+  }
+});
+
+recordedAudio.addEventListener('error',()=>{
+  if(isRecorded()){
+    playing=false;
+    update();
+    status.textContent='Unable to load the recorded meditation.';
+  }
+});
+
+document.addEventListener('visibilitychange',()=>{
+  if(document.hidden&&playing)pause();
+});
 window.SoulanovaMeditation={open(){if(window.SoulanovaClasses)try{window.SoulanovaClasses.close()}catch(e){};document.querySelector('#workouts .sectionhead').hidden=true;document.getElementById('workout-list').hidden=true;document.getElementById('selected-workout').hidden=true;root.hidden=false;root.scrollIntoView({behavior:'smooth',block:'start'})}};
 if(!('speechSynthesis' in window)){voiceOn=false;voiceButton.textContent='Voice unavailable on this device';voiceButton.disabled=true}makeCards();
 })();
