@@ -3,3 +3,68 @@
 .guide-grid,.habit-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:17px}.guide-grid article{background:#fff;border:1px solid var(--line);border-radius:18px;padding:27px}.guide-grid span{font-size:35px;color:var(--teal)}.guide-grid h3,.food-lists h3,.habit-grid h3{font:normal 23px Georgia,serif}.guide-grid p,.food-lists li,.habit-grid p{font-size:14px;line-height:1.8;color:#647a71}.food-band{background:#f0e9d9;padding:95px 5%}.food-band-inner{max-width:1300px;margin:auto;display:grid;grid-template-columns:0.8fr 1.2fr;gap:60px}.food-band h2{font-size:clamp(38px,4vw,60px)}.food-band p{line-height:1.8}.food-lists{display:grid;grid-template-columns:repeat(3,1fr);gap:12px}.food-lists article{background:#fffdf8;border-radius:16px;padding:22px}.food-lists ul{padding-left:19px}.food-lists li{margin-bottom:10px}.snack-row{margin-top:17px}.habits{padding-top:40px}.habit-grid article{border-top:2px solid #b3cbbd;padding-top:15px}.habit-grid span{font-size:11px;letter-spacing:2px;color:var(--teal)}.source-note{margin-top:50px;padding:25px;background:#e5eee7;border-radius:16px;font-size:13px;line-height:1.8}.source-note a{text-decoration:underline;color:var(--deep)}@media(max-width:950px){.guide-grid,.habit-grid{grid-template-columns:repeat(2,1fr)}.food-band-inner{grid-template-columns:1fr}}@media(max-width:650px){.guide-grid,.habit-grid,.food-lists{grid-template-columns:1fr}.food-band{padding:70px 6%}}
 
 .member-invite{text-align:center;background:#edf5ef;border-radius:20px;max-width:1060px;margin:40px auto;padding:54px 20px}.member-invite p{max-width:650px;margin:18px auto}.member-invite .btn{display:inline-flex}
+
+/* Soulanova public workout photography */
+.program-grid .program {
+  padding: 0;
+  overflow: hidden;
+  display: flex;
+  flex-direction: column;
+  align-items: stretch;
+  min-height: 390px;
+  color: var(--ink);
+  text-decoration: none;
+  background: #fff;
+  border: 1px solid var(--line);
+  border-radius: 20px;
+  transition: transform .2s ease, box-shadow .2s ease;
+}
+
+.program-grid .program.featured {
+  background: #fff;
+}
+
+.program-grid .program:hover {
+  transform: translateY(-4px);
+  box-shadow: 0 14px 30px rgba(11,75,83,.12);
+}
+
+.program-grid .program:focus-visible {
+  outline: 3px solid #719678;
+  outline-offset: 3px;
+}
+
+.program-grid .program-photo {
+  display: block;
+  width: 100%;
+  height: 210px;
+  object-fit: cover;
+  object-position: center 15%;
+}
+
+.program-grid .program-number {
+  margin: 22px 24px 0;
+}
+
+.program-grid .program h3 {
+  margin: 12px 24px;
+  font-size: 29px;
+  color: var(--deep);
+}
+
+.program-grid .program p {
+  margin: 0 24px 20px;
+  line-height: 1.65;
+  flex: 1;
+}
+
+.program-grid .program .chip {
+  align-self: flex-start;
+  margin: 0 24px 24px;
+}
+
+@media (max-width: 600px) {
+  .program-grid .program-photo {
+    height: 200px;
+  }
+}
