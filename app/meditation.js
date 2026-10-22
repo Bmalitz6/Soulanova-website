@@ -7,6 +7,8 @@ const startButton=document.getElementById('meditation-play'),stopButton=document
 let selected=null,elapsed=0,playing=false,voiceOn=true,lastTick=0,interval=null,lastCue=-1,finished=false;
 
 const recordedTracks = {
+  short2: '/app/meditation-audio/production/Soulanova_Morning_Grounding_Voice.mp3',
+  short3: '/app/meditation-audio/production/Soulanova_Stress_Release_Voice.mp3',
   short6: '/app/meditation-audio/production/Soulanova_Mindful_Focus_Voice.mp3'
 };
 const recordedAudio = new Audio();
@@ -14,11 +16,24 @@ const recordedOcean = new Audio();
 
 recordedOcean.preload = 'metadata';
 
-recordedOcean.src =
-  '/app/meditation-audio/production/Soulanova_Mindful_Focus_Ocean.mp3';
+const recordedOceanTracks = {
+  short2: '/app/meditation-audio/production/Soulanova_Ocean_10min.mp3',
+  short3: '/app/meditation-audio/production/Soulanova_Ocean_10min.mp3',
+  short6: '/app/meditation-audio/production/Soulanova_Mindful_Focus_Ocean.mp3'
+};
+
+let voiceVolume = 85;
+const voiceVolumeInput = document.getElementById('meditation-voice-volume');
+const voiceVolumeLabel = document.getElementById('meditation-voice-volume-label');
+
+voiceVolumeInput.addEventListener('input', () => {
+  voiceVolume = Number(voiceVolumeInput.value);
+  voiceVolumeLabel.textContent = voiceVolume + '%';
+  setRecordedLevels();
+});
 
 function setRecordedLevels() {
-  recordedAudio.volume = voiceOn ? 1 : 0;
+  recordedAudio.volume = voiceOn ? voiceVolume / 100 : 0;
   recordedOcean.volume = wavesOn ? musicVolume / 100 : 0;
 }
 
@@ -98,6 +113,8 @@ selected=s;
 if(isRecorded()){
   recordedAudio.src=recordedTracks[s.id];
   recordedAudio.load();
+  recordedOcean.src=recordedOceanTracks[s.id];
+  recordedOcean.load();
   recordedOcean.pause();
   recordedOcean.currentTime=0;
   setRecordedLevels();
