@@ -67,3 +67,41 @@ body{width:100%;max-width:100%;overflow-x:hidden}
 .text-link:focus-visible,.tabs button:focus-visible{outline:3px solid #719678;outline-offset:3px}
 
 .tabs .accessories-tab{white-space:nowrap;display:inline-flex;align-items:center;text-decoration:none;border:1px solid var(--line);padding:12px 18px;border-radius:25px;color:var(--deep);font-size:13px;font-weight:700}
+
+/* Meditation library */
+.meditation-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));gap:15px;margin:18px 0 36px}.meditation-card{background:#fff;border:1px solid var(--line);border-radius:18px;padding:20px;display:flex;flex-direction:column;gap:6px}.meditation-card h4{margin:0;color:var(--deep);font:22px 'Playfair Display',Georgia,serif}.meditation-card p{font-size:13px;color:#627c75;line-height:1.5;flex:1}.meditation-card button{align-self:start}.meditation-player{background:#e8efe8;border:1px solid #c6d8cb;border-radius:20px;padding:26px;margin-top:20px}.meditation-player h3{font-size:29px;margin:0}.meditation-clock{font:52px 'Playfair Display',Georgia,serif;color:var(--deep);margin:14px 0}.meditation-bar{width:100%;height:7px;background:#c7d9cc;border-radius:8px;overflow:hidden}.meditation-bar span{display:block;width:0;height:100%;background:var(--teal)}.meditation-cue{font-size:19px;line-height:1.7;min-height:4em}.meditation-player .class-actions{display:flex;flex-wrap:wrap;gap:10px}@media(max-width:600px){.meditation-grid{grid-template-columns:1fr}.meditation-clock{font-size:42px}}
+
+.meditation-volume{display:flex;align-items:center;gap:8px;font-size:12px;color:var(--deep);flex-wrap:wrap}.meditation-volume input{width:115px;accent-color:var(--teal)}.meditation-volume output{min-width:30px}
+
+
+/* Accessories navigation */
+.tabs a.accessories-tab,
+.tabs a.accessories-tab:link,
+.tabs a.accessories-tab:visited {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  flex: 1 1 auto;
+  padding: 10px 13px;
+  min-height: 42px;
+  border: 0;
+  border-radius: 25px;
+  background: transparent;
+  color: #54736b;
+  font-family: inherit;
+  font-size: 13px;
+  font-weight: 400;
+  line-height: normal;
+  text-decoration: none !important;
+  white-space: normal;
+}
+
+.tabs a.accessories-tab:hover {
+  background: #e3eee7;
+  color: #0b4b53;
+}
+
+.tabs a.accessories-tab:focus-visible {
+  outline: 3px solid #719678;
+  outline-offset: 3px;
+}
