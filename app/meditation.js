@@ -33,6 +33,7 @@ const recordedOceanTracks = {
   short7: '/app/meditation-audio/production/Soulanova_Ocean_10min.mp3',
   long8: '/app/meditation-audio/production/Soulanova_Ocean_20min.mp3',
   long1: '/app/meditation-audio/production/Soulanova_Ocean_20min.mp3',
+  long2: '/app/meditation-audio/production/Soulanova_Ocean_20min.mp3',
 };
 
 let voiceVolume = 85;
