@@ -13,7 +13,8 @@ const recordedTracks = {
   short4: '/app/meditation-audio/production/Soulanova_Gratitude_Pause_Voice.mp3',
   short5: '/app/meditation-audio/production/Soulanova_Body_Scan_Voice.mp3',
   short6: '/app/meditation-audio/production/Soulanova_Mindful_Focus_Voice.mp3',
-  short7: '/app/meditation-audio/production/Soulanova_Evening_Unwind_Voice.mp3'
+  short7: '/app/meditation-audio/production/Soulanova_Evening_Unwind_Voice.mp3',
+  long8: '/app/meditation-audio/production/Soulanova_Resilience_Voice.mp3',
 };
 const recordedAudio = new Audio();
 const recordedOcean = new Audio();
@@ -27,7 +28,8 @@ const recordedOceanTracks = {
   short4: '/app/meditation-audio/production/Soulanova_Ocean_10min.mp3',
   short5: '/app/meditation-audio/production/Soulanova_Ocean_10min.mp3',
   short6: '/app/meditation-audio/production/Soulanova_Mindful_Focus_Ocean.mp3',
-  short7: '/app/meditation-audio/production/Soulanova_Ocean_10min.mp3'
+  short7: '/app/meditation-audio/production/Soulanova_Ocean_10min.mp3',
+  long8: '/app/meditation-audio/production/Soulanova_Ocean_20min.mp3',
 };
 
 let voiceVolume = 85;
