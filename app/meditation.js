@@ -7,6 +7,7 @@ const startButton=document.getElementById('meditation-play'),stopButton=document
 let selected=null,elapsed=0,playing=false,voiceOn=true,lastTick=0,interval=null,lastCue=-1,finished=false;
 
 const recordedTracks = {
+  short1: '/app/meditation-audio/production/Soulanova_Calm_Breathing_Voice.mp3',
   short2: '/app/meditation-audio/production/Soulanova_Morning_Grounding_Voice.mp3',
   short3: '/app/meditation-audio/production/Soulanova_Stress_Release_Voice.mp3',
   short4: '/app/meditation-audio/production/Soulanova_Gratitude_Pause_Voice.mp3',
@@ -20,6 +21,7 @@ const recordedOcean = new Audio();
 recordedOcean.preload = 'metadata';
 
 const recordedOceanTracks = {
+  short1: '/app/meditation-audio/production/Soulanova_Ocean_10min.mp3',
   short2: '/app/meditation-audio/production/Soulanova_Ocean_10min.mp3',
   short3: '/app/meditation-audio/production/Soulanova_Ocean_10min.mp3',
   short4: '/app/meditation-audio/production/Soulanova_Ocean_10min.mp3',
