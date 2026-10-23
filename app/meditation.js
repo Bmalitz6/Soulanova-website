@@ -16,6 +16,7 @@ const recordedTracks = {
   short7: '/app/meditation-audio/production/Soulanova_Evening_Unwind_Voice.mp3',
   long8: '/app/meditation-audio/production/Soulanova_Resilience_Voice.mp3',
   long1: '/app/meditation-audio/production/Soulanova_Deep_Relaxation_Voice.mp3',
+  long2: '/app/meditation-audio/production/Soulanova_Restful_Sleep_Voice.mp3',
 };
 const recordedAudio = new Audio();
 const recordedOcean = new Audio();
