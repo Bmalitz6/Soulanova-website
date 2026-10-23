@@ -19,6 +19,7 @@ const recordedTracks = {
   long2: '/app/meditation-audio/production/Soulanova_Restful_Sleep_Voice.mp3',
   long3: '/app/meditation-audio/production/Soulanova_Inner_Confidence_Voice.mp3',
   long4: '/app/meditation-audio/production/Soulanova_Mindful_Nature_Voice.mp3',
+  long5: '/app/meditation-audio/production/Soulanova_Letting_Go_Voice.mp3',
 };
 const recordedAudio = new Audio();
 const recordedOcean = new Audio();
@@ -38,6 +39,7 @@ const recordedOceanTracks = {
   long2: '/app/meditation-audio/production/Soulanova_Ocean_20min.mp3',
   long3: '/app/meditation-audio/production/Soulanova_Ocean_20min.mp3',
   long4: '/app/meditation-audio/production/Soulanova_Ocean_20min.mp3',
+  long5: '/app/meditation-audio/production/Soulanova_Ocean_20min.mp3',
 };
 
 let voiceVolume = 85;
