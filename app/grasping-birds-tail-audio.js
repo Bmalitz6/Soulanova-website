@@ -35,6 +35,14 @@
     }
   }
 
+  // Pause this lesson when another free lesson starts.
+  document.querySelectorAll('video.free-video').forEach(other => {
+    if (other === video) return;
+    other.addEventListener('play', () => {
+      if (!video.paused) video.pause();
+    });
+  });
+
   video.addEventListener('play', () => {
     document.querySelectorAll('video.free-video')
       .forEach(other => {
