@@ -126,5 +126,42 @@ aria-label="Benjamin narration volume">
     in the lesson audio. Piano volume is adjustable separately.</p>
   </div>
 </article>
+<article class="feature" id="single-whip-lesson">
+  <span class="class-tag">AVAILABLE · TAI CHI VIDEO 010</span>
+  <h3>Single Whip · 2 minutes</h3>
+  <p>Practice the flowing Single Whip movement, gentle waist rotation, and controlled balance.</p>
+
+  <video id="single-whip-video" class="free-video"
+         controls playsinline preload="metadata"
+         poster="/assets/soulanova-logo.png">
+    <source src="/app/videos/Soulanova_TaiChi_010_Single_Whip.mp4"
+            type="video/mp4">
+  </video>
+
+  <div class="tai-audio-settings" style="padding:18px 0">
+    <h4>Single Whip Audio</h4>
+    <div class="class-actions">
+      <label class="meditation-volume">Benjamin volume
+        <input type="range" id="whip-ben-volume"
+               min="0" max="100" value="85" step="5">
+        <output id="whip-ben-label">85%</output>
+      </label>
+
+      <label class="meditation-volume">Soft piano volume
+        <input type="range" id="whip-piano-volume"
+               min="0" max="100" value="25" step="5">
+        <output id="whip-piano-label">25%</output>
+      </label>
+
+      <button type="button" class="quiet"
+              id="whip-piano-toggle" aria-pressed="true">
+        Piano: On
+      </button>
+    </div>
+    <p class="note">Benjamin and ending chimes are included
+    in the lesson audio. Piano volume is adjustable separately.</p>
+  </div>
+</article>
 <div class="free-cards"><article><span class="class-tag">COMING SOON</span><h3>Workout 002</h3><p>Our second instructor-led lesson is in production.</p></article><article><span class="class-tag">COMING SOON</span><h3>Workout 003</h3><p>Our third free workout will appear here when approved.</p></article></div><div class="sectionhead"><div><p class="eyebrow">MEDITERRANEAN KITCHEN</p><h2>Recipes for everyday living</h2><p>Six simple, original starter recipes with step-by-step instructions. Print your favorites.</p></div></div><div class="recipe-grid" id="free-recipes"></div></section><section id="journal" class="panel"><div class="sectionhead"><div><p class="eyebrow">SOULANOVA WELLNESS JOURNAL</p><h2>Small steps, lasting habits.</h2><p>Practical articles on movement, consistency, and Mediterranean-style food.</p></div></div><div class="journal-grid" id="journal-articles"></div></section><section id="account" class="panel"><div class="sectionhead"><div><p class="eyebrow">MEMBERSHIP PREFERENCES</p><h2>Your free account</h2><p>Free membership has no credit card requirement.</p></div></div><article class="feature"><label class="account-opt"><input type="checkbox" id="account-marketing"> Email me Soulanova news, new classes and wellness tips</label><p class="note">Marketing messages are optional. Turning this off records your preference; actual marketing emails must also include an unsubscribe link.</p><button type="button" id="save-preferences" class="action">Save preference</button><p id="preferences-message" role="status" aria-live="polite"></p></article></section></div></main><footer>Soulanova · Move Better • Feel Calmer • Live Fuller <span>Member preview · No payment required</span> <a href="/accessories/">Accessories</a> · <a href="/privacy/">Privacy</a> · <a href="/terms/">Terms</a> · <a href="/contact/">Contact</a></footer><script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2/dist/umd/supabase.js"></script><script src="/app/config.js"></script><script src="/app/app.js"></script><script src="/app/player.js"></script><script src="/app/free-content.js"></script><script src="/app/meditation.js"></script><script src="/app/marching-step-audio.js"></script><script src="/app/brush-knee-audio.js"></script>
-<script src="/app/grasping-birds-tail-audio.js"></script></body></html>
+<script src="/app/grasping-birds-tail-audio.js"></script>
+<script src="/app/single-whip-audio.js"></script></body></html>
