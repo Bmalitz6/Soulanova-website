@@ -39,3 +39,9 @@ create policy "entries own delete" on public.nutrition_entries for delete to aut
 -- Nutrient JSONB stores per-consumed-portion numeric values using keys like calories, protein,
 -- carbs, fat, total_sugar, added_sugar, fiber, sodium. Validate API writes client-side and
 -- server-side before public launch. Health data must never go into analytics/marketing logs.
+
+-- Grants are separate from RLS: authenticated users need table privileges before
+-- the per-user policies can be evaluated. Do not grant to anon or PUBLIC.
+grant usage on schema public to authenticated;
+grant select, insert, update, delete on table public.nutrition_goals to authenticated;
+grant select, insert, update, delete on table public.nutrition_entries to authenticated;
