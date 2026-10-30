@@ -1,17 +1,45 @@
 import React,{useEffect,useRef,useState} from 'react';
 import {Alert,Linking,Platform,ScrollView,StyleSheet,Text,TouchableOpacity,View} from 'react-native';
 import * as Health from '@appeeky/expo-healthkit';
+import * as Location from 'expo-location';
+import {GPS_TASK,beginGps,readGps,setGpsPaused,stopGps,clearGps} from './freestyleGps';
 const teal='#086B63';
 export default function FreeWalkScreen({onBack}:{onBack:()=>void}){
  const [kind,setKind]=useState<'Walk'|'Run'>('Walk'),[running,setRunning]=useState(false),[done,setDone]=useState(false),[seconds,setSeconds]=useState(0),[busy,setBusy]=useState(false);
  const [results,setResults]=useState<{steps:number|null;miles:number|null}|null>(null),[message,setMessage]=useState('No set duration. Play music in your favorite app while you move.');
  const active=useRef<number|null>(null),segments=useRef<{start:number;end:number}[]>([]);
+ const [gpsEnabled,setGpsEnabled]=useState(false),[gpsMiles,setGpsMiles]=useState(0),[gpsMessage,setGpsMessage]=useState('GPS optional. Enable before starting.'),[gpsBusy,setGpsBusy]=useState(false);
+ useEffect(()=>{if(!gpsEnabled)return;const id=setInterval(()=>{void readGps().then(t=>setGpsMiles(t.meters/1609.344))},2500);return()=>clearInterval(id)},[gpsEnabled]);
+ const enableGps=async()=>{
+  setGpsBusy(true);
+  try{
+   const fg=await Location.requestForegroundPermissionsAsync();if(fg.status!=='granted')throw Error('Foreground location denied');
+   const bg=await Location.requestBackgroundPermissionsAsync();if(bg.status!=='granted')throw Error('Background location denied');
+   if(!await Location.isBackgroundLocationAvailableAsync())throw Error('Background GPS unavailable; install the new development build.');
+   setGpsEnabled(true);setGpsMessage('GPS ready. Start tracking to record distance.');
+  }catch(e){setGpsMessage(e instanceof Error?e.message:String(e))}
+  finally{setGpsBusy(false)}
+ };
  const elapsed=()=>Math.round((segments.current.reduce((a,s)=>a+s.end-s.start,0)+(active.current?Date.now()-active.current:0))/1000);
  useEffect(()=>{if(!running)return;const id=setInterval(()=>setSeconds(elapsed()),1000);return()=>clearInterval(id)},[running]);
  const start=()=>{active.current=Date.now();setRunning(true)};
  const pause=()=>{if(active.current){segments.current.push({start:active.current,end:Date.now()});active.current=null;}setSeconds(elapsed());setRunning(false)};
  const finish=()=>{pause();setDone(true);setMessage('Finished. Read activity to get the available steps and distance for this session.')};
  const reset=()=>{active.current=null;segments.current=[];setRunning(false);setDone(false);setSeconds(0);setResults(null);setMessage('Ready for another activity.')};
+ const gpsStart=async()=>{
+  if(gpsEnabled){
+   try{
+    if(!segments.current.length&&!active.current){
+     await beginGps();
+     await Location.startLocationUpdatesAsync(GPS_TASK,{accuracy:Location.Accuracy.High,distanceInterval:5,showsBackgroundLocationIndicator:true,pausesUpdatesAutomatically:false,foregroundService:{notificationTitle:'Soulanova Walk / Run',notificationBody:'Recording your activity'}});
+    }else await setGpsPaused(false);
+   }catch(e){setGpsMessage('GPS could not start: '+(e instanceof Error?e.message:String(e)));return}
+  }
+  start();
+ };
+ const gpsPause=async()=>{pause();if(gpsEnabled)await setGpsPaused(true)};
+ const gpsFinish=async()=>{pause();if(gpsEnabled){await stopGps();if(await Location.hasStartedLocationUpdatesAsync(GPS_TASK))await Location.stopLocationUpdatesAsync(GPS_TASK);setGpsMiles((await readGps()).meters/1609.344)}setDone(true);setMessage('Activity finished. Read Health data after your watch syncs.')};
+ const gpsReset=async()=>{if(await Location.hasStartedLocationUpdatesAsync(GPS_TASK))await Location.stopLocationUpdatesAsync(GPS_TASK);await clearGps();setGpsMiles(0);reset()};
  const read=async()=>{
   setBusy(true);
   try{
@@ -49,16 +77,19 @@ export default function FreeWalkScreen({onBack}:{onBack:()=>void}){
      <TouchableOpacity accessibilityRole="button" onPress={()=>{void openMusic('Spotify')}} style={styles.musicButton}><Text style={styles.musicText}>◉ Spotify</Text></TouchableOpacity>
    </View>
    <Text style={styles.note}>Open a playlist, press Play, then return here to start or resume tracking. Other music apps work too.</Text>
+   <Text style={styles.label}>GPS distance: {gpsMiles.toFixed(2)} mi</Text>
+   {btn(gpsEnabled?'GPS Enabled':gpsBusy?'Requesting permission…':'Enable GPS (optional)',()=>{void enableGps()},gpsEnabled||gpsBusy||running||done)}
+   <Text style={styles.note}>{gpsMessage}</Text>
    <Text style={styles.label}>{kind} {done?'completed':running?'in progress':'ready'}</Text>
    <Text style={styles.clock}>{Math.floor(seconds/3600).toString().padStart(2,'0')}:{Math.floor(seconds%3600/60).toString().padStart(2,'0')}:{(seconds%60).toString().padStart(2,'0')}</Text>
-   {btn(running?'Tracking…':seconds?'Resume':'Start Tracking',start,running||done)}
-   {btn('Pause',pause,!running)}
-   {btn('Finish',finish,done||(!running&&seconds===0))}
-   {btn('Reset',()=>Alert.alert('Discard activity?','This clears the activity.',[{text:'Cancel'},{text:'Discard',style:'destructive',onPress:reset}]),running||(!seconds&&!done))}
+   {btn(running?'Tracking…':seconds?'Resume':'Start Tracking',()=>{void gpsStart()},running||done)}
+   {btn('Pause',()=>{void gpsPause()},!running)}
+   {btn('Finish',()=>{void gpsFinish()},done||(!running&&seconds===0))}
+   {btn('Reset',()=>Alert.alert('Discard activity?','This clears the activity.',[{text:'Cancel'},{text:'Discard',style:'destructive',onPress:()=>{void gpsReset()}}]),running||(!seconds&&!done))}
    {seconds>0&&btn(busy?'Reading…':'Read Activity',()=>{void read()},busy)}
    {results&&<Text style={styles.value}>{results.steps??'—'} steps • {results.miles?.toFixed(2)??'—'} miles</Text>}
    <Text style={styles.note}>{message}</Text>
-   <Text style={styles.note}>Music: open Spotify, Apple Music, or another player yourself. Soulanova provides no coaching in this mode. This first test reads health measurements during active tracking intervals. GPS, reliable background tracking, and saving free activities are not yet enabled; keep the app open during testing.</Text>
+   <Text style={styles.note}>Music: open Spotify, Apple Music, or another player yourself. Soulanova provides no coaching in this mode. This first test reads health measurements during active tracking intervals. Background GPS is experimental and requires a new native build; force-closing the app can interrupt tracking. Saving free activities is not yet enabled.</Text>
   </View>
  </ScrollView>;
 }
