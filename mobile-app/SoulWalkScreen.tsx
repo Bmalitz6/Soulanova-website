@@ -20,7 +20,7 @@ export default function SoulWalkScreen({onBack}:{onBack:()=>void}) {
   const [section,setSection]=useState<'home'|'guided'|'history'|'safety'>('home');
   const [week,setWeek]=useState(0);
   const [guidedGps,setGuidedGps]=useState(false);
-  const [guidedGpsMessage,setGuidedGpsMessage]=useState('Background GPS is optional. Enable it for locked-phone SoulSafe updates.');
+  const [guidedGpsMessage,setGuidedGpsMessage]=useState('For locked-phone SoulSafe updates, enable GPS here before starting your guided walk, then start live sharing from SoulSafe.');
   const gpsBusy=useRef(false);
   const enableGuidedGps=async()=>{
     if(gpsBusy.current||running)return;
@@ -298,7 +298,7 @@ export default function SoulWalkScreen({onBack}:{onBack:()=>void}) {
           ()=>{void saveWalk();},saved||saving)}
         {!!saveMessage&&<Text accessibilityRole="alert" style={styles.notice}>{saveMessage}</Text>}
       </View>}
-      <Text style={styles.notice}>Apple Health workout reading is available when a walk finishes. GPS and background workout tracking are not enabled. Keep the app in the foreground during testing.</Text>
+      <Text style={styles.notice}>Apple Health workout readings are available after your walk. Optional background GPS can keep SoulSafe location updates working with your phone locked when live sharing is enabled.</Text>
     </View>
     <Text style={styles.heading}>Choose your week</Text>
     <View style={styles.weeks}>{brisk.map((n,i)=><TouchableOpacity key={i} onPress={()=>choose(i)} disabled={running} style={[styles.week,i===week&&styles.selected]}><Text style={styles.weekText}>Week {i+1}</Text><Text style={styles.min}>{n+10} min</Text></TouchableOpacity>)}</View>
