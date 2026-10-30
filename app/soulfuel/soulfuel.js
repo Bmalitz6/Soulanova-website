@@ -13,7 +13,7 @@ function renderFrequentFoods(){
  const grouped=new Map();
  // Use the member's own recent entries; keep the latest full nutrient values.
  for(const item of recentFoods){
-  const key='name:'+item.food_name.trim().toLowerCase().replace(/\\s+/g,' ');
+  const key='name:'+item.food_name.trim().toLowerCase().replace(/\s+/g,' ');
   if(!grouped.has(key))grouped.set(key,{count:0,latest:item});
   grouped.get(key).count++;
  }
