@@ -304,3 +304,18 @@ body{width:100%;max-width:100%;overflow-x:hidden}
 .workout-meditation .workout-card-image {
   background-position: center 18%;
 }
+
+
+/* SoulFuel / member navigation refresh */
+.wellness-nav{display:flex;align-items:center;justify-content:space-between;gap:10px;margin:28px 0 30px;padding:10px;background:#fff;border:1px solid var(--line);border-radius:18px;box-shadow:0 8px 26px rgba(11,75,83,.06);overflow:visible}
+.nav-primary{display:flex;align-items:center;gap:3px;min-width:0;flex-wrap:wrap}
+.wellness-nav .nav-primary button,.wellness-nav .nav-primary a{display:inline-flex;align-items:center;gap:8px;padding:12px 13px;white-space:nowrap;text-decoration:none;font-size:13px;font-weight:700;border-radius:11px;transition:background .16s ease,color .16s ease}
+.wellness-nav .nav-primary a{color:var(--deep)}.wellness-nav .nav-primary button:not(.active){color:var(--deep)}
+.wellness-nav .nav-primary button:hover,.wellness-nav .nav-primary a:hover,.wellness-nav .nav-primary button:focus-visible,.wellness-nav .nav-primary a:focus-visible{background:#e9f4ef;outline:2px solid transparent}
+.wellness-nav .nav-primary button.active{background:var(--deep);color:#fff}
+.wellness-nav .nav-symbol{font-size:19px;line-height:1;min-width:19px;text-align:center}
+.nav-more{margin-left:auto;position:relative;flex-shrink:0}.nav-more summary{cursor:pointer;list-style:none;display:flex;gap:8px;align-items:center;border:1px solid var(--line);border-radius:11px;padding:11px 15px;background:#f4f8f5;font-weight:700;font-size:13px;color:var(--deep)}.nav-more summary::-webkit-details-marker{display:none}
+.nav-more-menu{position:absolute;right:0;top:calc(100% + 10px);min-width:235px;z-index:20;background:#fff;padding:8px;border:1px solid var(--line);border-radius:13px;box-shadow:0 15px 32px rgba(10,45,47,.15);display:flex;flex-direction:column;gap:3px}
+.wellness-nav .nav-more-menu button,.wellness-nav .nav-more-menu a{font:600 13px 'DM Sans',sans-serif;color:var(--deep);border:0;background:transparent;text-align:left;text-decoration:none;border-radius:9px;display:block;padding:12px}
+.wellness-nav .nav-more-menu button:hover,.wellness-nav .nav-more-menu a:hover,.wellness-nav .nav-more-menu button.active{background:#e9f4ef;color:var(--deep)}
+@media(max-width:780px){.wellness-nav{align-items:stretch;flex-wrap:wrap;padding:9px;margin-top:22px}.nav-primary{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));width:100%}.wellness-nav .nav-primary button,.wellness-nav .nav-primary a{white-space:normal;min-height:48px}.nav-more{width:100%}.nav-more summary{justify-content:center}.nav-more-menu{width:100%;min-width:0}}
