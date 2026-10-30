@@ -117,6 +117,26 @@ async function loadHistory(){
   $('history-steps').textContent=historyNumber(steps)+(truncated?'+':'');
   $('history-miles').textContent=miles.toFixed(2)+(truncated?'+':'');
   $('history-weeks').textContent=String(weeks);
+  const progress=$('week-progress');
+  progress.replaceChildren();
+  for(let i=0;i<12;i++){
+   const required=10+brisk[i];
+   const eligible=rows.filter(r=>Number(r.week_number)===i+1&&Number(r.duration_minutes)>=required-0.01);
+   const count=eligible.length;
+   const card=document.createElement('article');
+   card.className='week';
+   const heading=document.createElement('strong');
+   heading.textContent='Week '+(i+1)+' · '+Math.min(count,5)+'/5 walks';
+   const bar=document.createElement('progress');
+   bar.max=5;bar.value=Math.min(count,5);
+   bar.style.width='100%';
+   bar.setAttribute('aria-label','Week '+(i+1)+' qualifying walks');
+   const note=document.createElement('p');
+   note.className='muted';
+   note.textContent=count>=5?'Goal reached':count+' full-length '+required+'-minute '+(count===1?'walk':'walks')+' saved';
+   card.append(heading,bar,note);
+   progress.append(card);
+  }
   list.replaceChildren();
   if(!rows.length){status.textContent='No saved walks yet. Complete a walk to start your history.';return;}
   status.textContent=truncated?'Showing totals for the latest 20,000 walks.':'Your most recent saved walks:';
