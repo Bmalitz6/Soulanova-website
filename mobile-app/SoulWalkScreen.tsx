@@ -1,4 +1,6 @@
-import React, { useEffect, useRef, useState } from 'react';
+import React, { useCallback, useEffect, useRef, useState } from 'react';
+import { supabase } from './supabase';
+import type { Session } from '@supabase/supabase-js';
 import { Alert, ScrollView, StyleSheet, Text, TouchableOpacity, View, StatusBar, Platform } from 'react-native';
 
 const brisk = [5,7,9,11,13,15,18,20,23,26,28,30];
@@ -7,6 +9,36 @@ const clock=(seconds:number)=>String(Math.floor(seconds/60)).padStart(2,'0')+':'
 
 export default function SoulWalkScreen({onBack}:{onBack:()=>void}) {
   const [week,setWeek]=useState(0);
+  const [account,setAccount]=useState<Session|null>(null);
+  const [walks,setWalks]=useState<Array<{id:string;week_number:number;duration_minutes:number;steps:number|null;distance_miles:number|null;created_at:string}>>([]);
+  const [historyMessage,setHistoryMessage]=useState('Loading walking history…');
+  const [historyBusy,setHistoryBusy]=useState(false);
+  useEffect(()=>{
+    if(!supabase){setHistoryMessage('Supabase connection unavailable.');return;}
+    supabase.auth.getSession().then(({data})=>setAccount(data.session));
+    const {data:listener}=supabase.auth.onAuthStateChange((_event,session)=>setAccount(session));
+    return ()=>listener.subscription.unsubscribe();
+  },[]);
+  const refreshHistory=useCallback(async()=>{
+    if(!supabase||!account?.user){setWalks([]);setHistoryMessage('Sign in from Member Account to see your walking history.');return;}
+    setHistoryBusy(true);
+    try{
+      const all:typeof walks=[];
+      for(let offset=0;offset<20000;offset+=500){
+        const {data,error}=await supabase.from('soulwalk_sessions')
+          .select('id,week_number,duration_minutes,steps,distance_miles,created_at')
+          .eq('user_id',account.user.id).order('created_at',{ascending:false})
+          .range(offset,offset+499);
+        if(error)throw error;
+        all.push(...(data??[]));
+        if((data??[]).length<500)break;
+      }
+      setWalks(all);
+      setHistoryMessage(all.length===20000?'Showing the latest 20,000 walks.':all.length?'Your recent saved walks':'No walks saved yet.');
+    }catch(e){setWalks([]);setHistoryMessage('Could not load walking history: '+(e instanceof Error?e.message:String(e)));}
+    finally{setHistoryBusy(false);}
+  },[account?.user.id]);
+  useEffect(()=>{void refreshHistory();},[refreshHistory]);
   const [elapsed,setElapsed]=useState(0);
   const [running,setRunning]=useState(false);
   const startedAt=useRef<number|null>(null);
@@ -51,6 +83,20 @@ export default function SoulWalkScreen({onBack}:{onBack:()=>void}) {
       <View style={styles.actions}>{action(complete?'Finished':running?'Walking':'Start / Resume',start,running||complete)}{action('Pause',pause,!running)}{action('Reset',()=>Alert.alert('Reset walk?','This discards the current unsaved timer.',[{text:'Cancel',style:'cancel'},{text:'Reset',style:'destructive',onPress:reset}]))}</View>
       <Text style={styles.notice}>Mobile timer preview. Serene coaching, HealthKit, GPS and Supabase saving are not enabled on this screen yet. Keep the app in the foreground during testing.</Text>
     </View>
+    <View style={styles.card}>
+      <Text style={styles.heading}>Your Walking History</Text>
+      <View style={styles.statRow}>
+       <Text style={styles.stat}>Walks: {walks.length.toLocaleString()}</Text>
+       <Text style={styles.stat}>Steps: {walks.reduce((sum,w)=>sum+(w.steps??0),0).toLocaleString()}</Text>
+      </View>
+      <View style={styles.statRow}>
+       <Text style={styles.stat}>Miles: {walks.reduce((sum,w)=>sum+(w.distance_miles??0),0).toFixed(2)}</Text>
+       <Text style={styles.stat}>Weeks: {new Set(walks.map(w=>w.week_number)).size}/12</Text>
+      </View>
+      <Text style={styles.notice}>{historyMessage}</Text>
+      {walks.slice(0,10).map(w=><Text key={w.id} style={styles.historyItem}>{new Date(w.created_at).toLocaleDateString()} · Week {w.week_number} · {Number(w.duration_minutes).toFixed(1)} min · {w.steps??'—'} steps</Text>)}
+      {action(historyBusy?'Refreshing…':'Refresh History',()=>{void refreshHistory();},historyBusy)}
+    </View>
     <Text style={styles.heading}>Choose your week</Text>
     <View style={styles.weeks}>{brisk.map((n,i)=><TouchableOpacity key={i} onPress={()=>choose(i)} disabled={running} style={[styles.week,i===week&&styles.selected]}><Text style={styles.weekText}>Week {i+1}</Text><Text style={styles.min}>{n+10} min</Text></TouchableOpacity>)}</View>
   </ScrollView>;
@@ -64,5 +110,6 @@ const styles=StyleSheet.create({
  track:{height:12,backgroundColor:'#DCE8E2',borderRadius:8,overflow:'hidden'},fill:{height:'100%',backgroundColor:teal},note:{textAlign:'center',color:'#657F78',marginTop:14},
  actions:{gap:10,marginTop:14},button:{backgroundColor:teal,borderRadius:12,padding:14,alignItems:'center'},disabled:{opacity:.4},buttonText:{color:'white',fontSize:16,fontWeight:'800'},
  notice:{fontSize:12,color:'#71817B',lineHeight:18,marginTop:15},heading:{color:dark,fontSize:23,fontWeight:'800',marginTop:28,marginBottom:12},
+ statRow:{flexDirection:'row',justifyContent:'space-between',marginTop:12,gap:10},stat:{color:dark,fontSize:16,fontWeight:'700'},historyItem:{color:'#536E67',paddingVertical:8,borderBottomWidth:1,borderBottomColor:'#E4EDE8'},
  weeks:{flexDirection:'row',flexWrap:'wrap',justifyContent:'space-between'},week:{width:'31%',padding:12,borderRadius:12,backgroundColor:'white',borderWidth:1,borderColor:'#DEE8E2',marginBottom:10},selected:{borderColor:teal,borderWidth:2},weekText:{fontWeight:'800',color:dark},min:{color:'#708780',marginTop:4}
 });
