@@ -7,7 +7,8 @@
     "icon": "./assets/icon.png",
     "userInterfaceStyle": "light",
     "ios": {
-      "supportsTablet": true
+      "supportsTablet": true,
+      "bundleIdentifier": "com.soulanova.wellness"
     },
     "android": {
       "adaptiveIcon": {
@@ -48,6 +49,7 @@
       "eas": {
         "projectId": "86a34d5b-d36b-4f27-950a-8ffb1a6347f9"
       }
-    }
+    },
+    "owner": "soulanova"
   }
 }
