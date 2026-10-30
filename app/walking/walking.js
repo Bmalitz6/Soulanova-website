@@ -31,7 +31,14 @@ $('pause').onclick=()=>{tick();stopTimer();milestone('paused','Workout paused.')
 $('reset').onclick=()=>{if(!confirm('Reset this walk?'))return;stopTimer();elapsed=0;miles=0;finished=false;saved=false;events.clear();render()};
 $('gps').onchange=()=>{if($('gps').checked&&running)startGPS();else stopGPS()};
 $('steps').oninput=render;
-$('save').onclick=async()=>{if(!finished||saved)return;try{const {data,error}=await db.auth.getUser();if(error)throw error;if(!data.user)throw Error('Sign in to Soulanova first.');const {error:writeError}=await db.from('workout_sessions').insert({user_id:data.user.id,workout_name:'SoulWalk — Week '+(week+1),category:'Low-Impact Cardio',duration_minutes:total()/60});if(writeError)throw writeError;saved=true;render();$('message').textContent='Walk saved to your Soulanova workout history. Mileage and steps are displayed locally in this preview; they are not yet stored in workout history.';}catch(e){$('message').textContent='Could not save walk: '+e.message}};
+$('save').onclick=async()=>{if(!finished||saved)return;const btn=$('save');btn.disabled=true;try{
+ const {data,error}=await db.auth.getUser();if(error)throw error;if(!data.user)throw Error('Sign in to Soulanova first.');
+ const stepsRaw=$('steps').value.trim();const steps=stepsRaw===''?null:Number(stepsRaw);
+ if(steps!==null&&(!Number.isInteger(steps)||steps<0||steps>150000))throw Error('Enter a valid steps count.');
+ const entry={user_id:data.user.id,week_number:week+1,duration_minutes:total()/60,distance_miles:miles>0?Number(miles.toFixed(3)):null,steps,source:'web'};
+ const {error:detailError}=await db.from('soulwalk_sessions').insert(entry);if(detailError)throw detailError;
+ saved=true;render();$('message').textContent='SoulWalk completed! Distance and steps saved to your personal walking history. Workout-summary synchronization is coming next.';
+ }catch(e){$('message').textContent='Could not save walk: '+e.message}finally{btn.disabled=saved}}
 const box=$('weeks');brisk.forEach((mins,i)=>{const card=document.createElement('article');card.className='week';card.setAttribute('aria-current',String(i===week));const title=document.createElement('strong');title.textContent='Week '+(i+1)+' · '+(mins+10)+' min';const p=document.createElement('p');p.className='muted';p.textContent='5 min easy + '+mins+' min brisk + 5 min easy';const btn=document.createElement('button');btn.textContent='Choose week '+(i+1);btn.onclick=()=>choose(i);card.append(title,p,btn);box.append(card)});
 document.addEventListener('visibilitychange',()=>{if(!document.hidden&&running)tick()});
 render();
