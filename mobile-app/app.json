@@ -23,7 +23,18 @@
     },
     "plugins": [
       "expo-audio",
-      "@appeeky/expo-healthkit"
+      [
+        "@appeeky/expo-healthkit",
+        {
+          "healthSharePermission": "Soulanova reads steps and walking distance from Apple Health only when you choose to connect your health data.",
+          "healthUpdatePermission": "Soulanova requests permission to write workout information only if you choose to enable that feature.",
+          "isBackgroundDeliveryEnabled": false,
+          "healthConnectPermissions": [
+            "READ_STEPS",
+            "READ_DISTANCE"
+          ]
+        }
+      ]
     ]
   }
 }
