@@ -187,13 +187,20 @@ export default function FreeWalkScreen({onBack}:{onBack:()=>void}){
    {seconds>0&&btn(busy?'Reading…':'Read Activity',()=>{void read()},busy)}
    <Text style={styles.note}>{pedometerStatus}</Text>
    {results&&<Text style={styles.value}>Apple Health: {results.steps??'—'} steps • {results.miles?.toFixed(2)??'—'} mi</Text>}
-   {done&&<>
-    <Text style={styles.label}>Workout Summary</Text>
-    <Text style={styles.note}>{kind} • {Math.round(seconds/60)} minutes • GPS {gpsMiles.toFixed(2)} mi • {manualSteps.trim()||(phoneSteps??results?.steps??'—')} steps</Text>
-    <TextInput accessibilityLabel="Optional manual steps" keyboardType="number-pad" placeholder="Steps (optional, if Health has not synced)" value={manualSteps} onChangeText={setManualSteps} editable={!saving&&!saved} style={styles.stepsInput}/>
-    {btn(saved?'Saved':saving?'Saving…':'Save Activity',()=>{void saveFreestyle()},saved||saving)}
-    {!!saveMessage&&<Text style={styles.note}>{saveMessage}</Text>}
-   </>}
+   {done&&<View style={styles.summaryCard}>
+     <Text style={styles.summaryHeading}>{kind} Complete</Text>
+     <Text style={styles.summaryNote}>Review your workout before saving to Soulanova.</Text>
+     <View style={styles.summaryGrid}>
+       <View style={styles.summaryTile}><Text style={styles.summaryKey}>TIME</Text><Text style={styles.summaryNumber}>{Math.floor(seconds/60)}m {seconds%60}s</Text></View>
+       <View style={styles.summaryTile}><Text style={styles.summaryKey}>DISTANCE</Text><Text style={styles.summaryNumber}>{gpsMiles>0?gpsMiles.toFixed(2)+' mi':results?.miles!=null?results.miles.toFixed(2)+' mi':'—'}</Text></View>
+       <View style={styles.summaryTile}><Text style={styles.summaryKey}>STEPS</Text><Text style={styles.summaryNumber}>{manualSteps.trim()||(phoneSteps??results?.steps??'—')}</Text></View>
+       <View style={styles.summaryTile}><Text style={styles.summaryKey}>AVG PACE</Text><Text style={styles.summaryNumber}>{gpsMiles>=0.1&&seconds>=120?((seconds/60)/gpsMiles).toFixed(1)+' min/mi':'—'}</Text></View>
+     </View>
+     <Text style={styles.note}>Steps from iPhone motion or Apple Health when available. GPS distance may differ from Apple Health.</Text>
+     <TextInput accessibilityLabel="Optional manual steps" keyboardType="number-pad" placeholder="Correct steps (optional)" value={manualSteps} onChangeText={setManualSteps} editable={!saving&&!saved} style={styles.stepsInput}/>
+     {btn(saved?'Activity Saved':saving?'Saving…':'Save Activity',()=>{void saveFreestyle()},saved||saving)}
+     {!!saveMessage&&<Text style={styles.note}>{saveMessage}</Text>}
+   </View>}
    <Text style={styles.label}>Your Recent Freestyle Activities</Text>
    {recent.map(x=><Text key={x.id} style={styles.note}>{new Date(x.created_at).toLocaleDateString()} · {x.activity_type} · {Math.round(x.duration_seconds/60)} min · {x.distance_miles??'—'} mi</Text>)}
    {btn(refreshBusy?'Refreshing…':'Refresh Activities',()=>{void loadRecent()},refreshBusy)}
@@ -204,4 +211,4 @@ export default function FreeWalkScreen({onBack}:{onBack:()=>void}){
   </View>
  </ScrollView>;
 }
-const styles=StyleSheet.create({stepsInput:{backgroundColor:'#F7FAF8',borderColor:'#DCE8E2',borderWidth:1,borderRadius:12,padding:14,fontSize:16,marginVertical:12},metrics:{flexDirection:'row',gap:7,marginBottom:16},metric:{flex:1,backgroundColor:'#EAF4F0',borderRadius:12,padding:9,alignItems:'center'},metricLabel:{fontSize:11,color:'#6D817A',fontWeight:'700'},metricValue:{color:teal,fontSize:22,fontWeight:'800'},page:{flex:1,backgroundColor:'#F7F8F5'},content:{padding:22,paddingTop:76,paddingBottom:48},back:{fontSize:16,color:teal,fontWeight:'700',marginBottom:22},title:{fontSize:35,fontWeight:'800',color:'#173238'},sub:{color:'#6C827A',fontSize:16,marginTop:8,marginBottom:18},card:{backgroundColor:'white',padding:20,borderRadius:20,borderWidth:1,borderColor:'#DBE9E2'},row:{flexDirection:'row',gap:12},musicButton:{flex:1,alignItems:'center',justifyContent:'center',paddingVertical:15,borderRadius:12,backgroundColor:'#E5F1EC'},musicText:{color:teal,fontWeight:'800',fontSize:15},choice:{flex:1,padding:15,borderRadius:14,borderColor:'#DCE8E2',borderWidth:1,alignItems:'center'},label:{marginTop:26,textAlign:'center',fontSize:19,color:'#173238',fontWeight:'700'},clock:{textAlign:'center',fontSize:46,fontWeight:'800',color:teal,marginVertical:20},value:{fontSize:19,fontWeight:'700',color:'#173238',textAlign:'center',marginTop:8},button:{backgroundColor:teal,borderRadius:12,padding:16,alignItems:'center',marginBottom:10},buttonText:{color:'white',fontWeight:'800',fontSize:17},note:{fontSize:14,lineHeight:21,color:'#72847C',marginTop:14}});
+const styles=StyleSheet.create({summaryCard:{marginTop:22,backgroundColor:'#F1F7F4',borderRadius:18,padding:16},summaryHeading:{fontSize:24,fontWeight:'800',color:'#173238',textAlign:'center'},summaryNote:{color:'#637E73',textAlign:'center',marginTop:5,marginBottom:12},summaryGrid:{flexDirection:'row',flexWrap:'wrap',gap:9},summaryTile:{width:'48%',backgroundColor:'white',padding:13,borderRadius:12},summaryKey:{fontSize:11,fontWeight:'800',color:'#6D817A'},summaryNumber:{color:'#086B63',fontSize:19,fontWeight:'800',marginTop:5},stepsInput:{backgroundColor:'#F7FAF8',borderColor:'#DCE8E2',borderWidth:1,borderRadius:12,padding:14,fontSize:16,marginVertical:12},metrics:{flexDirection:'row',gap:7,marginBottom:16},metric:{flex:1,backgroundColor:'#EAF4F0',borderRadius:12,padding:9,alignItems:'center'},metricLabel:{fontSize:11,color:'#6D817A',fontWeight:'700'},metricValue:{color:teal,fontSize:22,fontWeight:'800'},page:{flex:1,backgroundColor:'#F7F8F5'},content:{padding:22,paddingTop:76,paddingBottom:48},back:{fontSize:16,color:teal,fontWeight:'700',marginBottom:22},title:{fontSize:35,fontWeight:'800',color:'#173238'},sub:{color:'#6C827A',fontSize:16,marginTop:8,marginBottom:18},card:{backgroundColor:'white',padding:20,borderRadius:20,borderWidth:1,borderColor:'#DBE9E2'},row:{flexDirection:'row',gap:12},musicButton:{flex:1,alignItems:'center',justifyContent:'center',paddingVertical:15,borderRadius:12,backgroundColor:'#E5F1EC'},musicText:{color:teal,fontWeight:'800',fontSize:15},choice:{flex:1,padding:15,borderRadius:14,borderColor:'#DCE8E2',borderWidth:1,alignItems:'center'},label:{marginTop:26,textAlign:'center',fontSize:19,color:'#173238',fontWeight:'700'},clock:{textAlign:'center',fontSize:46,fontWeight:'800',color:teal,marginVertical:20},value:{fontSize:19,fontWeight:'700',color:'#173238',textAlign:'center',marginTop:8},button:{backgroundColor:teal,borderRadius:12,padding:16,alignItems:'center',marginBottom:10},buttonText:{color:'white',fontWeight:'800',fontSize:17},note:{fontSize:14,lineHeight:21,color:'#72847C',marginTop:14}});
