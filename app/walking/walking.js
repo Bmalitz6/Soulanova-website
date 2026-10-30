@@ -42,8 +42,8 @@ function render(){
 }
 function milestone(key,text){if(events.has(key))return;events.add(key);announce(text,key)}
 function tick(){if(!running)return;elapsed=Math.min(total(),Math.floor((Date.now()-startedAt)/1000));
- if(elapsed>=Math.ceil(total()/2))milestone('half','You are halfway through your walk. Keep going at a comfortable pace.');
  if(elapsed>=300)milestone('brisk','Warm-up complete. Gradually increase to a brisk pace. You should still be able to talk.');
+ if(elapsed>=Math.ceil(total()/2))milestone('half','You are halfway through your walk. Keep going at a comfortable pace.');
  if(elapsed>=total()-300)milestone('cool','Five minutes remaining. Slow your pace for your cool-down.');
  if(elapsed===total()){finish();return}render();}
 function distance(a,b){const rad=Math.PI/180,dlat=(b.latitude-a.latitude)*rad,dlon=(b.longitude-a.longitude)*rad,x=Math.sin(dlat/2)**2+Math.cos(a.latitude*rad)*Math.cos(b.latitude*rad)*Math.sin(dlon/2)**2;return 3958.7613*2*Math.atan2(Math.sqrt(x),Math.sqrt(1-x))}
