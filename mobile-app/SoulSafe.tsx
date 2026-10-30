@@ -64,14 +64,14 @@ export default function SoulSafe(){
    if(error)throw error;
    const started=data as LiveSession;session.current=started;setLive(started);
    setStatus('Live sharing active for up to two hours. Send your private link to a trusted person. Updates currently require this app to remain open.');
-   const url=(process.env.EXPO_PUBLIC_SUPABASE_URL??'')+'/functions/v1/soulsafe-view?token='+encodeURIComponent(started.share_token);
+   const url='https://soulanova.com/soulsafe/#token='+encodeURIComponent(started.share_token);
    await Share.share({message:'I chose to share my SoulSafe location with you for up to two hours. This private link can reveal my current location; please do not forward it. '+url});
   }catch(e){setStatus('Could not start live sharing: '+messageOf(e))}
   finally{setBusy(false)}
  };
  const resendLiveLink=async()=>{
   const current=session.current;if(!current)return;
-  const url=(process.env.EXPO_PUBLIC_SUPABASE_URL??'')+'/functions/v1/soulsafe-view?token='+encodeURIComponent(current.share_token);
+  const url='https://soulanova.com/soulsafe/#token='+encodeURIComponent(current.share_token);
   try{await Share.share({message:'My private SoulSafe live location link (do not forward): '+url})}catch(e){setStatus(messageOf(e))}
  };
  const stopLive=async()=>{
