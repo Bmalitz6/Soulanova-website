@@ -1,5 +1,5 @@
 import React,{useEffect,useRef,useState} from 'react';
-import {Alert,Linking,Platform,ScrollView,StyleSheet,Text,TouchableOpacity,View} from 'react-native';
+import {Alert,Linking,Platform,ScrollView,StyleSheet,Text,TextInput,TouchableOpacity,View} from 'react-native';
 import * as Health from '@appeeky/expo-healthkit';
 import {supabase} from './supabase';
 import * as Location from 'expo-location';
@@ -7,6 +7,7 @@ import {GPS_TASK,beginGps,readGps,setGpsPaused,stopGps,clearGps} from './freesty
 const teal='#086B63';
 export default function FreeWalkScreen({onBack}:{onBack:()=>void}){
  const [kind,setKind]=useState<'Walk'|'Run'>('Walk'),[running,setRunning]=useState(false),[done,setDone]=useState(false),[seconds,setSeconds]=useState(0),[busy,setBusy]=useState(false);
+ const [manualSteps,setManualSteps]=useState('');
  const [results,setResults]=useState<{steps:number|null;miles:number|null}|null>(null),[message,setMessage]=useState('No set duration. Play music in your favorite app while you move.');
  const active=useRef<number|null>(null),segments=useRef<{start:number;end:number}[]>([]);
  const [saving,setSaving]=useState(false),[saved,setSaved]=useState(false),[saveMessage,setSaveMessage]=useState('');
@@ -36,9 +37,11 @@ export default function FreeWalkScreen({onBack}:{onBack:()=>void}){
    const gpsAvailable=gpsEnabled&&gpsMiles>0;
    const healthAvailable=results?.miles!==null&&results?.miles!==undefined;
    const miles=gpsAvailable?gpsMiles:healthAvailable?results!.miles:null;
+   const steps=manualSteps.trim()?Number(manualSteps.trim()):results?.steps??null;
+   if(steps!==null&&(!Number.isInteger(steps)||steps<0||steps>150000))throw Error('Enter a valid step count.');
    const {error}=await supabase.from('freestyle_sessions').insert({
     user_id:user.id,activity_type:kind.toLowerCase(),duration_seconds:seconds,
-    steps:results?.steps??null,distance_miles:miles,
+    steps,distance_miles:miles,
     distance_source:gpsAvailable?'gps':healthAvailable?'health':'none'
    });
    if(error)throw error;
@@ -69,7 +72,7 @@ export default function FreeWalkScreen({onBack}:{onBack:()=>void}){
  const start=()=>{active.current=Date.now();setRunning(true)};
  const pause=()=>{if(active.current){segments.current.push({start:active.current,end:Date.now()});active.current=null;}setSeconds(elapsed());setRunning(false)};
  const finish=()=>{pause();setDone(true);setMessage('Finished. Read activity to get the available steps and distance for this session.')};
- const reset=()=>{setSaved(false);setSaveMessage('');active.current=null;segments.current=[];setRunning(false);setDone(false);setSeconds(0);setResults(null);setMessage('Ready for another activity.')};
+ const reset=()=>{setManualSteps('');setSaved(false);setSaveMessage('');active.current=null;segments.current=[];setRunning(false);setDone(false);setSeconds(0);setResults(null);setMessage('Ready for another activity.')};
  const gpsStart=async()=>{
   if(gpsBusy)return;
   const permissionReady=gpsEnabled||await enableGps();
@@ -96,15 +99,18 @@ export default function FreeWalkScreen({onBack}:{onBack:()=>void}){
    let steps=0,miles=0,hasSteps=false,hasMiles=false;
    for(const span of spans){
     const from=new Date(span.start),to=new Date(span.end);
-    const [a,b]=await Promise.all([
-     Health.queryStatistics({type:Health.QuantityType.stepCount,unit:Health.Unit.count,from,to,options:Health.StatisticsOption.cumulativeSum}),
-     Health.queryStatistics({type:Health.QuantityType.distanceWalkingRunning,unit:Health.Unit.meter,from,to,options:Health.StatisticsOption.cumulativeSum})
-    ]);
-    if(typeof a.sum==='number'){steps+=a.sum;hasSteps=true}
-    if(typeof b.sum==='number'){miles+=b.sum/1609.344;hasMiles=true}
+    if(to<=from)continue;
+    try{
+     const st=await Health.queryStatistics({type:Health.QuantityType.stepCount,unit:Health.Unit.count,from,to,options:Health.StatisticsOption.cumulativeSum});
+     if(typeof st.sum==='number'&&Number.isFinite(st.sum)){steps+=st.sum;hasSteps=true}
+    }catch{/* No steps were reported for this interval. */}
+    try{
+     const di=await Health.queryStatistics({type:Health.QuantityType.distanceWalkingRunning,unit:Health.Unit.meter,from,to,options:Health.StatisticsOption.cumulativeSum});
+     if(typeof di.sum==='number'&&Number.isFinite(di.sum)){miles+=di.sum/1609.344;hasMiles=true}
+    }catch{/* Distance can be unavailable independently of steps. */}
    }
    setResults({steps:hasSteps?Math.round(steps):null,miles:hasMiles?miles:null});
-   setMessage('Activity may appear after your watch syncs. Tap Read Activity again to refresh.');
+   setMessage(!hasSteps&&!hasMiles?'No activity samples have synced for this period yet. Try Read Activity again after your watch syncs, or enter steps manually.':!hasSteps?'Distance loaded, but step samples are not available yet. Refresh after watch sync or enter steps manually.':'Health data loaded. Review before saving.');
   }catch(e){setMessage('Cannot read health activity: '+(e instanceof Error?e.message:String(e)))}
   finally{setBusy(false)}
  };
@@ -142,7 +148,8 @@ export default function FreeWalkScreen({onBack}:{onBack:()=>void}){
    {results&&<Text style={styles.value}>Apple Health: {results.steps??'—'} steps • {results.miles?.toFixed(2)??'—'} mi</Text>}
    {done&&<>
     <Text style={styles.label}>Workout Summary</Text>
-    <Text style={styles.note}>{kind} • {Math.round(seconds/60)} minutes • GPS {gpsMiles.toFixed(2)} mi • {results?.steps??'—'} steps</Text>
+    <Text style={styles.note}>{kind} • {Math.round(seconds/60)} minutes • GPS {gpsMiles.toFixed(2)} mi • {manualSteps.trim()||results?.steps||'—'} steps</Text>
+    <TextInput accessibilityLabel="Optional manual steps" keyboardType="number-pad" placeholder="Steps (optional, if Health has not synced)" value={manualSteps} onChangeText={setManualSteps} editable={!saving&&!saved} style={styles.stepsInput}/>
     {btn(saved?'Saved':saving?'Saving…':'Save Activity',()=>{void saveFreestyle()},saved||saving)}
     {!!saveMessage&&<Text style={styles.note}>{saveMessage}</Text>}
    </>}
@@ -154,4 +161,4 @@ export default function FreeWalkScreen({onBack}:{onBack:()=>void}){
   </View>
  </ScrollView>;
 }
-const styles=StyleSheet.create({metrics:{flexDirection:'row',gap:7,marginBottom:16},metric:{flex:1,backgroundColor:'#EAF4F0',borderRadius:12,padding:9,alignItems:'center'},metricLabel:{fontSize:11,color:'#6D817A',fontWeight:'700'},metricValue:{color:teal,fontSize:22,fontWeight:'800'},page:{flex:1,backgroundColor:'#F7F8F5'},content:{padding:22,paddingTop:76,paddingBottom:48},back:{fontSize:16,color:teal,fontWeight:'700',marginBottom:22},title:{fontSize:35,fontWeight:'800',color:'#173238'},sub:{color:'#6C827A',fontSize:16,marginTop:8,marginBottom:18},card:{backgroundColor:'white',padding:20,borderRadius:20,borderWidth:1,borderColor:'#DBE9E2'},row:{flexDirection:'row',gap:12},musicButton:{flex:1,alignItems:'center',justifyContent:'center',paddingVertical:15,borderRadius:12,backgroundColor:'#E5F1EC'},musicText:{color:teal,fontWeight:'800',fontSize:15},choice:{flex:1,padding:15,borderRadius:14,borderColor:'#DCE8E2',borderWidth:1,alignItems:'center'},label:{marginTop:26,textAlign:'center',fontSize:19,color:'#173238',fontWeight:'700'},clock:{textAlign:'center',fontSize:46,fontWeight:'800',color:teal,marginVertical:20},value:{fontSize:19,fontWeight:'700',color:'#173238',textAlign:'center',marginTop:8},button:{backgroundColor:teal,borderRadius:12,padding:16,alignItems:'center',marginBottom:10},buttonText:{color:'white',fontWeight:'800',fontSize:17},note:{fontSize:14,lineHeight:21,color:'#72847C',marginTop:14}});
+const styles=StyleSheet.create({stepsInput:{backgroundColor:'#F7FAF8',borderColor:'#DCE8E2',borderWidth:1,borderRadius:12,padding:14,fontSize:16,marginVertical:12},metrics:{flexDirection:'row',gap:7,marginBottom:16},metric:{flex:1,backgroundColor:'#EAF4F0',borderRadius:12,padding:9,alignItems:'center'},metricLabel:{fontSize:11,color:'#6D817A',fontWeight:'700'},metricValue:{color:teal,fontSize:22,fontWeight:'800'},page:{flex:1,backgroundColor:'#F7F8F5'},content:{padding:22,paddingTop:76,paddingBottom:48},back:{fontSize:16,color:teal,fontWeight:'700',marginBottom:22},title:{fontSize:35,fontWeight:'800',color:'#173238'},sub:{color:'#6C827A',fontSize:16,marginTop:8,marginBottom:18},card:{backgroundColor:'white',padding:20,borderRadius:20,borderWidth:1,borderColor:'#DBE9E2'},row:{flexDirection:'row',gap:12},musicButton:{flex:1,alignItems:'center',justifyContent:'center',paddingVertical:15,borderRadius:12,backgroundColor:'#E5F1EC'},musicText:{color:teal,fontWeight:'800',fontSize:15},choice:{flex:1,padding:15,borderRadius:14,borderColor:'#DCE8E2',borderWidth:1,alignItems:'center'},label:{marginTop:26,textAlign:'center',fontSize:19,color:'#173238',fontWeight:'700'},clock:{textAlign:'center',fontSize:46,fontWeight:'800',color:teal,marginVertical:20},value:{fontSize:19,fontWeight:'700',color:'#173238',textAlign:'center',marginTop:8},button:{backgroundColor:teal,borderRadius:12,padding:16,alignItems:'center',marginBottom:10},buttonText:{color:'white',fontWeight:'800',fontSize:17},note:{fontSize:14,lineHeight:21,color:'#72847C',marginTop:14}});
