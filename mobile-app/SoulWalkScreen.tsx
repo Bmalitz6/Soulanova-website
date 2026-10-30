@@ -1,6 +1,7 @@
 import React, { useCallback, useEffect, useRef, useState } from 'react';
 import { supabase } from './supabase';
 import * as HealthKit from '@appeeky/expo-healthkit';
+import FreeWalkScreen from './FreeWalkScreen';
 import { useAudioPlayer, setAudioModeAsync } from 'expo-audio';
 import { Switch } from 'react-native';
 import type { Session } from '@supabase/supabase-js';
@@ -11,6 +12,7 @@ const teal='#086B63', dark='#173238';
 const clock=(seconds:number)=>String(Math.floor(seconds/60)).padStart(2,'0')+':'+String(seconds%60).padStart(2,'0');
 
 export default function SoulWalkScreen({onBack}:{onBack:()=>void}) {
+  const [showFree,setShowFree]=useState(false);
   const [week,setWeek]=useState(0);
   const [coaching,setCoaching]=useState(true);
   const player=useAudioPlayer(null);
@@ -195,10 +197,17 @@ export default function SoulWalkScreen({onBack}:{onBack:()=>void}) {
   };
   const phase=complete?'Completed':elapsed<300?'Easy warm-up':elapsed<300+brisk[week]*60?'Brisk walking':'Cool-down';
   const action=(label:string,fn:()=>void,disabled=false)=><TouchableOpacity accessibilityRole="button" disabled={disabled} onPress={fn} style={[styles.button,disabled&&styles.disabled]}><Text style={styles.buttonText}>{label}</Text></TouchableOpacity>;
+  if(showFree)return <FreeWalkScreen onBack={()=>setShowFree(false)}/>;
   return <ScrollView style={styles.page} contentContainerStyle={styles.container}>
     <TouchableOpacity accessibilityRole="button" onPress={()=>{pause();onBack()}}><Text style={styles.back}>‹ Back to Soulanova</Text></TouchableOpacity>
     <Text style={styles.title}>SoulWalk</Text>
-    <Text style={styles.subtitle}>Your 12-Week Walking Journey</Text>
+    <Text style={styles.subtitle}>Choose a guided workout or move at your own pace.</Text>
+    <View style={styles.card}>
+      <Text style={styles.heading}>Walk / Run Freestyle</Text>
+      <Text style={styles.notice}>No coach or time limit. Track at your pace while listening to your own music.</Text>
+      {action('Start Walk / Run',()=>setShowFree(true),running)}
+      <Text style={styles.notice}>Or continue with the guided 12-week program below.</Text>
+    </View>
     <View style={styles.card}>
       <Text style={styles.eyebrow}>WEEK {week+1} · {Math.round(duration/60)} MINUTES</Text>
       <Text style={styles.phase}>{phase}</Text>
