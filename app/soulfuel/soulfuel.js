@@ -25,7 +25,7 @@ function renderFrequentFoods(){
   const btn=el('button','Use again');btn.type='button';btn.className='frequent-use';
   btn.onclick=()=>{
    $('food-name').value=item.food_name;$('meal').value=item.meal_type;
-   $('quantity').value=item.quantity;$('serving').value=item.serving_description;
+   $('quantity').value=item.quantity;const unitValues=[...$('serving').options].map(o=>o.value);$('serving').value=unitValues.includes(item.serving_description)?item.serving_description:'serving';
    for(const field of document.querySelectorAll('[data-nutrient]')){
     const value=item.nutrients?.[field.dataset.nutrient];
     field.value=value===undefined||value===null?'':String(value);
