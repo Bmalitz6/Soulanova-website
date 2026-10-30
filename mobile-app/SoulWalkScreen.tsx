@@ -1,5 +1,6 @@
 import React, { useCallback, useEffect, useRef, useState } from 'react';
 import { supabase } from './supabase';
+import * as HealthKit from '@appeeky/expo-healthkit';
 import { useAudioPlayer, setAudioModeAsync } from 'expo-audio';
 import { Switch } from 'react-native';
 import type { Session } from '@supabase/supabase-js';
@@ -63,6 +64,31 @@ export default function SoulWalkScreen({onBack}:{onBack:()=>void}) {
     finally{setHistoryBusy(false);}
   },[account?.user.id]);
   useEffect(()=>{void refreshHistory();},[refreshHistory]);
+  const [healthBusy,setHealthBusy]=useState(false);
+  const [healthMessage,setHealthMessage]=useState('Read today’s steps and distance from your health app.');
+  const [todayHealth,setTodayHealth]=useState<{steps:number|null;miles:number|null}|null>(null);
+  const connectHealth=async()=>{
+    if(healthBusy)return;
+    setHealthBusy(true);
+    try{
+      if(!HealthKit.isAvailable())throw new Error('Health service unavailable on this device. Use the native development build.');
+      await HealthKit.requestAuthorization({toRead:[
+        HealthKit.QuantityType.stepCount,
+        HealthKit.QuantityType.distanceWalkingRunning
+      ],toShare:[]});
+      const from=new Date();from.setHours(0,0,0,0);
+      const to=new Date();
+      const [st,di]=await Promise.all([
+        HealthKit.queryStatistics({type:HealthKit.QuantityType.stepCount,unit:HealthKit.Unit.count,from,to,options:HealthKit.StatisticsOption.cumulativeSum}),
+        HealthKit.queryStatistics({type:HealthKit.QuantityType.distanceWalkingRunning,unit:HealthKit.Unit.meter,from,to,options:HealthKit.StatisticsOption.cumulativeSum})
+      ]);
+      const steps=typeof st.sum==='number'&&Number.isFinite(st.sum)?Math.round(st.sum):null;
+      const miles=typeof di.sum==='number'&&Number.isFinite(di.sum)?di.sum/1609.344:null;
+      setTodayHealth({steps,miles});
+      setHealthMessage(steps===null&&miles===null?'No readable data returned. Check health permissions and sync sources.':'Today’s totals only — not an individual SoulWalk workout.');
+    }catch(e){setTodayHealth(null);setHealthMessage('Unable to read health data: '+(e instanceof Error?e.message:String(e)));}
+    finally{setHealthBusy(false);}
+  };
   const [stepsText,setStepsText]=useState('');
   const [saving,setSaving]=useState(false);
   const [saved,setSaved]=useState(false);
@@ -161,6 +187,13 @@ export default function SoulWalkScreen({onBack}:{onBack:()=>void}) {
         {!!saveMessage&&<Text accessibilityRole="alert" style={styles.notice}>{saveMessage}</Text>}
       </View>}
       <Text style={styles.notice}>HealthKit and GPS are not yet connected. Steps are entered manually; distance is not recorded. Keep the app in the foreground during testing.</Text>
+    </View>
+    <View style={styles.card}>
+      <Text style={styles.heading}>{Platform.OS==='ios'?'Apple Health':'Health Connect'}</Text>
+      <Text style={styles.notice}>Read-only test: steps and walking distance only. Health data is not uploaded or added to saved walks.</Text>
+      {action(healthBusy?'Reading…':'Connect & Read Today’s Activity',()=>{void connectHealth();},healthBusy)}
+      {todayHealth&&<Text style={styles.stat}>Today: {todayHealth.steps===null?'Unavailable':todayHealth.steps.toLocaleString()} steps · {todayHealth.miles===null?'Unavailable':todayHealth.miles.toFixed(2)} miles</Text>}
+      <Text style={styles.notice}>{healthMessage}</Text>
     </View>
     <View style={styles.card}>
       <Text style={styles.heading}>Your Walking History</Text>
