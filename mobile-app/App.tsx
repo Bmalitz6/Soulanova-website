@@ -1,4 +1,5 @@
-import React from 'react';
+import React, { useState } from 'react';
+import SoulWalkScreen from './SoulWalkScreen';
 import {
   View, Text, ScrollView, TouchableOpacity,
   StyleSheet, ImageBackground, StatusBar,
@@ -30,11 +31,11 @@ const programs = [
     image: images.strength, tag: 'STRENGTH & MOBILITY' },
 ];
 
-function ProgramCard({ item }: { item: typeof programs[number] }) {
+function ProgramCard({ item, onSoulWalk }: { item: typeof programs[number], onSoulWalk: () => void }) {
   return (
     <TouchableOpacity
       activeOpacity={0.85}
-      onPress={() => Alert.alert(item.title,
+      onPress={() => item.title === 'SoulWalk' ? onSoulWalk() : Alert.alert(item.title,
         'We are connecting this section to the existing Soulanova library.')}
       style={styles.programCard}
     >
@@ -64,6 +65,8 @@ function ProgramCard({ item }: { item: typeof programs[number] }) {
 }
 
 export default function App() {
+  const [screen, setScreen] = useState<'home' | 'walk'>('home');
+  if (screen === 'walk') return <SoulWalkScreen onBack={() => setScreen('home')} />;
   return (
     <SafeAreaView style={styles.safe}>
       <StatusBar barStyle="dark-content" />
@@ -105,8 +108,7 @@ export default function App() {
                 </Text>
                 <TouchableOpacity
                   style={styles.heroButton}
-                  onPress={() => Alert.alert('SoulWalk',
-                    'Your 12-week walking program is being connected.')}
+                  onPress={() => setScreen('walk')}
                 >
                   <Text style={styles.heroButtonText}>
                     Start Your Journey
@@ -126,7 +128,7 @@ export default function App() {
         </View>
 
         {programs.map(item => (
-          <ProgramCard key={item.title} item={item} />
+          <ProgramCard key={item.title} item={item} onSoulWalk={() => setScreen('walk')} />
         ))}
 
         <TouchableOpacity
