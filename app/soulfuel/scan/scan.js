@@ -1,6 +1,7 @@
 import {createClient} from 'https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2/+esm';
 const $=id=>document.getElementById(id),db=createClient(window.SOULANOVA_SUPABASE.url,window.SOULANOVA_SUPABASE.publishableKey);
-let user=null,barcode='',per100={},lastAmount=100,scanner=null,scanning=false;
+let user=null,barcode='',per100={},lastAmount=100,amountUnit='g',scanner=null,scanning=false;
+function labeledPortion(label){const match=String(label||'').match(/(\d+(?:[.,]\d+)?)\s*(mL|ml|g|fl\.?\s*oz|oz)\b/i);if(!match)return null;const value=Number(match[1].replace(',','.'));if(!Number.isFinite(value)||value<=0)return null;const unit=match[2].toLowerCase().replace(/\s|\./g,'');if(unit==='ml')return {amount:value,unit:'mL'};if(unit==='g')return {amount:value,unit:'g'};if(unit==='floz')return {amount:value*29.5735295625,unit:'mL'};if(unit==='oz')return {amount:value*28.349523125,unit:'g'};return null;}
 const nutrients=[['calories','Calories','kcal','energy-kcal_100g',1],['protein','Protein','g','proteins_100g',1],['carbs','Carbs','g','carbohydrates_100g',1],['fat','Fat','g','fat_100g',1],['total_sugar','Total sugar','g','sugars_100g',1],['fiber','Fiber','g','fiber_100g',1],['sodium','Sodium','mg','sodium_100g',1000],['added_sugar','Added sugar','g',null,1]];
 const setStatus=s=>{$('status').textContent=s},valid=n=>Number.isFinite(n)&&n>=0;
 const safeNumber=v=>v===null||v===undefined||v===''?null:Number(v);
@@ -10,8 +11,10 @@ async function lookup(e){e?.preventDefault();barcode=$('barcode').value.trim();i
  const p=data.product;per100={};for(const [key,, ,field,factor] of nutrients){if(!field)continue;const n=safeNumber(p.nutriments?.[field]);if(n!==null&&valid(n))per100[key]=n*factor}
  $('product').textContent=[p.product_name||'Unnamed product',p.brands].filter(Boolean).join(' · ');$('food-name').value=p.product_name||'Food '+barcode;
  $('attribution').textContent='Lookup: Open Food Facts · Serving label: '+(p.serving_size||'not specified')+'. Nutrients are based on reported values per 100g/100mL.';
- $('amount').value='100';lastAmount=100;
- for(const [key] of nutrients){const el=$('macro-'+key);el.value=per100[key]===undefined?'':String(Number(per100[key].toFixed(2)));}
+ const portion=labeledPortion(p.serving_size);lastAmount=portion?.amount||100;amountUnit=portion?.unit||'g';
+ $('amount').value=String(Number(lastAmount.toFixed(2)));
+ $('amount-label').textContent='Amount consumed ('+amountUnit+')';
+ for(const [key] of nutrients){const el=$('macro-'+key);el.value=per100[key]===undefined?'':String(Number((per100[key]*lastAmount/100).toFixed(2)));}
  $('result').hidden=false;setStatus('Product found. Review and adjust the values before saving.');
  }catch(err){setStatus('Lookup failed: '+err.message+'. You can still log this food manually.')}
 }
@@ -22,7 +25,7 @@ $('save').addEventListener('submit',async e=>{e.preventDefault();const btn=e.sub
  const session=await db.auth.getUser();if(session.error)throw session.error;user=session.data.user;if(!user)throw Error('Please sign in to your Soulanova account first.');
  const amount=Number($('amount').value),name=$('food-name').value.trim();if(!Number.isFinite(amount)||amount<=0||amount>10000||!name)throw Error('Check the food name and amount.');
  const values={};for(const [key] of nutrients){const raw=$('macro-'+key).value.trim();if(raw==='')continue;const n=Number(raw);if(!valid(n))throw Error('Correct the value for '+key);values[key]=n}
- btn.disabled=true;const {error}=await db.from('nutrition_entries').insert({user_id:user.id,consumed_at:new Date().toISOString(),meal_type:$('meal').value,food_name:name,quantity:amount,serving_description:'g or mL (as labeled)',nutrients:values,source:'barcode',barcode});if(error)throw error;
+ btn.disabled=true;const {error}=await db.from('nutrition_entries').insert({user_id:user.id,consumed_at:new Date().toISOString(),meal_type:$('meal').value,food_name:name,quantity:amount,serving_description:amountUnit,nutrients:values,source:'barcode',barcode});if(error)throw error;
  setStatus('Saved to your SoulFuel food journal.');$('result').hidden=true;
  }catch(err){setStatus(err.message)}finally{btn.disabled=false}});
 async function stop(){if(scanner&&scanning){try{await scanner.stop()}catch(e){}scanning=false}if(scanner){try{scanner.clear()}catch(e){}scanner=null}$('camera').hidden=true;$('stop-camera').hidden=true}
