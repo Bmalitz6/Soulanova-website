@@ -67,7 +67,7 @@ export default function SoulWalkScreen({onBack}:{onBack:()=>void}) {
   },[account?.user.id]);
   useEffect(()=>{void refreshHistory();},[refreshHistory]);
   const [healthBusy,setHealthBusy]=useState(false);
-  const [healthMessage,setHealthMessage]=useState('Read today’s steps and distance from your health app.');
+  const [healthMessage,setHealthMessage]=useState('Loading today’s activity from Apple Health…');
   const [todayHealth,setTodayHealth]=useState<{steps:number|null;miles:number|null}|null>(null);
   const connectHealth=async()=>{
     if(healthBusy)return;
@@ -115,6 +115,8 @@ export default function SoulWalkScreen({onBack}:{onBack:()=>void}) {
     }catch(e){setWorkoutMessage('Could not read workout activity: '+(e instanceof Error?e.message:String(e)));}
     finally{setWorkoutBusy(false);}
   };
+  // Refresh today's totals when SoulWalk opens; the workout metrics remain separate.
+  useEffect(()=>{void connectHealth();},[]);
   const [stepsText,setStepsText]=useState('');
   const [saving,setSaving]=useState(false);
   const [saved,setSaved]=useState(false);
@@ -235,7 +237,7 @@ export default function SoulWalkScreen({onBack}:{onBack:()=>void}) {
     <View style={styles.card}>
       <Text style={styles.heading}>{Platform.OS==='ios'?'Apple Health':'Health Connect'}</Text>
       <Text style={styles.notice}>Daily activity preview only. Workout readings are collected separately after finishing; saving a completed workout will upload the selected steps and distance.</Text>
-      {action(healthBusy?'Reading…':'Connect & Read Today’s Activity',()=>{void connectHealth();},healthBusy)}
+      {action(healthBusy?'Refreshing…':'Refresh Today’s Activity',()=>{void connectHealth();},healthBusy)}
       {todayHealth&&<Text style={styles.stat}>Today: {todayHealth.steps===null?'Unavailable':todayHealth.steps.toLocaleString()} steps · {todayHealth.miles===null?'Unavailable':todayHealth.miles.toFixed(2)} miles</Text>}
       <Text style={styles.notice}>{healthMessage}</Text>
     </View>
