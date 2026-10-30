@@ -56,6 +56,12 @@
           "isAndroidBackgroundLocationEnabled": true,
           "isAndroidForegroundServiceEnabled": true
         }
+      ],
+      [
+        "expo-sensors",
+        {
+          "motionPermission": "Soulanova uses motion activity to count your steps during Walk or Run sessions when you choose to start tracking."
+        }
       ]
     ],
     "extra": {
