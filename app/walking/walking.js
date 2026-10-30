@@ -36,7 +36,7 @@ function render(){
  const warm=elapsed<300,br=elapsed<300+brisk[week]*60;
  $('phase').textContent=finished?'Completed':!elapsed?'Ready to walk':warm?'Easy warm-up':br?'Brisk walking':'Slow cool-down';
  $('position').textContent='5 min warm-up · '+brisk[week]+' min brisk · 5 min cool-down';
- $('start').disabled=running||finished;$('pause').disabled=!running;$('pause').textContent='Pause';$('save').disabled=!finished||saved;
+ $('start').disabled=running||finished;$('pause').disabled=!running;$('pause').textContent='Pause';$('save').disabled=!finished||saved;$('save-help').textContent=saved?'Walk saved.':finished?'Workout finished. Save your steps and distance.':'Complete the walking timer before saving. '+format(total()-elapsed)+' remaining.';
  $('miles').textContent=miles>0?miles.toFixed(2):'—';$('steps-display').textContent=$('steps').value||'—';
  document.querySelectorAll('.week').forEach((el,i)=>{el.setAttribute('aria-current',String(i===week));el.querySelector('button').disabled=running;});
 }
