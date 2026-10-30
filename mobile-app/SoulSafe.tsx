@@ -12,6 +12,14 @@ export default function SoulSafe(){
  const [live,setLive]=useState<LiveSession|null>(null);
  const session=useRef<LiveSession|null>(null);
  const updating=useRef(false);
+ useEffect(()=>{let mounted=true;
+  const restore=async()=>{if(!supabase)return;
+   const {data:{user}}=await supabase.auth.getUser();if(!user||!mounted)return;
+   const {data,error}=await supabase.from('soulsafe_sessions').select('id,share_token,expires_at').eq('owner_id',user.id).is('ended_at',null).gt('expires_at',new Date().toISOString()).order('created_at',{ascending:false}).limit(1).maybeSingle();
+   if(!error&&data&&mounted){session.current=data as LiveSession;setLive(data as LiveSession);setStatus('An existing live sharing session is active. Use Stop Live Sharing to end it.')}
+  };void restore();return()=>{mounted=false}
+ },[]);
+
  const updateLocation=async()=>{
   const current=session.current;
   if(!current||!supabase||updating.current||AppState.currentState!=='active')return;
@@ -61,6 +69,11 @@ export default function SoulSafe(){
   }catch(e){setStatus('Could not start live sharing: '+messageOf(e))}
   finally{setBusy(false)}
  };
+ const resendLiveLink=async()=>{
+  const current=session.current;if(!current)return;
+  const url=(process.env.EXPO_PUBLIC_SUPABASE_URL??'')+'/functions/v1/soulsafe-view?token='+encodeURIComponent(current.share_token);
+  try{await Share.share({message:'My private SoulSafe live location link (do not forward): '+url,url})}catch(e){setStatus(messageOf(e))}
+ };
  const stopLive=async()=>{
   const current=session.current;
   if(!current||!supabase)return;
@@ -85,6 +98,7 @@ export default function SoulSafe(){
   <Text style={styles.note}>One-time map pin. Does not follow your movement.</Text>
   {!live?<TouchableOpacity accessibilityRole="button" onPress={()=>{void startLive()}} disabled={busy} style={styles.button}><Text style={styles.buttonText}>Start Live Sharing (2 hours max)</Text></TouchableOpacity>:
    <TouchableOpacity accessibilityRole="button" onPress={()=>{void stopLive()}} disabled={busy} style={[styles.button,styles.sos]}><Text style={styles.buttonText}>Stop Live Sharing</Text></TouchableOpacity>}
+  {live&&<TouchableOpacity accessibilityRole="button" onPress={()=>{void resendLiveLink()}} style={styles.button}><Text style={styles.buttonText}>Share Live Link Again</Text></TouchableOpacity>}
   {live&&<Text style={styles.note}>Sharing until {new Date(live.expires_at).toLocaleTimeString()} at the latest. Keep this screen open for location updates. A link holder can view your current position until you stop or it expires.</Text>}
   <TouchableOpacity accessibilityRole="button" onPress={callEmergency} style={[styles.button,styles.sos]}><Text style={styles.buttonText}>Emergency SOS · Call 911</Text></TouchableOpacity>
   <Text style={styles.note}>{status}</Text>
