@@ -3,7 +3,7 @@ import { supabase } from './supabase';
 import { useAudioPlayer, setAudioModeAsync } from 'expo-audio';
 import { Switch } from 'react-native';
 import type { Session } from '@supabase/supabase-js';
-import { Alert, ScrollView, StyleSheet, Text, TouchableOpacity, View, StatusBar, Platform } from 'react-native';
+import { Alert, ScrollView, StyleSheet, Text, TouchableOpacity, View, StatusBar, Platform, TextInput } from 'react-native';
 
 const brisk = [5,7,9,11,13,15,18,20,23,26,28,30];
 const teal='#086B63', dark='#173238';
@@ -63,6 +63,11 @@ export default function SoulWalkScreen({onBack}:{onBack:()=>void}) {
     finally{setHistoryBusy(false);}
   },[account?.user.id]);
   useEffect(()=>{void refreshHistory();},[refreshHistory]);
+  const [stepsText,setStepsText]=useState('');
+  const [saving,setSaving]=useState(false);
+  const [saved,setSaved]=useState(false);
+  const saveLock=useRef(false);
+  const [saveMessage,setSaveMessage]=useState('');
   const [elapsed,setElapsed]=useState(0);
   const [running,setRunning]=useState(false);
   const startedAt=useRef<number|null>(null);
@@ -102,12 +107,36 @@ export default function SoulWalkScreen({onBack}:{onBack:()=>void}) {
     player.pause();
   };
   const reset=()=>{
+    if(saving)return;
+    setSaved(false);setStepsText('');setSaveMessage('');
     setRunning(false);
     startedAt.current=null;
     setElapsed(0);
     clearCues();
   };
-  const choose=(i:number)=>{if(running)return;reset();setWeek(i)};
+  const choose=(i:number)=>{if(running||saving)return;reset();setWeek(i)};
+  const saveWalk=async()=>{
+    if(!complete||saved||saveLock.current)return;
+    if(!supabase){setSaveMessage('Supabase is not configured.');return;}
+    const steps=stepsText.trim()===''?null:Number(stepsText.trim());
+    if(steps!==null&&(!Number.isInteger(steps)||steps<0||steps>150000)){
+      setSaveMessage('Enter a valid step count from 0 to 150,000.');return;
+    }
+    saveLock.current=true;setSaving(true);setSaveMessage('');
+    try{
+      const {data,error:authError}=await supabase.auth.getUser();
+      if(authError)throw authError;
+      if(!data.user)throw Error('Sign in to your Soulanova account first.');
+      const {error}=await supabase.from('soulwalk_sessions').insert({
+        user_id:data.user.id,week_number:week+1,duration_minutes:duration/60,
+        distance_miles:null,steps,source:Platform.OS==='android'?'android':'ios'
+      });
+      if(error)throw error;
+      setSaved(true);setSaveMessage('Walk saved successfully.');
+      await refreshHistory();
+    }catch(e){setSaveMessage('Could not save walk: '+(e instanceof Error?e.message:String(e)));}
+    finally{saveLock.current=false;setSaving(false);}
+  };
   const phase=complete?'Completed':elapsed<300?'Easy warm-up':elapsed<300+brisk[week]*60?'Brisk walking':'Cool-down';
   const action=(label:string,fn:()=>void,disabled=false)=><TouchableOpacity accessibilityRole="button" disabled={disabled} onPress={fn} style={[styles.button,disabled&&styles.disabled]}><Text style={styles.buttonText}>{label}</Text></TouchableOpacity>;
   return <ScrollView style={styles.page} contentContainerStyle={styles.container}>
@@ -122,7 +151,16 @@ export default function SoulWalkScreen({onBack}:{onBack:()=>void}) {
       <Text style={styles.note}>5 min warm-up · {brisk[week]} min brisk · 5 min cool-down</Text>
       <View style={styles.actions}>{action(complete?'Finished':running?'Walking':'Start / Resume',start,running||complete)}{action('Pause',pause,!running)}{action('Reset',()=>Alert.alert('Reset walk?','This discards the current unsaved timer.',[{text:'Cancel',style:'cancel'},{text:'Reset',style:'destructive',onPress:reset}]))}</View>
       <View style={styles.statRow}><Text style={styles.stat}>Serene coaching voice</Text><Switch value={coaching} onValueChange={setCoaching} trackColor={{true:teal}} accessibilityLabel="Serene coaching voice"/></View>
-      <Text style={styles.notice}>Mobile timer preview. HealthKit, GPS and Supabase saving are not enabled on this screen yet. Keep the app in the foreground during testing.</Text>
+      {complete&&<View style={styles.saveSection}>
+        <Text style={styles.stat}>Steps from your watch or phone (optional)</Text>
+        <TextInput accessibilityLabel="Steps during this walk" keyboardType="number-pad"
+          placeholder="Enter steps" value={stepsText} onChangeText={setStepsText}
+          editable={!saved&&!saving} style={styles.stepInput}/>
+        {action(saved?'Walk Saved':saving?'Saving…':'Save Completed Walk',
+          ()=>{void saveWalk();},saved||saving)}
+        {!!saveMessage&&<Text accessibilityRole="alert" style={styles.notice}>{saveMessage}</Text>}
+      </View>}
+      <Text style={styles.notice}>HealthKit and GPS are not yet connected. Steps are entered manually; distance is not recorded. Keep the app in the foreground during testing.</Text>
     </View>
     <View style={styles.card}>
       <Text style={styles.heading}>Your Walking History</Text>
@@ -151,6 +189,7 @@ const styles=StyleSheet.create({
  track:{height:12,backgroundColor:'#DCE8E2',borderRadius:8,overflow:'hidden'},fill:{height:'100%',backgroundColor:teal},note:{textAlign:'center',color:'#657F78',marginTop:14},
  actions:{gap:10,marginTop:14},button:{backgroundColor:teal,borderRadius:12,padding:14,alignItems:'center'},disabled:{opacity:.4},buttonText:{color:'white',fontSize:16,fontWeight:'800'},
  notice:{fontSize:12,color:'#71817B',lineHeight:18,marginTop:15},heading:{color:dark,fontSize:23,fontWeight:'800',marginTop:28,marginBottom:12},
+ saveSection:{marginTop:20},stepInput:{backgroundColor:'#F8FAF8',padding:14,borderRadius:12,borderWidth:1,borderColor:'#D9E7E1',marginTop:10,marginBottom:12,fontSize:17},
  statRow:{flexDirection:'row',justifyContent:'space-between',marginTop:12,gap:10},stat:{color:dark,fontSize:16,fontWeight:'700'},historyItem:{color:'#536E67',paddingVertical:8,borderBottomWidth:1,borderBottomColor:'#E4EDE8'},
  weeks:{flexDirection:'row',flexWrap:'wrap',justifyContent:'space-between'},week:{width:'31%',padding:12,borderRadius:12,backgroundColor:'white',borderWidth:1,borderColor:'#DEE8E2',marginBottom:10},selected:{borderColor:teal,borderWidth:2},weekText:{fontWeight:'800',color:dark},min:{color:'#708780',marginTop:4}
 });
