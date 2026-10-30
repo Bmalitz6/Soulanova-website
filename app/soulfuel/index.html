@@ -16,7 +16,7 @@
 <h2>Log a food</h2><section aria-label="Frequently logged foods"><h3>Frequently logged foods</h3><p class="hint">Your most repeated foods. Tap one to fill in its saved portion and nutrition values, then adjust and save.</p><div id="frequent-foods"></div></section><p><a href="/app/soulfuel/scan/">📷 Scan barcode or look up a packaged food →</a></p><form id="food-form" class="stack">
 <label>Food name <input id="food-name" maxlength="150" required placeholder="e.g. Greek yogurt"></label>
 <label>Meal <select id="meal"><option value="breakfast">Breakfast</option><option value="lunch">Lunch</option><option value="dinner">Dinner</option><option value="snack">Snack</option></select></label>
-<div class="two"><label>Quantity <input id="quantity" type="number" min="0.001" step="any" value="1" required></label><label>Unit <input id="serving" value="serving" maxlength="80" required></label></div>
+<div class="two"><label>Quantity <input id="quantity" type="number" min="0.001" step="any" value="1" required></label><label>Unit <select id="serving"><option value="serving">Serving</option><option value="mL">mL</option><option value="fl oz">fl oz (US)</option><option value="g">g</option><option value="oz">oz (weight)</option></select></label></div>
 <p class="hint">Enter nutrition for the quantity consumed. Blank values mean unknown, not zero.</p>
 <div class="two" id="nutrient-fields"></div><button type="submit">Save food</button></form>
 <h3>Food journal</h3><div id="entries"></div></section></div></section>
