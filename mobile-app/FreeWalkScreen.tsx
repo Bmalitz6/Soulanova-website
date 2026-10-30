@@ -7,6 +7,7 @@ import {GPS_TASK,beginGps,readGps,setGpsPaused,stopGps,clearGps} from './freesty
 const teal='#086B63';
 export default function FreeWalkScreen({onBack}:{onBack:()=>void}){
  const [kind,setKind]=useState<'Walk'|'Run'>('Walk'),[running,setRunning]=useState(false),[done,setDone]=useState(false),[seconds,setSeconds]=useState(0),[busy,setBusy]=useState(false);
+ const healthReadLock=useRef(false);
  const [manualSteps,setManualSteps]=useState('');
  const [results,setResults]=useState<{steps:number|null;miles:number|null}|null>(null),[message,setMessage]=useState('No set duration. Play music in your favorite app while you move.');
  const active=useRef<number|null>(null),segments=useRef<{start:number;end:number}[]>([]);
@@ -91,6 +92,8 @@ export default function FreeWalkScreen({onBack}:{onBack:()=>void}){
  const gpsFinish=async()=>{pause();if(gpsEnabled){await stopGps();if(await Location.hasStartedLocationUpdatesAsync(GPS_TASK))await Location.stopLocationUpdatesAsync(GPS_TASK);setGpsMiles((await readGps()).meters/1609.344)}setDone(true);setMessage('Activity finished. Read Health data after your watch syncs.')};
  const gpsReset=async()=>{if(await Location.hasStartedLocationUpdatesAsync(GPS_TASK))await Location.stopLocationUpdatesAsync(GPS_TASK);await clearGps();setGpsMiles(0);reset()};
  const read=async()=>{
+  if(healthReadLock.current||saved)return;
+  healthReadLock.current=true;
   setBusy(true);
   try{
    if(!Health.isAvailable())throw Error('Health data is not available on this device.');
@@ -112,8 +115,15 @@ export default function FreeWalkScreen({onBack}:{onBack:()=>void}){
    setResults({steps:hasSteps?Math.round(steps):null,miles:hasMiles?miles:null});
    setMessage(!hasSteps&&!hasMiles?'No activity samples have synced for this period yet. Try Read Activity again after your watch syncs, or enter steps manually.':!hasSteps?'Distance loaded, but step samples are not available yet. Refresh after watch sync or enter steps manually.':'Health data loaded. Review before saving.');
   }catch(e){setMessage('Cannot read health activity: '+(e instanceof Error?e.message:String(e)))}
-  finally{setBusy(false)}
+  finally{healthReadLock.current=false;setBusy(false)}
  };
+ // Foreground refresh only: HealthKit may not have samples until watch sync.
+ useEffect(()=>{
+  if(done){void read();return;}
+  if(!running)return;
+  const id=setInterval(()=>{void read()},30000);
+  return()=>clearInterval(id);
+ },[running,done]);
  const openMusic=async(service:'Apple Music'|'Spotify')=>{
    const url=service==='Apple Music'?'https://music.apple.com/':'https://open.spotify.com/';
    try{await Linking.openURL(url)}
@@ -157,6 +167,7 @@ export default function FreeWalkScreen({onBack}:{onBack:()=>void}){
    {recent.map(x=><Text key={x.id} style={styles.note}>{new Date(x.created_at).toLocaleDateString()} · {x.activity_type} · {Math.round(x.duration_seconds/60)} min · {x.distance_miles??'—'} mi</Text>)}
    {btn(refreshBusy?'Refreshing…':'Refresh Activities',()=>{void loadRecent()},refreshBusy)}
    <Text style={styles.note}>{message}</Text>
+   <Text style={styles.note}>Steps refresh about every 30 seconds while this screen is active and once when you finish. Apple Health can report them later after a watch sync; use Read Activity to refresh manually.</Text>
    <Text style={styles.note}>Music: open Spotify, Apple Music, or another player yourself. Soulanova provides no coaching in this mode. This first test reads health measurements during active tracking intervals. Background GPS is experimental and requires a new native build; force-closing the app can interrupt tracking. Saving free activities requires the member account and freestyle_sessions database table.</Text>
   </View>
  </ScrollView>;
