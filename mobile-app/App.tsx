@@ -1,4 +1,7 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
+import type { Session } from '@supabase/supabase-js';
+import { supabase } from './supabase';
+import MemberScreen from './MemberScreen';
 import SoulWalkScreen from './SoulWalkScreen';
 import {
   View, Text, ScrollView, TouchableOpacity,
@@ -65,7 +68,15 @@ function ProgramCard({ item, onSoulWalk }: { item: typeof programs[number], onSo
 }
 
 export default function App() {
-  const [screen, setScreen] = useState<'home' | 'walk'>('home');
+  const [screen, setScreen] = useState<'home' | 'walk' | 'account'>('home');
+  const [session, setSession] = useState<Session | null>(null);
+  useEffect(() => {
+    if (!supabase) return;
+    supabase.auth.getSession().then(({data}) => setSession(data.session));
+    const {data: listener} = supabase.auth.onAuthStateChange((_event, next) => setSession(next));
+    return () => listener.subscription.unsubscribe();
+  }, []);
+  if (screen === 'account') return <MemberScreen onBack={() => setScreen('home')} emailSignedIn={session?.user.email ?? null} />;
   if (screen === 'walk') return <SoulWalkScreen onBack={() => setScreen('home')} />;
   return (
     <SafeAreaView style={styles.safe}>
@@ -81,8 +92,7 @@ export default function App() {
           </View>
           <TouchableOpacity
             style={styles.profile}
-            onPress={() => Alert.alert('My Account',
-              'Member login is our next integration.')}
+            onPress={() => setScreen('account')}
           >
             <Ionicons name="person-outline" size={23} color={TEAL} />
           </TouchableOpacity>
