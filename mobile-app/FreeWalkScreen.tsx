@@ -4,6 +4,7 @@ import * as Health from '@appeeky/expo-healthkit';
 import {Pedometer} from 'expo-sensors';
 import {supabase} from './supabase';
 import SoulSafe from './SoulSafe';
+import {endBackgroundShare} from './soulsafeBackground';
 import * as Location from 'expo-location';
 import {GPS_TASK,beginGps,readGps,setGpsPaused,stopGps,clearGps} from './freestyleGps';
 const teal='#086B63';
@@ -131,8 +132,8 @@ export default function FreeWalkScreen({onBack}:{onBack:()=>void}){
   start();
  };
  const gpsPause=async()=>{pause();if(gpsEnabled)await setGpsPaused(true)};
- const gpsFinish=async()=>{pause();void refreshPhoneSteps();if(gpsEnabled){await stopGps();if(await Location.hasStartedLocationUpdatesAsync(GPS_TASK))await Location.stopLocationUpdatesAsync(GPS_TASK);setGpsMiles((await readGps()).meters/1609.344)}setDone(true);setMessage('Activity finished. Read Health data after your watch syncs.')};
- const gpsReset=async()=>{if(await Location.hasStartedLocationUpdatesAsync(GPS_TASK))await Location.stopLocationUpdatesAsync(GPS_TASK);await clearGps();setGpsMiles(0);reset()};
+ const gpsFinish=async()=>{pause();void refreshPhoneSteps();if(gpsEnabled){await stopGps();if(await Location.hasStartedLocationUpdatesAsync(GPS_TASK))await Location.stopLocationUpdatesAsync(GPS_TASK);setGpsMiles((await readGps()).meters/1609.344)}try{await endBackgroundShare()}catch(e){Alert.alert('SoulSafe still sharing','Workout ended, but live location sharing could not be revoked. Open SoulSafe and tap Stop Live Sharing. '+errorDetails(e))}setDone(true);setMessage('Activity finished. Read Health data after your watch syncs.')};
+ const gpsReset=async()=>{if(await Location.hasStartedLocationUpdatesAsync(GPS_TASK))await Location.stopLocationUpdatesAsync(GPS_TASK);await clearGps();try{await endBackgroundShare()}catch(e){Alert.alert('SoulSafe still sharing','Reset did not revoke your live sharing link. Open SoulSafe and tap Stop Live Sharing. '+errorDetails(e))}setGpsMiles(0);reset()};
  const read=async()=>{
   if(healthReadLock.current||saved)return;
   healthReadLock.current=true;
