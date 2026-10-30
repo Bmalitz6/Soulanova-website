@@ -13,7 +13,7 @@ function renderFrequentFoods(){
  const grouped=new Map();
  // Use the member's own recent entries; keep the latest full nutrient values.
  for(const item of recentFoods){
-  const key=(item.barcode?'barcode:'+item.barcode:'name:'+item.food_name.trim().toLowerCase());
+  const key='name:'+item.food_name.trim().toLowerCase().replace(/\\s+/g,' ');
   if(!grouped.has(key))grouped.set(key,{count:0,latest:item});
   grouped.get(key).count++;
  }
@@ -21,7 +21,7 @@ function renderFrequentFoods(){
  if(!frequent.length){box.append(el('p','As you log meals, your frequently used foods will appear here.','hint'));return;}
  for(const group of frequent){
   const item=group.latest,row=el('div',undefined,'metric'),info=el('div');
-  info.append(el('strong',item.food_name),el('small',group.count+' logged · '+item.quantity+' '+item.serving_description));
+  const legacyUnit=['g or mL (as labeled)'].includes(item.serving_description);const displayUnit=legacyUnit?'unit needs confirmation':item.serving_description;info.append(el('strong',item.food_name),el('small',group.count+' logged · '+item.quantity+' '+displayUnit));
   const btn=el('button','Use again');btn.type='button';btn.className='frequent-use';
   btn.onclick=()=>{
    $('food-name').value=item.food_name;$('meal').value=item.meal_type;
@@ -30,7 +30,7 @@ function renderFrequentFoods(){
     const value=item.nutrients?.[field.dataset.nutrient];
     field.value=value===undefined||value===null?'':String(value);
    }
-   message('Food filled in. Adjust your portion and nutrition values, then click Save food.');
+   message('Food filled in. Check the unit, serving quantity and nutrition values before saving.'+(legacyUnit?' This older entry did not specify g versus mL.':''));
    $('food-form').scrollIntoView({behavior:'smooth',block:'center'});
   };
   row.append(info,btn);box.append(row);
