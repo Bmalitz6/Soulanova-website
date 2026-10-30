@@ -2,6 +2,7 @@ import React, { useCallback, useEffect, useRef, useState } from 'react';
 import { supabase } from './supabase';
 import * as HealthKit from '@appeeky/expo-healthkit';
 import FreeWalkScreen from './FreeWalkScreen';
+import SoulSafe from './SoulSafe';
 import { useAudioPlayer, setAudioModeAsync } from 'expo-audio';
 import { Switch } from 'react-native';
 import type { Session } from '@supabase/supabase-js';
@@ -215,6 +216,7 @@ export default function SoulWalkScreen({onBack}:{onBack:()=>void}) {
       {action(healthBusy?'Refreshing…':'Refresh Today’s Activity',()=>{void connectHealth();},healthBusy)}
       <Text style={styles.notice}>Daily totals are separate from your guided and Freestyle workouts.</Text>
     </View>
+    <SoulSafe />
     <View style={styles.card}>
       <Text style={styles.heading}>Walk / Run Freestyle</Text>
       <Text style={styles.notice}>No coach or time limit. Track at your pace while listening to your own music.</Text>
