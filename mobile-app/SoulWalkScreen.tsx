@@ -1,5 +1,7 @@
 import React, { useCallback, useEffect, useRef, useState } from 'react';
 import { supabase } from './supabase';
+import { useAudioPlayer, setAudioModeAsync } from 'expo-audio';
+import { Switch } from 'react-native';
 import type { Session } from '@supabase/supabase-js';
 import { Alert, ScrollView, StyleSheet, Text, TouchableOpacity, View, StatusBar, Platform } from 'react-native';
 
@@ -9,6 +11,28 @@ const clock=(seconds:number)=>String(Math.floor(seconds/60)).padStart(2,'0')+':'
 
 export default function SoulWalkScreen({onBack}:{onBack:()=>void}) {
   const [week,setWeek]=useState(0);
+  const [coaching,setCoaching]=useState(true);
+  const player=useAudioPlayer(null);
+  const played=useRef(new Set<string>());
+  const previousElapsed=useRef(0);
+  const coachingRef=useRef(true);
+  useEffect(()=>{coachingRef.current=coaching;if(!coaching)player.pause();},[coaching,player]);
+  useEffect(()=>{void setAudioModeAsync({playsInSilentMode:true,interruptionMode:'mixWithOthers'});return ()=>player.pause();},[player]);
+  const playCue=useCallback((key:'start'|'brisk'|'halfway'|'cooldown'|'finish')=>{
+    if(!coachingRef.current||played.current.has(key))return;
+    played.current.add(key);
+    const files={
+      start:require('./assets/audio/start.mp3'),
+      brisk:require('./assets/audio/brisk.mp3'),
+      halfway:require('./assets/audio/halfway.mp3'),
+      cooldown:require('./assets/audio/cooldown.mp3'),
+      finish:require('./assets/audio/finish.mp3'),
+    };
+    player.pause();
+    player.replace(files[key]);
+    player.play();
+  },[player]);
+  const clearCues=()=>{played.current.clear();previousElapsed.current=0;player.pause();};
   const [account,setAccount]=useState<Session|null>(null);
   const [walks,setWalks]=useState<Array<{id:string;week_number:number;duration_minutes:number;steps:number|null;distance_miles:number|null;created_at:string}>>([]);
   const [historyMessage,setHistoryMessage]=useState('Loading walking history…');
@@ -54,18 +78,34 @@ export default function SoulWalkScreen({onBack}:{onBack:()=>void}) {
     },500);
     return ()=>clearInterval(interval);
   },[running,duration]);
+  useEffect(()=>{
+    if(elapsed<=previousElapsed.current){previousElapsed.current=elapsed;return;}
+    const last=previousElapsed.current;
+    previousElapsed.current=elapsed;
+    const milestones=[
+      {at:300,key:'brisk' as const},
+      {at:Math.ceil(duration/2),key:'halfway' as const},
+      {at:duration-300,key:'cooldown' as const},
+      {at:duration,key:'finish' as const},
+    ];
+    const crossed=milestones.filter(m=>last<m.at&&elapsed>=m.at);
+    if(crossed.length)playCue(crossed[crossed.length-1].key);
+  },[elapsed,duration,playCue]);
   const start=()=>{
     startedAt.current=Date.now()-elapsed*1000;
+    if(elapsed===0)playCue('start');
     setRunning(true);
   };
   const pause=()=>{
     if(startedAt.current!==null)setElapsed(Math.min(duration,Math.floor((Date.now()-startedAt.current)/1000)));
     setRunning(false);
+    player.pause();
   };
   const reset=()=>{
     setRunning(false);
     startedAt.current=null;
     setElapsed(0);
+    clearCues();
   };
   const choose=(i:number)=>{if(running)return;reset();setWeek(i)};
   const phase=complete?'Completed':elapsed<300?'Easy warm-up':elapsed<300+brisk[week]*60?'Brisk walking':'Cool-down';
@@ -81,7 +121,8 @@ export default function SoulWalkScreen({onBack}:{onBack:()=>void}) {
       <View style={styles.track}><View style={[styles.fill,{width:(elapsed/duration*100)+'%'}]}/></View>
       <Text style={styles.note}>5 min warm-up · {brisk[week]} min brisk · 5 min cool-down</Text>
       <View style={styles.actions}>{action(complete?'Finished':running?'Walking':'Start / Resume',start,running||complete)}{action('Pause',pause,!running)}{action('Reset',()=>Alert.alert('Reset walk?','This discards the current unsaved timer.',[{text:'Cancel',style:'cancel'},{text:'Reset',style:'destructive',onPress:reset}]))}</View>
-      <Text style={styles.notice}>Mobile timer preview. Serene coaching, HealthKit, GPS and Supabase saving are not enabled on this screen yet. Keep the app in the foreground during testing.</Text>
+      <View style={styles.statRow}><Text style={styles.stat}>Serene coaching voice</Text><Switch value={coaching} onValueChange={setCoaching} trackColor={{true:teal}} accessibilityLabel="Serene coaching voice"/></View>
+      <Text style={styles.notice}>Mobile timer preview. HealthKit, GPS and Supabase saving are not enabled on this screen yet. Keep the app in the foreground during testing.</Text>
     </View>
     <View style={styles.card}>
       <Text style={styles.heading}>Your Walking History</Text>
