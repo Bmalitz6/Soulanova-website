@@ -3,6 +3,9 @@ import { supabase } from './supabase';
 import * as HealthKit from '@appeeky/expo-healthkit';
 import FreeWalkScreen from './FreeWalkScreen';
 import SoulSafe from './SoulSafe';
+import * as Location from 'expo-location';
+import {GPS_TASK,beginGps,setGpsPaused,stopGps,clearGps} from './freestyleGps';
+import {endBackgroundShare} from './soulsafeBackground';
 import { useAudioPlayer, setAudioModeAsync } from 'expo-audio';
 import { Switch } from 'react-native';
 import type { Session } from '@supabase/supabase-js';
@@ -16,6 +19,45 @@ export default function SoulWalkScreen({onBack}:{onBack:()=>void}) {
   const [showFree,setShowFree]=useState(false);
   const [section,setSection]=useState<'home'|'guided'|'history'|'safety'>('home');
   const [week,setWeek]=useState(0);
+  const [guidedGps,setGuidedGps]=useState(false);
+  const [guidedGpsMessage,setGuidedGpsMessage]=useState('Background GPS is optional. Enable it for locked-phone SoulSafe updates.');
+  const gpsBusy=useRef(false);
+  const enableGuidedGps=async()=>{
+    if(gpsBusy.current||running)return;
+    gpsBusy.current=true;
+    try{
+      let fg=await Location.getForegroundPermissionsAsync();
+      if(fg.status!=='granted')fg=await Location.requestForegroundPermissionsAsync();
+      if(fg.status!=='granted')throw Error('Location permission not granted.');
+      let bg=await Location.getBackgroundPermissionsAsync();
+      if(bg.status!=='granted')bg=await Location.requestBackgroundPermissionsAsync();
+      if(bg.status!=='granted')throw Error('Allow Always location access in Settings for locked-phone tracking.');
+      setGuidedGps(true);setGuidedGpsMessage('Background GPS ready. Start your guided walk to begin.');
+    }catch(e){setGuidedGps(false);setGuidedGpsMessage(e instanceof Error?e.message:String(e))}
+    finally{gpsBusy.current=false}
+  };
+  const startGuidedGps=async()=>{
+    if(!guidedGps)return;
+    try{
+      if(await Location.hasStartedLocationUpdatesAsync(GPS_TASK)){
+        await setGpsPaused(false);
+      }else{
+        await beginGps();
+        await Location.startLocationUpdatesAsync(GPS_TASK,{accuracy:Location.Accuracy.High,distanceInterval:5,showsBackgroundLocationIndicator:true,pausesUpdatesAutomatically:false,foregroundService:{notificationTitle:'Soulanova Guided SoulWalk',notificationBody:'Recording GPS during your guided walk'}});
+      }
+      setGuidedGpsMessage('GPS active. SoulSafe shares locations only if you explicitly start live sharing.');
+    }catch(e){setGuidedGpsMessage('GPS did not start: '+(e instanceof Error?e.message:String(e)))}
+  };
+  const pauseGuidedGps=async()=>{if(guidedGps)await setGpsPaused(true)};
+  const stopGuidedGps=async()=>{
+    if(!guidedGps)return;
+    await stopGps();
+    if(await Location.hasStartedLocationUpdatesAsync(GPS_TASK))await Location.stopLocationUpdatesAsync(GPS_TASK);
+    await clearGps();
+  };
+  const stopGuidedShare=async()=>{
+    try{await endBackgroundShare()}catch(e){Alert.alert('SoulSafe sharing may still be active','Please open SoulSafe and tap Stop Live Sharing. '+(e instanceof Error?e.message:String(e)))}
+  };
   const [coaching,setCoaching]=useState(true);
   const player=useAudioPlayer(null);
   const played=useRef(new Set<string>());
@@ -135,7 +177,7 @@ export default function SoulWalkScreen({onBack}:{onBack:()=>void}) {
       if(startedAt.current===null)return;
       const value=Math.min(duration,Math.floor((Date.now()-startedAt.current)/1000));
       setElapsed(value);
-      if(value>=duration){workoutEnded.current=workoutEnded.current??Date.now();setRunning(false);}
+      if(value>=duration){workoutEnded.current=workoutEnded.current??Date.now();setRunning(false);void stopGuidedGps();void stopGuidedShare();}
     },500);
     return ()=>clearInterval(interval);
   },[running,duration]);
@@ -157,6 +199,7 @@ export default function SoulWalkScreen({onBack}:{onBack:()=>void}) {
     startedAt.current=Date.now()-elapsed*1000;
     if(elapsed===0)playCue('start');
     setRunning(true);
+    void startGuidedGps();
   };
   const pause=()=>{
     if(startedAt.current!==null){
@@ -165,6 +208,7 @@ export default function SoulWalkScreen({onBack}:{onBack:()=>void}) {
       if(current>=duration)workoutEnded.current=workoutEnded.current??Date.now();
     }
     setRunning(false);
+    void pauseGuidedGps();
     player.pause();
   };
   const reset=()=>{
@@ -175,6 +219,8 @@ export default function SoulWalkScreen({onBack}:{onBack:()=>void}) {
     startedAt.current=null;
     setElapsed(0);
     clearCues();
+    void stopGuidedGps();
+    void stopGuidedShare();
   };
   const choose=(i:number)=>{if(running||saving)return;reset();setWeek(i)};
   const saveWalk=async()=>{
@@ -233,6 +279,9 @@ export default function SoulWalkScreen({onBack}:{onBack:()=>void}) {
       <Text style={styles.clock}>{clock(Math.max(0,duration-elapsed))}</Text>
       <View style={styles.track}><View style={[styles.fill,{width:(elapsed/duration*100)+'%'}]}/></View>
       <Text style={styles.note}>5 min warm-up · {brisk[week]} min brisk · 5 min cool-down</Text>
+      <Text style={styles.notice}>{guidedGpsMessage}</Text>
+      {!guidedGps&&action('Enable Background GPS for SoulSafe',()=>{void enableGuidedGps()},running)}
+
       <View style={styles.actions}>{action(complete?'Finished':running?'Walking':'Start / Resume',start,running||complete)}{action('Pause',pause,!running)}{action('Reset',()=>Alert.alert('Reset walk?','This discards the current unsaved timer.',[{text:'Cancel',style:'cancel'},{text:'Reset',style:'destructive',onPress:reset}]))}</View>
       <View style={styles.statRow}><Text style={styles.stat}>Serene coaching voice</Text><Switch value={coaching} onValueChange={setCoaching} trackColor={{true:teal}} accessibilityLabel="Serene coaching voice"/></View>
       {complete&&<View style={styles.saveSection}>
