@@ -6,7 +6,7 @@ function state(t){status.textContent=t;detail.textContent='';map.replaceChildren
 async function refresh(){
  if(!token||!/^[a-f0-9-]{36}$/i.test(token)){state('Invalid sharing link.');return}
  try{
-  const response=await fetch(endpoint,{cache:'no-store',credentials:'omit'});if(!response.ok)throw Error('Network error');
+  const response=await fetch(endpoint,{cache:'no-store',credentials:'omit'});if(!response.ok){const body=await response.json().catch(()=>({}));throw Error('Location service returned '+response.status+(body.error?' ('+String(body.error).slice(0,80)+')':''))}
   const d=await response.json();
   if(!d.is_active){state('This sharing session has ended or expired.');return}
   if(d.latitude==null||d.longitude==null){state('Sharing active. Waiting for the first GPS update…');return}
@@ -14,7 +14,7 @@ async function refresh(){
   status.textContent=age!==null&&age>90?'Location may be out of date.':'Sharing is active.';
   detail.textContent='Last update: '+(updated?updated.toLocaleTimeString():'unknown')+(age!==null?' ('+age+' seconds ago)':'')+(d.accuracy_m!=null?' · approximate accuracy '+Math.round(d.accuracy_m)+' m':'');
   map.replaceChildren();const a=document.createElement('a');a.href='https://maps.apple.com/?ll='+encodeURIComponent(d.latitude+','+d.longitude);a.rel='noopener noreferrer';a.target='_blank';a.textContent='View location in Maps';map.append(a);
- }catch{state('Unable to refresh location. Check your connection.')}
+ }catch(e){state('Unable to refresh location: '+(e instanceof Error?e.message:'Network or browser connection error'))}
 }
 void refresh();setInterval(refresh,15000);
 </script></body></html>
