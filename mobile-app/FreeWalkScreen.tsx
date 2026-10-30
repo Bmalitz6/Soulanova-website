@@ -148,7 +148,7 @@ export default function FreeWalkScreen({onBack}:{onBack:()=>void}){
    <View style={styles.metrics}>
     <View style={styles.metric}><Text style={styles.metricLabel}>GPS Miles</Text><Text style={styles.metricValue}>{gpsMiles.toFixed(2)}</Text></View>
     <View style={styles.metric}><Text style={styles.metricLabel}>Steps</Text><Text style={styles.metricValue}>{results?.steps??'—'}</Text></View>
-    <View style={styles.metric}><Text style={styles.metricLabel}>Avg pace</Text><Text style={styles.metricValue}>{gpsMiles>0.02?((seconds/60)/gpsMiles).toFixed(1):'—'}</Text><Text style={styles.metricLabel}>min/mi</Text></View>
+    <View style={styles.metric}><Text style={styles.metricLabel}>Avg pace</Text><Text style={styles.metricValue}>{gpsMiles>=0.1&&seconds>=120?((seconds/60)/gpsMiles).toFixed(1):'—'}</Text><Text style={styles.metricLabel}>{gpsMiles>=0.1&&seconds>=120?'min/mi':'Calculating…'}</Text></View>
    </View>
    {btn(running?'Tracking…':seconds?'Resume':'Start Tracking',()=>{void gpsStart()},running||done||gpsBusy)}
    {btn('Pause',()=>{void gpsPause()},!running)}
