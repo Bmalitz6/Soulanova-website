@@ -31,13 +31,15 @@ const workoutCardMeta = {
   pilates: {label:'PILATES', cta:'View Session', image:'/app/images/workouts/pilates.jpg'},
   strength: {label:'STRENGTH', cta:'View Session', image:'/app/images/workouts/strength.jpg'},
   mobility: {label:'STRETCH & MOBILITY', cta:'View Session', image:'/app/images/workouts/mobility.jpg'},
-  cardio: {label:'LOW-IMPACT CARDIO', cta:'View Session', image:'/app/images/workouts/cardio.jpg'},
+  cardio: {label:'LOW-IMPACT CARDIO', cta:'Start 12-Week Walking Plan', image:'/app/images/workouts/cardio.jpg'},
   meditation: {label:'MEDITATION', cta:'View Sessions', image:'/app/images/workouts/meditation.jpg'}
 };
 
 function openWorkout(w){
   state.selected=w.id;
   save();
+
+  if(w.id==='cardio'){window.location.href='/app/walking/';return;}
 
   if(w.id==='tai' && window.SoulanovaClasses){
     window.SoulanovaClasses.open();
