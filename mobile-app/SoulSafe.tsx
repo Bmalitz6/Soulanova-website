@@ -2,6 +2,7 @@ import React,{useEffect,useRef,useState} from 'react';
 import {Alert,Linking,Share,StyleSheet,Text,TouchableOpacity,View,AppState} from 'react-native';
 import * as Location from 'expo-location';
 import {supabase} from './supabase';
+import {setBackgroundShare} from './soulsafeBackground';
 
 const TEAL='#086B63';
 type LiveSession={id:string;share_token:string;expires_at:string};
@@ -16,21 +17,21 @@ export default function SoulSafe(){
   const restore=async()=>{if(!supabase)return;
    const {data:{user}}=await supabase.auth.getUser();if(!user||!mounted)return;
    const {data,error}=await supabase.from('soulsafe_sessions').select('id,share_token,expires_at').eq('owner_id',user.id).is('ended_at',null).gt('expires_at',new Date().toISOString()).order('created_at',{ascending:false}).limit(1).maybeSingle();
-   if(!error&&data&&mounted){session.current=data as LiveSession;setLive(data as LiveSession);setStatus('An existing live sharing session is active. Use Stop Live Sharing to end it.')}
+   if(!error&&data&&mounted){session.current=data as LiveSession;setLive(data as LiveSession);void setBackgroundShare(data as LiveSession);setStatus('An existing live sharing session is active. Use Stop Live Sharing to end it.')}
   };void restore();return()=>{mounted=false}
  },[]);
 
  const updateLocation=async()=>{
   const current=session.current;
   if(!current||!supabase||updating.current||AppState.currentState!=='active')return;
-  if(Date.now()>=new Date(current.expires_at).getTime()){setStatus('Live sharing expired.');session.current=null;setLive(null);return}
+  if(Date.now()>=new Date(current.expires_at).getTime()){setStatus('Live sharing expired.');await setBackgroundShare(null);session.current=null;setLive(null);return}
   updating.current=true;
   try{
    const p=await Location.getCurrentPositionAsync({accuracy:Location.Accuracy.Balanced});
    if(session.current?.id!==current.id)return;
    const {error}=await supabase.from('soulsafe_sessions').update({latitude:p.coords.latitude,longitude:p.coords.longitude,accuracy_m:p.coords.accuracy??null,updated_at:new Date().toISOString()}).eq('id',current.id);
    if(error)throw error;
-   setStatus('Live location updated at '+new Date().toLocaleTimeString()+'. Keep this screen open for updates.');
+   setStatus('Live location updated at '+new Date().toLocaleTimeString()+'. Keep SoulWalk active for updates outside Freestyle workouts.');
   }catch(e){setStatus('Live sharing update failed: '+messageOf(e))}
   finally{updating.current=false}
  };
@@ -62,8 +63,8 @@ export default function SoulSafe(){
    if(permission.status!=='granted')throw Error('Location access is needed for live sharing.');
    const {data,error}=await supabase.from('soulsafe_sessions').insert({owner_id:user.id}).select('id,share_token,expires_at').single();
    if(error)throw error;
-   const started=data as LiveSession;session.current=started;setLive(started);
-   setStatus('Live sharing active for up to two hours. Send your private link to a trusted person. Updates currently require this app to remain open.');
+   const started=data as LiveSession;session.current=started;await setBackgroundShare(started);setLive(started);
+   setStatus('Live sharing active for up to two hours. Send your private link to a trusted person. Background updates are supported during an active Freestyle workout when GPS permission is enabled.');
    const url='https://soulanova.com/soulsafe/#token='+encodeURIComponent(started.share_token);
    await Share.share({message:'I chose to share my SoulSafe location with you for up to two hours. This private link can reveal my current location; please do not forward it. '+url});
   }catch(e){setStatus('Could not start live sharing: '+messageOf(e))}
@@ -81,7 +82,7 @@ export default function SoulSafe(){
   try{
    const {error}=await supabase.from('soulsafe_sessions').update({ended_at:new Date().toISOString()}).eq('id',current.id);
    if(error)throw error;
-   session.current=null;setLive(null);setStatus('Live location sharing stopped. The private link no longer shows your location.');
+   await setBackgroundShare(null);session.current=null;setLive(null);setStatus('Live location sharing stopped. The private link no longer shows your location.');
   }catch(e){setStatus('Could not stop sharing. Check your connection and retry: '+messageOf(e))}
   finally{setBusy(false)}
  };
@@ -99,10 +100,10 @@ export default function SoulSafe(){
   {!live?<TouchableOpacity accessibilityRole="button" onPress={()=>{void startLive()}} disabled={busy} style={styles.button}><Text style={styles.buttonText}>Start Live Sharing (2 hours max)</Text></TouchableOpacity>:
    <TouchableOpacity accessibilityRole="button" onPress={()=>{void stopLive()}} disabled={busy} style={[styles.button,styles.sos]}><Text style={styles.buttonText}>Stop Live Sharing</Text></TouchableOpacity>}
   {live&&<TouchableOpacity accessibilityRole="button" onPress={()=>{void resendLiveLink()}} style={styles.button}><Text style={styles.buttonText}>Share Live Link Again</Text></TouchableOpacity>}
-  {live&&<Text style={styles.note}>Sharing until {new Date(live.expires_at).toLocaleTimeString()} at the latest. Keep this screen open for location updates. A link holder can view your current position until you stop or it expires.</Text>}
+  {live&&<Text style={styles.note}>Sharing until {new Date(live.expires_at).toLocaleTimeString()} at the latest. During Freestyle workouts, location can continue updating with your phone locked. A link holder can view your current position until you stop or it expires.</Text>}
   <TouchableOpacity accessibilityRole="button" onPress={callEmergency} style={[styles.button,styles.sos]}><Text style={styles.buttonText}>Emergency SOS · Call 911</Text></TouchableOpacity>
   <Text style={styles.note}>{status}</Text>
-  <Text style={styles.note}>This early live-sharing version updates only while this app screen is open. It does NOT yet track in the background, automatically notify contacts, or detect falls. Location accuracy, internet service and battery affect updates. Do not rely on it for emergency rescue.</Text>
+  <Text style={styles.note}>Background sharing uses Freestyle GPS while the workout is active and not paused. Guided walks and sharing outside active Freestyle workouts currently require the screen to be open. It does NOT automatically notify contacts or detect falls. Location accuracy, internet service and battery affect updates. Do not rely on it for emergency rescue.</Text>
  </View>
 }
 const styles=StyleSheet.create({card:{backgroundColor:'#FFFFFF',borderRadius:20,borderWidth:1,borderColor:'#DCE8E2',padding:18,marginTop:16},title:{fontSize:21,fontWeight:'800',color:'#173238'},note:{color:'#697F76',fontSize:13,lineHeight:19,marginTop:10},button:{backgroundColor:TEAL,borderRadius:12,padding:15,alignItems:'center',marginTop:14},buttonText:{fontSize:15,fontWeight:'800',color:'#FFFFFF'},sos:{backgroundColor:'#9B3232'}});
