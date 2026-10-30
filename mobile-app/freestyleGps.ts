@@ -1,6 +1,7 @@
 import * as TaskManager from 'expo-task-manager';
 import * as Location from 'expo-location';
 import AsyncStorage from '@react-native-async-storage/async-storage';
+import {backgroundSharePoint} from './soulsafeBackground';
 
 export const GPS_TASK='soulanova-freestyle-gps-v1';
 const KEY='soulanova-freestyle-gps-data-v1';
@@ -33,6 +34,7 @@ TaskManager.defineTask(GPS_TASK,async({data,error})=>{
     if(meters>0.8&&speed<=9){t.meters+=meters}
    }
    t.points.push(point);
+   try{await backgroundSharePoint(point.latitude,point.longitude,point.accuracy,point.timestamp)}catch(e){console.warn('SoulSafe location publish',e)}
    if(t.points.length>5000)t.points.shift();
   }
   await AsyncStorage.setItem(KEY,JSON.stringify(t));
