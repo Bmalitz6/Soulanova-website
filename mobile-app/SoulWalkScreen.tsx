@@ -205,6 +205,17 @@ export default function SoulWalkScreen({onBack}:{onBack:()=>void}) {
     <Text style={styles.title}>SoulWalk</Text>
     <Text style={styles.subtitle}>Choose a guided workout or move at your own pace.</Text>
     <View style={styles.card}>
+      <Text style={styles.todayTitle}>Today's Activity</Text>
+      <Text style={styles.todaySource}>{Platform.OS==='ios'?'Apple Health':'Health Connect'} · Daily totals</Text>
+      <View style={styles.todayRow}>
+        <View style={styles.todayMetric}><Text style={styles.todayLabel}>STEPS</Text><Text style={styles.todayNumber}>{todayHealth?.steps==null?'—':todayHealth.steps.toLocaleString()}</Text></View>
+        <View style={styles.todayMetric}><Text style={styles.todayLabel}>DISTANCE</Text><Text style={styles.todayNumber}>{todayHealth?.miles==null?'—':todayHealth.miles.toFixed(2)+' mi'}</Text></View>
+      </View>
+      <Text style={styles.notice}>{healthMessage}</Text>
+      {action(healthBusy?'Refreshing…':'Refresh Today’s Activity',()=>{void connectHealth();},healthBusy)}
+      <Text style={styles.notice}>Daily totals are separate from your guided and Freestyle workouts.</Text>
+    </View>
+    <View style={styles.card}>
       <Text style={styles.heading}>Walk / Run Freestyle</Text>
       <Text style={styles.notice}>No coach or time limit. Track at your pace while listening to your own music.</Text>
       {action('Start Walk / Run',()=>setShowFree(true),running)}
@@ -235,13 +246,6 @@ export default function SoulWalkScreen({onBack}:{onBack:()=>void}) {
       <Text style={styles.notice}>Apple Health workout reading is available when a walk finishes. GPS and background workout tracking are not enabled. Keep the app in the foreground during testing.</Text>
     </View>
     <View style={styles.card}>
-      <Text style={styles.heading}>{Platform.OS==='ios'?'Apple Health':'Health Connect'}</Text>
-      <Text style={styles.notice}>Daily activity preview only. Workout readings are collected separately after finishing; saving a completed workout will upload the selected steps and distance.</Text>
-      {action(healthBusy?'Refreshing…':'Refresh Today’s Activity',()=>{void connectHealth();},healthBusy)}
-      {todayHealth&&<Text style={styles.stat}>Today: {todayHealth.steps===null?'Unavailable':todayHealth.steps.toLocaleString()} steps · {todayHealth.miles===null?'Unavailable':todayHealth.miles.toFixed(2)} miles</Text>}
-      <Text style={styles.notice}>{healthMessage}</Text>
-    </View>
-    <View style={styles.card}>
       <Text style={styles.heading}>Your Walking History</Text>
       <View style={styles.statRow}>
        <Text style={styles.stat}>Walks: {walks.length.toLocaleString()}</Text>
@@ -259,7 +263,7 @@ export default function SoulWalkScreen({onBack}:{onBack:()=>void}) {
     <View style={styles.weeks}>{brisk.map((n,i)=><TouchableOpacity key={i} onPress={()=>choose(i)} disabled={running} style={[styles.week,i===week&&styles.selected]}><Text style={styles.weekText}>Week {i+1}</Text><Text style={styles.min}>{n+10} min</Text></TouchableOpacity>)}</View>
   </ScrollView>;
 }
-const styles=StyleSheet.create({
+const styles=StyleSheet.create({todayTitle:{fontSize:22,fontWeight:'800',color:'#173238'},todaySource:{fontSize:12,color:'#6A8079',marginTop:4},todayRow:{flexDirection:'row',gap:10,marginTop:15},todayMetric:{flex:1,backgroundColor:'#EAF4F0',borderRadius:12,padding:14},todayLabel:{fontSize:11,fontWeight:'800',color:'#617C72'},todayNumber:{fontSize:24,fontWeight:'800',color:'#086B63',marginTop:4},
  page:{flex:1,backgroundColor:'#F7F8F5'},container:{padding:22,paddingTop:Platform.OS==='android' ? (StatusBar.currentHeight ?? 24)+20 : 76,paddingBottom:45},
  back:{color:teal,fontSize:16,fontWeight:'700',marginBottom:16},title:{color:dark,fontSize:32,fontWeight:'800'},subtitle:{color:'#6A8079',fontSize:16,marginTop:5,marginBottom:16},
  card:{backgroundColor:'white',borderRadius:22,padding:17,borderWidth:1,borderColor:'#DCE8E2'},
