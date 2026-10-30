@@ -12,7 +12,9 @@ const errorDetails=(e:unknown):string=>{
   const parts=[x.code,x.message,x.details,x.hint].filter(v=>typeof v==='string'&&v.length>0);
   if(parts.length)return parts.join(' · ');
  }
- return e instanceof Error?e.message:String(e);
+ if(e instanceof Error&&typeof e.message==='string'&&e.message)return e.message;
+ try{return JSON.stringify(e)??'Unknown error'}catch{return 'Unknown error'}
+
 };
 export default function FreeWalkScreen({onBack}:{onBack:()=>void}){
  const [kind,setKind]=useState<'Walk'|'Run'>('Walk'),[running,setRunning]=useState(false),[done,setDone]=useState(false),[seconds,setSeconds]=useState(0),[busy,setBusy]=useState(false);
@@ -195,7 +197,6 @@ export default function FreeWalkScreen({onBack}:{onBack:()=>void}){
    {btn('Reset',()=>Alert.alert('Discard activity?','This clears the activity.',[{text:'Cancel'},{text:'Discard',style:'destructive',onPress:()=>{void gpsReset()}}]),running||(!seconds&&!done))}
    {seconds>0&&btn(busy?'Reading…':'Read Activity',()=>{void read()},busy)}
    <Text style={styles.note}>{pedometerStatus}</Text>
-   {results&&<Text style={styles.value}>Apple Health: {results.steps??'—'} steps • {results.miles?.toFixed(2)??'—'} mi</Text>}
    {done&&<View style={styles.summaryCard}>
      <Text style={styles.summaryHeading}>{kind} Complete</Text>
      <Text style={styles.summaryNote}>Review your workout before saving to Soulanova.</Text>
@@ -213,7 +214,7 @@ export default function FreeWalkScreen({onBack}:{onBack:()=>void}){
    <Text style={styles.label}>Your Recent Freestyle Activities</Text>
    {recent.map(x=><Text key={x.id} style={styles.note}>{new Date(x.created_at).toLocaleDateString()} · {x.activity_type} · {Math.round(x.duration_seconds/60)} min · {x.distance_miles??'—'} mi</Text>)}
    {btn(refreshBusy?'Refreshing…':'Refresh Activities',()=>{void loadRecent()},refreshBusy)}
-   {!!historyError&&<Text style={styles.note}>{historyError}</Text>}
+   {!!historyError&&<Text accessibilityRole="alert" style={styles.note}>{historyError}</Text>}
    <Text style={styles.note}>{message}</Text>
    <Text style={styles.note}>Phone sensor steps update while the app is open and can catch up when reopened on iPhone. They do not include watch-only steps.</Text>
    <Text style={styles.note}>Steps refresh about every 30 seconds while this screen is active and once when you finish. Apple Health can report them later after a watch sync; use Read Activity to refresh manually.</Text>
