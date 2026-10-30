@@ -172,7 +172,7 @@ const styles = StyleSheet.create({
   container: { paddingHorizontal: 20, paddingTop: 20, paddingBottom: 45 },
   header: {
     flexDirection: 'row', alignItems: 'center',
-    justifyContent: 'space-between', marginBottom: 25
+    justifyContent: 'space-between', marginBottom: 25, paddingTop: 65
   },
   brand: {
     color: TEAL, fontSize: 24, fontWeight: '800', letterSpacing: 2
