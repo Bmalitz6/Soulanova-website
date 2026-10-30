@@ -1,6 +1,7 @@
 import React,{useEffect,useRef,useState} from 'react';
 import {Alert,Linking,Platform,ScrollView,StyleSheet,Text,TextInput,TouchableOpacity,View} from 'react-native';
 import * as Health from '@appeeky/expo-healthkit';
+import {Pedometer} from 'expo-sensors';
 import {supabase} from './supabase';
 import * as Location from 'expo-location';
 import {GPS_TASK,beginGps,readGps,setGpsPaused,stopGps,clearGps} from './freestyleGps';
@@ -8,6 +9,33 @@ const teal='#086B63';
 export default function FreeWalkScreen({onBack}:{onBack:()=>void}){
  const [kind,setKind]=useState<'Walk'|'Run'>('Walk'),[running,setRunning]=useState(false),[done,setDone]=useState(false),[seconds,setSeconds]=useState(0),[busy,setBusy]=useState(false);
  const healthReadLock=useRef(false);
+ const [phoneSteps,setPhoneSteps]=useState<number|null>(null);
+ const [pedometerStatus,setPedometerStatus]=useState('Phone step counting will start with your walk.');
+ const phoneReadLock=useRef(false);
+ const refreshPhoneSteps=async()=>{
+  if(Platform.OS!=='ios'||phoneReadLock.current)return;
+  if(!active.current&&!segments.current.length)return;
+  phoneReadLock.current=true;
+  try{
+   const intervals=[...segments.current];if(active.current)intervals.push({start:active.current,end:Date.now()});
+   let total=0;
+   for(const span of intervals){
+    if(span.end<=span.start)continue;
+    const data=await Pedometer.getStepCountAsync(new Date(span.start),new Date(span.end));
+    total+=data.steps;
+   }
+   setPhoneSteps(Math.round(total));
+   setPedometerStatus('Steps from this iPhone’s motion sensor; your watch may report a different number.');
+  }catch(e){setPedometerStatus('Phone step count not available: '+(e instanceof Error?e.message:String(e)))}
+  finally{phoneReadLock.current=false}
+ };
+ useEffect(()=>{
+  if(!running&&!done)return;
+  void refreshPhoneSteps();
+  if(!running)return;
+  const timer=setInterval(()=>{void refreshPhoneSteps()},6000);
+  return()=>clearInterval(timer);
+ },[running,done]);
  const [manualSteps,setManualSteps]=useState('');
  const [results,setResults]=useState<{steps:number|null;miles:number|null}|null>(null),[message,setMessage]=useState('No set duration. Play music in your favorite app while you move.');
  const active=useRef<number|null>(null),segments=useRef<{start:number;end:number}[]>([]);
@@ -38,7 +66,7 @@ export default function FreeWalkScreen({onBack}:{onBack:()=>void}){
    const gpsAvailable=gpsEnabled&&gpsMiles>0;
    const healthAvailable=results?.miles!==null&&results?.miles!==undefined;
    const miles=gpsAvailable?gpsMiles:healthAvailable?results!.miles:null;
-   const steps=manualSteps.trim()?Number(manualSteps.trim()):results?.steps??null;
+   const steps=manualSteps.trim()?Number(manualSteps.trim()):phoneSteps??results?.steps??null;
    if(steps!==null&&(!Number.isInteger(steps)||steps<0||steps>150000))throw Error('Enter a valid step count.');
    const {error}=await supabase.from('freestyle_sessions').insert({
     user_id:user.id,activity_type:kind.toLowerCase(),duration_seconds:seconds,
@@ -73,9 +101,11 @@ export default function FreeWalkScreen({onBack}:{onBack:()=>void}){
  const start=()=>{active.current=Date.now();setRunning(true)};
  const pause=()=>{if(active.current){segments.current.push({start:active.current,end:Date.now()});active.current=null;}setSeconds(elapsed());setRunning(false)};
  const finish=()=>{pause();setDone(true);setMessage('Finished. Read activity to get the available steps and distance for this session.')};
- const reset=()=>{setManualSteps('');setSaved(false);setSaveMessage('');active.current=null;segments.current=[];setRunning(false);setDone(false);setSeconds(0);setResults(null);setMessage('Ready for another activity.')};
+ const reset=()=>{setPhoneSteps(null);setPedometerStatus('Phone step counting will start with your walk.');setManualSteps('');setSaved(false);setSaveMessage('');active.current=null;segments.current=[];setRunning(false);setDone(false);setSeconds(0);setResults(null);setMessage('Ready for another activity.')};
  const gpsStart=async()=>{
   if(gpsBusy)return;
+  if(Platform.OS==='ios'){
+   try{if(await Pedometer.isAvailableAsync()){const p=await Pedometer.requestPermissionsAsync();if(!p.granted)setPedometerStatus('Motion access not granted; GPS and timer still work.')}else setPedometerStatus('Phone step sensor unavailable.')}catch(e){setPedometerStatus('Phone step sensor unavailable.')}}
   const permissionReady=gpsEnabled||await enableGps();
   if(permissionReady){
    try{
@@ -89,7 +119,7 @@ export default function FreeWalkScreen({onBack}:{onBack:()=>void}){
   start();
  };
  const gpsPause=async()=>{pause();if(gpsEnabled)await setGpsPaused(true)};
- const gpsFinish=async()=>{pause();if(gpsEnabled){await stopGps();if(await Location.hasStartedLocationUpdatesAsync(GPS_TASK))await Location.stopLocationUpdatesAsync(GPS_TASK);setGpsMiles((await readGps()).meters/1609.344)}setDone(true);setMessage('Activity finished. Read Health data after your watch syncs.')};
+ const gpsFinish=async()=>{pause();void refreshPhoneSteps();if(gpsEnabled){await stopGps();if(await Location.hasStartedLocationUpdatesAsync(GPS_TASK))await Location.stopLocationUpdatesAsync(GPS_TASK);setGpsMiles((await readGps()).meters/1609.344)}setDone(true);setMessage('Activity finished. Read Health data after your watch syncs.')};
  const gpsReset=async()=>{if(await Location.hasStartedLocationUpdatesAsync(GPS_TASK))await Location.stopLocationUpdatesAsync(GPS_TASK);await clearGps();setGpsMiles(0);reset()};
  const read=async()=>{
   if(healthReadLock.current||saved)return;
@@ -147,7 +177,7 @@ export default function FreeWalkScreen({onBack}:{onBack:()=>void}){
    <Text style={styles.clock}>{Math.floor(seconds/3600).toString().padStart(2,'0')}:{Math.floor(seconds%3600/60).toString().padStart(2,'0')}:{(seconds%60).toString().padStart(2,'0')}</Text>
    <View style={styles.metrics}>
     <View style={styles.metric}><Text style={styles.metricLabel}>GPS Miles</Text><Text style={styles.metricValue}>{gpsMiles.toFixed(2)}</Text></View>
-    <View style={styles.metric}><Text style={styles.metricLabel}>Steps</Text><Text style={styles.metricValue}>{results?.steps??'—'}</Text></View>
+    <View style={styles.metric}><Text style={styles.metricLabel}>Steps</Text><Text style={styles.metricValue}>{phoneSteps??results?.steps??'—'}</Text></View>
     <View style={styles.metric}><Text style={styles.metricLabel}>Avg pace</Text><Text style={styles.metricValue}>{gpsMiles>=0.1&&seconds>=120?((seconds/60)/gpsMiles).toFixed(1):'—'}</Text><Text style={styles.metricLabel}>{gpsMiles>=0.1&&seconds>=120?'min/mi':'Calculating…'}</Text></View>
    </View>
    {btn(running?'Tracking…':seconds?'Resume':'Start Tracking',()=>{void gpsStart()},running||done||gpsBusy)}
@@ -155,10 +185,11 @@ export default function FreeWalkScreen({onBack}:{onBack:()=>void}){
    {btn('Finish',()=>{void gpsFinish()},done||(!running&&seconds===0))}
    {btn('Reset',()=>Alert.alert('Discard activity?','This clears the activity.',[{text:'Cancel'},{text:'Discard',style:'destructive',onPress:()=>{void gpsReset()}}]),running||(!seconds&&!done))}
    {seconds>0&&btn(busy?'Reading…':'Read Activity',()=>{void read()},busy)}
+   <Text style={styles.note}>{pedometerStatus}</Text>
    {results&&<Text style={styles.value}>Apple Health: {results.steps??'—'} steps • {results.miles?.toFixed(2)??'—'} mi</Text>}
    {done&&<>
     <Text style={styles.label}>Workout Summary</Text>
-    <Text style={styles.note}>{kind} • {Math.round(seconds/60)} minutes • GPS {gpsMiles.toFixed(2)} mi • {manualSteps.trim()||results?.steps||'—'} steps</Text>
+    <Text style={styles.note}>{kind} • {Math.round(seconds/60)} minutes • GPS {gpsMiles.toFixed(2)} mi • {manualSteps.trim()||(phoneSteps??results?.steps??'—')} steps</Text>
     <TextInput accessibilityLabel="Optional manual steps" keyboardType="number-pad" placeholder="Steps (optional, if Health has not synced)" value={manualSteps} onChangeText={setManualSteps} editable={!saving&&!saved} style={styles.stepsInput}/>
     {btn(saved?'Saved':saving?'Saving…':'Save Activity',()=>{void saveFreestyle()},saved||saving)}
     {!!saveMessage&&<Text style={styles.note}>{saveMessage}</Text>}
@@ -167,6 +198,7 @@ export default function FreeWalkScreen({onBack}:{onBack:()=>void}){
    {recent.map(x=><Text key={x.id} style={styles.note}>{new Date(x.created_at).toLocaleDateString()} · {x.activity_type} · {Math.round(x.duration_seconds/60)} min · {x.distance_miles??'—'} mi</Text>)}
    {btn(refreshBusy?'Refreshing…':'Refresh Activities',()=>{void loadRecent()},refreshBusy)}
    <Text style={styles.note}>{message}</Text>
+   <Text style={styles.note}>Phone sensor steps update while the app is open and can catch up when reopened on iPhone. They do not include watch-only steps.</Text>
    <Text style={styles.note}>Steps refresh about every 30 seconds while this screen is active and once when you finish. Apple Health can report them later after a watch sync; use Read Activity to refresh manually.</Text>
    <Text style={styles.note}>Music: open Spotify, Apple Music, or another player yourself. Soulanova provides no coaching in this mode. This first test reads health measurements during active tracking intervals. Background GPS is experimental and requires a new native build; force-closing the app can interrupt tracking. Saving free activities requires the member account and freestyle_sessions database table.</Text>
   </View>
