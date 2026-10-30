@@ -44,7 +44,7 @@ export default function SoulSafe(){
    const position=await Location.getCurrentPositionAsync({accuracy:Location.Accuracy.High});
    const {latitude,longitude}=position.coords;
    const url='https://maps.apple.com/?ll='+latitude.toFixed(6)+','+longitude.toFixed(6);
-   await Share.share({message:'I am out walking or running with Soulanova. Here is my current location (one-time snapshot, not live tracking): '+url,url});
+   await Share.share({message:'I am out walking or running with Soulanova. Here is my current location (one-time snapshot, not live tracking): '+url});
    setStatus('Choose your trusted contact to send the location pin.');
   }catch(e){setStatus(messageOf(e))}
   finally{setBusy(false)}
@@ -65,14 +65,14 @@ export default function SoulSafe(){
    const started=data as LiveSession;session.current=started;setLive(started);
    setStatus('Live sharing active for up to two hours. Send your private link to a trusted person. Updates currently require this app to remain open.');
    const url=(process.env.EXPO_PUBLIC_SUPABASE_URL??'')+'/functions/v1/soulsafe-view?token='+encodeURIComponent(started.share_token);
-   await Share.share({message:'I chose to share my SoulSafe location with you for up to two hours. This private link can reveal my current location; please do not forward it. '+url,url});
+   await Share.share({message:'I chose to share my SoulSafe location with you for up to two hours. This private link can reveal my current location; please do not forward it. '+url});
   }catch(e){setStatus('Could not start live sharing: '+messageOf(e))}
   finally{setBusy(false)}
  };
  const resendLiveLink=async()=>{
   const current=session.current;if(!current)return;
   const url=(process.env.EXPO_PUBLIC_SUPABASE_URL??'')+'/functions/v1/soulsafe-view?token='+encodeURIComponent(current.share_token);
-  try{await Share.share({message:'My private SoulSafe live location link (do not forward): '+url,url})}catch(e){setStatus(messageOf(e))}
+  try{await Share.share({message:'My private SoulSafe live location link (do not forward): '+url})}catch(e){setStatus(messageOf(e))}
  };
  const stopLive=async()=>{
   const current=session.current;
