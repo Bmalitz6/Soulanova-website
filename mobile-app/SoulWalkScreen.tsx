@@ -89,6 +89,30 @@ export default function SoulWalkScreen({onBack}:{onBack:()=>void}) {
     }catch(e){setTodayHealth(null);setHealthMessage('Unable to read health data: '+(e instanceof Error?e.message:String(e)));}
     finally{setHealthBusy(false);}
   };
+  const [workoutHealth,setWorkoutHealth]=useState<{steps:number|null;miles:number|null}|null>(null);
+  const [workoutMessage,setWorkoutMessage]=useState('');
+  const [workoutBusy,setWorkoutBusy]=useState(false);
+  const workoutStarted=useRef<number|null>(null);
+  const workoutEnded=useRef<number|null>(null);
+  const readWorkoutHealth=async()=>{
+    if(workoutBusy||!complete||!workoutStarted.current||!workoutEnded.current)return;
+    setWorkoutBusy(true);setWorkoutMessage('');
+    try{
+      if(!HealthKit.isAvailable())throw Error('Health tracking is unavailable on this device.');
+      await HealthKit.requestAuthorization({toRead:[HealthKit.QuantityType.stepCount,HealthKit.QuantityType.distanceWalkingRunning],toShare:[]});
+      const from=new Date(workoutStarted.current),to=new Date(workoutEnded.current);
+      const [st,di]=await Promise.all([
+        HealthKit.queryStatistics({type:HealthKit.QuantityType.stepCount,unit:HealthKit.Unit.count,from,to,options:HealthKit.StatisticsOption.cumulativeSum}),
+        HealthKit.queryStatistics({type:HealthKit.QuantityType.distanceWalkingRunning,unit:HealthKit.Unit.meter,from,to,options:HealthKit.StatisticsOption.cumulativeSum})
+      ]);
+      const steps=typeof st.sum==='number'&&Number.isFinite(st.sum)?Math.round(st.sum):null;
+      const miles=typeof di.sum==='number'&&Number.isFinite(di.sum)?di.sum/1609.344:null;
+      if(steps===null&&miles===null){setWorkoutMessage('No workout data available yet. Try Refresh after your watch syncs, or enter steps manually.');return;}
+      setWorkoutHealth({steps,miles});
+      setWorkoutMessage('Workout interval activity loaded. Review it before saving; activity during pauses may also be included.');
+    }catch(e){setWorkoutMessage('Could not read workout activity: '+(e instanceof Error?e.message:String(e)));}
+    finally{setWorkoutBusy(false);}
+  };
   const [stepsText,setStepsText]=useState('');
   const [saving,setSaving]=useState(false);
   const [saved,setSaved]=useState(false);
@@ -105,7 +129,7 @@ export default function SoulWalkScreen({onBack}:{onBack:()=>void}) {
       if(startedAt.current===null)return;
       const value=Math.min(duration,Math.floor((Date.now()-startedAt.current)/1000));
       setElapsed(value);
-      if(value>=duration)setRunning(false);
+      if(value>=duration){workoutEnded.current=workoutEnded.current??Date.now();setRunning(false);}
     },500);
     return ()=>clearInterval(interval);
   },[running,duration]);
@@ -123,18 +147,24 @@ export default function SoulWalkScreen({onBack}:{onBack:()=>void}) {
     if(crossed.length)playCue(crossed[crossed.length-1].key);
   },[elapsed,duration,playCue]);
   const start=()=>{
+    if(elapsed===0){workoutStarted.current=Date.now();workoutEnded.current=null;setWorkoutHealth(null);setWorkoutMessage('');}
     startedAt.current=Date.now()-elapsed*1000;
     if(elapsed===0)playCue('start');
     setRunning(true);
   };
   const pause=()=>{
-    if(startedAt.current!==null)setElapsed(Math.min(duration,Math.floor((Date.now()-startedAt.current)/1000)));
+    if(startedAt.current!==null){
+      const current=Math.min(duration,Math.floor((Date.now()-startedAt.current)/1000));
+      setElapsed(current);
+      if(current>=duration)workoutEnded.current=workoutEnded.current??Date.now();
+    }
     setRunning(false);
     player.pause();
   };
   const reset=()=>{
     if(saving)return;
     setSaved(false);setStepsText('');setSaveMessage('');
+    setWorkoutHealth(null);setWorkoutMessage('');workoutStarted.current=null;workoutEnded.current=null;
     setRunning(false);
     startedAt.current=null;
     setElapsed(0);
@@ -144,7 +174,7 @@ export default function SoulWalkScreen({onBack}:{onBack:()=>void}) {
   const saveWalk=async()=>{
     if(!complete||saved||saveLock.current)return;
     if(!supabase){setSaveMessage('Supabase is not configured.');return;}
-    const steps=stepsText.trim()===''?null:Number(stepsText.trim());
+    const steps=stepsText.trim()===''?workoutHealth?.steps??null:Number(stepsText.trim());
     if(steps!==null&&(!Number.isInteger(steps)||steps<0||steps>150000)){
       setSaveMessage('Enter a valid step count from 0 to 150,000.');return;
     }
@@ -155,7 +185,7 @@ export default function SoulWalkScreen({onBack}:{onBack:()=>void}) {
       if(!data.user)throw Error('Sign in to your Soulanova account first.');
       const {error}=await supabase.from('soulwalk_sessions').insert({
         user_id:data.user.id,week_number:week+1,duration_minutes:duration/60,
-        distance_miles:null,steps,source:Platform.OS==='android'?'android':'ios'
+        distance_miles:workoutHealth?.miles??null,steps,source:Platform.OS==='android'?'android':'ios'
       });
       if(error)throw error;
       setSaved(true);setSaveMessage('Walk saved successfully.');
@@ -178,19 +208,24 @@ export default function SoulWalkScreen({onBack}:{onBack:()=>void}) {
       <View style={styles.actions}>{action(complete?'Finished':running?'Walking':'Start / Resume',start,running||complete)}{action('Pause',pause,!running)}{action('Reset',()=>Alert.alert('Reset walk?','This discards the current unsaved timer.',[{text:'Cancel',style:'cancel'},{text:'Reset',style:'destructive',onPress:reset}]))}</View>
       <View style={styles.statRow}><Text style={styles.stat}>Serene coaching voice</Text><Switch value={coaching} onValueChange={setCoaching} trackColor={{true:teal}} accessibilityLabel="Serene coaching voice"/></View>
       {complete&&<View style={styles.saveSection}>
+        <Text style={styles.stat}>Workout Health Data</Text>
+        <Text style={styles.notice}>Read steps and distance recorded between this walk's start and finish. Pauses may be included. Results depend on your watch syncing.</Text>
+        {action(workoutBusy?'Reading Activity…':workoutHealth?'Refresh Workout Activity':'Read Workout Activity',()=>{void readWorkoutHealth();},workoutBusy||saving||saved)}
+        {workoutHealth&&<Text style={styles.stat}>Workout: {workoutHealth.steps===null?'—':workoutHealth.steps.toLocaleString()} steps · {workoutHealth.miles===null?'—':workoutHealth.miles.toFixed(2)} miles</Text>}
+        {!!workoutMessage&&<Text style={styles.notice}>{workoutMessage}</Text>}
         <Text style={styles.stat}>Steps from your watch or phone (optional)</Text>
         <TextInput accessibilityLabel="Steps during this walk" keyboardType="number-pad"
-          placeholder="Enter steps" value={stepsText} onChangeText={setStepsText}
+          placeholder={workoutHealth?.steps===null||!workoutHealth?'Enter steps':`Health: ${workoutHealth.steps} steps (or override)`} value={stepsText} onChangeText={setStepsText}
           editable={!saved&&!saving} style={styles.stepInput}/>
         {action(saved?'Walk Saved':saving?'Saving…':'Save Completed Walk',
           ()=>{void saveWalk();},saved||saving)}
         {!!saveMessage&&<Text accessibilityRole="alert" style={styles.notice}>{saveMessage}</Text>}
       </View>}
-      <Text style={styles.notice}>HealthKit and GPS are not yet connected. Steps are entered manually; distance is not recorded. Keep the app in the foreground during testing.</Text>
+      <Text style={styles.notice}>Apple Health workout reading is available when a walk finishes. GPS and background workout tracking are not enabled. Keep the app in the foreground during testing.</Text>
     </View>
     <View style={styles.card}>
       <Text style={styles.heading}>{Platform.OS==='ios'?'Apple Health':'Health Connect'}</Text>
-      <Text style={styles.notice}>Read-only test: steps and walking distance only. Health data is not uploaded or added to saved walks.</Text>
+      <Text style={styles.notice}>Daily activity preview only. Workout readings are collected separately after finishing; saving a completed workout will upload the selected steps and distance.</Text>
       {action(healthBusy?'Reading…':'Connect & Read Today’s Activity',()=>{void connectHealth();},healthBusy)}
       {todayHealth&&<Text style={styles.stat}>Today: {todayHealth.steps===null?'Unavailable':todayHealth.steps.toLocaleString()} steps · {todayHealth.miles===null?'Unavailable':todayHealth.miles.toFixed(2)} miles</Text>}
       <Text style={styles.notice}>{healthMessage}</Text>
