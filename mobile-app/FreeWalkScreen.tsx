@@ -1,6 +1,7 @@
 import React,{useEffect,useRef,useState} from 'react';
 import {Alert,Linking,Platform,ScrollView,StyleSheet,Text,TouchableOpacity,View} from 'react-native';
 import * as Health from '@appeeky/expo-healthkit';
+import {supabase} from './supabase';
 import * as Location from 'expo-location';
 import {GPS_TASK,beginGps,readGps,setGpsPaused,stopGps,clearGps} from './freestyleGps';
 const teal='#086B63';
@@ -8,6 +9,44 @@ export default function FreeWalkScreen({onBack}:{onBack:()=>void}){
  const [kind,setKind]=useState<'Walk'|'Run'>('Walk'),[running,setRunning]=useState(false),[done,setDone]=useState(false),[seconds,setSeconds]=useState(0),[busy,setBusy]=useState(false);
  const [results,setResults]=useState<{steps:number|null;miles:number|null}|null>(null),[message,setMessage]=useState('No set duration. Play music in your favorite app while you move.');
  const active=useRef<number|null>(null),segments=useRef<{start:number;end:number}[]>([]);
+ const [saving,setSaving]=useState(false),[saved,setSaved]=useState(false),[saveMessage,setSaveMessage]=useState('');
+ const savingLock=useRef(false);
+ const [recent,setRecent]=useState<Array<{id:string;activity_type:string;duration_seconds:number;steps:number|null;distance_miles:number|null;created_at:string}>>([]);
+ const [refreshBusy,setRefreshBusy]=useState(false);
+ const loadRecent=async()=>{
+  if(!supabase)return;
+  setRefreshBusy(true);
+  try{
+   const {data:{user}}=await supabase.auth.getUser();if(!user){setRecent([]);return}
+   const {data,error}=await supabase.from('freestyle_sessions').select('id,activity_type,duration_seconds,steps,distance_miles,created_at').eq('user_id',user.id).order('created_at',{ascending:false}).limit(5);
+   if(error)throw error;
+   setRecent(data??[]);
+  }catch(e){setSaveMessage('History unavailable: '+(e instanceof Error?e.message:String(e)))}
+  finally{setRefreshBusy(false)}
+ };
+ useEffect(()=>{void loadRecent()},[]);
+ const saveFreestyle=async()=>{
+  if(!done||saved||savingLock.current)return;
+  if(!supabase){setSaveMessage('Account connection unavailable.');return;}
+  savingLock.current=true;setSaving(true);setSaveMessage('');
+  try{
+   const {data:{user},error:authError}=await supabase.auth.getUser();
+   if(authError)throw authError;
+   if(!user)throw Error('Sign in to Member Account to save your workout.');
+   const gpsAvailable=gpsEnabled&&gpsMiles>0;
+   const healthAvailable=results?.miles!==null&&results?.miles!==undefined;
+   const miles=gpsAvailable?gpsMiles:healthAvailable?results!.miles:null;
+   const {error}=await supabase.from('freestyle_sessions').insert({
+    user_id:user.id,activity_type:kind.toLowerCase(),duration_seconds:seconds,
+    steps:results?.steps??null,distance_miles:miles,
+    distance_source:gpsAvailable?'gps':healthAvailable?'health':'none'
+   });
+   if(error)throw error;
+   setSaved(true);setSaveMessage('Activity saved to your Soulanova account.');
+   await loadRecent();
+  }catch(e){setSaveMessage('Could not save activity: '+(e instanceof Error?e.message:String(e)))}
+  finally{setSaving(false);savingLock.current=false}
+ };
  const [gpsEnabled,setGpsEnabled]=useState(false),[gpsMiles,setGpsMiles]=useState(0),[gpsMessage,setGpsMessage]=useState('GPS optional. Enable before starting.'),[gpsBusy,setGpsBusy]=useState(false);
  useEffect(()=>{if(!gpsEnabled)return;const id=setInterval(()=>{void readGps().then(t=>setGpsMiles(t.meters/1609.344))},2500);return()=>clearInterval(id)},[gpsEnabled]);
  const enableGps=async()=>{
@@ -25,7 +64,7 @@ export default function FreeWalkScreen({onBack}:{onBack:()=>void}){
  const start=()=>{active.current=Date.now();setRunning(true)};
  const pause=()=>{if(active.current){segments.current.push({start:active.current,end:Date.now()});active.current=null;}setSeconds(elapsed());setRunning(false)};
  const finish=()=>{pause();setDone(true);setMessage('Finished. Read activity to get the available steps and distance for this session.')};
- const reset=()=>{active.current=null;segments.current=[];setRunning(false);setDone(false);setSeconds(0);setResults(null);setMessage('Ready for another activity.')};
+ const reset=()=>{setSaved(false);setSaveMessage('');active.current=null;segments.current=[];setRunning(false);setDone(false);setSeconds(0);setResults(null);setMessage('Ready for another activity.')};
  const gpsStart=async()=>{
   if(gpsEnabled){
    try{
@@ -82,15 +121,29 @@ export default function FreeWalkScreen({onBack}:{onBack:()=>void}){
    <Text style={styles.note}>{gpsMessage}</Text>
    <Text style={styles.label}>{kind} {done?'completed':running?'in progress':'ready'}</Text>
    <Text style={styles.clock}>{Math.floor(seconds/3600).toString().padStart(2,'0')}:{Math.floor(seconds%3600/60).toString().padStart(2,'0')}:{(seconds%60).toString().padStart(2,'0')}</Text>
+   <View style={styles.metrics}>
+    <View style={styles.metric}><Text style={styles.metricLabel}>GPS Miles</Text><Text style={styles.metricValue}>{gpsMiles.toFixed(2)}</Text></View>
+    <View style={styles.metric}><Text style={styles.metricLabel}>Steps</Text><Text style={styles.metricValue}>{results?.steps??'—'}</Text></View>
+    <View style={styles.metric}><Text style={styles.metricLabel}>Avg pace</Text><Text style={styles.metricValue}>{gpsMiles>0.02?((seconds/60)/gpsMiles).toFixed(1):'—'}</Text><Text style={styles.metricLabel}>min/mi</Text></View>
+   </View>
    {btn(running?'Tracking…':seconds?'Resume':'Start Tracking',()=>{void gpsStart()},running||done)}
    {btn('Pause',()=>{void gpsPause()},!running)}
    {btn('Finish',()=>{void gpsFinish()},done||(!running&&seconds===0))}
    {btn('Reset',()=>Alert.alert('Discard activity?','This clears the activity.',[{text:'Cancel'},{text:'Discard',style:'destructive',onPress:()=>{void gpsReset()}}]),running||(!seconds&&!done))}
    {seconds>0&&btn(busy?'Reading…':'Read Activity',()=>{void read()},busy)}
-   {results&&<Text style={styles.value}>{results.steps??'—'} steps • {results.miles?.toFixed(2)??'—'} miles</Text>}
+   {results&&<Text style={styles.value}>Apple Health: {results.steps??'—'} steps • {results.miles?.toFixed(2)??'—'} mi</Text>}
+   {done&&<>
+    <Text style={styles.label}>Workout Summary</Text>
+    <Text style={styles.note}>{kind} • {Math.round(seconds/60)} minutes • GPS {gpsMiles.toFixed(2)} mi • {results?.steps??'—'} steps</Text>
+    {btn(saved?'Saved':saving?'Saving…':'Save Activity',()=>{void saveFreestyle()},saved||saving)}
+    {!!saveMessage&&<Text style={styles.note}>{saveMessage}</Text>}
+   </>}
+   <Text style={styles.label}>Your Recent Freestyle Activities</Text>
+   {recent.map(x=><Text key={x.id} style={styles.note}>{new Date(x.created_at).toLocaleDateString()} · {x.activity_type} · {Math.round(x.duration_seconds/60)} min · {x.distance_miles??'—'} mi</Text>)}
+   {btn(refreshBusy?'Refreshing…':'Refresh Activities',()=>{void loadRecent()},refreshBusy)}
    <Text style={styles.note}>{message}</Text>
-   <Text style={styles.note}>Music: open Spotify, Apple Music, or another player yourself. Soulanova provides no coaching in this mode. This first test reads health measurements during active tracking intervals. Background GPS is experimental and requires a new native build; force-closing the app can interrupt tracking. Saving free activities is not yet enabled.</Text>
+   <Text style={styles.note}>Music: open Spotify, Apple Music, or another player yourself. Soulanova provides no coaching in this mode. This first test reads health measurements during active tracking intervals. Background GPS is experimental and requires a new native build; force-closing the app can interrupt tracking. Saving free activities requires the member account and freestyle_sessions database table.</Text>
   </View>
  </ScrollView>;
 }
-const styles=StyleSheet.create({page:{flex:1,backgroundColor:'#F7F8F5'},content:{padding:22,paddingTop:76,paddingBottom:48},back:{fontSize:16,color:teal,fontWeight:'700',marginBottom:22},title:{fontSize:35,fontWeight:'800',color:'#173238'},sub:{color:'#6C827A',fontSize:16,marginTop:8,marginBottom:18},card:{backgroundColor:'white',padding:20,borderRadius:20,borderWidth:1,borderColor:'#DBE9E2'},row:{flexDirection:'row',gap:12},musicButton:{flex:1,alignItems:'center',justifyContent:'center',paddingVertical:15,borderRadius:12,backgroundColor:'#E5F1EC'},musicText:{color:teal,fontWeight:'800',fontSize:15},choice:{flex:1,padding:15,borderRadius:14,borderColor:'#DCE8E2',borderWidth:1,alignItems:'center'},label:{marginTop:26,textAlign:'center',fontSize:19,color:'#173238',fontWeight:'700'},clock:{textAlign:'center',fontSize:46,fontWeight:'800',color:teal,marginVertical:20},value:{fontSize:19,fontWeight:'700',color:'#173238',textAlign:'center',marginTop:8},button:{backgroundColor:teal,borderRadius:12,padding:16,alignItems:'center',marginBottom:10},buttonText:{color:'white',fontWeight:'800',fontSize:17},note:{fontSize:14,lineHeight:21,color:'#72847C',marginTop:14}});
+const styles=StyleSheet.create({metrics:{flexDirection:'row',gap:7,marginBottom:16},metric:{flex:1,backgroundColor:'#EAF4F0',borderRadius:12,padding:9,alignItems:'center'},metricLabel:{fontSize:11,color:'#6D817A',fontWeight:'700'},metricValue:{color:teal,fontSize:22,fontWeight:'800'},page:{flex:1,backgroundColor:'#F7F8F5'},content:{padding:22,paddingTop:76,paddingBottom:48},back:{fontSize:16,color:teal,fontWeight:'700',marginBottom:22},title:{fontSize:35,fontWeight:'800',color:'#173238'},sub:{color:'#6C827A',fontSize:16,marginTop:8,marginBottom:18},card:{backgroundColor:'white',padding:20,borderRadius:20,borderWidth:1,borderColor:'#DBE9E2'},row:{flexDirection:'row',gap:12},musicButton:{flex:1,alignItems:'center',justifyContent:'center',paddingVertical:15,borderRadius:12,backgroundColor:'#E5F1EC'},musicText:{color:teal,fontWeight:'800',fontSize:15},choice:{flex:1,padding:15,borderRadius:14,borderColor:'#DCE8E2',borderWidth:1,alignItems:'center'},label:{marginTop:26,textAlign:'center',fontSize:19,color:'#173238',fontWeight:'700'},clock:{textAlign:'center',fontSize:46,fontWeight:'800',color:teal,marginVertical:20},value:{fontSize:19,fontWeight:'700',color:'#173238',textAlign:'center',marginTop:8},button:{backgroundColor:teal,borderRadius:12,padding:16,alignItems:'center',marginBottom:10},buttonText:{color:'white',fontWeight:'800',fontSize:17},note:{fontSize:14,lineHeight:21,color:'#72847C',marginTop:14}});
