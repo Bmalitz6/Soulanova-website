@@ -1,5 +1,5 @@
 import React, { useEffect, useRef, useState } from 'react';
-import { Alert, ScrollView, StyleSheet, Text, TouchableOpacity, View } from 'react-native';
+import { Alert, ScrollView, StyleSheet, Text, TouchableOpacity, View, StatusBar, Platform } from 'react-native';
 
 const brisk = [5,7,9,11,13,15,18,20,23,26,28,30];
 const teal='#086B63', dark='#173238';
@@ -56,13 +56,13 @@ export default function SoulWalkScreen({onBack}:{onBack:()=>void}) {
   </ScrollView>;
 }
 const styles=StyleSheet.create({
- page:{flex:1,backgroundColor:'#F7F8F5'},container:{padding:22,paddingTop:28,paddingBottom:45},
- back:{color:teal,fontSize:16,fontWeight:'700',marginBottom:22},title:{color:dark,fontSize:34,fontWeight:'800'},subtitle:{color:'#6A8079',fontSize:16,marginTop:5,marginBottom:23},
- card:{backgroundColor:'white',borderRadius:22,padding:20,borderWidth:1,borderColor:'#DCE8E2'},
- eyebrow:{color:teal,fontSize:12,fontWeight:'800',letterSpacing:1.5},phase:{color:dark,textAlign:'center',fontSize:22,fontWeight:'700',marginTop:28},
- clock:{color:teal,fontSize:65,textAlign:'center',fontWeight:'800',fontVariant:['tabular-nums'],marginVertical:14},
+ page:{flex:1,backgroundColor:'#F7F8F5'},container:{padding:22,paddingTop:Platform.OS==='android' ? (StatusBar.currentHeight ?? 24)+20 : 76,paddingBottom:45},
+ back:{color:teal,fontSize:16,fontWeight:'700',marginBottom:16},title:{color:dark,fontSize:32,fontWeight:'800'},subtitle:{color:'#6A8079',fontSize:16,marginTop:5,marginBottom:16},
+ card:{backgroundColor:'white',borderRadius:22,padding:17,borderWidth:1,borderColor:'#DCE8E2'},
+ eyebrow:{color:teal,fontSize:12,fontWeight:'800',letterSpacing:1.5},phase:{color:dark,textAlign:'center',fontSize:22,fontWeight:'700',marginTop:15},
+ clock:{color:teal,fontSize:56,textAlign:'center',fontWeight:'800',fontVariant:['tabular-nums'],marginVertical:7},
  track:{height:12,backgroundColor:'#DCE8E2',borderRadius:8,overflow:'hidden'},fill:{height:'100%',backgroundColor:teal},note:{textAlign:'center',color:'#657F78',marginTop:14},
- actions:{gap:10,marginTop:23},button:{backgroundColor:teal,borderRadius:12,padding:14,alignItems:'center'},disabled:{opacity:.4},buttonText:{color:'white',fontSize:16,fontWeight:'800'},
- notice:{fontSize:12,color:'#71817B',lineHeight:18,marginTop:20},heading:{color:dark,fontSize:23,fontWeight:'800',marginTop:28,marginBottom:12},
+ actions:{gap:10,marginTop:14},button:{backgroundColor:teal,borderRadius:12,padding:14,alignItems:'center'},disabled:{opacity:.4},buttonText:{color:'white',fontSize:16,fontWeight:'800'},
+ notice:{fontSize:12,color:'#71817B',lineHeight:18,marginTop:15},heading:{color:dark,fontSize:23,fontWeight:'800',marginTop:28,marginBottom:12},
  weeks:{flexDirection:'row',flexWrap:'wrap',justifyContent:'space-between'},week:{width:'31%',padding:12,borderRadius:12,backgroundColor:'white',borderWidth:1,borderColor:'#DEE8E2',marginBottom:10},selected:{borderColor:teal,borderWidth:2},weekText:{fontWeight:'800',color:dark},min:{color:'#708780',marginTop:4}
 });
