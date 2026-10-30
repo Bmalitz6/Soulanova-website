@@ -7,6 +7,18 @@ const message=(s)=>{$('message').textContent=s};
 const dayString=d=>[d.getFullYear(),String(d.getMonth()+1).padStart(2,'0'),String(d.getDate()).padStart(2,'0')].join('-');
 $('day').value=dayString(new Date());
 const el=(tag,txt,cls)=>{let e=document.createElement(tag);if(txt!==undefined)e.textContent=txt;if(cls)e.className=cls;return e};
+// Units are stored exactly as entered. Changing compatible units converts the quantity,
+// not the food's nutrients; those describe the same consumed portion.
+const conversion={mL:{'fl oz':1/29.5735295625},'fl oz':{mL:29.5735295625},g:{oz:1/28.349523125},oz:{g:28.349523125}};
+let selectedUnit=$('serving').value;
+$('serving').addEventListener('change',()=>{
+ const next=$('serving').value,old=selectedUnit;
+ const factor=conversion[old]?.[next];
+ if(factor){const val=Number($('quantity').value);
+  if(Number.isFinite(val)&&val>0)$('quantity').value=String(Number((val*factor).toFixed(3)));
+ }else if(old!==next){message('Unit changed. Serving size is not convertible to weight or volume without product information. Check the quantity before saving.');}
+ selectedUnit=next;
+});
 const number=v=>Number.isFinite(Number(v))?Number(v):0;
 function renderFrequentFoods(){
  const box=$('frequent-foods');box.replaceChildren();
@@ -25,7 +37,7 @@ function renderFrequentFoods(){
   const btn=el('button','Use again');btn.type='button';btn.className='frequent-use';
   btn.onclick=()=>{
    $('food-name').value=item.food_name;$('meal').value=item.meal_type;
-   $('quantity').value=item.quantity;const unitValues=[...$('serving').options].map(o=>o.value);$('serving').value=unitValues.includes(item.serving_description)?item.serving_description:'serving';
+   $('quantity').value=item.quantity;const unitValues=[...$('serving').options].map(o=>o.value);$('serving').value=unitValues.includes(item.serving_description)?item.serving_description:'serving';selectedUnit=$('serving').value;
    for(const field of document.querySelectorAll('[data-nutrient]')){
     const value=item.nutrients?.[field.dataset.nutrient];
     field.value=value===undefined||value===null?'':String(value);
@@ -52,9 +64,9 @@ async function refresh(){if(!user)return;message('');const date=$('day').value;c
 async function remove(table,id){if(!confirm('Remove this entry?'))return;try{const r=await db.from(table).delete().eq('id',id).eq('user_id',user.id);if(r.error)throw r.error;await refresh()}catch(e){message(e.message)}}
 $('goal-form').addEventListener('submit',async e=>{e.preventDefault();const [nutrient_key,display_name,unit]=$('metric').value.split('|');const target_value=Number($('amount').value);if(!Number.isFinite(target_value)||target_value<0)return;try{const r=await db.from('nutrition_goals').upsert({user_id:user.id,nutrient_key,display_name,unit,target_value,goal_type:$('direction').value,enabled:true},{onConflict:'user_id,nutrient_key'});if(r.error)throw r.error;await refresh()}catch(ex){message(ex.message)}});
 for(const [key,label,unit] of fields){const wrap=el('label',label+' ('+unit+')'),input=el('input');input.type='number';input.min='0';input.step='any';input.placeholder='optional';input.dataset.nutrient=key;wrap.append(input);$('nutrient-fields').append(wrap)}
-$('food-form').addEventListener('submit',async e=>{e.preventDefault();const food_name=$('food-name').value.trim(),quantity=Number($('quantity').value);if(!food_name||!Number.isFinite(quantity)||quantity<=0)return;const nutrients={};for(const field of document.querySelectorAll('[data-nutrient]')){if(field.value.trim()==='')continue;const n=Number(field.value);if(!Number.isFinite(n)||n<0){message('Nutrition amounts must be nonnegative numbers.');return}nutrients[field.dataset.nutrient]=n}
+$('food-form').addEventListener('submit',async e=>{e.preventDefault();const food_name=$('food-name').value.trim(),quantity=Number($('quantity').value);if(!food_name||!Number.isFinite(quantity)||quantity<=0)return;if($('serving').value==='serving'&&quantity>20){message('Please confirm the unit: '+quantity+' servings seems unusual. Choose mL, fl oz, g or oz if you entered a package volume or weight.');return;}const nutrients={};for(const field of document.querySelectorAll('[data-nutrient]')){if(field.value.trim()==='')continue;const n=Number(field.value);if(!Number.isFinite(n)||n<0){message('Nutrition amounts must be nonnegative numbers.');return}nutrients[field.dataset.nutrient]=n}
  const selected=$('day').value,now=new Date(),at=new Date(selected+'T12:00:00');if(selected===dayString(now))at.setHours(now.getHours(),now.getMinutes(),0,0);
- try{const r=await db.from('nutrition_entries').insert({user_id:user.id,consumed_at:at.toISOString(),food_name,meal_type:$('meal').value,quantity,serving_description:$('serving').value.trim()||'serving',nutrients,source:'manual'});if(r.error)throw r.error;$('food-form').reset();$('quantity').value='1';$('serving').value='serving';await refresh()}catch(ex){message(ex.message)}});
+ try{const r=await db.from('nutrition_entries').insert({user_id:user.id,consumed_at:at.toISOString(),food_name,meal_type:$('meal').value,quantity,serving_description:$('serving').value.trim()||'serving',nutrients,source:'manual'});if(r.error)throw r.error;$('food-form').reset();$('quantity').value='1';$('serving').value='serving';selectedUnit='serving';await refresh()}catch(ex){message(ex.message)}});
 $('day').addEventListener('change',()=>refresh().catch(e=>message(e.message)));
 async function init(){try{const {data,error}=await db.auth.getUser();if(error)throw error;user=data.user;if(!user){$('signin').hidden=false;$('auth-status').textContent='Sign in required';return}$('app').hidden=false;$('auth-status').textContent=user.email;await refresh()}catch(e){message('Unable to load SoulFuel: '+e.message);$('signin').hidden=false}}
 init();
