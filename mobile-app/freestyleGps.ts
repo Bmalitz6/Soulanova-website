@@ -17,7 +17,7 @@ export async function beginGps(){await AsyncStorage.setItem(KEY,JSON.stringify({
 export async function setGpsPaused(paused:boolean){const t=await readGps();t.paused=paused;t.points=[];await AsyncStorage.setItem(KEY,JSON.stringify(t))}
 export async function stopGps(){const t=await readGps();t.active=false;t.paused=true;await AsyncStorage.setItem(KEY,JSON.stringify(t))}
 export async function clearGps(){await AsyncStorage.removeItem(KEY)}
-TaskManager.defineTask(GPS_TASK,({data,error})=>{
+TaskManager.defineTask(GPS_TASK,async({data,error})=>{
  if(error){console.warn('SoulWalk GPS:',error.message);return}
  const locations=(data as {locations?:Location.LocationObject[]}|undefined)?.locations??[];
  pending=pending.then(async()=>{
@@ -37,4 +37,5 @@ TaskManager.defineTask(GPS_TASK,({data,error})=>{
   }
   await AsyncStorage.setItem(KEY,JSON.stringify(t));
  }).catch(e=>console.warn('SoulWalk GPS data error',e));
+ await pending;
 });
