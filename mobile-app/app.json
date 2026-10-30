@@ -43,6 +43,16 @@
             "READ_DISTANCE"
           ]
         }
+      ],
+      [
+        "expo-location",
+        {
+          "locationWhenInUsePermission": "Soulanova uses your location during a Walk or Run to measure distance and route when you choose GPS tracking.",
+          "locationAlwaysAndWhenInUsePermission": "Allow Soulanova to record your Walk or Run route while your phone is locked or the app is in the background, only during an activity you start.",
+          "isIosBackgroundLocationEnabled": true,
+          "isAndroidBackgroundLocationEnabled": true,
+          "isAndroidForegroundServiceEnabled": true
+        }
       ]
     ],
     "extra": {
