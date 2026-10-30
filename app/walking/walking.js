@@ -41,11 +41,34 @@ function render(){
  document.querySelectorAll('.week').forEach((el,i)=>{el.setAttribute('aria-current',String(i===week));el.querySelector('button').disabled=running;});
 }
 function milestone(key,text){if(events.has(key))return;events.add(key);announce(text,key)}
-function tick(){if(!running)return;elapsed=Math.min(total(),Math.floor((Date.now()-startedAt)/1000));
- if(elapsed>=300)milestone('brisk','Warm-up complete. Gradually increase to a brisk pace. You should still be able to talk.');
- if(elapsed>=Math.ceil(total()/2))milestone('half','You are halfway through your walk. Keep going at a comfortable pace.');
- if(elapsed>=total()-300)milestone('cool','Five minutes remaining. Slow your pace for your cool-down.');
- if(elapsed===total()){finish();return}render();}
+function tick(){
+ if(!running)return;
+ const previous=elapsed;
+ elapsed=Math.min(total(),Math.floor((Date.now()-startedAt)/1000));
+
+ if(elapsed>=total()){finish();return;}
+
+ const cues=[
+  {time:300,key:'brisk',text:'Warm-up complete. Gradually increase to a brisk pace. You should still be able to talk.'},
+  {time:Math.ceil(total()/2),key:'half',text:'You are halfway through your walk. Keep going at a comfortable pace.'},
+  {time:total()-300,key:'cool',text:'Five minutes remaining. Slow your pace for your cool-down.'}
+ ];
+
+ const due=cues.filter(c=>elapsed>=c.time&&!events.has(c.key));
+
+ if(due.length){
+  if(elapsed-previous>15){
+   // Safari resumed after a delay: announce only the latest cue.
+   due.forEach(c=>events.add(c.key));
+   const latest=due[due.length-1];
+   announce(latest.text,latest.key);
+  }else{
+   const next=due[0];
+   milestone(next.key,next.text);
+  }
+ }
+ render();
+}
 function distance(a,b){const rad=Math.PI/180,dlat=(b.latitude-a.latitude)*rad,dlon=(b.longitude-a.longitude)*rad,x=Math.sin(dlat/2)**2+Math.cos(a.latitude*rad)*Math.cos(b.latitude*rad)*Math.sin(dlon/2)**2;return 3958.7613*2*Math.atan2(Math.sqrt(x),Math.sqrt(1-x))}
 function startGPS(){if(!navigator.geolocation){$('message').textContent='GPS unavailable in this browser.';return;}if(watch!==null)return;watch=navigator.geolocation.watchPosition(pos=>{if(!running)return;const p=pos.coords;if(p.accuracy>60)return;const next={latitude:p.latitude,longitude:p.longitude};if(lastPosition){const delta=distance(lastPosition,next);if(delta<.12&&delta>.003)miles+=delta;}lastPosition=next;render()},e=>{ $('message').textContent='GPS not available: '+e.message;$('gps').checked=false;stopGPS()},{enableHighAccuracy:true,maximumAge:3000,timeout:12000});}
 function stopGPS(){if(watch!==null){navigator.geolocation.clearWatch(watch);watch=null;}lastPosition=null}
