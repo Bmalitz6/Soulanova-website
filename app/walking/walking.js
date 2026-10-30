@@ -3,7 +3,21 @@ const $=id=>document.getElementById(id),brisk=[5,7,9,11,13,15,18,20,23,26,28,30]
 let week=0,elapsed=0,startedAt=0,timer=null,running=false,finished=false,watch=null,miles=0,lastPosition=null,events=new Set(),saved=false;
 const total=()=>600+brisk[week]*60;
 const format=s=>String(Math.floor(s/60)).padStart(2,'0')+':'+String(s%60).padStart(2,'0');
-function announce(text){$('message').textContent=text;if($('voice').checked&&'speechSynthesis' in window){try{speechSynthesis.cancel();const utter=new SpeechSynthesisUtterance(text);utter.rate=.88;utter.lang='en-US';speechSynthesis.speak(utter)}catch(e){}}}
+function availableVoices(){return 'speechSynthesis' in window?speechSynthesis.getVoices().filter(v=>v.lang?.toLowerCase().startsWith('en')):[];}
+function refreshVoices(){
+ const select=$('voice-choice'),prior=select.value,voices=availableVoices();
+ select.replaceChildren(new Option('Calm female voice (preferred)','auto'));
+ voices.forEach(v=>select.add(new Option(v.name+' · '+v.lang,v.voiceURI)));
+ if([...select.options].some(o=>o.value===prior))select.value=prior;
+}
+if('speechSynthesis' in window){refreshVoices();speechSynthesis.addEventListener?.('voiceschanged',refreshVoices);}
+function preferredVoice(){
+ const voices=availableVoices(),selected=$('voice-choice').value;
+ if(selected!=='auto')return voices.find(v=>v.voiceURI===selected)||null;
+ const preferred=['samantha','ava','allison','susan','serena','karen','victoria','moira','zoe','female'];
+ return voices.find(v=>preferred.some(n=>v.name.toLowerCase().includes(n)))||voices[0]||null;
+}
+function announce(text){$('message').textContent=text;if($('voice').checked&&'speechSynthesis' in window){try{speechSynthesis.cancel();const utter=new SpeechSynthesisUtterance(text);utter.rate=.88;utter.lang='en-US';const v=preferredVoice();if(v)utter.voice=v;speechSynthesis.speak(utter)}catch(e){}}}
 function choose(n){if(running)return;week=n;elapsed=0;finished=false;saved=false;events.clear();miles=0;lastPosition=null;$('gps').checked=false;stopGPS();render();}
 function render(){
  $('session-title').textContent='Week '+(week+1)+' · '+Math.round(total()/60)+' minutes';
