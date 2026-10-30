@@ -85,8 +85,54 @@ $('save').onclick=async()=>{if(!finished||saved)return;const btn=$('save');btn.d
  if(steps!==null&&(!Number.isInteger(steps)||steps<0||steps>150000))throw Error('Enter a valid steps count.');
  const entry={user_id:data.user.id,week_number:week+1,duration_minutes:total()/60,distance_miles:miles>0?Number(miles.toFixed(3)):null,steps,source:'web'};
  const {error:detailError}=await db.from('soulwalk_sessions').insert(entry);if(detailError)throw detailError;
- saved=true;render();$('message').textContent='SoulWalk completed! Distance and steps saved to your personal walking history. Workout-summary synchronization is coming next.';
+ saved=true;render();loadHistory();$('message').textContent='SoulWalk completed! Distance and steps saved to your personal walking history. Workout-summary synchronization is coming next.';
  }catch(e){$('message').textContent='Could not save walk: '+e.message}finally{btn.disabled=saved}}
 const box=$('weeks');brisk.forEach((mins,i)=>{const card=document.createElement('article');card.className='week';card.setAttribute('aria-current',String(i===week));const title=document.createElement('strong');title.textContent='Week '+(i+1)+' · '+(mins+10)+' min';const p=document.createElement('p');p.className='muted';p.textContent='5 min easy + '+mins+' min brisk + 5 min easy';const btn=document.createElement('button');btn.textContent='Choose week '+(i+1);btn.onclick=()=>choose(i);card.append(title,p,btn);box.append(card)});
 document.addEventListener('visibilitychange',()=>{if(!document.hidden&&running)tick()});
 render();
+
+const historyNumber=n=>Number(n).toLocaleString();
+async function loadHistory(){
+ const status=$('history-status'),refresh=$('history-refresh'),list=$('history-list');
+ refresh.disabled=true;status.textContent='Loading walking history…';
+ try{
+  const {data:auth,error:authError}=await db.auth.getUser();
+  if(authError||!auth.user)throw Error('Sign in to Soulanova to view your personal walking history.');
+  const rows=[];
+  // Read all saved walks in bounded pages rather than silently showing incomplete totals.
+  for(let start=0;start<20000;start+=500){
+   const {data,error}=await db.from('soulwalk_sessions')
+    .select('id,week_number,duration_minutes,distance_miles,steps,created_at')
+    .eq('user_id',auth.user.id).order('created_at',{ascending:false})
+    .range(start,start+499);
+   if(error)throw error;
+   rows.push(...data);
+   if(data.length<500)break;
+  }
+  const truncated=rows.length===20000;
+  const steps=rows.reduce((sum,r)=>sum+(Number(r.steps)||0),0);
+  const miles=rows.reduce((sum,r)=>sum+(Number(r.distance_miles)||0),0);
+  const weeks=new Set(rows.map(r=>r.week_number)).size;
+  $('history-count').textContent=historyNumber(rows.length)+(truncated?'+':'');
+  $('history-steps').textContent=historyNumber(steps)+(truncated?'+':'');
+  $('history-miles').textContent=miles.toFixed(2)+(truncated?'+':'');
+  $('history-weeks').textContent=String(weeks);
+  list.replaceChildren();
+  if(!rows.length){status.textContent='No saved walks yet. Complete a walk to start your history.';return;}
+  status.textContent=truncated?'Showing totals for the latest 20,000 walks.':'Your most recent saved walks:';
+  for(const r of rows.slice(0,10)){
+   const item=document.createElement('p');
+   const when=new Date(r.created_at);
+   const date=Number.isFinite(when.getTime())?when.toLocaleDateString():'Unknown date';
+   const details=[date,'Week '+r.week_number,Number(r.duration_minutes).toFixed(1)+' min'];
+   if(r.steps!==null)details.push(historyNumber(r.steps)+' steps');
+   if(r.distance_miles!==null)details.push(Number(r.distance_miles).toFixed(2)+' mi');
+   item.textContent=details.join(' · ');
+   list.append(item);
+  }
+ }catch(e){
+  status.textContent='Walking history unavailable: '+(e?.message||String(e));
+ }finally{refresh.disabled=false;}
+}
+$('history-refresh').onclick=loadHistory;
+loadHistory();
