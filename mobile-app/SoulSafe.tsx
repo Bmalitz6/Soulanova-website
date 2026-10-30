@@ -1,14 +1,34 @@
-import React,{useState} from 'react';
-import {Alert,Linking,Share,StyleSheet,Text,TouchableOpacity,View} from 'react-native';
+import React,{useEffect,useRef,useState} from 'react';
+import {Alert,Linking,Share,StyleSheet,Text,TouchableOpacity,View,AppState} from 'react-native';
 import * as Location from 'expo-location';
+import {supabase} from './supabase';
 
 const TEAL='#086B63';
+type LiveSession={id:string;share_token:string;expires_at:string};
+const messageOf=(e:unknown)=>e&&typeof e==='object'&&'message'in e?String((e as {message:unknown}).message):String(e);
 export default function SoulSafe(){
  const [busy,setBusy]=useState(false);
  const [status,setStatus]=useState('Location is shared only when you choose to send it.');
+ const [live,setLive]=useState<LiveSession|null>(null);
+ const session=useRef<LiveSession|null>(null);
+ const updating=useRef(false);
+ const updateLocation=async()=>{
+  const current=session.current;
+  if(!current||!supabase||updating.current||AppState.currentState!=='active')return;
+  if(Date.now()>=new Date(current.expires_at).getTime()){setStatus('Live sharing expired.');session.current=null;setLive(null);return}
+  updating.current=true;
+  try{
+   const p=await Location.getCurrentPositionAsync({accuracy:Location.Accuracy.Balanced});
+   if(session.current?.id!==current.id)return;
+   const {error}=await supabase.from('soulsafe_sessions').update({latitude:p.coords.latitude,longitude:p.coords.longitude,accuracy_m:p.coords.accuracy??null,updated_at:new Date().toISOString()}).eq('id',current.id);
+   if(error)throw error;
+   setStatus('Live location updated at '+new Date().toLocaleTimeString()+'. Keep this screen open for updates.');
+  }catch(e){setStatus('Live sharing update failed: '+messageOf(e))}
+  finally{updating.current=false}
+ };
+ useEffect(()=>{if(!live)return;void updateLocation();const interval=setInterval(()=>{void updateLocation()},15000);return()=>clearInterval(interval)},[live?.id]);
  const shareLocation=async()=>{
-  if(busy)return;
-  setBusy(true);
+  if(busy)return;setBusy(true);
   try{
    let permission=await Location.getForegroundPermissionsAsync();
    if(permission.status!=='granted')permission=await Location.requestForegroundPermissionsAsync();
@@ -17,8 +37,39 @@ export default function SoulSafe(){
    const {latitude,longitude}=position.coords;
    const url='https://maps.apple.com/?ll='+latitude.toFixed(6)+','+longitude.toFixed(6);
    await Share.share({message:'I am out walking or running with Soulanova. Here is my current location (one-time snapshot, not live tracking): '+url,url});
-   setStatus('Location sharing sheet opened. Choose your trusted contact to send the pin.');
-  }catch(e){setStatus(e instanceof Error?e.message:'Unable to share location.');}
+   setStatus('Choose your trusted contact to send the location pin.');
+  }catch(e){setStatus(messageOf(e))}
+  finally{setBusy(false)}
+ };
+ const startLive=async()=>{
+  if(busy||live)return;
+  if(!supabase){setStatus('Sign in to your Soulanova account to share live location.');return}
+  setBusy(true);
+  try{
+   const {data:{user},error:authError}=await supabase.auth.getUser();
+   if(authError)throw authError;
+   if(!user)throw Error('Sign in to your Soulanova account first.');
+   let permission=await Location.getForegroundPermissionsAsync();
+   if(permission.status!=='granted')permission=await Location.requestForegroundPermissionsAsync();
+   if(permission.status!=='granted')throw Error('Location access is needed for live sharing.');
+   const {data,error}=await supabase.from('soulsafe_sessions').insert({owner_id:user.id}).select('id,share_token,expires_at').single();
+   if(error)throw error;
+   const started=data as LiveSession;session.current=started;setLive(started);
+   setStatus('Live sharing active for up to two hours. Send your private link to a trusted person. Updates currently require this app to remain open.');
+   const url=(process.env.EXPO_PUBLIC_SUPABASE_URL??'')+'/functions/v1/soulsafe-view?token='+encodeURIComponent(started.share_token);
+   await Share.share({message:'I chose to share my SoulSafe location with you for up to two hours. This private link can reveal my current location; please do not forward it. '+url,url});
+  }catch(e){setStatus('Could not start live sharing: '+messageOf(e))}
+  finally{setBusy(false)}
+ };
+ const stopLive=async()=>{
+  const current=session.current;
+  if(!current||!supabase)return;
+  setBusy(true);
+  try{
+   const {error}=await supabase.from('soulsafe_sessions').update({ended_at:new Date().toISOString()}).eq('id',current.id);
+   if(error)throw error;
+   session.current=null;setLive(null);setStatus('Live location sharing stopped. The private link no longer shows your location.');
+  }catch(e){setStatus('Could not stop sharing. Check your connection and retry: '+messageOf(e))}
   finally{setBusy(false)}
  };
  const callEmergency=()=>Alert.alert('Emergency SOS','If you need emergency assistance, call your local emergency services. Soulanova does not automatically contact anyone.',[
@@ -27,16 +78,17 @@ export default function SoulSafe(){
  ]);
  return <View style={styles.card}>
   <Text style={styles.title}>SoulSafe · Walk & Run Safety</Text>
-  <Text style={styles.note}>Optional safety tools for outdoor activity. Nothing is shared automatically.</Text>
+  <Text style={styles.note}>Optional safety tools. Live location sharing is OFF until you explicitly start it.</Text>
   <TouchableOpacity accessibilityRole="button" onPress={()=>{void shareLocation()}} disabled={busy} style={styles.button}>
-   <Text style={styles.buttonText}>{busy?'Getting current location…':'Share My Current Location'}</Text>
+   <Text style={styles.buttonText}>{busy?'Working…':'Share My Current Location'}</Text>
   </TouchableOpacity>
-  <Text style={styles.note}>Sends one map pin using the iPhone or Android share sheet. It does not follow your movement or alert contacts automatically.</Text>
-  <TouchableOpacity accessibilityRole="button" onPress={callEmergency} style={[styles.button,styles.sos]}>
-   <Text style={styles.buttonText}>Emergency SOS · Call 911</Text>
-  </TouchableOpacity>
+  <Text style={styles.note}>One-time map pin. Does not follow your movement.</Text>
+  {!live?<TouchableOpacity accessibilityRole="button" onPress={()=>{void startLive()}} disabled={busy} style={styles.button}><Text style={styles.buttonText}>Start Live Sharing (2 hours max)</Text></TouchableOpacity>:
+   <TouchableOpacity accessibilityRole="button" onPress={()=>{void stopLive()}} disabled={busy} style={[styles.button,styles.sos]}><Text style={styles.buttonText}>Stop Live Sharing</Text></TouchableOpacity>}
+  {live&&<Text style={styles.note}>Sharing until {new Date(live.expires_at).toLocaleTimeString()} at the latest. Keep this screen open for location updates. A link holder can view your current position until you stop or it expires.</Text>}
+  <TouchableOpacity accessibilityRole="button" onPress={callEmergency} style={[styles.button,styles.sos]}><Text style={styles.buttonText}>Emergency SOS · Call 911</Text></TouchableOpacity>
   <Text style={styles.note}>{status}</Text>
-  <Text style={styles.note}>Live location links, trusted-contact alerts, and missed check-ins are planned but not yet enabled. In an emergency, use your phone's emergency features.</Text>
+  <Text style={styles.note}>This early live-sharing version updates only while this app screen is open. It does NOT yet track in the background, automatically notify contacts, or detect falls. Location accuracy, internet service and battery affect updates. Do not rely on it for emergency rescue.</Text>
  </View>
 }
 const styles=StyleSheet.create({card:{backgroundColor:'#FFFFFF',borderRadius:20,borderWidth:1,borderColor:'#DCE8E2',padding:18,marginTop:16},title:{fontSize:21,fontWeight:'800',color:'#173238'},note:{color:'#697F76',fontSize:13,lineHeight:19,marginTop:10},button:{backgroundColor:TEAL,borderRadius:12,padding:15,alignItems:'center',marginTop:14},buttonText:{fontSize:15,fontWeight:'800',color:'#FFFFFF'},sos:{backgroundColor:'#9B3232'}});
