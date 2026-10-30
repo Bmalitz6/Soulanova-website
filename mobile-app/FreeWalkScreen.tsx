@@ -6,6 +6,14 @@ import {supabase} from './supabase';
 import * as Location from 'expo-location';
 import {GPS_TASK,beginGps,readGps,setGpsPaused,stopGps,clearGps} from './freestyleGps';
 const teal='#086B63';
+const errorDetails=(e:unknown):string=>{
+ if(e&&typeof e==='object'){
+  const x=e as {message?:unknown;code?:unknown;details?:unknown;hint?:unknown};
+  const parts=[x.code,x.message,x.details,x.hint].filter(v=>typeof v==='string'&&v.length>0);
+  if(parts.length)return parts.join(' · ');
+ }
+ return e instanceof Error?e.message:String(e);
+};
 export default function FreeWalkScreen({onBack}:{onBack:()=>void}){
  const [kind,setKind]=useState<'Walk'|'Run'>('Walk'),[running,setRunning]=useState(false),[done,setDone]=useState(false),[seconds,setSeconds]=useState(0),[busy,setBusy]=useState(false);
  const healthReadLock=useRef(false);
@@ -43,15 +51,16 @@ export default function FreeWalkScreen({onBack}:{onBack:()=>void}){
  const savingLock=useRef(false);
  const [recent,setRecent]=useState<Array<{id:string;activity_type:string;duration_seconds:number;steps:number|null;distance_miles:number|null;created_at:string}>>([]);
  const [refreshBusy,setRefreshBusy]=useState(false);
+ const [historyError,setHistoryError]=useState('');
  const loadRecent=async()=>{
   if(!supabase)return;
-  setRefreshBusy(true);
+  setRefreshBusy(true);setHistoryError('');
   try{
    const {data:{user}}=await supabase.auth.getUser();if(!user){setRecent([]);return}
    const {data,error}=await supabase.from('freestyle_sessions').select('id,activity_type,duration_seconds,steps,distance_miles,created_at').eq('user_id',user.id).order('created_at',{ascending:false}).limit(5);
    if(error)throw error;
    setRecent(data??[]);
-  }catch(e){setSaveMessage('History unavailable: '+(e instanceof Error?e.message:String(e)))}
+  }catch(e){setHistoryError('History unavailable: '+errorDetails(e))}
   finally{setRefreshBusy(false)}
  };
  useEffect(()=>{void loadRecent()},[]);
@@ -76,7 +85,7 @@ export default function FreeWalkScreen({onBack}:{onBack:()=>void}){
    if(error)throw error;
    setSaved(true);setSaveMessage('Activity saved to your Soulanova account.');
    await loadRecent();
-  }catch(e){setSaveMessage('Could not save activity: '+(e instanceof Error?e.message:String(e)))}
+  }catch(e){setSaveMessage('Could not save activity: '+errorDetails(e))}
   finally{setSaving(false);savingLock.current=false}
  };
  const [gpsEnabled,setGpsEnabled]=useState(false),[gpsMiles,setGpsMiles]=useState(0),[gpsMessage,setGpsMessage]=useState('GPS optional. Enable before starting.'),[gpsBusy,setGpsBusy]=useState(false);
@@ -204,6 +213,7 @@ export default function FreeWalkScreen({onBack}:{onBack:()=>void}){
    <Text style={styles.label}>Your Recent Freestyle Activities</Text>
    {recent.map(x=><Text key={x.id} style={styles.note}>{new Date(x.created_at).toLocaleDateString()} · {x.activity_type} · {Math.round(x.duration_seconds/60)} min · {x.distance_miles??'—'} mi</Text>)}
    {btn(refreshBusy?'Refreshing…':'Refresh Activities',()=>{void loadRecent()},refreshBusy)}
+   {!!historyError&&<Text style={styles.note}>{historyError}</Text>}
    <Text style={styles.note}>{message}</Text>
    <Text style={styles.note}>Phone sensor steps update while the app is open and can catch up when reopened on iPhone. They do not include watch-only steps.</Text>
    <Text style={styles.note}>Steps refresh about every 30 seconds while this screen is active and once when you finish. Apple Health can report them later after a watch sync; use Read Activity to refresh manually.</Text>
