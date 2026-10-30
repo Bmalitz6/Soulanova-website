@@ -1,12 +1,14 @@
 import {createClient} from 'https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2/+esm';
 const $=id=>document.getElementById(id),brisk=[5,7,9,11,13,15,18,20,23,26,28,30],db=createClient(window.SOULANOVA_SUPABASE.url,window.SOULANOVA_SUPABASE.publishableKey);
 let week=0,elapsed=0,startedAt=0,timer=null,running=false,finished=false,watch=null,miles=0,lastPosition=null,events=new Set(),saved=false;
+const cueFiles={start:'start.mp3',brisk:'brisk.mp3',half:'halfway.mp3',cool:'cooldown.mp3',done:'finish.mp3'};let activeCue=null;
 const total=()=>600+brisk[week]*60;
 const format=s=>String(Math.floor(s/60)).padStart(2,'0')+':'+String(s%60).padStart(2,'0');
 function availableVoices(){return 'speechSynthesis' in window?speechSynthesis.getVoices().filter(v=>v.lang?.toLowerCase().startsWith('en')):[];}
 function refreshVoices(){
  const select=$('voice-choice'),prior=select.value,voices=availableVoices();
- select.replaceChildren(new Option('Calm female voice (preferred)','auto'));
+ select.replaceChildren(new Option('Serene · Recorded female coach','recorded'),new Option('Device voice (fallback)','auto'));
+ if(!prior)select.value='recorded';
  voices.forEach(v=>select.add(new Option(v.name+' · '+v.lang,v.voiceURI)));
  if([...select.options].some(o=>o.value===prior))select.value=prior;
 }
@@ -17,7 +19,16 @@ function preferredVoice(){
  const preferred=['samantha','ava','allison','susan','serena','karen','victoria','moira','zoe','female'];
  return voices.find(v=>preferred.some(n=>v.name.toLowerCase().includes(n)))||voices[0]||null;
 }
-function announce(text){$('message').textContent=text;if($('voice').checked&&'speechSynthesis' in window){try{speechSynthesis.cancel();const utter=new SpeechSynthesisUtterance(text);utter.rate=.88;utter.lang='en-US';const v=preferredVoice();if(v)utter.voice=v;speechSynthesis.speak(utter)}catch(e){}}}
+function fallbackSpeech(text){if(!('speechSynthesis' in window))return;try{speechSynthesis.cancel();const utter=new SpeechSynthesisUtterance(text);utter.rate=.88;utter.lang='en-US';const v=preferredVoice();if(v)utter.voice=v;speechSynthesis.speak(utter)}catch(e){}}
+function announce(text,key){
+ $('message').textContent=text;if(!$('voice').checked)return;
+ if(activeCue){activeCue.pause();activeCue=null;}
+ if('speechSynthesis' in window)speechSynthesis.cancel();
+ if($('voice-choice').value!=='recorded'||!cueFiles[key]){fallbackSpeech(text);return;}
+ const cue=new Audio('/app/walking/audio/'+cueFiles[key]);activeCue=cue;let recovered=false;
+ const recover=()=>{if(recovered||activeCue!==cue)return;recovered=true;activeCue=null;fallbackSpeech(text)};
+ cue.onerror=recover;cue.play().catch(recover);
+}
 function choose(n){if(running)return;week=n;elapsed=0;finished=false;saved=false;events.clear();miles=0;lastPosition=null;$('gps').checked=false;stopGPS();render();}
 function render(){
  $('session-title').textContent='Week '+(week+1)+' · '+Math.round(total()/60)+' minutes';
@@ -29,7 +40,7 @@ function render(){
  $('miles').textContent=miles>0?miles.toFixed(2):'—';$('steps-display').textContent=$('steps').value||'—';
  document.querySelectorAll('.week').forEach((el,i)=>{el.setAttribute('aria-current',String(i===week));el.querySelector('button').disabled=running;});
 }
-function milestone(key,text){if(events.has(key))return;events.add(key);announce(text)}
+function milestone(key,text){if(events.has(key))return;events.add(key);announce(text,key)}
 function tick(){if(!running)return;elapsed=Math.min(total(),Math.floor((Date.now()-startedAt)/1000));
  if(elapsed>=Math.ceil(total()/2))milestone('half','You are halfway through your walk. Keep going at a comfortable pace.');
  if(elapsed>=300)milestone('brisk','Warm-up complete. Gradually increase to a brisk pace. You should still be able to talk.');
@@ -38,10 +49,10 @@ function tick(){if(!running)return;elapsed=Math.min(total(),Math.floor((Date.now
 function distance(a,b){const rad=Math.PI/180,dlat=(b.latitude-a.latitude)*rad,dlon=(b.longitude-a.longitude)*rad,x=Math.sin(dlat/2)**2+Math.cos(a.latitude*rad)*Math.cos(b.latitude*rad)*Math.sin(dlon/2)**2;return 3958.7613*2*Math.atan2(Math.sqrt(x),Math.sqrt(1-x))}
 function startGPS(){if(!navigator.geolocation){$('message').textContent='GPS unavailable in this browser.';return;}if(watch!==null)return;watch=navigator.geolocation.watchPosition(pos=>{if(!running)return;const p=pos.coords;if(p.accuracy>60)return;const next={latitude:p.latitude,longitude:p.longitude};if(lastPosition){const delta=distance(lastPosition,next);if(delta<.12&&delta>.003)miles+=delta;}lastPosition=next;render()},e=>{ $('message').textContent='GPS not available: '+e.message;$('gps').checked=false;stopGPS()},{enableHighAccuracy:true,maximumAge:3000,timeout:12000});}
 function stopGPS(){if(watch!==null){navigator.geolocation.clearWatch(watch);watch=null;}lastPosition=null}
-function stopTimer(){if(timer!==null)clearInterval(timer);timer=null;running=false;stopGPS();}
+function stopTimer(){if(timer!==null)clearInterval(timer);timer=null;running=false;stopGPS();if(activeCue){activeCue.pause();activeCue=null}}
 function finish(){elapsed=total();finished=true;stopTimer();milestone('done','Workout complete! Excellent work. You have finished week '+(week+1)+'.');render();}
 $('start').onclick=()=>{if(finished)return;running=true;startedAt=Date.now()-elapsed*1000;timer=setInterval(tick,500);if($('gps').checked)startGPS();if(!events.has('start'))milestone('start','Begin with five minutes of easy walking to warm up.');render()};
-$('pause').onclick=()=>{tick();stopTimer();milestone('paused','Workout paused.');render()};
+$('pause').onclick=()=>{tick();stopTimer();$('message').textContent='Workout paused.';render()};
 $('reset').onclick=()=>{if(!confirm('Reset this walk?'))return;stopTimer();elapsed=0;miles=0;finished=false;saved=false;events.clear();render()};
 $('gps').onchange=()=>{if($('gps').checked&&running)startGPS();else stopGPS()};
 $('steps').oninput=render;
