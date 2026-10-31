@@ -1,0 +1,87 @@
+{
+  "version": 1,
+  "title": "Soulanova Tai Chi 005 \u2014 Brush Knee \u2014 Engine V1 local review",
+  "template": "tai_chi",
+  "lesson_id": "005",
+  "asset_root": "~",
+  "expected_duration": 120,
+  "assets": {
+    "movement": {
+      "path": "Downloads/Soulanova_005_Brush_Knee_Bow_Assembly_Kit/Brush_Knee_105sec_APPROVED.mp4",
+      "approved": true,
+      "approval_note": "Existing 005 bow-assembly kit identifies this as the approved movement. Baked source timer is retained; trim only the final two excess frames.",
+      "expected_audio": "silent",
+      "baked_timer": true
+    },
+    "opening": {
+      "path": "Documents/Soulanova/Soulanova-website/app/videos/bows/Soulanova_005_Opening_Bow_FINAL_REVIEW.mp4",
+      "approved": true,
+      "approval_note": "Existing approved real moving 005 opening used by the V3 builder; preserve all 7 seconds and the instructor.",
+      "lesson_id": "005",
+      "expected_audio": "silent"
+    },
+    "closing": {
+      "path": "Documents/Soulanova/Soulanova-website/app/videos/bows/Soulanova_005_Closing_Bow_FINAL_REVIEW.mp4",
+      "approved": true,
+      "approval_note": "Existing approved real moving 005 closing used by the V3 builder; preserve all 8 seconds and the instructor.",
+      "lesson_id": "005",
+      "expected_audio": "silent"
+    },
+    "benjamin": {
+      "path": "Documents/Soulanova/Soulanova-website/app/tai-chi-audio/Brush_Knee_005_Benjamin.mp3",
+      "approved": true,
+      "approval_note": "Existing Benjamin 005 soundtrack. Reuse complete recording; no regenerated speech or added chimes.",
+      "expected_audio": "required"
+    },
+    "piano": {
+      "path": "Documents/Soulanova/Soulanova-website/app/tai-chi-audio/Soulanova_Soft_Piano.mp3",
+      "approved": true,
+      "approval_note": "Existing Soulanova soft-piano recording already used by the website.",
+      "expected_audio": "required"
+    }
+  },
+  "segments": [
+    {
+      "id": "opening",
+      "kind": "opening_bow",
+      "asset": "opening",
+      "source_in": 0,
+      "source_out": 7
+    },
+    {
+      "id": "practice",
+      "kind": "movement",
+      "asset": "movement",
+      "source_in": 0,
+      "source_out": 105
+    },
+    {
+      "id": "closing",
+      "kind": "closing_bow",
+      "asset": "closing",
+      "source_in": 0,
+      "source_out": 8
+    }
+  ],
+  "narration": [
+    {
+      "asset": "benjamin",
+      "at": 0
+    }
+  ],
+  "music": {
+    "asset": "piano",
+    "source_in": 0,
+    "gain_db": 8,
+    "duck": true,
+    "fade_seconds": 1
+  },
+  "output": {
+    "resolution": "auto",
+    "fps": 30,
+    "crf": 20,
+    "preset": "veryfast",
+    "normalize_audio": true,
+    "audio_required": true
+  }
+}

@@ -1,0 +1,48 @@
+{
+  "version": 1,
+  "title": "Stretching template \u2014 supply approved local footage",
+  "template": "stretching",
+  "asset_root": ".",
+  "expected_duration": 30,
+  "assets": {
+    "movement": {
+      "path": "REPLACE_WITH_APPROVED_MOVEMENT.mp4",
+      "approved": false,
+      "approval_note": "Pending instructor approval of footage, technique and timing",
+      "expected_audio": "silent"
+    },
+    "voice": {
+      "path": "REPLACE_WITH_APPROVED_NARRATION.wav",
+      "approved": false,
+      "approval_note": "Pending narration approval",
+      "expected_audio": "required"
+    }
+  },
+  "segments": [
+    {
+      "id": "practice",
+      "asset": "movement",
+      "source_in": 0,
+      "source_out": 30
+    }
+  ],
+  "narration": [
+    {
+      "asset": "voice",
+      "segment": "practice",
+      "offset": 0
+    }
+  ],
+  "output": {
+    "resolution": "auto",
+    "fps": 30,
+    "normalize_audio": true
+  },
+  "expected_holds": [
+    {
+      "start": 5,
+      "end": 25,
+      "reason": "Example only: replace with the instructor-approved hold interval"
+    }
+  ]
+}

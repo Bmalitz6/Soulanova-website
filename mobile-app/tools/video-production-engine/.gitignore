@@ -1,0 +1,17 @@
+# Default-deny this tooling directory: never archive local media, private
+# manifests, inventories, credentials, run logs, caches or temporary files.
+# Directory exceptions omit trailing slashes for EAS traversal compatibility.
+/*
+!/.gitignore
+!/engine.py
+!/README.md
+!/AUDIT_AND_DESIGN.md
+!/examples
+/examples/**
+!/examples/taichi-005.json
+!/examples/taichi-foundations-10min.draft.json
+!/examples/strength.template.json
+!/examples/stretching.template.json
+!/tests
+/tests/**
+!/tests/test_engine.py
