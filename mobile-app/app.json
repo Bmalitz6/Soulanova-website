@@ -1,16 +1,18 @@
 {
   "expo": {
-    "name": "mobile-app",
+    "name": "Soulanova",
     "slug": "mobile-app",
     "version": "1.0.0",
     "orientation": "portrait",
-    "icon": "./assets/icon.png",
+    "icon": "./assets/soulanova-app-icon.png",
     "userInterfaceStyle": "light",
     "ios": {
       "supportsTablet": true,
       "bundleIdentifier": "com.soulanova.wellness",
       "infoPlist": {
-        "ITSAppUsesNonExemptEncryption": false
+        "ITSAppUsesNonExemptEncryption": false,
+        "CFBundleDisplayName": "Soulanova",
+        "CFBundleName": "Soulanova"
       }
     },
     "android": {
@@ -62,7 +64,9 @@
         {
           "motionPermission": "Soulanova uses motion activity to count your steps during Walk or Run sessions when you choose to start tracking."
         }
-      ]
+      ],
+      "expo-font",
+      "expo-asset"
     ],
     "extra": {
       "eas": {
