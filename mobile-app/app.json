@@ -1,0 +1,78 @@
+{
+  "expo": {
+    "name": "Soulanova",
+    "slug": "mobile-app",
+    "version": "1.0.0",
+    "orientation": "portrait",
+    "icon": "./assets/soulanova-app-icon.png",
+    "userInterfaceStyle": "light",
+    "ios": {
+      "supportsTablet": true,
+      "bundleIdentifier": "com.soulanova.wellness",
+      "infoPlist": {
+        "ITSAppUsesNonExemptEncryption": false,
+        "CFBundleDisplayName": "Soulanova",
+        "CFBundleName": "Soulanova"
+      }
+    },
+    "android": {
+      "adaptiveIcon": {
+        "backgroundColor": "#E6F4FE",
+        "foregroundImage": "./assets/android-icon-foreground.png",
+        "backgroundImage": "./assets/android-icon-background.png",
+        "monochromeImage": "./assets/android-icon-monochrome.png"
+      },
+      "predictiveBackGestureEnabled": false,
+      "permissions": [
+        "android.permission.RECORD_AUDIO",
+        "android.permission.MODIFY_AUDIO_SETTINGS",
+        "android.permission.FOREGROUND_SERVICE",
+        "android.permission.FOREGROUND_SERVICE_MEDIA_PLAYBACK",
+        "android.permission.health.READ_STEPS",
+        "android.permission.health.READ_DISTANCE"
+      ]
+    },
+    "web": {
+      "favicon": "./assets/favicon.png"
+    },
+    "plugins": [
+      "expo-audio",
+      [
+        "@appeeky/expo-healthkit",
+        {
+          "healthSharePermission": "Soulanova reads steps and walking distance from Apple Health only when you choose to connect your health data.",
+          "healthUpdatePermission": "Soulanova requests permission to write workout information only if you choose to enable that feature.",
+          "isBackgroundDeliveryEnabled": false,
+          "healthConnectPermissions": [
+            "READ_STEPS",
+            "READ_DISTANCE"
+          ]
+        }
+      ],
+      [
+        "expo-location",
+        {
+          "locationWhenInUsePermission": "Soulanova uses your location during a Walk or Run to measure distance and route when you choose GPS tracking.",
+          "locationAlwaysAndWhenInUsePermission": "Allow Soulanova to record your Walk or Run route while your phone is locked or the app is in the background, only during an activity you start.",
+          "isIosBackgroundLocationEnabled": true,
+          "isAndroidBackgroundLocationEnabled": true,
+          "isAndroidForegroundServiceEnabled": true
+        }
+      ],
+      [
+        "expo-sensors",
+        {
+          "motionPermission": "Soulanova uses motion activity to count your steps during Walk or Run sessions when you choose to start tracking."
+        }
+      ],
+      "expo-font",
+      "expo-asset"
+    ],
+    "extra": {
+      "eas": {
+        "projectId": "86a34d5b-d36b-4f27-950a-8ffb1a6347f9"
+      }
+    },
+    "owner": "soulanova"
+  }
+}

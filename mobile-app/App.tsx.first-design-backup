@@ -1,0 +1,309 @@
+import React from 'react';
+import {
+  SafeAreaView,
+  ScrollView,
+  View,
+  Text,
+  TouchableOpacity,
+  StyleSheet,
+  StatusBar,
+  Alert,
+} from 'react-native';
+import { Ionicons } from '@expo/vector-icons';
+
+const teal = '#086A63';
+const dark = '#173238';
+const background = '#F5F8F5';
+
+const programs = [
+  {
+    title: 'SoulWalk',
+    subtitle: '12-Week Walking Journey',
+    icon: 'footsteps-outline',
+    detail: 'Walking • Cardio',
+  },
+  {
+    title: 'Tai Chi',
+    subtitle: 'Balance, Flow & Movement',
+    icon: 'body-outline',
+    detail: 'Mindful Movement',
+  },
+  {
+    title: 'Meditation',
+    subtitle: 'Find Your Inner Calm',
+    icon: 'leaf-outline',
+    detail: 'Mind & Wellness',
+  },
+  {
+    title: 'Strength & Fitness',
+    subtitle: 'Build Strength at Your Pace',
+    icon: 'barbell-outline',
+    detail: 'Strength • Flexibility',
+  },
+] as const;
+
+export default function App() {
+  const comingSoon = (name: string) => {
+    Alert.alert(
+      name,
+      'This section is being connected to your existing Soulanova programs.'
+    );
+  };
+
+  return (
+    <SafeAreaView style={styles.safe}>
+      <StatusBar barStyle="dark-content" />
+      <ScrollView
+        contentContainerStyle={styles.container}
+        showsVerticalScrollIndicator={false}
+      >
+        <View style={styles.header}>
+          <View>
+            <Text style={styles.brand}>✺ SOULANOVA</Text>
+            <Text style={styles.tagline}>MOVE • BREATHE • THRIVE</Text>
+          </View>
+          <TouchableOpacity
+            style={styles.profile}
+            onPress={() => comingSoon('Member Account')}
+          >
+            <Ionicons name="person-outline" size={24} color={teal} />
+          </TouchableOpacity>
+        </View>
+
+        <View style={styles.hero}>
+          <Text style={styles.heroLabel}>YOUR WELLNESS JOURNEY</Text>
+          <Text style={styles.heroTitle}>
+            A healthier you,{'\n'}one day at a time.
+          </Text>
+          <Text style={styles.heroText}>
+            Movement, mindfulness and strength — all in one place.
+          </Text>
+          <TouchableOpacity
+            style={styles.heroButton}
+            onPress={() => comingSoon('SoulWalk')}
+          >
+            <Text style={styles.heroButtonText}>Start Your Journey</Text>
+            <Ionicons name="arrow-forward" size={20} color={teal} />
+          </TouchableOpacity>
+        </View>
+
+        <View style={styles.sectionHeader}>
+          <Text style={styles.sectionTitle}>Explore Your Programs</Text>
+          <Text style={styles.sectionSubtitle}>
+            Choose what feels right for you today.
+          </Text>
+        </View>
+
+        {programs.map((program) => (
+          <TouchableOpacity
+            key={program.title}
+            style={styles.programCard}
+            activeOpacity={0.8}
+            onPress={() => comingSoon(program.title)}
+          >
+            <View style={styles.programIcon}>
+              <Ionicons
+                name={program.icon}
+                size={27}
+                color={teal}
+              />
+            </View>
+            <View style={styles.programContent}>
+              <Text style={styles.programDetail}>{program.detail}</Text>
+              <Text style={styles.programTitle}>{program.title}</Text>
+              <Text style={styles.programSubtitle}>{program.subtitle}</Text>
+            </View>
+            <Ionicons
+              name="chevron-forward"
+              size={22}
+              color="#8A9E9A"
+            />
+          </TouchableOpacity>
+        ))}
+
+        <View style={styles.progressCard}>
+          <View style={styles.progressIcon}>
+            <Ionicons name="stats-chart-outline" size={26} color={teal} />
+          </View>
+          <View style={{ flex: 1 }}>
+            <Text style={styles.progressTitle}>Your Progress</Text>
+            <Text style={styles.progressText}>
+              Your walks, workouts and wellness milestones.
+            </Text>
+          </View>
+          <TouchableOpacity onPress={() => comingSoon('Your Progress')}>
+            <Ionicons name="arrow-forward-circle" size={32} color={teal} />
+          </TouchableOpacity>
+        </View>
+
+        <Text style={styles.footer}>
+          SOULANOVA WELLNESS {'\n'}Move with purpose. Live with balance.
+        </Text>
+      </ScrollView>
+    </SafeAreaView>
+  );
+}
+
+const styles = StyleSheet.create({
+  safe: {
+    flex: 1,
+    backgroundColor: background,
+  },
+  container: {
+    padding: 22,
+    paddingBottom: 44,
+  },
+  header: {
+    flexDirection: 'row',
+    alignItems: 'center',
+    justifyContent: 'space-between',
+    marginBottom: 26,
+    marginTop: 10,
+  },
+  brand: {
+    color: teal,
+    fontSize: 23,
+    fontWeight: '800',
+    letterSpacing: 3,
+  },
+  tagline: {
+    color: '#68817B',
+    fontSize: 10,
+    letterSpacing: 2,
+    marginTop: 5,
+  },
+  profile: {
+    backgroundColor: '#E2EFEB',
+    width: 45,
+    height: 45,
+    borderRadius: 23,
+    justifyContent: 'center',
+    alignItems: 'center',
+  },
+  hero: {
+    backgroundColor: teal,
+    borderRadius: 24,
+    padding: 25,
+    marginBottom: 32,
+  },
+  heroLabel: {
+    color: '#B9E7DD',
+    fontSize: 11,
+    fontWeight: '700',
+    letterSpacing: 2,
+    marginBottom: 14,
+  },
+  heroTitle: {
+    color: '#FFFFFF',
+    fontSize: 30,
+    fontWeight: '800',
+    lineHeight: 38,
+    marginBottom: 14,
+  },
+  heroText: {
+    color: '#DFEFEB',
+    fontSize: 15,
+    lineHeight: 23,
+    marginBottom: 23,
+  },
+  heroButton: {
+    backgroundColor: '#FFFFFF',
+    paddingVertical: 14,
+    paddingHorizontal: 17,
+    borderRadius: 12,
+    flexDirection: 'row',
+    justifyContent: 'space-between',
+    alignItems: 'center',
+  },
+  heroButtonText: {
+    color: teal,
+    fontSize: 16,
+    fontWeight: '700',
+  },
+  sectionHeader: {
+    marginBottom: 17,
+  },
+  sectionTitle: {
+    color: dark,
+    fontSize: 24,
+    fontWeight: '800',
+  },
+  sectionSubtitle: {
+    color: '#718581',
+    fontSize: 14,
+    marginTop: 6,
+  },
+  programCard: {
+    backgroundColor: '#FFFFFF',
+    borderWidth: 1,
+    borderColor: '#E1EAE5',
+    borderRadius: 17,
+    padding: 16,
+    marginBottom: 13,
+    flexDirection: 'row',
+    alignItems: 'center',
+  },
+  programIcon: {
+    width: 58,
+    height: 58,
+    borderRadius: 15,
+    backgroundColor: '#E7F3EF',
+    justifyContent: 'center',
+    alignItems: 'center',
+    marginRight: 15,
+  },
+  programContent: {
+    flex: 1,
+  },
+  programDetail: {
+    color: teal,
+    fontSize: 10,
+    fontWeight: '700',
+    letterSpacing: 1,
+    marginBottom: 4,
+  },
+  programTitle: {
+    color: dark,
+    fontSize: 19,
+    fontWeight: '800',
+  },
+  programSubtitle: {
+    color: '#718581',
+    fontSize: 12,
+    marginTop: 4,
+  },
+  progressCard: {
+    marginTop: 15,
+    backgroundColor: '#E5F1EC',
+    borderRadius: 18,
+    padding: 18,
+    flexDirection: 'row',
+    alignItems: 'center',
+    gap: 13,
+  },
+  progressIcon: {
+    width: 44,
+    height: 44,
+    justifyContent: 'center',
+    alignItems: 'center',
+  },
+  progressTitle: {
+    color: dark,
+    fontSize: 18,
+    fontWeight: '800',
+  },
+  progressText: {
+    color: '#617973',
+    fontSize: 12,
+    marginTop: 5,
+    lineHeight: 17,
+  },
+  footer: {
+    color: '#91A49E',
+    textAlign: 'center',
+    marginTop: 34,
+    fontSize: 11,
+    letterSpacing: 1,
+    lineHeight: 20,
+  },
+});

@@ -1,0 +1,28 @@
+import {createClient} from 'https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2/+esm';
+const $=id=>document.getElementById(id);
+const db=createClient(window.SOULANOVA_SUPABASE.url,window.SOULANOVA_SUPABASE.publishableKey);
+let user,profile=null,measurements=[];
+const units={weight_kg:[['kg',1],['lb',0.45359237]],body_fat_percent:[['%',1]],resting_heart_rate_bpm:[['bpm',1]],systolic_mmhg:[['mmHg',1]],diastolic_mmhg:[['mmHg',1]],waist_cm:[['cm',1],['in',2.54]],sleep_hours:[['hours',1]],steps:[['steps',1]]};
+const names={weight_kg:'Weight',body_fat_percent:'Body fat',resting_heart_rate_bpm:'Resting heart rate',systolic_mmhg:'Systolic blood pressure',diastolic_mmhg:'Diastolic blood pressure',waist_cm:'Waist',sleep_hours:'Sleep',steps:'Steps'};
+const message=s=>{$('message').textContent=s};
+const dateLocal=d=>[d.getFullYear(),String(d.getMonth()+1).padStart(2,'0'),String(d.getDate()).padStart(2,'0')].join('-');
+$('day').value=dateLocal(new Date());
+function metricUnits(){const options=units[$('metric').value];$('unit').replaceChildren(...options.map(([s])=>new Option(s,s)));}
+$('metric').addEventListener('change',metricUnits);metricUnits();
+const make=(t,text)=>{const n=document.createElement(t);n.textContent=text;return n};
+function age(dob){if(!dob)return null;const d=new Date(dob+'T12:00:00'),now=new Date();let n=now.getFullYear()-d.getFullYear();if(now.getMonth()<d.getMonth()||(now.getMonth()===d.getMonth()&&now.getDate()<d.getDate()))n--;return n>=0&&n<=120?n:null}
+function render(){
+ $('dob').value=profile?.birth_date||''; const cm=Number(profile?.height_cm);const inUnit=$('height-unit').value==='in'; $('height').value=cm>0?(cm/(inUnit?2.54:1)).toFixed(1):'';
+ $('age-display').textContent='Age: '+(age(profile?.birth_date)??'—');
+ const latest=measurements.find(x=>x.metric_key==='weight_kg');const bmi=cm>0&&latest?.value>0?latest.value/Math.pow(cm/100,2):null;
+ $('bmi-display').textContent='BMI: '+(bmi!==null?bmi.toFixed(1):'—');
+ const h=$('history');h.replaceChildren();
+ if(!measurements.length)h.append(make('p','No measurements recorded yet.'));
+ for(const m of measurements){const row=make('div','');row.className='entry';const info=make('div','');const display=m.metric_key==='weight_kg'?((m.value/0.45359237).toFixed(1)+' lb'):m.metric_key==='waist_cm'?((m.value/2.54).toFixed(1)+' in'):(m.value+' '+units[m.metric_key][0][0]);info.append(make('strong',names[m.metric_key]+': '+display),make('small',new Date(m.measured_at).toLocaleDateString()));const del=make('button','Remove');del.onclick=async()=>{if(!confirm('Remove this measurement?'))return;try{const r=await db.from('member_health_measurements').delete().eq('id',m.id).eq('user_id',user.id);if(r.error)throw r.error;await load()}catch(e){message(e.message)}};row.append(info,del);h.append(row);}
+ const trend=$('trend');trend.replaceChildren();const weights=measurements.filter(m=>m.metric_key==='weight_kg').slice(0,10).reverse();for(const w of weights){const row=make('p',new Date(w.measured_at).toLocaleDateString()+': '+(w.value/0.45359237).toFixed(1)+' lb');trend.append(row)}if(!weights.length)trend.append(make('p','Weight history will appear here after you log a measurement.'));
+}
+$('height-unit').addEventListener('change',()=>{const input=$('height');const cm=Number(profile?.height_cm);input.value=cm>0?(cm/($('height-unit').value==='in'?2.54:1)).toFixed(1):''});
+async function load(){if(!user)return;const [p,m]=await Promise.all([db.from('member_health_profiles').select('*').eq('user_id',user.id).maybeSingle(),db.from('member_health_measurements').select('*').eq('user_id',user.id).order('measured_at',{ascending:false}).limit(100)]);if(p.error)throw p.error;if(m.error)throw m.error;profile=p.data;measurements=m.data||[];message('');render()}
+$('profile-form').addEventListener('submit',async e=>{e.preventDefault();try{const birth=$('dob').value||null;const h=$('height').value;const height_cm=h===''?null:Number(h)*($('height-unit').value==='in'?2.54:1);if(height_cm!==null&&(height_cm<=0||height_cm>=300))throw Error('Enter a valid height.');if(birth&&(new Date(birth)>new Date()||age(birth)===null))throw Error('Enter a valid birth date.');const r=await db.from('member_health_profiles').upsert({user_id:user.id,birth_date:birth,height_cm,updated_at:new Date().toISOString()});if(r.error)throw r.error;await load();message('Profile saved.')}catch(err){message(err.message)}});
+$('measurement-form').addEventListener('submit',async e=>{e.preventDefault();try{const key=$('metric').value,n=Number($('value').value),d=$('day').value,unit=$('unit').value,mult=units[key].find(([u])=>u===unit)?.[1];if(!Number.isFinite(n)||n<=0||!d||!mult)throw Error('Enter a valid value and date.');if(new Date(d+'T12:00:00')>new Date())throw Error('Future measurements are not supported.');const at=new Date(d+'T12:00:00').toISOString();const r=await db.from('member_health_measurements').insert({user_id:user.id,metric_key:key,value:n*mult,measured_at:at});if(r.error)throw r.error;$('value').value='';await load();message('Measurement saved.')}catch(err){message(err.message)}});
+async function init(){try{const r=await db.auth.getUser();if(r.error)throw r.error;user=r.data.user;if(!user){$('signin').hidden=false;$('auth-status').textContent='Sign in required';return}$('auth-status').textContent=user.email;$('app').hidden=false;await load()}catch(err){message('Unable to load My Health: '+err.message);$('auth-status').textContent='Setup needed'}}init();

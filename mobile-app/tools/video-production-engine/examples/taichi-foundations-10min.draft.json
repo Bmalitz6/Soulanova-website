@@ -1,0 +1,144 @@
+{
+  "version": 1,
+  "title": "DRAFT Beginner Tai Chi Foundations \u2014 10 minutes",
+  "template": "tai_chi",
+  "asset_root": "~/Documents/Soulanova/Soulanova-website",
+  "expected_duration": 600,
+  "editorial_status": "NOT APPROVED: class-neutral bow graphics, narration cue selection, bridge cues and preview titles pending. Do not change approval flags just to bypass validation.",
+  "assets": {
+    "asset_0": {
+      "path": "app/videos/bows/Soulanova_005_Opening_Bow_FINAL_REVIEW.mp4",
+      "approved": false,
+      "approval_note": "DRAFT: verify approved revision before changing approved to true. Class-neutral side-panel/title treatment in a new derivative; preserve moving instructor.",
+      "expected_audio": "silent",
+      "lesson_id": "005"
+    },
+    "asset_1": {
+      "path": "app/videos/production_masters/Soulanova_018_Shoulder_Rolls_MOVEMENT_105s.mp4",
+      "approved": false,
+      "approval_note": "DRAFT: verify approved revision before changing approved to true. Production-master candidate; class placement requires editorial sign-off.",
+      "expected_audio": "silent",
+      "sha256": "e8e916295f9666506a67e0a5e0cdb71ef776774262c99f1709034e4b5ea3e8c1"
+    },
+    "asset_2": {
+      "path": "app/videos/production_masters/Soulanova_021_Opening_Wings_MOVEMENT_105s.mp4",
+      "approved": false,
+      "approval_note": "DRAFT: verify approved revision before changing approved to true. Separate Next movement title and approved transition cue; preview then restart full practice.",
+      "expected_audio": "silent",
+      "sha256": "f0c265094ef26d393f3a390d15e9410d788e06b8461581cb2670fa98cd4c5675"
+    },
+    "asset_3": {
+      "path": "app/videos/production_masters/Soulanova_027_Playing_with_Waves_MOVEMENT_105s.mp4",
+      "approved": false,
+      "approval_note": "DRAFT: verify approved revision before changing approved to true. Separate Next movement title and approved transition cue; preview then restart full practice.",
+      "expected_audio": "silent",
+      "sha256": "45d049d5dc7c9c487de0d57a6bb0d8373be6016861b03e9a592a1925713e07f3"
+    },
+    "asset_4": {
+      "path": "app/videos/production_masters/Soulanova_005_Brush_Knee_CLASS_MASTER.mp4",
+      "approved": false,
+      "approval_note": "DRAFT: verify approved revision before changing approved to true. Separate Next movement title and approved transition cue; preview then restart full practice.",
+      "expected_audio": "silent",
+      "sha256": "a9161fe942c3b4041c00b0a10e13608fd0915917de8a2725e576e97848a9f2b9"
+    },
+    "asset_5": {
+      "path": "app/videos/production_masters/Soulanova_014_Playing_the_Lute_MOVEMENT_105s.mp4",
+      "approved": false,
+      "approval_note": "DRAFT: verify approved revision before changing approved to true. Separate Next movement title and approved transition cue; preview then restart full practice.",
+      "expected_audio": "silent",
+      "sha256": "0872387a67b104a107b752beeb4f2822b53f5ac6a1037ce10409efa08ace132e"
+    },
+    "asset_6": {
+      "path": "app/videos/bows/Soulanova_005_Closing_Bow_FINAL_REVIEW.mp4",
+      "approved": false,
+      "approval_note": "DRAFT: verify approved revision before changing approved to true. Class-neutral side-panel/title treatment in a new derivative; preserve moving instructor.",
+      "expected_audio": "silent",
+      "lesson_id": "005"
+    }
+  },
+  "segments": [
+    {
+      "id": "segment_0",
+      "asset": "asset_0",
+      "kind": "opening_bow",
+      "source_in": 0,
+      "source_out": 7
+    },
+    {
+      "id": "segment_1",
+      "asset": "asset_1",
+      "kind": "practice",
+      "source_in": 0,
+      "source_out": 105
+    },
+    {
+      "id": "segment_2",
+      "asset": "asset_2",
+      "kind": "next_movement_preview",
+      "source_in": 0,
+      "source_out": 15
+    },
+    {
+      "id": "segment_3",
+      "asset": "asset_2",
+      "kind": "practice",
+      "source_in": 0,
+      "source_out": 105
+    },
+    {
+      "id": "segment_4",
+      "asset": "asset_3",
+      "kind": "next_movement_preview",
+      "source_in": 0,
+      "source_out": 15
+    },
+    {
+      "id": "segment_5",
+      "asset": "asset_3",
+      "kind": "practice",
+      "source_in": 0,
+      "source_out": 105
+    },
+    {
+      "id": "segment_6",
+      "asset": "asset_4",
+      "kind": "next_movement_preview",
+      "source_in": 0,
+      "source_out": 15
+    },
+    {
+      "id": "segment_7",
+      "asset": "asset_4",
+      "kind": "practice",
+      "source_in": 0,
+      "source_out": 105
+    },
+    {
+      "id": "segment_8",
+      "asset": "asset_5",
+      "kind": "next_movement_preview",
+      "source_in": 0,
+      "source_out": 15
+    },
+    {
+      "id": "segment_9",
+      "asset": "asset_5",
+      "kind": "practice",
+      "source_in": 0,
+      "source_out": 105
+    },
+    {
+      "id": "segment_10",
+      "asset": "asset_6",
+      "kind": "closing_bow",
+      "source_in": 0,
+      "source_out": 8
+    }
+  ],
+  "narration": [],
+  "output": {
+    "resolution": "auto",
+    "fps": 30,
+    "audio_required": false
+  }
+}

@@ -68,3 +68,9 @@
     height: 200px;
   }
 }
+
+/* Landing page: distinct visitor signup vs returning-member sign-in */
+.header nav .nav-login{color:var(--deep);font-weight:700;border:1px solid #cdded9;border-radius:999px;padding:11px 19px;text-decoration:none;background:#fff;white-space:nowrap}
+.header nav .nav-login:hover,.header nav .nav-login:focus-visible{background:#edf5ef;color:var(--deep)}
+.header nav .nav-pill{white-space:nowrap;box-shadow:0 4px 12px rgba(11,75,83,.14)}
+@media(max-width:900px){.header nav .nav-login,.header nav .nav-pill{display:block;text-align:center;width:100%}}

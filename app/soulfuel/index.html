@@ -1,0 +1,25 @@
+<!doctype html>
+<html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<title>SoulFuel | Soulanova</title><meta name="theme-color" content="#0b4b53">
+<link rel="stylesheet" href="/app/soulfuel/soulfuel.css"></head>
+<body><header><a href="/app/">← Soulanova</a><strong>✺ SoulFuel</strong><span>Nutrition & progress</span></header>
+<main><div class="heading"><div><small>YOUR PERSONAL NUTRITION</small><h1>Fuel your day.</h1><p>You set the goals. Track what matters to you.</p></div><span id="auth-status">Connecting…</span></div>
+<p id="message" role="status" aria-live="polite"></p>
+<section id="app" hidden>
+<div class="columns"><section class="panel"><h2>My daily goals</h2><p class="hint">Each metric is optional. Choose a target, minimum, or maximum. No required presets.</p>
+<div id="goals"></div><form id="goal-form" class="stack"><h3>Add or update a goal</h3>
+<label>Metric <select id="metric"><option value="calories|Calories|kcal">Calories</option><option value="protein|Protein|g">Protein</option><option value="carbs|Carbohydrates|g">Carbs</option><option value="fat|Fat|g">Fat</option><option value="total_sugar|Total sugar|g">Total sugar</option><option value="added_sugar|Added sugar|g">Added sugar</option><option value="fiber|Fiber|g">Fiber</option><option value="sodium|Sodium|mg">Sodium</option><option value="water|Water|ml">Water</option></select></label>
+<label>Daily amount <input id="amount" type="number" min="0" max="100000" step="0.1" required></label>
+<label>Goal direction <select id="direction"><option value="target">Target</option><option value="minimum">At least</option><option value="maximum">At most</option></select></label>
+<button type="submit">Save goal</button></form></section>
+<section class="panel"><h2>Today's progress</h2><label>Day <input id="day" type="date"></label><div id="summary" class="summary"></div>
+<h2>Log a food</h2><section aria-label="Frequently logged foods"><h3>Frequently logged foods</h3><p class="hint">Your most repeated foods. Tap one to fill in its saved portion and nutrition values, then adjust and save.</p><div id="frequent-foods"></div></section><p><a href="/app/soulfuel/scan/">📷 Scan barcode or look up a packaged food →</a></p><form id="food-form" class="stack">
+<label>Food name <input id="food-name" maxlength="150" required placeholder="e.g. Greek yogurt"></label>
+<label>Meal <select id="meal"><option value="breakfast">Breakfast</option><option value="lunch">Lunch</option><option value="dinner">Dinner</option><option value="snack">Snack</option></select></label>
+<div class="two"><label>Quantity <input id="quantity" type="number" min="0.001" step="any" value="1" required></label><label>Unit <select id="serving"><option value="serving">Serving</option><option value="mL">mL</option><option value="fl oz">fl oz (US)</option><option value="g">g</option><option value="oz">oz (weight)</option></select></label></div>
+<p class="hint">Enter nutrition for the quantity consumed. Blank values mean unknown, not zero.</p>
+<div class="two" id="nutrient-fields"></div><button type="submit">Save food</button></form>
+<h3>Food journal</h3><div id="entries"></div></section></div></section>
+<div id="signin" class="panel" hidden><h2>Sign in to Soulanova</h2><p>SoulFuel uses your existing Soulanova member account. <a href="/app/">Sign in or create an account</a>, then return here.</p></div>
+<p class="hint">Nutrition tracking is for general wellness, not medical advice. Food values are member-entered and should be verified. Barcode lookup is available in Version 1. Check food labels and quantities before saving.</p></main>
+<script src="/app/config.js"></script><script type="module" src="/app/soulfuel/soulfuel.js"></script></body></html>

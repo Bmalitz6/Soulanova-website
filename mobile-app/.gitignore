@@ -1,0 +1,95 @@
+# Learn more https://docs.github.com/en/get-started/getting-started-with-git/ignoring-files
+
+# dependencies
+node_modules/
+
+# Expo
+.expo/
+dist/
+web-build/
+expo-env.d.ts
+
+# Native
+.kotlin/
+*.orig.*
+*.jks
+*.p8
+*.p12
+*.key
+*.mobileprovision
+
+# Metro
+.metro-health-check*
+
+# debug
+npm-debug.*
+yarn-debug.*
+yarn-error.*
+
+# macOS
+.DS_Store
+*.pem
+
+# local env files
+.env*.local
+
+# typescript
+*.tsbuildinfo
+
+# generated native folders
+/ios/**
+/android
+
+# Soulanova mobile development
+node_modules/
+.expo/
+dist/
+.env
+.env.*
+!.env.example
+App.tsx.starter-backup
+App.tsx.before-premium-design
+.DS_Store
+
+# Preserve only reviewed native source and shared project metadata.
+# Add new files explicitly; Pods, builds, environment and user files stay ignored.
+# Directory exceptions omit the trailing slash so EAS can traverse directories
+# before it checks their explicitly allowed files. /ios/** still denies new files.
+!/ios/.gitignore
+!/ios/Podfile
+!/ios/Podfile.lock
+!/ios/Podfile.properties.json
+!/ios/SoulwalkWatch Watch App
+!/ios/SoulwalkWatch Watch App/Assets.xcassets
+!/ios/SoulwalkWatch Watch App/Assets.xcassets/AccentColor.colorset
+!/ios/SoulwalkWatch Watch App/Assets.xcassets/AccentColor.colorset/Contents.json
+!/ios/SoulwalkWatch Watch App/Assets.xcassets/AppIcon.appiconset
+!/ios/SoulwalkWatch Watch App/Assets.xcassets/AppIcon.appiconset/Contents.json
+!/ios/SoulwalkWatch Watch App/Assets.xcassets/AppIcon.appiconset/Soulanova-AppIcon-1024.png
+!/ios/SoulwalkWatch Watch App/Assets.xcassets/Contents.json
+!/ios/SoulwalkWatch Watch App/ContentView.swift
+!/ios/SoulwalkWatch Watch App/SoulwalkWatch Watch App.entitlements
+!/ios/SoulwalkWatch Watch App/SoulwalkWatchApp.swift
+!/ios/mobileapp.xcodeproj
+!/ios/mobileapp.xcodeproj/project.pbxproj
+!/ios/mobileapp.xcodeproj/xcshareddata
+!/ios/mobileapp.xcodeproj/xcshareddata/xcschemes
+!/ios/mobileapp.xcodeproj/xcshareddata/xcschemes/SoulwalkWatch.xcscheme
+!/ios/mobileapp.xcodeproj/xcshareddata/xcschemes/mobileapp.xcscheme
+!/ios/mobileapp.xcworkspace
+!/ios/mobileapp.xcworkspace/contents.xcworkspacedata
+!/ios/mobileapp
+!/ios/mobileapp/AppDelegate.swift
+!/ios/mobileapp/Images.xcassets
+!/ios/mobileapp/Images.xcassets/AppIcon.appiconset
+!/ios/mobileapp/Images.xcassets/AppIcon.appiconset/App-Icon-1024x1024@1x.png
+!/ios/mobileapp/Images.xcassets/AppIcon.appiconset/Contents.json
+!/ios/mobileapp/Images.xcassets/Contents.json
+!/ios/mobileapp/Info.plist
+!/ios/mobileapp/PrivacyInfo.xcprivacy
+!/ios/mobileapp/SceneDelegate.swift
+!/ios/mobileapp/SplashScreen.storyboard
+!/ios/mobileapp/Supporting
+!/ios/mobileapp/Supporting/Expo.plist
+!/ios/mobileapp/mobileapp-Bridging-Header.h
+!/ios/mobileapp/mobileapp.entitlements

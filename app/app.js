@@ -20,7 +20,7 @@ const days=[
 const groceries=['Leafy greens','Tomatoes','Cucumbers','Peppers','Berries','Apples / pears','Chickpeas / beans','Lentils','Oats / quinoa','Brown rice / farro','Extra-virgin olive oil','Walnuts / almonds','Plain yogurt','Fish / seafood','Eggs / poultry','Lemons / herbs'];
 const storageKey='soulanova-preview-v1';let state={history:[],selected:'',checked:[]};try{const raw=JSON.parse(localStorage.getItem(storageKey)||'{}');if(typeof raw.selected==='string')state.selected=raw.selected;if(Array.isArray(raw.checked))state.checked=raw.checked.filter(x=>typeof x==='string')}catch(e){};
 function save(){try{localStorage.setItem(storageKey,JSON.stringify({selected:state.selected,checked:state.checked}))}catch(e){}};
-function tab(name){document.querySelectorAll('.tabs button').forEach(b=>{let active=b.dataset.tab===name;b.classList.toggle('active',active);if(active)b.setAttribute('aria-current','page');else b.removeAttribute('aria-current')});document.querySelectorAll('.panel').forEach(p=>p.classList.toggle('active',p.id===name));window.scrollTo({top:0,behavior:'smooth'})}
+function tab(name){const menu=document.querySelector('.nav-more');if(menu)menu.open=false;document.querySelectorAll('.tabs button').forEach(b=>{let active=b.dataset.tab===name;b.classList.toggle('active',active);if(active)b.setAttribute('aria-current','page');else b.removeAttribute('aria-current')});document.querySelectorAll('.panel').forEach(p=>p.classList.toggle('active',p.id===name));window.scrollTo({top:0,behavior:'smooth'})}
 document.querySelectorAll('[data-tab]').forEach(b=>b.addEventListener('click',()=>tab(b.dataset.tab)));document.querySelectorAll('[data-goto]').forEach(b=>b.addEventListener('click',()=>tab(b.dataset.goto)));
 document.getElementById('today').textContent=new Intl.DateTimeFormat('en-US',{weekday:'long',month:'short',day:'numeric'}).format(new Date());
 const category=document.getElementById('category');[...new Set(workouts.map(w=>w.category))].forEach(c=>category.add(new Option(c,c)));category.addEventListener('change',renderWorkouts);
@@ -31,13 +31,15 @@ const workoutCardMeta = {
   pilates: {label:'PILATES', cta:'View Session', image:'/app/images/workouts/pilates.jpg'},
   strength: {label:'STRENGTH', cta:'View Session', image:'/app/images/workouts/strength.jpg'},
   mobility: {label:'STRETCH & MOBILITY', cta:'View Session', image:'/app/images/workouts/mobility.jpg'},
-  cardio: {label:'LOW-IMPACT CARDIO', cta:'View Session', image:'/app/images/workouts/cardio.jpg'},
+  cardio: {label:'LOW-IMPACT CARDIO', cta:'Start 12-Week Walking Plan', image:'/app/images/workouts/cardio.jpg'},
   meditation: {label:'MEDITATION', cta:'View Sessions', image:'/app/images/workouts/meditation.jpg'}
 };
 
 function openWorkout(w){
   state.selected=w.id;
   save();
+
+  if(w.id==='cardio'){window.location.href='/app/walking/';return;}
 
   if(w.id==='tai' && window.SoulanovaClasses){
     window.SoulanovaClasses.open();
