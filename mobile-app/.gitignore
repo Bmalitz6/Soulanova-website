@@ -53,32 +53,34 @@ App.tsx.before-premium-design
 
 # Preserve only reviewed native source and shared project metadata.
 # Add new files explicitly; Pods, builds, environment and user files stay ignored.
+# Directory exceptions omit the trailing slash so EAS can traverse directories
+# before it checks their explicitly allowed files. /ios/** still denies new files.
 !/ios/.gitignore
 !/ios/Podfile
 !/ios/Podfile.lock
 !/ios/Podfile.properties.json
-!/ios/SoulwalkWatch Watch App/
-!/ios/SoulwalkWatch Watch App/Assets.xcassets/
-!/ios/SoulwalkWatch Watch App/Assets.xcassets/AccentColor.colorset/
+!/ios/SoulwalkWatch Watch App
+!/ios/SoulwalkWatch Watch App/Assets.xcassets
+!/ios/SoulwalkWatch Watch App/Assets.xcassets/AccentColor.colorset
 !/ios/SoulwalkWatch Watch App/Assets.xcassets/AccentColor.colorset/Contents.json
-!/ios/SoulwalkWatch Watch App/Assets.xcassets/AppIcon.appiconset/
+!/ios/SoulwalkWatch Watch App/Assets.xcassets/AppIcon.appiconset
 !/ios/SoulwalkWatch Watch App/Assets.xcassets/AppIcon.appiconset/Contents.json
 !/ios/SoulwalkWatch Watch App/Assets.xcassets/Contents.json
 !/ios/SoulwalkWatch Watch App/ContentView.swift
 !/ios/SoulwalkWatch Watch App/SoulwalkWatch Watch App.entitlements
 !/ios/SoulwalkWatch Watch App/SoulwalkWatchApp.swift
-!/ios/mobileapp.xcodeproj/
+!/ios/mobileapp.xcodeproj
 !/ios/mobileapp.xcodeproj/project.pbxproj
-!/ios/mobileapp.xcodeproj/xcshareddata/
-!/ios/mobileapp.xcodeproj/xcshareddata/xcschemes/
+!/ios/mobileapp.xcodeproj/xcshareddata
+!/ios/mobileapp.xcodeproj/xcshareddata/xcschemes
 !/ios/mobileapp.xcodeproj/xcshareddata/xcschemes/SoulwalkWatch.xcscheme
 !/ios/mobileapp.xcodeproj/xcshareddata/xcschemes/mobileapp.xcscheme
-!/ios/mobileapp.xcworkspace/
+!/ios/mobileapp.xcworkspace
 !/ios/mobileapp.xcworkspace/contents.xcworkspacedata
-!/ios/mobileapp/
+!/ios/mobileapp
 !/ios/mobileapp/AppDelegate.swift
-!/ios/mobileapp/Images.xcassets/
-!/ios/mobileapp/Images.xcassets/AppIcon.appiconset/
+!/ios/mobileapp/Images.xcassets
+!/ios/mobileapp/Images.xcassets/AppIcon.appiconset
 !/ios/mobileapp/Images.xcassets/AppIcon.appiconset/App-Icon-1024x1024@1x.png
 !/ios/mobileapp/Images.xcassets/AppIcon.appiconset/Contents.json
 !/ios/mobileapp/Images.xcassets/Contents.json
@@ -86,7 +88,7 @@ App.tsx.before-premium-design
 !/ios/mobileapp/PrivacyInfo.xcprivacy
 !/ios/mobileapp/SceneDelegate.swift
 !/ios/mobileapp/SplashScreen.storyboard
-!/ios/mobileapp/Supporting/
+!/ios/mobileapp/Supporting
 !/ios/mobileapp/Supporting/Expo.plist
 !/ios/mobileapp/mobileapp-Bridging-Header.h
 !/ios/mobileapp/mobileapp.entitlements
