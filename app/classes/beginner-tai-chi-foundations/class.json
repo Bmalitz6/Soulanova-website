@@ -1,0 +1,43 @@
+{
+  "id": "beginner-tai-chi-foundations",
+  "category": "tai_chi",
+  "title": "Beginner Tai Chi Foundations",
+  "subtitle": "10 minutes \u00b7 5 movements \u00b7 Benjamin narration",
+  "duration": 600,
+  "media": {
+    "src": "/app/videos/Soulanova_Beginner_Tai_Chi_Foundations_10min_v1.mp4",
+    "bakedTimer": true
+  },
+  "movements": [
+    {
+      "id": "019",
+      "name": "Shoulder Rotations",
+      "start": 7,
+      "end": 112
+    },
+    {
+      "id": "020",
+      "name": "Chest Opening Swings",
+      "start": 127,
+      "end": 232
+    },
+    {
+      "id": "023",
+      "name": "Frontal Circles",
+      "start": 247,
+      "end": 352
+    },
+    {
+      "id": "027",
+      "name": "Playing with Waves",
+      "start": 367,
+      "end": 472
+    },
+    {
+      "id": "030",
+      "name": "Separating Heaven and Earth",
+      "start": 487,
+      "end": 592
+    }
+  ]
+}
