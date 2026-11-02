@@ -1,0 +1,280 @@
+{
+  "refs": {
+    "main": "0479dc67b1f3b348d9421b133b581f8a6e253cd8",
+    "foundation": "56ff06a3c4eb4f6d1aa3596637986693fe3a8040"
+  },
+  "files": [
+    {
+      "path": "app/soulfuel/index.html",
+      "main": {
+        "exists": false,
+        "sha256": null
+      },
+      "foundation": {
+        "exists": true,
+        "sha256": "0ae8d2a5f1fdb467051daaf3b28ffafe614b60e970518ea497ebb0d742ed3fcb"
+      },
+      "local": {
+        "exists": true,
+        "sha256": "0ae8d2a5f1fdb467051daaf3b28ffafe614b60e970518ea497ebb0d742ed3fcb"
+      },
+      "local_matches_foundation": true
+    },
+    {
+      "path": "app/soulfuel/soulfuel.js",
+      "main": {
+        "exists": false,
+        "sha256": null
+      },
+      "foundation": {
+        "exists": true,
+        "sha256": "e543442a909ba9e8db46303e5c90611a5b373643ae100cd99ab785a6059e1531"
+      },
+      "local": {
+        "exists": true,
+        "sha256": "e543442a909ba9e8db46303e5c90611a5b373643ae100cd99ab785a6059e1531"
+      },
+      "local_matches_foundation": true
+    },
+    {
+      "path": "app/soulfuel/soulfuel.css",
+      "main": {
+        "exists": false,
+        "sha256": null
+      },
+      "foundation": {
+        "exists": true,
+        "sha256": "c005ce0b865f041e7c442cc761d1d3b30d6f20a95c505aa0547d7965edf43f43"
+      },
+      "local": {
+        "exists": true,
+        "sha256": "c005ce0b865f041e7c442cc761d1d3b30d6f20a95c505aa0547d7965edf43f43"
+      },
+      "local_matches_foundation": true
+    },
+    {
+      "path": "app/soulfuel/scan/index.html",
+      "main": {
+        "exists": false,
+        "sha256": null
+      },
+      "foundation": {
+        "exists": true,
+        "sha256": "8bb2738d0dd8f4ed396a44e452ccccd5720fe893e35bdba567ce1d12131ac9db"
+      },
+      "local": {
+        "exists": true,
+        "sha256": "8bb2738d0dd8f4ed396a44e452ccccd5720fe893e35bdba567ce1d12131ac9db"
+      },
+      "local_matches_foundation": true
+    },
+    {
+      "path": "app/soulfuel/scan/scan.js",
+      "main": {
+        "exists": false,
+        "sha256": null
+      },
+      "foundation": {
+        "exists": true,
+        "sha256": "4f14c14b94cfbca5714f7934c2a4ab8e3f5e362e42bb3cb9df1f4bb5872f0a5e"
+      },
+      "local": {
+        "exists": true,
+        "sha256": "4f14c14b94cfbca5714f7934c2a4ab8e3f5e362e42bb3cb9df1f4bb5872f0a5e"
+      },
+      "local_matches_foundation": true
+    },
+    {
+      "path": "app/health/index.html",
+      "main": {
+        "exists": false,
+        "sha256": null
+      },
+      "foundation": {
+        "exists": true,
+        "sha256": "e6f33fb8636f7d10b561db9ed2449409571c76b71f7baccc9eb890f8da03a7ec"
+      },
+      "local": {
+        "exists": true,
+        "sha256": "e6f33fb8636f7d10b561db9ed2449409571c76b71f7baccc9eb890f8da03a7ec"
+      },
+      "local_matches_foundation": true
+    },
+    {
+      "path": "app/health/health.js",
+      "main": {
+        "exists": false,
+        "sha256": null
+      },
+      "foundation": {
+        "exists": true,
+        "sha256": "8e47aafef8dcaa83dae6cc5d4690405a63e88c3ee2a6c56e7457758f1d0af96c"
+      },
+      "local": {
+        "exists": true,
+        "sha256": "8e47aafef8dcaa83dae6cc5d4690405a63e88c3ee2a6c56e7457758f1d0af96c"
+      },
+      "local_matches_foundation": true
+    },
+    {
+      "path": "supabase/soulfuel_v1.sql",
+      "main": {
+        "exists": false,
+        "sha256": null
+      },
+      "foundation": {
+        "exists": true,
+        "sha256": "232e9273da3f0e0d0b351877dcc3de67b1bcada5f19b5e29fb81262fff89f7ba"
+      },
+      "local": {
+        "exists": true,
+        "sha256": "232e9273da3f0e0d0b351877dcc3de67b1bcada5f19b5e29fb81262fff89f7ba"
+      },
+      "local_matches_foundation": true
+    },
+    {
+      "path": "supabase/soulfuel_health_v1.sql",
+      "main": {
+        "exists": false,
+        "sha256": null
+      },
+      "foundation": {
+        "exists": true,
+        "sha256": "5b5f651e30ede522dd609ea236d6e668cdb1a28a11131d8373101804743591a0"
+      },
+      "local": {
+        "exists": true,
+        "sha256": "5b5f651e30ede522dd609ea236d6e668cdb1a28a11131d8373101804743591a0"
+      },
+      "local_matches_foundation": true
+    },
+    {
+      "path": "mobile-app/SoulFuelScreen.tsx",
+      "main": {
+        "exists": false,
+        "sha256": null
+      },
+      "foundation": {
+        "exists": true,
+        "sha256": "9edf23663283b45d2c7bbbdd5755311c09a5751d4f52e88aa787e107e31201a3"
+      },
+      "local": {
+        "exists": true,
+        "sha256": "9edf23663283b45d2c7bbbdd5755311c09a5751d4f52e88aa787e107e31201a3"
+      },
+      "local_matches_foundation": true
+    },
+    {
+      "path": "mobile-app/App.tsx",
+      "main": {
+        "exists": false,
+        "sha256": null
+      },
+      "foundation": {
+        "exists": true,
+        "sha256": "38653e8fb445242956b14de91195655c42a0b14b6276096317d29fc29141d1b3"
+      },
+      "local": {
+        "exists": true,
+        "sha256": "38653e8fb445242956b14de91195655c42a0b14b6276096317d29fc29141d1b3"
+      },
+      "local_matches_foundation": true
+    },
+    {
+      "path": "mobile-app/supabase.ts",
+      "main": {
+        "exists": false,
+        "sha256": null
+      },
+      "foundation": {
+        "exists": true,
+        "sha256": "9c0bac4247a9f394548cfd3dff77844a774fb83022c4e0308895c7be8b1ca864"
+      },
+      "local": {
+        "exists": true,
+        "sha256": "9c0bac4247a9f394548cfd3dff77844a774fb83022c4e0308895c7be8b1ca864"
+      },
+      "local_matches_foundation": true
+    },
+    {
+      "path": "app/free-content.js",
+      "main": {
+        "exists": true,
+        "sha256": "8e6a606e89baca212b7c39b296276a054ba40c8edba52cd21767f439aef12af8"
+      },
+      "foundation": {
+        "exists": true,
+        "sha256": "8e6a606e89baca212b7c39b296276a054ba40c8edba52cd21767f439aef12af8"
+      },
+      "local": {
+        "exists": true,
+        "sha256": "8e6a606e89baca212b7c39b296276a054ba40c8edba52cd21767f439aef12af8"
+      },
+      "local_matches_foundation": true
+    },
+    {
+      "path": "app/config.js",
+      "main": {
+        "exists": true,
+        "sha256": "223a8ffd7e57e869a74e95c4ac59fee393ecc9ed3f23c9220c1cf5684d98c41e"
+      },
+      "foundation": {
+        "exists": true,
+        "sha256": "223a8ffd7e57e869a74e95c4ac59fee393ecc9ed3f23c9220c1cf5684d98c41e"
+      },
+      "local": {
+        "exists": true,
+        "sha256": "223a8ffd7e57e869a74e95c4ac59fee393ecc9ed3f23c9220c1cf5684d98c41e"
+      },
+      "local_matches_foundation": true
+    },
+    {
+      "path": "app/app.js",
+      "main": {
+        "exists": true,
+        "sha256": "cf2a23b78628bb61a8c3679b11d2d1cecbfc66efdee6badd1bed2b9a8d949a95"
+      },
+      "foundation": {
+        "exists": true,
+        "sha256": "a473c37cd90f98e8d7c429fdef5e97ab4bb619731ebc95203b6d936d104244ba"
+      },
+      "local": {
+        "exists": true,
+        "sha256": "a473c37cd90f98e8d7c429fdef5e97ab4bb619731ebc95203b6d936d104244ba"
+      },
+      "local_matches_foundation": true
+    },
+    {
+      "path": "app/classes/beginner-tai-chi-foundations/class.json",
+      "main": {
+        "exists": true,
+        "sha256": "4c6fdd6d1c2ccdabdce67a03834d7dd89f41e4475294dfe93d28eead3b3d8b56"
+      },
+      "foundation": {
+        "exists": false,
+        "sha256": null
+      },
+      "local": {
+        "exists": false,
+        "sha256": null
+      },
+      "local_matches_foundation": false
+    },
+    {
+      "path": "app/videos/Soulanova_Beginner_Tai_Chi_Foundations_10min_v1.mp4",
+      "main": {
+        "exists": true,
+        "sha256": "8449b1cb99f742816edab68d1f273747062edc42e3ba98105c76d73c03dc195e"
+      },
+      "foundation": {
+        "exists": false,
+        "sha256": null
+      },
+      "local": {
+        "exists": false,
+        "sha256": null
+      },
+      "local_matches_foundation": false
+    }
+  ]
+}

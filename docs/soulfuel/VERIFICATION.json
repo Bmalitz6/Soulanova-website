@@ -1,0 +1,24 @@
+{
+  "audited_at_utc": "2026-11-02T00:20:26.514390+00:00",
+  "main_commit": "0479dc67b1f3b348d9421b133b581f8a6e253cd8",
+  "foundation_commit": "56ff06a3c4eb4f6d1aa3596637986693fe3a8040",
+  "preview_branch": "preview/soulfuel-additive-audit",
+  "branch_scope": "Documentation/evidence only; no production code changes or functional SoulFuel merge",
+  "mobile_typecheck": "passed",
+  "web_module_syntax": "passed",
+  "lint": "unavailable:no lint script/installed ESLint",
+  "positive_fixture_behavior_checks": 18,
+  "known_gap_checks": 1,
+  "manual_rapid_double_submit_insert_calls": 2,
+  "live_checks": "Anonymous GET limit0 only; four401/42501 table permission responses. No rows or writes.",
+  "live_authenticated_or_RLS_proof": false,
+  "production_routes": {
+    "soulfuel": 404,
+    "health": 404,
+    "foundations": 200
+  },
+  "local_soulfuel_sources_match_remote_foundation": true,
+  "supabase_settings_or_data_changed": false,
+  "production_deploy_requested": false,
+  "native_project_changed": false
+}
