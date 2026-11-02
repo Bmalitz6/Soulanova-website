@@ -1,0 +1,20 @@
+{
+  "base_main": "0479dc67b1f3b348d9421b133b581f8a6e253cd8",
+  "unchanged_existing_files_checked": 65,
+  "member_html_only_navigation_script": true,
+  "design_auth_sample_checks": 48,
+  "additional_responsive_viewports": [
+    320,
+    768,
+    1024
+  ],
+  "class_playback_checks": {
+    "desktop": 32,
+    "mobile": 29
+  },
+  "total_browser_checks": 112,
+  "auth_scope": "In-memory fixtures; no real account or email test",
+  "typescript": "pass",
+  "lint": "Unavailable: no lint script",
+  "production_deployed": false
+}

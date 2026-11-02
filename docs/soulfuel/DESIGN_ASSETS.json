@@ -1,0 +1,20 @@
+{
+  "base_main": "0479dc67b1f3b348d9421b133b581f8a6e253cd8",
+  "reused_auth_commits": [
+    "95adc228be392c24ca37c4376d76612bb2121cdd",
+    "d59ff92d31075499ac3a5937df13204c67773754"
+  ],
+  "already_in_main_workout_design": [
+    "65f875abe91c86e6d914de16df30007a403f821a",
+    "9cf3353"
+  ],
+  "studio_image_source": "Existing approved Tai_chi_Instructor.png branding asset",
+  "studio_image_sha256": "668481920ba302b4e78288c3445d7bbbaa84233530936f03c72c28a35dcec48f",
+  "existing_workout_photos": "Unchanged app/images/workouts/*.jpg",
+  "food_graphics": "New original code-native ingredient illustrations; no external stock or generated photos",
+  "recipe_source": "Existing main app/free-content.js; exact recipes0,1,3 preserved",
+  "local_75_recipe_pack": "Found existing library with editorial/source flags. Preserved outside this preview; no recipe or nutrition overwrite.",
+  "soulfuel_demo_source_commit": "56ff06a3c4eb4f6d1aa3596637986693fe3a8040",
+  "soulfuel_demo_backend": "In-memory preview only; cannot call Supabase",
+  "production_deployment_authorized": false
+}
