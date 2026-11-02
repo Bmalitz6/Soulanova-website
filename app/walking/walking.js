@@ -145,9 +145,14 @@ $('save').onclick=async()=>{if(!accountWritesEnabled){$('message').textContent='
  try{const user=await requireMember(db,expected);if(revision!==authRevision)throw Error('Your account changed. Refresh before saving.');
  const stepsRaw=$('steps').value.trim(),steps=stepsRaw===''?null:Number(stepsRaw);
  if(steps!==null&&(!Number.isInteger(steps)||steps<0||steps>150000))throw Error('Enter a valid steps count.');
- const actualDistance=mode==='treadmill'?valueOf('treadmill-distance'):null;
+ const actualDistance=mode==='treadmill'?valueOf('treadmill-distance'):null,actualSpeed=mode==='treadmill'?valueOf('treadmill-speed'):null,actualIncline=mode==='treadmill'?valueOf('treadmill-incline'):null;
  if(mode==='treadmill'&&actualDistance!==null&&(!Number.isFinite(actualDistance)||actualDistance<0||actualDistance>100))throw Error('Enter a valid treadmill distance.');
- const entry={id:walkId,user_id:user.id,week_number:week+1,duration_minutes:total()/60,distance_miles:mode==='treadmill'?(actualDistance===null?null:Number(actualDistance.toFixed(3))):(miles>0?Number(miles.toFixed(3)):null),steps,source:'web'};
+ if(mode==='treadmill'&&actualSpeed!==null&&(!Number.isFinite(actualSpeed)||actualSpeed<0||actualSpeed>15))throw Error('Enter a valid actual treadmill speed.');
+ if(mode==='treadmill'&&actualIncline!==null&&(!Number.isFinite(actualIncline)||actualIncline<0||actualIncline>20))throw Error('Enter a valid actual treadmill incline.');
+ const distance=mode==='treadmill'?(actualDistance===null?null:Number(actualDistance.toFixed(3))):(miles>0?Number(miles.toFixed(3)):null);
+ const distanceSource=distance===null?null:mode==='treadmill'?'treadmill_manual':'outdoor_gps';
+ const stepsSource=stepsRaw===''?null:'manual';
+ const entry={id:walkId,user_id:user.id,week_number:week+1,walk_mode:mode,fitness_level:treadmillLevel,duration_minutes:total()/60,distance_miles:distance,distance_source:distanceSource,steps,steps_source:stepsSource,treadmill_speed_mph:actualSpeed,treadmill_incline_percent:actualIncline,source:'web'};
  await insertOnce(db,'soulwalk','soulwalk_sessions',entry);if(revision!==authRevision)return;
  saved=true;$('message').textContent='Walk saved to your account. Refreshing history…';await loadHistory();if(revision===authRevision)$('message').textContent='Walk saved. See your personal walking history below.';
  }catch(e){if(revision===authRevision)$('message').textContent='Could not save walk: '+e.message;}finally{saving=false;render();}};
@@ -165,13 +170,18 @@ async function loadHistory(){
  refresh.disabled=true;status.textContent='Loading walking history…';$('history-chart-empty').hidden=false;$('history-chart-empty').textContent='Loading recent walk totals…';
  try{
   const member=await requireMember(db,owner);if(accountRevision!==authRevision||revision!==historyRevision)return;
-  const rows=[];
+  const rows=[];let metadataColumns=true;
   // Read all saved walks in bounded pages rather than silently showing incomplete totals.
   for(let start=0;start<20000;start+=500){
-   const {data,error}=await bounded(signal=>db.from('soulwalk_sessions')
-    .select('id,week_number,duration_minutes,distance_miles,steps,created_at')
+   let {data,error}=await bounded(signal=>db.from('soulwalk_sessions')
+    .select(metadataColumns?'id,week_number,duration_minutes,distance_miles,steps,created_at,walk_mode,fitness_level,distance_source,steps_source,treadmill_speed_mph,treadmill_incline_percent':'id,week_number,duration_minutes,distance_miles,steps,created_at')
     .eq('user_id',member.id).order('created_at',{ascending:false})
     .range(start,start+499).abortSignal(signal));
+   if(error&&metadataColumns&&['42703','PGRST204'].includes(error.code)){
+    metadataColumns=false;
+    ({data,error}=await bounded(signal=>db.from('soulwalk_sessions').select('id,week_number,duration_minutes,distance_miles,steps,created_at')
+     .eq('user_id',member.id).order('created_at',{ascending:false}).range(start,start+499).abortSignal(signal)));
+   }
    if(accountRevision!==authRevision||revision!==historyRevision)return;
    if(error)throw error;
    rows.push(...data);
@@ -220,7 +230,7 @@ async function loadHistory(){
    const day=Number.isFinite(when.getTime())?(sameDay?'Today':when.toLocaleDateString(undefined,{month:'short',day:'numeric'})):'Date unavailable';
    const main=document.createElement('div');main.className='entry-main';const check=document.createElement('span');check.className='entry-check';check.textContent='✓';
    const text=document.createElement('div');const title=document.createElement('strong');title.textContent=`${day} · Week ${r.week_number}`;
-   const details=[];if(r.steps!==null)details.push(historyNumber(r.steps)+' steps');if(r.distance_miles!==null)details.push(Number(r.distance_miles).toFixed(2)+' mi');const meta=document.createElement('small');meta.textContent=details.join(' · ')||'Completed walk';text.append(title,meta);main.append(check,text);
+   const details=[];if(r.walk_mode)details.push(r.walk_mode==='treadmill'?'Treadmill':'Outdoor');if(r.fitness_level)details.push(r.fitness_level[0].toUpperCase()+r.fitness_level.slice(1));if(r.steps!==null)details.push(historyNumber(r.steps)+' steps'+(r.steps_source?' · '+(r.steps_source==='manual'?'entered':'health data'):''));if(r.distance_miles!==null)details.push(Number(r.distance_miles).toFixed(2)+' mi'+(r.distance_source==='outdoor_gps'?' GPS':r.distance_source==='treadmill_manual'?' actual':''));if(r.treadmill_speed_mph!==null&&r.treadmill_speed_mph!==undefined)details.push(r.treadmill_speed_mph+' mph actual');if(r.treadmill_incline_percent!==null&&r.treadmill_incline_percent!==undefined)details.push(r.treadmill_incline_percent+'% incline actual');const meta=document.createElement('small');meta.textContent=details.join(' · ')||'Completed walk';text.append(title,meta);main.append(check,text);
    const duration=document.createElement('span');duration.className='entry-time';duration.textContent=Number(r.duration_minutes).toFixed(0)+' min';item.append(main,duration);
    list.append(item);
   }
