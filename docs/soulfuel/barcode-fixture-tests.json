@@ -1,0 +1,39 @@
+{
+  "passed": true,
+  "scope": "Actual existing source loaded unchanged except replacing Supabase import with in-memoryfixture. No real sessions, rows or writes; not liveRLS proof.",
+  "source_kind": "barcode",
+  "checks": [
+    {
+      "passed": true,
+      "message": "Barcode fixture defaults to labeled240mL serving"
+    },
+    {
+      "passed": true,
+      "message": "Barcode scales per100values and sodium g→mg"
+    },
+    {
+      "passed": true,
+      "message": "Unknown added sugar remains blank"
+    },
+    {
+      "passed": true,
+      "message": "Compatible volume unit conversion preserves macros"
+    },
+    {
+      "passed": true,
+      "message": "Amount change scales consumed-portion nutrients"
+    },
+    {
+      "passed": true,
+      "message": "Barcode save writes expected current-member nutrition_entries payload"
+    },
+    {
+      "passed": true,
+      "message": "After save macros remain visible and sequential duplicate save disabled"
+    },
+    {
+      "passed": true,
+      "message": "Sequential repeat submit does not insert again"
+    }
+  ]
+}

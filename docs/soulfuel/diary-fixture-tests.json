@@ -1,0 +1,52 @@
+{
+  "passed": true,
+  "scope": "Actual existing source loaded unchanged except replacing Supabase import with in-memoryfixture. No real sessions, rows or writes; not liveRLS proof.",
+  "source_kind": "diary",
+  "checks": [
+    {
+      "passed": true,
+      "message": "Existing dashboard opens for fixture authenticated member"
+    },
+    {
+      "passed": true,
+      "message": "Calories/protein sum for selected day"
+    },
+    {
+      "passed": true,
+      "message": "Daily journal excludes other dates"
+    },
+    {
+      "passed": true,
+      "message": "Nine existing nutrient input fields"
+    },
+    {
+      "passed": true,
+      "message": "Manual insert uses current member and per-consumed-portion nutrients; unknowns omitted"
+    },
+    {
+      "passed": true,
+      "message": "Manual200kcal at quantity2 adds200 not400 per consumed-portion contract"
+    },
+    {
+      "passed": true,
+      "message": "Goal upsert updates member/metric rather than duplicating"
+    },
+    {
+      "passed": true,
+      "message": "CompatiblemL→fl oz conversion"
+    },
+    {
+      "passed": true,
+      "message": "Delete scoped by entry id and current member"
+    },
+    {
+      "passed": true,
+      "message": "Existing date picker retrieves historical day"
+    },
+    {
+      "passed": true,
+      "message": "Known incomplete behavior demonstrated: rapid duplicate submits",
+      "observed_insert_calls": 2
+    }
+  ]
+}

@@ -1,0 +1,49 @@
+[
+  {
+    "table": "nutrition_goals",
+    "method": "GET limit=0",
+    "status": 401,
+    "code": "42501",
+    "message": "permission denied for table nutrition_goals",
+    "interpretation": "Permission/table metadata response only; no member rows requested."
+  },
+  {
+    "table": "nutrition_entries",
+    "method": "GET limit=0",
+    "status": 401,
+    "code": "42501",
+    "message": "permission denied for table nutrition_entries",
+    "interpretation": "Permission/table metadata response only; no member rows requested."
+  },
+  {
+    "table": "member_health_profiles",
+    "method": "GET limit=0",
+    "status": 401,
+    "code": "42501",
+    "message": "permission denied for table member_health_profiles",
+    "interpretation": "Permission/table metadata response only; no member rows requested."
+  },
+  {
+    "table": "member_health_measurements",
+    "method": "GET limit=0",
+    "status": 401,
+    "code": "42501",
+    "message": "permission denied for table member_health_measurements",
+    "interpretation": "Permission/table metadata response only; no member rows requested."
+  },
+  {
+    "path": "/app/soulfuel",
+    "method": "HEAD",
+    "status": 404
+  },
+  {
+    "path": "/app/health",
+    "method": "HEAD",
+    "status": 404
+  },
+  {
+    "path": "/app/classes/beginner-tai-chi-foundations",
+    "method": "HEAD",
+    "status": 200
+  }
+]
