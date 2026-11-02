@@ -3,7 +3,7 @@ import {briskMinutes as brisk,treadmillLevels,phaseAt,accountChangeState} from '
 import {createClient} from 'https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2/+esm';
 const $=id=>document.getElementById(id),db=createClient(window.SOULANOVA_SUPABASE.url,window.SOULANOVA_SUPABASE.publishableKey,{auth:{flowType:'pkce',detectSessionInUrl:true,autoRefreshToken:true,persistSession:true}});
 let saving=false,walkId=crypto.randomUUID(),owner=null,authRevision=0,historyRevision=0;
-let week=0,weekWindowStart=0,elapsed=0,startedAt=0,timer=null,running=false,finished=false,watch=null,miles=0,lastPosition=null,events=new Set(),saved=false,mode='outdoor',treadmillLevel='beginner',manualPhase=null;
+let week=0,weekWindowStart=0,elapsed=0,startedAt=0,timer=null,running=false,finished=false,watch=null,miles=0,lastPosition=null,events=new Set(),saved=false,mode='outdoor',treadmillLevel='beginner',manualPhase=null,gpsOptOutForSession=false,gpsRestartOnForeground=false;
 const accountWritesEnabled=false;
 const cueFiles={start:'start.mp3',brisk:'brisk.mp3',half:'halfway.mp3',cool:'cooldown.mp3',done:'finish.mp3'};let activeCue=null;
 const total=()=>600+brisk[week]*60;
@@ -16,9 +16,9 @@ function weekWindowSize(){return window.matchMedia('(max-width: 680px)').matches
 function clearEnteredMetrics(){for(const id of ['steps','treadmill-distance','treadmill-speed','treadmill-incline','manual-speed','manual-incline'])$(id).value='';}
 function renderGuidance(){
  $('level-panel').hidden=mode!=='treadmill';$('treadmill-options').hidden=mode!=='treadmill';$('gps-control').hidden=mode!=='outdoor';
- $('gps').disabled=mode!=='outdoor'||saving;if(mode!=='outdoor')$('gps').checked=false;
+ $('gps').disabled=mode!=='outdoor'||saving;if(mode==='outdoor')$('gps').checked=!gpsOptOutForSession;else $('gps').checked=false;
  $('guidance-card-title').textContent=mode==='treadmill'?'Treadmill Guidance':'Outdoor Walk';
- $('guidance-card-subtitle').textContent=mode==='treadmill'?`${treadmillLevels[treadmillLevel].label} · optional pace and incline`:'GPS only when you choose it';
+ $('guidance-card-subtitle').textContent=mode==='treadmill'?`${treadmillLevels[treadmillLevel].label} · optional pace and incline`:'GPS starts on Start Walk unless you turn it off';
  const status=phaseAt(week,elapsed),current=status.current,next=status.next;
  if(current){$('current-phase-name').textContent=phaseNames[current];$('current-recommendation').textContent=recommendation(treadmillLevel,current);}
  else{$('current-phase-name').textContent='Completed';$('current-recommendation').textContent='—';}
@@ -60,7 +60,7 @@ function announce(text,key){
  const recover=()=>{if(recovered||activeCue!==cue)return;recovered=true;activeCue=null;fallbackSpeech(text)};
  cue.onerror=recover;cue.play().catch(recover);
 }
-function choose(n){if(running||saving)return;stopNarration();walkId=crypto.randomUUID();week=n;const count=weekWindowSize();if(n<weekWindowStart||n>=weekWindowStart+count)weekWindowStart=Math.max(0,Math.min(brisk.length-count,n-Math.floor(count/2)));elapsed=0;finished=false;saved=false;events.clear();miles=0;lastPosition=null;manualPhase=null;$('gps').checked=false;clearEnteredMetrics();stopGPS();render();}
+function choose(n){if(running||saving)return;stopNarration();walkId=crypto.randomUUID();week=n;const count=weekWindowSize();if(n<weekWindowStart||n>=weekWindowStart+count)weekWindowStart=Math.max(0,Math.min(brisk.length-count,n-Math.floor(count/2)));elapsed=0;finished=false;saved=false;events.clear();miles=0;lastPosition=null;manualPhase=null;gpsOptOutForSession=false;clearEnteredMetrics();stopGPS();render();}
 function render(){
  const duration=Math.round(total()/60),current=phaseAt(week,elapsed).current,progressPercent=Math.round(100*elapsed/total());
  const underway=running||(!finished&&elapsed>0);$('workout-center').classList.toggle('is-before',!underway&&!finished);$('workout-center').classList.toggle('is-active',underway);$('workout-center').classList.toggle('is-complete',finished);
@@ -120,19 +120,20 @@ function tick(){
  render();
 }
 function distance(a,b){const rad=Math.PI/180,dlat=(b.latitude-a.latitude)*rad,dlon=(b.longitude-a.longitude)*rad,x=Math.sin(dlat/2)**2+Math.cos(a.latitude*rad)*Math.cos(b.latitude*rad)*Math.sin(dlon/2)**2;return 3958.7613*2*Math.atan2(Math.sqrt(x),Math.sqrt(1-x))}
-function startGPS(){if(mode!=='outdoor')return;if(!navigator.geolocation){$('message').textContent='GPS unavailable in this browser.';return;}if(watch!==null)return;watch=navigator.geolocation.watchPosition(pos=>{if(!running||mode!=='outdoor')return;const p=pos.coords;if(p.accuracy>60)return;const next={latitude:p.latitude,longitude:p.longitude};if(lastPosition){const delta=distance(lastPosition,next);if(delta<.12&&delta>.003)miles+=delta;}lastPosition=next;render()},e=>{ $('message').textContent='GPS not available: '+e.message;$('gps').checked=false;stopGPS()},{enableHighAccuracy:true,maximumAge:3000,timeout:12000});}
+function startGPS(){if(mode!=='outdoor'||gpsOptOutForSession)return;if(!navigator.geolocation){$('message').textContent='GPS unavailable in this browser. Your walk timer continues without GPS.';return;}if(watch!==null)return;watch=navigator.geolocation.watchPosition(pos=>{if(!running||mode!=='outdoor'||gpsOptOutForSession)return;const p=pos.coords;if(p.accuracy>60)return;const next={latitude:p.latitude,longitude:p.longitude};if(lastPosition){const delta=distance(lastPosition,next);if(delta<.12&&delta>.003)miles+=delta;}lastPosition=next;render()},e=>{ $('message').textContent='GPS not available: '+e.message+' Your walk timer continues.';stopGPS()},{enableHighAccuracy:true,maximumAge:3000,timeout:12000});}
 function stopGPS(){if(watch!==null){navigator.geolocation.clearWatch(watch);watch=null;}lastPosition=null}
-function stopTimer(){if(timer!==null)clearInterval(timer);timer=null;running=false;stopGPS();stopNarration()}
+function stopTimer(){if(timer!==null)clearInterval(timer);timer=null;running=false;gpsRestartOnForeground=false;stopGPS();stopNarration()}
 function finish(){elapsed=total();finished=true;stopTimer();milestone('done','Workout complete! Excellent work. You have finished week '+(week+1)+'.');render();}
-const startWalk=()=>{if(finished||running)return;running=true;startedAt=Date.now()-elapsed*1000;timer=setInterval(tick,500);if(mode==='outdoor'&&$('gps').checked)startGPS();if(!events.has('start'))milestone('start','Begin with five minutes of easy walking to warm up.');render()};
+const startWalk=()=>{if(finished||running)return;running=true;startedAt=Date.now()-elapsed*1000;timer=setInterval(tick,500);if(mode==='outdoor'&&!gpsOptOutForSession)startGPS();if(!events.has('start'))milestone('start','Begin with five minutes of easy walking to warm up.');render()};
 $('start').onclick=startWalk;
 $('pause').onclick=()=>{tick();stopTimer();$('message').textContent='Workout paused.';render()};
 $('resume').onclick=startWalk;
-const resetWalk=()=>{if(saving)return;stopTimer();walkId=crypto.randomUUID();elapsed=0;miles=0;finished=false;saved=false;events.clear();manualPhase=null;clearEnteredMetrics();render()};
+const resetWalk=()=>{if(saving)return;stopTimer();walkId=crypto.randomUUID();elapsed=0;miles=0;finished=false;saved=false;events.clear();manualPhase=null;gpsOptOutForSession=false;$('gps').checked=true;clearEnteredMetrics();render()};
 $('reset').onclick=()=>{if(saving)return;if(!confirm('Reset this walk?'))return;resetWalk()};
 $('start-new').onclick=resetWalk;
-$('gps').onchange=()=>{if($('gps').checked&&running)startGPS();else stopGPS()};
-$('outdoor-mode').onchange=()=>{if(!$('outdoor-mode').checked)return;if(running||elapsed||finished||saving){render();return;}mode='outdoor';manualPhase=null;stopGPS();miles=0;lastPosition=null;$('gps').checked=false;clearEnteredMetrics();render()};
+$('gps').checked=true;
+$('gps').onchange=()=>{if(mode!=='outdoor'||running||elapsed||finished||saving){render();return;}gpsOptOutForSession=!$('gps').checked;stopGPS()};
+$('outdoor-mode').onchange=()=>{if(!$('outdoor-mode').checked)return;if(running||elapsed||finished||saving){render();return;}mode='outdoor';manualPhase=null;stopGPS();miles=0;lastPosition=null;$('gps').checked=!gpsOptOutForSession;clearEnteredMetrics();render()};
 $('treadmill-mode').onchange=()=>{if(!$('treadmill-mode').checked)return;if(running||elapsed||finished||saving){render();return;}mode='treadmill';manualPhase=null;treadmillLevel=$('treadmill-level').value;stopGPS();miles=0;lastPosition=null;$('gps').checked=false;clearEnteredMetrics();render()};
 $('treadmill-level').onchange=()=>{treadmillLevel=$('treadmill-level').value;renderGuidance();};
 $('voice').addEventListener('change',()=>{if(!$('voice').checked)stopNarration();});
@@ -153,7 +154,7 @@ document.querySelector('#week-prev').onclick=()=>{weekWindowStart=Math.max(0,wee
 document.querySelector('#week-next').onclick=()=>{weekWindowStart=Math.min(brisk.length-weekWindowSize(),weekWindowStart+weekWindowSize()-1);renderWeekSelector()};
 window.addEventListener('resize',renderWeekSelector);
 document.querySelectorAll('input[name="level-chip"]').forEach(input=>input.addEventListener('change',()=>{if(!input.checked)return;$('treadmill-level').value=input.value;$('treadmill-level').dispatchEvent(new Event('change'));}));
-document.addEventListener('visibilitychange',()=>{if(!document.hidden&&running)tick()});
+document.addEventListener('visibilitychange',()=>{if(document.hidden){if(running&&mode==='outdoor'&&$('gps').checked){gpsRestartOnForeground=true;stopGPS()}}else if(running){tick();if(gpsRestartOnForeground&&mode==='outdoor'&&$('gps').checked){gpsRestartOnForeground=false;startGPS()}}});
 render();
 
 const historyNumber=n=>Number(n).toLocaleString();
