@@ -68,8 +68,11 @@ function announce(text,key){
 }
 function choose(n){if(running||saving)return;stopNarration();walkId=crypto.randomUUID();week=n;elapsed=0;finished=false;saved=false;events.clear();miles=0;lastPosition=null;manualPhase=null;$('gps').checked=false;clearEnteredMetrics();stopGPS();render();}
 function render(){
- $('session-title').textContent='Week '+(week+1)+' · '+Math.round(total()/60)+' minutes';
+ const duration=Math.round(total()/60);
+ $('session-title').textContent='Week '+(week+1)+' · '+duration+' minutes';
+ $('timer-week-title').textContent='Week '+(week+1)+' walk';$('week-duration').textContent=duration+' MINUTES';
  $('clock').textContent=format(Math.max(0,total()-elapsed));$('progress').style.width=(100*elapsed/total())+'%';
+ $('progress').parentElement.setAttribute('aria-valuenow',String(Math.round(100*elapsed/total())));
  const current=phaseAt(week,elapsed).current;
  if(mode==='treadmill'&&current&&manualPhase&&current!==manualPhase){$('manual-speed').value='';$('manual-incline').value='';}
  if(mode==='treadmill'&&current)manualPhase=current;
@@ -77,9 +80,14 @@ function render(){
  $('position').textContent='5 min warm-up · '+brisk[week]+' min brisk · 5 min cool-down';
  const locked=running||elapsed>0||finished||saving;
  $('outdoor-mode').disabled=locked;$('treadmill-mode').disabled=locked;$('mode-lock-note').hidden=!locked;
- $('start').disabled=running||finished||saving;$('reset').disabled=saving;$('pause').disabled=!running;$('pause').textContent='Pause';$('save').disabled=!accountWritesEnabled||!finished||saved||saving||!owner;$('save').textContent=saving?'Saving…':'Save completed walk to Soulanova';$('save').setAttribute('aria-busy',String(saving));$('save-help').textContent=accountWritesEnabled?(saved?'Walk saved.':finished?'Workout finished. Save your steps and distance.':'Complete the walking timer before saving. '+format(total()-elapsed)+' remaining.'):'Account saving is paused while Supabase validation is pending. Your current entries remain in this browser session.';
+ $('start').disabled=running||finished||saving;$('start').textContent=running?'Walking…':finished?'Walk complete':elapsed?'Resume walk':'Start walk';$('pause').disabled=!running;$('pause').textContent='Pause';$('reset').disabled=saving;$('save').disabled=!accountWritesEnabled||!finished||saved||saving||!owner;$('save').textContent=saving?'Saving…':'Save completed walk';$('save').setAttribute('aria-busy',String(saving));$('save-help').textContent=accountWritesEnabled?(saved?'Walk saved.':finished?'Workout finished. Save your steps and distance.':'Complete the walking timer before saving. '+format(total()-elapsed)+' remaining.'):'Account saving is paused while Supabase validation is pending. Your current entries remain in this browser session.';
+ renderMilestones();
  renderGuidance();renderActuals();
  document.querySelectorAll('#weeks .week').forEach((el,i)=>{el.setAttribute('aria-current',String(i===week));el.querySelector('button').disabled=running||saving;});
+}
+function renderMilestones(){
+ const marks={start:elapsed>0||finished,brisk:elapsed>=300,half:elapsed>=Math.ceil(total()/2),cool:elapsed>=total()-300,done:finished};
+ document.querySelectorAll('#milestone-track [data-milestone]').forEach(el=>el.classList.toggle('done',Boolean(marks[el.dataset.milestone])));
 }
 function milestone(key,text){if(events.has(key))return;events.add(key);announce(text,key)}
 function tick(){
@@ -135,7 +143,8 @@ $('save').onclick=async()=>{if(!accountWritesEnabled){$('message').textContent='
  await insertOnce(db,'soulwalk','soulwalk_sessions',entry);if(revision!==authRevision)return;
  saved=true;$('message').textContent='Walk saved to your account. Refreshing history…';await loadHistory();if(revision===authRevision)$('message').textContent='Walk saved. See your personal walking history below.';
  }catch(e){if(revision===authRevision)$('message').textContent='Could not save walk: '+e.message;}finally{saving=false;render();}};
-const box=$('weeks');brisk.forEach((mins,i)=>{const card=document.createElement('article');card.className='week';card.setAttribute('aria-current',String(i===week));const title=document.createElement('strong');title.textContent='Week '+(i+1)+' · '+(mins+10)+' min';const p=document.createElement('p');p.className='muted';p.textContent='5 min easy + '+mins+' min brisk + 5 min easy';const btn=document.createElement('button');btn.textContent='Choose week '+(i+1);btn.onclick=()=>choose(i);card.append(title,p,btn);box.append(card)});
+const box=$('weeks');brisk.forEach((mins,i)=>{const card=document.createElement('article');card.className='week';card.setAttribute('aria-current',String(i===week));const btn=document.createElement('button');btn.type='button';btn.textContent=String(i+1);btn.setAttribute('aria-label','Choose week '+(i+1)+', '+(mins+10)+' minutes');btn.title='Week '+(i+1)+' · '+(mins+10)+' minutes';btn.onclick=()=>choose(i);card.append(btn);box.append(card)});
+document.querySelectorAll('input[name="level-chip"]').forEach(input=>input.addEventListener('change',()=>{if(!input.checked)return;$('treadmill-level').value=input.value;$('treadmill-level').dispatchEvent(new Event('change'));}));
 document.addEventListener('visibilitychange',()=>{if(!document.hidden&&running)tick()});
 render();
 
@@ -189,13 +198,13 @@ async function loadHistory(){
   if(!rows.length){status.textContent='No saved walks yet. Complete a walk to start your history.';return;}
   status.textContent=truncated?'Showing totals for the latest 20,000 walks.':'Your most recent saved walks:';
   for(const r of rows.slice(0,10)){
-   const item=document.createElement('p');
+   const item=document.createElement('article');item.className='history-entry';
    const when=new Date(r.created_at);
    const date=Number.isFinite(when.getTime())?when.toLocaleDateString():'Unknown date';
    const details=[date,'Week '+r.week_number,Number(r.duration_minutes).toFixed(1)+' min'];
    if(r.steps!==null)details.push(historyNumber(r.steps)+' steps');
    if(r.distance_miles!==null)details.push(Number(r.distance_miles).toFixed(2)+' mi');
-   item.textContent=details.join(' · ');
+   const title=document.createElement('strong');title.textContent='Week '+r.week_number+' walk';const meta=document.createElement('span');meta.textContent=details.join(' · ');item.append(title,meta);
    list.append(item);
   }
  }catch(e){
@@ -203,7 +212,7 @@ async function loadHistory(){
  }finally{if(revision===historyRevision)refresh.disabled=false;}
 }
 function clearHistory(){for(const id of ['history-count','history-steps','history-miles','history-weeks'])$(id).textContent='—';$('history-list').replaceChildren();$('week-progress').replaceChildren();}
-function changeMember(user){const next=user?.id||null,reset=accountChangeState(owner,next,week);if(reset){authRevision++;historyRevision++;owner=reset.owner;stopTimer();walkId=crypto.randomUUID();week=reset.week;elapsed=reset.elapsed;finished=reset.finished;saved=reset.saved;miles=reset.gpsMiles;events=new Set(reset.events);mode=reset.mode;treadmillLevel=reset.level;manualPhase=null;lastPosition=null;$('outdoor-mode').checked=true;$('treadmill-mode').checked=false;$('treadmill-level').value=reset.level;clearEnteredMetrics();$('gps').checked=false;clearHistory();render();}if(!next)$('history-status').textContent='Sign in to view your walking history.';}
+function changeMember(user){const next=user?.id||null,reset=accountChangeState(owner,next,week);if(reset){authRevision++;historyRevision++;owner=reset.owner;stopTimer();walkId=crypto.randomUUID();week=reset.week;elapsed=reset.elapsed;finished=reset.finished;saved=reset.saved;miles=reset.gpsMiles;events=new Set(reset.events);mode=reset.mode;treadmillLevel=reset.level;manualPhase=null;lastPosition=null;$('outdoor-mode').checked=true;$('treadmill-mode').checked=false;$('treadmill-level').value=reset.level;document.querySelectorAll('input[name="level-chip"]').forEach(input=>input.checked=input.value===reset.level);clearEnteredMetrics();$('gps').checked=false;clearHistory();render();}if(!next)$('history-status').textContent='Sign in to view your walking history.';}
 db.auth.onAuthStateChange((_event,session)=>{changeMember(session?.user);setTimeout(()=>loadHistory(),0);});
 $('history-refresh').onclick=loadHistory;
 requireMember(db).then(user=>{changeMember(user);return loadHistory();}).catch(e=>{$('history-status').textContent=e.message;});

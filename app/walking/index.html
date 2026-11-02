@@ -3,72 +3,129 @@
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width,initial-scale=1">
-  <meta name="theme-color" content="#0b4b53">
+  <meta name="theme-color" content="#164e49">
   <title>SoulWalk — 12-Week Walking Program | Soulanova</title>
   <link rel="stylesheet" href="/app/soulfuel/soulfuel.css">
   <style>
-    .walk-wrap{max-width:970px;margin:auto}.walk-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(230px,1fr));gap:12px}.week{background:#fff;border:1px solid #dce5dd;border-radius:13px;padding:14px}.week[aria-current=true]{border:2px solid #09766d}.week button{margin-top:10px}.clock{font-size:clamp(48px,11vw,86px);font-weight:750;font-variant-numeric:tabular-nums;text-align:center;color:#0b4b53}.phase{text-align:center;font-size:24px;font-weight:700}.progress{height:12px;border-radius:12px;background:#dce5dd;overflow:hidden}.progress div{background:#168d80;height:100%;width:0}.controls{display:flex;gap:10px;flex-wrap:wrap}.controls button{flex:1;min-width:100px}.stats{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:12px}.stats article{background:#f1f7f4;padding:13px;border-radius:10px}.stats strong{display:block;font-size:25px}#message{white-space:pre-wrap}#week-progress progress{appearance:none;-webkit-appearance:none;display:block;width:100%;height:12px;border:0;border-radius:12px;overflow:hidden;background:#dce5dd}#week-progress progress::-webkit-progress-bar{background:#dce5dd;border-radius:12px}#week-progress progress::-webkit-progress-value{background:#168d80;border-radius:12px}#week-progress progress::-moz-progress-bar{background:#168d80;border-radius:12px}.muted{color:#667a78;font-size:13px}.mode-choice,.level-choice{display:flex;flex-wrap:wrap;gap:12px;padding:0;border:0;margin:16px 0}.mode-choice label,.level-choice label{display:flex;align-items:center;gap:8px;border:1px solid #dce5dd;background:#fff;border-radius:10px;padding:12px}.mode-choice input,.level-choice input{width:auto}.treadmill-box{margin:16px 0;padding:16px;border:1px solid #dce5dd;border-radius:14px;background:#f8faf7}.phase-grid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:10px}.phase-card{padding:12px;border-radius:10px;background:#fff;border:1px solid #e3e9e3}.phase-card small{display:block;color:#667a78}.phase-card strong{font-size:16px}.entry-grid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:12px}.entry-grid label{margin:0}.entry-grid input{margin-top:6px}.recommendation-note{margin:8px 0 14px}.disabled-note{margin:6px 0;color:#667a78;font-size:12px}@media(max-width:600px){.walk-wrap{padding:0 12px}.stats{grid-template-columns:repeat(2,minmax(0,1fr))}.stats article{min-width:0}.stats strong{overflow-wrap:anywhere}.controls button{min-width:0}#week-progress{grid-template-columns:repeat(auto-fit,minmax(min(100%,230px),1fr))}.phase-grid,.entry-grid{grid-template-columns:1fr}.mode-choice{display:grid;grid-template-columns:1fr}.mode-choice label{min-height:44px}}
+    :root{--walk-ink:#183d39;--walk-deep:#164e49;--walk-teal:#287d70;--walk-sage:#9bb39a;--walk-pale:#e5eee6;--walk-cream:#f6f3e9;--walk-line:#dbe5da;--walk-muted:#71817a;--walk-gold:#e6bc6d;--walk-white:#fff}
+    body{background:var(--walk-cream);color:var(--walk-ink);font-family:'DM Sans',Arial,sans-serif}
+    .walk-bar{height:74px;display:flex;align-items:center;justify-content:space-between;gap:16px;padding:10px max(22px,calc((100vw - 1240px)/2));background:#fff;border-bottom:1px solid var(--walk-line)}
+    .walk-brand{display:flex;align-items:center;gap:11px;text-decoration:none;color:var(--walk-deep)}.walk-brand>span{display:block;margin-left:0;font-size:inherit;opacity:1}.walk-brand img{width:45px;height:45px;object-fit:contain}.walk-brand b{font:600 24px 'Playfair Display',Georgia,serif}.walk-brand small{display:block;margin-top:1px;color:#718a79;font-size:9px;font-weight:700;letter-spacing:1.6px;text-transform:uppercase}
+    .bar-right{display:flex;align-items:center;gap:18px}.bar-right a{font-size:13px;text-decoration:none;color:var(--walk-deep)}.preview-pill{display:inline-flex;padding:7px 12px;border-radius:30px;background:#f3eddb;color:#7d6c47;font-size:10px;font-weight:700;letter-spacing:1px;text-transform:uppercase}
+    .walk-shell{max-width:1240px;margin:auto;padding:26px 28px 72px}
+    .walk-hero{position:relative;min-height:248px;overflow:hidden;border-radius:28px;background:#365d50;box-shadow:0 15px 38px #23473b20}.walk-hero img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;object-position:center 38%}.walk-hero:after{content:"";position:absolute;inset:0;background:linear-gradient(90deg,#143e39ef 0%,#1c5145cc 39%,#19433822 78%),linear-gradient(0deg,#173d3522,#173d3522)}
+    .hero-copy{position:relative;z-index:1;max-width:610px;padding:31px 38px;color:#fff}.hero-kicker{display:flex;align-items:center;gap:8px;color:#e6cf9e;font-size:10px;font-weight:700;letter-spacing:1.8px;text-transform:uppercase}.hero-kicker:before{content:"✦";font-size:13px}.hero-copy h1{margin:12px 0 7px;font:500 clamp(34px,4vw,50px)/1.08 'Playfair Display',Georgia,serif;letter-spacing:-.5px}.hero-copy p{max-width:480px;margin:0;color:#eff4ed;font-size:14px;line-height:1.6}.hero-tag{display:inline-flex;gap:8px;align-items:center;margin-top:18px;padding:8px 12px;border:1px solid #ffffff5c;border-radius:25px;background:#ffffff18;color:white;font-size:11px}
+    .preview-note{margin:14px 2px 0;padding:10px 14px;border:1px solid #e6dcbf;border-radius:12px;background:#fffaf0;color:#70603f;font-size:12px}
+    .program-grid{display:grid;grid-template-columns:minmax(0,1.12fr) minmax(350px,.88fr);align-items:start;gap:18px;margin-top:18px}.setup-card,.timer-card,.history-card{border:1px solid var(--walk-line);border-radius:22px;background:#fff;box-shadow:0 8px 24px #294b3b0a}.setup-card{padding:21px}.timer-card{position:sticky;top:18px;padding:22px;background:linear-gradient(155deg,#fff 10%,#f2f6ef 100%)}
+    .section-kicker{margin:0 0 6px;color:var(--walk-teal);font-size:10px;font-weight:700;letter-spacing:1.6px;text-transform:uppercase}.card-title{margin:0;color:var(--walk-deep);font:500 25px 'Playfair Display',Georgia,serif}.card-subtitle{margin:6px 0 15px;color:var(--walk-muted);font-size:12px;line-height:1.5}
+    .week-heading{display:flex;align-items:baseline;justify-content:space-between;gap:10px;margin-bottom:9px}.week-heading strong{font:500 17px 'Playfair Display',Georgia,serif;color:var(--walk-deep)}.week-heading span{color:var(--walk-muted);font-size:11px}
+    .week-grid{display:grid;grid-template-columns:repeat(6,minmax(0,1fr));gap:6px}.week{min-width:0;padding:0;background:transparent;border:0}.week button{width:100%;height:34px;margin:0;border:1px solid var(--walk-line);border-radius:10px;background:#fafbf7;color:#547069;font-size:11px;font-weight:700;transition:.15s}.week button:hover{border-color:#8da997;background:#edf4ed}.week[aria-current=true] button{border-color:var(--walk-deep);background:var(--walk-deep);color:#fff;box-shadow:0 3px 8px #164e492b}.week button:disabled{opacity:.55}
+    .divider{height:1px;margin:17px 0;background:#e8eee6}.choice-label{display:block;margin:0 0 8px;color:#527168;font-size:11px;font-weight:700;letter-spacing:.5px}.mode-choice{display:grid;grid-template-columns:1fr 1fr;gap:9px;margin:0;padding:0;border:0}.mode-choice legend{position:absolute;width:1px;height:1px;padding:0;margin:-1px;overflow:hidden;clip:rect(0,0,0,0);white-space:nowrap;border:0}.mode-choice label{display:flex;align-items:center;gap:9px;min-width:0;padding:11px;border:1px solid var(--walk-line);border-radius:13px;background:#fbfcf9;color:var(--walk-deep);font-size:12px;font-weight:700;cursor:pointer}.mode-choice label:has(input:checked){border-color:var(--walk-teal);background:#eaf2ec;box-shadow:inset 0 0 0 1px var(--walk-teal)}.mode-choice input{flex:0 0 auto;width:16px;height:16px;margin:0;accent-color:var(--walk-teal)}.mode-choice label .mode-name{display:block;margin-right:auto;color:var(--walk-deep);font-size:12px;font-weight:700;text-align:left}.mode-choice label .mode-hint{display:block;margin-left:auto;color:var(--walk-muted);font-size:9px;font-weight:500;text-align:right}
+    .level-choice{display:flex;gap:7px;padding:0;margin:0;border:0}.level-choice legend{position:absolute;width:1px;height:1px;padding:0;margin:-1px;overflow:hidden;clip:rect(0,0,0,0);white-space:nowrap;border:0}.level-chip{position:relative;flex:1;min-width:0}.level-chip input{position:absolute;opacity:0;inset:0;width:100%;height:100%;cursor:pointer}.level-chip span{display:block;padding:9px 7px;border:1px solid var(--walk-line);border-radius:22px;background:#fbfcf9;color:#55736b;text-align:center;font-size:11px;font-weight:700;cursor:pointer}.level-chip input:checked+span{border-color:var(--walk-deep);background:var(--walk-deep);color:#fff}.level-chip input:focus-visible+span{outline:3px solid #e5c675;outline-offset:2px}.visually-hidden{position:absolute!important;width:1px;height:1px;padding:0;margin:-1px;overflow:hidden;clip:rect(0,0,0,0);white-space:nowrap;border:0}
+    #treadmill-options[hidden]{display:none}.treadmill-guidance{margin-top:13px;padding:12px;border-radius:15px;background:#edf3eb}.guidance-head{display:flex;align-items:baseline;justify-content:space-between;gap:8px}.guidance-head h3{margin:0;color:var(--walk-deep);font:500 17px 'Playfair Display',Georgia,serif}.guidance-head span{color:var(--walk-muted);font-size:10px}.phase-grid{display:grid;grid-template-columns:1fr 1fr;gap:8px;margin-top:9px}.phase-card{min-width:0;padding:10px;border:1px solid #d8e4d8;border-radius:12px;background:#fff}.phase-card small{display:block;color:var(--walk-muted);font-size:9px}.phase-card strong{display:block;margin-top:5px;color:var(--walk-deep);font-size:12px;line-height:1.35}.recommendation-note{margin:7px 0 0;color:var(--walk-muted);font-size:10px;line-height:1.4}
+    .details-grid{display:grid;grid-template-columns:1fr 1fr;gap:8px;margin-top:10px}.details-grid details{min-width:0;border:1px solid var(--walk-line);border-radius:12px;background:#fff}.details-grid summary{padding:10px 11px;color:var(--walk-deep);font-size:11px;font-weight:700;cursor:pointer}.details-body{padding:0 11px 11px}.entry-grid{display:grid;grid-template-columns:1fr 1fr;gap:9px}.entry-grid label{margin:0;color:#536e65;font-size:10px;line-height:1.35}.entry-grid input{width:100%;min-width:0;margin-top:5px;padding:8px;border:1px solid var(--walk-line);border-radius:9px;background:#fcfdf9;color:var(--walk-deep);font:inherit;font-size:12px}.machine-note{margin:9px 0 0;color:var(--walk-muted);font-size:10px;line-height:1.4}
+    .timer-card .week-name{display:flex;justify-content:space-between;align-items:center;gap:8px}.timer-card .week-name h2{margin:0;color:var(--walk-deep);font:500 21px 'Playfair Display',Georgia,serif}.week-duration{padding:6px 9px;border-radius:20px;background:#e9f0e8;color:#547166;font-size:10px;font-weight:700;white-space:nowrap}.phase{margin:20px 0 0;color:var(--walk-teal);font-size:12px;font-weight:700;letter-spacing:1px;text-align:center;text-transform:uppercase}.clock{margin:2px 0 9px;color:var(--walk-deep);font:500 clamp(62px,8vw,82px)/1 'DM Sans',Arial,sans-serif;font-variant-numeric:tabular-nums;letter-spacing:-3px;text-align:center}.progress{height:9px;overflow:hidden;border-radius:9px;background:#e2e9df}.progress div{height:100%;width:0;border-radius:inherit;background:linear-gradient(90deg,#438e7f,#b0c391);transition:width .3s ease}.milestone-track{display:grid;grid-template-columns:repeat(5,1fr);gap:5px;margin-top:11px}.milestone-step{position:relative;padding-top:15px;color:#98a69d;font-size:8px;font-weight:700;line-height:1.2;text-align:center}.milestone-step:before{position:absolute;top:0;left:50%;width:8px;height:8px;transform:translateX(-50%);border:2px solid #cfdacf;border-radius:50%;background:#fff;content:""}.milestone-step.done{color:var(--walk-teal)}.milestone-step.done:before{border-color:var(--walk-teal);background:var(--walk-teal);box-shadow:0 0 0 3px #dcebe2}
+    #position{margin:11px 0 15px;color:var(--walk-muted);font-size:11px;text-align:center}.controls{display:grid;grid-template-columns:1.2fr 1fr 42px;gap:8px}.controls button{min-width:0;min-height:44px;margin:0;border:0;border-radius:13px;font-size:12px;font-weight:700}.controls #start{background:var(--walk-deep);color:#fff}.controls #pause{border:1px solid #c9d9cc;background:#e9f1e9;color:var(--walk-deep)}.controls #reset{border:1px solid #d7e1d6;background:#fff;color:#648075;font-size:18px}.controls button:disabled{cursor:not-allowed;opacity:.45}#message{min-height:18px;margin:11px 0;color:#537369;font-size:11px;line-height:1.5;text-align:center;white-space:pre-wrap}
+    .timer-options{display:flex;align-items:center;justify-content:center;gap:17px;flex-wrap:wrap;margin:5px 0 0}.timer-options label{display:flex;align-items:center;gap:6px;color:#547067;font-size:10px}.timer-options input{accent-color:var(--walk-teal)}.timer-options select{max-width:155px;padding:6px 24px 6px 8px;border:1px solid var(--walk-line);border-radius:9px;background:#fff;color:var(--walk-deep);font-size:10px}.gps-option[hidden]{display:none}
+    .metric-row{display:grid;grid-template-columns:1fr 1fr;gap:8px;margin-top:15px}.metric{padding:10px;border:1px solid #e1e9df;border-radius:13px;background:#fff}.metric span{display:block;color:var(--walk-muted);font-size:9px}.metric strong{display:block;margin-top:3px;color:var(--walk-deep);font:500 20px 'Playfair Display',Georgia,serif}.metric small{color:#86958c;font-size:9px}.actual-summary{min-height:14px;margin:8px 0 0;color:#74867b;font-size:9px;line-height:1.4;text-align:center}.save-row{margin-top:12px;text-align:center}.save-row button{width:100%;min-height:38px;border:1px solid #d8e1d6;border-radius:12px;background:#edf1e8;color:#74877b;font-size:11px;font-weight:700}.save-row button:disabled{cursor:not-allowed}.save-row p{margin:6px 0 0;color:#8a9286;font-size:9px;line-height:1.4}
+    .history-section{margin-top:20px;padding:22px;border-radius:22px;background:#e9efe6}.history-head{display:flex;justify-content:space-between;align-items:end;gap:12px;margin-bottom:14px}.history-head h2{margin:0;color:var(--walk-deep);font:500 25px 'Playfair Display',Georgia,serif}.history-head p{margin:5px 0 0;color:var(--walk-muted);font-size:11px}.history-summary{display:grid;grid-template-columns:repeat(4,1fr);gap:9px}.history-summary article{padding:12px;border:1px solid #dbe5d9;border-radius:14px;background:#fff}.history-summary span{display:block;color:var(--walk-muted);font-size:9px}.history-summary strong{display:block;margin:5px 0;color:var(--walk-deep);font:500 23px 'Playfair Display',Georgia,serif}.history-summary small{color:#87958b;font-size:9px}.progress-title{display:flex;justify-content:space-between;align-items:baseline;gap:8px;margin:19px 0 9px}.progress-title h3{margin:0;color:var(--walk-deep);font:500 18px 'Playfair Display',Georgia,serif}.progress-title span{color:var(--walk-muted);font-size:9px}.week-progress-grid{display:grid;grid-template-columns:repeat(6,minmax(0,1fr));gap:7px}.week-progress-grid .week{padding:9px;border:1px solid #d9e4d7;border-radius:12px;background:#fff}.week-progress-grid .week strong{display:block;color:var(--walk-deep);font-size:10px}.week-progress-grid progress{width:100%;height:5px;margin:7px 0 3px;appearance:none;border:0;border-radius:8px;overflow:hidden;background:#e4ebe1}.week-progress-grid progress::-webkit-progress-bar{border-radius:8px;background:#e4ebe1}.week-progress-grid progress::-webkit-progress-value{border-radius:8px;background:#6d9d7b}.week-progress-grid progress::-moz-progress-bar{border-radius:8px;background:#6d9d7b}.week-progress-grid .week p{margin:0;color:#87958b;font-size:8px}.history-list{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:8px;margin-top:12px}.history-entry{padding:12px 14px;border:1px solid #dce5d9;border-radius:13px;background:#fff}.history-entry strong{display:block;color:var(--walk-deep);font:500 15px 'Playfair Display',Georgia,serif}.history-entry span{display:block;margin-top:5px;color:var(--walk-muted);font-size:10px;line-height:1.45}.history-status{margin:12px 0 0;color:#71847a;font-size:10px;line-height:1.5}.history-actions{display:flex;justify-content:space-between;align-items:center;gap:12px;margin-top:10px}.history-actions button{padding:8px 12px;border:1px solid #c7d8ca;border-radius:22px;background:#fff;color:var(--walk-deep);font-size:10px;font-weight:700}.program-guidance{margin-top:16px;color:#859188;font-size:10px;line-height:1.5}
+    @media(max-width:900px){.walk-shell{padding:20px 18px 55px}.program-grid{grid-template-columns:minmax(0,1fr) minmax(320px,.9fr);gap:12px}.setup-card,.timer-card{padding:17px}.week-grid{grid-template-columns:repeat(4,minmax(0,1fr))}.history-summary{grid-template-columns:repeat(2,1fr)}.week-progress-grid{grid-template-columns:repeat(4,minmax(0,1fr))}}
+    @media(max-width:680px){.walk-bar{height:62px;padding:8px 15px;flex-wrap:nowrap}.walk-bar .bar-right .preview-pill{display:none}.walk-brand img{width:38px;height:38px}.walk-brand b{font-size:20px}.bar-right{gap:10px}.bar-right a{font-size:11px}.preview-pill{padding:6px 8px;font-size:8px}.walk-shell{padding:12px 12px 42px}.walk-hero{min-height:190px;border-radius:20px}.walk-hero img{object-position:58% 36%}.walk-hero:after{background:linear-gradient(90deg,#143e39ef 0%,#1c5145bd 52%,#19433817 100%)}.hero-copy{padding:23px 20px}.hero-copy h1{max-width:310px;font-size:36px}.hero-copy p{max-width:310px;font-size:12px}.hero-tag{margin-top:12px;font-size:9px}.preview-note{font-size:10px}.program-grid{grid-template-columns:minmax(0,1fr);margin-top:11px}.setup-card{grid-row:1;padding:16px}.timer-card{position:static;grid-row:2;padding:18px}.timer-card .week-name h2{font-size:20px}.clock{font-size:68px}.history-section{margin-top:12px;padding:17px}.history-head{align-items:start;flex-direction:column}.history-head h2{font-size:22px}.week-grid{grid-template-columns:repeat(6,minmax(0,1fr))}.week button{height:32px}.mode-choice label{padding:9px 8px}.mode-choice label .mode-name{font-size:10px}.mode-choice label .mode-hint{font-size:8px}.details-grid{grid-template-columns:1fr}.week-progress-grid{grid-template-columns:repeat(3,minmax(0,1fr))}.history-list{grid-template-columns:1fr}.progress-title span{font-size:8px}.controls{grid-template-columns:1.2fr 1fr 42px}.metric-row{margin-top:12px}}
+    @media(prefers-reduced-motion:reduce){*,*:before,*:after{scroll-behavior:auto!important;transition:none!important}}
   </style>
 </head>
 <body>
-<header><a href="/app/">← Workouts</a><strong>✺ SoulWalk</strong><span>Low-Impact Cardio</span></header>
-<aside role="note" style="padding:16px;background:#fff5d9;color:#473b1f">Member preview · Explore the controls and view your existing history. Saving is temporarily unavailable. <a href="/app/?mode=signin#home">Your dashboard</a></aside>
-<main class="walk-wrap">
-  <div class="heading"><div><small>SOULANOVA · BEGINNER CARDIO</small><h1>12-Week Walking Journey</h1><p>Five-minute warm-up, gradually increasing brisk walk, and five-minute cool-down.</p></div></div>
-  <p class="muted">Walk at a comfortable level; during brisk walking you should still be able to talk. Aim for five days per week, progress only when comfortable, and consult a healthcare professional before starting if you have significant health concerns or have been inactive.</p>
-  <section class="panel"><h2>Choose your week</h2><div id="weeks" class="walk-grid"></div></section>
-  <section class="panel">
-    <h2 id="session-title">Week 1 · 15 minutes</h2>
-    <fieldset class="mode-choice" id="mode-choice"><legend>Choose your walk</legend>
-      <label><input type="radio" name="walk-mode" id="outdoor-mode" value="outdoor" checked> Outdoor Walk <span>(GPS when available)</span></label>
-      <label><input type="radio" name="walk-mode" id="treadmill-mode" value="treadmill"> Treadmill Walk <span>(no GPS)</span></label>
-    </fieldset>
-    <p class="disabled-note" id="mode-lock-note" hidden>Reset this walk before changing its mode.</p>
-    <div id="treadmill-options" hidden>
-      <label>Optional treadmill guidance level
-        <select id="treadmill-level"><option value="beginner">Beginner</option><option value="intermediate">Intermediate</option><option value="advanced">Advanced</option></select>
-      </label>
-      <div class="treadmill-box" aria-label="Optional treadmill pace recommendations">
-        <h3>Optional speed and incline guidance</h3>
-        <p class="muted recommendation-note">Suggestions only—not prescriptions. Choose a comfortable setting and adjust or stop as needed. Soulanova never controls the treadmill.</p>
-        <div class="phase-grid">
-          <article class="phase-card"><small>Current phase · <span id="current-phase-name">Warm-up</span></small><strong id="current-recommendation">1.5–2.0 mph · 0% incline</strong></article>
-          <article class="phase-card"><small>Up next · <span id="next-phase-name">Steady</span></small><strong id="next-recommendation">2.0–2.8 mph · 0–1% incline</strong></article>
+  <header class="walk-bar">
+    <a class="walk-brand" href="/app/" aria-label="Soulanova member home"><img src="/assets/soulanova-logo.png" alt=""><span><b>SoulWalk</b><small>Soulanova wellness</small></span></a>
+    <div class="bar-right"><span class="preview-pill">Member preview</span><a href="/app/?mode=signin#home">Your account ↗</a></div>
+  </header>
+  <main class="walk-shell">
+    <section class="walk-hero" aria-labelledby="hero-title">
+      <img src="/app/images/workouts/cardio.jpg" alt="A woman walking in a bright Soulanova wellness studio beside green trees" fetchpriority="high">
+      <div class="hero-copy"><div class="hero-kicker">SOULANOVA · 12-WEEK WALKING JOURNEY</div><h1 id="hero-title">Find your rhythm.<br>Feel better, one walk at a time.</h1><p>A gentle, progressive plan with space to move at your own pace—outside or on your treadmill.</p><span class="hero-tag">✦ &nbsp; Low-impact cardio · Beginner friendly</span></div>
+    </section>
+    <aside class="preview-note" role="note">Explore the program and your existing history. Walk saving is temporarily paused while account validation is completed.</aside>
+
+    <div class="program-grid">
+      <section class="setup-card" aria-labelledby="setup-title">
+        <p class="section-kicker">Your plan</p><h2 class="card-title" id="setup-title">Make this walk yours</h2><p class="card-subtitle">Choose a week and walking style. Move at a comfortable pace and adjust whenever you need.</p>
+        <div class="week-heading"><strong>12-week program</strong><span id="session-title">Week 1 · 15 minutes</span></div>
+        <div id="weeks" class="week-grid" aria-label="Choose a program week"></div>
+        <div class="divider"></div>
+        <label class="choice-label">WALKING MODE</label>
+        <fieldset class="mode-choice" id="mode-choice"><legend>Choose your walk</legend>
+          <label><input type="radio" name="walk-mode" id="outdoor-mode" value="outdoor" checked><span class="mode-name">Outdoor</span><span class="mode-hint">GPS if available</span></label>
+          <label><input type="radio" name="walk-mode" id="treadmill-mode" value="treadmill"><span class="mode-name">Treadmill</span><span class="mode-hint">No GPS</span></label>
+        </fieldset>
+        <p class="muted disabled-note" id="mode-lock-note" hidden>Reset this walk before changing its mode.</p>
+        <div id="treadmill-options" hidden>
+          <div class="divider"></div>
+          <label class="choice-label" for="treadmill-level">YOUR COMFORT LEVEL</label>
+          <fieldset class="level-choice" aria-label="Treadmill guidance level">
+            <legend>Choose an optional guidance level</legend>
+            <label class="level-chip"><input type="radio" name="level-chip" value="beginner" checked><span>Beginner</span></label>
+            <label class="level-chip"><input type="radio" name="level-chip" value="intermediate"><span>Intermediate</span></label>
+            <label class="level-chip"><input type="radio" name="level-chip" value="advanced"><span>Advanced</span></label>
+          </fieldset>
+          <select id="treadmill-level" class="visually-hidden" tabindex="-1" aria-hidden="true"><option value="beginner">Beginner</option><option value="intermediate">Intermediate</option><option value="advanced">Advanced</option></select>
+          <div class="treadmill-guidance" aria-label="Optional treadmill pace recommendations">
+            <div class="guidance-head"><h3>Gentle pace guidance</h3><span>Suggestion only</span></div>
+            <div class="phase-grid">
+              <article class="phase-card"><small>Now · <span id="current-phase-name">Warm-up</span></small><strong id="current-recommendation">1.5–2.0 mph · 0% incline</strong></article>
+              <article class="phase-card"><small>Next · <span id="next-phase-name">Steady</span></small><strong id="next-recommendation">2.0–2.8 mph · 0–1% incline</strong></article>
+            </div>
+            <p class="recommendation-note">Optional ranges, not prescriptions. Change the machine yourself; stop or adjust to comfort. Soulanova never controls treadmill equipment.</p>
+          </div>
+          <div class="details-grid">
+            <details><summary>My manual settings</summary><div class="details-body"><div class="entry-grid">
+              <label>Your speed setting (mph)<input type="number" id="manual-speed" min="0" max="15" step="0.1" inputmode="decimal" placeholder="Set on treadmill"></label>
+              <label>Your incline setting (%)<input type="number" id="manual-incline" min="0" max="20" step="0.5" inputmode="decimal" placeholder="Set on treadmill"></label>
+            </div><p class="machine-note">These are reminders only. You set the treadmill yourself.</p></div></details>
+            <details><summary>Enter actual readings</summary><div class="details-body"><p class="machine-note">Use values shown by your treadmill. These are actual entries, not GPS estimates, and remain on this page while saving is paused.</p><div class="entry-grid">
+              <label>Actual distance (mi)<input type="number" id="treadmill-distance" min="0" max="100" step="0.01" inputmode="decimal" placeholder="0.00"></label>
+              <label>Average speed (mph)<input type="number" id="treadmill-speed" min="0" max="15" step="0.1" inputmode="decimal" placeholder="Optional"></label>
+              <label>Average incline (%)<input type="number" id="treadmill-incline" min="0" max="20" step="0.5" inputmode="decimal" placeholder="Optional"></label>
+              <label>Actual steps<input type="number" id="steps" min="0" max="150000" step="1" inputmode="numeric" placeholder="Optional"></label>
+            </div></div></details>
+          </div>
         </div>
-        <div class="entry-grid" style="margin-top:14px">
-          <label>Your manual speed setting for this phase (mph)<input type="number" id="manual-speed" min="0" max="15" step="0.1" inputmode="decimal" placeholder="Set it on the treadmill"></label>
-          <label>Your manual incline setting for this phase (%)<input type="number" id="manual-incline" min="0" max="20" step="0.5" inputmode="decimal" placeholder="Set it on the treadmill"></label>
+        <div class="divider"></div>
+        <div class="timer-options">
+          <label id="gps-control" class="gps-option"><input type="checkbox" id="gps"> Outdoor GPS</label>
+          <label><input type="checkbox" id="voice" checked> Voice cues</label>
+          <label class="visually-hidden" for="voice-choice">Coaching voice</label>
+          <select id="voice-choice"><option value="recorded">Recorded coach</option></select>
         </div>
-        <p class="muted">These fields are reminders for you only. Set the machine yourself; values are never sent to treadmill hardware.</p>
-      </div>
-      <div class="treadmill-box">
-        <h3>Actual treadmill readings · optional</h3>
-        <p class="muted">Enter the session’s actual average speed and incline and the distance shown by the treadmill. These are actual readings you enter—not GPS estimates. They stay in this browser session while account saving is disabled.</p>
-        <div class="entry-grid">
-          <label>Actual treadmill distance (miles)<input type="number" id="treadmill-distance" min="0" max="100" step="0.01" inputmode="decimal" placeholder="For example, 1.25"></label>
-          <label>Actual average speed (mph)<input type="number" id="treadmill-speed" min="0" max="15" step="0.1" inputmode="decimal" placeholder="Optional"></label>
-          <label>Actual average incline (%)<input type="number" id="treadmill-incline" min="0" max="20" step="0.5" inputmode="decimal" placeholder="Optional"></label>
-          <label>Actual steps (optional)<input type="number" id="steps" min="0" max="150000" step="1" inputmode="numeric" placeholder="From your watch or treadmill"></label>
+        <p class="machine-note">Outdoor GPS is an estimate when enabled. Treadmill distance comes only from your entered treadmill reading. Existing approved coaching cues and timing are unchanged.</p>
+      </section>
+
+      <section class="timer-card" aria-label="Walking session timer">
+        <div class="week-name"><h2 id="timer-week-title">Week 1 walk</h2><span class="week-duration" id="week-duration">15 MINUTES</span></div>
+        <div id="phase" class="phase">Ready when you are</div><div class="clock" id="clock" aria-live="off">15:00</div>
+        <div class="progress" role="progressbar" aria-label="Walk progress" aria-valuemin="0" aria-valuemax="100" aria-valuenow="0"><div id="progress"></div></div>
+        <div class="milestone-track" id="milestone-track" aria-label="Walk milestones">
+          <div class="milestone-step" data-milestone="start">Begin</div><div class="milestone-step" data-milestone="brisk">Warm-up</div><div class="milestone-step" data-milestone="half">Halfway</div><div class="milestone-step" data-milestone="cool">Cool-down</div><div class="milestone-step" data-milestone="done">Finish</div>
         </div>
-      </div>
+        <p id="position">5 min warm-up · 5 min brisk · 5 min cool-down</p>
+        <div class="controls"><button id="start">Start walk</button><button id="pause" disabled>Pause</button><button id="reset" type="button" aria-label="Reset walk" title="Reset walk">↺</button></div>
+        <p id="message" role="status" aria-live="polite"></p>
+        <div class="metric-row"><article class="metric"><span>Distance</span><strong id="miles">—</strong><small id="distance-note">GPS estimate · outdoors</small></article><article class="metric"><span>Steps</span><strong id="steps-display">—</strong><small>User-entered reading</small></article></div>
+        <p id="actual-summary" class="actual-summary" aria-live="polite"></p>
+        <div class="save-row"><button id="save" disabled>Save completed walk</button><p id="save-help" role="status">Saving is paused pending account validation.</p></div>
+      </section>
     </div>
-    <div id="phase" class="phase">Ready to walk</div><div class="clock" id="clock">15:00</div><div class="progress"><div id="progress"></div></div>
-    <p id="position" class="muted">5 min warm-up · 5 min brisk · 5 min cool-down</p>
-    <div class="controls"><button id="start">Start walk</button><button id="pause" disabled>Pause</button><button id="reset" type="button">Reset</button></div>
-    <p id="message" role="status" aria-live="polite"></p>
-    <div class="two"><label id="gps-control"><input type="checkbox" id="gps"> Track outdoor GPS distance (permission required)</label><label><input type="checkbox" id="voice" checked> Spoken pace and milestone cues</label></div>
-    <label>Coaching voice<select id="voice-choice"><option value="recorded">Serene · Recorded female coach</option></select></label>
-    <p class="muted">Voice options depend on your device. Choose an available voice or turn speech off. Existing approved phase cues and milestone timing are unchanged.</p>
-    <h3>Your music</h3><p class="muted">You can play your own music in another app. Soulanova speaks pace cues when supported, but cannot guarantee ducking or interrupting audio from Spotify or Apple Music, especially when the phone is locked or in the background.</p>
-    <p><a href="https://music.apple.com/" target="_blank" rel="noopener noreferrer">Open Apple Music</a> · <a href="https://open.spotify.com/" target="_blank" rel="noopener noreferrer">Open Spotify</a></p>
-    <div class="stats"><article>Distance <strong id="miles">—</strong><small id="distance-note">GPS estimate · outdoors</small></article><article>Steps <strong id="steps-display">—</strong><small>User-entered reading</small></article></div>
-    <p id="actual-summary" class="muted" aria-live="polite"></p>
-    <p class="muted">Browser websites cannot reliably read Apple Watch/phone step counts automatically. Outdoor GPS estimates may be inaccurate. Treadmill distance is never calculated from GPS.</p>
-    <button id="save" disabled>Save completed walk to Soulanova</button><p id="save-help" class="muted" role="status">Complete the full walking timer to enable saving. Saving remains paused pending account validation.</p>
-  </section>
-  <section class="panel" id="walking-history"><h2>Your Walking History</h2><p class="muted">Your saved walks are private to your Soulanova account.</p><div class="stats" aria-label="Walking totals"><article>Completed walks<strong id="history-count">—</strong></article><article>Total steps<strong id="history-steps">—</strong></article><article>Recorded miles<strong id="history-miles">—</strong></article><article>Weeks practiced<strong id="history-weeks">—</strong><small>out of 12 weeks</small></article></div><h3>12-Week Program Progress</h3><p class="muted">Goal: five full-length walks for each program week. Short test sessions remain in history but do not count toward the goal.</p><div id="week-progress" class="walk-grid" aria-label="Progress for each program week"></div><p id="history-status" class="muted" role="status" aria-live="polite">Loading walking history…</p><div id="history-list"></div><button id="history-refresh" type="button">Refresh history</button></section>
-  <p class="muted">Source: NHLBI 12-week walking schedule supplied for this program. General fitness guidance; not a medical prescription.</p>
-</main>
-<script src="/app/config.js"></script><script type="module" src="/app/walking/walking.js"></script>
+
+    <section class="history-section" id="walking-history" aria-labelledby="history-title">
+      <div class="history-head"><div><p class="section-kicker">Your journey</p><h2 id="history-title">Walking history & progress</h2><p>Personal totals and completed walks from your member account.</p></div><span class="preview-pill">Private to your account</span></div>
+      <div class="history-summary" aria-label="Walking totals"><article><span>Completed walks</span><strong id="history-count">—</strong><small>Saved sessions</small></article><article><span>Total steps</span><strong id="history-steps">—</strong><small>From recorded walks</small></article><article><span>Recorded miles</span><strong id="history-miles">—</strong><small>GPS estimate or entered</small></article><article><span>Weeks practiced</span><strong id="history-weeks">—</strong><small>Out of 12 weeks</small></article></div>
+      <div class="progress-title"><h3>Your 12-week progress</h3><span>Full-length walks count toward each week's goal</span></div>
+      <p class="machine-note">Goal: five full-length walks for each program week. Short test sessions remain visible in history but do not count toward the goal.</p>
+      <div id="week-progress" class="week-progress-grid" aria-label="Progress for each program week"></div>
+      <p id="history-status" class="history-status" role="status" aria-live="polite">Loading your walking history…</p><div id="history-list" class="history-list"></div>
+      <div class="history-actions"><span class="machine-note">Your history is shown only from the signed-in account.</span><button id="history-refresh" type="button">Refresh history</button></div>
+    </section>
+    <p class="program-guidance">Walk at a comfortable level; during brisk walking you should still be able to talk. Aim for five days per week, progress only when comfortable, and consult a healthcare professional before starting if you have significant health concerns or have been inactive. Program schedule source: NHLBI walking plan. General fitness guidance; not a medical prescription.</p>
+  </main>
+  <script src="/app/config.js"></script><script type="module" src="/app/walking/walking.js"></script>
 </body>
 </html>
