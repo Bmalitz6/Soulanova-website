@@ -2,7 +2,7 @@
 
 ## Reference and assets
 
-The requested `soulwalk_12_week_wellness_dashboard.png` was not present in `~/Downloads` or the project when checked. The user was asked to add it to the project; the preview was built from the written design brief while waiting. Existing approved Soulanova logo and cardio image assets provide the branded hero. No new image generation or paid asset use occurred.
+The approved reference was located at `~/Downloads/SoulWalk 12-Week Wellness Dashboard.png` (1672 × 941; SHA-256 `1844fffc6840b5d7dc662b0f0d2d6f7a9740599466b1f79cb7ff406a4dfdc3c9`). It was inspected and used as a visual guide for the scenic hero, premium cream/teal/sage palette, rounded workout control center, compact week navigation, countdown, progress visualization, and history cards. It is not embedded in the page. A clean text-free scenic hero asset, `assets/images/soulwalk-scenic-hero.png`, supplies the landscape artwork; live HTML, CSS, and JavaScript render all controls and member data. Mockup/example statistics are not used as member data.
 
 ## Implementation
 
@@ -15,7 +15,7 @@ The requested `soulwalk_12_week_wellness_dashboard.png` was not present in `~/Do
 
 ## Validation
 
-- Desktop and 390px mobile Chrome smoke passed. Mobile document width stayed at 390px, and setup/timer appear before history.
+- Desktop and 390px mobile Chrome visual and interaction checks passed. The final mobile run reports a 390px viewport and document width, with no overflowing elements; setup and timer appear before history, and the 12-week selection remains compact. This caught and fixed a hidden mode-radio input that had extended the document width.
 - All 12 week durations were verified: 15, 17, 19, 21, 23, 25, 28, 30, 33, 36, 38, and 40 minutes.
 - Beginner, Intermediate, and Advanced current/next guidance matched all requested ranges.
 - Outdoor mode exposed GPS and invoked its watch when enabled. Treadmill mode hid/cleared GPS and made no geolocation call.
@@ -25,6 +25,6 @@ The requested `soulwalk_12_week_wellness_dashboard.png` was not present in `~/Do
 
 ## Remaining note
 
-The supplied visual reference is still needed for exact image-by-image matching. Also, the existing recorded coaching voice is labeled Serene in the application; this redesign preserved those approved recordings and did not generate or relabel a Benjamin narration track.
+The existing recorded coaching voice is identified in the application as Serene; this redesign preserves the approved audio and does not relabel it as Benjamin or generate narration. Account-backed saves remain disabled pending Supabase validation. No Supabase schema, policy, production code, or production deployment was changed.
 
 Preview only. Production and database configuration were not changed.
