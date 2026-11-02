@@ -1,6 +1,7 @@
 import {bounded,requireMember,insertOnce,assertWriteReady} from '/app/member-data.mjs';
 import {createClient} from 'https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2/+esm';
 const $=id=>document.getElementById(id),db=createClient(window.SOULANOVA_SUPABASE.url,window.SOULANOVA_SUPABASE.publishableKey,{auth:{flowType:'pkce',detectSessionInUrl:true,autoRefreshToken:true,persistSession:true}});
+let lookupRevision=0,lookupController=null;
 let savingFood=false,pendingFood=null,authRevision=0;
 let user=null,barcode='',per100={},lastAmount=100,amountUnit='g',baseAmount=100,scanner=null,scanning=false,foodSaved=false;
 function labeledPortion(label){const match=String(label||'').match(/(\d+(?:[.,]\d+)?)\s*(mL|ml|g|fl\.?\s*oz|oz)\b/i);if(!match)return null;const value=Number(match[1].replace(',','.'));if(!Number.isFinite(value)||value<=0)return null;const unit=match[2].toLowerCase().replace(/\s|\./g,'');if(unit==='ml')return {amount:value,unit:'mL'};if(unit==='g')return {amount:value,unit:'g'};if(unit==='floz')return {amount:value*29.5735295625,unit:'mL'};if(unit==='oz')return {amount:value*28.349523125,unit:'g'};return null;}
@@ -10,9 +11,9 @@ const safeNumber=v=>v===null||v===undefined||v===''?null:Number(v);
 function showMacros(){$('result').scrollIntoView({behavior:'smooth',block:'start'});}function resetSave(){foodSaved=false;$('save-food').disabled=false;$('saved-actions').hidden=true;}
 $('go-to-macros').addEventListener('click',showMacros);
 $('scan-another').addEventListener('click',()=>{resetSave();$('result').hidden=true;$('go-to-macros').hidden=true;$('barcode').value='';window.scrollTo({top:0,behavior:'smooth'});$('barcode').focus();});
-async function lookup(e){e?.preventDefault();resetSave();barcode=$('barcode').value.trim();if(!/^\d{8,14}$/.test(barcode)){setStatus('Enter a valid UPC or EAN barcode.');return}
+async function lookup(e){e?.preventDefault();if(savingFood||pendingFood){setStatus('Confirm the pending save before looking up another product.');return;}const revision=++lookupRevision;lookupController?.abort();lookupController=new AbortController();const controller=lookupController;resetSave();$('result').hidden=true;$('go-to-macros').hidden=true;barcode=$('barcode').value.trim();if(!/^\d{8,14}$/.test(barcode)){setStatus('Enter a valid UPC or EAN barcode.');return}
  $('result').hidden=true;setStatus('Looking up product…');
- try{const res=await fetch('https://world.openfoodfacts.org/api/v2/product/'+encodeURIComponent(barcode)+'.json?fields=code,product_name,brands,serving_size,nutriments',{headers:{Accept:'application/json'}});if(!res.ok)throw Error('Food lookup service returned '+res.status);const data=await res.json();if(data.status!==1||!data.product){setStatus('Product not found. Use manual food entry in SoulFuel.');return}
+ try{const {res,data}=await bounded(async signal=>{signal.addEventListener('abort',()=>controller.abort(),{once:true});const res=await fetch('https://world.openfoodfacts.org/api/v2/product/'+encodeURIComponent(barcode)+'.json?fields=code,product_name,brands,serving_size,nutriments',{headers:{Accept:'application/json'},signal:controller.signal});return {res,data:res.ok?await res.json():null};});if(revision!==lookupRevision)return;if(!res.ok)throw Error('Food lookup service returned '+res.status);if(revision!==lookupRevision)return;if(data.status!==1||!data.product){setStatus('Product not found. Use manual food entry in SoulFuel.');return}
  const p=data.product;per100={};for(const [key,, ,field,factor] of nutrients){if(!field)continue;const n=safeNumber(p.nutriments?.[field]);if(n!==null&&valid(n))per100[key]=n*factor}
  $('product').textContent=[p.product_name||'Unnamed product',p.brands].filter(Boolean).join(' · ');$('food-name').value=p.product_name||'Food '+barcode;
  $('attribution').textContent='Lookup: Open Food Facts · Serving label: '+(p.serving_size||'not specified')+'. Nutrients are based on reported values per 100g/100mL.';
@@ -21,7 +22,7 @@ async function lookup(e){e?.preventDefault();resetSave();barcode=$('barcode').va
  $('amount-label').textContent=portion?'Suggested package serving: '+p.serving_size:'Serving size unavailable; check the label.';
  for(const [key] of nutrients){const el=$('macro-'+key);el.value=per100[key]===undefined?'':String(Number((per100[key]*lastAmount/100).toFixed(2)));}
  $('result').hidden=false;$('go-to-macros').hidden=false;setStatus('Product found. Review and adjust the values before saving.');showMacros();
- }catch(err){setStatus('Lookup failed: '+err.message+'. You can still log this food manually.')}
+ }catch(err){if(revision!==lookupRevision)return;setStatus('Lookup failed: '+err.message+'. You can still log this food manually.')}
 }
 for(const [key,label,unit] of nutrients){const l=document.createElement('label'),i=document.createElement('input');l.textContent=label+' ('+unit+')';i.type='number';i.min='0';i.step='any';i.placeholder='Unknown';i.id='macro-'+key;l.append(i);$('macros').append(l)}
 const unitFactors={mL:1,'fl oz':29.5735295625,g:1,oz:28.349523125};
@@ -47,4 +48,4 @@ async function stop(){if(scanner&&scanning){try{await scanner.stop()}catch(e){}s
 $('start-camera').addEventListener('click',async()=>{try{if(!window.Html5Qrcode)throw Error('Camera library unavailable. Use manual barcode entry.');await stop();$('camera').hidden=false;$('stop-camera').hidden=false;scanner=new window.Html5Qrcode('camera');scanning=true;await scanner.start({facingMode:'environment'},{fps:10,qrbox:{width:260,height:140}},async code=>{await stop();$('barcode').value=code;await lookup()},()=>{});setStatus('Point the camera at the product barcode.')}catch(err){await stop();setStatus('Camera unavailable: '+err.message+'. Enter the barcode manually.') }});
 $('stop-camera').addEventListener('click',()=>stop().then(()=>setStatus('Camera stopped.')));
 bounded(()=>db.auth.getUser()).then(({data,error})=>{if(error)setStatus('Sign-in check failed: '+error.message);else if(!data.user)setStatus('Sign in through Soulanova before saving foods.');else setStatus('Ready to scan or enter a barcode.');user=data?.user||null;}).catch(e=>setStatus(e.message));
-db.auth.onAuthStateChange((_event,session)=>{if((session?.user?.id||null)===(user?.id||null))return;authRevision++;user=session?.user||null;pendingFood=null;foodSaved=false;$('result').hidden=true;$('saved-actions').hidden=true;setStatus(user?'Account changed. Look up the product again.':'Sign in before saving foods.');});
+db.auth.onAuthStateChange((_event,session)=>{if((session?.user?.id||null)===(user?.id||null))return;authRevision++;lookupRevision++;lookupController?.abort();user=session?.user||null;pendingFood=null;foodSaved=false;$('result').hidden=true;$('saved-actions').hidden=true;setStatus(user?'Account changed. Look up the product again.':'Sign in before saving foods.');});
