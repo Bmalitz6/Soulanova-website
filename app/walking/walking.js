@@ -1,11 +1,43 @@
 import {bounded,requireMember,insertOnce} from '/app/member-data.mjs';
+import {briskMinutes as brisk,treadmillLevels,phaseAt,accountChangeState} from '/app/walking/training.mjs';
 import {createClient} from 'https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2/+esm';
-const $=id=>document.getElementById(id),brisk=[5,7,9,11,13,15,18,20,23,26,28,30],db=createClient(window.SOULANOVA_SUPABASE.url,window.SOULANOVA_SUPABASE.publishableKey,{auth:{flowType:'pkce',detectSessionInUrl:true,autoRefreshToken:true,persistSession:true}});
+const $=id=>document.getElementById(id),db=createClient(window.SOULANOVA_SUPABASE.url,window.SOULANOVA_SUPABASE.publishableKey,{auth:{flowType:'pkce',detectSessionInUrl:true,autoRefreshToken:true,persistSession:true}});
 let saving=false,walkId=crypto.randomUUID(),owner=null,authRevision=0,historyRevision=0;
-let week=0,elapsed=0,startedAt=0,timer=null,running=false,finished=false,watch=null,miles=0,lastPosition=null,events=new Set(),saved=false;
+let week=0,elapsed=0,startedAt=0,timer=null,running=false,finished=false,watch=null,miles=0,lastPosition=null,events=new Set(),saved=false,mode='outdoor',treadmillLevel='beginner',manualPhase=null;
+const accountWritesEnabled=false;
 const cueFiles={start:'start.mp3',brisk:'brisk.mp3',half:'halfway.mp3',cool:'cooldown.mp3',done:'finish.mp3'};let activeCue=null;
 const total=()=>600+brisk[week]*60;
 const format=s=>String(Math.floor(s/60)).padStart(2,'0')+':'+String(s%60).padStart(2,'0');
+const phaseNames={warmup:'Warm-up',steady:'Steady walk',brisk:'Brisk walk',cooldown:'Cool-down'};
+const valueOf=id=>$(id).value.trim()===''?null:Number($(id).value);
+function formatRange(range){return range[0]===range[1]?String(range[0]):`${range[0]}–${range[1]}`;}
+function recommendation(level,phase){const item=treadmillLevels[level]?.phases[phase];return item?`${formatRange(item.speed)} mph · ${formatRange(item.incline)}% incline`:'—';}
+function clearEnteredMetrics(){for(const id of ['steps','treadmill-distance','treadmill-speed','treadmill-incline','manual-speed','manual-incline'])$(id).value='';}
+function renderGuidance(){
+ $('treadmill-options').hidden=mode!=='treadmill';$('gps-control').hidden=mode!=='outdoor';
+ $('gps').disabled=mode!=='outdoor'||saving;if(mode!=='outdoor')$('gps').checked=false;
+ const status=phaseAt(week,elapsed),current=status.current,next=status.next;
+ if(current){$('current-phase-name').textContent=phaseNames[current];$('current-recommendation').textContent=recommendation(treadmillLevel,current);}
+ else{$('current-phase-name').textContent='Completed';$('current-recommendation').textContent='—';}
+ $('next-phase-name').textContent=next?phaseNames[next]:'No next phase';$('next-recommendation').textContent=next?recommendation(treadmillLevel,next):'—';
+}
+function renderActuals(){
+ const actualDistance=mode==='treadmill'?valueOf('treadmill-distance'):null;
+ const displayDistance=mode==='treadmill'?actualDistance:(miles>0?miles:null);
+ $('miles').textContent=displayDistance===null?'—':displayDistance.toFixed(2);
+ $('distance-note').textContent=mode==='treadmill'?'Actual value entered from treadmill':'GPS estimate · outdoors';
+ $('steps-display').textContent=$('steps').value||'—';
+ if(mode==='treadmill'){
+  const parts=[];
+  if(actualDistance!==null)parts.push(`${actualDistance.toFixed(2)} mi actual`);
+  const speed=valueOf('treadmill-speed');if(speed!==null)parts.push(`${speed.toFixed(1)} mph actual average`);
+  const incline=valueOf('treadmill-incline');if(incline!==null)parts.push(`${incline.toFixed(1)}% actual average incline`);
+  const steps=valueOf('steps');if(steps!==null)parts.push(`${Math.trunc(steps)} actual steps`);
+  $('actual-summary').textContent=parts.length?`Treadmill readings entered for this session: ${parts.join(' · ')}. Not saved to your account while saving is paused.`:'Treadmill readings entered here are actual values, not GPS estimates.';
+ }else{
+  const steps=valueOf('steps');$('actual-summary').textContent=steps===null?'':`${Math.trunc(steps)} user-entered steps. Outdoor distance is a GPS estimate.`;
+ }
+}
 function availableVoices(){return 'speechSynthesis' in window?speechSynthesis.getVoices().filter(v=>v.lang?.toLowerCase().startsWith('en')):[];}
 function refreshVoices(){
  const select=$('voice-choice'),prior=select.value,voices=availableVoices();
@@ -24,7 +56,9 @@ function preferredVoice(){
 function fallbackSpeech(text){if(!('speechSynthesis' in window))return;try{speechSynthesis.cancel();const utter=new SpeechSynthesisUtterance(text);utter.rate=.88;utter.lang='en-US';const v=preferredVoice();if(v)utter.voice=v;speechSynthesis.speak(utter)}catch(e){}}
 function stopNarration(){if(activeCue){activeCue.pause();activeCue=null;}if('speechSynthesis' in window)speechSynthesis.cancel();}
 function announce(text,key){
- $('message').textContent=text;if(!$('voice').checked)return;
+ const current=phaseAt(week,elapsed).current;
+ const prompt=mode==='treadmill'&&current?`${text}\nOptional treadmill guidance for ${phaseNames[current].toLowerCase()}: ${recommendation(treadmillLevel,current)}. Adjust to comfort; set the machine yourself.`:text;
+ $('message').textContent=prompt;if(!$('voice').checked)return;
  if(activeCue){activeCue.pause();activeCue=null;}
  if('speechSynthesis' in window)speechSynthesis.cancel();
  if($('voice-choice').value!=='recorded'||!cueFiles[key]){fallbackSpeech(text);return;}
@@ -32,15 +66,19 @@ function announce(text,key){
  const recover=()=>{if(recovered||activeCue!==cue)return;recovered=true;activeCue=null;fallbackSpeech(text)};
  cue.onerror=recover;cue.play().catch(recover);
 }
-function choose(n){if(running||saving)return;stopNarration();walkId=crypto.randomUUID();week=n;elapsed=0;finished=false;saved=false;events.clear();miles=0;lastPosition=null;$('gps').checked=false;stopGPS();render();}
+function choose(n){if(running||saving)return;stopNarration();walkId=crypto.randomUUID();week=n;elapsed=0;finished=false;saved=false;events.clear();miles=0;lastPosition=null;manualPhase=null;$('gps').checked=false;clearEnteredMetrics();stopGPS();render();}
 function render(){
  $('session-title').textContent='Week '+(week+1)+' · '+Math.round(total()/60)+' minutes';
  $('clock').textContent=format(Math.max(0,total()-elapsed));$('progress').style.width=(100*elapsed/total())+'%';
- const warm=elapsed<300,br=elapsed<300+brisk[week]*60;
- $('phase').textContent=finished?'Completed':!elapsed?'Ready to walk':warm?'Easy warm-up':br?'Brisk walking':'Slow cool-down';
+ const current=phaseAt(week,elapsed).current;
+ if(mode==='treadmill'&&current&&manualPhase&&current!==manualPhase){$('manual-speed').value='';$('manual-incline').value='';}
+ if(mode==='treadmill'&&current)manualPhase=current;
+ $('phase').textContent=finished?'Completed':!elapsed?'Ready to walk':phaseNames[current]||'Completed';
  $('position').textContent='5 min warm-up · '+brisk[week]+' min brisk · 5 min cool-down';
- $('start').disabled=running||finished||saving;$('reset').disabled=saving;$('pause').disabled=!running;$('pause').textContent='Pause';$('save').disabled=!finished||saved||saving||!owner;$('save').textContent=saving?'Saving…':'Save completed walk to Soulanova';$('save').setAttribute('aria-busy',String(saving));$('save-help').textContent=saved?'Walk saved.':finished?'Workout finished. Save your steps and distance.':'Complete the walking timer before saving. '+format(total()-elapsed)+' remaining.';
- $('miles').textContent=miles>0?miles.toFixed(2):'—';$('steps-display').textContent=$('steps').value||'—';
+ const locked=running||elapsed>0||finished||saving;
+ $('outdoor-mode').disabled=locked;$('treadmill-mode').disabled=locked;$('mode-lock-note').hidden=!locked;
+ $('start').disabled=running||finished||saving;$('reset').disabled=saving;$('pause').disabled=!running;$('pause').textContent='Pause';$('save').disabled=!accountWritesEnabled||!finished||saved||saving||!owner;$('save').textContent=saving?'Saving…':'Save completed walk to Soulanova';$('save').setAttribute('aria-busy',String(saving));$('save-help').textContent=accountWritesEnabled?(saved?'Walk saved.':finished?'Workout finished. Save your steps and distance.':'Complete the walking timer before saving. '+format(total()-elapsed)+' remaining.'):'Account saving is paused while Supabase validation is pending. Your current entries remain in this browser session.';
+ renderGuidance();renderActuals();
  document.querySelectorAll('#weeks .week').forEach((el,i)=>{el.setAttribute('aria-current',String(i===week));el.querySelector('button').disabled=running||saving;});
 }
 function milestone(key,text){if(events.has(key))return;events.add(key);announce(text,key)}
@@ -73,21 +111,27 @@ function tick(){
  render();
 }
 function distance(a,b){const rad=Math.PI/180,dlat=(b.latitude-a.latitude)*rad,dlon=(b.longitude-a.longitude)*rad,x=Math.sin(dlat/2)**2+Math.cos(a.latitude*rad)*Math.cos(b.latitude*rad)*Math.sin(dlon/2)**2;return 3958.7613*2*Math.atan2(Math.sqrt(x),Math.sqrt(1-x))}
-function startGPS(){if(!navigator.geolocation){$('message').textContent='GPS unavailable in this browser.';return;}if(watch!==null)return;watch=navigator.geolocation.watchPosition(pos=>{if(!running)return;const p=pos.coords;if(p.accuracy>60)return;const next={latitude:p.latitude,longitude:p.longitude};if(lastPosition){const delta=distance(lastPosition,next);if(delta<.12&&delta>.003)miles+=delta;}lastPosition=next;render()},e=>{ $('message').textContent='GPS not available: '+e.message;$('gps').checked=false;stopGPS()},{enableHighAccuracy:true,maximumAge:3000,timeout:12000});}
+function startGPS(){if(mode!=='outdoor')return;if(!navigator.geolocation){$('message').textContent='GPS unavailable in this browser.';return;}if(watch!==null)return;watch=navigator.geolocation.watchPosition(pos=>{if(!running||mode!=='outdoor')return;const p=pos.coords;if(p.accuracy>60)return;const next={latitude:p.latitude,longitude:p.longitude};if(lastPosition){const delta=distance(lastPosition,next);if(delta<.12&&delta>.003)miles+=delta;}lastPosition=next;render()},e=>{ $('message').textContent='GPS not available: '+e.message;$('gps').checked=false;stopGPS()},{enableHighAccuracy:true,maximumAge:3000,timeout:12000});}
 function stopGPS(){if(watch!==null){navigator.geolocation.clearWatch(watch);watch=null;}lastPosition=null}
 function stopTimer(){if(timer!==null)clearInterval(timer);timer=null;running=false;stopGPS();stopNarration()}
 function finish(){elapsed=total();finished=true;stopTimer();milestone('done','Workout complete! Excellent work. You have finished week '+(week+1)+'.');render();}
-$('start').onclick=()=>{if(finished)return;running=true;startedAt=Date.now()-elapsed*1000;timer=setInterval(tick,500);if($('gps').checked)startGPS();if(!events.has('start'))milestone('start','Begin with five minutes of easy walking to warm up.');render()};
+$('start').onclick=()=>{if(finished)return;running=true;startedAt=Date.now()-elapsed*1000;timer=setInterval(tick,500);if(mode==='outdoor'&&$('gps').checked)startGPS();if(!events.has('start'))milestone('start','Begin with five minutes of easy walking to warm up.');render()};
 $('pause').onclick=()=>{tick();stopTimer();$('message').textContent='Workout paused.';render()};
-$('reset').onclick=()=>{if(saving)return;if(!confirm('Reset this walk?'))return;stopTimer();walkId=crypto.randomUUID();elapsed=0;miles=0;finished=false;saved=false;events.clear();render()};
+$('reset').onclick=()=>{if(saving)return;if(!confirm('Reset this walk?'))return;stopTimer();walkId=crypto.randomUUID();elapsed=0;miles=0;finished=false;saved=false;events.clear();manualPhase=null;clearEnteredMetrics();render()};
 $('gps').onchange=()=>{if($('gps').checked&&running)startGPS();else stopGPS()};
+$('outdoor-mode').onchange=()=>{if(!$('outdoor-mode').checked)return;if(running||elapsed||finished||saving){render();return;}mode='outdoor';manualPhase=null;stopGPS();miles=0;lastPosition=null;$('gps').checked=false;clearEnteredMetrics();render()};
+$('treadmill-mode').onchange=()=>{if(!$('treadmill-mode').checked)return;if(running||elapsed||finished||saving){render();return;}mode='treadmill';manualPhase=null;treadmillLevel=$('treadmill-level').value;stopGPS();miles=0;lastPosition=null;$('gps').checked=false;clearEnteredMetrics();render()};
+$('treadmill-level').onchange=()=>{treadmillLevel=$('treadmill-level').value;renderGuidance();};
 $('voice').addEventListener('change',()=>{if(!$('voice').checked)stopNarration();});
-$('steps').oninput=render;
-$('save').onclick=async()=>{if(!finished||saved||saving)return;const revision=authRevision;const expected=owner;saving=true;render();
+$('steps').oninput=render;$('treadmill-distance').oninput=render;$('treadmill-speed').oninput=render;$('treadmill-incline').oninput=render;
+$('manual-speed').oninput=render;$('manual-incline').oninput=render;
+$('save').onclick=async()=>{if(!accountWritesEnabled){$('message').textContent='Saving is disabled while account validation is pending. Your readings remain on this screen.';return;}if(!finished||saved||saving)return;const revision=authRevision;const expected=owner;saving=true;render();
  try{const user=await requireMember(db,expected);if(revision!==authRevision)throw Error('Your account changed. Refresh before saving.');
  const stepsRaw=$('steps').value.trim(),steps=stepsRaw===''?null:Number(stepsRaw);
  if(steps!==null&&(!Number.isInteger(steps)||steps<0||steps>150000))throw Error('Enter a valid steps count.');
- const entry={id:walkId,user_id:user.id,week_number:week+1,duration_minutes:total()/60,distance_miles:miles>0?Number(miles.toFixed(3)):null,steps,source:'web'};
+ const actualDistance=mode==='treadmill'?valueOf('treadmill-distance'):null;
+ if(mode==='treadmill'&&actualDistance!==null&&(!Number.isFinite(actualDistance)||actualDistance<0||actualDistance>100))throw Error('Enter a valid treadmill distance.');
+ const entry={id:walkId,user_id:user.id,week_number:week+1,duration_minutes:total()/60,distance_miles:mode==='treadmill'?(actualDistance===null?null:Number(actualDistance.toFixed(3))):(miles>0?Number(miles.toFixed(3)):null),steps,source:'web'};
  await insertOnce(db,'soulwalk','soulwalk_sessions',entry);if(revision!==authRevision)return;
  saved=true;$('message').textContent='Walk saved to your account. Refreshing history…';await loadHistory();if(revision===authRevision)$('message').textContent='Walk saved. See your personal walking history below.';
  }catch(e){if(revision===authRevision)$('message').textContent='Could not save walk: '+e.message;}finally{saving=false;render();}};
@@ -159,7 +203,7 @@ async function loadHistory(){
  }finally{if(revision===historyRevision)refresh.disabled=false;}
 }
 function clearHistory(){for(const id of ['history-count','history-steps','history-miles','history-weeks'])$(id).textContent='—';$('history-list').replaceChildren();$('week-progress').replaceChildren();}
-function changeMember(user){const next=user?.id||null;if(next!==owner){authRevision++;historyRevision++;owner=next;stopTimer();walkId=crypto.randomUUID();elapsed=0;finished=false;saved=false;miles=0;events.clear();clearHistory();render();}if(!next)$('history-status').textContent='Sign in to view your walking history.';}
+function changeMember(user){const next=user?.id||null,reset=accountChangeState(owner,next,week);if(reset){authRevision++;historyRevision++;owner=reset.owner;stopTimer();walkId=crypto.randomUUID();week=reset.week;elapsed=reset.elapsed;finished=reset.finished;saved=reset.saved;miles=reset.gpsMiles;events=new Set(reset.events);mode=reset.mode;treadmillLevel=reset.level;manualPhase=null;lastPosition=null;$('outdoor-mode').checked=true;$('treadmill-mode').checked=false;$('treadmill-level').value=reset.level;clearEnteredMetrics();$('gps').checked=false;clearHistory();render();}if(!next)$('history-status').textContent='Sign in to view your walking history.';}
 db.auth.onAuthStateChange((_event,session)=>{changeMember(session?.user);setTimeout(()=>loadHistory(),0);});
 $('history-refresh').onclick=loadHistory;
 requireMember(db).then(user=>{changeMember(user);return loadHistory();}).catch(e=>{$('history-status').textContent=e.message;});
