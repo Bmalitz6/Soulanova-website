@@ -4,6 +4,7 @@ import { supabase } from './supabase';
 import MemberScreen from './MemberScreen';
 import SoulWalkScreen from './SoulWalkScreen';
 import SoulFuelScreen from './SoulFuelScreen';
+import StrengthPreviewScreen from './StrengthPreviewScreen';
 import {
   View, Text, ScrollView, TouchableOpacity,
   StyleSheet, ImageBackground, StatusBar,
@@ -21,7 +22,7 @@ const images = {
   walk: 'https://images.unsplash.com/photo-1476480862126-209bfaa8edc8?w=900&q=85',
   tai: 'https://images.unsplash.com/photo-1544367567-0f2fcb009e0b?w=900&q=85',
   meditation: 'https://images.unsplash.com/photo-1500534623283-312aade485b7?w=900&q=85',
-  strength: 'https://images.unsplash.com/photo-1517836357463-d25dfeac3438?w=900&q=85',
+  strength: 'https://soulanova.com/app/images/workouts/strength.jpg',
   fuel: 'https://images.unsplash.com/photo-1512621776951-a57141f2eefd?w=900&q=85',
 };
 
@@ -71,7 +72,7 @@ function ProgramCard({ item, onOpen }: { item: typeof programs[number], onOpen: 
 }
 
 export default function App() {
-  const [screen, setScreen] = useState<'home' | 'walk' | 'fuel' | 'account'>('home');
+  const [screen, setScreen] = useState<'home' | 'walk' | 'fuel' | 'account' | 'strength-preview'>('home');
   const [session, setSession] = useState<Session | null>(null);
   useEffect(() => {
     if (!supabase) return;
@@ -82,6 +83,10 @@ export default function App() {
   if (screen === 'account') return <MemberScreen onBack={() => setScreen('home')} emailSignedIn={session?.user.email ?? null} />;
   if (screen === 'walk') return <SoulWalkScreen onBack={() => setScreen('home')} />;
   if (screen === 'fuel') return <SoulFuelScreen onBack={() => setScreen('home')} />;
+  if (screen === 'strength-preview') {
+    const previewScope = session?.user.id ?? 'anonymous';
+    return <StrengthPreviewScreen key={previewScope} previewScope={previewScope} onBack={() => setScreen('home')} />;
+  }
   return (
     <SafeAreaView style={styles.safe}>
       <StatusBar barStyle="dark-content" />
@@ -142,7 +147,7 @@ export default function App() {
         </View>
 
         {programs.map(item => (
-          <ProgramCard key={item.title} item={item} onOpen={title => title==='SoulWalk'?setScreen('walk'):title==='SoulFuel'?setScreen('fuel'):Alert.alert(title,'We are connecting this section to the existing Soulanova library.')} />
+          <ProgramCard key={item.title} item={item} onOpen={title => title==='SoulWalk'?setScreen('walk'):title==='SoulFuel'?setScreen('fuel'):title==='Strength & Fitness'?setScreen('strength-preview'):Alert.alert(title,'This program is not available in the mobile library yet.')} />
         ))}
 
         <TouchableOpacity
