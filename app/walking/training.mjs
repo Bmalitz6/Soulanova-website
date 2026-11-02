@@ -30,6 +30,12 @@ export const treadmillLevels = Object.freeze({
   })
 });
 
+export const outdoorEffortGuidance = Object.freeze({
+  beginner: Object.freeze({warmup:'Easy, conversational pace',steady:'Comfortable, steady steps',brisk:'Purposeful, still able to talk',cooldown:'Ease back to comfortable pace'}),
+  intermediate: Object.freeze({warmup:'Easy, settled breathing',steady:'Brisk but controlled',brisk:'Strong, sustainable effort',cooldown:'Ease back gradually'}),
+  advanced: Object.freeze({warmup:'Relaxed, steady steps',steady:'Purposeful, moderately brisk',brisk:'Challenging, sustainable effort',cooldown:'Ease down to a relaxed pace'})
+});
+
 const phases = Object.freeze(['warmup', 'steady', 'brisk', 'cooldown']);
 
 export function totalWalkSeconds(weekIndex) {

@@ -1,5 +1,5 @@
 import {bounded,requireMember,insertOnce} from '/app/member-data.mjs';
-import {briskMinutes as brisk,treadmillLevels,phaseAt,accountChangeState} from '/app/walking/training.mjs';
+import {briskMinutes as brisk,treadmillLevels,outdoorEffortGuidance,phaseAt,accountChangeState} from '/app/walking/training.mjs';
 import {createClient} from 'https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2/+esm';
 const $=id=>document.getElementById(id),db=createClient(window.SOULANOVA_SUPABASE.url,window.SOULANOVA_SUPABASE.publishableKey,{auth:{flowType:'pkce',detectSessionInUrl:true,autoRefreshToken:true,persistSession:true}});
 let saving=false,walkId=crypto.randomUUID(),owner=null,authRevision=0,historyRevision=0;
@@ -12,17 +12,19 @@ const phaseNames={warmup:'Warm-up',steady:'Steady walk',brisk:'Brisk walk',coold
 const valueOf=id=>$(id).value.trim()===''?null:Number($(id).value);
 function formatRange(range){return range[0]===range[1]?String(range[0]):`${range[0]}–${range[1]}`;}
 function recommendation(level,phase){const item=treadmillLevels[level]?.phases[phase];return item?`${formatRange(item.speed)} mph · ${formatRange(item.incline)}% incline`:'—';}
+function effort(level,phase){return outdoorEffortGuidance[level]?.[phase]||'—';}
 function weekWindowSize(){return window.matchMedia('(max-width: 680px)').matches?4:6;}
 function clearEnteredMetrics(){for(const id of ['steps','treadmill-distance','treadmill-speed','treadmill-incline','manual-speed','manual-incline'])$(id).value='';}
 function renderGuidance(){
- $('level-panel').hidden=mode!=='treadmill';$('treadmill-options').hidden=mode!=='treadmill';$('gps-control').hidden=mode!=='outdoor';
+ $('level-panel').hidden=false;$('treadmill-options').hidden=mode!=='treadmill';$('outdoor-effort-options').hidden=mode!=='outdoor';$('gps-control').hidden=mode!=='outdoor';
+ $('choose-level-subtitle').textContent=mode==='treadmill'?'Optional speed and incline ranges; adjust the machine by hand.':'Comfortable, effort-based cues for each walking phase.';document.querySelectorAll('input[name="level-chip"] + span small').forEach((el,index)=>{el.textContent=mode==='outdoor'?['Easy effort','Steady effort','Strong effort'][index]:['Gentle start','Steady build','Confident pace'][index];});
  $('gps').disabled=mode!=='outdoor'||saving;if(mode==='outdoor')$('gps').checked=!gpsOptOutForSession;else $('gps').checked=false;
  $('guidance-card-title').textContent=mode==='treadmill'?'Treadmill Guidance':'Outdoor Walk';
- $('guidance-card-subtitle').textContent=mode==='treadmill'?`${treadmillLevels[treadmillLevel].label} · optional pace and incline`:'GPS starts on Start Walk unless you turn it off';
+ $('guidance-card-subtitle').textContent=mode==='treadmill'?`${treadmillLevels[treadmillLevel].label} · optional pace and incline`:`${treadmillLevels[treadmillLevel].label} · effort-based pace cues`;
  const status=phaseAt(week,elapsed),current=status.current,next=status.next;
  if(current){$('current-phase-name').textContent=phaseNames[current];$('current-recommendation').textContent=recommendation(treadmillLevel,current);}
  else{$('current-phase-name').textContent='Completed';$('current-recommendation').textContent='—';}
- $('next-phase-name').textContent=next?phaseNames[next]:'No next phase';$('next-recommendation').textContent=next?recommendation(treadmillLevel,next):'—';
+ $('next-phase-name').textContent=next?phaseNames[next]:'No next phase';$('next-recommendation').textContent=next?recommendation(treadmillLevel,next):'—';$('effort-current').textContent=current?effort(treadmillLevel,current):'—';$('effort-next').textContent=next?effort(treadmillLevel,next):'—';
 }
 function renderActuals(){
  const actualDistance=mode==='treadmill'?valueOf('treadmill-distance'):null;
@@ -70,7 +72,7 @@ function render(){
  $('timer-ring').style.setProperty('--timer-progress',progressPercent+'%');$('timer-ring').setAttribute('aria-valuenow',String(progressPercent));
  if(mode==='treadmill'&&current&&manualPhase&&current!==manualPhase){$('manual-speed').value='';$('manual-incline').value='';}if(mode==='treadmill'&&current)manualPhase=current;
  $('phase').textContent=finished?'Completed':!elapsed?'Warm Up':phaseNames[current]||'Completed';
- const status=phaseAt(week,elapsed),activeCurrent=status.current,activeNext=status.next;$('active-phase-name').textContent=finished?'Walk complete':activeCurrent?phaseNames[activeCurrent]:'Warm Up';$('active-next-phase').textContent=activeNext?phaseNames[activeNext]:'Walk complete';$('active-current-recommendation').textContent=mode==='treadmill'&&activeCurrent?recommendation(treadmillLevel,activeCurrent):'';$('active-current-recommendation').hidden=mode!=='treadmill'||!activeCurrent;$('active-next-recommendation').textContent=mode==='treadmill'&&activeNext?recommendation(treadmillLevel,activeNext):'';$('active-next-recommendation').hidden=mode!=='treadmill'||!activeNext;
+ const status=phaseAt(week,elapsed),activeCurrent=status.current,activeNext=status.next;$('active-phase-name').textContent=finished?'Walk complete':activeCurrent?phaseNames[activeCurrent]:'Warm Up';$('active-next-phase').textContent=activeNext?phaseNames[activeNext]:'Walk complete';$('active-current-recommendation').textContent=activeCurrent?(mode==='treadmill'?recommendation(treadmillLevel,activeCurrent):effort(treadmillLevel,activeCurrent)):'';$('active-current-recommendation').hidden=!activeCurrent;$('active-next-recommendation').textContent=activeNext?(mode==='treadmill'?recommendation(treadmillLevel,activeNext):effort(treadmillLevel,activeNext)):'';$('active-next-recommendation').hidden=!activeNext;
  const locked=running||elapsed>0||finished||saving;$('outdoor-mode').disabled=locked;$('treadmill-mode').disabled=locked;$('mode-lock-note').hidden=!locked;
  $('start').disabled=running||finished||saving;$('start').textContent='Start Walk';$('pause').disabled=!running;$('pause').textContent='Pause Walk';$('resume').hidden=running||!underway;$('resume').disabled=saving;$('start-new').hidden=!finished;$('start-new').disabled=saving;$('reset').disabled=saving;$('save').disabled=!accountWritesEnabled||!finished||saved||saving||!owner;$('save').textContent=saving?'Saving…':'Save completed walk';$('save').setAttribute('aria-busy',String(saving));$('save-help').textContent=accountWritesEnabled?(saved?'Walk saved.':finished?'Workout finished. Save your steps and distance.':'Complete the walking timer before saving. '+format(total()-elapsed)+' remaining.'):'Account saving is paused while Supabase validation is pending. Your current entries remain in this browser session.';
  renderPhases();renderWeekSelector();renderGuidance();renderActuals();

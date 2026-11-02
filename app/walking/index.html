@@ -49,12 +49,12 @@
             <label><input type="radio" name="walk-mode" id="treadmill-mode" value="treadmill"><span class="mode-icon" aria-hidden="true">♟</span>Treadmill</label>
           </fieldset>
         </div>
-        <section class="level-panel" id="level-panel" aria-labelledby="choose-level-title"><div class="level-panel-head"><div><h2 id="choose-level-title">Choose your level</h2><p>Personalize your optional treadmill guidance.</p></div></div>
+        <section class="level-panel" id="level-panel" aria-labelledby="choose-level-title"><div class="level-panel-head"><div><h2 id="choose-level-title">Choose your level</h2><p id="choose-level-subtitle">Choose effort cues for your outdoor walk.</p></div></div>
           <fieldset class="level-choice" aria-label="Choose your level">
             <legend class="visually-hidden">Choose your level</legend>
-            <label class="level-chip"><input type="radio" name="level-chip" value="beginner" checked><span><strong>Beginner</strong><small>Gentle start</small></span></label>
-            <label class="level-chip"><input type="radio" name="level-chip" value="intermediate"><span><strong>Intermediate</strong><small>Steady build</small></span></label>
-            <label class="level-chip"><input type="radio" name="level-chip" value="advanced"><span><strong>Advanced</strong><small>Confident pace</small></span></label>
+            <label class="level-chip"><input type="radio" name="level-chip" value="beginner" checked><span><strong>Beginner</strong><small>Easy effort</small></span></label>
+            <label class="level-chip"><input type="radio" name="level-chip" value="intermediate"><span><strong>Intermediate</strong><small>Steady effort</small></span></label>
+            <label class="level-chip"><input type="radio" name="level-chip" value="advanced"><span><strong>Advanced</strong><small>Strong effort</small></span></label>
           </fieldset>
           <select id="treadmill-level" class="visually-hidden" tabindex="-1" aria-hidden="true"><option value="beginner">Beginner</option><option value="intermediate">Intermediate</option><option value="advanced">Advanced</option></select>
         </section>
@@ -72,6 +72,7 @@
             <div id="treadmill-options" hidden><div class="phase-grid"><article class="phase-card"><small>Current · <span id="current-phase-name">Warm-up</span></small><strong id="current-recommendation">1.5–2.0 mph · 0% incline</strong></article><article class="phase-card"><small>Next · <span id="next-phase-name">Steady</span></small><strong id="next-recommendation">2.0–2.8 mph · 0–1% incline</strong></article></div><p class="recommendation-note">Optional, adjustable guidance—not a prescription. Set the treadmill yourself.</p>
               <div class="treadmill-fields"><details><summary>Manual settings for this phase</summary><div class="entry-grid"><label>Your speed (mph)<input type="number" id="manual-speed" min="0" max="15" step="0.1" inputmode="decimal" placeholder="Set on machine"></label><label>Your incline (%)<input type="number" id="manual-incline" min="0" max="20" step="0.5" inputmode="decimal" placeholder="Set on machine"></label></div><p class="manual-note">Reminders only; no treadmill hardware control.</p></details><details><summary>Enter actual treadmill readings</summary><p class="manual-note">Values shown by your treadmill. They are not GPS estimates and remain in this browser session while saving is disabled.</p><div class="entry-grid"><label>Distance (mi)<input type="number" id="treadmill-distance" min="0" max="100" step="0.01" inputmode="decimal" placeholder="Optional"></label><label>Average speed (mph)<input type="number" id="treadmill-speed" min="0" max="15" step="0.1" inputmode="decimal" placeholder="Optional"></label><label>Average incline (%)<input type="number" id="treadmill-incline" min="0" max="20" step="0.5" inputmode="decimal" placeholder="Optional"></label><label>Actual steps<input type="number" id="steps" min="0" max="150000" step="1" inputmode="numeric" placeholder="Optional"></label></div></details></div>
             </div>
+            <div id="outdoor-effort-options" hidden><div class="phase-grid"><article class="phase-card"><small>Warm-up effort</small><strong id="effort-current">Easy, conversational pace</strong></article><article class="phase-card"><small>Brisk effort</small><strong id="effort-next">Purposeful, still able to talk</strong></article></div><p class="recommendation-note">Comfort-based cues. Walk at your own pace and adjust as needed.</p></div>
           </article>
         </div>
         <p id="message" role="status" aria-live="polite"></p>
