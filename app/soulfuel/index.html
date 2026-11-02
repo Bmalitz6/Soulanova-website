@@ -3,9 +3,9 @@
 <title>SoulFuel | Soulanova</title><meta name="theme-color" content="#0b4b53">
 <link rel="stylesheet" href="/app/soulfuel/soulfuel.css"></head>
 <body><header><a href="/app/">← Soulanova</a><strong>✺ SoulFuel</strong><span>Nutrition & progress</span></header>
-<aside role="note" style="padding:16px;background:#fff5d9;color:#473b1f">Integrated preview · Account data only; no sample diary. Saving is disabled pending authenticated database/RLS verification and release approval. <a href="/app/release-preview/">Readiness &amp; navigation</a></aside><main><div class="heading"><div><small>YOUR PERSONAL NUTRITION</small><h1>Fuel your day.</h1><p>You set the goals. Track what matters to you.</p></div><span id="auth-status">Connecting…</span></div>
+<aside role="note" style="padding:16px;background:#fff5d9;color:#473b1f">Member preview · Explore the controls and view your existing history. Saving is temporarily unavailable. <a href="/app/?mode=signin#home">Your dashboard</a></aside><main><div class="heading"><div><small>YOUR PERSONAL NUTRITION</small><h1>Fuel your day.</h1><p>You set the goals. Track what matters to you.</p></div><span id="auth-status">Connecting…</span></div>
 <p id="message" role="status" aria-live="polite"></p>
-<section id="app" hidden>
+<nav class="nutrition-nav" aria-label="SoulFuel navigation"><a href="/app/?mode=signin#free-library">Recipe library</a> · <a href="/app/soulfuel/scan/">Barcode lookup</a> · <a href="/app/?mode=signin#home">Your dashboard</a></nav><section id="app" hidden>
 <div class="columns"><section class="panel"><h2>My daily goals</h2><p class="hint">Each metric is optional. Choose a target, minimum, or maximum. No required presets.</p>
 <div id="goals"></div><form id="goal-form" class="stack"><h3>Add or update a goal</h3>
 <label>Metric <select id="metric"><option value="calories|Calories|kcal">Calories</option><option value="protein|Protein|g">Protein</option><option value="carbs|Carbohydrates|g">Carbs</option><option value="fat|Fat|g">Fat</option><option value="total_sugar|Total sugar|g">Total sugar</option><option value="added_sugar|Added sugar|g">Added sugar</option><option value="fiber|Fiber|g">Fiber</option><option value="sodium|Sodium|mg">Sodium</option><option value="water|Water|ml">Water</option></select></label>

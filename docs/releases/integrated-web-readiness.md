@@ -16,7 +16,7 @@ This branch is not authorized for wholesale production deployment.
 
 ## Preview entry points
 
-- `/app/release-preview/`: component navigation and release gates.
+- `/app/release-preview/`: entry to the polished authenticated member dashboard.
 - `/app/?mode=signin` and `/app/?mode=signup`: existing Supabase auth/session handling.
 - `/app/walking/`: existing 12-week walking journey and personal history.
 - `/app/?mode=signin#meditation`: existing guided library.
@@ -25,7 +25,7 @@ This branch is not authorized for wholesale production deployment.
 - `/app/classes/beginner-tai-chi-foundations`: preserved published class.
 
 No sample adapter, sample diary, fake nutrition results, accounts or runtime test
-fixtures are shipped. The existing Supabase public configuration and auth code
+fixtures are shipped. The existing Supabase public configuration and sign-in/signup/recovery handlers
 are unchanged. `app/member-data.mjs` closes all new walking/nutrition mutation
 paths by default. Gates cannot be enabled with URL parameters or local storage.
 Browser tests temporarily intercept the helper only in an isolated fixture page;
@@ -48,8 +48,8 @@ this is not evidence of live database authorization.
 - Existing SQL files on the feature branch describe owner SELECT/INSERT/UPDATE/
   DELETE policies and authenticated grants. They have NOT been executed or assumed
   to match the live schema. No database administration connector is available.
-- Source preservation compares all existing files to production; only member
-  HTML/navigation and the meditation lifecycle implementation change in preview.
+- Source preservation compares all existing files to production; member
+  HTML/navigation, scoped progress rendering/requests and meditation lifecycle change in preview.
   All auth/config, homepage styling, videos, audio and other pages remain unchanged.
 - Browser fixtures persist only test rows under a dedicated local test key; they
   are not included in this branch. Real HealthKit/GPS/background mobile reliability
@@ -70,3 +70,54 @@ this is not evidence of live database authorization.
 
 No mobile/native/TestFlight changes, schema mutations or additional production
 components are deployed by this integrated preview.
+
+## Member dashboard and expanded QA update
+
+The technical link index now leads to the real authenticated member home. The
+home reuses the approved studio/branding assets, presents Tai Chi, SoulWalk and
+meditation as clear activity choices, and contains three expandable previews of
+the existing recipes with links to all six originals and the real account diary.
+No demo adapter, synthetic statistics or fake diary is included. Loading/read
+failures show unavailable values rather than zero totals.
+
+Additional preview fixes:
+
+- Clear member progress immediately on account changes and reject stale history
+  responses; bound history requests. Existing sign-in/signup/recovery handlers,
+  public Supabase configuration and production landing-page bytes are retained.
+- Gate unverified `workout_sessions` progress writes as well as walking/nutrition
+  writes. Completing a meditation cannot automatically write unverified progress.
+- Stop an active walking cue immediately when narration is turned off, paused or
+  a different week is selected; cancel device speech fallback as well.
+- Treat missing nutrient values as unknown, with a known-value subtotal notice.
+  Clear the previous day's foods while loading another date and on request/date
+  errors, so a failed request cannot label old foods as a different day's history.
+- Bound the complete barcode request/body read, abort superseded lookups, ignore
+  stale responses and hide old results for invalid/new codes. Pending-save retry
+  identity, serving conversions and duplicate guards remain intact.
+
+The expanded QA includes all 12 weekly schedules and five walking cue files;
+completion/save/history and two-account fixtures; all 17 actual voice/ocean pairs
+playing on desktop and mobile; unknown nutrition, historical-day selection,
+barcode serving/macro conversions, not-found/HTTP/timeout/stale-response states,
+manual fallback, and dashboard widths 320/390/768/1024/1440. All 25 MP3 assets
+(17 voices, 3 ocean tracks, 5 walking cues) decode completely and contain signal.
+Tai Chi's 600-second playback, audio, countdown and playlist are preserved.
+
+A read-only call to the real Open Food Facts product API returned a product and
+nutrient data; fixture barcode cases exercise failure paths without external
+writes. Camera scanning and outdoor GPS/locked-phone behavior require physical
+mobile-device review; synthetic GPS tests do not certify sensor accuracy.
+
+Live account verification remains BLOCKED: the available preview browser had no
+stored Supabase session, and no database administration connector is available.
+An authenticated session plus positive-control reads from two existing test
+accounts are needed to prove live read isolation. Anonymous denial and fixture
+isolation are explicitly not treated as proof of authenticated RLS. Live write
+policies/persistence need authorized schema-policy inspection and, if required,
+separate permission for disposable test records. No users, production rows,
+policies or schema were changed. All write gates remain closed.
+
+The dashboard/meditation/recipe presentation can be considered for an individually
+approved release after owner review. Walking/nutrition/progress writes are not
+publish-ready. No production push or promotion is authorized by this preview.

@@ -1,0 +1,33 @@
+{
+  "base_production_sha": "0a0e24a12694763c4a7742cea0c7c35bed021144",
+  "groups": {
+    "walking_nutrition_regressions": 52,
+    "meditation_actual_track_playback": 96,
+    "walking_program_and_cues": 44,
+    "dashboard_diary_barcode": 50,
+    "landing_auth_regressions": 44,
+    "tai_chi_class": 61,
+    "additional_responsive_layouts": 6
+  },
+  "total_browser_checks": 353,
+  "audio_files_completely_decoded_with_signal": 25,
+  "live_open_food_facts_read": "Product and nutrients returned; no food saved",
+  "live_authenticated_session_available": false,
+  "live_rls_verified": false,
+  "fixture_account_isolation_verified": true,
+  "write_gates": {
+    "soulwalk": false,
+    "soulfuel": false,
+    "progress": false
+  },
+  "database_or_schema_changed": false,
+  "production_deployed": false,
+  "typescript": "passed",
+  "lint": "unavailable: no lint script",
+  "physical_device_review_required": [
+    "camera scanning",
+    "outdoor GPS accuracy",
+    "locked-phone/background audio and timer behavior"
+  ],
+  "test_scope": "Browser auth/data fixtures are private local test harnesses, not deployed app code. Fixture isolation is not live RLS verification."
+}
