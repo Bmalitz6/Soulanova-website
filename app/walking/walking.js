@@ -24,7 +24,7 @@ function renderGuidance(){
  const status=phaseAt(week,elapsed),current=status.current,next=status.next;
  if(current){$('current-phase-name').textContent=phaseNames[current];$('current-recommendation').textContent=recommendation(treadmillLevel,current);}
  else{$('current-phase-name').textContent='Completed';$('current-recommendation').textContent='—';}
- $('next-phase-name').textContent=next?phaseNames[next]:'No next phase';$('next-recommendation').textContent=next?recommendation(treadmillLevel,next):'—';$('effort-current').textContent=current?effort(treadmillLevel,current):'—';$('effort-next').textContent=next?effort(treadmillLevel,next):'—';
+ $('next-phase-name').textContent=next?phaseNames[next]:'No next phase';$('next-recommendation').textContent=next?recommendation(treadmillLevel,next):'—';$('effort-current').textContent=effort(treadmillLevel,'warmup');$('effort-next').textContent=effort(treadmillLevel,'brisk');
 }
 function renderActuals(){
  const actualDistance=mode==='treadmill'?valueOf('treadmill-distance'):null;
