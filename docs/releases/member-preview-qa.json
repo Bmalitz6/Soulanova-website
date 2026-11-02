@@ -29,5 +29,54 @@
     "outdoor GPS accuracy",
     "locked-phone/background audio and timer behavior"
   ],
-  "test_scope": "Browser auth/data fixtures are private local test harnesses, not deployed app code. Fixture isolation is not live RLS verification."
+  "test_scope": "Browser auth/data fixtures are private local test harnesses, not deployed app code. Fixture isolation is not live RLS verification.",
+  "latest_preview_verification": {
+    "date": "2026-11-02",
+    "production_base_sha": "8f1400cf4c9ca06b481803d904ecb18af19965f0",
+    "desktop_mobile": {
+      "dashboard_navigation_without_reload": true,
+      "mobile_viewport": 390,
+      "mobile_horizontal_overflow": false,
+      "signin_signup_mode_routing": true
+    },
+    "meditation": {
+      "sessions": 17,
+      "all_voice_and_ocean_pairs_loaded_and_played": true,
+      "matching_track_durations": true,
+      "independent_voice_ocean_controls": true,
+      "pause_resume": true,
+      "audio_errors": 0
+    },
+    "soulwalk": {
+      "weeks": 12,
+      "timer_pause_resume_completion": true,
+      "recorded_start_cue_playback": true,
+      "cue_assets_http_200": 5,
+      "save_gate_closed": true
+    },
+    "soulfuel": {
+      "free_recipes": 6,
+      "dashboard_recipe_previews": 3,
+      "invalid_barcode_error": true,
+      "not_found_fixture_error": true,
+      "http_503_fixture_error": true,
+      "public_product_lookup_http": 200,
+      "write_gate_closed": true
+    },
+    "authenticated_read_only": {
+      "distinct_test_accounts": true,
+      "walking_ui_matches_rows": true,
+      "account_a_walk_rows": 4,
+      "account_b_walk_rows": 1,
+      "account_a_soulfuel_entries": 3,
+      "account_a_soulfuel_goals": 1,
+      "account_b_soulfuel_entries": 0,
+      "account_b_soulfuel_goals": 0,
+      "cross_account_reads_zero_rows": true
+    },
+    "disposable_rows_remaining": 2,
+    "privileged_cleanup_executed": false,
+    "supabase_schema_or_policy_changed": false,
+    "production_deployed": false
+  }
 }

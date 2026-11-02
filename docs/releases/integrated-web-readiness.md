@@ -121,3 +121,54 @@ policies or schema were changed. All write gates remain closed.
 The dashboard/meditation/recipe presentation can be considered for an individually
 approved release after owner review. Walking/nutrition/progress writes are not
 publish-ready. No production push or promotion is authorized by this preview.
+
+
+## Current integrated preview update — 2026-11-02
+
+Current preview branch: `preview/integrated-web-readiness-v2`, based on production
+main commit `8f1400cf4c9ca06b481803d904ecb18af19965f0` (including corrected Tai Chi
+014). It reuses the two reviewed integrated-preview commits and includes the
+approved Today’s Plan card and Browse Workouts action. The action uses the existing
+tab handler without a page reload. The root landing page, graphics, Log In / Join
+Free navigation, Tai Chi Foundations files, all published video assets and other
+published pages are outside the preview diff.
+
+Latest isolated local browser QA:
+
+- Desktop and 390px mobile checks passed for Today’s Plan, navigation, auth-mode
+  routes and responsive layout. Browse Workouts activated the existing Workouts tab
+  without reloading; the mobile page width remained 390px.
+- All 17 recorded meditation voice/ocean pairs loaded and played. The voice and
+  ocean controls changed their levels independently, and pause/resume passed.
+  Each pair reported matching 600- or 1,200-second tracks.
+- The 12-week SoulWalk schedule rendered. Start, pause, hold, resume and completion
+  passed. The recorded start cue played and all five cue files returned HTTP 200.
+  Save remains disabled in this local unauthenticated preview; no save was attempted.
+- SoulFuel rendered six Free Library recipes and three dashboard previews. Invalid
+  barcode, mocked product-not-found and mocked HTTP 503 states showed their expected
+  errors. The public test barcode returned HTTP 200 with a product. No food was
+  saved. Duplicate protection and calorie/macro/goal totals had been checked in the
+  prior authorized disposable-record tests and read-only account check.
+- The local smoke emitted no non-GET Supabase requests. SoulWalk, SoulFuel and
+  progress write gates remain false.
+
+Latest authenticated read-only check used the two existing, distinct test accounts
+without printing account identifiers. Each account's walking-history UI matched
+its own authenticated rows (A: 4 rows / 4,101 steps; B: 1 row / 1 step). SoulFuel
+read results were HTTP 200 (A: 3 entries and 1 goal; B: 0 entries and 0 goals); A's
+displayed totals matched its readable data. Cross-account reads returned zero rows
+for `soulwalk_sessions`, `nutrition_entries`, `nutrition_goals` and
+`workout_sessions`. The earlier disposable tests also confirmed repeat nutrition
+entry submissions are rejected with HTTP 409 in both directions.
+
+**Outstanding data-safety item:** of eight previously authorized disposable test
+records, six were cleaned. Exactly two disposable SoulWalk rows remain, one in each
+test account. Owner DELETE returned HTTP 403. Keep these rows until separately
+approved privileged cleanup; the prepared private cleanup SQL has not been run.
+No schema, RLS policy, grant, existing member data or production website code was
+changed in this preview work.
+
+**Release decision:** this build is for preview review only. SoulWalk/SoulFuel/progress
+writes remain closed. Production deployment is not authorized by this preview task.
+Camera scanning, physical GPS accuracy and locked-phone/background behavior still
+need device review.
