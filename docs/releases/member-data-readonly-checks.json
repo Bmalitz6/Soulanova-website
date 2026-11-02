@@ -1,0 +1,22 @@
+{
+  "checks": [
+    {
+      "table": "soulwalk_sessions",
+      "status": 401,
+      "code": "42501"
+    },
+    {
+      "table": "nutrition_goals",
+      "status": 401,
+      "code": "42501"
+    },
+    {
+      "table": "nutrition_entries",
+      "status": 401,
+      "code": "42501"
+    }
+  ],
+  "authenticated_rls_verified": false,
+  "schema_mutated": false,
+  "production_rows_written": false
+}
