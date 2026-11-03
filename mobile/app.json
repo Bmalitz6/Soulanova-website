@@ -1,0 +1,25 @@
+{
+  "expo": {
+    "name": "Soulanova",
+    "slug": "soulanova",
+    "scheme": "soulanova",
+    "version": "0.1.0",
+    "orientation": "portrait",
+    "userInterfaceStyle": "light",
+    "ios": {
+      "supportsTablet": true,
+      "bundleIdentifier": "com.soulanova.wellness",
+      "infoPlist": {
+        "NSLocationWhenInUseUsageDescription": "Soulanova uses your location only when you enable GPS during a walk."
+      }
+    },
+    "android": {
+      "package": "com.soulanova.wellness",
+      "permissions": [
+        "ACCESS_COARSE_LOCATION",
+        "ACCESS_FINE_LOCATION"
+      ]
+    },
+    "plugins": []
+  }
+}
