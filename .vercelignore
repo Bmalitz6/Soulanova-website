@@ -1,0 +1,11 @@
+# Local Development Supabase credentials are never part of a Production deployment.
+app/config.development.local.js
+.env
+.env.*
+**/.env
+**/.env.*
+# Review tooling and schema scripts are not client runtime assets.
+tests/
+**/*.test.*
+docs/
+supabase/

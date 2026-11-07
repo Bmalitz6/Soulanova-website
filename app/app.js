@@ -39,6 +39,11 @@ function openWorkout(w){
   state.selected=w.id;
   save();
 
+  if(w.id==='strength'){
+    window.location.href='/app/strength/';
+    return;
+  }
+
   if(w.id==='tai' && window.SoulanovaClasses){
     window.SoulanovaClasses.open();
     return;
