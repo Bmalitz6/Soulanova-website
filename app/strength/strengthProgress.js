@@ -1,4 +1,11 @@
 (() => {
+  function isProductionWebsiteHost(hostname) {
+    const host = String(hostname || '').toLowerCase();
+    return host === 'soulanova.com'
+      || host === 'www.soulanova.com'
+      || /^soulanova-website-[a-z0-9]+-soulanova\.vercel\.app$/.test(host);
+  }
+
   function isExpectedSupabaseUrl(value, expectedValue) {
     try {
       const actual = new URL(value);
@@ -41,7 +48,7 @@
       || [...workouts].sort((left, right) => (latestByWorkout.get(left.id) || '').localeCompare(latestByWorkout.get(right.id) || ''))[0];
   }
 
-  const api = { isExpectedSupabaseUrl, mergeCompletionRecords, completionCounts, pendingCompletionRecords, getRecommendedWorkout };
+  const api = { isProductionWebsiteHost, isExpectedSupabaseUrl, mergeCompletionRecords, completionCounts, pendingCompletionRecords, getRecommendedWorkout };
   if (typeof module !== 'undefined' && module.exports) module.exports = api;
   else globalThis.SoulStrengthProgress = api;
 })();

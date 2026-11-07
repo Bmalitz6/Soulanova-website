@@ -16,6 +16,15 @@ test('sync accepts only the exact HTTPS origin selected for the current environm
   assert.equal(progress.isExpectedSupabaseUrl('not a url', production), false);
 });
 
+test('protected SoulStrength Vercel Preview is classified as Production during initialization', () => {
+  const previewHost = 'soulanova-website-ri97xjx4w-soulanova.vercel.app';
+  const production = 'https://dscbavbnlubfmfhudqwy.supabase.co';
+  assert.equal(progress.isProductionWebsiteHost(previewHost), true);
+  assert.equal(progress.isExpectedSupabaseUrl(production, 'https://dscbavbnlubfmfhudqwy.supabase.co'), true);
+  assert.equal(progress.isProductionWebsiteHost('another-project-ri97xjx4w-soulanova.vercel.app'), false);
+  assert.equal(progress.isProductionWebsiteHost('soulstrength-preview.vercel.app'), false);
+});
+
 test('completion merge is member-isolated and idempotent by stable completion id', () => {
   const local = [record('completion-a', 'member-a', 'beginner-one', '2026-11-06T12:00:00.000Z')];
   const remote = [

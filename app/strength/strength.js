@@ -509,7 +509,7 @@
     });
     window.addEventListener('online', () => { void retryPendingCompletions(); void loadRemoteHistory(); });
     if (!progressTools || !window.supabase) throw Error('The SoulStrength progress service is not available.');
-    const productionHost = ['soulanova.com', 'www.soulanova.com'].includes(location.hostname.toLowerCase());
+    const productionHost = progressTools.isProductionWebsiteHost(location.hostname);
     const config = window.SOULANOVA_SUPABASE;
     if (!config?.url || !config?.publishableKey) throw Error('A verified Supabase configuration is required for SoulStrength accounts.');
     if (productionHost && !progressTools.isExpectedSupabaseUrl(config.url, 'https://dscbavbnlubfmfhudqwy.supabase.co')) throw Error('SoulStrength Production must use the approved Production Supabase project.');

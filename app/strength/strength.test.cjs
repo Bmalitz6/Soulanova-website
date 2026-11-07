@@ -79,6 +79,13 @@ test('level thumbnails, hero, and web player source references resolve', () => {
   assert.match(page, /supabase-js@2\.118\.0/);
 });
 
+test('library startup uses the shared Production-host classifier for protected Preview initialization', () => {
+  const source = fs.readFileSync(path.join(root, 'strength.js'), 'utf8');
+  assert.match(source, /progressTools\.isProductionWebsiteHost\(location\.hostname\)/);
+  assert.match(source, /productionHost && !progressTools\.isExpectedSupabaseUrl\(config\.url, 'https:\/\/dscbavbnlubfmfhudqwy\.supabase\.co'\)/);
+  assert.match(source, /!productionHost && window\.SOULANOVA_SUPABASE_DEVELOPMENT !== config/);
+});
+
 test('cross-platform completion migration is additive and enforces member-owned rows', () => {
   const migration = fs.readFileSync(path.join(root, '../../../Soulanova-SoulFuel/supabase/strength_workout_completions_v1.sql'), 'utf8');
   assert.match(migration, /create table if not exists public\.strength_workout_completions/);
