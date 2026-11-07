@@ -12,7 +12,7 @@ function configuredHost(hostname) {
   return window.SOULANOVA_SUPABASE?.url ?? null;
 }
 
-test('production config contains no Development endpoint and fails closed on non-production hosts', () => {
+test('production config contains no Development endpoint and fails closed outside approved hosts', () => {
   assert.doesNotMatch(configSource, /rhkaerduobytsmezllpe/);
   assert.equal(configuredHost('localhost'), null);
   assert.equal(configuredHost('preview.example.test'), null);
@@ -21,4 +21,10 @@ test('production config contains no Development endpoint and fails closed on non
 test('the official website domains retain the existing Production configuration', () => {
   assert.equal(new URL(configuredHost('www.soulanova.com')).hostname, 'dscbavbnlubfmfhudqwy.supabase.co');
   assert.equal(new URL(configuredHost('soulanova.com')).hostname, 'dscbavbnlubfmfhudqwy.supabase.co');
+});
+
+test('only generated Soulanova Vercel Preview hosts use the Production project', () => {
+  assert.equal(new URL(configuredHost('soulanova-website-f286e1n0c-soulanova.vercel.app')).hostname, 'dscbavbnlubfmfhudqwy.supabase.co');
+  assert.equal(configuredHost('another-project-f286e1n0c-soulanova.vercel.app'), null);
+  assert.equal(configuredHost('soulanova-website.preview.vercel.app'), null);
 });

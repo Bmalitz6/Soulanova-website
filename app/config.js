@@ -6,5 +6,9 @@ const SOULANOVA_PRODUCTION_SUPABASE = {
 };
 const SOULANOVA_PRODUCTION_DOMAINS = ['soulanova.com', 'www.soulanova.com'];
 const SOULANOVA_IS_PRODUCTION_DOMAIN = SOULANOVA_PRODUCTION_DOMAINS.includes(location.hostname.toLowerCase());
-if (SOULANOVA_IS_PRODUCTION_DOMAIN) window.SOULANOVA_SUPABASE = SOULANOVA_PRODUCTION_SUPABASE;
+// Vercel project preview deployments are protected by the project's SSO gate.
+// Permit only this project's generated deployment hostname shape so the
+// isolated, access-protected release preview can authenticate against Prod.
+const SOULANOVA_IS_PROTECTED_VERCEL_PREVIEW = /^soulanova-website-[a-z0-9]+-soulanova\.vercel\.app$/.test(location.hostname.toLowerCase());
+if (SOULANOVA_IS_PRODUCTION_DOMAIN || SOULANOVA_IS_PROTECTED_VERCEL_PREVIEW) window.SOULANOVA_SUPABASE = SOULANOVA_PRODUCTION_SUPABASE;
 else if (!window.SOULANOVA_SUPABASE) window.SOULANOVA_SUPABASE = null;
