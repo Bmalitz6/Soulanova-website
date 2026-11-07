@@ -42,7 +42,10 @@
   <script src="/app/strength/strengthProgress.js?v=20261107-workout-details"></script>
   <script src="/app/strength/strengthPlayback.js?v=20261107-workout-details"></script>
   <script>
-    if (!['soulanova.com', 'www.soulanova.com'].includes(location.hostname.toLowerCase())) {
+    const host = location.hostname.toLowerCase();
+    const productionDomain = ['soulanova.com', 'www.soulanova.com'].includes(host);
+    const protectedPreview = /^soulanova-website-[a-z0-9]+-soulanova\.vercel\.app$/.test(host);
+    if (!productionDomain && !protectedPreview) {
       document.write('<script src="/app/config.development.local.js"><\/script>');
     }
   </script>

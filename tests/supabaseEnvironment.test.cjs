@@ -28,3 +28,12 @@ test('only generated Soulanova Vercel Preview hosts use the Production project',
   assert.equal(configuredHost('another-project-f286e1n0c-soulanova.vercel.app'), null);
   assert.equal(configuredHost('soulanova-website.preview.vercel.app'), null);
 });
+
+test('approved Production Preview pages do not request the excluded Development config file', () => {
+  const memberPage = fs.readFileSync(path.join(__dirname, '../app/index.html'), 'utf8');
+  const strengthPage = fs.readFileSync(path.join(__dirname, '../app/strength/index.html'), 'utf8');
+  for (const source of [memberPage, strengthPage]) {
+    assert.ok(source.includes('/^soulanova-website-[a-z0-9]+-soulanova\\.vercel\\.app$/.test(host)'));
+    assert.match(source, /if\s*\(\s*!productionDomain\s*&&\s*!protectedPreview\s*\)[\s\S]{0,160}document\.write/);
+  }
+});
