@@ -32,7 +32,7 @@ const workoutCardMeta = {
   tai: {label:'TAI CHI', cta:'View Classes', image:'/app/images/workouts/tai-chi.jpg'},
   yoga: {label:'YOGA', cta:'View Session', image:'/app/images/workouts/yoga.jpg'},
   pilates: {label:'PILATES', cta:'View Session', image:'/app/images/workouts/pilates.jpg'},
-  strength: {label:'STRENGTH', cta:'View Session', image:'/app/images/workouts/strength.jpg'},
+  strength: {label:'STRENGTH', cta:'View Workouts', image:'/app/images/workouts/strength.jpg'},
   mobility: {label:'STRETCH & MOBILITY', cta:'View Session', image:'/app/images/workouts/mobility.jpg'},
   cardio: {label:'LOW-IMPACT CARDIO', cta:'View Session', image:'/app/images/workouts/cardio.jpg'},
   meditation: {label:'MEDITATION', cta:'View Sessions', image:'/app/images/workouts/meditation.jpg'}
@@ -41,6 +41,11 @@ const workoutCardMeta = {
 function openWorkout(w){
   state.selected=w.id;
   save();
+
+  if(w.id==='strength'){
+    window.location.href='/app/strength/';
+    return;
+  }
 
   if(w.id==='tai' && window.SoulanovaClasses){
     window.SoulanovaClasses.open();
@@ -150,7 +155,7 @@ document.querySelectorAll('[data-auth-mode]').forEach(b=>b.addEventListener('cli
 document.getElementById('existing-member-link').addEventListener('click',()=>setMode('signin'));
 const requestedMode=new URLSearchParams(window.location.search).get('mode');if(['signin','signup','reset'].includes(requestedMode))setMode(requestedMode);
 function setUser(user){if((currentUser?.id||null)!==(user?.id||null)){workoutRevision++;state.history=[];historyView=user?'loading':'idle';}currentUser=user;authBox.hidden=recoveryActive?false:!!user;memberApp.hidden=recoveryActive?true:!user;signOut.hidden=!user;memberLabel.textContent=user?.email||'Not signed in';const opt=document.getElementById('account-marketing');if(opt)opt.checked=user?.user_metadata?.marketing_opt_in===true;if(!user){state.history=[];historyView='idle';}renderStats();}
-async function refreshWorkouts(){if(!currentUser)return;const owner=currentUser.id,revision=++workoutRevision;historyView='loading';renderStats();try{const {bounded}=await import('/app/member-data.mjs');const {data,error}=await bounded(signal=>client.from('workout_sessions').select('id,workout_name,category,duration_minutes,completed_at').eq('user_id',owner).order('completed_at',{ascending:true}).limit(1000).abortSignal(signal));if(currentUser?.id!==owner||revision!==workoutRevision)return;if(error)throw error;state.history=(data||[]).map(r=>({id:workouts.find(w=>w.title===r.workout_name&&w.category===r.category)?.id||'',at:r.completed_at,dbid:r.id,minutes:r.duration_minutes,name:r.workout_name,category:r.category}));historyView='ready';renderStats();}catch(error){if(currentUser?.id!==owner||revision!==workoutRevision)return;state.history=[];historyView='error';renderStats();throw error;}}
+async function refreshWorkouts(){if(!currentUser)return;const owner=currentUser.id,revision=++workoutRevision;historyView='loading';renderStats();try{const {bounded}=await import('/app/member-data.mjs');const [sessions,strength]=await Promise.all([bounded(signal=>client.from('workout_sessions').select('id,user_id,workout_name,category,duration_minutes,completed_at').eq('user_id',owner).order('completed_at',{ascending:true}).limit(1000).abortSignal(signal)),bounded(signal=>client.from('strength_workout_completions').select('completion_id,user_id,workout_id,workout_title,difficulty,duration_minutes,completed_at').eq('user_id',owner).order('completed_at',{ascending:true}).limit(1000).abortSignal(signal))]);if(currentUser?.id!==owner||revision!==workoutRevision)return;if(sessions.error&&!window.SoulanovaMemberProgress.isMissingWorkoutSessionsTable(sessions.error))throw sessions.error;if(strength.error)throw strength.error;state.history=window.SoulanovaMemberProgress.mergeHistory(owner,sessions.error?[]:sessions.data||[],strength.data||[]);historyView='ready';renderStats();}catch(error){if(currentUser?.id!==owner||revision!==workoutRevision)return;state.history=[];historyView='error';renderStats();throw error;}}
 async function requireProgressWrite(){const {assertWriteReady}=await import('/app/member-data.mjs');assertWriteReady('progress');}
 async function addWorkout(w){await requireProgressWrite();if(!currentUser)throw Error('Please sign in first');const {error}=await client.from('workout_sessions').insert({user_id:currentUser.id,workout_name:w.title,category:w.category,duration_minutes:w.minutes});if(error)throw error;await refreshWorkouts();}
 async function deleteWorkout(id){await requireProgressWrite();if(!currentUser)return;const {error}=await client.from('workout_sessions').delete().eq('id',id).eq('user_id',currentUser.id);if(error)throw error;await refreshWorkouts();}
