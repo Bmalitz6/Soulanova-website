@@ -1,0 +1,175 @@
+{
+  "github_base_sha": "1b09f3e897948b16a8a7c4aa4930f9fe8fb8b7ef",
+  "source_snapshot_sha": "ba552c660c343a8242fc84069871965875e1d747",
+  "candidate_branch": "feature/soulfuel-clean-preview-2026-11-09",
+  "files": [
+    {
+      "path": "api/foodfacts.js",
+      "source_sha256": "6ca97b5d6b62a10d3dd528aa985d14e41a6c9849b984bd1548b43734bfa03ffa",
+      "candidate_sha256": "6ca97b5d6b62a10d3dd528aa985d14e41a6c9849b984bd1548b43734bfa03ffa",
+      "adapted": false
+    },
+    {
+      "path": "api/foodscore-availability.js",
+      "source_sha256": "001197429e0e521f965f5adbbe0e8f7584cce271ab254d32338013f4817284f2",
+      "candidate_sha256": "001197429e0e521f965f5adbbe0e8f7584cce271ab254d32338013f4817284f2",
+      "adapted": false
+    },
+    {
+      "path": "app/soulfuel/food-diary-core.js",
+      "source_sha256": "6e8229cb176561fa02706f5b938a9ff85b06288f6637019c74ded3ae929ce5a5",
+      "candidate_sha256": "6e8229cb176561fa02706f5b938a9ff85b06288f6637019c74ded3ae929ce5a5",
+      "adapted": false
+    },
+    {
+      "path": "app/soulfuel/foodscore-availability.js",
+      "source_sha256": "5b1843a1c30354c167aa1b38190a8ea581ae4b5f4e60e73b59c4cd0153a87660",
+      "candidate_sha256": "5b1843a1c30354c167aa1b38190a8ea581ae4b5f4e60e73b59c4cd0153a87660",
+      "adapted": false
+    },
+    {
+      "path": "app/soulfuel/foodscore-core.js",
+      "source_sha256": "771c6bd8c92c84addd77ba0051e436428655b2bd115af9dfdb38e573d647e70b",
+      "candidate_sha256": "771c6bd8c92c84addd77ba0051e436428655b2bd115af9dfdb38e573d647e70b",
+      "adapted": false
+    },
+    {
+      "path": "app/soulfuel/foodscore-scanner.js",
+      "source_sha256": "083268ece78dcd7b398555c49b44e0768cf1f3b5af96ea5b8c781a435b847cee",
+      "candidate_sha256": "083268ece78dcd7b398555c49b44e0768cf1f3b5af96ea5b8c781a435b847cee",
+      "adapted": false
+    },
+    {
+      "path": "app/soulfuel/foodscore.css",
+      "source_sha256": "1823a1ea90ada2fc77bc6ee793d4665279f76c17a6f5f7b884da5d720f3ac0ee",
+      "candidate_sha256": "1823a1ea90ada2fc77bc6ee793d4665279f76c17a6f5f7b884da5d720f3ac0ee",
+      "adapted": false
+    },
+    {
+      "path": "app/soulfuel/foodscore.js",
+      "source_sha256": "f18d2d866fc3d95ba946a8e7379a934f9e9b03efedee5d03efc291011b7b09eb",
+      "candidate_sha256": "f18d2d866fc3d95ba946a8e7379a934f9e9b03efedee5d03efc291011b7b09eb",
+      "adapted": false
+    },
+    {
+      "path": "app/soulfuel/index.html",
+      "source_sha256": "b5738d170805dca803d07489b450b4d6ef524fd7031961c31a15af1b6a8663d7",
+      "candidate_sha256": "8b84d73580b55815c6a10d4b61366e33a6097f9f3eb9a77ade86bd416bbbd68c",
+      "adapted": true
+    },
+    {
+      "path": "app/soulfuel/recipe-library/Soulanova_Mediterranean_Recipe_Library/README.txt",
+      "source_sha256": "ed808d1b0bdd14fc3934c0f9bc27b3ad04f9702f9a6ec97d43c04e77100ff1f9",
+      "candidate_sha256": "ed808d1b0bdd14fc3934c0f9bc27b3ad04f9702f9a6ec97d43c04e77100ff1f9",
+      "adapted": false
+    },
+    {
+      "path": "app/soulfuel/recipe-library/Soulanova_Mediterranean_Recipe_Library/breakfast.html",
+      "source_sha256": "3dc624f87059122a1eb8b23d67f5346f6e3bd0f4459e3d428bd815f972dea0f5",
+      "candidate_sha256": "3dc624f87059122a1eb8b23d67f5346f6e3bd0f4459e3d428bd815f972dea0f5",
+      "adapted": false
+    },
+    {
+      "path": "app/soulfuel/recipe-library/Soulanova_Mediterranean_Recipe_Library/dinner.html",
+      "source_sha256": "00fb597812073c0c00ac5d7036106e1e19d5013cab797841609b33ca10e14ca5",
+      "candidate_sha256": "00fb597812073c0c00ac5d7036106e1e19d5013cab797841609b33ca10e14ca5",
+      "adapted": false
+    },
+    {
+      "path": "app/soulfuel/recipe-library/Soulanova_Mediterranean_Recipe_Library/index.html",
+      "source_sha256": "598faffdeb338c240d066d751e8c9ddf9b8ba1e2f7617b45ddc31ab7f3a2c2e3",
+      "candidate_sha256": "598faffdeb338c240d066d751e8c9ddf9b8ba1e2f7617b45ddc31ab7f3a2c2e3",
+      "adapted": false
+    },
+    {
+      "path": "app/soulfuel/recipe-library/Soulanova_Mediterranean_Recipe_Library/lunch.html",
+      "source_sha256": "922e7e1531baeb1d75dd145750513cf2dd27e9e895450369e8ebd5d4869a5a1b",
+      "candidate_sha256": "922e7e1531baeb1d75dd145750513cf2dd27e9e895450369e8ebd5d4869a5a1b",
+      "adapted": false
+    },
+    {
+      "path": "app/soulfuel/recipe-library/Soulanova_Mediterranean_Recipe_Library/recipe_content_review.csv",
+      "source_sha256": "3647b8642cc11de3f4eb666073c696f8f7e24eb8557aec2302d94810b7b337b6",
+      "candidate_sha256": "3647b8642cc11de3f4eb666073c696f8f7e24eb8557aec2302d94810b7b337b6",
+      "adapted": false
+    },
+    {
+      "path": "app/soulfuel/recipe-library/Soulanova_Mediterranean_Recipe_Library/recipes.json",
+      "source_sha256": "5264577f659b24672e9a1e042c9739248c8c6db6427673e065796e30e4a1808e",
+      "candidate_sha256": "5264577f659b24672e9a1e042c9739248c8c6db6427673e065796e30e4a1808e",
+      "adapted": false
+    },
+    {
+      "path": "app/soulfuel/recipe-library/Soulanova_Mediterranean_Recipe_Library/snacks.html",
+      "source_sha256": "adeb538d0b76dab00ba79d56dd009721142463691f11fa2ea58d57cda8e932a8",
+      "candidate_sha256": "adeb538d0b76dab00ba79d56dd009721142463691f11fa2ea58d57cda8e932a8",
+      "adapted": false
+    },
+    {
+      "path": "docs/release2/OPEN_FOOD_FACTS_READINESS.md",
+      "source_sha256": "4a569cfa3b3abc8713dce181bcb29d2bda096347fa0070e0c49f274d53e9e84c",
+      "candidate_sha256": "22073c11972e7a2964dd114d8684e6c9592b6eafc5bfca967da5e074306d8e27",
+      "adapted": true
+    },
+    {
+      "path": "docs/release2/SOULFUEL_75_RECIPE_RECOVERY_2026-11-09.md",
+      "source_sha256": "b35242dc672a135a3ed5fcd36594af6dbe334a7bb6aea9bd645955ef68f2b738",
+      "candidate_sha256": "f1744d2cf6cfcc3f101d93177af7776c577ccb56fbc7c77b24d2ea60cf462ac1",
+      "adapted": true
+    },
+    {
+      "path": "docs/release2/SOULFUEL_NUTRITION_EXPANSION_PLAN_2026-11-09.md",
+      "source_sha256": "6b52aa3dca707055beb2616002bf6c42833c70bb43e2661abff2311d8dd69ee7",
+      "candidate_sha256": "c4a1b26d47993831dbd40686ffb7a19e4241ad285811a6281c44bf98784dfa24",
+      "adapted": true
+    },
+    {
+      "path": "docs/release2/SOULFUEL_PREVIEW_REDIS_AND_FIRST_TEST_2026-11-09.md",
+      "source_sha256": "c1a47ea57eaa7d8936e740981e084dd9b49f30dee4783bcfec0f88ff5d5f9ed3",
+      "candidate_sha256": "9f7a41dd7a5eebd20ef694d1ae0045ce37aa9c7b0e134821173db56a514f6c90",
+      "adapted": true
+    },
+    {
+      "path": "docs/release2/SOULFUEL_SESSION3_OWNER_HANDOFF.md",
+      "source_sha256": "2ae89496bddd81be414b18185bbe0de1267356abf0d29e3eef755a6283cc25ce",
+      "candidate_sha256": "f820d3174271db2baa68a93f7c8f1f3250f75c3eab3c2dde07aa3a7d83591a02",
+      "adapted": true
+    },
+    {
+      "path": "lib/foodscore-preview.js",
+      "source_sha256": "8e8e8c9bb27d65f3a0f9ce0fb2f0b2c01aaa75b63e1e86e0096ce104b65ab68b",
+      "candidate_sha256": "8e8e8c9bb27d65f3a0f9ce0fb2f0b2c01aaa75b63e1e86e0096ce104b65ab68b",
+      "adapted": false
+    },
+    {
+      "path": "tests/foodfacts-production.test.cjs",
+      "source_sha256": "533a57d2b1d3137bbc846d8f302b6dae736c860217807037a6f7903cf35d90b7",
+      "candidate_sha256": "1c2bb1a445a45279ae74c4dfd7de9c8c73508d0aa3f6a680c48b75c7ec347929",
+      "adapted": true
+    },
+    {
+      "path": "tests/soulfuel-food-diary.test.cjs",
+      "source_sha256": "89f0712a124feba3e8a4c5c605c794a7155dc61fc137c9d94781b8441af4401c",
+      "candidate_sha256": "971620e716fc546202596b3313a272f5a4d34d3f89121407c72cc0af53dd8914",
+      "adapted": true
+    },
+    {
+      "path": "tests/soulfuel-foodscore-scanner.test.cjs",
+      "source_sha256": "b02043b97ff8cdedccb916ec96d4a1e4bc9184107cb87b901a4d5fe8c7b39fe1",
+      "candidate_sha256": "9e70f19c27238d1f2f91cfa4ef80d05e2d1b4f1c2d2eeed6ea33226e29a1b026",
+      "adapted": true
+    },
+    {
+      "path": "tests/soulfuel-preview-gate.test.cjs",
+      "source_sha256": "de077ca8c101e0a6818a7dba8d0dfeef0865bb10148aa27d671a26d9f2091f04",
+      "candidate_sha256": "de077ca8c101e0a6818a7dba8d0dfeef0865bb10148aa27d671a26d9f2091f04",
+      "adapted": false
+    },
+    {
+      "path": "tests/soulfuel-recipe-library.test.cjs",
+      "source_sha256": "48d280afb4d333fd108f4e5032f2e796fb41f8084ce592e5d289e47f327b64cf",
+      "candidate_sha256": "48d280afb4d333fd108f4e5032f2e796fb41f8084ce592e5d289e47f327b64cf",
+      "adapted": false
+    }
+  ]
+}
