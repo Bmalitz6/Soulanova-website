@@ -9,3 +9,27 @@ tests/
 **/*.test.*
 docs/
 supabase/
+# SoulStretch source copies remain in this worktree and are excluded only
+# because byte-identical, hash-addressed public Storage objects were verified.
+app/stretching/media/IMG_4096.mov
+app/stretching/media/IMG_4097.mov
+app/stretching/media/IMG_4098.mov
+app/stretching/media/IMG_4099.mp4
+app/stretching/media/IMG_4100.mp4
+app/stretching/media/IMG_4102.mp4
+app/stretching/media/IMG_4103.mp4
+app/stretching/media/IMG_4104.mov
+app/stretching/media/IMG_4105.mov
+app/stretching/media/IMG_4106.mp4
+app/stretching/media/IMG_4107.mp4
+app/stretching/media/IMG_4108.mov
+app/stretching/media/IMG_4111.mp4
+app/stretching/media/IMG_4112.mp4
+app/stretching/media/IMG_4113.mov
+app/stretching/media/IMG_4114.mp4
+app/stretching/media/IMG_4115.mp4
+app/stretching/media/IMG_4117.mp4
+app/stretching/media/IMG_4120.mp4
+app/stretching/media/IMG_4121.mp4
+app/stretching/media/IMG_4122.mp4
+app/stretching/media/IMG_4123.mp4

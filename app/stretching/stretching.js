@@ -1,0 +1,44 @@
+'use strict';
+(()=>{
+ const $=id=>document.getElementById(id),video=$('demo');
+ const {movements,routines}=window.SoulStretchCatalog;
+ let member=null,routine=null,index=0,remaining=30,interval=null,playing=false,filter='All',completed=[];
+ let generation=0,lastTick=0,authRevision=0,historyReady=false,completionId=null;const practiced=new Set();const progress=window.SoulStretchProgress;
+ function src(m){return window.SoulStretchCatalog.mediaUrl(m.file,m.sha256,window.SOULANOVA_SOULSTRETCH_PUBLIC_BASE)}
+ function stop(){generation++;if(interval)clearInterval(interval);interval=null;playing=false;video.pause();}
+ function setMovement(m){$('movement-name').textContent=m.name;$('instruction').textContent=m.instruction;$('position').textContent=routine?`${routine.title} · Movement ${index+1} of ${routine.ids.length}`:`${m.category} · ${Math.round(m.seconds)} second demonstration`;$('demo').src=src(m);video.load();$('clock').textContent=`00:${String(remaining).padStart(2,'0')}`;$('fill').style.width='0%';$('timer-state').textContent='Ready when you are.';$('toggle').textContent='Start movement';$('previous').disabled=!routine||index===0;$('next').textContent=routine&&index===routine.ids.length-1?'Complete routine':'Next →'}
+ function current(){return routine?movements.find(m=>m.id===routine.ids[index]):null}
+ function renderRoutines(){const list=$('routine-list');list.replaceChildren();routines.forEach(item=>{const card=document.createElement('article');card.className='routine';const tag=document.createElement('p');tag.className='eyebrow';tag.textContent=item.category+' · ABOUT '+item.minutes+' MIN';const title=document.createElement('h3');title.textContent=item.title;const desc=document.createElement('p');desc.textContent=item.description;const button=document.createElement('button');button.className='action';button.textContent='Start routine';button.addEventListener('click',()=>{stop();routine=item;completionId=crypto.randomUUID();practiced.clear();index=0;remaining=30;$('routines').hidden=true;$('player').hidden=false;setMovement(current());window.scrollTo({top:0,behavior:'smooth'})});card.append(tag,title,desc,button);list.append(card)})}
+ function renderFilters(){const cats=['All','Upper body','Hips','Lower body'];const box=$('filters');box.replaceChildren();cats.forEach(c=>{const b=document.createElement('button');b.className='filter'+(filter===c?' active':'');b.textContent=c;b.addEventListener('click',()=>{filter=c;renderFilters();renderMovements()});box.append(b)})}
+ function renderMovements(){const box=$('movements');box.replaceChildren();movements.filter(m=>m.category===filter||filter==='All').forEach(m=>{const row=document.createElement('article');row.className='movement';const copy=document.createElement('div');const name=document.createElement('strong');name.textContent=m.name;const meta=document.createElement('small');meta.textContent=`${m.category} · ${Math.round(m.seconds)}s demo${m.status==='review'?' · Review required':''}`;const button=document.createElement('button');button.className='quiet';button.textContent='View';button.addEventListener('click',()=>{stop();routine=null;remaining=30;$('routines').hidden=true;$('player').hidden=false;setMovement(m);window.scrollTo({top:0,behavior:'smooth'})});copy.append(name,document.createElement('br'),meta);row.append(copy,button);box.append(row)})}
+ async function saveCompletion(item,expected,revision){
+  if(!historyReady){$('history-status').textContent='Routine completed. Saving is paused because existing history could not be read; nothing was overwritten.';return;}
+  if(!navigator.locks){$('history-status').textContent='Routine completed. This browser cannot safely coordinate history across tabs; existing history was preserved.';return;}
+  try{await navigator.locks.request('soulanova-stretch-history:'+(expected||'guest'),()=>{
+   if((member?.id||null)!==expected||authRevision!==revision)return;
+   const result=progress.append(localStorage,expected,item);completed=result.entries;renderHistory();
+   $('history-status').textContent=(expected?'Saved for this member on this browser.':'Saved as guest history on this browser.')+' Cloud saving remains paused; history is not cross-device synced.';
+  });}catch{historyReady=false;$('history-status').textContent='Routine completed, but local history could not be saved. Existing data was preserved; refresh to retry.';}
+ }
+ function renderHistory(){const box=$('history-list');box.replaceChildren();completed.slice(0,100).forEach(item=>{const row=document.createElement('div');row.className='history-row';row.textContent=`${item.title} · ${new Date(item.completedAt).toLocaleDateString()}`;box.append(row)})}
+ function finish(){
+  stop();const done=routine,expected=member?.id||null,revision=authRevision,id=completionId;routine=null;completionId=null;
+  if(done){if(done.ids.every(id=>practiced.has(id))){const item={completionId:id,routineId:done.id,title:done.title,completedAt:new Date().toISOString(),movementCount:done.ids.length,minutes:done.minutes,practicedSeconds:done.ids.length*30};void saveCompletion(item,expected,revision);}else $('history-status').textContent='Routine ended with skipped or unfinished timers. No completion was logged.';}
+  $('player').hidden=true;$('routines').hidden=false;window.scrollTo({top:0,behavior:'smooth'});
+ }
+ function drawTimer(){$('clock').textContent=`00:${String(Math.ceil(remaining)).padStart(2,'0')}`;$('fill').style.width=`${(30-remaining)/30*100}%`;}
+ function beginTimer(){if(playing||document.hidden)return;if(remaining<=0)remaining=30;playing=true;lastTick=performance.now();$('toggle').textContent='Pause';$('timer-state').textContent='Move at a comfortable pace.';
+  interval=setInterval(()=>{if(document.hidden||video.paused){stop();return;}const now=performance.now();remaining=Math.max(0,remaining-(now-lastTick)/1000);lastTick=now;drawTimer();if(remaining===0){if(routine)practiced.add(current().id);stop();$('timer-state').textContent='Timer complete. Choose Next when ready.';$('toggle').textContent='Start again';}},100);
+ }
+ $('toggle').addEventListener('click',async()=>{if(playing){stop();$('toggle').textContent='Resume';$('timer-state').textContent='Paused';return;}const ticket=generation;try{await video.play();if(ticket===generation&&!document.hidden)beginTimer();}catch{if(ticket===generation)$('timer-state').textContent='Playback could not start. Try again when ready.';}});
+ video.addEventListener('play',beginTimer);video.addEventListener('pause',()=>{if(playing){stop();$('toggle').textContent='Resume';$('timer-state').textContent='Paused';}});
+ document.addEventListener('visibilitychange',()=>{if(document.hidden){stop();$('toggle').textContent='Resume';$('timer-state').textContent='Paused while this page is hidden.';}});
+ $('previous').addEventListener('click',()=>{if(!routine||index<=0)return;stop();index--;remaining=30;setMovement(current())});$('next').addEventListener('click',()=>{if(!routine)return;if(index+1>=routine.ids.length){finish();return}stop();index++;remaining=30;setMovement(current())});$('return').addEventListener('click',()=>{stop();$('player').hidden=true;$('routines').hidden=false});video.addEventListener('ended',()=>{if(playing)video.currentTime=0});
+ let client=null;const cfg=window.SOULANOVA_SUPABASE||{};
+ function applyMember(user){const prior=member?.id||null,next=user?.id||null;authRevision++;if(prior!==next){stop();routine=null;completionId=null;practiced.clear();$('player').hidden=true;$('routines').hidden=false;}member=user||null;completed=[];historyReady=false;
+  try{completed=progress.read(localStorage,next);historyReady=true;$('history-status').textContent='History is local to this browser. Cloud saving remains paused.';}catch{$('history-status').textContent='Existing browser history could not be read. Saving is paused; no data was overwritten.';}renderHistory();$('identity').textContent=next?'Signed in. Completion history is private to this member on this browser.':'Guest practice. Sign in through Member space to use member-specific local history.';
+ }
+ if(cfg.url&&cfg.publishableKey&&window.supabase){client=window.supabase.createClient(cfg.url,cfg.publishableKey,{auth:{flowType:'pkce',persistSession:true,autoRefreshToken:true}});client.auth.onAuthStateChange((_event,session)=>applyMember(session?.user));const revision=authRevision;client.auth.getUser().then(({data,error})=>{if(revision!==authRevision)return;if(error){$('identity').textContent='Sign-in could not be verified. Saving is paused.';}else applyMember(data?.user);}).catch(()=>{if(revision===authRevision)$('identity').textContent='Sign-in could not be verified. Saving is paused.';});}else $('identity').textContent='Member connection is unavailable. Saving is paused.';
+
+ renderRoutines();renderFilters();renderMovements();
+})();

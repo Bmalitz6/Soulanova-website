@@ -1,0 +1,249 @@
+{
+  "approval_status": "Owner-approved for Production \u2014 exact reviewed SHA-256",
+  "approval_source": "Explicit owner instruction in this conversation: SOULANOVA SOULSTRETCH \u2014 USER PRODUCTION APPROVAL",
+  "scope": "Only the 22 exact filenames/movement mappings/SHA-256 values reviewed in docs/release2/soulstretch-review.html and its companion JSON; no alternates or raw/unreviewed assets. Asset approval does not authorize deployment, database changes, or history write enablement.",
+  "assets": [
+    {
+      "filename": "IMG_4096.mov",
+      "duration_seconds": 28.433,
+      "resolution": "1104x816",
+      "size_bytes": 13013185,
+      "sha256": "de62b10902b60eea026ad970c9577c6c9a8b77a38a00fec74c5da63f06f14042",
+      "movement_identification": "Shoulder Stretch",
+      "category": "Upper body",
+      "approval_status": "Owner-approved for Production \u2014 exact reviewed SHA-256",
+      "approval_record": "SOULSTRETCH_OWNER_APPROVAL_2026-11-08"
+    },
+    {
+      "filename": "IMG_4097.mov",
+      "duration_seconds": 29.067,
+      "resolution": "1104x816",
+      "size_bytes": 11732973,
+      "sha256": "8ea07fdbc8de8f1c30e8c3ca645c00e2903b061753f09c7816c91345800297d6",
+      "movement_identification": "Overhead shoulder stretch",
+      "category": "Upper body",
+      "approval_status": "Owner-approved for Production \u2014 exact reviewed SHA-256",
+      "approval_record": "SOULSTRETCH_OWNER_APPROVAL_2026-11-08"
+    },
+    {
+      "filename": "IMG_4098.mov",
+      "duration_seconds": 29.0,
+      "resolution": "1104x816",
+      "size_bytes": 11519724,
+      "sha256": "e5508186a3bed9c7e3868af88800db7bb5673a8cb8b5eb6a559d7d25d50e28a1",
+      "movement_identification": "Overhead reach",
+      "category": "Upper body",
+      "approval_status": "Owner-approved for Production \u2014 exact reviewed SHA-256",
+      "approval_record": "SOULSTRETCH_OWNER_APPROVAL_2026-11-08"
+    },
+    {
+      "filename": "IMG_4099.mp4",
+      "duration_seconds": 35.042,
+      "resolution": "1104x816",
+      "size_bytes": 14245425,
+      "sha256": "420766c54d90a97b78e1e624415d0f415d9ba3e0ac89253eb811129bf83d8e71",
+      "movement_identification": "Standing forward fold",
+      "category": "Lower body",
+      "approval_status": "Owner-approved for Production \u2014 exact reviewed SHA-256",
+      "approval_record": "SOULSTRETCH_OWNER_APPROVAL_2026-11-08"
+    },
+    {
+      "filename": "IMG_4100.mp4",
+      "duration_seconds": 29.0,
+      "resolution": "1104x816",
+      "size_bytes": 11910204,
+      "sha256": "51ac818a7a6e6c13a40a67187f319cd5dfca688f13e15637becbebaca81b553f",
+      "movement_identification": "Standing hamstring stretch, variation A",
+      "category": "Lower body",
+      "approval_status": "Owner-approved for Production \u2014 exact reviewed SHA-256",
+      "approval_record": "SOULSTRETCH_OWNER_APPROVAL_2026-11-08"
+    },
+    {
+      "filename": "IMG_4102.mp4",
+      "duration_seconds": 29.0,
+      "resolution": "1104x816",
+      "size_bytes": 10973953,
+      "sha256": "5dae18420038711226d0867eed9639b555d3a7e20ee4c6b455934ec1e2652359",
+      "movement_identification": "Staggered-stance hip-flexor stretch, variation A",
+      "category": "Hips",
+      "approval_status": "Owner-approved for Production \u2014 exact reviewed SHA-256",
+      "approval_record": "SOULSTRETCH_OWNER_APPROVAL_2026-11-08"
+    },
+    {
+      "filename": "IMG_4103.mp4",
+      "duration_seconds": 29.0,
+      "resolution": "1104x816",
+      "size_bytes": 11661660,
+      "sha256": "e90cb34e31a28cb810011d02b5db0656385beef4a5dcbe5c2df76f3918cf6370",
+      "movement_identification": "Staggered-stance hip-flexor stretch, variation B",
+      "category": "Hips",
+      "approval_status": "Owner-approved for Production \u2014 exact reviewed SHA-256",
+      "approval_record": "SOULSTRETCH_OWNER_APPROVAL_2026-11-08"
+    },
+    {
+      "filename": "IMG_4104.mov",
+      "duration_seconds": 27.733,
+      "resolution": "1104x816",
+      "size_bytes": 11649508,
+      "sha256": "3df3b1e8579b8696a77dcf8a17867ee033ae3197465fc21fafd534fe2a1a6f16",
+      "movement_identification": "Standing figure-four stretch, variation A",
+      "category": "Hips",
+      "approval_status": "Owner-approved for Production \u2014 exact reviewed SHA-256",
+      "approval_record": "SOULSTRETCH_OWNER_APPROVAL_2026-11-08"
+    },
+    {
+      "filename": "IMG_4105.mov",
+      "duration_seconds": 26.333,
+      "resolution": "1104x816",
+      "size_bytes": 12194334,
+      "sha256": "55c6cd81b240cfbe192823ffd8b9bcd404e207fb1a72ac5174ddec675dbb87f6",
+      "movement_identification": "Standing figure-four stretch, variation B",
+      "category": "Hips",
+      "approval_status": "Owner-approved for Production \u2014 exact reviewed SHA-256",
+      "approval_record": "SOULSTRETCH_OWNER_APPROVAL_2026-11-08"
+    },
+    {
+      "filename": "IMG_4106.mp4",
+      "duration_seconds": 29.0,
+      "resolution": "1104x816",
+      "size_bytes": 13420833,
+      "sha256": "f979dd234a23dbc3a985dbf3a4ace006a3175f9288e3443306784ea41e7fa7e5",
+      "movement_identification": "Lateral lunge / adductor stretch",
+      "category": "Lower body",
+      "approval_status": "Owner-approved for Production \u2014 exact reviewed SHA-256",
+      "approval_record": "SOULSTRETCH_OWNER_APPROVAL_2026-11-08"
+    },
+    {
+      "filename": "IMG_4107.mp4",
+      "duration_seconds": 29.0,
+      "resolution": "1104x816",
+      "size_bytes": 11101641,
+      "sha256": "59ca2a8c7e6c396b7efcde94689f05a037f673578943b8d1a4a9d5486f80a2f5",
+      "movement_identification": "Cross-body shoulder stretch, variation A",
+      "category": "Upper body",
+      "approval_status": "Owner-approved for Production \u2014 exact reviewed SHA-256",
+      "approval_record": "SOULSTRETCH_OWNER_APPROVAL_2026-11-08"
+    },
+    {
+      "filename": "IMG_4108.mov",
+      "duration_seconds": 29.0,
+      "resolution": "1104x816",
+      "size_bytes": 11101909,
+      "sha256": "0f5cc134cc36bf77138cb30b0eb33b5503e259c73d3b239e91aa1e9da50c51d9",
+      "movement_identification": "Cross-body shoulder stretch, variation B",
+      "category": "Upper body",
+      "approval_status": "Owner-approved for Production \u2014 exact reviewed SHA-256",
+      "approval_record": "SOULSTRETCH_OWNER_APPROVAL_2026-11-08"
+    },
+    {
+      "filename": "IMG_4111.mp4",
+      "duration_seconds": 29.0,
+      "resolution": "1104x816",
+      "size_bytes": 14240374,
+      "sha256": "4d688dcacb9e280c8e1a0d87f78af431d5bcf6bc3ad60fe52c6029d38a0b37ee",
+      "movement_identification": "Standing calf stretch, variation A",
+      "category": "Lower body",
+      "approval_status": "Owner-approved for Production \u2014 exact reviewed SHA-256",
+      "approval_record": "SOULSTRETCH_OWNER_APPROVAL_2026-11-08"
+    },
+    {
+      "filename": "IMG_4112.mp4",
+      "duration_seconds": 29.0,
+      "resolution": "1104x816",
+      "size_bytes": 14052460,
+      "sha256": "a664c098552bcbd2096dac8fccb260efce683fdc6f7aa78d6b2a3b38100d1dfe",
+      "movement_identification": "Standing calf stretch, variation B",
+      "category": "Lower body",
+      "approval_status": "Owner-approved for Production \u2014 exact reviewed SHA-256",
+      "approval_record": "SOULSTRETCH_OWNER_APPROVAL_2026-11-08"
+    },
+    {
+      "filename": "IMG_4113.mov",
+      "duration_seconds": 29.433,
+      "resolution": "1104x816",
+      "size_bytes": 24559737,
+      "sha256": "f1d36d4d25ea76baeb86a5f222f653646a1db6084be7ee1a4d2bed03ddf506b5",
+      "movement_identification": "Calf Raises",
+      "category": "Lower body",
+      "approval_status": "Owner-approved for Production \u2014 exact reviewed SHA-256",
+      "approval_record": "SOULSTRETCH_OWNER_APPROVAL_2026-11-08"
+    },
+    {
+      "filename": "IMG_4114.mp4",
+      "duration_seconds": 29.0,
+      "resolution": "1104x816",
+      "size_bytes": 14638886,
+      "sha256": "2d837888dc6ba43aa822643b7f281b10156a6eb4bb5a9f87085d77ea9111a58f",
+      "movement_identification": "Toe Raises",
+      "category": "Lower body",
+      "approval_status": "Owner-approved for Production \u2014 exact reviewed SHA-256",
+      "approval_record": "SOULSTRETCH_OWNER_APPROVAL_2026-11-08"
+    },
+    {
+      "filename": "IMG_4115.mp4",
+      "duration_seconds": 29.0,
+      "resolution": "1104x816",
+      "size_bytes": 14933827,
+      "sha256": "6d2fbd5c7f6a6960b20a3ef85aac972752c6a094e50f1bfa0ba3d84d139c9776",
+      "movement_identification": "Hip Rotations",
+      "category": "Hips",
+      "approval_status": "Owner-approved for Production \u2014 exact reviewed SHA-256",
+      "approval_record": "SOULSTRETCH_OWNER_APPROVAL_2026-11-08"
+    },
+    {
+      "filename": "IMG_4117.mp4",
+      "duration_seconds": 29.0,
+      "resolution": "1104x816",
+      "size_bytes": 14058904,
+      "sha256": "cb5c70acac6366203e147eefcdcf13f0bb872fdfece10ccf2f70b84456a84731",
+      "movement_identification": "Hip Flexor",
+      "category": "Hips",
+      "approval_status": "Owner-approved for Production \u2014 exact reviewed SHA-256",
+      "approval_record": "SOULSTRETCH_OWNER_APPROVAL_2026-11-08"
+    },
+    {
+      "filename": "IMG_4120.mp4",
+      "duration_seconds": 29.0,
+      "resolution": "1104x816",
+      "size_bytes": 13912736,
+      "sha256": "28779359e4eb6bf504bfafc3af85a489007c152bae3f2abc25b51b3f7185823c",
+      "movement_identification": "Standing knee-to-chest stretch",
+      "category": "Hips",
+      "approval_status": "Owner-approved for Production \u2014 exact reviewed SHA-256",
+      "approval_record": "SOULSTRETCH_OWNER_APPROVAL_2026-11-08"
+    },
+    {
+      "filename": "IMG_4121.mp4",
+      "duration_seconds": 29.0,
+      "resolution": "1104x816",
+      "size_bytes": 11740532,
+      "sha256": "2e6df3e0084b9601dc4eb5df9383b22f8115c7e0cd0e314ec81fd727b8cdbc37",
+      "movement_identification": "Wide-stance lateral stretch, variation A",
+      "category": "Lower body",
+      "approval_status": "Owner-approved for Production \u2014 exact reviewed SHA-256",
+      "approval_record": "SOULSTRETCH_OWNER_APPROVAL_2026-11-08"
+    },
+    {
+      "filename": "IMG_4122.mp4",
+      "duration_seconds": 29.0,
+      "resolution": "1104x816",
+      "size_bytes": 12581589,
+      "sha256": "2e5bc8cca60f4abc654a4bc0f27f82526f160d2ea5615156df297a890ba2fc89",
+      "movement_identification": "Wide-stance lateral stretch, variation B",
+      "category": "Lower body",
+      "approval_status": "Owner-approved for Production \u2014 exact reviewed SHA-256",
+      "approval_record": "SOULSTRETCH_OWNER_APPROVAL_2026-11-08"
+    },
+    {
+      "filename": "IMG_4123.mp4",
+      "duration_seconds": 28.708,
+      "resolution": "1104x832",
+      "size_bytes": 4161462,
+      "sha256": "29f542953962d8c172db79173394cf426f2fa811132e5eda05e2893b0ec72a48",
+      "movement_identification": "Chest Stretch",
+      "category": "Upper body",
+      "approval_status": "Owner-approved for Production \u2014 exact reviewed SHA-256",
+      "approval_record": "SOULSTRETCH_OWNER_APPROVAL_2026-11-08"
+    }
+  ]
+}

@@ -6,7 +6,7 @@ const workouts=[
 {id:'tai',category:'Tai Chi',icon:'☯',title:'Flow & Balance',minutes:30,steps:['5 min gentle warm-up and easy breathing','10 min slow weight shifts and mindful stepping','10 min familiar flowing Tai Chi movements','5 min comfortable cool-down']},
 {id:'yoga',category:'Yoga',icon:'✳',title:'Gentle Yoga Reset',minutes:25,steps:['5 min relaxed breathing','10 min comfortable standing and seated poses','5 min gentle mobility','5 min quiet rest']},
 {id:'strength',category:'Strength',icon:'↗',title:'Everyday Strength',minutes:30,steps:['5 min warm-up','10 min supported lower-body movements','10 min comfortable upper-body movements','5 min cool-down']},
-{id:'mobility',category:'Stretch & Mobility',icon:'〰',title:'Move with Ease',minutes:20,steps:['5 min gentle warm-up','5 min shoulders and upper-back mobility','5 min hip and ankle mobility','5 min easy stretches']},
+{id:'mobility',category:'Stretch & Mobility',icon:'〰',title:'SoulStretch',minutes:20,steps:['5 min gentle warm-up','5 min shoulders and upper-back mobility','5 min hip and ankle mobility','5 min easy stretches']},
 {id:'cardio',category:'Low-Impact Cardio',icon:'♡',title:'Easy Energy',minutes:25,steps:['5 min easy walk in place','10 min comfortable low-impact steps','5 min light movement','5 min cool-down']},
 {id:'meditation',category:'Meditation',icon:'☾',title:'Guided Meditation',minutes:10,steps:['Track 1: seven 10-minute meditations','Track 2: ten 20-minute meditations','Soft voice guidance with quiet pauses']}
 ];
@@ -31,7 +31,7 @@ const workoutCardMeta = {
   tai: {label:'TAI CHI', cta:'View Classes', image:'/app/images/workouts/tai-chi.jpg'},
   yoga: {label:'YOGA', cta:'View Session', image:'/app/images/workouts/yoga.jpg'},
   strength: {label:'STRENGTH', cta:'View Workouts', image:'/app/images/workouts/strength.jpg'},
-  mobility: {label:'STRETCH & MOBILITY', cta:'View Session', image:'/app/images/workouts/mobility.jpg'},
+  mobility: {label:'SOULSTRETCH', cta:'Explore Stretching', image:'/app/images/workouts/mobility.jpg'},
   cardio: {label:'LOW-IMPACT CARDIO', cta:'View Session', image:'/app/images/workouts/cardio.jpg'},
   meditation: {label:'MEDITATION', cta:'View Sessions', image:'/app/images/workouts/meditation.jpg'}
 };
@@ -39,6 +39,8 @@ const workoutCardMeta = {
 function openWorkout(w){
   state.selected=w.id;
   save();
+
+  if(w.id==='mobility'){window.location.href='/app/stretching/';return;}
 
   if(w.id==='strength'){
     window.location.href='/app/strength/';
@@ -106,7 +108,7 @@ function renderWorkouts(){
 
       const duration=document.createElement('small');
       duration.className='workout-card-meta';
-      duration.textContent=w.minutes+' MIN · '+w.category;
+      duration.textContent=w.id==='mobility'?'3 GUIDED ROUTINES':w.minutes+' MIN · '+w.category;
 
       const title=document.createElement('h3');
       title.className='workout-card-title';

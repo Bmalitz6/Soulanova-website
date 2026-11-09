@@ -1,0 +1,41 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="theme-color" content="#0b4b53">
+  <title>SoulFuel FoodScore · Soulanova</title>
+  <link rel="stylesheet" href="/app/soulfuel/foodscore.css">
+</head>
+<body>
+  <header class="topbar"><a class="brand" href="/app/">✺ SOULANOVA</a><span class="tag">SOULFUEL · DEVELOPMENT</span><a class="back" href="/app/">← Member home</a></header>
+  <main class="shell">
+    <section class="food-hero" aria-labelledby="foodscore-title"><div class="food-hero-art" aria-hidden="true"><span class="food-orbit orbit-one"></span><span class="food-orbit orbit-two"></span><span class="food-leaf">✳</span><span class="food-sparkle">✦</span></div><div><p class="eyebrow">SOULFUEL · FOOD DISCOVERY</p><h1 id="foodscore-title">FoodScore</h1><p class="intro">A clearer look at what’s in your food.</p></div></section>
+    <section class="card" aria-labelledby="lookup-title">
+        <h2 id="lookup-title">FoodScore barcode lookup</h2>
+      <p id="foodscore-coming-soon" class="status" role="status">Coming soon. Barcode lookup is temporarily unavailable. Your existing food diary and nutrition tracking remain available on this browser.</p>
+      <div id="foodscore-lookup" hidden>
+        <div class="scan-graphic" aria-hidden="true"><span class="scan-corners"></span><span class="barcode-bars">▏▌▏▏▌▌▏▏▌▏▌</span><span class="scan-line"></span><span class="scan-caption">A quick look at the label</span></div>
+      <form id="lookup-form">
+        <label for="barcode">Product barcode</label>
+        <div class="entry"><input id="barcode" inputmode="numeric" autocomplete="off" placeholder="8, 12, 13 or 14 digits" maxlength="14" required><button class="primary" id="lookup-button" type="submit">Look up food</button></div>
+      </form>
+      <p id="status" class="status" role="status" aria-live="polite"></p>
+      <div id="result" hidden></div>
+      </div>
+    </section>
+    <section class="card diary" aria-labelledby="diary-title">
+      <div class="section-head"><div><p class="eyebrow">YOUR MEMBER-SCOPED LOG</p><h2 id="diary-title">Food Diary</h2></div><label for="meal">Meal <select id="meal"><option>Breakfast</option><option selected>Lunch</option><option>Dinner</option><option>Snack</option></select></label></div>
+      <p id="auth-state" class="subtle">Restoring your member session…</p><div id="diary-list"></div>
+    </section>
+    <p class="disclaimer">FoodScore is a provisional Soulanova heuristic, not official Nutri-Score, medical advice, or a clinically validated measure. Always check the package label. Open Food Facts data is community contributed.</p>
+  </main>
+  <footer><a href="https://world.openfoodfacts.org/" target="_blank" rel="noopener noreferrer">Open Food Facts · ODbL data · CC BY-SA images</a> · <a href="/app/">SoulFuel Home</a></footer>
+  <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2.118.0/dist/umd/supabase.js"></script>
+  <script>if(!['soulanova.com','www.soulanova.com'].includes(location.hostname.toLowerCase()))document.write('<script src="/app/config.development.local.js"><\/script>');</script>
+  <script src="/app/config.js"></script>
+  <script src="/app/soulfuel/foodscore-availability.js"></script>
+  <script src="/app/soulfuel/foodscore-core.js"></script>
+  <script src="/app/soulfuel/foodscore.js"></script>
+</body>
+</html>
