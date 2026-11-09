@@ -35,6 +35,17 @@ test('one Start begins the first matching Miriam track and video-ended advances 
  assert.equal(h.starts[1].audioUrl,guidance['forward-fold'].audioUrl);
 });
 
+test('an intentional second round replays each movement and its matching Miriam narration',async()=>{
+ const program=catalog.routines.find(r=>r.collection==='level'&&r.level==='Beginner');const h=make(program);h.controller.start();await flush();
+ assert.equal(h.controller.getState().total,program.ids.length*2);assert.equal(h.controller.getState().round,1);
+ const expected=[...program.ids,...program.ids];
+ for(let i=0;i<expected.length;i++){
+  assert.equal(h.starts[i].id,expected[i],`playback segment ${i+1}`);assert.equal(h.starts[i].audioUrl,guidance[expected[i]].audioUrl,`matching narration ${i+1}`);
+  h.controller.videoEnded();if(i<expected.length-1){h.controller.tick(5);await flush();}
+ }
+ assert.equal(h.controller.getState().round,2);assert.equal(h.controller.getState().phase,'complete');assert.equal(h.completion.completedSegmentIndexes.length,expected.length);assert.equal(h.completion.allSegmentsCompleted,true);
+});
+
 test('the actual video-ended event starts a five-second fade transition even before estimated clip duration',()=>{
  const h=make(routine);h.controller.start();const stopsBeforeEnd=h.events.filter(x=>x==='stop').length;h.controller.videoEnded();
  assert.equal(h.controller.getState().phase,'transition');assert.equal(h.controller.getState().countdown,5);
@@ -90,7 +101,7 @@ test('Previous and Restart restart the selected sequence without duplicate compl
 test('all completed movements show completion once and expose an exact history-safe result',async()=>{
  const h=make(routine);h.controller.start();await flush();h.controller.videoEnded();h.controller.tick(5);await flush();h.controller.videoEnded();h.controller.tick(5);await flush();h.controller.videoEnded();
  h.controller.videoEnded();assert.equal(h.controller.getState().phase,'complete');assert.equal(h.events.filter(x=>x==='complete').length,1);
- assert.deepEqual(h.completion.completedMovementIds,routine.ids);assert.equal(h.completion.allMovementsCompleted,true);
+ assert.deepEqual(h.completion.completedMovementIds,routine.ids);assert.equal(h.completion.allMovementsCompleted,true);assert.equal(h.completion.allSegmentsCompleted,true);assert.equal(h.completion.completedSegmentIndexes.length,routine.ids.length);
 });
 
 test('skipped movements and video-load failures never create false completion',()=>{
@@ -127,6 +138,10 @@ test('page integration starts matching video and Miriam audio, controls them tog
  const context={document,window:{SoulStretchCatalog:catalog,SoulStretchGuidance:guidance,SoulStretchProgress:require('../app/stretching/stretchingProgress.js'),SoulStretchPlayback:playbackTools,SOULANOVA_SOULSTRETCH_PUBLIC_BASE:'https://media.example.invalid/soulstretch/',scrollTo(){}},navigator:{},localStorage:{getItem(){return null},setItem(){}},crypto:{randomUUID(){return'00000000-0000-4000-8000-000000000123'}},performance:{now(){return now}},URL,setInterval(fn){const id=++nextTimer;timers.set(id,fn);return id},clearInterval(id){timers.delete(id)},queueMicrotask(fn){fn()},requestAnimationFrame(fn){fn()},console};
  vm.runInNewContext(fs.readFileSync(path.join(root,'app/stretching/stretching.js'),'utf8'),context);
  const card=elements.get('routine-list').children[0],selected=catalog.routines.find(r=>r.collection==='level'&&r.level==='Beginner');card.dispatch('click');
+ assert.match(card.children[1].children[0].textContent,/05:35 · 5 movements · 10 playback segments · 2 rounds/);
+ assert.equal(elements.get('sequence-list').children.length,10,'sequence shows both rounds');
+ assert.match(elements.get('sequence-list').children[0].children[1].children[0].textContent,/Round 1/);
+ assert.match(elements.get('sequence-list').children[5].children[1].children[0].textContent,/Round 2/);
  const first=selected.ids[0],firstMovement=catalog.movements.find(m=>m.id===first);assert.equal(elements.get('movement-name').textContent,firstMovement.name);assert.equal(elements.get('narration-enabled').checked,true);
  await Promise.all(elements.get('toggle').dispatch('click'));await Promise.resolve();await Promise.resolve();
  assert.equal(elements.get('demo').paused,false);assert.equal(elements.get('narration-audio').paused,false);assert.equal(elements.get('narration-audio').src,guidance[first].audioUrl);assert.equal(elements.get('demo').src,`https://media.example.invalid/soulstretch/${firstMovement.sha256}/${encodeURIComponent(firstMovement.file)}`);
@@ -143,4 +158,14 @@ test('page integration starts matching video and Miriam audio, controls them tog
  await Promise.resolve();await Promise.resolve();assert.equal(elements.get('movement-name').textContent,nextMovement.name);assert.equal(elements.get('demo').paused,false);assert.equal(elements.get('narration-audio').paused,false);assert.equal(elements.get('narration-audio').src,guidance[nextId].audioUrl);
  const stops=mediaEvents.map((event,index)=>event.startsWith('pause:narration-audio:')?index:-1).filter(index=>index>=0),nextPlay=mediaEvents.findIndex(event=>event===`play:narration-audio:${guidance[nextId].audioUrl}`);assert.ok(stops.some(index=>index<nextPlay));
  elements.get('next').dispatch('click');await Promise.resolve();await Promise.resolve();assert.equal(elements.get('movement-name').textContent,catalog.movements.find(m=>m.id===selected.ids[2]).name);
+ const firstTrackPlayCount=mediaEvents.filter(event=>event===`play:narration-audio:${guidance[first].audioUrl}`).length;
+ for(let index=2;index<selected.ids.length;index++){
+  elements.get('demo').dispatch('ended');
+  for(let tick=0;tick<10;tick++){now+=500;for(const advance of [...timers.values()])advance();}
+  await Promise.resolve();await Promise.resolve();
+ }
+ assert.equal(elements.get('movement-name').textContent,firstMovement.name,'second round returns to its first movement');
+ assert.equal(elements.get('narration-audio').src,guidance[first].audioUrl,'matching Miriam narration is replayed on the repeated movement');
+ assert.equal(elements.get('narration-audio').paused,false);assert.equal(elements.get('demo').currentTime,0);
+ assert.equal(mediaEvents.filter(event=>event===`play:narration-audio:${guidance[first].audioUrl}`).length,firstTrackPlayCount+1,'same approved narration starts again in round two');
 });

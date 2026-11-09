@@ -244,336 +244,487 @@
       "approval_status": "Owner-approved for Production — exact reviewed SHA-256"
     }
   ],
-  "routines": [
+  "routines":   [
     {
       "id": "full-body-gentle",
-      "title": "Gentle Full-Body Reset",
+      "title": "Gentle Full-Body Foundations",
       "level": "Beginner",
       "category": "Full body",
-      "minutes": 5,
-      "description": "A supported, unhurried introduction to shoulder, hip, and leg mobility.",
+      "minutes": 6,
+      "seconds": 335,
+      "description": "Five approachable demonstrations repeated for a second gentle round, with a steady upper-to-lower flow.",
+      "difficulty": "Beginner · two gentle rounds; stay within each demonstrated range",
       "ids": [
         "overhead-reach",
-        "overhead-reset",
         "shoulder-a",
         "hip-flexor-a",
         "hamstring-a",
-        "calf-a",
-        "standing-reset-4113",
-        "standing-reset-4114",
-        "standing-reset-4123"
+        "calf-a"
       ],
+      "rounds": 2,
       "collection": "level",
-      "difficulty": "Beginner · gentle pace; support nearby"
+      "uniqueMovementCount": 5,
+      "segmentCount": 10
     },
     {
       "id": "upper-body",
-      "title": "Upper-Body Ease",
+      "title": "Easy Upper Body & Posture",
       "level": "Beginner",
       "category": "Upper body",
-      "minutes": 3,
-      "description": "Gentle shoulder, chest, and overhead movements. Stay in a comfortable range.",
-      "ids": [
-        "overhead-shoulder",
-        "overhead-reach",
-        "shoulder-a",
-        "overhead-reset",
-        "standing-reset-4123"
-      ],
-      "collection": "level",
-      "difficulty": "Beginner · upper body; simple sequence"
-    },
-    {
-      "id": "hips-and-legs",
-      "title": "Hips & Legs",
-      "level": "Intermediate",
-      "category": "Lower body",
-      "minutes": 4,
-      "description": "A steady lower-body flow with a chair or wall nearby for balance.",
-      "ids": [
-        "hip-flexor-a",
-        "figure-four-a",
-        "adductor",
-        "knee-chest",
-        "calf-a",
-        "side-bend",
-        "hip-abduction"
-      ],
-      "collection": "level",
-      "difficulty": "Intermediate · balance and lateral transitions"
-    },
-    {
-      "id": "balanced-full-body-flow",
-      "title": "Balanced Full-Body Flow",
-      "level": "Intermediate",
-      "category": "Full body",
       "minutes": 6,
-      "description": "A longer sequence linking upper-body mobility with hips and legs.",
+      "seconds": 333.416,
+      "description": "An unhurried shoulder and chest sequence, including both approved cross-body variations in each round.",
+      "difficulty": "Beginner · supported stance and simple transitions",
       "ids": [
         "overhead-shoulder",
-        "shoulder-a",
-        "side-bend",
-        "hip-flexor-b",
-        "wide-stance-a",
-        "hamstring-a",
-        "calf-a",
-        "standing-reset-4113"
-      ],
-      "collection": "level",
-      "difficulty": "Intermediate · longer linked sequence"
-    },
-    {
-      "id": "complete-mobility-circuit",
-      "title": "Complete Mobility Circuit",
-      "level": "Advanced",
-      "category": "Full body",
-      "minutes": 7,
-      "description": "A longer, continuous circuit. Use a stable support for standing balance movements and shorten any range that feels uncomfortable.",
-      "ids": [
-        "overhead-reach",
-        "shoulder-b",
-        "hip-flexor-a",
-        "figure-four-a",
-        "adductor",
-        "wide-stance-b",
-        "forward-fold",
-        "calf-b",
-        "standing-reset-4114"
-      ],
-      "collection": "level",
-      "difficulty": "Advanced · nine movements; varied standing positions"
-    },
-    {
-      "id": "extended-range-flow",
-      "title": "Extended Range Flow",
-      "level": "Advanced",
-      "category": "Full body",
-      "minutes": 8,
-      "description": "The longest library sequence, combining all movement areas with deliberate transitions and balance support as needed.",
-      "ids": [
         "overhead-reset",
-        "overhead-shoulder",
-        "overhead-reach",
+        "standing-reset-4123",
         "shoulder-a",
-        "shoulder-b",
-        "side-bend",
-        "hip-flexor-b",
-        "figure-four-b",
-        "knee-chest",
-        "wide-stance-a",
-        "hamstring-a",
-        "standing-reset-4123"
+        "shoulder-b"
       ],
+      "rounds": 2,
       "collection": "level",
-      "difficulty": "Advanced · longest program; twelve movements"
-    },
-    {
-      "id": "lower-leg-foundations",
-      "title": "Lower-Leg Foundations",
-      "level": "Beginner",
-      "collection": "level",
-      "category": "Calves & ankles",
-      "minutes": 0,
-      "description": "A short, supported sequence for calf flexibility and the lower legs, ending with gentle ankle movement.",
-      "difficulty": "Beginner · steady stance",
-      "ids": [
-        "calf-a",
-        "calf-b",
-        "standing-reset-4113",
-        "standing-reset-4114"
-      ]
+      "uniqueMovementCount": 5,
+      "segmentCount": 10
     },
     {
       "id": "supported-hip-mobility",
       "title": "Supported Hips & Legs",
       "level": "Beginner",
-      "collection": "level",
       "category": "Hips & legs",
-      "minutes": 0,
-      "description": "A steady, supported combination of hip mobility and simple ankle movement. Keep a chair or wall within reach and move without rushing.",
-      "difficulty": "Beginner · support encouraged",
+      "minutes": 6,
+      "seconds": 327.132,
+      "description": "A supported hip sequence that pairs the approved left/right variations before repeating the circuit.",
+      "difficulty": "Beginner · use a stable support for balance",
       "ids": [
+        "hip-flexor-a",
         "hip-flexor-b",
-        "side-bend",
-        "knee-chest",
+        "figure-four-a",
+        "figure-four-b",
+        "knee-chest"
+      ],
+      "rounds": 2,
+      "collection": "level",
+      "uniqueMovementCount": 5,
+      "segmentCount": 10
+    },
+    {
+      "id": "lower-leg-foundations",
+      "title": "Calves, Ankles & Standing Ease",
+      "level": "Beginner",
+      "category": "Calves & ankles",
+      "minutes": 6,
+      "seconds": 347.95,
+      "description": "A gradual lower-leg series paired with a comfortable standing fold; repeat once at the same gentle pace.",
+      "difficulty": "Beginner · steady footing and relaxed setup",
+      "ids": [
+        "calf-a",
+        "calf-b",
         "standing-reset-4113",
-        "standing-reset-4114"
-      ]
+        "standing-reset-4114",
+        "forward-fold"
+      ],
+      "rounds": 2,
+      "collection": "level",
+      "uniqueMovementCount": 5,
+      "segmentCount": 10
     },
     {
       "id": "gentle-standing-balance",
-      "title": "Gentle Standing Balance",
+      "title": "Gentle Side-to-Side Mobility",
       "level": "Beginner",
-      "collection": "level",
       "category": "Balance & legs",
-      "minutes": 0,
-      "description": "A steady introduction to supported single-leg positions and simple lower-leg movements. Use a sturdy support throughout.",
-      "difficulty": "Beginner · support encouraged",
+      "minutes": 6,
+      "seconds": 334.416,
+      "description": "A short side-to-side sequence with both approved wide-stance variations and a calm chest opener.",
+      "difficulty": "Beginner · keep support within reach",
       "ids": [
-        "knee-chest",
-        "figure-four-a",
-        "standing-reset-4113",
-        "standing-reset-4114"
-      ]
+        "side-bend",
+        "wide-stance-a",
+        "wide-stance-b",
+        "hip-abduction",
+        "standing-reset-4123"
+      ],
+      "rounds": 2,
+      "collection": "level",
+      "uniqueMovementCount": 5,
+      "segmentCount": 10
     },
     {
       "id": "easy-chest-and-shoulders",
-      "title": "Easy Chest & Shoulders",
+      "title": "Soft Full-Body Restore",
       "level": "Beginner",
-      "collection": "level",
-      "category": "Shoulders & chest",
-      "minutes": 0,
-      "description": "An unhurried upper-body sequence through chest opening and comfortable shoulder mobility.",
-      "difficulty": "Beginner · gentle upper-body range",
+      "category": "Full body",
+      "minutes": 7,
+      "seconds": 403.134,
+      "description": "A six-movement mix linking shoulders, hips and legs across two relaxed rounds.",
+      "difficulty": "Beginner · six movements; comfortable pace",
       "ids": [
-        "standing-reset-4123",
+        "overhead-reach",
+        "overhead-shoulder",
+        "hamstring-a",
+        "hip-flexor-b",
+        "knee-chest",
+        "standing-reset-4114"
+      ],
+      "rounds": 2,
+      "collection": "level",
+      "uniqueMovementCount": 6,
+      "segmentCount": 12
+    },
+    {
+      "id": "hips-and-legs",
+      "title": "Balanced Hips & Legs",
+      "level": "Intermediate",
+      "category": "Hips & legs",
+      "minutes": 12,
+      "seconds": 667.1320000000001,
+      "description": "A fuller lower-body circuit pairing both hip-flexor, figure-four and calf demonstrations across two rounds.",
+      "difficulty": "Intermediate · bilateral pairings and longer sequence",
+      "ids": [
+        "hip-flexor-a",
+        "hip-flexor-b",
+        "figure-four-a",
+        "figure-four-b",
+        "hamstring-a",
+        "calf-a",
+        "calf-b",
+        "knee-chest",
+        "adductor",
+        "wide-stance-a"
+      ],
+      "rounds": 2,
+      "collection": "level",
+      "uniqueMovementCount": 10,
+      "segmentCount": 20
+    },
+    {
+      "id": "balanced-full-body-flow",
+      "title": "Full-Body Mobility Circuit",
+      "level": "Intermediate",
+      "category": "Full body",
+      "minutes": 12,
+      "seconds": 685.366,
+      "description": "Alternates upper-body and lower-body mobility, then repeats the complete sequence.",
+      "difficulty": "Intermediate · balanced upper/lower sequence",
+      "ids": [
+        "overhead-reset",
+        "overhead-reach",
+        "shoulder-a",
         "shoulder-b",
-        "shoulder-a"
-      ]
+        "standing-reset-4123",
+        "hip-flexor-a",
+        "hip-flexor-b",
+        "side-bend",
+        "forward-fold",
+        "calf-a"
+      ],
+      "rounds": 2,
+      "collection": "level",
+      "uniqueMovementCount": 10,
+      "segmentCount": 20
     },
     {
       "id": "posterior-chain-mobility",
-      "title": "Back-of-Leg Mobility",
+      "title": "Posterior Chain & Side Body",
       "level": "Intermediate",
-      "collection": "level",
       "category": "Hamstrings & calves",
-      "minutes": 0,
-      "description": "A focused standing sequence for the hamstrings and calves, moving gradually from hips toward ankles.",
-      "difficulty": "Intermediate · linked hamstring and calf sequence",
+      "minutes": 12,
+      "seconds": 687.0840000000001,
+      "description": "Moves from a gentle hinge through lateral and calf work, with both wide-stance and calf variations.",
+      "difficulty": "Intermediate · linked hip, hamstring and calf work",
       "ids": [
         "forward-fold",
         "hamstring-a",
+        "wide-stance-a",
+        "wide-stance-b",
+        "hip-flexor-b",
+        "adductor",
         "calf-a",
         "calf-b",
+        "side-bend",
         "standing-reset-4114"
-      ]
+      ],
+      "rounds": 2,
+      "collection": "level",
+      "uniqueMovementCount": 10,
+      "segmentCount": 20
     },
     {
       "id": "lateral-hip-flow",
-      "title": "Lateral Hip Flow",
+      "title": "Standing Hip Control",
       "level": "Intermediate",
-      "collection": "level",
-      "category": "Hips & inner thighs",
-      "minutes": 0,
-      "description": "Links hip rotation with a controlled lateral shift and a comfortable inner-thigh stretch.",
-      "difficulty": "Intermediate · coordinated lateral transitions",
-      "ids": [
-        "hip-flexor-b",
-        "side-bend",
-        "adductor",
-        "wide-stance-a",
-        "calf-b"
-      ]
-    },
-    {
-      "id": "upper-body-length",
-      "title": "Upper-to-Lower Lengthening",
-      "level": "Intermediate",
-      "collection": "level",
-      "category": "Full body",
-      "minutes": 0,
-      "description": "A longer standing flow linking chest and shoulder mobility with a hip hinge, hip movement, and calf stretch.",
-      "difficulty": "Intermediate · varied body areas and transitions",
-      "ids": [
-        "overhead-reset",
-        "shoulder-b",
-        "standing-reset-4123",
-        "forward-fold",
-        "calf-a",
-        "hip-flexor-b"
-      ]
-    },
-    {
-      "id": "standing-mobility-circuit",
-      "title": "Standing Mobility Circuit",
-      "level": "Intermediate",
-      "collection": "level",
-      "category": "Full body",
-      "minutes": 0,
-      "description": "A varied standing circuit alternating between shoulder mobility, supported hip balance, a lateral stance, and back-of-leg stretches.",
-      "difficulty": "Intermediate · varied standing positions",
-      "ids": [
-        "overhead-reset",
-        "shoulder-a",
-        "figure-four-b",
-        "wide-stance-a",
-        "hamstring-a",
-        "calf-b"
-      ]
-    },
-    {
-      "id": "progressive-lower-body",
-      "title": "Progressive Lower-Body Flow",
-      "level": "Advanced",
-      "collection": "level",
-      "category": "Hips & legs",
-      "minutes": 0,
-      "description": "A longer lower-body sequence linking a hip hinge, staggered stance, balance, and lateral movement. Keep support within reach.",
-      "difficulty": "Advanced · longer linked lower-body sequence",
-      "ids": [
-        "forward-fold",
-        "hamstring-a",
-        "hip-flexor-b",
-        "figure-four-b",
-        "adductor",
-        "calf-b",
-        "knee-chest"
-      ]
-    },
-    {
-      "id": "upper-to-lateral-flow",
-      "title": "Upper-to-Lateral Flow",
-      "level": "Advanced",
-      "collection": "level",
-      "category": "Shoulders & lateral body",
-      "minutes": 0,
-      "description": "Moves from overhead and chest mobility into a controlled wide-stance sequence, with room for steady transitions.",
-      "difficulty": "Advanced · coordinated upper/lower transitions",
-      "ids": [
-        "overhead-reach",
-        "shoulder-b",
-        "standing-reset-4123",
-        "side-bend",
-        "wide-stance-a",
-        "adductor"
-      ]
-    },
-    {
-      "id": "balance-and-hip-control",
-      "title": "Balance & Hip Control",
-      "level": "Advanced",
-      "collection": "level",
       "category": "Hips & balance",
-      "minutes": 0,
-      "description": "A balance-focused hip sequence. Keep a sturdy support close and skip any position that feels unsteady.",
-      "difficulty": "Advanced · balance emphasis; support required",
+      "minutes": 12,
+      "seconds": 667.1320000000001,
+      "description": "Combines both hip-flexor and figure-four sides with lateral stance changes and a steady leg finish.",
+      "difficulty": "Intermediate · controlled balance and lateral transitions",
       "ids": [
+        "figure-four-a",
         "figure-four-b",
         "knee-chest",
         "hip-abduction",
+        "hip-flexor-a",
         "hip-flexor-b",
-        "side-bend"
-      ]
+        "wide-stance-a",
+        "wide-stance-b",
+        "calf-b",
+        "hamstring-a"
+      ],
+      "rounds": 2,
+      "collection": "level",
+      "uniqueMovementCount": 10,
+      "segmentCount": 20
+    },
+    {
+      "id": "upper-body-length",
+      "title": "Shoulders to Lower Legs",
+      "level": "Intermediate",
+      "category": "Full body",
+      "minutes": 12,
+      "seconds": 686.366,
+      "description": "Pairs upper-body variations with a measured hinge and lower-leg sequence over two rounds.",
+      "difficulty": "Intermediate · varied standing positions",
+      "ids": [
+        "overhead-shoulder",
+        "overhead-reset",
+        "shoulder-a",
+        "shoulder-b",
+        "standing-reset-4123",
+        "hamstring-a",
+        "forward-fold",
+        "calf-a",
+        "calf-b",
+        "standing-reset-4113"
+      ],
+      "rounds": 2,
+      "collection": "level",
+      "uniqueMovementCount": 10,
+      "segmentCount": 20
+    },
+    {
+      "id": "standing-mobility-circuit",
+      "title": "Cross-Body Mobility Flow",
+      "level": "Intermediate",
+      "category": "Full body",
+      "minutes": 12,
+      "seconds": 679.2160000000001,
+      "description": "Links cross-body shoulder and side movement to paired hip stretches and a deliberate closing fold.",
+      "difficulty": "Intermediate · ten ordered movements and two rounds",
+      "ids": [
+        "overhead-reach",
+        "shoulder-a",
+        "side-bend",
+        "hip-flexor-a",
+        "hip-flexor-b",
+        "figure-four-a",
+        "figure-four-b",
+        "adductor",
+        "wide-stance-a",
+        "forward-fold"
+      ],
+      "rounds": 2,
+      "collection": "level",
+      "uniqueMovementCount": 10,
+      "segmentCount": 20
+    },
+    {
+      "id": "complete-mobility-circuit",
+      "title": "Full-Body Circuit Endurance",
+      "level": "Advanced",
+      "category": "Full body",
+      "minutes": 20,
+      "seconds": 1154.632,
+      "description": "A 17-movement full-body circuit with both approved hip-flexor, figure-four, shoulder, wide-stance and calf variations across two complete rounds.",
+      "difficulty": "Advanced · two complete rounds · stay within approved demonstrations",
+      "ids": [
+        "shoulder-a",
+        "shoulder-b",
+        "standing-reset-4123",
+        "side-bend",
+        "hip-flexor-a",
+        "hip-flexor-b",
+        "hip-abduction",
+        "figure-four-a",
+        "figure-four-b",
+        "knee-chest",
+        "wide-stance-a",
+        "wide-stance-b",
+        "adductor",
+        "calf-a",
+        "calf-b",
+        "standing-reset-4113",
+        "standing-reset-4114"
+      ],
+      "rounds": 2,
+      "collection": "level",
+      "uniqueMovementCount": 17,
+      "segmentCount": 34
+    },
+    {
+      "id": "extended-range-flow",
+      "title": "Lower-Body Balance Endurance",
+      "level": "Advanced",
+      "category": "Hips & legs",
+      "minutes": 20,
+      "seconds": 1142.998,
+      "description": "A lower-body emphasis balancing both hip-flexor, figure-four, wide-stance and calf variations with upper-body mobility in two rounds.",
+      "difficulty": "Advanced · two complete rounds · stay within approved demonstrations",
+      "ids": [
+        "overhead-reach",
+        "shoulder-a",
+        "shoulder-b",
+        "standing-reset-4123",
+        "side-bend",
+        "hip-flexor-a",
+        "hip-flexor-b",
+        "figure-four-a",
+        "figure-four-b",
+        "hip-abduction",
+        "knee-chest",
+        "wide-stance-a",
+        "wide-stance-b",
+        "hamstring-a",
+        "forward-fold",
+        "calf-a",
+        "calf-b"
+      ],
+      "rounds": 2,
+      "collection": "level",
+      "uniqueMovementCount": 17,
+      "segmentCount": 34
+    },
+    {
+      "id": "progressive-lower-body",
+      "title": "Upper-to-Lower Progression",
+      "level": "Advanced",
+      "category": "Full body",
+      "minutes": 20,
+      "seconds": 1142.864,
+      "description": "Begins with overhead and shoulder mobility, then progresses through paired hips and lower legs over two complete rounds.",
+      "difficulty": "Advanced · two complete rounds · stay within approved demonstrations",
+      "ids": [
+        "overhead-reset",
+        "overhead-shoulder",
+        "shoulder-a",
+        "shoulder-b",
+        "standing-reset-4123",
+        "hip-flexor-a",
+        "hip-flexor-b",
+        "figure-four-a",
+        "figure-four-b",
+        "knee-chest",
+        "wide-stance-a",
+        "wide-stance-b",
+        "hamstring-a",
+        "calf-a",
+        "calf-b",
+        "standing-reset-4113",
+        "standing-reset-4114"
+      ],
+      "rounds": 2,
+      "collection": "level",
+      "uniqueMovementCount": 17,
+      "segmentCount": 34
+    },
+    {
+      "id": "upper-to-lateral-flow",
+      "title": "Lateral Hip & Balance Endurance",
+      "level": "Advanced",
+      "category": "Hips & balance",
+      "minutes": 20,
+      "seconds": 1154.766,
+      "description": "A supported lateral-focused program pairing hip, wide-stance and calf variations while balancing the sequence with overhead and shoulder work.",
+      "difficulty": "Advanced · two complete rounds · stay within approved demonstrations",
+      "ids": [
+        "overhead-reset",
+        "overhead-shoulder",
+        "overhead-reach",
+        "shoulder-a",
+        "shoulder-b",
+        "standing-reset-4123",
+        "forward-fold",
+        "hip-flexor-a",
+        "hip-flexor-b",
+        "figure-four-a",
+        "figure-four-b",
+        "adductor",
+        "hip-abduction",
+        "wide-stance-a",
+        "wide-stance-b",
+        "calf-a",
+        "calf-b"
+      ],
+      "rounds": 2,
+      "collection": "level",
+      "uniqueMovementCount": 17,
+      "segmentCount": 34
+    },
+    {
+      "id": "balance-and-hip-control",
+      "title": "Bilateral Mobility Endurance",
+      "level": "Advanced",
+      "category": "Full body",
+      "minutes": 20,
+      "seconds": 1155.498,
+      "description": "A steady bilateral flow with paired shoulder, hip-flexor, figure-four, wide-stance and calf demonstrations in two rounds.",
+      "difficulty": "Advanced · two complete rounds · stay within approved demonstrations",
+      "ids": [
+        "overhead-shoulder",
+        "overhead-reach",
+        "shoulder-a",
+        "shoulder-b",
+        "standing-reset-4123",
+        "side-bend",
+        "hip-flexor-a",
+        "hip-flexor-b",
+        "figure-four-a",
+        "figure-four-b",
+        "wide-stance-a",
+        "wide-stance-b",
+        "adductor",
+        "hamstring-a",
+        "calf-a",
+        "calf-b",
+        "standing-reset-4113"
+      ],
+      "rounds": 2,
+      "collection": "level",
+      "uniqueMovementCount": 17,
+      "segmentCount": 34
     },
     {
       "id": "standing-mobility-endurance",
-      "title": "Standing Mobility Endurance",
+      "title": "Long Full-Body Mobility Flow",
       "level": "Advanced",
-      "collection": "level",
       "category": "Full body",
-      "minutes": 0,
-      "description": "The longest varied standing circuit in this group, combining upper-body mobility, lower-leg movement, and hip work.",
-      "difficulty": "Advanced · longer sequence and transitions",
+      "minutes": 20,
+      "seconds": 1141.548,
+      "description": "A long, controlled sequence linking upper-body, hips and legs with both approved side variations, repeated once without increasing range.",
+      "difficulty": "Advanced · two complete rounds · stay within approved demonstrations",
       "ids": [
-        "standing-reset-4113",
-        "overhead-shoulder",
-        "forward-fold",
-        "standing-reset-4114",
-        "hip-flexor-a",
+        "overhead-reset",
+        "overhead-reach",
+        "shoulder-a",
         "shoulder-b",
+        "hip-flexor-a",
+        "hip-flexor-b",
+        "side-bend",
+        "figure-four-a",
+        "figure-four-b",
+        "knee-chest",
+        "wide-stance-a",
         "wide-stance-b",
-        "calf-a"
-      ]
+        "calf-a",
+        "calf-b",
+        "forward-fold",
+        "standing-reset-4113",
+        "standing-reset-4114"
+      ],
+      "rounds": 2,
+      "collection": "level",
+      "uniqueMovementCount": 17,
+      "segmentCount": 34
     },
     {
       "id": "quick-shoulders-chest",
@@ -581,14 +732,18 @@
       "level": "Body Area",
       "collection": "body-area",
       "category": "Shoulders & chest",
-      "minutes": 0,
+      "minutes": 2,
       "description": "A brief upper-body selection covering cross-body shoulders, overhead reach, and chest mobility.",
       "difficulty": "Quick · upper body",
       "ids": [
         "overhead-shoulder",
         "shoulder-b",
         "standing-reset-4123"
-      ]
+      ],
+      "seconds": 96.775,
+      "rounds": 1,
+      "uniqueMovementCount": 3,
+      "segmentCount": 3
     },
     {
       "id": "quick-hips",
@@ -596,14 +751,18 @@
       "level": "Body Area",
       "collection": "body-area",
       "category": "Hips",
-      "minutes": 0,
+      "minutes": 2,
       "description": "A brief supported selection of the approved hip-flexor, hip-rotation, and knee-to-chest demonstrations.",
       "difficulty": "Quick · use support as needed",
       "ids": [
         "hip-flexor-a",
         "side-bend",
         "knee-chest"
-      ]
+      ],
+      "seconds": 97,
+      "rounds": 1,
+      "uniqueMovementCount": 3,
+      "segmentCount": 3
     },
     {
       "id": "quick-supported-balance",
@@ -611,14 +770,18 @@
       "level": "Body Area",
       "collection": "body-area",
       "category": "Balance & hips",
-      "minutes": 0,
+      "minutes": 2,
       "description": "A short, supported sequence combining the approved knee-to-chest and figure-four positions with hip movement. Keep a stable support close.",
       "difficulty": "Quick · balance support required",
       "ids": [
         "figure-four-b",
         "knee-chest",
         "hip-abduction"
-      ]
+      ],
+      "seconds": 94.333,
+      "rounds": 1,
+      "uniqueMovementCount": 3,
+      "segmentCount": 3
     },
     {
       "id": "quick-hamstrings",
@@ -626,14 +789,18 @@
       "level": "Body Area",
       "collection": "body-area",
       "category": "Hamstrings",
-      "minutes": 0,
+      "minutes": 2,
       "description": "A short hip-hinge and hamstring sequence using the approved forward fold and standing hamstring demonstration.",
       "difficulty": "Quick · back-of-leg focus",
       "ids": [
         "forward-fold",
         "hamstring-a",
         "calf-a"
-      ]
+      ],
+      "seconds": 103.042,
+      "rounds": 1,
+      "uniqueMovementCount": 3,
+      "segmentCount": 3
     },
     {
       "id": "quick-inner-thighs",
@@ -641,14 +808,18 @@
       "level": "Body Area",
       "collection": "body-area",
       "category": "Inner thighs",
-      "minutes": 0,
+      "minutes": 2,
       "description": "A brief supported lateral sequence centered on the approved adductor stretch and one wide-stance demonstration.",
       "difficulty": "Quick · comfortable stance width",
       "ids": [
         "adductor",
         "wide-stance-b",
         "hip-flexor-a"
-      ]
+      ],
+      "seconds": 97,
+      "rounds": 1,
+      "uniqueMovementCount": 3,
+      "segmentCount": 3
     },
     {
       "id": "quick-full-body-reset",
@@ -656,7 +827,7 @@
       "level": "Body Area",
       "collection": "body-area",
       "category": "Full body",
-      "minutes": 0,
+      "minutes": 3,
       "description": "A short sampler linking chest, hip, and lower-leg movements from the approved library.",
       "difficulty": "Quick · mixed areas",
       "ids": [
@@ -664,14 +835,21 @@
         "hip-abduction",
         "standing-reset-4114",
         "overhead-reset"
-      ]
+      ],
+      "seconds": 130.141,
+      "rounds": 1,
+      "uniqueMovementCount": 4,
+      "segmentCount": 4
     }
   ]
 };
 for(const movement of catalog.movements){movement.thumbnail='/app/stretching/thumbnails/'+encodeURIComponent(movement.id)+'.jpg';}
-// Timings follow the approved demonstration lengths plus brief setup and transitions.
+// Timings use exact approved clip durations and the player's five-second transition.
 for(const routine of catalog.routines){
-  routine.seconds=30+routine.ids.reduce((sum,id)=>sum+(catalog.movements.find(m=>m.id===id)?.seconds||0),0)+Math.max(0,routine.ids.length-1)*6;
+  routine.rounds=Number.isInteger(routine.rounds)&&routine.rounds>0?routine.rounds:1;
+  routine.uniqueMovementCount=new Set(routine.ids).size;
+  routine.segmentCount=routine.ids.length*routine.rounds;
+  routine.seconds=routine.ids.reduce((sum,id)=>sum+(catalog.movements.find(m=>m.id===id)?.seconds||0),0)*routine.rounds+Math.max(0,routine.segmentCount-1)*5;
   routine.minutes=Math.ceil(routine.seconds/60);
 }
 catalog.mediaUrl=function(file,sha256,publicBase){

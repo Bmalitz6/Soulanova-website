@@ -17,6 +17,7 @@
  function current(){return playback.getState().movementId?movement(playback.getState().movementId):selectedMovement;}
  function src(m){return window.SoulStretchCatalog.mediaUrl(m.file,m.sha256,window.SOULANOVA_SOULSTRETCH_PUBLIC_BASE);}
  function clock(seconds){const s=Math.max(0,Math.ceil(seconds));return `${String(Math.floor(s/60)).padStart(2,'0')}:${String(s%60).padStart(2,'0')}`;}
+ function routineDuration(item){const rounds=Number.isInteger(item?.rounds)&&item.rounds>0?item.rounds:1,segments=(item?.ids?.length||0)*rounds,clips=(item?.ids||[]).reduce((sum,id)=>sum+(movement(id)?.seconds||0),0)*rounds;return clips+Math.max(0,segments-1)*transitionSeconds;}
  function releaseWakeLock(){if(wakeLock){const lock=wakeLock;wakeLock=null;void lock.release?.().catch?.(()=>{});}}
  async function requestWakeLock(){try{if(navigator.wakeLock?.request){const lock=await navigator.wakeLock.request('screen');if(['idle','complete'].includes(playback.getState().phase)){await lock.release();return;}wakeLock=lock;}}catch{wakeLock=null;}}
  function stopTransitionClock(){if(transitionInterval){clearInterval(transitionInterval);transitionInterval=null;}}
@@ -43,7 +44,7 @@
   if(!m)return;selectedMovement=m;const cue=guidance[m.id],state=playback.getState();
   $('movement-name').textContent=m.name;
   $('instruction').textContent=m.instruction;
-  $('position').textContent=routine?`${routine.level||'SoulStretch'} · ${routine.title} · Movement ${state.index+1} of ${routine.ids.length}`:`${m.category} · ${m.seconds.toFixed(1)} second approved demonstration`;
+  $('position').textContent=routine?`${routine.level||'SoulStretch'} · ${routine.title} · Round ${state.round} of ${state.rounds} · Segment ${state.index+1} of ${state.total} · Movement ${state.movementInRound} of ${routine.ids.length}`:`${m.category} · ${m.seconds.toFixed(1)} second approved demonstration`;
   renderGuidance(m);
   audio.pause();audio.removeAttribute('src');audio.load();
   const narration=$('narration-enabled'),volume=$('narration-volume');
@@ -56,16 +57,17 @@
   video.currentTime=0;updateTimer();renderSequence(state);
  }
  function renderSequence(state=playback.getState()){
-  const key=`${routine?.id||'none'}:${state.phase}:${state.index}:${state.completedMovementIds.join(',')}`;if(key===lastSequenceKey)return;lastSequenceKey=key;
+  const key=`${routine?.id||'none'}:${state.phase}:${state.index}:${state.completedSegmentIndexes.join(',')}`;if(key===lastSequenceKey)return;lastSequenceKey=key;
   const list=$('sequence-list');list.replaceChildren();
   if(!routine){$('sequence-summary').textContent='Choose a program to see its movement order.';return;}
-  $('sequence-summary').textContent=`${state.total} movements · ${state.completedMovementIds.length} completed · ${state.remaining} remaining`;
-  routine.ids.forEach((id,i)=>{
+  $('sequence-summary').textContent=`${state.uniqueMovementCount} unique movements · ${state.total} playback segments · ${state.completedSegmentIndexes.length} completed · ${state.remaining} remaining`;
+  const sequence=Array.from({length:state.rounds},(_,round)=>routine.ids.map((id,movementIndex)=>({id,round:round+1,movementIndex}))).flat();
+  sequence.forEach(({id,round,movementIndex},i)=>{
    const m=movement(id),li=document.createElement('li'),img=document.createElement('img'),copy=document.createElement('span'),name=document.createElement('strong'),status=document.createElement('small');
    li.className='sequence-item';if(i===state.index&&!['complete','idle'].includes(state.phase))li.classList.add('is-current');
-   if(state.completedMovementIds.includes(id))li.classList.add('is-complete');if(i>state.index)li.classList.add('is-upcoming');
-   img.src=m.thumbnail;img.alt='';img.loading='lazy';name.textContent=`${String(i+1).padStart(2,'0')} · ${m.name}`;
-   status.textContent=state.completedMovementIds.includes(id)?'Complete':i===state.index&&state.phase==='ready'?'Ready':i===state.index?'Now playing':i===state.index+1?'Up next':'Upcoming';
+   const isComplete=state.completedSegmentIndexes.includes(i);if(isComplete)li.classList.add('is-complete');if(i>state.index)li.classList.add('is-upcoming');
+   img.src=m.thumbnail;img.alt='';img.loading='lazy';name.textContent=`${String(i+1).padStart(2,'0')} · Round ${round} · ${m.name}`;
+   status.textContent=i===state.index&&state.phase==='ready'?'Ready':i===state.index&&transitionSeconds>0&&['transition','paused-transition'].includes(state.phase)?'Just completed':i===state.index?'Now playing':i===state.index+1?'Up next':isComplete?'Complete':`Movement ${movementIndex+1} of ${routine.ids.length}`;
    copy.append(name,status);li.append(img,copy);list.append(li);
   });
  }
@@ -102,7 +104,7 @@
  }
  async function playMovement(index,{id,resume,userGesture,token}){
   const m=movement(id);if(!m)return false;
-  if(!resume&&selectedMovement?.id!==id)setMovement(m);
+  if(!resume)setMovement(m);
   if(!resume){video.currentTime=0;audio.currentTime=0;}
   if(userGesture)void requestWakeLock();
   $('video-frame').classList.remove('is-fading');$('transition-screen').classList.remove('is-visible');
@@ -127,11 +129,12 @@
   const first=movement(item.ids[0]),card=document.createElement('button');card.type='button';card.className='routine';
   const image=document.createElement('img');image.className='routine-thumbnail';image.src=first.thumbnail;image.alt=`${first.name} still from this program`;image.loading='lazy';
   const copy=document.createElement('span');copy.className='routine-copy';
-  const tag=document.createElement('span');tag.className='eyebrow';tag.textContent=`${item.category} · ${item.minutes} min · ${item.ids.length} movements`;
+  const rounds=Number.isInteger(item.rounds)&&item.rounds>0?item.rounds:1,segments=item.ids.length*rounds,unique=new Set(item.ids).size,seconds=routineDuration(item);
+  const tag=document.createElement('span');tag.className='eyebrow';tag.textContent=`${item.category} · ${clock(seconds)} · ${unique} movements · ${segments} playback segments · ${rounds} ${rounds===1?'round':'rounds'}`;
   const title=document.createElement('strong');title.className='routine-title';title.textContent=item.title;
   const desc=document.createElement('span');desc.className='routine-description';desc.textContent=item.description;
   const meta=document.createElement('span');meta.className='routine-meta';meta.textContent=`${item.difficulty} · Start program →`;
-  copy.append(tag,title,desc,meta);card.append(image,copy);card.setAttribute('aria-label',`Start ${item.title}, ${item.minutes} minutes, ${item.ids.length} movements`);card.addEventListener('click',()=>beginRoutine(item,true));return card;
+  copy.append(tag,title,desc,meta);card.append(image,copy);card.setAttribute('aria-label',`Start ${item.title}, approximately ${Math.ceil(seconds/60)} minutes, ${unique} movements, ${segments} playback segments, ${rounds} rounds`);card.addEventListener('click',()=>beginRoutine(item,true));return card;
  }
  function renderLevelTabs(){const tabs=$('level-tabs');tabs.replaceChildren();for(const level of ['Beginner','Intermediate','Advanced']){const tab=document.createElement('button');tab.type='button';tab.className='program-tab';tab.textContent=level;tab.setAttribute('aria-pressed',String(selectedLevel===level));tab.addEventListener('click',()=>{selectedLevel=level;renderLevelTabs();renderRoutines();});tabs.append(tab);}}
  function renderRoutines(){const list=$('routine-list');list.replaceChildren();for(const item of routines.filter(r=>r.collection==='level'&&r.level===selectedLevel))list.append(routineCard(item));}
@@ -146,10 +149,11 @@
  function renderHistory(){const box=$('history-list');box.replaceChildren();completed.slice(0,100).forEach(item=>{const row=document.createElement('div');row.className='history-row';row.textContent=`${item.title} · ${new Date(item.completedAt).toLocaleDateString()}`;box.append(row);});}
  function finishRoutine(result){
   releaseWakeLock();stopTransitionClock();
-  const done=result.routine,all=result.allMovementsCompleted;
+  const done=result.routine,all=result.allSegmentsCompleted;
   $('completion-title').textContent=all?'Workout Complete':'Session Ended';
-  $('completion-summary').textContent=all?`You completed all ${done.ids.length} movements in ${done.title}.`:`${result.completedMovementIds.length} of ${done.ids.length} movements completed. Skipped movements were not added to history.`;
-  if(launchAsProgram&&all&&!playbackCompletionClaimed){playbackCompletionClaimed=true;const seconds=done.ids.reduce((sum,id)=>sum+(movement(id)?.seconds||0),0);const item={completionId,routineId:done.id,title:done.title,completedAt:new Date().toISOString(),movementCount:done.ids.length,minutes:Math.max(1,Math.ceil(seconds/60)),practicedSeconds:Math.round(seconds)};void saveCompletion(item,member?.id||null,authRevision);}
+  const rounds=Number.isInteger(done.rounds)&&done.rounds>0?done.rounds:1;
+  $('completion-summary').textContent=all?`You completed ${result.totalSegments} movement segments across ${rounds} ${rounds===1?'round':'rounds'} (${new Set(done.ids).size} distinct movements) in ${done.title}.`:`${result.completedSegmentIndexes.length} of ${result.totalSegments} movement segments completed. Skipped segments were not added to history.`;
+  if(launchAsProgram&&all&&!playbackCompletionClaimed){playbackCompletionClaimed=true;const seconds=routineDuration(done);const item={completionId,routineId:done.id,title:done.title,completedAt:new Date().toISOString(),movementCount:result.totalSegments,minutes:Math.max(1,Math.ceil(seconds/60)),practicedSeconds:Math.round(seconds)};void saveCompletion(item,member?.id||null,authRevision);}
   else if(launchAsProgram&&!all)$('history-status').textContent='Program ended before every movement finished. No completion was recorded.';
  }
  function renderHistoryFromStorage(userId){try{completed=progress.read(localStorage,userId);historyReady=true;$('history-status').textContent='History is local to this browser. Cloud saving remains paused.';}catch{completed=[];historyReady=false;$('history-status').textContent='Existing browser history could not be read. Saving is paused; no data was overwritten.';}renderHistory();}
