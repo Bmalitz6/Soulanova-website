@@ -668,6 +668,7 @@
     }
   ]
 };
+for(const movement of catalog.movements){movement.thumbnail='/app/stretching/thumbnails/'+encodeURIComponent(movement.id)+'.jpg';}
 // Timings follow the approved demonstration lengths plus brief setup and transitions.
 for(const routine of catalog.routines){
   routine.seconds=30+routine.ids.reduce((sum,id)=>sum+(catalog.movements.find(m=>m.id===id)?.seconds||0),0)+Math.max(0,routine.ids.length-1)*6;
