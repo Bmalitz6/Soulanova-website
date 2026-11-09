@@ -11,14 +11,14 @@ test('member dashboard cards are one keyboard-accessible click target with no ne
  for(const href of ['/app/strength/','/app/stretching/','/app/walking/','/app/soulfuel/','/app/classes/beginner-tai-chi-foundations/','/app/?mode=signin#meditation'])assert.ok(html.includes(`href="${href}"`),href);
 });
 
-test('SoulStretch exposes six ordered programs, all approved movements, and exact source URLs',()=>{
+test('SoulStretch exposes 24 ordered programs, level/body-area browsing, and all approved movements',()=>{
  const catalog=require('../app/stretching/stretchingCatalog.js'),player=read('app/stretching/stretching.js'),page=read('app/stretching/index.html');
- assert.equal(catalog.movements.length,22);assert.equal(catalog.routines.length,6);
- for(const level of ['Beginner','Intermediate','Advanced'])assert.equal(catalog.routines.filter(r=>r.level===level).length,2);
+ assert.equal(catalog.movements.length,22);assert.equal(catalog.routines.length,24);
+ for(const level of ['Beginner','Intermediate','Advanced'])assert.equal(catalog.routines.filter(r=>r.collection==='level'&&r.level===level).length,6);assert.equal(catalog.routines.filter(r=>r.collection==='body-area').length,6);
  assert.deepEqual(Array.from(new Set(catalog.routines.flatMap(r=>r.ids))).sort(),catalog.movements.map(m=>m.id).sort());
- assert.match(page,/22 owner-approved exercise demonstrations/);assert.match(page,/id="narration-enabled"/);assert.match(page,/id="narration-volume"/);
- assert.match(player,/remaining=m\.seconds/);assert.match(player,/video\.addEventListener\('seeking'/);assert.match(player,/audio\.currentTime=Math\.min\(video\.currentTime,audio\.duration\)/);
- const guidance=require('../app/stretching/stretchingGuidance.js');for(const movement of catalog.movements){const cue=guidance[movement.id];assert.ok(cue);for(const field of ['start','form','breathing','core','transition'])assert.ok(cue[field]);assert.equal(cue.audioUrl,null);}
+ assert.match(page,/22 owner-approved exercise demonstrations/);assert.match(page,/id="level-tabs"/);assert.match(page,/Stretch by Body Area/);assert.match(page,/id="body-area-tabs"/);assert.match(page,/id="narration-enabled"/);assert.match(page,/id="narration-volume"/);
+ assert.match(player,/function routineCard\(item\)\{const card=document\.createElement\('button'\)/);assert.match(player,/card\.append\(tag,title,desc,meta\)/);assert.match(player,/aria-pressed/);const css=read('app/stretching/stretching.css');assert.match(css,/\.routine:hover/);assert.match(css,/\.routine:focus-visible/);assert.match(css,/\.routines,\.movement-list\{grid-template-columns:minmax\(0,1fr\)\}/);assert.match(player,/remaining=m\.seconds/);assert.match(player,/video\.addEventListener\('seeking'/);assert.match(player,/audio\.currentTime=Math\.min\(video\.currentTime,audio\.duration\)/);
+ const guidance=require('../app/stretching/stretchingGuidance.js');for(const movement of catalog.movements){const cue=guidance[movement.id];assert.ok(cue);for(const field of ['start','form','breathing','core','transition'])assert.ok(cue[field]);assert.equal(cue.audioStatus,'owner-approved');assert.match(cue.audioUrl,/^\/app\/stretching\/narration\/miriam\/.+\.mp3$/);assert.match(cue.audioSha256,/^[a-f0-9]{64}$/);}assert.match(player,/cue\.audioStatus==='owner-approved'/);assert.match(player,/Approved voice narration is available and follows the movement video/);
 });
 
 test('SoulFuel remains one-click accessible with recipe, planning, diary paths and FoodScore OFF',()=>{

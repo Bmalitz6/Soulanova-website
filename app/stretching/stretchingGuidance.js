@@ -1,6 +1,5 @@
 'use strict';
-// Editorial movement cues are ready for recording. audioUrl intentionally remains null
-// until an approved Soulanova voice recording has been produced and reviewed.
+// Miriam audio files are mapped for review; playback remains blocked until each recording is owner-approved.
 (function(root){
 const guidance={
  'overhead-reset':{start:'Stand tall with feet comfortable and shoulders relaxed; keep a chair or wall nearby.',form:'Let the shoulders settle down before gently opening the arms to the demonstrated range.',breathing:'Breathe naturally; exhale as the shoulders soften.',core:'Keep the abdomen gently active without holding your breath.',transition:'Lower the arms slowly, then release before the next movement.',text:"Stand comfortably with your shoulders relaxed. Follow the demonstrated shoulder stretch in an easy range. Breathe out softly as the shoulders settle. Let your arms lower slowly, then pause."},
@@ -26,9 +25,35 @@ const guidance={
  'wide-stance-b':{start:'Set your feet in a wide, stable stance; shorten the stance if needed.',form:'Follow the demonstrated lateral stretch without forcing depth or locking the knees.',breathing:'Use a calm exhale to ease into the movement.',core:'Keep a gentle abdominal connection and remain balanced.',transition:'Press evenly through both feet to return upright before switching sides.',text:"Set a stable wide stance, shortening it if needed. Follow the demonstrated lateral stretch without forcing depth or locking your knees. Breathe out gently, then return upright with control."},
  'standing-reset-4123':{start:'Stand or sit upright with shoulders relaxed and feet supported.',form:'Follow the demonstrated chest-opening position; keep ribs easy and avoid pushing the shoulders back.',breathing:'Inhale softly to lengthen; exhale and let the chest relax.',core:'Use only light center support, with no breath holding.',transition:'Release the arms slowly and let the shoulders settle.',text:"Stand or sit upright with shoulders relaxed. Follow the demonstrated chest-opening position without forcing the shoulders back. Breathe in gently, then release your arms slowly and let the shoulders settle."}
 };
-for(const cue of Object.values(guidance)){
- cue.audioUrl=null;
- cue.audioStatus='recording_needed';
+const narrationRecordings={
+ 'overhead-reset':{url:"/app/stretching/narration/miriam/overhead-reset.mp3",sha256:"ca95259ab9ad302a5e67509c44abf8710686430ec68ff3eac0786ca31fe4391a",status:"owner-approved"},
+ 'overhead-shoulder':{url:"/app/stretching/narration/miriam/overhead-shoulder.mp3",sha256:"b5f0d22cd8470e28d9853432bfffb883c4d5555d45439937476486f9738f1731",status:"owner-approved"},
+ 'overhead-reach':{url:"/app/stretching/narration/miriam/overhead-reach.mp3",sha256:"64aa59265ec38c30a4585d2d4b1cb94dac9a0d9c543cc7a4bc3878bd731c5456",status:"owner-approved"},
+ 'forward-fold':{url:"/app/stretching/narration/miriam/forward-fold.mp3",sha256:"6a8a414ad4878d890bfc04850efeaa77c599585c5b76dda182a7e93ffe71795a",status:"owner-approved"},
+ 'hamstring-a':{url:"/app/stretching/narration/miriam/hamstring-a.mp3",sha256:"c3690f716ccb1115311babed5f64b6b265f7b06bab11c3b323a609e2f2dfa019",status:"owner-approved"},
+ 'hip-flexor-a':{url:"/app/stretching/narration/miriam/hip-flexor-a.mp3",sha256:"dd2ddb5f505164236696d4db99edf9ddf0e6df9584e0c8e43b2de723c3e1f671",status:"owner-approved"},
+ 'hip-flexor-b':{url:"/app/stretching/narration/miriam/hip-flexor-b.mp3",sha256:"d4298ed9b6d466663ac4439c160555253e5ea49d2b1fb1a54e7bc968953f47f4",status:"owner-approved"},
+ 'figure-four-a':{url:"/app/stretching/narration/miriam/figure-four-a.mp3",sha256:"eb7a0537fd839308cc00f0816876247d49db06b4ef669997e90e7ed25f9ecadd",status:"owner-approved"},
+ 'figure-four-b':{url:"/app/stretching/narration/miriam/figure-four-b.mp3",sha256:"1c22070f6270e20cd7453d00207a1c68df5d18c7c4bd78d5d680a6a3af833d54",status:"owner-approved"},
+ 'adductor':{url:"/app/stretching/narration/miriam/adductor.mp3",sha256:"d4f50541be67170adff5af74d7f44680be07138ed12f4336c70a897bfa8db2cf",status:"owner-approved"},
+ 'shoulder-a':{url:"/app/stretching/narration/miriam/shoulder-a.mp3",sha256:"3827af4dbcea5cea6f565a399af421db1e34e443289848e5cfb2ee64696ac1ba",status:"owner-approved"},
+ 'shoulder-b':{url:"/app/stretching/narration/miriam/shoulder-b.mp3",sha256:"8ece0a1fc15e0c0b27749c1373754a48dcb66c4ca6ac31ab47a85b8b29d1d0b6",status:"owner-approved"},
+ 'calf-a':{url:"/app/stretching/narration/miriam/calf-a.mp3",sha256:"b2d7fce1b6b4002ee3d4d511e7fb3f13530f0563df0c7367c11c297884dfc3d0",status:"owner-approved"},
+ 'calf-b':{url:"/app/stretching/narration/miriam/calf-b.mp3",sha256:"9fdbb2b85808b87e74f57ee936c139f38fe0a02efa8c03b29532b794f1005eb3",status:"owner-approved"},
+ 'standing-reset-4113':{url:"/app/stretching/narration/miriam/standing-reset-4113.mp3",sha256:"260da08756b04bd706d68a79338f7ef4dd80b6f066edee2136788e2ea8b889a1",status:"owner-approved"},
+ 'standing-reset-4114':{url:"/app/stretching/narration/miriam/standing-reset-4114.mp3",sha256:"b4d6da5a68f7f98ec7f8a5abe2db4dff019db0b634af0c77499047fa01db6e8d",status:"owner-approved"},
+ 'side-bend':{url:"/app/stretching/narration/miriam/side-bend.mp3",sha256:"3713da47efce145712acfba236e4d7deb6a6a14db81c261943ae6d6e19d2c596",status:"owner-approved"},
+ 'hip-abduction':{url:"/app/stretching/narration/miriam/hip-abduction.mp3",sha256:"4360f3440f9c96b8a4fdb037e5fb855673d6f4aafc088515470f95605fbcb3b8",status:"owner-approved"},
+ 'knee-chest':{url:"/app/stretching/narration/miriam/knee-chest.mp3",sha256:"02eb2b64fe00be76c9a84f4c3c67db4c52827e1c7bb0140d1ab7b9e7bfe1ac54",status:"owner-approved"},
+ 'wide-stance-a':{url:"/app/stretching/narration/miriam/wide-stance-a.mp3",sha256:"32ea1ed683023c4c031f417b7d636959e11cfd4fd7c61fa4b2872ae950b05985",status:"owner-approved"},
+ 'wide-stance-b':{url:"/app/stretching/narration/miriam/wide-stance-b.mp3",sha256:"02b4737abe144b0ab6bba6987077c0b6f3db62bd5bdf2a482f00397163df0bf1",status:"owner-approved"},
+ 'standing-reset-4123':{url:"/app/stretching/narration/miriam/standing-reset-4123.mp3",sha256:"7e7e23deb6170412ec6fcc09af9746122852be3194ddb6da17347a98157b01af",status:"owner-approved"}
+};
+for(const [movementId,cue] of Object.entries(guidance)){
+ const recording=narrationRecordings[movementId];
+ cue.audioUrl=recording?.url||null;
+ cue.audioSha256=recording?.sha256||null;
+ cue.audioStatus=recording?.status||'recording_needed';
  cue.timestamp='00:00';
  cue.expectedSpokenSeconds=Math.ceil(cue.text.trim().split(/\s+/).length/140*60+1);
 }

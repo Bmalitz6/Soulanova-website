@@ -1,10 +1,10 @@
 {
   "version": 1,
   "created_utc": "2026-11-09",
-  "approval_scope": "Scripts only; no audio recording approved or generated.",
-  "voice_requirement": "Use only the owner-approved Soulanova narration identity and style. Strength uses Bernard and Tai Chi uses Benjamin; no evidence approves either voice for SoulStretch.",
-  "provider": "Not identified in approved project documentation; owner must choose/confirm an authorized existing provider or human recording workflow.",
-  "settings": "No approved SoulStretch TTS voice ID, model, stability/style settings, sample rate, or export settings located. No paid generation performed.",
+  "approval_scope": "Owner approved the Miriam narrator and exact settings, and subsequently authorized and submitted all 22 exact scripts for generation (89 credits total). Audio file approval remains pending owner listening; no track is enabled for playback.",
+  "voice_requirement": "Use the exact owner-selected female narrator and settings in voice_approval for every production request. Do not substitute another voice.",
+  "provider": "Runway Generate Speech",
+  "settings": "eleven_multilingual_v2; speed 0.75; English; MP3 output; calm, warm, professional British female narration. Existing SoulWalk Serene configuration was not recoverable; these are the owner-approved SoulStretch settings.",
   "assets": [
     {
       "movement_id": "overhead-reset",
@@ -15,27 +15,83 @@
       "script": "Stand comfortably with your shoulders relaxed. Follow the demonstrated shoulder stretch in an easy range. Breathe out softly as the shoulders settle. Let your arms lower slowly, then pause.",
       "cues": [
         {
-          "timestamp_seconds": 0,
+          "timestamp_seconds": 0.0,
           "text": "Stand comfortably with your shoulders relaxed."
         },
         {
-          "timestamp_seconds": 3,
+          "timestamp_seconds": 3.9,
           "text": "Follow the demonstrated shoulder stretch in an easy range."
         },
         {
-          "timestamp_seconds": 6,
+          "timestamp_seconds": 9.6,
           "text": "Breathe out softly as the shoulders settle."
         },
         {
-          "timestamp_seconds": 9,
+          "timestamp_seconds": 14.1,
           "text": "Let your arms lower slowly, then pause."
         }
       ],
-      "expected_spoken_duration_seconds": 14,
-      "quiet_hold_seconds": 14.4,
-      "audio_status": "NOT RECORDED — owner approval and production required",
-      "proposed_filename": "soulstretch/overhead-reset.mp3",
-      "audio_url": null
+      "expected_spoken_duration_seconds": 19,
+      "quiet_hold_seconds": 9.4,
+      "audio_status": "owner-approved",
+      "proposed_filename": "app/stretching/narration/miriam/overhead-reset.mp3",
+      "audio_url": "/app/stretching/narration/miriam/overhead-reset.mp3",
+      "text_characters": 189,
+      "word_count": 29,
+      "credit_cost": 4,
+      "timing_estimate": {
+        "method": "Approximation only: 140 wpm source estimate scaled by speed 0.75 (about 105 wpm), plus 0.5 s between sentence cues.",
+        "estimated_narration_seconds": 18.1,
+        "approved_video_seconds": 28.433,
+        "estimated_quiet_hold_seconds": 10.3,
+        "timing_status": "ESTIMATED FIT — validate actual generated MP3 duration before integration",
+        "actual_duration_seconds": 19.411882,
+        "actual_quiet_hold_seconds": 9.021,
+        "actual_timing_status": "PASS — MP3 is shorter than its approved video clip"
+      },
+      "expected_public_url": "/app/stretching/narration/miriam/overhead-reset.mp3",
+      "runway_request": {
+        "name": "SoulStretch_overhead-reset_Miriam",
+        "provider": "Runway Generate Speech",
+        "voice": "Miriam",
+        "model": "eleven_multilingual_v2",
+        "speed": 0.75,
+        "language": "English",
+        "text": "Stand comfortably with your shoulders relaxed. Follow the demonstrated shoulder stretch in an easy range. Breathe out softly as the shoulders settle. Let your arms lower slowly, then pause.",
+        "expected_output": "MP3",
+        "text_characters": 189,
+        "estimated_credits": 4,
+        "submit_authorized": true
+      },
+      "audio_sha256": "ca95259ab9ad302a5e67509c44abf8710686430ec68ff3eac0786ca31fe4391a",
+      "player_mapping": {
+        "guidance_key": "overhead-reset",
+        "audio_url_field": "SoulStretchGuidance['overhead-reset'].audioUrl",
+        "expected_public_url": "/app/stretching/narration/miriam/overhead-reset.mp3",
+        "required_review_fields": [
+          "audioStatus=owner-approved",
+          "audioUrl=expected_public_url",
+          "audioSha256=<verified exact MP3 SHA-256>"
+        ],
+        "approval_status_required": "owner-approved"
+      },
+      "file_size_bytes": 311840,
+      "actual_duration_seconds": 19.411882,
+      "runway_asset_name": "SoulStretch Miriam 01 - overhead-reset",
+      "runway_task_id": "cbee1399-e9e3-4b21-9e96-ae4296cb87ad",
+      "runway_voice_id": "VhxAIIZM8IRmnl5fyeyk",
+      "runway_text_matches_manifest": true,
+      "audio_review_status": "OWNER-APPROVED FOR PLAYBACK — owner listened to and approved the exact generated MP3 SHA-256",
+      "ffprobe": {
+        "format": "mp3",
+        "codec": "mp3",
+        "codec_type": "audio",
+        "duration_seconds": 19.411882,
+        "sample_rate_hz": 44100,
+        "channels": 1
+      },
+      "audio_approved_at_utc": "2026-11-09T20:11:06Z",
+      "audio_approval_source": "Owner approval in SoulStretch integration session; exact manifest recording and SHA-256 scope."
     },
     {
       "movement_id": "overhead-shoulder",
@@ -46,23 +102,79 @@
       "script": "Stand or sit tall, with your neck relaxed. Follow the demonstrated overhead shoulder position; stop before any pinching. Breathe steadily and let the arm lower with control.",
       "cues": [
         {
-          "timestamp_seconds": 0,
+          "timestamp_seconds": 0.0,
           "text": "Stand or sit tall, with your neck relaxed."
         },
         {
-          "timestamp_seconds": 3,
+          "timestamp_seconds": 5.1,
           "text": "Follow the demonstrated overhead shoulder position; stop before any pinching."
         },
         {
-          "timestamp_seconds": 8,
+          "timestamp_seconds": 11.3,
           "text": "Breathe steadily and let the arm lower with control."
         }
       ],
-      "expected_spoken_duration_seconds": 13,
-      "quiet_hold_seconds": 16.1,
-      "audio_status": "NOT RECORDED — owner approval and production required",
-      "proposed_filename": "soulstretch/overhead-shoulder.mp3",
-      "audio_url": null
+      "expected_spoken_duration_seconds": 17,
+      "quiet_hold_seconds": 12.1,
+      "audio_status": "owner-approved",
+      "proposed_filename": "app/stretching/narration/miriam/overhead-shoulder.mp3",
+      "audio_url": "/app/stretching/narration/miriam/overhead-shoulder.mp3",
+      "text_characters": 173,
+      "word_count": 27,
+      "credit_cost": 4,
+      "timing_estimate": {
+        "method": "Approximation only: 140 wpm source estimate scaled by speed 0.75 (about 105 wpm), plus 0.5 s between sentence cues.",
+        "estimated_narration_seconds": 16.4,
+        "approved_video_seconds": 29.067,
+        "estimated_quiet_hold_seconds": 12.7,
+        "timing_status": "ESTIMATED FIT — validate actual generated MP3 duration before integration",
+        "actual_duration_seconds": 18.575964,
+        "actual_quiet_hold_seconds": 10.491,
+        "actual_timing_status": "PASS — MP3 is shorter than its approved video clip"
+      },
+      "expected_public_url": "/app/stretching/narration/miriam/overhead-shoulder.mp3",
+      "runway_request": {
+        "name": "SoulStretch_overhead-shoulder_Miriam",
+        "provider": "Runway Generate Speech",
+        "voice": "Miriam",
+        "model": "eleven_multilingual_v2",
+        "speed": 0.75,
+        "language": "English",
+        "text": "Stand or sit tall, with your neck relaxed. Follow the demonstrated overhead shoulder position; stop before any pinching. Breathe steadily and let the arm lower with control.",
+        "expected_output": "MP3",
+        "text_characters": 173,
+        "estimated_credits": 4,
+        "submit_authorized": true
+      },
+      "audio_sha256": "b5f0d22cd8470e28d9853432bfffb883c4d5555d45439937476486f9738f1731",
+      "player_mapping": {
+        "guidance_key": "overhead-shoulder",
+        "audio_url_field": "SoulStretchGuidance['overhead-shoulder'].audioUrl",
+        "expected_public_url": "/app/stretching/narration/miriam/overhead-shoulder.mp3",
+        "required_review_fields": [
+          "audioStatus=owner-approved",
+          "audioUrl=expected_public_url",
+          "audioSha256=<verified exact MP3 SHA-256>"
+        ],
+        "approval_status_required": "owner-approved"
+      },
+      "file_size_bytes": 298465,
+      "actual_duration_seconds": 18.575964,
+      "runway_asset_name": "SoulStretch Miriam 02 - overhead-shoulder",
+      "runway_task_id": "61de9d66-53c8-4fd4-819a-2421cd1d39fe",
+      "runway_voice_id": "VhxAIIZM8IRmnl5fyeyk",
+      "runway_text_matches_manifest": true,
+      "audio_review_status": "OWNER-APPROVED FOR PLAYBACK — owner listened to and approved the exact generated MP3 SHA-256",
+      "ffprobe": {
+        "format": "mp3",
+        "codec": "mp3",
+        "codec_type": "audio",
+        "duration_seconds": 18.575964,
+        "sample_rate_hz": 44100,
+        "channels": 1
+      },
+      "audio_approved_at_utc": "2026-11-09T20:11:06Z",
+      "audio_approval_source": "Owner approval in SoulStretch integration session; exact manifest recording and SHA-256 scope."
     },
     {
       "movement_id": "overhead-reach",
@@ -73,27 +185,83 @@
       "script": "Stand with your feet steady. Reach both arms overhead only as far as comfortable, keeping your ribs relaxed. Breathe out as your shoulders soften. Lower your arms slowly.",
       "cues": [
         {
-          "timestamp_seconds": 0,
+          "timestamp_seconds": 0.0,
           "text": "Stand with your feet steady."
         },
         {
-          "timestamp_seconds": 2,
+          "timestamp_seconds": 3.4,
           "text": "Reach both arms overhead only as far as comfortable, keeping your ribs relaxed."
         },
         {
-          "timestamp_seconds": 8,
+          "timestamp_seconds": 11.3,
           "text": "Breathe out as your shoulders soften."
         },
         {
-          "timestamp_seconds": 10,
+          "timestamp_seconds": 15.2,
           "text": "Lower your arms slowly."
         }
       ],
-      "expected_spoken_duration_seconds": 13,
-      "quiet_hold_seconds": 16,
-      "audio_status": "NOT RECORDED — owner approval and production required",
-      "proposed_filename": "soulstretch/overhead-reach.mp3",
-      "audio_url": null
+      "expected_spoken_duration_seconds": 18,
+      "quiet_hold_seconds": 11,
+      "audio_status": "owner-approved",
+      "proposed_filename": "app/stretching/narration/miriam/overhead-reach.mp3",
+      "audio_url": "/app/stretching/narration/miriam/overhead-reach.mp3",
+      "text_characters": 170,
+      "word_count": 28,
+      "credit_cost": 4,
+      "timing_estimate": {
+        "method": "Approximation only: 140 wpm source estimate scaled by speed 0.75 (about 105 wpm), plus 0.5 s between sentence cues.",
+        "estimated_narration_seconds": 17.5,
+        "approved_video_seconds": 29.0,
+        "estimated_quiet_hold_seconds": 11.5,
+        "timing_status": "ESTIMATED FIT — validate actual generated MP3 duration before integration",
+        "actual_duration_seconds": 21.176599,
+        "actual_quiet_hold_seconds": 7.823,
+        "actual_timing_status": "PASS — MP3 is shorter than its approved video clip"
+      },
+      "expected_public_url": "/app/stretching/narration/miriam/overhead-reach.mp3",
+      "runway_request": {
+        "name": "SoulStretch_overhead-reach_Miriam",
+        "provider": "Runway Generate Speech",
+        "voice": "Miriam",
+        "model": "eleven_multilingual_v2",
+        "speed": 0.75,
+        "language": "English",
+        "text": "Stand with your feet steady. Reach both arms overhead only as far as comfortable, keeping your ribs relaxed. Breathe out as your shoulders soften. Lower your arms slowly.",
+        "expected_output": "MP3",
+        "text_characters": 170,
+        "estimated_credits": 4,
+        "submit_authorized": true
+      },
+      "audio_sha256": "64aa59265ec38c30a4585d2d4b1cb94dac9a0d9c543cc7a4bc3878bd731c5456",
+      "player_mapping": {
+        "guidance_key": "overhead-reach",
+        "audio_url_field": "SoulStretchGuidance['overhead-reach'].audioUrl",
+        "expected_public_url": "/app/stretching/narration/miriam/overhead-reach.mp3",
+        "required_review_fields": [
+          "audioStatus=owner-approved",
+          "audioUrl=expected_public_url",
+          "audioSha256=<verified exact MP3 SHA-256>"
+        ],
+        "approval_status_required": "owner-approved"
+      },
+      "file_size_bytes": 339843,
+      "actual_duration_seconds": 21.176599,
+      "runway_asset_name": "SoulStretch Miriam 03 - overhead-reach",
+      "runway_task_id": "cb50d4be-445d-446a-9aa4-2fcc35dd1b73",
+      "runway_voice_id": "VhxAIIZM8IRmnl5fyeyk",
+      "runway_text_matches_manifest": true,
+      "audio_review_status": "OWNER-APPROVED FOR PLAYBACK — owner listened to and approved the exact generated MP3 SHA-256",
+      "ffprobe": {
+        "format": "mp3",
+        "codec": "mp3",
+        "codec_type": "audio",
+        "duration_seconds": 21.176599,
+        "sample_rate_hz": 44100,
+        "channels": 1
+      },
+      "audio_approved_at_utc": "2026-11-09T20:11:06Z",
+      "audio_approval_source": "Owner approval in SoulStretch integration session; exact manifest recording and SHA-256 scope."
     },
     {
       "movement_id": "forward-fold",
@@ -104,27 +272,83 @@
       "script": "Stand with feet comfortably apart and knees soft. Hinge gently at your hips; let your head and arms relax without pulling. Keep breathing. Rise slowly and pause upright.",
       "cues": [
         {
-          "timestamp_seconds": 0,
+          "timestamp_seconds": 0.0,
           "text": "Stand with feet comfortably apart and knees soft."
         },
         {
-          "timestamp_seconds": 3,
+          "timestamp_seconds": 5.1,
           "text": "Hinge gently at your hips; let your head and arms relax without pulling."
         },
         {
-          "timestamp_seconds": 9,
+          "timestamp_seconds": 13.0,
           "text": "Keep breathing."
         },
         {
-          "timestamp_seconds": 10,
+          "timestamp_seconds": 14.6,
           "text": "Rise slowly and pause upright."
         }
       ],
-      "expected_spoken_duration_seconds": 13,
-      "quiet_hold_seconds": 22,
-      "audio_status": "NOT RECORDED — owner approval and production required",
-      "proposed_filename": "soulstretch/forward-fold.mp3",
-      "audio_url": null
+      "expected_spoken_duration_seconds": 18,
+      "quiet_hold_seconds": 17.0,
+      "audio_status": "owner-approved",
+      "proposed_filename": "app/stretching/narration/miriam/forward-fold.mp3",
+      "audio_url": "/app/stretching/narration/miriam/forward-fold.mp3",
+      "text_characters": 169,
+      "word_count": 28,
+      "credit_cost": 4,
+      "timing_estimate": {
+        "method": "Approximation only: 140 wpm source estimate scaled by speed 0.75 (about 105 wpm), plus 0.5 s between sentence cues.",
+        "estimated_narration_seconds": 17.5,
+        "approved_video_seconds": 35.042,
+        "estimated_quiet_hold_seconds": 17.5,
+        "timing_status": "ESTIMATED FIT — validate actual generated MP3 duration before integration",
+        "actual_duration_seconds": 17.925805,
+        "actual_quiet_hold_seconds": 17.116,
+        "actual_timing_status": "PASS — MP3 is shorter than its approved video clip"
+      },
+      "expected_public_url": "/app/stretching/narration/miriam/forward-fold.mp3",
+      "runway_request": {
+        "name": "SoulStretch_forward-fold_Miriam",
+        "provider": "Runway Generate Speech",
+        "voice": "Miriam",
+        "model": "eleven_multilingual_v2",
+        "speed": 0.75,
+        "language": "English",
+        "text": "Stand with feet comfortably apart and knees soft. Hinge gently at your hips; let your head and arms relax without pulling. Keep breathing. Rise slowly and pause upright.",
+        "expected_output": "MP3",
+        "text_characters": 169,
+        "estimated_credits": 4,
+        "submit_authorized": true
+      },
+      "audio_sha256": "6a8a414ad4878d890bfc04850efeaa77c599585c5b76dda182a7e93ffe71795a",
+      "player_mapping": {
+        "guidance_key": "forward-fold",
+        "audio_url_field": "SoulStretchGuidance['forward-fold'].audioUrl",
+        "expected_public_url": "/app/stretching/narration/miriam/forward-fold.mp3",
+        "required_review_fields": [
+          "audioStatus=owner-approved",
+          "audioUrl=expected_public_url",
+          "audioSha256=<verified exact MP3 SHA-256>"
+        ],
+        "approval_status_required": "owner-approved"
+      },
+      "file_size_bytes": 288016,
+      "actual_duration_seconds": 17.925805,
+      "runway_asset_name": "SoulStretch Miriam 04 - forward-fold",
+      "runway_task_id": "606e1c44-8dbe-48a3-a84a-7aadbb5e0f48",
+      "runway_voice_id": "VhxAIIZM8IRmnl5fyeyk",
+      "runway_text_matches_manifest": true,
+      "audio_review_status": "OWNER-APPROVED FOR PLAYBACK — owner listened to and approved the exact generated MP3 SHA-256",
+      "ffprobe": {
+        "format": "mp3",
+        "codec": "mp3",
+        "codec_type": "audio",
+        "duration_seconds": 17.925805,
+        "sample_rate_hz": 44100,
+        "channels": 1
+      },
+      "audio_approved_at_utc": "2026-11-09T20:11:06Z",
+      "audio_approval_source": "Owner approval in SoulStretch integration session; exact manifest recording and SHA-256 scope."
     },
     {
       "movement_id": "hamstring-a",
@@ -135,27 +359,83 @@
       "script": "Stand near a stable support. Extend one leg as shown, heel grounded, and hinge gently from the hips. Keep the standing knee soft and breathe easily. Return upright slowly.",
       "cues": [
         {
-          "timestamp_seconds": 0,
+          "timestamp_seconds": 0.0,
           "text": "Stand near a stable support."
         },
         {
-          "timestamp_seconds": 2,
+          "timestamp_seconds": 3.4,
           "text": "Extend one leg as shown, heel grounded, and hinge gently from the hips."
         },
         {
-          "timestamp_seconds": 8,
+          "timestamp_seconds": 11.3,
           "text": "Keep the standing knee soft and breathe easily."
         },
         {
-          "timestamp_seconds": 11,
+          "timestamp_seconds": 16.4,
           "text": "Return upright slowly."
         }
       ],
-      "expected_spoken_duration_seconds": 14,
-      "quiet_hold_seconds": 15,
-      "audio_status": "NOT RECORDED — owner approval and production required",
-      "proposed_filename": "soulstretch/hamstring-a.mp3",
-      "audio_url": null
+      "expected_spoken_duration_seconds": 19,
+      "quiet_hold_seconds": 10,
+      "audio_status": "owner-approved",
+      "proposed_filename": "app/stretching/narration/miriam/hamstring-a.mp3",
+      "audio_url": "/app/stretching/narration/miriam/hamstring-a.mp3",
+      "text_characters": 171,
+      "word_count": 29,
+      "credit_cost": 4,
+      "timing_estimate": {
+        "method": "Approximation only: 140 wpm source estimate scaled by speed 0.75 (about 105 wpm), plus 0.5 s between sentence cues.",
+        "estimated_narration_seconds": 18.1,
+        "approved_video_seconds": 29.0,
+        "estimated_quiet_hold_seconds": 10.9,
+        "timing_status": "ESTIMATED FIT — validate actual generated MP3 duration before integration",
+        "actual_duration_seconds": 21.037279,
+        "actual_quiet_hold_seconds": 7.963,
+        "actual_timing_status": "PASS — MP3 is shorter than its approved video clip"
+      },
+      "expected_public_url": "/app/stretching/narration/miriam/hamstring-a.mp3",
+      "runway_request": {
+        "name": "SoulStretch_hamstring-a_Miriam",
+        "provider": "Runway Generate Speech",
+        "voice": "Miriam",
+        "model": "eleven_multilingual_v2",
+        "speed": 0.75,
+        "language": "English",
+        "text": "Stand near a stable support. Extend one leg as shown, heel grounded, and hinge gently from the hips. Keep the standing knee soft and breathe easily. Return upright slowly.",
+        "expected_output": "MP3",
+        "text_characters": 171,
+        "estimated_credits": 4,
+        "submit_authorized": true
+      },
+      "audio_sha256": "c3690f716ccb1115311babed5f64b6b265f7b06bab11c3b323a609e2f2dfa019",
+      "player_mapping": {
+        "guidance_key": "hamstring-a",
+        "audio_url_field": "SoulStretchGuidance['hamstring-a'].audioUrl",
+        "expected_public_url": "/app/stretching/narration/miriam/hamstring-a.mp3",
+        "required_review_fields": [
+          "audioStatus=owner-approved",
+          "audioUrl=expected_public_url",
+          "audioSha256=<verified exact MP3 SHA-256>"
+        ],
+        "approval_status_required": "owner-approved"
+      },
+      "file_size_bytes": 337754,
+      "actual_duration_seconds": 21.037279,
+      "runway_asset_name": "SoulStretch Miriam 05 - hamstring-a",
+      "runway_task_id": "ed38a8ae-5bb8-4152-9e10-d3adb9ee3317",
+      "runway_voice_id": "VhxAIIZM8IRmnl5fyeyk",
+      "runway_text_matches_manifest": true,
+      "audio_review_status": "OWNER-APPROVED FOR PLAYBACK — owner listened to and approved the exact generated MP3 SHA-256",
+      "ffprobe": {
+        "format": "mp3",
+        "codec": "mp3",
+        "codec_type": "audio",
+        "duration_seconds": 21.037279,
+        "sample_rate_hz": 44100,
+        "channels": 1
+      },
+      "audio_approved_at_utc": "2026-11-09T20:11:06Z",
+      "audio_approval_source": "Owner approval in SoulStretch integration session; exact manifest recording and SHA-256 scope."
     },
     {
       "movement_id": "hip-flexor-a",
@@ -166,23 +446,79 @@
       "script": "Take the demonstrated staggered stance, with support nearby. Stay tall and shift forward gently until the front of the hip feels mild tension. Breathe out softly; step back with control.",
       "cues": [
         {
-          "timestamp_seconds": 0,
+          "timestamp_seconds": 0.0,
           "text": "Take the demonstrated staggered stance, with support nearby."
         },
         {
-          "timestamp_seconds": 3,
+          "timestamp_seconds": 5.1,
           "text": "Stay tall and shift forward gently until the front of the hip feels mild tension."
         },
         {
-          "timestamp_seconds": 10,
+          "timestamp_seconds": 14.1,
           "text": "Breathe out softly; step back with control."
         }
       ],
-      "expected_spoken_duration_seconds": 14,
-      "quiet_hold_seconds": 15,
-      "audio_status": "NOT RECORDED — owner approval and production required",
-      "proposed_filename": "soulstretch/hip-flexor-a.mp3",
-      "audio_url": null
+      "expected_spoken_duration_seconds": 19,
+      "quiet_hold_seconds": 10,
+      "audio_status": "owner-approved",
+      "proposed_filename": "app/stretching/narration/miriam/hip-flexor-a.mp3",
+      "audio_url": "/app/stretching/narration/miriam/hip-flexor-a.mp3",
+      "text_characters": 186,
+      "word_count": 30,
+      "credit_cost": 4,
+      "timing_estimate": {
+        "method": "Approximation only: 140 wpm source estimate scaled by speed 0.75 (about 105 wpm), plus 0.5 s between sentence cues.",
+        "estimated_narration_seconds": 18.1,
+        "approved_video_seconds": 29.0,
+        "estimated_quiet_hold_seconds": 10.9,
+        "timing_status": "ESTIMATED FIT — validate actual generated MP3 duration before integration",
+        "actual_duration_seconds": 22.476916,
+        "actual_quiet_hold_seconds": 6.523,
+        "actual_timing_status": "PASS — MP3 is shorter than its approved video clip"
+      },
+      "expected_public_url": "/app/stretching/narration/miriam/hip-flexor-a.mp3",
+      "runway_request": {
+        "name": "SoulStretch_hip-flexor-a_Miriam",
+        "provider": "Runway Generate Speech",
+        "voice": "Miriam",
+        "model": "eleven_multilingual_v2",
+        "speed": 0.75,
+        "language": "English",
+        "text": "Take the demonstrated staggered stance, with support nearby. Stay tall and shift forward gently until the front of the hip feels mild tension. Breathe out softly; step back with control.",
+        "expected_output": "MP3",
+        "text_characters": 186,
+        "estimated_credits": 4,
+        "submit_authorized": true
+      },
+      "audio_sha256": "dd2ddb5f505164236696d4db99edf9ddf0e6df9584e0c8e43b2de723c3e1f671",
+      "player_mapping": {
+        "guidance_key": "hip-flexor-a",
+        "audio_url_field": "SoulStretchGuidance['hip-flexor-a'].audioUrl",
+        "expected_public_url": "/app/stretching/narration/miriam/hip-flexor-a.mp3",
+        "required_review_fields": [
+          "audioStatus=owner-approved",
+          "audioUrl=expected_public_url",
+          "audioSha256=<verified exact MP3 SHA-256>"
+        ],
+        "approval_status_required": "owner-approved"
+      },
+      "file_size_bytes": 360741,
+      "actual_duration_seconds": 22.476916,
+      "runway_asset_name": "SoulStretch Miriam 06 - hip-flexor-a",
+      "runway_task_id": "905df02f-37e2-41cc-9454-2a50d311d5bf",
+      "runway_voice_id": "VhxAIIZM8IRmnl5fyeyk",
+      "runway_text_matches_manifest": true,
+      "audio_review_status": "OWNER-APPROVED FOR PLAYBACK — owner listened to and approved the exact generated MP3 SHA-256",
+      "ffprobe": {
+        "format": "mp3",
+        "codec": "mp3",
+        "codec_type": "audio",
+        "duration_seconds": 22.476916,
+        "sample_rate_hz": 44100,
+        "channels": 1
+      },
+      "audio_approved_at_utc": "2026-11-09T20:11:06Z",
+      "audio_approval_source": "Owner approval in SoulStretch integration session; exact manifest recording and SHA-256 scope."
     },
     {
       "movement_id": "hip-flexor-b",
@@ -193,27 +529,83 @@
       "script": "Set up in the demonstrated staggered stance and steady yourself. Keep your torso tall as you make a small hip shift. Breathe continuously. Return to neutral slowly.",
       "cues": [
         {
-          "timestamp_seconds": 0,
+          "timestamp_seconds": 0.0,
           "text": "Set up in the demonstrated staggered stance and steady yourself."
         },
         {
-          "timestamp_seconds": 4,
+          "timestamp_seconds": 6.2,
           "text": "Keep your torso tall as you make a small hip shift."
         },
         {
-          "timestamp_seconds": 9,
+          "timestamp_seconds": 13.0,
           "text": "Breathe continuously."
         },
         {
-          "timestamp_seconds": 10,
+          "timestamp_seconds": 14.6,
           "text": "Return to neutral slowly."
         }
       ],
-      "expected_spoken_duration_seconds": 13,
-      "quiet_hold_seconds": 16,
-      "audio_status": "NOT RECORDED — owner approval and production required",
-      "proposed_filename": "soulstretch/hip-flexor-b.mp3",
-      "audio_url": null
+      "expected_spoken_duration_seconds": 17,
+      "quiet_hold_seconds": 12,
+      "audio_status": "owner-approved",
+      "proposed_filename": "app/stretching/narration/miriam/hip-flexor-b.mp3",
+      "audio_url": "/app/stretching/narration/miriam/hip-flexor-b.mp3",
+      "text_characters": 164,
+      "word_count": 27,
+      "credit_cost": 4,
+      "timing_estimate": {
+        "method": "Approximation only: 140 wpm source estimate scaled by speed 0.75 (about 105 wpm), plus 0.5 s between sentence cues.",
+        "estimated_narration_seconds": 16.9,
+        "approved_video_seconds": 29.0,
+        "estimated_quiet_hold_seconds": 12.1,
+        "timing_status": "ESTIMATED FIT — validate actual generated MP3 duration before integration",
+        "actual_duration_seconds": 19.226122,
+        "actual_quiet_hold_seconds": 9.774,
+        "actual_timing_status": "PASS — MP3 is shorter than its approved video clip"
+      },
+      "expected_public_url": "/app/stretching/narration/miriam/hip-flexor-b.mp3",
+      "runway_request": {
+        "name": "SoulStretch_hip-flexor-b_Miriam",
+        "provider": "Runway Generate Speech",
+        "voice": "Miriam",
+        "model": "eleven_multilingual_v2",
+        "speed": 0.75,
+        "language": "English",
+        "text": "Set up in the demonstrated staggered stance and steady yourself. Keep your torso tall as you make a small hip shift. Breathe continuously. Return to neutral slowly.",
+        "expected_output": "MP3",
+        "text_characters": 164,
+        "estimated_credits": 4,
+        "submit_authorized": true
+      },
+      "audio_sha256": "d4298ed9b6d466663ac4439c160555253e5ea49d2b1fb1a54e7bc968953f47f4",
+      "player_mapping": {
+        "guidance_key": "hip-flexor-b",
+        "audio_url_field": "SoulStretchGuidance['hip-flexor-b'].audioUrl",
+        "expected_public_url": "/app/stretching/narration/miriam/hip-flexor-b.mp3",
+        "required_review_fields": [
+          "audioStatus=owner-approved",
+          "audioUrl=expected_public_url",
+          "audioSha256=<verified exact MP3 SHA-256>"
+        ],
+        "approval_status_required": "owner-approved"
+      },
+      "file_size_bytes": 308496,
+      "actual_duration_seconds": 19.226122,
+      "runway_asset_name": "SoulStretch Miriam 07 - hip-flexor-b",
+      "runway_task_id": "14f19e49-ce9a-46c4-aa23-c7dfdff7fce1",
+      "runway_voice_id": "VhxAIIZM8IRmnl5fyeyk",
+      "runway_text_matches_manifest": true,
+      "audio_review_status": "OWNER-APPROVED FOR PLAYBACK — owner listened to and approved the exact generated MP3 SHA-256",
+      "ffprobe": {
+        "format": "mp3",
+        "codec": "mp3",
+        "codec_type": "audio",
+        "duration_seconds": 19.226122,
+        "sample_rate_hz": 44100,
+        "channels": 1
+      },
+      "audio_approved_at_utc": "2026-11-09T20:11:06Z",
+      "audio_approval_source": "Owner approval in SoulStretch integration session; exact manifest recording and SHA-256 scope."
     },
     {
       "movement_id": "figure-four-a",
@@ -224,23 +616,79 @@
       "script": "Stand beside a sturdy support and follow the demonstrated figure-four position only if balanced. Keep the stretch mild and breathe freely. Uncross slowly, placing both feet down before moving on.",
       "cues": [
         {
-          "timestamp_seconds": 0,
+          "timestamp_seconds": 0.0,
           "text": "Stand beside a sturdy support and follow the demonstrated figure-four position only if balanced."
         },
         {
-          "timestamp_seconds": 6,
+          "timestamp_seconds": 8.5,
           "text": "Keep the stretch mild and breathe freely."
         },
         {
-          "timestamp_seconds": 9,
+          "timestamp_seconds": 13.0,
           "text": "Uncross slowly, placing both feet down before moving on."
         }
       ],
-      "expected_spoken_duration_seconds": 14,
-      "quiet_hold_seconds": 13.7,
-      "audio_status": "NOT RECORDED — owner approval and production required",
-      "proposed_filename": "soulstretch/figure-four-a.mp3",
-      "audio_url": null
+      "expected_spoken_duration_seconds": 19,
+      "quiet_hold_seconds": 8.7,
+      "audio_status": "owner-approved",
+      "proposed_filename": "app/stretching/narration/miriam/figure-four-a.mp3",
+      "audio_url": "/app/stretching/narration/miriam/figure-four-a.mp3",
+      "text_characters": 195,
+      "word_count": 30,
+      "credit_cost": 4,
+      "timing_estimate": {
+        "method": "Approximation only: 140 wpm source estimate scaled by speed 0.75 (about 105 wpm), plus 0.5 s between sentence cues.",
+        "estimated_narration_seconds": 18.1,
+        "approved_video_seconds": 27.733,
+        "estimated_quiet_hold_seconds": 9.6,
+        "timing_status": "ESTIMATED FIT — validate actual generated MP3 duration before integration",
+        "actual_duration_seconds": 23.684354,
+        "actual_quiet_hold_seconds": 4.049,
+        "actual_timing_status": "PASS — MP3 is shorter than its approved video clip"
+      },
+      "expected_public_url": "/app/stretching/narration/miriam/figure-four-a.mp3",
+      "runway_request": {
+        "name": "SoulStretch_figure-four-a_Miriam",
+        "provider": "Runway Generate Speech",
+        "voice": "Miriam",
+        "model": "eleven_multilingual_v2",
+        "speed": 0.75,
+        "language": "English",
+        "text": "Stand beside a sturdy support and follow the demonstrated figure-four position only if balanced. Keep the stretch mild and breathe freely. Uncross slowly, placing both feet down before moving on.",
+        "expected_output": "MP3",
+        "text_characters": 195,
+        "estimated_credits": 4,
+        "submit_authorized": true
+      },
+      "audio_sha256": "eb7a0537fd839308cc00f0816876247d49db06b4ef669997e90e7ed25f9ecadd",
+      "player_mapping": {
+        "guidance_key": "figure-four-a",
+        "audio_url_field": "SoulStretchGuidance['figure-four-a'].audioUrl",
+        "expected_public_url": "/app/stretching/narration/miriam/figure-four-a.mp3",
+        "required_review_fields": [
+          "audioStatus=owner-approved",
+          "audioUrl=expected_public_url",
+          "audioSha256=<verified exact MP3 SHA-256>"
+        ],
+        "approval_status_required": "owner-approved"
+      },
+      "file_size_bytes": 379967,
+      "actual_duration_seconds": 23.684354,
+      "runway_asset_name": "SoulStretch Miriam 08 - figure-four-a",
+      "runway_task_id": "1b8b7072-4668-49ee-97d6-37b11ec0284f",
+      "runway_voice_id": "VhxAIIZM8IRmnl5fyeyk",
+      "runway_text_matches_manifest": true,
+      "audio_review_status": "OWNER-APPROVED FOR PLAYBACK — owner listened to and approved the exact generated MP3 SHA-256",
+      "ffprobe": {
+        "format": "mp3",
+        "codec": "mp3",
+        "codec_type": "audio",
+        "duration_seconds": 23.684354,
+        "sample_rate_hz": 44100,
+        "channels": 1
+      },
+      "audio_approved_at_utc": "2026-11-09T20:11:06Z",
+      "audio_approval_source": "Owner approval in SoulStretch integration session; exact manifest recording and SHA-256 scope."
     },
     {
       "movement_id": "figure-four-b",
@@ -251,27 +699,83 @@
       "script": "Begin upright near a stable chair or wall. Follow the demonstrated figure-four shape only within a steady, comfortable range. Keep breathing. Release carefully and reset both feet.",
       "cues": [
         {
-          "timestamp_seconds": 0,
+          "timestamp_seconds": 0.0,
           "text": "Begin upright near a stable chair or wall."
         },
         {
-          "timestamp_seconds": 3,
+          "timestamp_seconds": 5.1,
           "text": "Follow the demonstrated figure-four shape only within a steady, comfortable range."
         },
         {
-          "timestamp_seconds": 8,
+          "timestamp_seconds": 11.9,
           "text": "Keep breathing."
         },
         {
-          "timestamp_seconds": 9,
+          "timestamp_seconds": 13.5,
           "text": "Release carefully and reset both feet."
         }
       ],
-      "expected_spoken_duration_seconds": 13,
-      "quiet_hold_seconds": 13.3,
-      "audio_status": "NOT RECORDED — owner approval and production required",
-      "proposed_filename": "soulstretch/figure-four-b.mp3",
-      "audio_url": null
+      "expected_spoken_duration_seconds": 17,
+      "quiet_hold_seconds": 9.3,
+      "audio_status": "owner-approved",
+      "proposed_filename": "app/stretching/narration/miriam/figure-four-b.mp3",
+      "audio_url": "/app/stretching/narration/miriam/figure-four-b.mp3",
+      "text_characters": 180,
+      "word_count": 27,
+      "credit_cost": 4,
+      "timing_estimate": {
+        "method": "Approximation only: 140 wpm source estimate scaled by speed 0.75 (about 105 wpm), plus 0.5 s between sentence cues.",
+        "estimated_narration_seconds": 16.9,
+        "approved_video_seconds": 26.333,
+        "estimated_quiet_hold_seconds": 9.4,
+        "timing_status": "ESTIMATED FIT — validate actual generated MP3 duration before integration",
+        "actual_duration_seconds": 20.34068,
+        "actual_quiet_hold_seconds": 5.992,
+        "actual_timing_status": "PASS — MP3 is shorter than its approved video clip"
+      },
+      "expected_public_url": "/app/stretching/narration/miriam/figure-four-b.mp3",
+      "runway_request": {
+        "name": "SoulStretch_figure-four-b_Miriam",
+        "provider": "Runway Generate Speech",
+        "voice": "Miriam",
+        "model": "eleven_multilingual_v2",
+        "speed": 0.75,
+        "language": "English",
+        "text": "Begin upright near a stable chair or wall. Follow the demonstrated figure-four shape only within a steady, comfortable range. Keep breathing. Release carefully and reset both feet.",
+        "expected_output": "MP3",
+        "text_characters": 180,
+        "estimated_credits": 4,
+        "submit_authorized": true
+      },
+      "audio_sha256": "1c22070f6270e20cd7453d00207a1c68df5d18c7c4bd78d5d680a6a3af833d54",
+      "player_mapping": {
+        "guidance_key": "figure-four-b",
+        "audio_url_field": "SoulStretchGuidance['figure-four-b'].audioUrl",
+        "expected_public_url": "/app/stretching/narration/miriam/figure-four-b.mp3",
+        "required_review_fields": [
+          "audioStatus=owner-approved",
+          "audioUrl=expected_public_url",
+          "audioSha256=<verified exact MP3 SHA-256>"
+        ],
+        "approval_status_required": "owner-approved"
+      },
+      "file_size_bytes": 326469,
+      "actual_duration_seconds": 20.34068,
+      "runway_asset_name": "SoulStretch Miriam 09 - figure-four-b",
+      "runway_task_id": "78e8aee7-d4f0-4fed-977f-8708cb076be5",
+      "runway_voice_id": "VhxAIIZM8IRmnl5fyeyk",
+      "runway_text_matches_manifest": true,
+      "audio_review_status": "OWNER-APPROVED FOR PLAYBACK — owner listened to and approved the exact generated MP3 SHA-256",
+      "ffprobe": {
+        "format": "mp3",
+        "codec": "mp3",
+        "codec_type": "audio",
+        "duration_seconds": 20.34068,
+        "sample_rate_hz": 44100,
+        "channels": 1
+      },
+      "audio_approved_at_utc": "2026-11-09T20:11:06Z",
+      "audio_approval_source": "Owner approval in SoulStretch integration session; exact manifest recording and SHA-256 scope."
     },
     {
       "movement_id": "adductor",
@@ -282,23 +786,79 @@
       "script": "Take a comfortable wide stance with support close by. Shift toward the bent leg as shown; keep the other leg easy and the knee aligned with the toes. Breathe smoothly, then return to center.",
       "cues": [
         {
-          "timestamp_seconds": 0,
+          "timestamp_seconds": 0.0,
           "text": "Take a comfortable wide stance with support close by."
         },
         {
-          "timestamp_seconds": 4,
+          "timestamp_seconds": 5.6,
           "text": "Shift toward the bent leg as shown; keep the other leg easy and the knee aligned with the toes."
         },
         {
-          "timestamp_seconds": 12,
+          "timestamp_seconds": 17.0,
           "text": "Breathe smoothly, then return to center."
         }
       ],
-      "expected_spoken_duration_seconds": 16,
-      "quiet_hold_seconds": 13,
-      "audio_status": "NOT RECORDED — owner approval and production required",
-      "proposed_filename": "soulstretch/adductor.mp3",
-      "audio_url": null
+      "expected_spoken_duration_seconds": 21,
+      "quiet_hold_seconds": 8,
+      "audio_status": "owner-approved",
+      "proposed_filename": "app/stretching/narration/miriam/adductor.mp3",
+      "audio_url": "/app/stretching/narration/miriam/adductor.mp3",
+      "text_characters": 190,
+      "word_count": 34,
+      "credit_cost": 4,
+      "timing_estimate": {
+        "method": "Approximation only: 140 wpm source estimate scaled by speed 0.75 (about 105 wpm), plus 0.5 s between sentence cues.",
+        "estimated_narration_seconds": 20.4,
+        "approved_video_seconds": 29.0,
+        "estimated_quiet_hold_seconds": 8.6,
+        "timing_status": "ESTIMATED FIT — validate actual generated MP3 duration before integration",
+        "actual_duration_seconds": 21.269478,
+        "actual_quiet_hold_seconds": 7.731,
+        "actual_timing_status": "PASS — MP3 is shorter than its approved video clip"
+      },
+      "expected_public_url": "/app/stretching/narration/miriam/adductor.mp3",
+      "runway_request": {
+        "name": "SoulStretch_adductor_Miriam",
+        "provider": "Runway Generate Speech",
+        "voice": "Miriam",
+        "model": "eleven_multilingual_v2",
+        "speed": 0.75,
+        "language": "English",
+        "text": "Take a comfortable wide stance with support close by. Shift toward the bent leg as shown; keep the other leg easy and the knee aligned with the toes. Breathe smoothly, then return to center.",
+        "expected_output": "MP3",
+        "text_characters": 190,
+        "estimated_credits": 4,
+        "submit_authorized": true
+      },
+      "audio_sha256": "d4f50541be67170adff5af74d7f44680be07138ed12f4336c70a897bfa8db2cf",
+      "player_mapping": {
+        "guidance_key": "adductor",
+        "audio_url_field": "SoulStretchGuidance['adductor'].audioUrl",
+        "expected_public_url": "/app/stretching/narration/miriam/adductor.mp3",
+        "required_review_fields": [
+          "audioStatus=owner-approved",
+          "audioUrl=expected_public_url",
+          "audioSha256=<verified exact MP3 SHA-256>"
+        ],
+        "approval_status_required": "owner-approved"
+      },
+      "file_size_bytes": 341515,
+      "actual_duration_seconds": 21.269478,
+      "runway_asset_name": "SoulStretch Miriam 10 - adductor",
+      "runway_task_id": "955aec4b-c23d-4cd7-8698-c5e0473c5ec3",
+      "runway_voice_id": "VhxAIIZM8IRmnl5fyeyk",
+      "runway_text_matches_manifest": true,
+      "audio_review_status": "OWNER-APPROVED FOR PLAYBACK — owner listened to and approved the exact generated MP3 SHA-256",
+      "ffprobe": {
+        "format": "mp3",
+        "codec": "mp3",
+        "codec_type": "audio",
+        "duration_seconds": 21.269478,
+        "sample_rate_hz": 44100,
+        "channels": 1
+      },
+      "audio_approved_at_utc": "2026-11-09T20:11:06Z",
+      "audio_approval_source": "Owner approval in SoulStretch integration session; exact manifest recording and SHA-256 scope."
     },
     {
       "movement_id": "shoulder-a",
@@ -309,27 +869,83 @@
       "script": "Sit or stand tall with shoulders relaxed. Bring one arm across your chest as shown, supporting it gently without pulling. Breathe slowly. Release the arm and pause before changing sides.",
       "cues": [
         {
-          "timestamp_seconds": 0,
+          "timestamp_seconds": 0.0,
           "text": "Sit or stand tall with shoulders relaxed."
         },
         {
-          "timestamp_seconds": 3,
+          "timestamp_seconds": 4.5,
           "text": "Bring one arm across your chest as shown, supporting it gently without pulling."
         },
         {
-          "timestamp_seconds": 9,
+          "timestamp_seconds": 12.4,
           "text": "Breathe slowly."
         },
         {
-          "timestamp_seconds": 9,
+          "timestamp_seconds": 14.1,
           "text": "Release the arm and pause before changing sides."
         }
       ],
-      "expected_spoken_duration_seconds": 14,
-      "quiet_hold_seconds": 15,
-      "audio_status": "NOT RECORDED — owner approval and production required",
-      "proposed_filename": "soulstretch/shoulder-a.mp3",
-      "audio_url": null
+      "expected_spoken_duration_seconds": 19,
+      "quiet_hold_seconds": 10,
+      "audio_status": "owner-approved",
+      "proposed_filename": "app/stretching/narration/miriam/shoulder-a.mp3",
+      "audio_url": "/app/stretching/narration/miriam/shoulder-a.mp3",
+      "text_characters": 186,
+      "word_count": 30,
+      "credit_cost": 4,
+      "timing_estimate": {
+        "method": "Approximation only: 140 wpm source estimate scaled by speed 0.75 (about 105 wpm), plus 0.5 s between sentence cues.",
+        "estimated_narration_seconds": 18.6,
+        "approved_video_seconds": 29.0,
+        "estimated_quiet_hold_seconds": 10.4,
+        "timing_status": "ESTIMATED FIT — validate actual generated MP3 duration before integration",
+        "actual_duration_seconds": 20.57288,
+        "actual_quiet_hold_seconds": 8.427,
+        "actual_timing_status": "PASS — MP3 is shorter than its approved video clip"
+      },
+      "expected_public_url": "/app/stretching/narration/miriam/shoulder-a.mp3",
+      "runway_request": {
+        "name": "SoulStretch_shoulder-a_Miriam",
+        "provider": "Runway Generate Speech",
+        "voice": "Miriam",
+        "model": "eleven_multilingual_v2",
+        "speed": 0.75,
+        "language": "English",
+        "text": "Sit or stand tall with shoulders relaxed. Bring one arm across your chest as shown, supporting it gently without pulling. Breathe slowly. Release the arm and pause before changing sides.",
+        "expected_output": "MP3",
+        "text_characters": 186,
+        "estimated_credits": 4,
+        "submit_authorized": true
+      },
+      "audio_sha256": "3827af4dbcea5cea6f565a399af421db1e34e443289848e5cfb2ee64696ac1ba",
+      "player_mapping": {
+        "guidance_key": "shoulder-a",
+        "audio_url_field": "SoulStretchGuidance['shoulder-a'].audioUrl",
+        "expected_public_url": "/app/stretching/narration/miriam/shoulder-a.mp3",
+        "required_review_fields": [
+          "audioStatus=owner-approved",
+          "audioUrl=expected_public_url",
+          "audioSha256=<verified exact MP3 SHA-256>"
+        ],
+        "approval_status_required": "owner-approved"
+      },
+      "file_size_bytes": 330230,
+      "actual_duration_seconds": 20.57288,
+      "runway_asset_name": "SoulStretch Miriam 11 - shoulder-a",
+      "runway_task_id": "fde5c3c5-edcf-43ea-ba3e-b39630e7a2f1",
+      "runway_voice_id": "VhxAIIZM8IRmnl5fyeyk",
+      "runway_text_matches_manifest": true,
+      "audio_review_status": "OWNER-APPROVED FOR PLAYBACK — owner listened to and approved the exact generated MP3 SHA-256",
+      "ffprobe": {
+        "format": "mp3",
+        "codec": "mp3",
+        "codec_type": "audio",
+        "duration_seconds": 20.57288,
+        "sample_rate_hz": 44100,
+        "channels": 1
+      },
+      "audio_approved_at_utc": "2026-11-09T20:11:06Z",
+      "audio_approval_source": "Owner approval in SoulStretch integration session; exact manifest recording and SHA-256 scope."
     },
     {
       "movement_id": "shoulder-b",
@@ -340,27 +956,83 @@
       "script": "Settle into a comfortable upright position. Follow the demonstrated cross-body shoulder stretch and keep your neck relaxed. Exhale softly without holding your breath. Bring the arm back to neutral.",
       "cues": [
         {
-          "timestamp_seconds": 0,
+          "timestamp_seconds": 0.0,
           "text": "Settle into a comfortable upright position."
         },
         {
-          "timestamp_seconds": 3,
+          "timestamp_seconds": 3.9,
           "text": "Follow the demonstrated cross-body shoulder stretch and keep your neck relaxed."
         },
         {
-          "timestamp_seconds": 7,
+          "timestamp_seconds": 10.7,
           "text": "Exhale softly without holding your breath."
         },
         {
-          "timestamp_seconds": 10,
+          "timestamp_seconds": 14.6,
           "text": "Bring the arm back to neutral."
         }
       ],
-      "expected_spoken_duration_seconds": 14,
-      "quiet_hold_seconds": 15,
-      "audio_status": "NOT RECORDED — owner approval and production required",
-      "proposed_filename": "soulstretch/shoulder-b.mp3",
-      "audio_url": null
+      "expected_spoken_duration_seconds": 19,
+      "quiet_hold_seconds": 10,
+      "audio_status": "owner-approved",
+      "proposed_filename": "app/stretching/narration/miriam/shoulder-b.mp3",
+      "audio_url": "/app/stretching/narration/miriam/shoulder-b.mp3",
+      "text_characters": 197,
+      "word_count": 29,
+      "credit_cost": 4,
+      "timing_estimate": {
+        "method": "Approximation only: 140 wpm source estimate scaled by speed 0.75 (about 105 wpm), plus 0.5 s between sentence cues.",
+        "estimated_narration_seconds": 18.1,
+        "approved_video_seconds": 29.0,
+        "estimated_quiet_hold_seconds": 10.9,
+        "timing_status": "ESTIMATED FIT — validate actual generated MP3 duration before integration",
+        "actual_duration_seconds": 20.015601,
+        "actual_quiet_hold_seconds": 8.984,
+        "actual_timing_status": "PASS — MP3 is shorter than its approved video clip"
+      },
+      "expected_public_url": "/app/stretching/narration/miriam/shoulder-b.mp3",
+      "runway_request": {
+        "name": "SoulStretch_shoulder-b_Miriam",
+        "provider": "Runway Generate Speech",
+        "voice": "Miriam",
+        "model": "eleven_multilingual_v2",
+        "speed": 0.75,
+        "language": "English",
+        "text": "Settle into a comfortable upright position. Follow the demonstrated cross-body shoulder stretch and keep your neck relaxed. Exhale softly without holding your breath. Bring the arm back to neutral.",
+        "expected_output": "MP3",
+        "text_characters": 197,
+        "estimated_credits": 4,
+        "submit_authorized": true
+      },
+      "audio_sha256": "8ece0a1fc15e0c0b27749c1373754a48dcb66c4ca6ac31ab47a85b8b29d1d0b6",
+      "player_mapping": {
+        "guidance_key": "shoulder-b",
+        "audio_url_field": "SoulStretchGuidance['shoulder-b'].audioUrl",
+        "expected_public_url": "/app/stretching/narration/miriam/shoulder-b.mp3",
+        "required_review_fields": [
+          "audioStatus=owner-approved",
+          "audioUrl=expected_public_url",
+          "audioSha256=<verified exact MP3 SHA-256>"
+        ],
+        "approval_status_required": "owner-approved"
+      },
+      "file_size_bytes": 321453,
+      "actual_duration_seconds": 20.015601,
+      "runway_asset_name": "SoulStretch Miriam 12 - shoulder-b",
+      "runway_task_id": "dab2380c-3a7b-469a-a5ae-097dd5a1beb6",
+      "runway_voice_id": "VhxAIIZM8IRmnl5fyeyk",
+      "runway_text_matches_manifest": true,
+      "audio_review_status": "OWNER-APPROVED FOR PLAYBACK — owner listened to and approved the exact generated MP3 SHA-256",
+      "ffprobe": {
+        "format": "mp3",
+        "codec": "mp3",
+        "codec_type": "audio",
+        "duration_seconds": 20.015601,
+        "sample_rate_hz": 44100,
+        "channels": 1
+      },
+      "audio_approved_at_utc": "2026-11-09T20:11:06Z",
+      "audio_approval_source": "Owner approval in SoulStretch integration session; exact manifest recording and SHA-256 scope."
     },
     {
       "movement_id": "calf-a",
@@ -371,23 +1043,79 @@
       "script": "Face a wall or chair and take the demonstrated staggered stance. Keep the back heel comfortably down as you lean forward a little. Breathe evenly, then step in slowly.",
       "cues": [
         {
-          "timestamp_seconds": 0,
+          "timestamp_seconds": 0.0,
           "text": "Face a wall or chair and take the demonstrated staggered stance."
         },
         {
-          "timestamp_seconds": 5,
+          "timestamp_seconds": 6.8,
           "text": "Keep the back heel comfortably down as you lean forward a little."
         },
         {
-          "timestamp_seconds": 10,
+          "timestamp_seconds": 14.1,
           "text": "Breathe evenly, then step in slowly."
         }
       ],
-      "expected_spoken_duration_seconds": 14,
-      "quiet_hold_seconds": 15,
-      "audio_status": "NOT RECORDED — owner approval and production required",
-      "proposed_filename": "soulstretch/calf-a.mp3",
-      "audio_url": null
+      "expected_spoken_duration_seconds": 18,
+      "quiet_hold_seconds": 11,
+      "audio_status": "owner-approved",
+      "proposed_filename": "app/stretching/narration/miriam/calf-a.mp3",
+      "audio_url": "/app/stretching/narration/miriam/calf-a.mp3",
+      "text_characters": 167,
+      "word_count": 29,
+      "credit_cost": 4,
+      "timing_estimate": {
+        "method": "Approximation only: 140 wpm source estimate scaled by speed 0.75 (about 105 wpm), plus 0.5 s between sentence cues.",
+        "estimated_narration_seconds": 17.6,
+        "approved_video_seconds": 29.0,
+        "estimated_quiet_hold_seconds": 11.4,
+        "timing_status": "ESTIMATED FIT — validate actual generated MP3 duration before integration",
+        "actual_duration_seconds": 18.575964,
+        "actual_quiet_hold_seconds": 10.424,
+        "actual_timing_status": "PASS — MP3 is shorter than its approved video clip"
+      },
+      "expected_public_url": "/app/stretching/narration/miriam/calf-a.mp3",
+      "runway_request": {
+        "name": "SoulStretch_calf-a_Miriam",
+        "provider": "Runway Generate Speech",
+        "voice": "Miriam",
+        "model": "eleven_multilingual_v2",
+        "speed": 0.75,
+        "language": "English",
+        "text": "Face a wall or chair and take the demonstrated staggered stance. Keep the back heel comfortably down as you lean forward a little. Breathe evenly, then step in slowly.",
+        "expected_output": "MP3",
+        "text_characters": 167,
+        "estimated_credits": 4,
+        "submit_authorized": true
+      },
+      "audio_sha256": "b2d7fce1b6b4002ee3d4d511e7fb3f13530f0563df0c7367c11c297884dfc3d0",
+      "player_mapping": {
+        "guidance_key": "calf-a",
+        "audio_url_field": "SoulStretchGuidance['calf-a'].audioUrl",
+        "expected_public_url": "/app/stretching/narration/miriam/calf-a.mp3",
+        "required_review_fields": [
+          "audioStatus=owner-approved",
+          "audioUrl=expected_public_url",
+          "audioSha256=<verified exact MP3 SHA-256>"
+        ],
+        "approval_status_required": "owner-approved"
+      },
+      "file_size_bytes": 298465,
+      "actual_duration_seconds": 18.575964,
+      "runway_asset_name": "SoulStretch Miriam 13 - calf-a",
+      "runway_task_id": "802d52ad-679d-4c64-89b6-e4e573f5029a",
+      "runway_voice_id": "VhxAIIZM8IRmnl5fyeyk",
+      "runway_text_matches_manifest": true,
+      "audio_review_status": "OWNER-APPROVED FOR PLAYBACK — owner listened to and approved the exact generated MP3 SHA-256",
+      "ffprobe": {
+        "format": "mp3",
+        "codec": "mp3",
+        "codec_type": "audio",
+        "duration_seconds": 18.575964,
+        "sample_rate_hz": 44100,
+        "channels": 1
+      },
+      "audio_approved_at_utc": "2026-11-09T20:11:06Z",
+      "audio_approval_source": "Owner approval in SoulStretch integration session; exact manifest recording and SHA-256 scope."
     },
     {
       "movement_id": "calf-b",
@@ -398,23 +1126,79 @@
       "script": "Stay close to a stable support and place your feet as shown. Let the heel lower only within comfort; keep your balance and breathe naturally. Return the foot to neutral.",
       "cues": [
         {
-          "timestamp_seconds": 0,
+          "timestamp_seconds": 0.0,
           "text": "Stay close to a stable support and place your feet as shown."
         },
         {
-          "timestamp_seconds": 5,
+          "timestamp_seconds": 7.4,
           "text": "Let the heel lower only within comfort; keep your balance and breathe naturally."
         },
         {
-          "timestamp_seconds": 11,
+          "timestamp_seconds": 15.3,
           "text": "Return the foot to neutral."
         }
       ],
-      "expected_spoken_duration_seconds": 14,
-      "quiet_hold_seconds": 15,
-      "audio_status": "NOT RECORDED — owner approval and production required",
-      "proposed_filename": "soulstretch/calf-b.mp3",
-      "audio_url": null
+      "expected_spoken_duration_seconds": 19,
+      "quiet_hold_seconds": 10,
+      "audio_status": "owner-approved",
+      "proposed_filename": "app/stretching/narration/miriam/calf-b.mp3",
+      "audio_url": "/app/stretching/narration/miriam/calf-b.mp3",
+      "text_characters": 169,
+      "word_count": 30,
+      "credit_cost": 4,
+      "timing_estimate": {
+        "method": "Approximation only: 140 wpm source estimate scaled by speed 0.75 (about 105 wpm), plus 0.5 s between sentence cues.",
+        "estimated_narration_seconds": 18.1,
+        "approved_video_seconds": 29.0,
+        "estimated_quiet_hold_seconds": 10.9,
+        "timing_status": "ESTIMATED FIT — validate actual generated MP3 duration before integration",
+        "actual_duration_seconds": 18.854603,
+        "actual_quiet_hold_seconds": 10.145,
+        "actual_timing_status": "PASS — MP3 is shorter than its approved video clip"
+      },
+      "expected_public_url": "/app/stretching/narration/miriam/calf-b.mp3",
+      "runway_request": {
+        "name": "SoulStretch_calf-b_Miriam",
+        "provider": "Runway Generate Speech",
+        "voice": "Miriam",
+        "model": "eleven_multilingual_v2",
+        "speed": 0.75,
+        "language": "English",
+        "text": "Stay close to a stable support and place your feet as shown. Let the heel lower only within comfort; keep your balance and breathe naturally. Return the foot to neutral.",
+        "expected_output": "MP3",
+        "text_characters": 169,
+        "estimated_credits": 4,
+        "submit_authorized": true
+      },
+      "audio_sha256": "9fdbb2b85808b87e74f57ee936c139f38fe0a02efa8c03b29532b794f1005eb3",
+      "player_mapping": {
+        "guidance_key": "calf-b",
+        "audio_url_field": "SoulStretchGuidance['calf-b'].audioUrl",
+        "expected_public_url": "/app/stretching/narration/miriam/calf-b.mp3",
+        "required_review_fields": [
+          "audioStatus=owner-approved",
+          "audioUrl=expected_public_url",
+          "audioSha256=<verified exact MP3 SHA-256>"
+        ],
+        "approval_status_required": "owner-approved"
+      },
+      "file_size_bytes": 302645,
+      "actual_duration_seconds": 18.854603,
+      "runway_asset_name": "SoulStretch Miriam 14 - calf-b",
+      "runway_task_id": "51626089-d2c4-4e25-86c6-33f54b33b75c",
+      "runway_voice_id": "VhxAIIZM8IRmnl5fyeyk",
+      "runway_text_matches_manifest": true,
+      "audio_review_status": "OWNER-APPROVED FOR PLAYBACK — owner listened to and approved the exact generated MP3 SHA-256",
+      "ffprobe": {
+        "format": "mp3",
+        "codec": "mp3",
+        "codec_type": "audio",
+        "duration_seconds": 18.854603,
+        "sample_rate_hz": 44100,
+        "channels": 1
+      },
+      "audio_approved_at_utc": "2026-11-09T20:11:06Z",
+      "audio_approval_source": "Owner approval in SoulStretch integration session; exact manifest recording and SHA-256 scope."
     },
     {
       "movement_id": "standing-reset-4113",
@@ -425,27 +1209,83 @@
       "script": "Stand behind a sturdy chair. Rise onto the balls of your feet only as high as steady, then lower with control. Breathe out as you lift and in as you lower. Pause.",
       "cues": [
         {
-          "timestamp_seconds": 0,
+          "timestamp_seconds": 0.0,
           "text": "Stand behind a sturdy chair."
         },
         {
-          "timestamp_seconds": 2,
+          "timestamp_seconds": 3.4,
           "text": "Rise onto the balls of your feet only as high as steady, then lower with control."
         },
         {
-          "timestamp_seconds": 9,
+          "timestamp_seconds": 13.0,
           "text": "Breathe out as you lift and in as you lower."
         },
         {
-          "timestamp_seconds": 13,
+          "timestamp_seconds": 19.2,
           "text": "Pause."
         }
       ],
-      "expected_spoken_duration_seconds": 15,
-      "quiet_hold_seconds": 14.4,
-      "audio_status": "NOT RECORDED — owner approval and production required",
-      "proposed_filename": "soulstretch/standing-reset-4113.mp3",
-      "audio_url": null
+      "expected_spoken_duration_seconds": 20,
+      "quiet_hold_seconds": 9.4,
+      "audio_status": "owner-approved",
+      "proposed_filename": "app/stretching/narration/miriam/standing-reset-4113.mp3",
+      "audio_url": "/app/stretching/narration/miriam/standing-reset-4113.mp3",
+      "text_characters": 162,
+      "word_count": 32,
+      "credit_cost": 4,
+      "timing_estimate": {
+        "method": "Approximation only: 140 wpm source estimate scaled by speed 0.75 (about 105 wpm), plus 0.5 s between sentence cues.",
+        "estimated_narration_seconds": 19.8,
+        "approved_video_seconds": 29.433,
+        "estimated_quiet_hold_seconds": 9.6,
+        "timing_status": "ESTIMATED FIT — validate actual generated MP3 duration before integration",
+        "actual_duration_seconds": 20.805079,
+        "actual_quiet_hold_seconds": 8.628,
+        "actual_timing_status": "PASS — MP3 is shorter than its approved video clip"
+      },
+      "expected_public_url": "/app/stretching/narration/miriam/standing-reset-4113.mp3",
+      "runway_request": {
+        "name": "SoulStretch_standing-reset-4113_Miriam",
+        "provider": "Runway Generate Speech",
+        "voice": "Miriam",
+        "model": "eleven_multilingual_v2",
+        "speed": 0.75,
+        "language": "English",
+        "text": "Stand behind a sturdy chair. Rise onto the balls of your feet only as high as steady, then lower with control. Breathe out as you lift and in as you lower. Pause.",
+        "expected_output": "MP3",
+        "text_characters": 162,
+        "estimated_credits": 4,
+        "submit_authorized": true
+      },
+      "audio_sha256": "260da08756b04bd706d68a79338f7ef4dd80b6f066edee2136788e2ea8b889a1",
+      "player_mapping": {
+        "guidance_key": "standing-reset-4113",
+        "audio_url_field": "SoulStretchGuidance['standing-reset-4113'].audioUrl",
+        "expected_public_url": "/app/stretching/narration/miriam/standing-reset-4113.mp3",
+        "required_review_fields": [
+          "audioStatus=owner-approved",
+          "audioUrl=expected_public_url",
+          "audioSha256=<verified exact MP3 SHA-256>"
+        ],
+        "approval_status_required": "owner-approved"
+      },
+      "file_size_bytes": 333992,
+      "actual_duration_seconds": 20.805079,
+      "runway_asset_name": "SoulStretch Miriam 15 - standing-reset-4113",
+      "runway_task_id": "59e27c29-82c8-40f4-a39a-285340325198",
+      "runway_voice_id": "VhxAIIZM8IRmnl5fyeyk",
+      "runway_text_matches_manifest": true,
+      "audio_review_status": "OWNER-APPROVED FOR PLAYBACK — owner listened to and approved the exact generated MP3 SHA-256",
+      "ffprobe": {
+        "format": "mp3",
+        "codec": "mp3",
+        "codec_type": "audio",
+        "duration_seconds": 20.805079,
+        "sample_rate_hz": 44100,
+        "channels": 1
+      },
+      "audio_approved_at_utc": "2026-11-09T20:11:06Z",
+      "audio_approval_source": "Owner approval in SoulStretch integration session; exact manifest recording and SHA-256 scope."
     },
     {
       "movement_id": "standing-reset-4114",
@@ -456,27 +1296,83 @@
       "script": "Stand tall near a chair or wall. Keep your heels down as you lift the toes in a small range. Breathe naturally and keep your shoulders soft. Set the toes down gently.",
       "cues": [
         {
-          "timestamp_seconds": 0,
+          "timestamp_seconds": 0.0,
           "text": "Stand tall near a chair or wall."
         },
         {
-          "timestamp_seconds": 3,
+          "timestamp_seconds": 4.5,
           "text": "Keep your heels down as you lift the toes in a small range."
         },
         {
-          "timestamp_seconds": 9,
+          "timestamp_seconds": 12.4,
           "text": "Breathe naturally and keep your shoulders soft."
         },
         {
-          "timestamp_seconds": 12,
+          "timestamp_seconds": 16.9,
           "text": "Set the toes down gently."
         }
       ],
-      "expected_spoken_duration_seconds": 15,
-      "quiet_hold_seconds": 14,
-      "audio_status": "NOT RECORDED — owner approval and production required",
-      "proposed_filename": "soulstretch/standing-reset-4114.mp3",
-      "audio_url": null
+      "expected_spoken_duration_seconds": 20,
+      "quiet_hold_seconds": 9,
+      "audio_status": "owner-approved",
+      "proposed_filename": "app/stretching/narration/miriam/standing-reset-4114.mp3",
+      "audio_url": "/app/stretching/narration/miriam/standing-reset-4114.mp3",
+      "text_characters": 166,
+      "word_count": 32,
+      "credit_cost": 4,
+      "timing_estimate": {
+        "method": "Approximation only: 140 wpm source estimate scaled by speed 0.75 (about 105 wpm), plus 0.5 s between sentence cues.",
+        "estimated_narration_seconds": 19.8,
+        "approved_video_seconds": 29.0,
+        "estimated_quiet_hold_seconds": 9.2,
+        "timing_status": "ESTIMATED FIT — validate actual generated MP3 duration before integration",
+        "actual_duration_seconds": 17.414966,
+        "actual_quiet_hold_seconds": 11.585,
+        "actual_timing_status": "PASS — MP3 is shorter than its approved video clip"
+      },
+      "expected_public_url": "/app/stretching/narration/miriam/standing-reset-4114.mp3",
+      "runway_request": {
+        "name": "SoulStretch_standing-reset-4114_Miriam",
+        "provider": "Runway Generate Speech",
+        "voice": "Miriam",
+        "model": "eleven_multilingual_v2",
+        "speed": 0.75,
+        "language": "English",
+        "text": "Stand tall near a chair or wall. Keep your heels down as you lift the toes in a small range. Breathe naturally and keep your shoulders soft. Set the toes down gently.",
+        "expected_output": "MP3",
+        "text_characters": 166,
+        "estimated_credits": 4,
+        "submit_authorized": true
+      },
+      "audio_sha256": "b4d6da5a68f7f98ec7f8a5abe2db4dff019db0b634af0c77499047fa01db6e8d",
+      "player_mapping": {
+        "guidance_key": "standing-reset-4114",
+        "audio_url_field": "SoulStretchGuidance['standing-reset-4114'].audioUrl",
+        "expected_public_url": "/app/stretching/narration/miriam/standing-reset-4114.mp3",
+        "required_review_fields": [
+          "audioStatus=owner-approved",
+          "audioUrl=expected_public_url",
+          "audioSha256=<verified exact MP3 SHA-256>"
+        ],
+        "approval_status_required": "owner-approved"
+      },
+      "file_size_bytes": 279657,
+      "actual_duration_seconds": 17.414966,
+      "runway_asset_name": "SoulStretch Miriam 16 - standing-reset-4114",
+      "runway_task_id": "15fa6e40-12ed-4c52-b5d3-5eb6edd15782",
+      "runway_voice_id": "VhxAIIZM8IRmnl5fyeyk",
+      "runway_text_matches_manifest": true,
+      "audio_review_status": "OWNER-APPROVED FOR PLAYBACK — owner listened to and approved the exact generated MP3 SHA-256",
+      "ffprobe": {
+        "format": "mp3",
+        "codec": "mp3",
+        "codec_type": "audio",
+        "duration_seconds": 17.414966,
+        "sample_rate_hz": 44100,
+        "channels": 1
+      },
+      "audio_approved_at_utc": "2026-11-09T20:11:06Z",
+      "audio_approval_source": "Owner approval in SoulStretch integration session; exact manifest recording and SHA-256 scope."
     },
     {
       "movement_id": "side-bend",
@@ -487,27 +1383,83 @@
       "script": "Stand with feet grounded and knees soft. Follow the demonstrated hip rotations in a small, comfortable range. Keep breathing and your trunk steady. Return to center before continuing.",
       "cues": [
         {
-          "timestamp_seconds": 0,
+          "timestamp_seconds": 0.0,
           "text": "Stand with feet grounded and knees soft."
         },
         {
-          "timestamp_seconds": 3,
+          "timestamp_seconds": 4.5,
           "text": "Follow the demonstrated hip rotations in a small, comfortable range."
         },
         {
-          "timestamp_seconds": 7,
+          "timestamp_seconds": 10.7,
           "text": "Keep breathing and your trunk steady."
         },
         {
-          "timestamp_seconds": 10,
+          "timestamp_seconds": 14.6,
           "text": "Return to center before continuing."
         }
       ],
-      "expected_spoken_duration_seconds": 13,
-      "quiet_hold_seconds": 16,
-      "audio_status": "NOT RECORDED — owner approval and production required",
-      "proposed_filename": "soulstretch/side-bend.mp3",
-      "audio_url": null
+      "expected_spoken_duration_seconds": 18,
+      "quiet_hold_seconds": 11,
+      "audio_status": "owner-approved",
+      "proposed_filename": "app/stretching/narration/miriam/side-bend.mp3",
+      "audio_url": "/app/stretching/narration/miriam/side-bend.mp3",
+      "text_characters": 183,
+      "word_count": 28,
+      "credit_cost": 4,
+      "timing_estimate": {
+        "method": "Approximation only: 140 wpm source estimate scaled by speed 0.75 (about 105 wpm), plus 0.5 s between sentence cues.",
+        "estimated_narration_seconds": 17.5,
+        "approved_video_seconds": 29.0,
+        "estimated_quiet_hold_seconds": 11.5,
+        "timing_status": "ESTIMATED FIT — validate actual generated MP3 duration before integration",
+        "actual_duration_seconds": 19.597642,
+        "actual_quiet_hold_seconds": 9.402,
+        "actual_timing_status": "PASS — MP3 is shorter than its approved video clip"
+      },
+      "expected_public_url": "/app/stretching/narration/miriam/side-bend.mp3",
+      "runway_request": {
+        "name": "SoulStretch_side-bend_Miriam",
+        "provider": "Runway Generate Speech",
+        "voice": "Miriam",
+        "model": "eleven_multilingual_v2",
+        "speed": 0.75,
+        "language": "English",
+        "text": "Stand with feet grounded and knees soft. Follow the demonstrated hip rotations in a small, comfortable range. Keep breathing and your trunk steady. Return to center before continuing.",
+        "expected_output": "MP3",
+        "text_characters": 183,
+        "estimated_credits": 4,
+        "submit_authorized": true
+      },
+      "audio_sha256": "3713da47efce145712acfba236e4d7deb6a6a14db81c261943ae6d6e19d2c596",
+      "player_mapping": {
+        "guidance_key": "side-bend",
+        "audio_url_field": "SoulStretchGuidance['side-bend'].audioUrl",
+        "expected_public_url": "/app/stretching/narration/miriam/side-bend.mp3",
+        "required_review_fields": [
+          "audioStatus=owner-approved",
+          "audioUrl=expected_public_url",
+          "audioSha256=<verified exact MP3 SHA-256>"
+        ],
+        "approval_status_required": "owner-approved"
+      },
+      "file_size_bytes": 314766,
+      "actual_duration_seconds": 19.597642,
+      "runway_asset_name": "SoulStretch Miriam 17 - side-bend",
+      "runway_task_id": "c82489c9-bd11-4e72-a583-736c42fde3cc",
+      "runway_voice_id": "VhxAIIZM8IRmnl5fyeyk",
+      "runway_text_matches_manifest": true,
+      "audio_review_status": "OWNER-APPROVED FOR PLAYBACK — owner listened to and approved the exact generated MP3 SHA-256",
+      "ffprobe": {
+        "format": "mp3",
+        "codec": "mp3",
+        "codec_type": "audio",
+        "duration_seconds": 19.597642,
+        "sample_rate_hz": 44100,
+        "channels": 1
+      },
+      "audio_approved_at_utc": "2026-11-09T20:11:06Z",
+      "audio_approval_source": "Owner approval in SoulStretch integration session; exact manifest recording and SHA-256 scope."
     },
     {
       "movement_id": "hip-abduction",
@@ -518,27 +1470,83 @@
       "script": "Stand beside a stable support with your weight even. Move the leg outward as demonstrated without leaning your trunk. Breathe out as it moves, in as it returns. Switch only if shown.",
       "cues": [
         {
-          "timestamp_seconds": 0,
+          "timestamp_seconds": 0.0,
           "text": "Stand beside a stable support with your weight even."
         },
         {
-          "timestamp_seconds": 4,
+          "timestamp_seconds": 5.6,
           "text": "Move the leg outward as demonstrated without leaning your trunk."
         },
         {
-          "timestamp_seconds": 8,
+          "timestamp_seconds": 11.9,
           "text": "Breathe out as it moves, in as it returns."
         },
         {
-          "timestamp_seconds": 12,
+          "timestamp_seconds": 17.5,
           "text": "Switch only if shown."
         }
       ],
-      "expected_spoken_duration_seconds": 15,
-      "quiet_hold_seconds": 14,
-      "audio_status": "NOT RECORDED — owner approval and production required",
-      "proposed_filename": "soulstretch/hip-abduction.mp3",
-      "audio_url": null
+      "expected_spoken_duration_seconds": 20,
+      "quiet_hold_seconds": 9,
+      "audio_status": "owner-approved",
+      "proposed_filename": "app/stretching/narration/miriam/hip-abduction.mp3",
+      "audio_url": "/app/stretching/narration/miriam/hip-abduction.mp3",
+      "text_characters": 182,
+      "word_count": 32,
+      "credit_cost": 4,
+      "timing_estimate": {
+        "method": "Approximation only: 140 wpm source estimate scaled by speed 0.75 (about 105 wpm), plus 0.5 s between sentence cues.",
+        "estimated_narration_seconds": 19.8,
+        "approved_video_seconds": 29.0,
+        "estimated_quiet_hold_seconds": 9.2,
+        "timing_status": "ESTIMATED FIT — validate actual generated MP3 duration before integration",
+        "actual_duration_seconds": 20.34068,
+        "actual_quiet_hold_seconds": 8.659,
+        "actual_timing_status": "PASS — MP3 is shorter than its approved video clip"
+      },
+      "expected_public_url": "/app/stretching/narration/miriam/hip-abduction.mp3",
+      "runway_request": {
+        "name": "SoulStretch_hip-abduction_Miriam",
+        "provider": "Runway Generate Speech",
+        "voice": "Miriam",
+        "model": "eleven_multilingual_v2",
+        "speed": 0.75,
+        "language": "English",
+        "text": "Stand beside a stable support with your weight even. Move the leg outward as demonstrated without leaning your trunk. Breathe out as it moves, in as it returns. Switch only if shown.",
+        "expected_output": "MP3",
+        "text_characters": 182,
+        "estimated_credits": 4,
+        "submit_authorized": true
+      },
+      "audio_sha256": "4360f3440f9c96b8a4fdb037e5fb855673d6f4aafc088515470f95605fbcb3b8",
+      "player_mapping": {
+        "guidance_key": "hip-abduction",
+        "audio_url_field": "SoulStretchGuidance['hip-abduction'].audioUrl",
+        "expected_public_url": "/app/stretching/narration/miriam/hip-abduction.mp3",
+        "required_review_fields": [
+          "audioStatus=owner-approved",
+          "audioUrl=expected_public_url",
+          "audioSha256=<verified exact MP3 SHA-256>"
+        ],
+        "approval_status_required": "owner-approved"
+      },
+      "file_size_bytes": 326469,
+      "actual_duration_seconds": 20.34068,
+      "runway_asset_name": "SoulStretch Miriam 18 - hip-abduction",
+      "runway_task_id": "686ab5ee-de13-4249-826a-d6133645b4a5",
+      "runway_voice_id": "VhxAIIZM8IRmnl5fyeyk",
+      "runway_text_matches_manifest": true,
+      "audio_review_status": "OWNER-APPROVED FOR PLAYBACK — owner listened to and approved the exact generated MP3 SHA-256",
+      "ffprobe": {
+        "format": "mp3",
+        "codec": "mp3",
+        "codec_type": "audio",
+        "duration_seconds": 20.34068,
+        "sample_rate_hz": 44100,
+        "channels": 1
+      },
+      "audio_approved_at_utc": "2026-11-09T20:11:06Z",
+      "audio_approval_source": "Owner approval in SoulStretch integration session; exact manifest recording and SHA-256 scope."
     },
     {
       "movement_id": "knee-chest",
@@ -549,23 +1557,79 @@
       "script": "Stand beside sturdy support. Lift one knee only as high as comfortable, keeping your torso tall; do not pull on the leg. Breathe out as it lifts, then lower carefully.",
       "cues": [
         {
-          "timestamp_seconds": 0,
+          "timestamp_seconds": 0.0,
           "text": "Stand beside sturdy support."
         },
         {
-          "timestamp_seconds": 2,
+          "timestamp_seconds": 2.8,
           "text": "Lift one knee only as high as comfortable, keeping your torso tall; do not pull on the leg."
         },
         {
-          "timestamp_seconds": 9,
+          "timestamp_seconds": 13.6,
           "text": "Breathe out as it lifts, then lower carefully."
         }
       ],
-      "expected_spoken_duration_seconds": 14,
-      "quiet_hold_seconds": 15,
-      "audio_status": "NOT RECORDED — owner approval and production required",
-      "proposed_filename": "soulstretch/knee-chest.mp3",
-      "audio_url": null
+      "expected_spoken_duration_seconds": 19,
+      "quiet_hold_seconds": 10,
+      "audio_status": "owner-approved",
+      "proposed_filename": "app/stretching/narration/miriam/knee-chest.mp3",
+      "audio_url": "/app/stretching/narration/miriam/knee-chest.mp3",
+      "text_characters": 167,
+      "word_count": 30,
+      "credit_cost": 4,
+      "timing_estimate": {
+        "method": "Approximation only: 140 wpm source estimate scaled by speed 0.75 (about 105 wpm), plus 0.5 s between sentence cues.",
+        "estimated_narration_seconds": 18.1,
+        "approved_video_seconds": 29.0,
+        "estimated_quiet_hold_seconds": 10.9,
+        "timing_status": "ESTIMATED FIT — validate actual generated MP3 duration before integration",
+        "actual_duration_seconds": 20.805079,
+        "actual_quiet_hold_seconds": 8.195,
+        "actual_timing_status": "PASS — MP3 is shorter than its approved video clip"
+      },
+      "expected_public_url": "/app/stretching/narration/miriam/knee-chest.mp3",
+      "runway_request": {
+        "name": "SoulStretch_knee-chest_Miriam",
+        "provider": "Runway Generate Speech",
+        "voice": "Miriam",
+        "model": "eleven_multilingual_v2",
+        "speed": 0.75,
+        "language": "English",
+        "text": "Stand beside sturdy support. Lift one knee only as high as comfortable, keeping your torso tall; do not pull on the leg. Breathe out as it lifts, then lower carefully.",
+        "expected_output": "MP3",
+        "text_characters": 167,
+        "estimated_credits": 4,
+        "submit_authorized": true
+      },
+      "audio_sha256": "02eb2b64fe00be76c9a84f4c3c67db4c52827e1c7bb0140d1ab7b9e7bfe1ac54",
+      "player_mapping": {
+        "guidance_key": "knee-chest",
+        "audio_url_field": "SoulStretchGuidance['knee-chest'].audioUrl",
+        "expected_public_url": "/app/stretching/narration/miriam/knee-chest.mp3",
+        "required_review_fields": [
+          "audioStatus=owner-approved",
+          "audioUrl=expected_public_url",
+          "audioSha256=<verified exact MP3 SHA-256>"
+        ],
+        "approval_status_required": "owner-approved"
+      },
+      "file_size_bytes": 333992,
+      "actual_duration_seconds": 20.805079,
+      "runway_asset_name": "SoulStretch Miriam 19 - knee-chest",
+      "runway_task_id": "96f8f8d0-2d73-4204-8966-7cbae053abb6",
+      "runway_voice_id": "VhxAIIZM8IRmnl5fyeyk",
+      "runway_text_matches_manifest": true,
+      "audio_review_status": "OWNER-APPROVED FOR PLAYBACK — owner listened to and approved the exact generated MP3 SHA-256",
+      "ffprobe": {
+        "format": "mp3",
+        "codec": "mp3",
+        "codec_type": "audio",
+        "duration_seconds": 20.805079,
+        "sample_rate_hz": 44100,
+        "channels": 1
+      },
+      "audio_approved_at_utc": "2026-11-09T20:11:06Z",
+      "audio_approval_source": "Owner approval in SoulStretch integration session; exact manifest recording and SHA-256 scope."
     },
     {
       "movement_id": "wide-stance-a",
@@ -576,23 +1640,79 @@
       "script": "Take the demonstrated wide stance, knees soft and support nearby. Shift gently to one side while keeping your torso long. Breathe smoothly, return to center, and change sides only if shown.",
       "cues": [
         {
-          "timestamp_seconds": 0,
+          "timestamp_seconds": 0.0,
           "text": "Take the demonstrated wide stance, knees soft and support nearby."
         },
         {
-          "timestamp_seconds": 4,
+          "timestamp_seconds": 6.2,
           "text": "Shift gently to one side while keeping your torso long."
         },
         {
-          "timestamp_seconds": 9,
+          "timestamp_seconds": 12.4,
           "text": "Breathe smoothly, return to center, and change sides only if shown."
         }
       ],
-      "expected_spoken_duration_seconds": 15,
-      "quiet_hold_seconds": 14,
-      "audio_status": "NOT RECORDED — owner approval and production required",
-      "proposed_filename": "soulstretch/wide-stance-a.mp3",
-      "audio_url": null
+      "expected_spoken_duration_seconds": 19,
+      "quiet_hold_seconds": 10,
+      "audio_status": "owner-approved",
+      "proposed_filename": "app/stretching/narration/miriam/wide-stance-a.mp3",
+      "audio_url": "/app/stretching/narration/miriam/wide-stance-a.mp3",
+      "text_characters": 189,
+      "word_count": 31,
+      "credit_cost": 4,
+      "timing_estimate": {
+        "method": "Approximation only: 140 wpm source estimate scaled by speed 0.75 (about 105 wpm), plus 0.5 s between sentence cues.",
+        "estimated_narration_seconds": 18.7,
+        "approved_video_seconds": 29.0,
+        "estimated_quiet_hold_seconds": 10.3,
+        "timing_status": "ESTIMATED FIT — validate actual generated MP3 duration before integration",
+        "actual_duration_seconds": 22.662676,
+        "actual_quiet_hold_seconds": 6.337,
+        "actual_timing_status": "PASS — MP3 is shorter than its approved video clip"
+      },
+      "expected_public_url": "/app/stretching/narration/miriam/wide-stance-a.mp3",
+      "runway_request": {
+        "name": "SoulStretch_wide-stance-a_Miriam",
+        "provider": "Runway Generate Speech",
+        "voice": "Miriam",
+        "model": "eleven_multilingual_v2",
+        "speed": 0.75,
+        "language": "English",
+        "text": "Take the demonstrated wide stance, knees soft and support nearby. Shift gently to one side while keeping your torso long. Breathe smoothly, return to center, and change sides only if shown.",
+        "expected_output": "MP3",
+        "text_characters": 189,
+        "estimated_credits": 4,
+        "submit_authorized": true
+      },
+      "audio_sha256": "32ea1ed683023c4c031f417b7d636959e11cfd4fd7c61fa4b2872ae950b05985",
+      "player_mapping": {
+        "guidance_key": "wide-stance-a",
+        "audio_url_field": "SoulStretchGuidance['wide-stance-a'].audioUrl",
+        "expected_public_url": "/app/stretching/narration/miriam/wide-stance-a.mp3",
+        "required_review_fields": [
+          "audioStatus=owner-approved",
+          "audioUrl=expected_public_url",
+          "audioSha256=<verified exact MP3 SHA-256>"
+        ],
+        "approval_status_required": "owner-approved"
+      },
+      "file_size_bytes": 363667,
+      "actual_duration_seconds": 22.662676,
+      "runway_asset_name": "SoulStretch Miriam 20 - wide-stance-a",
+      "runway_task_id": "23e6129c-2222-473f-8d5e-60550199ad57",
+      "runway_voice_id": "VhxAIIZM8IRmnl5fyeyk",
+      "runway_text_matches_manifest": true,
+      "audio_review_status": "OWNER-APPROVED FOR PLAYBACK — owner listened to and approved the exact generated MP3 SHA-256",
+      "ffprobe": {
+        "format": "mp3",
+        "codec": "mp3",
+        "codec_type": "audio",
+        "duration_seconds": 22.662676,
+        "sample_rate_hz": 44100,
+        "channels": 1
+      },
+      "audio_approved_at_utc": "2026-11-09T20:11:06Z",
+      "audio_approval_source": "Owner approval in SoulStretch integration session; exact manifest recording and SHA-256 scope."
     },
     {
       "movement_id": "wide-stance-b",
@@ -603,23 +1723,79 @@
       "script": "Set a stable wide stance, shortening it if needed. Follow the demonstrated lateral stretch without forcing depth or locking your knees. Breathe out gently, then return upright with control.",
       "cues": [
         {
-          "timestamp_seconds": 0,
+          "timestamp_seconds": 0.0,
           "text": "Set a stable wide stance, shortening it if needed."
         },
         {
-          "timestamp_seconds": 4,
+          "timestamp_seconds": 5.6,
           "text": "Follow the demonstrated lateral stretch without forcing depth or locking your knees."
         },
         {
-          "timestamp_seconds": 9,
+          "timestamp_seconds": 13.0,
           "text": "Breathe out gently, then return upright with control."
         }
       ],
-      "expected_spoken_duration_seconds": 14,
-      "quiet_hold_seconds": 15,
-      "audio_status": "NOT RECORDED — owner approval and production required",
-      "proposed_filename": "soulstretch/wide-stance-b.mp3",
-      "audio_url": null
+      "expected_spoken_duration_seconds": 18,
+      "quiet_hold_seconds": 11,
+      "audio_status": "owner-approved",
+      "proposed_filename": "app/stretching/narration/miriam/wide-stance-b.mp3",
+      "audio_url": "/app/stretching/narration/miriam/wide-stance-b.mp3",
+      "text_characters": 189,
+      "word_count": 29,
+      "credit_cost": 4,
+      "timing_estimate": {
+        "method": "Approximation only: 140 wpm source estimate scaled by speed 0.75 (about 105 wpm), plus 0.5 s between sentence cues.",
+        "estimated_narration_seconds": 17.6,
+        "approved_video_seconds": 29.0,
+        "estimated_quiet_hold_seconds": 11.4,
+        "timing_status": "ESTIMATED FIT — validate actual generated MP3 duration before integration",
+        "actual_duration_seconds": 20.201361,
+        "actual_quiet_hold_seconds": 8.799,
+        "actual_timing_status": "PASS — MP3 is shorter than its approved video clip"
+      },
+      "expected_public_url": "/app/stretching/narration/miriam/wide-stance-b.mp3",
+      "runway_request": {
+        "name": "SoulStretch_wide-stance-b_Miriam",
+        "provider": "Runway Generate Speech",
+        "voice": "Miriam",
+        "model": "eleven_multilingual_v2",
+        "speed": 0.75,
+        "language": "English",
+        "text": "Set a stable wide stance, shortening it if needed. Follow the demonstrated lateral stretch without forcing depth or locking your knees. Breathe out gently, then return upright with control.",
+        "expected_output": "MP3",
+        "text_characters": 189,
+        "estimated_credits": 4,
+        "submit_authorized": true
+      },
+      "audio_sha256": "02b4737abe144b0ab6bba6987077c0b6f3db62bd5bdf2a482f00397163df0bf1",
+      "player_mapping": {
+        "guidance_key": "wide-stance-b",
+        "audio_url_field": "SoulStretchGuidance['wide-stance-b'].audioUrl",
+        "expected_public_url": "/app/stretching/narration/miriam/wide-stance-b.mp3",
+        "required_review_fields": [
+          "audioStatus=owner-approved",
+          "audioUrl=expected_public_url",
+          "audioSha256=<verified exact MP3 SHA-256>"
+        ],
+        "approval_status_required": "owner-approved"
+      },
+      "file_size_bytes": 324379,
+      "actual_duration_seconds": 20.201361,
+      "runway_asset_name": "SoulStretch Miriam 21 - wide-stance-b",
+      "runway_task_id": "734f3978-4a92-4857-85c7-49624a878c55",
+      "runway_voice_id": "VhxAIIZM8IRmnl5fyeyk",
+      "runway_text_matches_manifest": true,
+      "audio_review_status": "OWNER-APPROVED FOR PLAYBACK — owner listened to and approved the exact generated MP3 SHA-256",
+      "ffprobe": {
+        "format": "mp3",
+        "codec": "mp3",
+        "codec_type": "audio",
+        "duration_seconds": 20.201361,
+        "sample_rate_hz": 44100,
+        "channels": 1
+      },
+      "audio_approved_at_utc": "2026-11-09T20:11:06Z",
+      "audio_approval_source": "Owner approval in SoulStretch integration session; exact manifest recording and SHA-256 scope."
     },
     {
       "movement_id": "standing-reset-4123",
@@ -630,23 +1806,132 @@
       "script": "Stand or sit upright with shoulders relaxed. Follow the demonstrated chest-opening position without forcing the shoulders back. Breathe in gently, then release your arms slowly and let the shoulders settle.",
       "cues": [
         {
-          "timestamp_seconds": 0,
+          "timestamp_seconds": 0.0,
           "text": "Stand or sit upright with shoulders relaxed."
         },
         {
-          "timestamp_seconds": 3,
+          "timestamp_seconds": 4.5,
           "text": "Follow the demonstrated chest-opening position without forcing the shoulders back."
         },
         {
-          "timestamp_seconds": 7,
+          "timestamp_seconds": 10.7,
           "text": "Breathe in gently, then release your arms slowly and let the shoulders settle."
         }
       ],
-      "expected_spoken_duration_seconds": 14,
-      "quiet_hold_seconds": 14.7,
-      "audio_status": "NOT RECORDED — owner approval and production required",
-      "proposed_filename": "soulstretch/standing-reset-4123.mp3",
-      "audio_url": null
+      "expected_spoken_duration_seconds": 19,
+      "quiet_hold_seconds": 9.7,
+      "audio_status": "owner-approved",
+      "proposed_filename": "app/stretching/narration/miriam/standing-reset-4123.mp3",
+      "audio_url": "/app/stretching/narration/miriam/standing-reset-4123.mp3",
+      "text_characters": 206,
+      "word_count": 30,
+      "credit_cost": 5,
+      "timing_estimate": {
+        "method": "Approximation only: 140 wpm source estimate scaled by speed 0.75 (about 105 wpm), plus 0.5 s between sentence cues.",
+        "estimated_narration_seconds": 18.1,
+        "approved_video_seconds": 28.708,
+        "estimated_quiet_hold_seconds": 10.6,
+        "timing_status": "ESTIMATED FIT — validate actual generated MP3 duration before integration",
+        "actual_duration_seconds": 23.684354,
+        "actual_quiet_hold_seconds": 5.024,
+        "actual_timing_status": "PASS — MP3 is shorter than its approved video clip"
+      },
+      "expected_public_url": "/app/stretching/narration/miriam/standing-reset-4123.mp3",
+      "runway_request": {
+        "name": "SoulStretch_standing-reset-4123_Miriam",
+        "provider": "Runway Generate Speech",
+        "voice": "Miriam",
+        "model": "eleven_multilingual_v2",
+        "speed": 0.75,
+        "language": "English",
+        "text": "Stand or sit upright with shoulders relaxed. Follow the demonstrated chest-opening position without forcing the shoulders back. Breathe in gently, then release your arms slowly and let the shoulders settle.",
+        "expected_output": "MP3",
+        "text_characters": 206,
+        "estimated_credits": 5,
+        "submit_authorized": true
+      },
+      "audio_sha256": "7e7e23deb6170412ec6fcc09af9746122852be3194ddb6da17347a98157b01af",
+      "player_mapping": {
+        "guidance_key": "standing-reset-4123",
+        "audio_url_field": "SoulStretchGuidance['standing-reset-4123'].audioUrl",
+        "expected_public_url": "/app/stretching/narration/miriam/standing-reset-4123.mp3",
+        "required_review_fields": [
+          "audioStatus=owner-approved",
+          "audioUrl=expected_public_url",
+          "audioSha256=<verified exact MP3 SHA-256>"
+        ],
+        "approval_status_required": "owner-approved"
+      },
+      "file_size_bytes": 379967,
+      "actual_duration_seconds": 23.684354,
+      "runway_asset_name": "SoulStretch Miriam 22 - standing-reset-4123",
+      "runway_task_id": "cc723b55-35b0-4c3b-b206-1205b219201d",
+      "runway_voice_id": "VhxAIIZM8IRmnl5fyeyk",
+      "runway_text_matches_manifest": true,
+      "audio_review_status": "OWNER-APPROVED FOR PLAYBACK — owner listened to and approved the exact generated MP3 SHA-256",
+      "ffprobe": {
+        "format": "mp3",
+        "codec": "mp3",
+        "codec_type": "audio",
+        "duration_seconds": 23.684354,
+        "sample_rate_hz": 44100,
+        "channels": 1
+      },
+      "audio_approved_at_utc": "2026-11-09T20:11:06Z",
+      "audio_approval_source": "Owner approval in SoulStretch integration session; exact manifest recording and SHA-256 scope."
     }
-  ]
+  ],
+  "voice_approval": {
+    "status": "OWNER-APPROVED for SoulStretch voice and settings",
+    "provider": "Runway",
+    "voice": "Miriam",
+    "model": "eleven_multilingual_v2",
+    "speed": 0.75,
+    "language": "English",
+    "style": "Calm, warm, professional British female narrator",
+    "output_format": "MP3"
+  },
+  "generation_status": "All 22 Miriam MP3s were generated and downloaded. The owner has listened to and approved these exact files for playback; SHA-256, Runway task metadata, and ffprobe durations are preserved below.",
+  "credit_calculation": {
+    "runway_rate": "1 credit per 50 text characters, rounded up separately for each request (minimum 1 credit)",
+    "request_count": 22,
+    "total_script_characters": 3950,
+    "per_request_credit_total": 89,
+    "note": "Each script is a separate Generate Speech request. Sum the per-request ceilings; do not round only the aggregate character count."
+  },
+  "source_voice_configuration_note": "The approved SoulWalk Serene MP3 references remain available, but source metadata and Runway voice/model/speed settings were not present in the asset tags, project handoffs, recent-asset metadata, or saved workflows. SoulStretch uses the owner-specified Miriam settings above.",
+  "generation_process": [
+    "Generation was authorized by the owner for the exact 22 manifest scripts using Miriam, eleven_multilingual_v2, speed 0.75, English, MP3; recorded Runway task IDs and names are listed per asset.",
+    "Downloaded each successful Runway MP3 to its proposed_filename without modifying video masters.",
+    "Run ffprobe and SHA-256 verification on each local MP3; actual durations are below approved clip durations.",
+    "Owner listened to and explicitly approved the exact 22 generated recordings on 2026-11-09; approval is bound to the movement ID, filename, and verified MP3 SHA-256.",
+    "Player enables narration only when owner-approved status, the expected URL, and a valid 64-character SHA-256 are all present."
+  ],
+  "verified_download_count": 22,
+  "technical_qa": {
+    "ffprobe_checked_count": 22,
+    "valid_mp3_count": 22,
+    "script_text_match_from_runway_task_metadata_count": 22,
+    "owner_approved_count": 22,
+    "over_video_count": 0,
+    "issues": [],
+    "audio_content_owner_listening_status": "PENDING for all 22; Runway task text metadata confirms submitted script only, not acoustic transcription or performance review."
+  },
+  "audio_owner_approval": {
+    "status": "OWNER-APPROVED — all 22 exact Miriam recordings",
+    "decision": "Owner confirmed personal listening and approval of all 22 narrations.",
+    "recorded_at_utc": "2026-11-09T20:11:06Z",
+    "scope": "Only the exact 22 generated MP3s listed in this manifest, matched by movement_id, proposed_filename, and audio_sha256. Does not extend to alternate or regenerated recordings.",
+    "voice": {
+      "status": "OWNER-APPROVED for SoulStretch voice and settings",
+      "provider": "Runway",
+      "voice": "Miriam",
+      "model": "eleven_multilingual_v2",
+      "speed": 0.75,
+      "language": "English",
+      "style": "Calm, warm, professional British female narrator",
+      "output_format": "MP3"
+    },
+    "approved_count": 22
+  }
 }
