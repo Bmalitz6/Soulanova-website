@@ -248,9 +248,10 @@
     {
       "id": "full-body-gentle",
       "title": "Gentle Full-Body Reset",
+      "level": "Beginner",
       "category": "Full body",
       "minutes": 5,
-      "description": "A calm sequence for upper body, hips, and legs.",
+      "description": "A supported, unhurried introduction to shoulder, hip, and leg mobility.",
       "ids": [
         "overhead-reach",
         "overhead-reset",
@@ -266,9 +267,10 @@
     {
       "id": "upper-body",
       "title": "Upper-Body Ease",
+      "level": "Beginner",
       "category": "Upper body",
       "minutes": 3,
-      "description": "Easy shoulder, chest, and overhead mobility.",
+      "description": "Gentle shoulder, chest, and overhead movements. Stay in a comfortable range.",
       "ids": [
         "overhead-shoulder",
         "overhead-reach",
@@ -280,9 +282,10 @@
     {
       "id": "hips-and-legs",
       "title": "Hips & Legs",
+      "level": "Intermediate",
       "category": "Lower body",
       "minutes": 4,
-      "description": "A gentle lower-body sequence with balance options.",
+      "description": "A steady lower-body flow with a chair or wall nearby for balance.",
       "ids": [
         "hip-flexor-a",
         "figure-four-a",
@@ -292,9 +295,41 @@
         "side-bend",
         "hip-abduction"
       ]
+    },
+    {
+      "id": "balanced-full-body-flow",
+      "title": "Balanced Full-Body Flow",
+      "level": "Intermediate",
+      "category": "Full body",
+      "minutes": 6,
+      "description": "A longer sequence linking upper-body mobility with hips and legs.",
+      "ids": ["overhead-shoulder", "shoulder-a", "side-bend", "hip-flexor-b", "wide-stance-a", "hamstring-a", "calf-a", "standing-reset-4113"]
+    },
+    {
+      "id": "complete-mobility-circuit",
+      "title": "Complete Mobility Circuit",
+      "level": "Advanced",
+      "category": "Full body",
+      "minutes": 7,
+      "description": "A longer, continuous circuit. Use a stable support for standing balance movements and shorten any range that feels uncomfortable.",
+      "ids": ["overhead-reach", "shoulder-b", "hip-flexor-a", "figure-four-a", "adductor", "wide-stance-b", "forward-fold", "calf-b", "standing-reset-4114"]
+    },
+    {
+      "id": "extended-range-flow",
+      "title": "Extended Range Flow",
+      "level": "Advanced",
+      "category": "Full body",
+      "minutes": 8,
+      "description": "The longest library sequence, combining all movement areas with deliberate transitions and balance support as needed.",
+      "ids": ["overhead-reset", "overhead-shoulder", "overhead-reach", "shoulder-a", "shoulder-b", "side-bend", "hip-flexor-b", "figure-four-b", "knee-chest", "wide-stance-a", "hamstring-a", "standing-reset-4123"]
     }
   ]
 };
+// Timings follow the approved demonstration lengths plus brief setup and transitions.
+for(const routine of catalog.routines){
+  routine.seconds=30+routine.ids.reduce((sum,id)=>sum+(catalog.movements.find(m=>m.id===id)?.seconds||0),0)+Math.max(0,routine.ids.length-1)*6;
+  routine.minutes=Math.ceil(routine.seconds/60);
+}
 catalog.mediaUrl=function(file,sha256,publicBase){
   const approved=catalog.movements.find(m=>m.file===file&&m.sha256===sha256);
   if(!approved)throw new Error('Refusing unapproved SoulStretch media mapping');

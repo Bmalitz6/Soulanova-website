@@ -8,9 +8,10 @@
   <link rel="stylesheet" href="/app/soulfuel/foodscore.css">
 </head>
 <body>
-  <header class="topbar"><a class="brand" href="/app/">✺ SOULANOVA</a><span class="tag">SOULFUEL · DEVELOPMENT</span><a class="back" href="/app/">← Member home</a></header>
+  <header class="topbar"><a class="brand" href="/app/">✺ SOULANOVA</a><span class="tag">SOULFUEL · MEMBER NUTRITION</span><a class="back" href="/app/">← Member home</a></header>
+  <nav class="soulfuel-shortcuts" aria-label="SoulFuel shortcuts"><a href="/app/#free-library">Mediterranean recipes</a><a href="/app/#meals">Meal planning</a><a href="#diary">Food diary</a></nav>
   <main class="shell">
-    <section class="food-hero" aria-labelledby="foodscore-title"><div class="food-hero-art" aria-hidden="true"><span class="food-orbit orbit-one"></span><span class="food-orbit orbit-two"></span><span class="food-leaf">✳</span><span class="food-sparkle">✦</span></div><div><p class="eyebrow">SOULFUEL · FOOD DISCOVERY</p><h1 id="foodscore-title">FoodScore</h1><p class="intro">A clearer look at what’s in your food.</p></div></section>
+    <section class="food-hero" aria-labelledby="foodscore-title"><div class="food-hero-art" aria-hidden="true"><span class="food-orbit orbit-one"></span><span class="food-orbit orbit-two"></span><span class="food-leaf">✳</span><span class="food-sparkle">✦</span></div><div><p class="eyebrow">SOULFUEL · FOOD DISCOVERY</p><h1 id="foodscore-title">SoulFuel</h1><p class="intro">Mediterranean recipes, meal planning, and your food diary.</p></div></section>
     <section class="card" aria-labelledby="lookup-title">
         <h2 id="lookup-title">FoodScore barcode lookup</h2>
       <p id="foodscore-coming-soon" class="status" role="status">Coming soon. Barcode lookup is temporarily unavailable. Your existing food diary and nutrition tracking remain available on this browser.</p>
@@ -24,7 +25,7 @@
       <div id="result" hidden></div>
       </div>
     </section>
-    <section class="card diary" aria-labelledby="diary-title">
+    <section id="diary" class="card diary" aria-labelledby="diary-title">
       <div class="section-head"><div><p class="eyebrow">YOUR MEMBER-SCOPED LOG</p><h2 id="diary-title">Food Diary</h2></div><label for="meal">Meal <select id="meal"><option>Breakfast</option><option selected>Lunch</option><option>Dinner</option><option>Snack</option></select></label></div>
       <p id="auth-state" class="subtle">Restoring your member session…</p><div id="diary-list"></div>
     </section>

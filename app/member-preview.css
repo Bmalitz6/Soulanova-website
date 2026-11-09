@@ -16,3 +16,8 @@
 .today-plan-card p:not(.eyebrow){margin:0;color:#5c7467;font-size:13px;line-height:1.6}
 .today-plan-card button{flex:none}
 @media(max-width:600px){.today-plan-card{align-items:stretch;flex-direction:column;gap:14px;margin-top:20px;padding:18px}.today-plan-card button{width:100%;min-height:44px}}
+/* Direct member entries use one anchor for the entire card, including its image. */
+.member-path{cursor:pointer}.member-path:hover{box-shadow:0 12px 28px #173f3820;transform:translateY(-2px)}.member-path:focus-visible,.member-direct-link:focus-visible{outline:3px solid #bb852c;outline-offset:4px}.member-path:focus-visible{box-shadow:0 0 0 4px #bb852c30}.member-path,.member-direct-link{transition:box-shadow .2s,transform .2s}.member-direct-link:hover{background:#e7efe8;color:var(--deep)}.member-direct-paths{grid-template-columns:repeat(3,minmax(0,1fr))}.member-direct-paths .member-path p{min-height:60px}
+@media(max-width:900px){.member-direct-paths{grid-template-columns:repeat(2,minmax(0,1fr))}}
+@media(max-width:600px){.member-direct-paths{grid-template-columns:1fr}.member-direct-paths .member-path p{min-height:0}}
+@media(prefers-reduced-motion:reduce){.member-path,.member-direct-link{transition:none!important}.member-path:hover{transform:none}}

@@ -1,0 +1,29 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><meta name="theme-color" content="#07524c">
+  <title>SoulWalk Freestyle | Soulanova</title><link rel="stylesheet" href="/app/walking/freestyle/freestyle.css">
+</head>
+<body>
+  <header><a href="/app/" class="brand">✺ Soulanova</a><a href="/app/walking/" class="back">← Guided 12-Week Journey</a></header>
+  <main>
+    <nav aria-label="Choose your SoulWalk experience"><a href="/app/walking/">Guided · 12-Week Journey</a><a href="/app/walking/freestyle/" aria-current="page">Freestyle · Walk at your own pace</a></nav>
+    <section class="hero"><p class="eyebrow">SOULWALK · FREESTYLE</p><h1>Your walk, your pace.</h1><p>A self-directed timer for an outdoor walk or treadmill session. This is separate from the Guided 12-Week Journey.</p></section>
+    <p id="identity" role="status">Checking your member account…</p>
+    <section id="session" class="card" hidden aria-labelledby="session-title">
+      <h2 id="session-title">Freestyle walk</h2>
+      <fieldset><legend>Walk setting</legend><label><input type="radio" name="setting" value="outdoor" checked> Outdoor</label><label><input type="radio" name="setting" value="treadmill"> Treadmill</label></fieldset>
+      <label class="gps"><input type="checkbox" id="gps"> Use GPS while this page is open (optional)</label>
+      <p class="note">Location permission is requested only after you opt in and start. Location readings stay in this page session; no route or walk record is uploaded.</p>
+      <div class="timer" id="timer" role="timer" aria-live="off">00:00</div>
+      <div class="metrics"><div><span>Distance</span><strong id="distance">0.00 mi</strong></div><label>Steps (optional)<input id="steps" type="number" min="0" max="150000" step="1" inputmode="numeric" placeholder="Enter if known"></label></div>
+      <div class="controls"><button id="start" class="primary">Start walk</button><button id="pause" disabled>Pause</button><button id="finish" disabled>Finish</button><button id="reset">Reset</button></div>
+      <p id="status" role="status">Ready when you are. Start when you begin walking.</p>
+      <p class="note">This page does not save or synchronize Freestyle sessions. Guided SoulWalk account saving remains disabled pending release validation.</p>
+    </section>
+    <p id="auth-help" class="auth-help" hidden><a href="/app/?mode=signin&amp;next=%2Fapp%2Fwalking%2Ffreestyle%2F">Sign in to your Soulanova account</a> to open Freestyle.</p>
+  </main>
+  <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2.118.0/dist/umd/supabase.js"></script>
+  <script src="/app/config.js"></script><script type="module" src="/app/walking/freestyle/freestyle.js"></script>
+</body>
+</html>

@@ -8,13 +8,24 @@ const vm = require('node:vm');
 const root = path.resolve(__dirname, '..');
 const read = file => fs.readFileSync(path.join(root, file), 'utf8');
 
-test('dashboard retains three featured cards and an accessible six-category workout library', () => {
+test('dashboard keeps featured recommendations and an optional six-category workout directory', () => {
   const html = read('app/index.html');
   const cardCount = (html.match(/class="member-path"/g) || []).length;
-  assert.equal(cardCount, 3);
+  assert.equal(cardCount, 6);
   assert.match(html, /href="\/app\/classes\/beginner-tai-chi-foundations\/"/);
   assert.match(html, /href="\/app\/\?mode=signin#meditation"/);
-  assert.match(html, /href="\/app\/\?mode=signin#workouts"/);
+  assert.match(html, /href="\/app\/strength\/"/);
+  assert.match(html, /href="\/app\/stretching\/"/);
+  assert.match(html, /href="\/app\/walking\/"/);
+  assert.match(html, /href="\/app\/soulfuel\/"/);
+  assert.match(html, /All Workouts directory/);
+  const cards = [...html.matchAll(/<a class="member-path"[\s\S]*?<\/a>/g)].map(x => x[0]);
+  assert.equal(cards.length, 6);
+  for (const card of cards) {
+    assert.doesNotMatch(card.replace(/^<a\b[^>]*>|<\/a>$/g, ''), /<(?:a|button|input|select)\b/i, 'one anchor owns the entire clickable card');
+    assert.match(card, /<img\b/);
+    assert.match(card, /<strong>/);
+  }
   assert.match(html, /data-tab="home"/);
   assert.match(html, /data-tab="workouts"/);
   assert.match(html, /id="workout-list"/);
@@ -42,4 +53,26 @@ test('Strength, SoulStretch, Tai Chi and Meditation enter their existing librari
   const meditation = read('app/meditation.js');
   const sessions = JSON.parse(meditation.match(/const sessions=(\[.*\]);/)[1]);
   assert.equal(sessions.length, 17);
+});
+
+test('SoulFuel and distinct SoulWalk experiences have direct authenticated entry paths', () => {
+  const html = read('app/index.html');
+  assert.match(html, /<a class="accessories-tab member-direct-link" href="\/app\/soulfuel\/">SoulFuel<\/a>/);
+  assert.match(html, /<a class="accessories-tab member-direct-link" href="\/app\/walking\/">SoulWalk<\/a>/);
+  const fuel = read('app/soulfuel/index.html');
+  assert.match(fuel, /href="\/app\/#free-library">Mediterranean recipes/);
+  assert.match(fuel, /href="\/app\/#meals">Meal planning/);
+  assert.match(fuel, /href="#diary">Food diary/);
+  assert.match(fuel, /id="diary"/);
+  assert.match(fuel, /Coming soon\. Barcode lookup is temporarily unavailable/);
+  const guided = read('app/walking/index.html');
+  const freestyle = read('app/walking/freestyle/index.html');
+  assert.match(guided, /Guided · 12-Week Journey/);
+  assert.match(guided, /href="\/app\/walking\/freestyle\/"/);
+  assert.match(freestyle, /Freestyle · Walk at your own pace/);
+  assert.match(freestyle, /does not save or synchronize/);
+  assert.match(read('app/walking/freestyle/freestyle.js'), /import \{requireMember\} from '\/app\/member-data\.mjs'/);
+  assert.match(read('app/app.js'), /returnAfterSignIn=.*\/app\/walking\/freestyle\//);
+  assert.match(read('app/walking/walking.js'), /const accountWritesEnabled=false/);
+  assert.match(read('app/member-data.mjs'), /soulwalk:false/);
 });

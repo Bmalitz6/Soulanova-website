@@ -9,14 +9,27 @@ const root = path.resolve(__dirname, '..');
 const read = file => fs.readFileSync(path.join(root, file), 'utf8');
 
 function normalizeReviewedReleaseDelta(file, actual) {
-  if (!['app/app.js', 'app/index.html', '.vercelignore', 'app/strength/index.html', 'app/strength/strength.js'].includes(file)) return actual;
+  if (!['app/app.js', 'app/index.html', 'app/member-preview.css', '.vercelignore', 'app/strength/index.html', 'app/strength/strength.js'].includes(file)) return actual;
   let source = actual.toString('utf8');
   if (file === 'app/app.js') return Buffer.from(source
+    .replace("let returnAfterSignIn=['/app/walking/','/app/walking/freestyle/'].includes(new URLSearchParams(location.search).get('next'))?new URLSearchParams(location.search).get('next'):null;\n", '')
     .replace("title:'SoulStretch'", "title:'Move with Ease'")
     .replace("mobility: {label:'SOULSTRETCH', cta:'Explore Stretching'", "mobility: {label:'STRETCH & MOBILITY', cta:'View Session'")
     .replace("  if(w.id==='mobility'){window.location.href='/app/stretching/';return;}\n\n", '')
-    .replace("duration.textContent=w.id==='mobility'?'3 GUIDED ROUTINES':w.minutes+' MIN · '+w.category;", "duration.textContent=w.minutes+' MIN · '+w.category;"));
-  if (file === 'app/index.html') return Buffer.from(source.replace('<p><a href="/app/release2/">Release 2 Development review &amp; browser reminders</a></p>', ''));
+    .replace("duration.textContent=w.id==='mobility'?'3 GUIDED ROUTINES':w.minutes+' MIN · '+w.category;", "duration.textContent=w.minutes+' MIN · '+w.category;")
+    .replace("renderStats();if(user&&returnAfterSignIn&&!recoveryActive){const destination=returnAfterSignIn;returnAfterSignIn=null;window.location.replace(destination);}}", "renderStats();}"));
+  if (file === 'app/index.html') {
+    source = source.replace('<p><a href="/app/release2/">Release 2 Development review &amp; browser reminders</a></p>', '');
+    source = source.replace('<a class="accessories-tab member-direct-link" href="/app/soulfuel/">SoulFuel</a><a class="accessories-tab member-direct-link" href="/app/walking/">SoulWalk</a>', '');
+    source = source.replace('<a class="member-path" href="/app/strength/"><img src="/app/images/workouts/strength.jpg" width="600" height="338" alt="Soulanova movement instructor leading a gentle strength exercise" loading="lazy"><div><span class="eyebrow">MOVE AT YOUR PACE</span><h3>SoulStrength</h3><p>Go directly to the Beginner, Intermediate, or Advanced strength library.</p><strong>Choose your strength program ↗</strong></div></a>', '<a class="member-path" href="/app/?mode=signin#workouts"><img src="/app/images/workouts/strength.jpg" width="600" height="338" alt="Soulanova movement instructor leading a gentle strength exercise" loading="lazy"><div><span class="eyebrow">MOVE AT YOUR PACE</span><h3>Explore workouts</h3><p>Browse the existing movement library and choose a session that feels right.</p><strong>Find a workout ↗</strong></div></a>');
+    source = source.replace(/\n<section aria-labelledby="member-programs-title">[\s\S]*?<\/section>(?=\n<section class="member-food")/, '');
+    return Buffer.from(source);
+  }
+  if (file === 'app/member-preview.css') {
+    const marker = '/* Direct member entries use one anchor for the entire card, including its image. */';
+    assert.ok(source.includes(marker));
+    return Buffer.from(source.slice(0, source.indexOf(marker)));
+  }
   if (file === '.vercelignore') {
     const marker = '# SoulStretch source copies remain in this worktree and are excluded only';
     assert.ok(source.includes(marker));
