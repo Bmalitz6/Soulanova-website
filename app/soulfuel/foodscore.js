@@ -23,12 +23,13 @@
     const endpoint='/api/foodfacts';
     try{
       const response=await fetch(`${endpoint}?barcode=${encodeURIComponent(code)}`,{headers:{Accept:'application/json'},signal:AbortSignal.timeout(15000)});
-      if(response.status===429)throw Error('Food lookup limit reached. Please try again in a minute.');
+      if(response.status===429){const seconds=Math.max(1,Number(response.headers?.get('Retry-After'))||60);throw Error(`Food lookup limit reached. Try again in about ${seconds} seconds.`)}
+      if(response.status===503)throw Error('FoodScore is temporarily unavailable. Please try again later.');
       if(!response.ok)throw Error('Open Food Facts is temporarily unavailable. Please try again.');
       const payload=await response.json();
       if(!(payload.status===1||payload.status==='success')||!payload.product){currentProduct=null;showStatus('No product was found for this barcode. Check the number or try another product.');return}
       currentProduct=normalize(payload.product,code);scanId=`${Date.now()}-${Math.random().toString(36).slice(2)}`;renderProduct();showStatus('Product information loaded from Open Food Facts.',true);
-    }catch(error){showStatus(error instanceof Error?error.message:'Food lookup is temporarily unavailable.')}
+    }catch(error){showStatus(error instanceof Error&&/Food lookup limit|FoodScore is temporarily|Open Food Facts is temporarily|No product was found/.test(error.message)?error.message:'FoodScore lookup is temporarily unavailable. Please try again later.')}
     finally{lookupPending=false;button.disabled=false}
   }
 
