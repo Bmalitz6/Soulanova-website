@@ -36,12 +36,15 @@
   let strengthTransitionType = 'set';
   const progressTools = window.SoulStrengthProgress;
   const playbackTools = window.SoulStrengthPlayback;
+  const environmentTools = window.SoulanovaStrengthEnvironment;
   let playbackNeedsGesture = false;
   let activeSupabaseUrl = null;
+  let supabaseAccess = null;
 
-  function canSyncActiveProject() {
+  function canReadActiveProject() {
     return !!(client && activeSupabaseUrl && progressTools?.isExpectedSupabaseUrl(client.supabaseUrl, activeSupabaseUrl));
   }
+  function canSyncActiveProject() { return canReadActiveProject() && supabaseAccess?.canWrite === true; }
 
   function setStatus(message) { $('#progress-status').textContent = message; }
   function makeButton(label, className, handler) {
@@ -474,7 +477,7 @@
     }
   }
   async function loadRemoteHistory() {
-    if (!client || !member || !canSyncActiveProject()) return;
+    if (!client || !member || !canReadActiveProject()) return;
     try {
       const { data, error } = await client.from('strength_workout_completions').select('completion_id,user_id,workout_id,workout_title,difficulty,duration_minutes,completed_at').eq('user_id', member.id).order('completed_at', { ascending: false });
       if (error) throw error;
@@ -509,11 +512,14 @@
     });
     window.addEventListener('online', () => { void retryPendingCompletions(); void loadRemoteHistory(); });
     if (!progressTools || !window.supabase) throw Error('The SoulStrength progress service is not available.');
-    const productionHost = ['soulanova.com', 'www.soulanova.com'].includes(location.hostname.toLowerCase());
     const config = window.SOULANOVA_SUPABASE;
-    if (!config?.url || !config?.publishableKey) throw Error('A verified Supabase configuration is required for SoulStrength accounts.');
-    if (productionHost && !progressTools.isExpectedSupabaseUrl(config.url, 'https://dscbavbnlubfmfhudqwy.supabase.co')) throw Error('SoulStrength Production must use the approved Production Supabase project.');
-    if (!productionHost && window.SOULANOVA_SUPABASE_DEVELOPMENT !== config) throw Error('A verified Development Supabase configuration is required for non-production SoulStrength accounts.');
+    if (!environmentTools?.resolve) throw Error('The SoulStrength environment verifier is not available.');
+    supabaseAccess = environmentTools.resolve({
+      hostname: location.hostname,
+      config,
+      developmentConfig: window.SOULANOVA_SUPABASE_DEVELOPMENT,
+      isExpectedProductionProject: Boolean(config?.url && progressTools.isExpectedSupabaseUrl(config.url, 'https://dscbavbnlubfmfhudqwy.supabase.co')),
+    });
     activeSupabaseUrl = config.url;
     client = window.supabase.createClient(config.url, config.publishableKey, { auth: { flowType: 'pkce', autoRefreshToken: true, persistSession: true, detectSessionInUrl: true } });
     client.auth.onAuthStateChange((_event, session) => {
