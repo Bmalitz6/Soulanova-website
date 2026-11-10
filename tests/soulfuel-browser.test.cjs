@@ -87,7 +87,7 @@ test('browser: default and mock-product states meet automated WCAG A/AA checks',
 });
 test('browser: premium hierarchy keeps four primary metrics and reveals secondary controls by keyboard',opts,async()=>{
  const {page,context}=await open({active:false,width:390,height:844});
- assert.deepEqual(await page.locator('main > section[id]').evaluateAll(els=>els.map(e=>e.id)),['diary','foodscore','recipe-library','nutrition-goals']);
+ assert.deepEqual(await page.locator('main > section[id]').evaluateAll(els=>els.map(e=>e.id)),['program-overview','diary','foodscore','recipe-library','nutrition-goals']);
  assert.equal(await page.locator('.hero-actions a').count(),2);assert.equal(await page.locator('.fuel-grid').count(),0);
  assert.equal(await page.locator('#diary-totals > .total-item').count(),4);assert.equal(await page.locator('#secondary-totals > .total-item').count(),2);
  assert.equal(await page.locator('#secondary-totals').isVisible(),false);await page.locator('.secondary-metrics > summary').focus();await page.keyboard.press('Enter');assert.equal(await page.locator('#secondary-totals').isVisible(),true);
@@ -180,4 +180,12 @@ test('browser: scanner exposes loading, safe error and retry review before confi
  finish();await page.waitForFunction(()=>document.querySelector('#scan-panel').getAttribute('aria-busy')==='false');assert.match(await page.locator('#status').textContent(),/temporarily unavailable/);assert.equal(await page.locator('#result').isVisible(),false);
  await page.unroute('**/api/foodfacts');await page.locator('#lookup-button').click();await page.waitForSelector('#save-food');assert.equal(await page.locator('.entryrow').count(),0);assert.match(await page.locator('#product-save-status').textContent(),/check the package/);assert.equal(await page.locator('#product-confirm').isChecked(),false);
  await context.close();
+});
+
+test('browser: real captured Nutella without serving values requires measured grams before saving',opts,async()=>{
+ const {page,context}=await open();try{
+ await page.route('**/api/foodfacts',route=>route.fulfill({contentType:'application/json',body:JSON.stringify(require('./fixtures/off-staging-v3.4-nutella.json'))}));
+ await page.locator('#barcode').fill('3017620422003');await page.locator('#lookup-button').click();await page.waitForSelector('#save-food');assert.match(await page.locator('.score-gauge').getAttribute('aria-label'),/23 out of 100/);assert.equal(await page.locator('#product-servings').isDisabled(),true);assert.match(await page.locator('#portion-preview').textContent(),/No serving nutrition is reported/);assert.equal(await page.locator('#save-food').isDisabled(),true);
+ await page.locator('#product-grams').fill('15');assert.equal(await page.locator('#save-food').isDisabled(),false);await page.locator('#product-confirm').check();await page.locator('#save-food').click();assert.match(await page.locator('#product-save-status').textContent(),/Saved and read back/);const rows=await page.evaluate(()=>JSON.parse(localStorage.getItem('soulanova-foodscore-diary-v1:test-member-a')));assert.equal(rows.length,1);assert.equal(rows[0].portion,'15 g portion');assert.ok(Math.abs(rows[0].calories-80.85)<1e-9);assert.equal(rows[0].memberConfirmed,true);
+ }finally{await context.close();}
 });

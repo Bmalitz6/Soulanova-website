@@ -17,7 +17,7 @@ test('existing GitHub main files stay unchanged except the authorized SoulFuel d
     assert.equal(type, 'blob');
     if(file==='app/index.html'){
       const current=fs.readFileSync(path.join(root,file),'utf8');
-      const restored=current.replace('<link rel="stylesheet" href="/app/soulfuel/member-navigation.css">','').replace(/<a id="soulfuel-dashboard-entry"[\s\S]*?<\/a>/,'').replace('<a class="soulfuel-tab" href="/app/soulfuel/">SoulFuel</a>','');
+      const restored=current.replace('<link rel="stylesheet" href="/app/soulfuel/member-navigation.css">','').replace(/<section id="member-programs"[\s\S]*?<\/section>/,'').replace('<a class="soulfuel-tab" href="/app/soulfuel/">SoulFuel</a>','');
       assert.equal(restored,git('show',base+':'+file).toString(),file+' only authorized link additions');
     }else assert.equal(git('hash-object',file).toString().trim(), hash, file);
   }
