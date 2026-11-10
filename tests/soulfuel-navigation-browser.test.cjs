@@ -122,3 +122,19 @@ test('U.S. units persist without changing records; toggles and BMI never double-
  await page.evaluate(()=>window.__navigationSwitch('units-member-b'));await page.waitForFunction(()=>document.querySelector('#health-auth').textContent.includes('Member verified'));assert.equal(await page.locator('#health-units').inputValue(),'metric');assert.equal(await page.locator('.metric-record').count(),0);
  }finally{await context.close();}
 });
+
+for(const width of [1280,390,320])test(`program navigation ${width}px: each card, correct content and return; Meditation never leaks into Stretching`,{skip:!enabled},async()=>{
+ const {page,context,errors}=await wellnessPage(width);
+ try{
+  const card=name=>page.locator('.wellness-program-card').filter({has:page.getByRole('heading',{name,exact:true})});
+  // SoulWalk intentionally has no website destination; clicking must not invent one.
+  const initial=page.url();await card('SoulWalk').click();assert.equal(page.url(),initial);assert.match(await card('SoulWalk').textContent(),/Mobile app/);assert.equal(await card('SoulWalk').getAttribute('aria-disabled'),'true');
+  for(const [name,category,title]of [['Strength','Strength','Everyday Strength'],['Yoga','Yoga','Gentle Yoga Reset']]){
+   await card(name).click();assert.equal(await page.locator('#category').inputValue(),category);assert.equal(await page.locator('#workouts .sectionhead h2').textContent(),'Your Workout Library');assert.equal(await page.locator('#workout-list h3').textContent(),title);assert.equal(await page.locator('#workout-list').isVisible(),true);await page.locator('#workout-list button').click();assert.equal(await page.locator('#selected-workout h3').textContent(),'Your plan: '+title);await page.locator('[data-tab=home]').click();assert.equal(await page.locator('#home').isVisible(),true);
+  }
+  await card('Tai Chi').click();await page.waitForURL('**/app/classes/beginner-tai-chi-foundations/');assert.equal(await page.locator('h1').textContent(),'Beginner Tai Chi Foundations');await page.locator('.library-link').click();await page.waitForSelector('#soulfuel-dashboard-entry');
+  await card('Meditation').click();await page.waitForSelector('#meditation-library');assert.equal(await page.locator('#meditation-library h2').textContent(),'A quieter moment, just for you.');await page.locator('[data-tab=home]').click();assert.equal(await page.locator('#home').isVisible(),true);
+  await card('Stretching').click();assert.equal(await page.locator('#category').inputValue(),'Stretch & Mobility');assert.equal(await page.locator('#meditation-library').isVisible(),false);assert.equal(await page.locator('#workouts .sectionhead h2').isVisible(),true);assert.equal(await page.locator('#workout-list h3').textContent(),'Move with Ease');assert.equal(await page.locator('#workout-list').isVisible(),true);await page.locator('#workout-list button').click();assert.equal(await page.locator('#selected-workout h3').textContent(),'Your plan: Move with Ease');assert.match(await page.locator('#selected-workout').textContent(),/Self-guided preview \(no video yet\)/);await page.locator('[data-tab=home]').click();
+  await card('SoulFuel').click();await page.waitForURL('**/app/soulfuel/');assert.match(await page.locator('h1').textContent(),/Good food/);await page.locator('.member-navigation a').first().click();await page.waitForSelector('#soulfuel-dashboard-entry');assert.equal(await page.locator('#home').isVisible(),true);assert.equal(await page.locator('#auth-box').isVisible(),false);assert.equal(await page.evaluate(()=>document.documentElement.scrollWidth<=innerWidth),true);assert.deepEqual(errors,[]);
+ }finally{await context.close();}
+});
