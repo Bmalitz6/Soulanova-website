@@ -52,12 +52,14 @@ test('browser: manual barcode → mock product → reviewed portion → readback
  await expand(page,'goal-editor');await page.locator('#goal-calories').fill('2000');await page.locator('#goal-protein').fill('80');await page.locator('#nutrition-goals-form button[type="submit"]').click();
  await page.locator('#barcode').fill('0123456789012');await page.locator('#lookup-button').click();await page.waitForSelector('#save-food');
  assert.match(await page.locator('.score-gauge').getAttribute('aria-label'),/90 out of 100/);
+ assert.match(await page.locator('#result').textContent(),/staging · Test data only/);
+ assert.equal(await page.locator('#result .attrib a').first().getAttribute('href'),'https://world.openfoodfacts.net/product/0123456789012');
  assert.match(await page.locator('#camera-status').textContent(),/manually/);
  await page.locator('#product-grams').fill('75');assert.match(await page.locator('#portion-preview').textContent(),/112.5 kcal/);
  await page.locator('#save-food').click();assert.match(await page.locator('#product-save-status').textContent(),/Confirm the product/);
  await page.locator('#product-confirm').check();await page.locator('#save-food').click();assert.match(await page.locator('#product-save-status').textContent(),/Saved and read back/);
  assert.match(await page.locator('.total-calories').textContent(),/112.5/);assert.equal(await page.locator('.total-calories progress').getAttribute('max'),'2000');
- const entries=await page.evaluate(()=>JSON.parse(localStorage.getItem('soulanova-foodscore-diary-v1:test-member-a')));assert.equal(entries.length,1);assert.equal(entries[0].memberConfirmed,true);assert.equal(entries[0].protein,6);
+ const entries=await page.evaluate(()=>JSON.parse(localStorage.getItem('soulanova-foodscore-diary-v1:test-member-a')));assert.equal(entries.length,1);assert.equal(entries[0].memberConfirmed,true);assert.equal(entries[0].protein,6);assert.equal(entries[0].sourceUrl,'https://world.openfoodfacts.net/product/0123456789012');assert.equal(entries[0].source,'Open Food Facts staging (test data)');
  assert.equal(await page.locator('#save-food').isDisabled(),true);assert.equal(requests.length,1);assert.deepEqual(requests[0],{method:'POST',url:'/api/foodfacts',body:{barcode:'0123456789012'}});
  await page.screenshot({path:'/private/tmp/soulfuel-upgrade-mocked-score.png',fullPage:true});
  await page.reload();await page.waitForFunction(()=>document.querySelector('#entry-name').disabled===false);assert.match(await page.locator('.total-calories').textContent(),/112.5/);assert.deepEqual(errors,[]);await context.close();
