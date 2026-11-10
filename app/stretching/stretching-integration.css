@@ -1,0 +1,4 @@
+/* Accessibility-only integration fixes; approved layout and player styles remain intact. */
+.hero small,.meta,.routine-description,.movement small,.timer-card>span,.sequence-panel>p,.sequence-item small{color:#486259}
+header{flex-wrap:wrap;gap:10px}.back,.brand{min-height:44px;display:inline-flex;align-items:center}
+footer{color:#486259}
