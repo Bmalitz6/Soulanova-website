@@ -1,3 +1,5 @@
+> **Current upgrade revision:** see [v2 formula, source units, staging/API and compliance review](SOULFUEL_SCORE_V2_AND_COMPLIANCE_2026-11-09.md). It supersedes prior score weights, exclusion of confirmed community entries from tracker totals, and the old production OFF host. Live lookup remains OFF; registration is submitted, not externally approved. Earlier counts/provenance below are historical.
+
 > Current clean candidate and dependency/test results: [integration audit](SOULFUEL_CLEAN_INTEGRATION_AUDIT_2026-11-09.md). Owner-created Upstash database exists; secure branch-restricted variable setup and activation approval remain pending. Earlier remote inventory is historical.
 
 > Session 3 supersedes the gate/activation status below: see [current owner handoff](SOULFUEL_SESSION3_OWNER_HANDOFF.md). A server-controlled Preview-only path is now implemented in the isolated candidate; registration is owner-reported submitted on 2026-11-09; external approval is unknown and activation remains off. Earlier implementation notes below describe the pre-Session-3 baseline.

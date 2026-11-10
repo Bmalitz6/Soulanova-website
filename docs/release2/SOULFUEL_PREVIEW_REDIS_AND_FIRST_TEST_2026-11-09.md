@@ -1,3 +1,5 @@
+> **Current upgrade revision:** see [v2 formula, source units, staging/API and compliance review](SOULFUEL_SCORE_V2_AND_COMPLIANCE_2026-11-09.md). It supersedes prior score weights, exclusion of confirmed community entries from tracker totals, and the old production OFF host. Live lookup remains OFF; registration is submitted, not externally approved. Earlier counts/provenance below are historical.
+
 > Clean GitHub-ancestry candidate: `feature/soulfuel-clean-preview-2026-11-09`. See [current integration audit](SOULFUEL_CLEAN_INTEGRATION_AUDIT_2026-11-09.md). Owner has already created `soulanova-foodscore-preview` on Upstash Free/us-east-1; creation is no longer pending. Configure its URL and writable token through the approved secure Preview-only workflow after branch publication is authorized. No resource or environment changes were made here.
 
 # SoulFuel Preview Redis and first barcode test — 2026-11-09

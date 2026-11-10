@@ -152,13 +152,13 @@ test('valid lookup uses the identified v3.6 endpoint and shared cache with expli
   }
   assert.equal(calls.upstreamRequests.length, 1);
   const upstream = calls.upstreamRequests[0];
-  assert.ok(upstream.url.startsWith('https://world.openfoodfacts.org/api/v3.6/product/'));
+  assert.ok(upstream.url.startsWith('https://world.openfoodfacts.net/api/v3.6/product/'));
   assert.equal(upstream.options.headers['User-Agent'], 'Soulanova-FoodScore/1.0 (support@soulanova.com)');
-  assert.equal(upstream.options.headers.Authorization, undefined);
+  assert.equal(upstream.options.headers.Authorization, 'Basic '+Buffer.from('off:off').toString('base64'));
   assert.ok(upstream.options.signal && typeof upstream.options.signal.aborted === 'boolean');
   assert.ok(calls.commands.some(command => command[0] === 'EVAL' && command[3] === 'soulanova:foodscore:off:product-read:global'));
   assert.ok(calls.commands.some(command => command[0] === 'SET' && command[3] === 'EX' && command[4] === '3600'));
-  assert.doesNotMatch(fs.readFileSync(apiFile, 'utf8'), /openfoodfacts\.net|b2ZmOm9mZg==|off:off/);
+  assert.doesNotMatch(fs.readFileSync(apiFile, 'utf8'), /https:\/\/world\.openfoodfacts\.org\/api/);
 });
 
 test('shared cached product responses avoid both another rate-limit slot and upstream request', async t => {

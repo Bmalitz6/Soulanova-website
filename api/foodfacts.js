@@ -7,7 +7,7 @@ const WINDOW_MS = 60_000;
 const MAX_UPSTREAM_REQUESTS = 10; // OFF allows 15 product reads/minute/IP.
 const CACHE_TTL_SECONDS = 60 * 60;
 const NOT_FOUND_TTL_SECONDS = 5 * 60;
-const FIELDS = 'code,product_name,product_name_en,brands,serving_size,nutriments,ingredients_text,ingredients_text_en,nutriscore_grade,nova_group';
+const FIELDS = 'code,product_name,product_name_en,brands,serving_size,product_quantity_unit,serving_quantity_unit,categories_tags,nutriments,ingredients,ingredients_text,ingredients_text_en,nutriscore_grade,nova_group';
 const ALLOWED_ORIGINS = new Set(['https://soulanova.com', 'https://www.soulanova.com']);
 const previewPolicy = require('../lib/foodscore-preview.js');
 const RATE_SCRIPT = `
@@ -49,7 +49,7 @@ module.exports = async function foodFactsProxy(req, res) {
     return send(res, 503, { error: 'FoodScore lookup is not configured for safe shared access yet.' });
   }
 
-  const cacheKey = `soulanova:foodscore:off:product:${code}`;
+  const cacheKey = `soulanova:foodscore:off:staging:v2:product:${code}`;
   let cached;
   try {
     cached = await redisCommand(redis, ['GET', cacheKey]);
@@ -82,10 +82,12 @@ module.exports = async function foodFactsProxy(req, res) {
   }
 
   try {
-    const upstream = await fetch(`https://world.openfoodfacts.org/api/v3.6/product/${code}.json?fields=${encodeURIComponent(FIELDS)}`, {
+    const upstream = await fetch(`https://world.openfoodfacts.net/api/v3.6/product/${code}.json?fields=${encodeURIComponent(FIELDS)}`, {
       headers: {
         'User-Agent': 'Soulanova-FoodScore/1.0 (support@soulanova.com)',
         Accept: 'application/json',
+        // OFF documents this public staging-only Basic credential; no member identity.
+        Authorization: `Basic ${Buffer.from('off:off').toString('base64')}`,
       },
       signal: AbortSignal.timeout(10_000),
     });
@@ -103,7 +105,7 @@ module.exports = async function foodFactsProxy(req, res) {
       return send(res, 502, { error: 'Open Food Facts returned an unexpected response.' });
     }
     const serialized = JSON.stringify(payload);
-    const ttl = payload.status === 1 && payload.product ? CACHE_TTL_SECONDS : NOT_FOUND_TTL_SECONDS;
+    const ttl = (payload.status === 1 || payload.status === 'success') && payload.product ? CACHE_TTL_SECONDS : NOT_FOUND_TTL_SECONDS;
     try {
       await redisCommand(redis, ['SET', cacheKey, serialized, 'EX', String(ttl)]);
     } catch {

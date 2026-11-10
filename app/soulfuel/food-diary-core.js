@@ -28,7 +28,7 @@
     const raw = storage.getItem(key);
     if (raw === null) return [];
     const value = JSON.parse(raw);
-    if (!Array.isArray(value)) throw new Error('Saved data has an invalid format. Existing data was left unchanged.');
+    if (!Array.isArray(value) || value.some(item => !item || typeof item !== 'object' || Array.isArray(item))) throw new Error('Saved data has an invalid format. Existing data was left unchanged.');
     return value;
   }
 
@@ -38,7 +38,9 @@
 
   function writeDiary(storage, memberId, entries) {
     if (!Array.isArray(entries)) throw new Error('Diary entries must be a list.');
-    storage.setItem(diaryKey(memberId), JSON.stringify(entries));
+    const serialized = JSON.stringify(entries);
+    storage.setItem(diaryKey(memberId), serialized);
+    if (storage.getItem(diaryKey(memberId)) !== serialized) throw new Error('Diary persistence could not be confirmed. Reload to check before retrying.');
   }
 
   function saveEntry(storage, memberId, entry) {
@@ -76,7 +78,9 @@
       const value = Number(raw);
       if (Number.isFinite(value) && value >= 0) clean[nutrient] = value;
     }
-    storage.setItem(goalsKey(memberId), JSON.stringify(clean));
+    const serialized = JSON.stringify(clean);
+    storage.setItem(goalsKey(memberId), serialized);
+    if (storage.getItem(goalsKey(memberId)) !== serialized) throw new Error('Goal persistence could not be confirmed.');
     return clean;
   }
 
@@ -94,6 +98,12 @@
       }
     }
     return { totals, counted };
+  }
+
+  function trackerTotals(entries, day) {
+    const reviewed = entries.filter(entry => entry && entry.day === day && (['verified','user-supplied'].includes(entry.nutritionStatus) || (entry.nutritionStatus === 'product-data' && entry.memberConfirmed === true)));
+    const totals = dailyTotals(reviewed.map(entry => ({...entry,nutritionStatus:'user-supplied'})),day);
+    return {...totals, communityEntries:reviewed.filter(entry=>entry.nutritionStatus==='product-data').length, entryCount:reviewed.length};
   }
 
   function makeManualEntry(input, id) {
@@ -121,5 +131,5 @@
     return entry;
   }
 
-  return { DIARY_PREFIX, GOALS_PREFIX, NUTRIENTS, MEALS, diaryKey, goalsKey, readDiary, writeDiary, saveEntry, deleteEntry, readGoals, writeGoals, dailyTotals, makeManualEntry };
+  return { DIARY_PREFIX, GOALS_PREFIX, NUTRIENTS, MEALS, diaryKey, goalsKey, readDiary, writeDiary, saveEntry, deleteEntry, readGoals, writeGoals, dailyTotals, trackerTotals, makeManualEntry };
 });
