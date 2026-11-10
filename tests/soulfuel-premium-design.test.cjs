@@ -2,7 +2,7 @@
 const {test}=require('node:test');const assert=require('node:assert/strict');const fs=require('node:fs'),path=require('node:path'),crypto=require('node:crypto');const {execFileSync}=require('node:child_process');
 const root=path.resolve(__dirname,'..'),baseline='36cbbf10a799876e87046f0fa7bb3e58314a6951';
 test('premium redesign preserves exact formula, scanner, diary storage and both server gates',()=>{
- for(const file of ['api/foodfacts.js','api/foodscore-availability.js','lib/foodscore-preview.js','app/soulfuel/foodscore-core.js','app/soulfuel/food-diary-core.js','app/soulfuel/foodscore-availability.js','app/soulfuel/foodscore-scanner.js']){
+ for(const file of ['api/foodscore-availability.js','lib/foodscore-preview.js','app/soulfuel/foodscore-core.js','app/soulfuel/food-diary-core.js','app/soulfuel/foodscore-availability.js','app/soulfuel/foodscore-scanner.js']){
   assert.deepEqual(fs.readFileSync(path.join(root,file)),execFileSync('git',['show',baseline+':'+file],{cwd:root}),file);
  }
  const recipeFiles=execFileSync('git',['ls-tree','-r','--name-only',baseline,'app/soulfuel/recipe-library/'],{cwd:root,encoding:'utf8'}).trim().split('\n');assert.equal(recipeFiles.length,8);

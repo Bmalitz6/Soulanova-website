@@ -53,8 +53,8 @@ module.exports = async function foodFactsProxy(req, res) {
   let cached;
   try {
     cached = await redisCommand(redis, ['GET', cacheKey]);
-  } catch {
-    return send(res, 503, { error: 'FoodScore lookup is temporarily unavailable.' });
+  } catch (error) {
+    return storageFailure(res, 'CACHE_READ', error);
   }
   if (typeof cached === 'string') {
     try {
@@ -67,13 +67,13 @@ module.exports = async function foodFactsProxy(req, res) {
   let limit;
   try {
     limit = await redisCommand(redis, ['EVAL', RATE_SCRIPT, '1', 'soulanova:foodscore:off:product-read:global', String(WINDOW_MS)]);
-  } catch {
-    return send(res, 503, { error: 'FoodScore lookup is temporarily unavailable.' });
+  } catch (error) {
+    return storageFailure(res, 'RATE_LIMIT', error);
   }
   const count = Number(Array.isArray(limit) ? limit[0] : NaN);
   const ttlMs = Number(Array.isArray(limit) ? limit[1] : NaN);
   if (!Number.isFinite(count) || !Number.isFinite(ttlMs)) {
-    return send(res, 503, { error: 'FoodScore lookup is temporarily unavailable.' });
+    return storageFailure(res, 'RATE_LIMIT', { safeKind: 'INVALID_RESULT' });
   }
   if (count > MAX_UPSTREAM_REQUESTS) {
     const retryAfter = Math.max(1, Math.ceil(ttlMs / 1000));
@@ -133,10 +133,17 @@ async function redisCommand(redis, command) {
     body: JSON.stringify(command),
     signal: AbortSignal.timeout(3_000),
   });
-  if (!response.ok) throw Error('Shared FoodScore storage failed.');
+  if (!response.ok) { const error = Error('Shared FoodScore storage failed.'); error.safeKind = `HTTP_${Number.isInteger(response.status) ? response.status : 'ERROR'}`; throw error; }
   const body = await response.json();
-  if (!body || Object.hasOwn(body, 'error') || !Object.hasOwn(body, 'result')) throw Error('Shared FoodScore storage failed.');
+  if (!body || Object.hasOwn(body, 'error') || !Object.hasOwn(body, 'result')) { const error = Error('Shared FoodScore storage failed.'); error.safeKind = 'INVALID_RESPONSE'; throw error; }
   return body.result;
+}
+
+// Only fixed stage/kind enums leave the server; never error.message, URLs,
+// provider bodies, credentials, request bodies or member details.
+function storageFailure(res, stage, error) {
+  const kind = /^HTTP_\d{3}$|^INVALID_RESPONSE$|^INVALID_RESULT$/.test(error?.safeKind || '') ? error.safeKind : error?.name === 'TimeoutError' ? 'TIMEOUT' : 'NETWORK_OR_RESPONSE';
+  return send(res, 503, { error: 'FoodScore lookup is temporarily unavailable.', code: `REDIS_${stage}_${kind}` });
 }
 
 function sendCached(res, body) {

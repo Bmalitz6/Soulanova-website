@@ -308,3 +308,12 @@ test('malformed JSON request bodies fail before Redis or provider requests', asy
   }
   assert.equal(calls, 0);
 });
+
+for(const stage of ['CACHE_READ','RATE_LIMIT'])test(`Redis ${stage} diagnostic distinguishes HTTP failure without leaking provider details`,async t=>{
+ setupEnabledTest(t);const handler=handlerWithAvailability(true);let calls=0;
+ global.fetch=async(url,options)=>{calls++;const command=JSON.parse(options.body);if(stage==='RATE_LIMIT'&&command[0]==='GET')return jsonResponse(200,{result:null});return jsonResponse(401,{error:'secret-provider-detail'});};
+ const res=await call(handler);assert.equal(res.statusCode,503);assert.equal(JSON.parse(res.body).code,`REDIS_${stage}_HTTP_401`);assert.doesNotMatch(res.body,/test-only-token|secret-provider-detail|upstash.io/);assert.equal(calls,stage==='CACHE_READ'?1:2);
+});
+test('Redis malformed limiter result is distinct and blocks OFF',async t=>{
+ setupEnabledTest(t);const calls=mockRedisAndOff({onRedis:async command=>command[0]==='GET'?null:'invalid'});const res=await call(handlerWithAvailability(true));assert.equal(res.statusCode,503);assert.equal(JSON.parse(res.body).code,'REDIS_RATE_LIMIT_INVALID_RESULT');assert.equal(calls.upstreamRequests.length,0);
+});
