@@ -49,7 +49,7 @@ module.exports = async function foodFactsProxy(req, res) {
     return send(res, 503, { error: 'FoodScore lookup is not configured for safe shared access yet.' });
   }
 
-  const cacheKey = `soulanova:foodscore:off:staging:v2:product:${code}`;
+  const cacheKey = `soulanova:foodscore:off:staging:api-v3.4:v3:product:${code}`;
   let cached;
   try {
     cached = await redisCommand(redis, ['GET', cacheKey]);
@@ -82,7 +82,10 @@ module.exports = async function foodFactsProxy(req, res) {
   }
 
   try {
-    const upstream = await fetch(`https://world.openfoodfacts.net/api/v3.6/product/${code}.json?fields=${encodeURIComponent(FIELDS)}`, {
+    // Pin the documented legacy nutrition schema consumed by the existing normalizer.
+    // v3.5+ replaces nutriments with nutrition sets; a future adapter must explicitly
+    // review sources, preparation and units. Do not reinterpret or synthesize fields here.
+    const upstream = await fetch(`https://world.openfoodfacts.net/api/v3.4/product/${code}.json?fields=${encodeURIComponent(FIELDS)}`, {
       headers: {
         'User-Agent': 'Soulanova-FoodScore/1.0 (support@soulanova.com)',
         Accept: 'application/json',

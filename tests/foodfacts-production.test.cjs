@@ -85,7 +85,7 @@ test('FoodScore release gate defaults off and the direct page keeps diary and ac
   assert.match(client, /method:'POST'/);
   assert.match(api, /previewPolicy\.enabled\(process\.env, req\) === true/);
   assert.match(api, /Soulanova-FoodScore\/1\.0 \(support@soulanova\.com\)/);
-  assert.match(api, /api\/v3\.6\/product/);
+  assert.match(api, /api\/v3\.4\/product/);
   assert.match(api, /MAX_UPSTREAM_REQUESTS = 10/);
   assert.match(api, /EVAL', RATE_SCRIPT/);
   assert.match(api, /Cache-Control', 'no-store'/);
@@ -140,7 +140,7 @@ test('an enabled lookup fails closed without shared Redis configuration', async 
   assert.equal(calls, 0);
 });
 
-test('valid lookup uses the identified v3.6 endpoint and shared cache with explicit attribution fields', async t => {
+test('valid lookup uses the identified v3.4 endpoint and shared cache with explicit attribution fields', async t => {
   setupEnabledTest(t);
   const handler = handlerWithAvailability(true), fixture = { status: 1, product: { code: barcode, product_name: 'Fixture product', nutriments: {} } };
   const calls = mockRedisAndOff({ onUpstream: async (url, options) => jsonResponse(200, fixture) });
@@ -152,7 +152,7 @@ test('valid lookup uses the identified v3.6 endpoint and shared cache with expli
   }
   assert.equal(calls.upstreamRequests.length, 1);
   const upstream = calls.upstreamRequests[0];
-  assert.ok(upstream.url.startsWith('https://world.openfoodfacts.net/api/v3.6/product/'));
+  assert.ok(upstream.url.startsWith('https://world.openfoodfacts.net/api/v3.4/product/'));
   assert.equal(upstream.options.headers['User-Agent'], 'Soulanova-FoodScore/1.0 (support@soulanova.com)');
   assert.equal(upstream.options.headers.Authorization, 'Basic '+Buffer.from('off:off').toString('base64'));
   assert.ok(upstream.options.signal && typeof upstream.options.signal.aborted === 'boolean');
@@ -316,4 +316,27 @@ for(const stage of ['CACHE_READ','RATE_LIMIT'])test(`Redis ${stage} diagnostic d
 });
 test('Redis malformed limiter result is distinct and blocks OFF',async t=>{
  setupEnabledTest(t);const calls=mockRedisAndOff({onRedis:async command=>command[0]==='GET'?null:'invalid'});const res=await call(handlerWithAvailability(true));assert.equal(res.statusCode,503);assert.equal(JSON.parse(res.body).code,'REDIS_RATE_LIMIT_INVALID_RESULT');assert.equal(calls.upstreamRequests.length,0);
+});
+
+// Captured read-only OFF staging example, 2026-11-10:
+// https://world.openfoodfacts.net/api/v3.4/product/3017620422003.json
+// Source: Open Food Facts, database ODbL 1.0 / individual contents DbCL 1.0.
+// https://opendatacommons.org/licenses/odbl/1-0/
+// https://opendatacommons.org/licenses/dbcl/1-0/
+// Community test data is unverified; never a medical/nutrition recommendation.
+test('v3.4 compatibility preserves captured complete staging nutrition, ingredients and score',async t=>{
+ setupEnabledTest(t);const fixture=require('./fixtures/off-staging-v3.4-nutella.json');
+ const calls=mockRedisAndOff({onUpstream:async()=>jsonResponse(200,fixture)});
+ // An old incomplete namespace must not mask the corrected request.
+ calls.cache.set('soulanova:foodscore:off:staging:v2:product:3017620422003',JSON.stringify({status:'success',product:{nutriments:{}}}));
+ const res=await call(handlerWithAvailability(true),'3017620422003');assert.equal(res.statusCode,200);const payload=JSON.parse(res.body);assert.deepEqual(payload,fixture);
+ assert.equal(calls.upstreamRequests.length,1);assert.ok(calls.commands.some(c=>c[0]==='SET'&&c[1]==='soulanova:foodscore:off:staging:api-v3.4:v3:product:3017620422003'&&c[4]==='3600'));
+ const url=new URL(calls.upstreamRequests[0].url);assert.equal(url.pathname,'/api/v3.4/product/3017620422003.json');for(const field of ['nutriments','ingredients','ingredients_text','serving_size','product_quantity_unit','serving_quantity_unit','nova_group'])assert.ok(url.searchParams.get('fields').split(',').includes(field),field);
+ const Core=require('../app/soulfuel/foodscore-core.js'),p=Core.normalizeOpenFoodFactsProduct(payload.product,'3017620422003');assert.equal(p.name,'Nutella');assert.equal(p.score.score,23);assert.equal(p.score.coverage,75);assert.equal(p.per100g.calories,539);assert.equal(p.per100g.protein,6.3);assert.equal(p.per100g.carbs,57.5);assert.equal(p.per100g.fat,30.9);assert.equal(p.per100g.fiber,0);
+ const portion=Core.scaleProductNutrition(p,1,15);assert.equal(portion.basis,'15 g');assert.ok(Math.abs(portion.values.calories-80.85)<1e-10);assert.ok(Math.abs(portion.values.fat-4.635)<1e-10);assert.equal(p.perServing.calories,null);
+});
+test('v3.4 compatibility never repairs incomplete product nutrition or invents a serving',async t=>{
+ setupEnabledTest(t);const fixture=structuredClone(require('./fixtures/off-staging-v3.4-nutella.json'));delete fixture.product.nutriments.fiber_100g;
+ mockRedisAndOff({onUpstream:async()=>jsonResponse(200,fixture)});const res=await call(handlerWithAvailability(true),'3017620422003');const product=JSON.parse(res.body).product;assert.equal(Object.hasOwn(product.nutriments,'fiber_100g'),false);
+ const Core=require('../app/soulfuel/foodscore-core.js'),p=Core.normalizeOpenFoodFactsProduct(product,'3017620422003');assert.equal(p.per100g.fiber,null);assert.equal(p.score.status,'insufficient-data');assert.ok(p.score.missing.includes('fiber'));assert.equal(Core.scaleProductNutrition(p,1,15).values.fiber,null);assert.equal(p.perServing.calories,null);
 });
