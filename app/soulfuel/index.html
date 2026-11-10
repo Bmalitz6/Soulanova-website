@@ -18,30 +18,35 @@
       <p id="auth-state" class="subtle">Restoring your member session…</p>
       <div class="diary-date-nav" aria-label="Diary date navigation"><button id="previous-day" type="button" class="secondary">← Previous day</button><label for="diary-date">Diary date<input id="diary-date" type="date"></label><button id="next-day" type="button" class="secondary">Next day →</button><button id="today-day" type="button" class="secondary">Today</button></div>
       <section class="diary-totals" aria-labelledby="diary-totals-title"><h3 id="diary-totals-title" class="sr-only">Reported nutrition totals</h3><div id="diary-totals" class="totals-grid" aria-live="polite"></div><details class="secondary-metrics"><summary>Fiber, water &amp; tracking details</summary><div id="secondary-totals" class="totals-grid"></div><p id="tracker-summary" class="subtle" aria-live="polite">Add an entry to begin. No default calorie targets.</p><p class="subtle">Totals include confirmed community estimates and available values only. Missing nutrition is not zero.</p></details></section>
-      <details id="manual-entry-panel" class="entry-panel"><summary>Add food or drink <span aria-hidden="true">＋</span></summary><form id="manual-entry-form" class="manual-entry-form">
+      <details id="diary-history" class="diary-history" open><summary>Food diary <span id="selected-day-label"></span></summary><div id="diary-list"></div></details>
+    </section>
+    <section id="foodscore" class="card" aria-labelledby="lookup-title">
+        <div class="section-heading"><div><p class="eyebrow">YOUR NEXT NOURISHING MOMENT</p><h2 id="lookup-title">Add Food</h2></div><span id="lookup-availability" class="availability-label">Preview · lookup paused</span></div>
+      <div class="food-tabs" role="tablist" aria-label="How to add food"><button id="scan-tab" type="button" role="tab" aria-selected="true" aria-controls="scan-panel" tabindex="0">Scan Barcode</button><button id="manual-tab" type="button" role="tab" aria-selected="false" aria-controls="manual-panel" tabindex="-1">Enter Manually</button></div>
+      <div id="scan-panel" role="tabpanel" aria-labelledby="scan-tab" tabindex="0">
+      <div class="scanner-intro"><svg class="scanner-art" viewBox="0 0 180 130" aria-hidden="true"><rect x="22" y="12" width="136" height="106" rx="22" fill="#fff"/><path d="M42 43V32h19m58 0h19v11M42 87v11h19m58 0h19V87" fill="none" stroke="currentColor" stroke-width="4" stroke-linecap="round"/><path d="M59 49v33m8-33v33m10-33v33m8-33v33m12-33v33m7-33v33m11-33v33m7-33v33" stroke="currentColor" stroke-width="3"/><path d="M36 66h108" stroke="#bf651a" stroke-width="2"/></svg><div><h3>A little clarity in every scan.</h3><p class="subtle">Scan a package or enter its UPC / EAN. Review the nutrition and portion before adding it.</p></div></div>
+      <div id="scanner-paused-preview"><fieldset disabled><legend class="sr-only">Barcode lookup is paused</legend><button class="primary" type="button">Scan with Camera</button><label for="paused-barcode">UPC / EAN barcode</label><div class="entry"><input id="paused-barcode" inputmode="numeric" placeholder="Enter the package barcode"><button class="secondary" type="button">Look up food</button></div></fieldset></div>
+      <p id="foodscore-coming-soon" class="status" role="status">Coming soon. Barcode lookup is paused. You can still add food to your Daily Tracker.</p>
+      <div id="foodscore-lookup" hidden>
+      <p class="subtle">Scan a package or type its barcode. Camera frames stay on this device; only the barcode is sent.</p>
+      <button id="scan-camera" type="button" class="primary">Scan with Camera</button><button id="stop-camera" type="button" class="secondary" hidden>Stop camera</button>
+      <p id="camera-status" class="status" role="status" aria-live="polite">You can always enter the barcode manually.</p><div id="camera-preview" class="camera-preview" hidden><video id="camera-video" playsinline muted></video></div>
+      <form id="lookup-form">
+        <label for="barcode">UPC / EAN barcode</label>
+        <div class="entry"><input id="barcode" inputmode="numeric" autocomplete="off" placeholder="8, 12, 13 or 14 digits" maxlength="14" required><button class="primary" id="lookup-button" type="submit">Look up food</button></div>
+      </form>
+      <p id="status" class="status" role="status" aria-live="polite"></p>
+      <div id="result" hidden></div>
+      </div>
+      </div><div id="manual-panel" role="tabpanel" aria-labelledby="manual-tab" tabindex="0" hidden>      <div id="manual-entry-panel" class="entry-panel"><form id="manual-entry-form" class="manual-entry-form">
         <h3 id="manual-form-title" class="sr-only">Add food or drink</h3><input id="entry-id" type="hidden">
         <label for="entry-name">Food or drink</label><input id="entry-name" name="name" maxlength="120" autocomplete="off" required>
         <div class="diary-form-row"><label for="entry-meal">Meal<select id="entry-meal" name="meal"><option>Breakfast</option><option>Lunch</option><option>Dinner</option><option>Snack</option></select></label><label for="entry-portion">Portion / serving<input id="entry-portion" name="portion" maxlength="80" placeholder="e.g. 1 cup"></label></div>
         <fieldset class="manual-nutrition"><legend>Optional nutrition values</legend><p class="subtle">Use your label or records. Leave unknown values blank.</p><div class="nutrition-input-grid">
           <label for="entry-calories">Calories (kcal)<input id="entry-calories" name="calories" type="number" min="0" step="any" inputmode="decimal"></label><label for="entry-protein">Protein (g)<input id="entry-protein" name="protein" type="number" min="0" step="any" inputmode="decimal"></label><label for="entry-carbs">Carbohydrates (g)<input id="entry-carbs" name="carbs" type="number" min="0" step="any" inputmode="decimal"></label><label for="entry-fat">Fat (g)<input id="entry-fat" name="fat" type="number" min="0" step="any" inputmode="decimal"></label>
         </div><details class="secondary-fields"><summary>Fiber &amp; water (optional)</summary><div class="nutrition-input-grid"><label for="entry-fiber">Fiber (g)<input id="entry-fiber" name="fiber" type="number" min="0" step="any" inputmode="decimal"></label><label for="entry-water">Water (ml)<input id="entry-water" name="water" type="number" min="0" step="any" inputmode="decimal"></label></div></details></fieldset>
-        <div class="form-actions"><button id="save-entry" type="submit" class="primary">Add to diary</button><button id="cancel-edit" type="button" class="secondary" hidden>Cancel edit</button></div><p id="diary-message" class="status" role="status" aria-live="polite"></p>
-      </form></details>
-      <details id="diary-history" class="diary-history" open><summary>Food diary <span id="selected-day-label"></span></summary><div id="diary-list"></div></details>
-    </section>
-    <section id="foodscore" class="card" aria-labelledby="lookup-title">
-        <div class="section-heading"><div><p class="eyebrow">A LITTLE MORE CLARITY</p><h2 id="lookup-title">Scan Food</h2></div><span id="lookup-availability" class="availability-label">Preview · lookup paused</span></div>
-      <p id="foodscore-coming-soon" class="status" role="status">Coming soon. Barcode lookup is paused. You can still add food to your Daily Tracker.</p>
-      <div id="foodscore-lookup" hidden>
-      <p class="subtle">Scan a package or type its barcode. Camera frames stay on this device; only the barcode is sent.</p>
-      <button id="scan-camera" type="button" class="secondary">Scan Barcode</button><button id="stop-camera" type="button" class="secondary" hidden>Stop camera</button>
-      <p id="camera-status" class="status" role="status" aria-live="polite">You can always enter the barcode manually.</p><div id="camera-preview" class="camera-preview" hidden><video id="camera-video" playsinline muted></video></div>
-      <form id="lookup-form">
-        <label for="barcode">Product barcode</label>
-        <div class="entry"><input id="barcode" inputmode="numeric" autocomplete="off" placeholder="8, 12, 13 or 14 digits" maxlength="14" required><button class="primary" id="lookup-button" type="submit">Look up food</button></div>
-      </form>
-      <p id="status" class="status" role="status" aria-live="polite"></p>
-      <div id="result" hidden></div>
+        <div class="form-actions"><button id="save-entry" type="submit" class="primary">Add to Daily Tracker</button><button id="cancel-edit" type="button" class="secondary" hidden>Cancel edit</button></div><p id="diary-message" class="status" role="status" aria-live="polite"></p>
+      </form></div>
       </div>
     <details id="score-method" class="methodology"><summary>About FoodScore &amp; source data</summary><div><p>Each category has its own profile. Solid foods, meals and snacks use sugars, saturated fat, sodium, fiber and protein. Drinks use total sugars, sodium, saturated fat and energy per 100 ml. Oils use reported unsaturated and saturated fat ratios. A category or nutrient that cannot be established is never guessed.</p><p>Ingredient points require a complete recognized set of declared percentages. Missing ingredient or processing points are excluded. At least 75 weighted points and all category nutrient inputs must be available: score = round(100 × earned points ÷ assessed points). The interface shows coverage and every scored factor; coverage measures completeness, not accuracy. Incomplete scores are not comparable to scores with different coverage.</p><p>85–100 Excellent · 70–84 Good · 50–69 Moderate · 30–49 Limit frequency · 0–29 Occasional. These labels and numerical cutoffs are provisional design choices, not validated frequency advice. Check portions and the package label; no score establishes allergen safety or suitability for you.</p></div></details>
     </section>
@@ -65,6 +70,7 @@
   <script src="/app/soulfuel/foodscore-core.js"></script>
   <script src="/app/soulfuel/food-diary-core.js"></script>
   <script src="/app/soulfuel/foodscore-scanner.js"></script>
+  <script src="/app/soulfuel/tracker-progress.js"></script>
   <script src="/app/soulfuel/foodscore.js"></script>
 </body>
 </html>

@@ -33,7 +33,7 @@ async function open({active=true,width=1280,height=900}={}){
  });
  await page.goto(origin+'/app/soulfuel/');await page.waitForFunction(()=>document.querySelector('#entry-name')?.disabled===false);return {page,context,errors};
 }
-async function expand(page,id){const panel=page.locator('#'+id);if(await panel.count() && !await panel.evaluate(e=>e.open))await panel.locator('summary').first().click();}
+async function expand(page,id){if(id==='manual-entry-panel'){await page.locator('#manual-tab').click();return}const panel=page.locator('#'+id);if(await panel.count() && !await panel.evaluate(e=>e.open))await panel.locator('summary').first().click();}
 const opts={skip:!enabled};
 test('browser: default-off makes no lookup; desktop/iPhone layouts have no horizontal overflow',opts,async()=>{
  requests.length=0;
@@ -50,7 +50,7 @@ test('browser: default-off makes no lookup; desktop/iPhone layouts have no horiz
 test('browser: manual barcode → mock product → reviewed portion → readback-confirmed tracker and no duplicate',opts,async()=>{
  requests.length=0;const {page,context,errors}=await open();
  await expand(page,'goal-editor');await page.locator('#goal-calories').fill('2000');await page.locator('#goal-protein').fill('80');await page.locator('#nutrition-goals-form button[type="submit"]').click();
- await page.locator('#barcode').fill('0123456789012');await page.locator('#lookup-button').click();await page.waitForSelector('#save-food');
+ await page.locator('#scan-tab').click();await page.locator('#barcode').fill('0123456789012');await page.locator('#lookup-button').click();await page.waitForSelector('#save-food');
  assert.match(await page.locator('.score-gauge').getAttribute('aria-label'),/90 out of 100/);
  assert.match(await page.locator('#result').textContent(),/staging · Test data only/);
  assert.equal(await page.locator('#result .attrib a').first().getAttribute('href'),'https://world.openfoodfacts.net/product/0123456789012');
@@ -58,7 +58,7 @@ test('browser: manual barcode → mock product → reviewed portion → readback
  await page.locator('#product-grams').fill('75');assert.match(await page.locator('#portion-preview').textContent(),/112.5 kcal/);
  await page.locator('#save-food').click();assert.match(await page.locator('#product-save-status').textContent(),/Confirm the product/);
  await page.locator('#product-confirm').check();await page.locator('#save-food').click();assert.match(await page.locator('#product-save-status').textContent(),/Saved and read back/);
- assert.match(await page.locator('.total-calories').textContent(),/112.5/);assert.equal(await page.locator('.total-calories progress').getAttribute('max'),'2000');
+ assert.match(await page.locator('.total-calories').textContent(),/112.5/);assert.match(await page.locator('.total-calories .dial-goal').textContent(),/2,000 kcal/);assert.equal(await page.locator('.total-calories .dial-percent').textContent(),'5.625%');
  const entries=await page.evaluate(()=>JSON.parse(localStorage.getItem('soulanova-foodscore-diary-v1:test-member-a')));assert.equal(entries.length,1);assert.equal(entries[0].memberConfirmed,true);assert.equal(entries[0].protein,6);assert.equal(entries[0].sourceUrl,'https://world.openfoodfacts.net/product/0123456789012');assert.equal(entries[0].source,'Open Food Facts staging (test data)');
  assert.equal(await page.locator('#save-food').isDisabled(),true);assert.equal(requests.length,1);assert.deepEqual(requests[0],{method:'POST',url:'/api/foodfacts',body:{barcode:'0123456789012'}});
  await page.screenshot({path:'/private/tmp/soulfuel-upgrade-mocked-score.png',fullPage:true});
@@ -68,7 +68,7 @@ test('browser: account switch isolates diary/goals and delayed lookup result can
  const {page,context}=await open();await expand(page,'manual-entry-panel');await page.locator('#entry-name').fill('Member A oats');await page.locator('#entry-calories').fill('100');await page.locator('#save-entry').click();
  await expand(page,'goal-editor');await page.locator('#goal-calories').fill('2000');await page.locator('#nutrition-goals-form button[type="submit"]').click();
  let finish;const delayed=new Promise(resolve=>finish=resolve);await page.route('**/api/foodfacts',async route=>{await delayed;await route.fulfill({contentType:'application/json',body:JSON.stringify({status:1,product:fixture})})});
- await page.locator('#barcode').fill('0123456789012');await page.locator('#lookup-button').click();
+ await page.locator('#scan-tab').click();await page.locator('#barcode').fill('0123456789012');await page.locator('#lookup-button').click();
  await page.evaluate(()=>window.__switchMember('test-member-b'));finish();await page.waitForTimeout(100);
  assert.equal(await page.locator('#result').isVisible(),false);assert.equal(await page.locator('#goal-calories').inputValue(),'');assert.doesNotMatch(await page.locator('#diary-list').textContent(),/Member A oats/);
  await page.evaluate(()=>window.__switchMember('test-member-a'));assert.match(await page.locator('#diary-list').textContent(),/Member A oats/);assert.equal(await page.locator('#goal-calories').inputValue(),'2000');await context.close();
@@ -91,16 +91,93 @@ test('browser: premium hierarchy keeps four primary metrics and reveals secondar
  assert.equal(await page.locator('.hero-actions a').count(),2);assert.equal(await page.locator('.fuel-grid').count(),0);
  assert.equal(await page.locator('#diary-totals > .total-item').count(),4);assert.equal(await page.locator('#secondary-totals > .total-item').count(),2);
  assert.equal(await page.locator('#secondary-totals').isVisible(),false);await page.locator('.secondary-metrics > summary').focus();await page.keyboard.press('Enter');assert.equal(await page.locator('#secondary-totals').isVisible(),true);
- assert.equal(await page.locator('#entry-name').isVisible(),false);await page.locator('#manual-entry-panel > summary').focus();await page.keyboard.press('Enter');assert.equal(await page.locator('#entry-name').isVisible(),true);
+ assert.equal(await page.locator('#entry-name').isVisible(),false);await page.locator('#scan-tab').focus();await page.keyboard.press('ArrowRight');assert.equal(await page.locator('#entry-name').isVisible(),true);
  assert.equal(await page.locator('#entry-fiber').isVisible(),false);await page.locator('#manual-entry-form .secondary-fields > summary').click();assert.equal(await page.locator('#entry-fiber').isVisible(),true);
  assert.equal(await page.locator('#goal-calories').isVisible(),false);await expand(page,'goal-editor');assert.equal(await page.locator('#goal-calories').isVisible(),true);assert.equal(await page.locator('#goal-water').isVisible(),false);
- for(const selector of ['.hero-actions a','.section-nav a','.diary-date-nav button','#manual-entry-panel > summary','#goal-editor > summary'])for(const element of await page.locator(selector).all()){const box=await element.boundingBox();assert.ok(box.height>=44,selector+' touch target');}
+ for(const selector of ['.hero-actions a','.section-nav a','.diary-date-nav button','.food-tabs button','#goal-editor > summary'])for(const element of await page.locator(selector).all()){const box=await element.boundingBox();assert.ok(box.height>=44,selector+' touch target');}
  await context.close();
 });
 test('browser: collapsed manual editor still supports edit/delete and keeps source details accessible',opts,async()=>{
  const {page,context}=await open({active:false});await expand(page,'manual-entry-panel');await page.locator('#entry-name').fill('Mediterranean lunch');await page.locator('#entry-calories').fill('400');await page.locator('#entry-protein').fill('15');await page.locator('#save-entry').click();
- assert.match(await page.locator('.total-calories').textContent(),/400/);await page.locator('#manual-entry-panel > summary').click();
+ assert.match(await page.locator('.total-calories').textContent(),/400/);await page.locator('#scan-tab').click();
  await page.locator('#diary-list button').getByText('Edit',{exact:true}).click();assert.equal(await page.locator('#entry-name').isVisible(),true);await page.locator('#entry-calories').fill('450');await page.locator('#save-entry').click();assert.match(await page.locator('.total-calories').textContent(),/450/);
  assert.equal(await page.locator('.entry-nutrition-details').count(),1);await page.locator('.entry-nutrition-details > summary').click();assert.match(await page.locator('.entry-nutrition-details').textContent(),/Manual entry/);
- await page.locator('#diary-list button').getByText('Delete',{exact:true}).click();assert.equal(await page.locator('.entryrow').count(),0);assert.equal(await page.locator('.total-calories strong').getAttribute('aria-label'),'Calories: Not provided');await context.close();
+ await page.locator('#diary-list button').getByText('Delete',{exact:true}).click();assert.equal(await page.locator('.entryrow').count(),0);assert.equal(await page.locator('.total-calories strong').getAttribute('aria-label'),'Calories: 0 kcal');await context.close();
+});
+
+test('browser: tracker goal states, overflow, edit/delete, missing data and live goal changes',opts,async()=>{
+ const {page,context}=await open({active:false});
+ await page.locator('#diary-date').fill('2026-11-09');
+ const seed=async(value,goal=100)=>{
+  await page.evaluate(({value,goal})=>{
+   localStorage.setItem('soulanova-food-diary-goals-v1:test-member-a',JSON.stringify({calories:goal,protein:goal,carbs:goal,fat:goal}));
+   localStorage.setItem('soulanova-foodscore-diary-v1:test-member-a',JSON.stringify([{id:'dial-fixture',type:'manual',nutritionStatus:'user-supplied',name:'Dial test meal',day:'2026-11-09',meal:'Lunch',calories:value,protein:value,carbs:value,fat:value}]));
+  },{value,goal});
+  await page.locator('#diary-date').dispatchEvent('change');
+ };
+ for(const value of [0,100,101,125,200,375]){
+  await seed(value);
+  for(const nutrient of ['calories','protein','carbs','fat']){
+   const dial=page.locator('.total-'+nutrient);
+   assert.equal(await dial.locator('.dial-percent').textContent(),value+'%');
+   assert.match(await dial.locator('.dial-graphic').getAttribute('aria-label'),new RegExp(value+'%'));
+   assert.equal(await dial.locator('.dial-overflow').count(),value>100?1:0);
+   assert.equal(await dial.locator('.dial-state').textContent(),value>100?'Over Goal':value===100?'Goal Reached ✓':'Of your goal');
+  }
+ }
+ await seed(125);await page.locator('#diary-list button').getByText('Edit',{exact:true}).click();
+ assert.equal(await page.locator('#manual-tab').getAttribute('aria-selected'),'true');
+ await page.locator('#entry-calories').fill('101');await page.locator('#save-entry').click();assert.equal(await page.locator('.total-calories .dial-percent').textContent(),'101%');assert.equal(await page.locator('.entryrow').count(),1);
+ await expand(page,'goal-editor');await page.locator('#goal-calories').fill('202');await page.locator('#nutrition-goals-form button[type=submit]').click();assert.equal(await page.locator('.total-calories .dial-percent').textContent(),'50%');
+ await page.locator('#diary-list button').getByText('Delete',{exact:true}).click();assert.equal(await page.locator('.total-calories .dial-percent').textContent(),'0%');
+ await page.locator('#clear-goals').click();assert.equal(await page.locator('.total-calories .dial-percent').textContent(),'—');assert.match(await page.locator('.total-calories').textContent(),/Not Set.*Set Goal/);
+ await page.locator('.total-calories .dial-state').click();assert.equal(await page.locator('#goal-calories').isVisible(),true);
+ await seed(null);assert.equal(await page.locator('.total-calories .dial-percent').textContent(),'—');assert.match(await page.locator('.total-calories .dial-graphic').getAttribute('aria-label'),/Unavailable/);
+ await context.close();
+});
+
+test('browser: colorful tracker and tabbed scanner fit desktop and narrow iPhone layouts',opts,async()=>{
+ for(const width of [1280,390,320]){
+  const {page,context}=await open({active:false,width,height:900});
+  await page.evaluate(async()=>{await Promise.all([...document.images].map(img=>{img.loading='eager';return img.decode().catch(()=>{});}));});
+  await page.evaluate(()=>{
+   localStorage.setItem('soulanova-food-diary-goals-v1:test-member-a',JSON.stringify({calories:2000,protein:100,carbs:200,fat:60}));
+   localStorage.setItem('soulanova-foodscore-diary-v1:test-member-a',JSON.stringify([{id:'visual-fixture',type:'manual',nutritionStatus:'user-supplied',name:'Visual test meal',day:document.querySelector('#diary-date').value,meal:'Lunch',calories:1500,protein:100,carbs:150,fat:30}]));
+  });await page.locator('#diary-date').dispatchEvent('change');
+  const boxes=await page.locator('#diary-totals .tracker-dial').evaluateAll(els=>els.map(e=>({x:e.offsetLeft,y:e.offsetTop})));
+  assert.equal(new Set(boxes.map(b=>b.y)).size,width===1280?1:2);
+  assert.equal(new Set(boxes.map(b=>b.x)).size,width===1280?4:2);
+  assert.equal(await page.evaluate(()=>document.documentElement.scrollWidth<=innerWidth),true);
+  assert.equal(await page.locator('#paused-barcode').isDisabled(),true);assert.equal(await page.locator('#scanner-paused-preview button').first().isDisabled(),true);
+  await page.screenshot({path:`/private/tmp/soulfuel-dials-${width}.png`,fullPage:true});
+  await page.evaluate(()=>{const key='soulanova-foodscore-diary-v1:test-member-a',rows=JSON.parse(localStorage.getItem(key));rows[0].carbs=250;rows[0].fat=120;localStorage.setItem(key,JSON.stringify(rows));});await page.locator('#diary-date').dispatchEvent('change');
+  await page.screenshot({path:`/private/tmp/soulfuel-dials-overflow-${width}.png`,fullPage:true});
+  await page.locator('#manual-tab').click();assert.equal(await page.locator('#scan-panel').isVisible(),false);assert.equal(await page.locator('#entry-name').isVisible(),true);
+  assert.equal(await page.evaluate(()=>document.documentElement.scrollWidth<=innerWidth),true);
+  if(width===390)await page.screenshot({path:'/private/tmp/soulfuel-dials-manual-390.png',fullPage:true});
+  await page.locator('#manual-tab').focus();await page.keyboard.press('ArrowLeft');assert.equal(await page.locator('#scan-tab').getAttribute('aria-selected'),'true');
+  await context.close();
+ }
+});
+
+test('browser: overflow dials and manual tab pass automated WCAG A/AA', {skip:!enabled||!process.env.SOULFUEL_AXE_PATH},async()=>{
+ const {page,context}=await open({active:false,width:320,height:900});
+ await page.evaluate(()=>{
+  localStorage.setItem('soulanova-food-diary-goals-v1:test-member-a',JSON.stringify({calories:100,protein:100,carbs:100,fat:100}));
+  localStorage.setItem('soulanova-foodscore-diary-v1:test-member-a',JSON.stringify([{id:'a11y',type:'manual',nutritionStatus:'user-supplied',name:'Accessibility fixture',day:document.querySelector('#diary-date').value,meal:'Lunch',calories:101,protein:100,carbs:125,fat:200}]));
+ });await page.locator('#diary-date').dispatchEvent('change');
+ const AxeBuilder=require(process.env.SOULFUEL_AXE_PATH).default;
+ for(const tab of ['scan','manual']){await page.locator('#'+tab+'-tab').click();const result=await new AxeBuilder({page}).withTags(['wcag2a','wcag2aa','wcag21aa']).analyze();assert.deepEqual(result.violations.map(v=>({id:v.id,nodes:v.nodes.map(n=>n.target)})),[]);}
+ await context.close();
+});
+
+test('browser: scanner exposes loading, safe error and retry review before confirmed save',opts,async()=>{
+ const {page,context}=await open();let finish;
+ const delayed=new Promise(resolve=>finish=resolve);
+ await page.route('**/api/foodfacts',async route=>{await delayed;await route.fulfill({status:503,contentType:'application/json',body:JSON.stringify({error:'Unavailable'})});});
+ await page.locator('#barcode').fill('0123456789012');await page.locator('#lookup-button').click();
+ assert.equal(await page.locator('#scan-panel').getAttribute('aria-busy'),'true');assert.equal(await page.locator('#lookup-button').isDisabled(),true);assert.match(await page.locator('#status').textContent(),/Looking up/);
+ finish();await page.waitForFunction(()=>document.querySelector('#scan-panel').getAttribute('aria-busy')==='false');assert.match(await page.locator('#status').textContent(),/temporarily unavailable/);assert.equal(await page.locator('#result').isVisible(),false);
+ await page.unroute('**/api/foodfacts');await page.locator('#lookup-button').click();await page.waitForSelector('#save-food');assert.equal(await page.locator('.entryrow').count(),0);assert.match(await page.locator('#product-save-status').textContent(),/check the package/);assert.equal(await page.locator('#product-confirm').isChecked(),false);
+ await context.close();
 });

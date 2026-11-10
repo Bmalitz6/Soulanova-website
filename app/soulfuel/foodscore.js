@@ -8,6 +8,7 @@
   const lookupEnabled = window.SoulanovaFoodScoreAvailability?.enabled === true;
   $('foodscore-lookup').hidden = !lookupEnabled;
   $('foodscore-coming-soon').hidden = lookupEnabled;
+  if($('scanner-paused-preview'))$('scanner-paused-preview').hidden=lookupEnabled;
   if($('lookup-availability'))$('lookup-availability').textContent=lookupEnabled?'Barcode lookup ready':'Preview · lookup paused';
   let memberId = null, currentProduct = null, scanId = '', client = null, lookupPending = false, authRevision = 0;
   let storageReadFailed = false, lookupRevision = 0;
@@ -21,6 +22,24 @@
   const showStatus = (message, ok = false) => { status.textContent = message; status.classList.toggle('good', ok); };
   const fmt = (value, unit) => value === null ? 'Unavailable' : `${Number(value.toFixed(1)).toLocaleString()} ${unit}`;
   let cameraSession = null, cameraAttempt = 0;
+  function selectFoodTab(name,focus=false){
+    if(name!=='scan')stopCamera();
+    for(const tabName of ['scan','manual']){
+      const tab=$(tabName+'-tab'),active=tabName===name;
+      tab.setAttribute('aria-selected',String(active));tab.tabIndex=active?0:-1;
+      $(tabName+'-panel').hidden=!active;
+      if(active&&focus)tab.focus();
+    }
+  }
+  for(const name of ['scan','manual']){
+    $(name+'-tab').addEventListener('click',()=>selectFoodTab(name));
+    $(name+'-tab').addEventListener('keydown',event=>{
+      if(['ArrowLeft','ArrowRight','Home','End'].includes(event.key)){
+        event.preventDefault();selectFoodTab(event.key==='Home'?'scan':event.key==='End'?'manual':name==='scan'?'manual':'scan',true);
+      }
+    });
+  }
+
 
   function stopCamera(){cameraAttempt++;cameraSession?.stop();cameraSession=null;cameraPreview.hidden=true;stopCameraButton.hidden=true;cameraButton.disabled=!Scanner?.capability(window)}
 
@@ -30,7 +49,7 @@
     const code=String(barcode).replace(/\s/g,'');
     if(!/^(?:\d{8}|\d{12}|\d{13}|\d{14})$/.test(code)){showStatus('Enter a valid 8, 12, 13, or 14 digit barcode.');return}
     stopCamera();
-    lookupPending=true;button.disabled=true;result.hidden=true;showStatus('Looking up product…');
+    lookupPending=true;button.disabled=true;$('scan-panel').setAttribute('aria-busy','true');result.hidden=true;showStatus('Looking up product…');
     const endpoint='/api/foodfacts';
     try{
       const response=await fetch(endpoint,{method:'POST',headers:{Accept:'application/json','Content-Type':'application/json'},body:JSON.stringify({barcode:code}),signal:AbortSignal.timeout(15000)});
@@ -42,7 +61,7 @@
       if(!(payload.status===1||payload.status==='success')||!payload.product){currentProduct=null;showStatus('No product was found for this barcode. Check the number or try another product.');return}
       currentProduct=normalize(payload.product,code);scanId=`${Date.now()}-${Math.random().toString(36).slice(2)}`;renderProduct();showStatus('Open Food Facts staging test data loaded. Not for nutrition decisions.',true);
     }catch(error){if(requestRevision!==lookupRevision||memberRevision!==authRevision)return;showStatus(error instanceof Error&&/Food lookup limit|FoodScore is temporarily|Open Food Facts is temporarily|No product was found/.test(error.message)?error.message:'FoodScore lookup is temporarily unavailable. Please try again later.')}
-    finally{if(requestRevision===lookupRevision){lookupPending=false;button.disabled=false}}
+    finally{if(requestRevision===lookupRevision){lookupPending=false;button.disabled=false;$('scan-panel').setAttribute('aria-busy','false')}}
   }
 
   function renderProduct(){
@@ -65,15 +84,32 @@
     if(memberId){try{goals=Diary.readGoals(localStorage,memberId)}catch{}}
     const names={calories:['Calories','kcal'],protein:['Protein','g'],carbs:['Carbohydrates','g'],fat:['Fat','g'],fiber:['Fiber','g'],water:['Water','ml']};
     const target=$('diary-totals'),secondary=$('secondary-totals');target.replaceChildren();secondary?.replaceChildren();
-    for(const key of Diary.NUTRIENTS){const cell=document.createElement('div');cell.className=`total-item total-${key}`;const label=document.createElement('span'),value=document.createElement('strong'),hint=document.createElement('small');label.textContent=names[key][0];value.textContent=counted[key]?`${Number(totals[key].toFixed(1)).toLocaleString()} ${names[key][1]}`:'—';value.setAttribute('aria-label',`${names[key][0]}: ${counted[key]?value.textContent:'Not provided'}`);cell.append(label,value);
-      if(typeof goals[key]==='number'&&goals[key]>0){const progress=document.createElement('progress');progress.max=goals[key];if(counted[key])progress.value=Math.min(totals[key],goals[key]);progress.setAttribute('aria-label',`${names[key][0]}: ${counted[key]?Number(totals[key].toFixed(1)):'no reported data'} of your optional ${goals[key]} ${names[key][1]} goal`);hint.textContent=`of ${goals[key]} ${names[key][1]} · ${counted[key]?Math.round(totals[key]/goals[key]*100)+'% reported':'no data yet'}${counted[key]&&totals[key]>goals[key]?' · above your reference':''}`;cell.append(progress)}else hint.textContent='';cell.append(hint);(secondary&&['fiber','water'].includes(key)?secondary:target).append(cell)}
+    for(const key of Diary.NUTRIENTS){
+      const cell=document.createElement('div');cell.className=`total-item total-${key}`;
+      const amount=counted[key]?totals[key]:entryCount===0?0:null;
+      const goal=goals[key], unit=names[key][1];
+      if(!['fiber','water'].includes(key)){
+        const p=window.SoulanovaTrackerProgress.progress(amount,goal);
+        const amountText=p.amount===null?'Unavailable':p.amount.toLocaleString(undefined,{maximumFractionDigits:10});
+        const goalText=p.target===null?'Not Set':`${p.target.toLocaleString()} ${unit}`;
+        const stateText=p.state==='over'?'Over Goal':p.state==='reached'?'Goal Reached ✓':p.state==='unset'?'Set Goal':p.state==='unknown'?'No reported data':'Of your goal';
+        const percentText=p.label===null?'—':`${p.label}%`;
+        cell.classList.add('tracker-dial',`dial-${p.state}`);
+        cell.innerHTML=`<span class="dial-title">${names[key][0]}</span><div class="dial-graphic" role="img" aria-label="${names[key][0]}: ${amountText} ${unit}; goal ${goalText}; ${p.label===null?'percentage unavailable':percentText}; ${stateText}"><svg viewBox="0 0 160 160" aria-hidden="true"><circle class="dial-track" cx="80" cy="80" r="63"></circle><circle class="dial-fill" cx="80" cy="80" r="63" style="stroke-dashoffset:${(1-p.ring/100)*395.84}"></circle>${p.state==='over'?'<circle class="dial-overflow" cx="80" cy="80" r="75"></circle>':''}</svg><div class="dial-center"><strong aria-label="${names[key][0]}: ${amount===null?'Not provided':amountText+' '+unit}">${amountText}</strong><span>${unit} consumed</span><b class="dial-percent">${percentText}</b></div></div><small class="dial-goal">Goal: ${goalText}</small>${p.state==='unset'?'<a class="dial-state" href="#nutrition-goals">Set Goal</a>':`<span class="dial-state">${stateText}</span>`}`;
+      }else{
+        const label=document.createElement('span'),value=document.createElement('strong');label.textContent=names[key][0];value.textContent=amount===null?'Unavailable':`${Number(amount.toFixed(1)).toLocaleString()} ${unit}`;cell.append(label,value);
+        if(Number.isFinite(goal)&&goal>0){const hint=document.createElement('small'),bar=document.createElement('progress');bar.max=goal;if(amount!==null)bar.value=Math.min(amount,goal);bar.setAttribute('aria-label',`${names[key][0]} goal: ${goal} ${unit}`);hint.textContent=`Goal: ${goal} ${unit}${amount===null?' · No reported data':''}`;cell.append(bar,hint);}
+      }
+      (secondary&&['fiber','water'].includes(key)?secondary:target).append(cell);
+    }
     const note=$('tracker-summary');if(note)note.textContent=`${entryCount} confirmed entries · ${communityEntries} with community-reported nutrition. Totals reflect available values only; unknown nutrients are not zero. Personal goals are references, not dietary recommendations.`;
   }
+  $('diary-totals').addEventListener('click',event=>{const link=event.target.closest('a.dial-state');if(link){$('goal-editor').open=true;const cell=link.closest('.tracker-dial');const key=Diary.NUTRIENTS.find(n=>cell.classList.contains('total-'+n));if(key)$('goal-'+key).focus();}});
   function renderDiary(){diaryList.replaceChildren();if(!memberId){authState.innerHTML='Sign in through the <a href="/app/?mode=signin">Soulanova member page</a> to save foods to a private diary.';setFormsEnabled(false);renderTotals([]);$('selected-day-label').textContent=selectedDay();return}authState.textContent='Saved in this browser for your account.';setFormsEnabled(!storageReadFailed);let rows;try{rows=Diary.readDiary(localStorage,memberId)}catch{storageReadFailed=true;setFormsEnabled(false);authState.textContent='Your saved diary could not be read. Existing entries were left unchanged; saving is paused.';renderTotals([]);return}const day=selectedDay();$('selected-day-label').textContent=new Date(`${day}T12:00:00`).toLocaleDateString(undefined,{weekday:'long',year:'numeric',month:'long',day:'numeric'});const todays=rows.filter(x=>x.day===day);renderTotals(rows);if(!todays.length){diaryList.innerHTML='<p class="subtle">No entries for this day yet.</p>';return}const units={calories:'kcal',protein:'g',carbs:'g',fat:'g',sugar:'g',fiber:'g',water:'ml',saturatedFat:'g',sodiumMg:'mg'};for(const item of todays){const row=document.createElement('article');row.className='entryrow';const left=document.createElement('div'),title=document.createElement('strong'),meta=document.createElement('small'),actions=document.createElement('div');left.className='entry-copy';title.textContent=item.name||`Food ${item.barcode||''}`;const nutrition=Object.entries(units).filter(([key])=>['calories','protein','carbs','fat'].includes(key)).filter(([key])=>typeof item[key]==='number').map(([key,unit])=>`${key}: ${item[key]} ${unit}`).join(' · ');const scoreLabel=Number.isFinite(item.score)?`Provisional FoodScore ${item.score}; separate from official Nutri-Score`:null;meta.textContent=[item.meal,item.portion||'Serving not entered',nutrition||'Nutrition not provided',scoreLabel,item.type==='manual'?'Values entered by you; not independently verified':`${item.source||'Saved food'} · community estimate included only after your confirmation`].filter(Boolean).join(' · ');left.append(title,meta);const extra=document.createElement('details'),extraTitle=document.createElement('summary'),extraText=document.createElement('p');extra.className='entry-nutrition-details';extraTitle.textContent='More nutrition & source';extraText.textContent=[...Object.entries(units).filter(([key])=>!['calories','protein','carbs','fat'].includes(key)&&typeof item[key]==='number').map(([key,unit])=>`${key}: ${item[key]} ${unit}`),item.source||'Manual entry',scoreLabel].filter(Boolean).join(' · ');extra.append(extraTitle,extraText);left.append(extra);actions.className='entry-actions';if(item.type==='manual'){const edit=document.createElement('button');edit.type='button';edit.className='secondary';edit.textContent='Edit';edit.addEventListener('click',()=>editEntry(item));actions.append(edit)}const remove=document.createElement('button');remove.type='button';remove.className='secondary';remove.textContent='Delete';remove.addEventListener('click',()=>removeEntry(item.id));actions.append(remove);row.append(left,actions);diaryList.append(row)}}
 
   function writeEntry(entry){if(!memberId||storageReadFailed)return;try{Diary.saveEntry(localStorage,memberId,entry);$('diary-message').textContent='Entry saved and read back on this device.';renderDiary();return true}catch{storageReadFailed=true;authState.textContent='Diary persistence could not be confirmed. Reload to check your entries before retrying; saving is paused.';setFormsEnabled(false);return false}}
-  function resetEntryForm(){manualForm.reset();$('entry-id').value='';$('entry-meal').value='Breakfast';$('diary-date').value=selectedDay();$('manual-form-title').textContent='Add food or drink';$('save-entry').textContent='Add to diary';$('cancel-edit').hidden=true}
-  function editEntry(item){if($('manual-entry-panel'))$('manual-entry-panel').open=true;$('entry-id').value=item.id;$('entry-name').value=item.name||'';$('entry-portion').value=item.portion||'';$('entry-meal').value=Diary.MEALS.includes(item.meal)?item.meal:'Breakfast';$('diary-date').value=item.day||selectedDay();for(const nutrient of Diary.NUTRIENTS)$(`entry-${nutrient}`).value=typeof item[nutrient]==='number'?item[nutrient]:'';$('manual-form-title').textContent='Edit food or drink';$('save-entry').textContent='Save changes';$('cancel-edit').hidden=false;$('entry-name').focus()}
+  function resetEntryForm(){manualForm.reset();$('entry-id').value='';$('entry-meal').value='Breakfast';$('diary-date').value=selectedDay();$('manual-form-title').textContent='Add food or drink';$('save-entry').textContent='Add to Daily Tracker';$('cancel-edit').hidden=true}
+  function editEntry(item){selectFoodTab('manual');$('entry-id').value=item.id;$('entry-name').value=item.name||'';$('entry-portion').value=item.portion||'';$('entry-meal').value=Diary.MEALS.includes(item.meal)?item.meal:'Breakfast';$('diary-date').value=item.day||selectedDay();for(const nutrient of Diary.NUTRIENTS)$(`entry-${nutrient}`).value=typeof item[nutrient]==='number'?item[nutrient]:'';$('manual-form-title').textContent='Edit food or drink';$('save-entry').textContent='Save changes';$('cancel-edit').hidden=false;$('entry-name').focus()}
   function removeEntry(id){if(!memberId||storageReadFailed)return;try{Diary.deleteEntry(localStorage,memberId,id);$('diary-message').textContent='Entry deleted from this device.';renderDiary()}catch{storageReadFailed=true;authState.textContent='The entry could not be deleted safely. Existing diary data was left unchanged.';setFormsEnabled(false)}}
   function renderGoals(){if(!memberId){for(const n of Diary.NUTRIENTS)$(`goal-${n}`).value='';$('goals-message').textContent='Sign in to save goals privately in this browser.';return}try{const goals=Diary.readGoals(localStorage,memberId);for(const nutrient of Diary.NUTRIENTS)$(`goal-${nutrient}`).value=goals[nutrient]??'';$('goals-message').textContent='Goals are optional and saved only on this device.'}catch{$('goals-message').textContent='Saved goals could not be read. Existing data was left unchanged.';goalsForm.querySelector('button[type="submit"]').disabled=true}}
 
@@ -105,7 +141,7 @@
     const cfg=window.SOULANOVA_SUPABASE||{};
     if(!cfg.url||!cfg.publishableKey||!window.supabase){authState.textContent='Member sign-in is unavailable. Your existing data is unchanged.';return}
     client=window.supabase.createClient(cfg.url,cfg.publishableKey,{auth:{flowType:'pkce',detectSessionInUrl:true,autoRefreshToken:true,persistSession:true}});
-    client.auth.onAuthStateChange((_event,session)=>{authRevision++;const nextMemberId=session?.user?.id||null;if(nextMemberId!==memberId){lookupRevision++;lookupPending=false;button.disabled=false;stopCamera();resetEntryForm();dateInput.value=dayKey();currentProduct=null;result.hidden=true}memberId=nextMemberId;storageReadFailed=false;renderDiary();renderGoals();if(currentProduct)renderProduct()});
+    client.auth.onAuthStateChange((_event,session)=>{authRevision++;const nextMemberId=session?.user?.id||null;if(nextMemberId!==memberId){lookupRevision++;lookupPending=false;button.disabled=false;$('scan-panel').setAttribute('aria-busy','false');stopCamera();resetEntryForm();dateInput.value=dayKey();currentProduct=null;result.hidden=true}memberId=nextMemberId;storageReadFailed=false;renderDiary();renderGoals();if(currentProduct)renderProduct()});
     const revision=authRevision;const {data,error}=await client.auth.getSession();if(error){authState.textContent='Could not restore your member session. Sign in again from the member page.';return}if(revision===authRevision){memberId=data.session?.user?.id||null;renderDiary();renderGoals()}
   }
   restoreSession().catch(()=>{authState.textContent='Could not restore your member session.'});
