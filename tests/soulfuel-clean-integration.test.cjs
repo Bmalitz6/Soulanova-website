@@ -8,14 +8,18 @@ const root = path.resolve(__dirname, '..');
 const base = '1b09f3e897948b16a8a7c4aa4930f9fe8fb8b7ef';
 const git = (...args) => execFileSync('git', args, { cwd: root });
 
-test('every existing GitHub main file remains byte-identical after the SoulFuel-only port', () => {
+test('existing GitHub main files stay unchanged except the authorized SoulFuel dashboard links', () => {
   const entries = git('ls-tree', '-r', base).toString().trim().split('\n');
   assert.ok(entries.length > 0);
   for (const entry of entries) {
     const [metadata, file] = entry.split('\t');
     const [mode, type, hash] = metadata.split(' ');
     assert.equal(type, 'blob');
-    assert.equal(git('hash-object',file).toString().trim(), hash, file);
+    if(file==='app/index.html'){
+      const current=fs.readFileSync(path.join(root,file),'utf8');
+      const restored=current.replace('<link rel="stylesheet" href="/app/soulfuel/member-navigation.css">','').replace(/<a id="soulfuel-dashboard-entry"[\s\S]*?<\/a>/,'').replace('<a class="soulfuel-tab" href="/app/soulfuel/">SoulFuel</a>','');
+      assert.equal(restored,git('show',base+':'+file).toString(),file+' only authorized link additions');
+    }else assert.equal(git('hash-object',file).toString().trim(), hash, file);
   }
 });
 
