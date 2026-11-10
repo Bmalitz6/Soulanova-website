@@ -1,1 +1,47 @@
-<!doctype html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><meta name="referrer" content="same-origin"><title>SoulStrength · Soulanova</title><link rel="stylesheet" href="/app/programs/program.css"></head><body data-program="strength"><a class="skip" href="#main">Skip to program</a><header><a class="brand" href="/app/#home"><img src="/assets/soulanova-logo.png" alt="" width="30" height="30">Soulanova</a><a href="/app/#home" class="back">← Back to Overview</a></header><main id="main"><p class="eyebrow">YOUR SOULANOVA PROGRAM</p><h1>SoulStrength</h1><p id="identity" role="status">Verifying your existing member session…</p><a id="sign-in" href="/app/?mode=signin#home" hidden>Sign in with your existing Soulanova account</a><div id="program" hidden><p id="description"></p><p id="availability" class="notice"></p><section aria-labelledby="workouts-title"><div class="section-heading"><h2 id="workouts-title">Program library</h2><label>Level<select id="level"><option>Beginner</option><option>Intermediate</option><option>Advanced</option></select></label></div><div id="workouts" class="grid"></div></section><section id="detail" hidden aria-labelledby="detail-title"><button id="back-library" type="button">← Back to program library</button><h2 id="detail-title" tabindex="-1"></h2><p id="detail-description"></p><ol id="steps"></ol></section><section id="review" hidden aria-labelledby="movement-title"><h2 id="movement-title" tabindex="-1"></h2><p id="instruction"></p><p id="media-status" role="status"></p><video id="demo" controls playsinline preload="none" aria-label="Approved Soulanova exercise demonstration"></video><div class="player-controls"><button id="previous" type="button">← Previous movement</button><button id="next" type="button">Next movement →</button><button id="close-video" type="button">Back to catalog</button></div><p class="note">Individual demonstration · Use the video controls for play, pause, seeking and volume. No workout completion is recorded.</p></section><section aria-labelledby="movements-title"><h2 id="movements-title">Exercise library</h2><div id="movements" class="grid"></div></section></div></main><script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2/dist/umd/supabase.js"></script><script src="/app/config.js"></script><script src="/app/programs/program-core.js"></script><script src="/app/programs/program.js"></script></body></html>
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1">
+  <meta name="theme-color" content="#f7f6f0">
+  <meta name="description" content="Member SoulStrength guided workouts with approved Soulanova instructors.">
+  <title>SoulStrength | Soulanova</title>
+  <link rel="stylesheet" href="/app/strength/strength.css?v=20261107-rest-overlay"><link rel="stylesheet" href="/app/strength/strength-integration.css">
+</head>
+<body>
+  <header class="site-header"><a href="/app/#home" class="brand">✺ Soulanova</a><a href="/app/#home" class="back-link">← Back to Overview</a></header>
+  <main id="main" class="shell">
+    <section id="auth-required" class="notice" hidden>
+      <h1>Sign in to SoulStrength</h1><p>Your workout selection is available after existing member sign-in. Progress recording remains paused.</p>
+      <a class="button primary" href="/app/?mode=signin">Sign in to your account</a>
+    </section>
+    <section id="strength-app" hidden aria-live="polite">
+      <div class="hero">
+        <img id="hero-image" alt="Approved Soulanova strength instructor demonstrating a dumbbell movement" loading="eager">
+        <div class="hero-copy"><span class="eyebrow">SOULANOVA · SOULSTRENGTH</span><h1>Build strength.<br>Feel stronger.</h1><p>Guided routines built around calm, controlled movement.</p></div>
+      </div>
+      <div class="member-row"><span id="member-name"></span><button type="button" id="sign-out" class="text-button">Sign out</button></div>
+      <section id="library-view" aria-labelledby="library-title">
+        <div class="section-heading"><div><p class="eyebrow">36 WORKOUT PLANS</p><h2 id="library-title">Choose your level</h2><p>Original plans, instructions and exercise icons. Five final-master demonstrations are enabled; full guided playback remains paused pending media approvals.</p></div></div>
+        <div class="level-tabs" role="tablist" aria-label="Workout difficulty">
+          <button type="button" role="tab" data-level="Beginner" aria-selected="true">Beginner <small>12 workouts</small></button>
+          <button type="button" role="tab" data-level="Intermediate" aria-selected="false">Intermediate <small>12 workouts</small></button>
+          <button type="button" role="tab" data-level="Advanced" aria-selected="false">Advanced <small>12 workouts</small></button>
+        </div>
+        <div id="workout-list" class="workout-grid"></div>
+      </section>
+      <section id="workout-detail" hidden></section>
+      <section id="player-view" hidden aria-live="polite"></section>
+      <p class="player-help">On iPhone Safari, use the video’s AirPlay control to choose a receiver. For screen mirroring, open Control Center and choose Screen Mirroring.</p>
+      <section id="exercise-reference"><button id="reference-toggle" type="button" class="button secondary" aria-expanded="false" aria-controls="reference-list">Exercise Reference · Browse 17 exercises →</button><div id="reference-list" class="reference-grid" hidden></div></section><section id="member-progress" class="progress-section"><h2>Your SoulStrength progress</h2><p id="progress-status" role="status">Recording remains paused. Existing local and cloud history is not read or changed.</p><div id="progress-list"></div></section>
+    </section>
+    <p id="load-error" class="notice error" role="alert" hidden></p>
+  </main>
+  <footer>Soulanova · Move Better • Feel Calmer • Live Fuller <a href="/privacy/">Privacy</a> · <a href="/terms/">Terms</a></footer>
+  <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2.118.0/dist/umd/supabase.js"></script>
+  <script src="/app/strength/strengthProgress.js?v=20261107-workout-details"></script>
+  <script src="/app/strength/strengthPlayback.js?v=20261107-workout-details"></script>
+  <script src="/app/config.js"></script>
+  <script src="/app/programs/program-core.js"></script><script src="/app/strength/strength.js?v=restored-approved-ui"></script>
+</body>
+</html>

@@ -1,0 +1,33 @@
+{
+  "sourceCommit": "6b412af05ed662f8550599887877b80c7cc841d5",
+  "branch": "release/soulstrength-production-2026-11-08",
+  "sha256": {
+    "app/strength/index.html": "308d0e5608de364093051e0361d1f9bce8b27d28b221b7f9d80b491a680fdaca",
+    "app/strength/strength.css": "2592453f056f3d5cb8f32cf885a86c05a3364fc88e34bebdec30173c304660bc",
+    "app/strength/strength.js": "736863fee3606d4154533c4ca078853e053042fa82786f50ee018cbf0d03c508",
+    "app/strength/strengthWorkouts.json": "9671f1252fcc95a01b7aace32220f8f7766c6d71153694d2d12dcc75a8d9a479",
+    "app/strength/strengthPlayback.js": "62914257f5091458ccb78a251b54f087f40072eb6146cea1f1906abc913ca3e1",
+    "app/strength/strengthProgress.js": "7a58165b4ba6e24ee40c0ecf9bad75a214d00a31b08bc6b37ede7b47891f93ac",
+    "app/strength/media/images/soulanova-strength-hero.jpg": "33d54e0d4543daf85c507c06ee2dfd1d264b84c5a9cd938f2e4b18842abc7934",
+    "app/strength/media/thumbnails/STR-001.jpg": "557984cc7612fadc55f7bb1c7c445019eab38de0f087e677f416dc7e557ab5e9",
+    "app/strength/media/thumbnails/STR-020.jpg": "efdf08e32700e05efae75edfc67291ccc1d117574af6201570e186fb6324c1bd",
+    "app/strength/media/thumbnails/STR-036.jpg": "6f26760552b77d41c96f8d777ef137c5f00a1157402a9fb0c6e7075a09321f29",
+    "app/strength/media/thumbnails/STR-045.jpg": "2807602ccd877fe1dbe1a10e9801c6af191a17a9330a95e2e5629518e4ec7eda",
+    "app/strength/media/thumbnails/STR-053.jpg": "a6a857460ca46e223dd43ce657cd3815af6ba275512219b0f0bbbc3d19617729",
+    "app/strength/media/thumbnails/STR-056.jpg": "3a559ba2059b01dda0751883cc8ba8e245e70b1f585de490baed1ae1abfb1157",
+    "app/strength/media/thumbnails/STR-057.jpg": "c31bf60ba0c2f4b61f28506ed1625e832436307ea80272e0dc47757df750f351",
+    "app/strength/media/thumbnails/STR-058.jpg": "47ab681c9b64a1629badeba440878cf6f15ee3453a864fccd21df39185cbe7d0",
+    "app/strength/media/thumbnails/STR-061.jpg": "f5376bfe41381b663571e02e60a31d5194dde3f70656fe3f0f97e2d09a3bf503",
+    "app/strength/media/thumbnails/STR-087.jpg": "a71d1b461fc5553b91d64f37d74548bb44dd75ff49606f8f5db6e92eca76ab74",
+    "app/strength/media/thumbnails/STR-091.jpg": "780a6f79e6e2b163798647bde820b9d409f4eb394b3f0e128eb6eaae5a91618e",
+    "app/strength/media/thumbnails/STR-092.jpg": "18319ca3e0e79f9af2c85f786b54b0fffce8c94d2c6459472c1a2fb4b6b66108",
+    "app/strength/media/thumbnails/STR-104.jpg": "1ee6199e338a3d038fb0d1813ccabacd6458c04822939c22495fbede419ef6b0",
+    "app/strength/media/thumbnails/STR-112.jpg": "147cded7756d9d7f3722569da78a62ecaecaf91bdd339dc1c8dfb2465d7918a4",
+    "app/strength/media/thumbnails/STR-114.jpg": "bc6351d3c6bf284ac7ab8ea48ef6eb867846d25cc5750ec52124e16425e32850",
+    "app/strength/media/thumbnails/STR-115.jpg": "d6fd60255da2f2ea82427c7d6b42759666a96d18f9a9bc12996c92f0fa40e9fb",
+    "app/strength/media/thumbnails/STR-117.jpg": "ae0886dba973b26f7ea04a31255c8dedc095bebabf1ee9f1f427037c60ee1f51",
+    "app/strength/media/workout-thumbnails/level-advanced.jpg": "2a27473cf3109d0c5d93c5cccfbe2b578b69c4986526b7d9b3340262666ee3ec",
+    "app/strength/media/workout-thumbnails/level-beginner.jpg": "ee80f933e944727b937665d4175ace9aa7ee6562c0700407427bb961188f414c",
+    "app/strength/media/workout-thumbnails/level-intermediate.jpg": "3725208edb52a7a38f0c5c3bdeac806aa8e56c3243c06f6c54c3a2c6e66775d7"
+  }
+}
