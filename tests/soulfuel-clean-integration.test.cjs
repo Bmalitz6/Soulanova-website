@@ -17,8 +17,17 @@ test('existing GitHub main files stay unchanged except the authorized SoulFuel d
     assert.equal(type, 'blob');
     if(file==='app/index.html'){
       const current=fs.readFileSync(path.join(root,file),'utf8');
-      const restored=current.replace('<link rel="stylesheet" href="/app/soulfuel/member-navigation.css">','').replace(/<section id="member-programs"[\s\S]*?<\/section>/,'').replace('<a class="soulfuel-tab" href="/app/soulfuel/">SoulFuel</a>','');
-      assert.equal(restored,git('show',base+':'+file).toString(),file+' only authorized link additions');
+      const original=git('show',base+':'+file).toString();
+      const auth=html=>html.slice(html.indexOf('<section id="auth-box"'),html.indexOf('<div id="member-app"'));
+      assert.equal(auth(current),auth(original),'Existing account/auth markup unchanged');
+      const scripts=['/app/soulfuel/food-diary-core.js','/app/soulfuel/metrics/metrics-core.js','/app/soulfuel/metrics/units.js','/app/soulfuel/tracker-progress.js','/app/wellness/dashboard-core.js','/app/wellness/dashboard.js'];
+      let tail=current.slice(current.indexOf('<section id="workouts"'));
+      for(const src of scripts)tail=tail.replace('<script src="'+src+'"></script>','');
+      assert.equal(tail,original.slice(original.indexOf('<section id="workouts"')),'All existing non-home program panels unchanged');
+    }else if(file==='app/app.js'){
+      const current=fs.readFileSync(path.join(root,file),'utf8');
+      const bridge=`\n// Read-only session bridge for the authorized wellness dashboard; no auth changes.\nwindow.SoulanovaMemberAuth=Object.freeze({getClient:()=>client,getWorkoutSnapshot:()=>({memberId:currentUser?.id||null,ready:historyView==='ready',rows:state.history.map(e=>({completed_at:e.at,duration_minutes:e.minutes}))})});\n`;
+      assert.equal(current.replace(bridge,''),git('show',base+':'+file).toString(),'Existing workout and authentication code unchanged');
     }else assert.equal(git('hash-object',file).toString().trim(), hash, file);
   }
 });

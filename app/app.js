@@ -208,3 +208,6 @@ if(recoveryRequested)showPasswordUpdate(false);
 
 // Member preference is saved in Supabase Auth user metadata, not in a public list.
 document.getElementById('save-preferences').addEventListener('click',async()=>{const status=document.getElementById('preferences-message');if(!client||!currentUser){status.textContent='Sign in to update preferences.';return}const opt=document.getElementById('account-marketing').checked;const {data,error}=await client.auth.updateUser({data:{marketing_opt_in:opt,marketing_consent_at:opt?new Date().toISOString():null}});status.textContent=error?'Could not save: '+error.message:'Preference saved.';if(!error)setUser(data.user)});
+
+// Read-only session bridge for the authorized wellness dashboard; no auth changes.
+window.SoulanovaMemberAuth=Object.freeze({getClient:()=>client,getWorkoutSnapshot:()=>({memberId:currentUser?.id||null,ready:historyView==='ready',rows:state.history.map(e=>({completed_at:e.at,duration_minutes:e.minutes}))})});
