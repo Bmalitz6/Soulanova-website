@@ -15,6 +15,7 @@ Continued from clean feature-branch commit `825eb25f989434c98aaa0d5b7d5dda2c84c9
 
 - Reads and local mutations now use verified `auth.getUser()`, rejecting anonymous users and failed verification. A cached session alone cannot authorize a diary/goal mutation.
 - Local save/edit/delete/goal operations serialize during verification and capture the expected member/revision. Account switching during verification cannot write to either member's diary.
+- Same-account token refresh preserves a pending verified save instead of cancelling it. Member changes still invalidate it.
 - Verification has a twelve-second bound. A late response after timeout cannot cause a write; an unconfirmed save does not reset the draft or announce success.
 - Original recipes, nutrition/scanner/scoring cores, portion calculations, four dials and approved imagery remain unchanged. Diary and manual health data are still **unencrypted browser-local and unsynced**, not secure cross-device cloud records.
 
@@ -27,7 +28,7 @@ Continued from clean feature-branch commit `825eb25f989434c98aaa0d5b7d5dda2c84c9
 
 ## Validation result
 
-**150/150 automated tests passed; zero failures/skips. 62/62 JavaScript syntax checks passed.** Desktop, 390px and 320px browser and automated accessibility checks passed.
+**151/151 automated tests passed; zero failures/skips. 62/62 JavaScript syntax checks passed.** Desktop, 390px and 320px browser and automated accessibility checks passed.
 
 ## Test boundaries
 

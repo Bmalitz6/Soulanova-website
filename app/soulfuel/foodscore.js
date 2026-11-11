@@ -165,7 +165,7 @@
       try{const {data,error}=await verifiedSessionUser();if(revision!==authRevision)return;if(error||!data?.user||data.user.is_anonymous||(expected&&data.user.id!==expected))throw Error('Verified member required');memberId=data.user.id;storageReadFailed=false;renderDiary();renderGoals();if(currentProduct)renderProduct();}
       catch{if(revision!==authRevision)return;memberId=null;renderDiary();renderGoals();authState.textContent='Could not verify your member session. Sign in through the member page. No local changes were saved.';}
     }
-    client.auth.onAuthStateChange((event,session)=>{void verifySession(session?.user?.id||null,event==='SIGNED_OUT');});
+    client.auth.onAuthStateChange((event,session)=>{if(event==='TOKEN_REFRESHED'&&memberId&&session?.user?.id===memberId&&!session.user.is_anonymous)return;void verifySession(session?.user?.id||null,event==='SIGNED_OUT');});
     await verifySession();
   }
   restoreSession().catch(()=>{authState.textContent='Could not restore your member session.'});
