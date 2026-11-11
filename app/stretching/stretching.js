@@ -17,7 +17,8 @@
  function current(){return playback.getState().movementId?movement(playback.getState().movementId):selectedMovement;}
  function src(m){return window.SoulStretchCatalog.mediaUrl(m.file,m.sha256,window.SOULANOVA_SOULSTRETCH_PUBLIC_BASE);}
  function clock(seconds){const s=Math.max(0,Math.ceil(seconds));return `${String(Math.floor(s/60)).padStart(2,'0')}:${String(s%60).padStart(2,'0')}`;}
- function routineDuration(item){const rounds=Number.isInteger(item?.rounds)&&item.rounds>0?item.rounds:1,segments=(item?.ids?.length||0)*rounds,clips=(item?.ids||[]).reduce((sum,id)=>sum+(movement(id)?.seconds||0),0)*rounds;return clips+Math.max(0,segments-1)*transitionSeconds;}
+ function scheduledRounds(item){return item.roundMovementIds||Array.from({length:item.rounds||1},()=>item.ids||[]);}
+ function routineDuration(item){const ids=scheduledRounds(item).flat();return ids.reduce((sum,id)=>sum+(movement(id)?.seconds||0),0)+Math.max(0,ids.length-1)*transitionSeconds;}
  function releaseWakeLock(){if(wakeLock){const lock=wakeLock;wakeLock=null;void lock.release?.().catch?.(()=>{});}}
  async function requestWakeLock(){try{if(navigator.wakeLock?.request){const lock=await navigator.wakeLock.request('screen');if(['idle','complete'].includes(playback.getState().phase)){await lock.release();return;}wakeLock=lock;}}catch{wakeLock=null;}}
  function stopTransitionClock(){if(transitionInterval){clearInterval(transitionInterval);transitionInterval=null;}}
@@ -61,7 +62,7 @@
   const list=$('sequence-list');list.replaceChildren();
   if(!routine){$('sequence-summary').textContent='Choose a program to see its movement order.';return;}
   $('sequence-summary').textContent=`${state.uniqueMovementCount} unique movements · ${state.total} playback segments · ${state.completedSegmentIndexes.length} completed · ${state.remaining} remaining`;
-  const sequence=Array.from({length:state.rounds},(_,round)=>routine.ids.map((id,movementIndex)=>({id,round:round+1,movementIndex}))).flat();
+  const sequence=scheduledRounds(routine).map((ids,round)=>ids.map((id,movementIndex)=>({id,round:round+1,movementIndex}))).flat();
   sequence.forEach(({id,round,movementIndex},i)=>{
    const m=movement(id),li=document.createElement('li'),img=document.createElement('img'),copy=document.createElement('span'),name=document.createElement('strong'),status=document.createElement('small');
    li.className='sequence-item';if(i===state.index&&!['complete','idle'].includes(state.phase))li.classList.add('is-current');
@@ -130,7 +131,7 @@
   const first=movement(item.ids[0]),card=document.createElement('button');card.type='button';card.className='routine';
   const image=document.createElement('img');image.className='routine-thumbnail';image.src=first.thumbnail;image.alt=`${first.name} still from this program`;image.loading='lazy';
   const copy=document.createElement('span');copy.className='routine-copy';
-  const rounds=Number.isInteger(item.rounds)&&item.rounds>0?item.rounds:1,segments=item.ids.length*rounds,unique=new Set(item.ids).size,seconds=routineDuration(item);
+  const rounds=Number.isInteger(item.rounds)&&item.rounds>0?item.rounds:1,segments=scheduledRounds(item).flat().length,unique=new Set(scheduledRounds(item).flat()).size,seconds=routineDuration(item);
   const tag=document.createElement('span');tag.className='eyebrow';tag.textContent=`${item.category} · ${clock(seconds)} · ${unique} movements · ${segments} playback segments · ${rounds} ${rounds===1?'round':'rounds'}`;
   const title=document.createElement('strong');title.className='routine-title';title.textContent=item.title;
   const desc=document.createElement('span');desc.className='routine-description';desc.textContent=item.description;
@@ -149,7 +150,7 @@
   const done=result.routine,all=result.allSegmentsCompleted;
   $('completion-title').textContent=all?'Workout Complete':'Session Ended';
   const rounds=Number.isInteger(done.rounds)&&done.rounds>0?done.rounds:1;
-  $('completion-summary').textContent=all?`You completed ${result.totalSegments} movement segments across ${rounds} ${rounds===1?'round':'rounds'} (${new Set(done.ids).size} distinct movements) in ${done.title}.`:`${result.completedSegmentIndexes.length} of ${result.totalSegments} movement segments completed. Skipped segments were not added to history.`;
+  $('completion-summary').textContent=all?`You completed ${result.totalSegments} movement segments across ${rounds} ${rounds===1?'round':'rounds'} (${new Set(scheduledRounds(done).flat()).size} distinct movements) in ${done.title}.`:`${result.completedSegmentIndexes.length} of ${result.totalSegments} movement segments completed. Skipped segments were not added to history.`;
   if(launchAsProgram&&all&&!playbackCompletionClaimed){playbackCompletionClaimed=true;const seconds=routineDuration(done);const item={completionId,routineId:done.id,title:done.title,completedAt:new Date().toISOString(),movementCount:result.totalSegments,minutes:Math.max(1,Math.ceil(seconds/60)),practicedSeconds:Math.round(seconds)};void saveCompletion(item,member?.id||null,authRevision);}
   else if(launchAsProgram&&!all)$('history-status').textContent='Program ended before every movement finished. No completion was recorded.';
  }
@@ -159,6 +160,7 @@
   if(phase==='movement')playback.pause();else if(phase==='transition')playback.pause();else if(phase==='ready'||phase==='paused-movement'||phase==='paused-transition'||phase==='resume-required')playback.start();else if(phase==='error')playback.retry();
  });
  $('next').addEventListener('click',()=>playback.next());$('previous').addEventListener('click',()=>playback.previous());$('restart').addEventListener('click',()=>{completionId=crypto.randomUUID();playbackCompletionClaimed=false;playback.restart();});$('completion-restart').addEventListener('click',()=>{completionId=crypto.randomUUID();playbackCompletionClaimed=false;playback.restart();});$('transition-next').addEventListener('click',()=>playback.next());$('retry').addEventListener('click',()=>playback.retry());
+ window.addEventListener('load',()=>window.SoulanovaMemberNavigation?.setGuard(()=>!['idle','complete'].includes(playback.getState().phase)));
  $('return').addEventListener('click',()=>{playback.leave();routine=null;selectedMovement=null;releaseWakeLock();$('player').hidden=true;$('routines').hidden=false;$('video-frame').classList.remove('is-fading');});
  video.addEventListener('timeupdate',updateTimer);video.addEventListener('durationchange',updateTimer);video.addEventListener('playing',()=>{if(playback.getState().phase==='movement')$('timer-state').textContent='Move at a comfortable pace.';});video.addEventListener('ended',()=>playback.videoEnded());
  video.addEventListener('pause',()=>{if(internalVideoPause)return;const atClipEnd=video.ended||(Number.isFinite(video.duration)&&video.duration>0&&video.currentTime>=video.duration-.1);if(atClipEnd)return;const phase=playback.getState().phase;if(phase==='movement')playback.pause();});
@@ -174,7 +176,7 @@
  async function verifiedOwner(){const expected=member?.id,revision=authRevision;if(!expected||!client)throw Error('Sign in required.');const {data,error}=await client.auth.getUser();if(error||data?.user?.is_anonymous||data?.user?.id!==expected||revision!==authRevision)throw Error('Member verification changed.');return expected;}
  function clearMember(){playback.leave();audio.pause();video.pause();audio.removeAttribute('src');video.removeAttribute('src');audio.load();video.load();member=null;routine=null;completionId=null;completed=[];practiced.clear();releaseWakeLock();$('stretch-program').hidden=true;$('player').hidden=true;}
  async function verifyMember(){const revision=++authRevision;clearMember();$('access-state').textContent='Verifying your existing member session…';$('sign-in').hidden=true;try{if(!client)throw Error('Member service unavailable.');const {data,error}=await client.auth.getUser();if(revision!==authRevision)return;if(error||!data?.user||data.user.is_anonymous)throw Error('Verified sign-in required.');member=data.user;$('stretch-program').hidden=false;$('access-state').textContent='Member verified.';$('identity').textContent='Approved program playback · Existing member history is unchanged.';renderHistoryFromStorage();}catch{if(revision!==authRevision)return;clearMember();$('access-state').textContent='Sign in with your existing member account to open SoulStretch.';$('sign-in').hidden=false;}}
- if(cfg.url&&cfg.publishableKey&&window.supabase){client=window.supabase.createClient(cfg.url,cfg.publishableKey,{auth:{flowType:'pkce',persistSession:true,autoRefreshToken:true}});client.auth.onAuthStateChange(()=>{authRevision++;clearMember();setTimeout(verifyMember,0);});}void verifyMember();
+ if(cfg.url&&cfg.publishableKey&&window.supabase){client=window.supabase.createClient(cfg.url,cfg.publishableKey,{auth:{flowType:'pkce',persistSession:true,autoRefreshToken:true}});client.auth.onAuthStateChange((event,session)=>{if(member&&session?.user?.id===member.id&&['TOKEN_REFRESHED','SIGNED_IN'].includes(event)){const revision=authRevision,expected=member.id;setTimeout(async()=>{try{const {data,error}=await client.auth.getUser();if(revision!==authRevision)return;if(error||data?.user?.is_anonymous||data?.user?.id!==expected)throw Error('Member verification failed');member=data.user;}catch{if(revision===authRevision){authRevision++;clearMember();}}},0);return;}authRevision++;clearMember();setTimeout(verifyMember,0);});}void verifyMember();
  addEventListener('pagehide',()=>{playback.pause();audio.pause();video.pause();releaseWakeLock();});
  renderLevelTabs();renderRoutines();renderBodyAreas();renderFilters();renderMovements();
 })();

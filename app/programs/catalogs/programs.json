@@ -5,7 +5,7 @@
     "strength": {
       "title": "SoulStrength",
       "description": "The existing Soulanova Strength program: 36 workouts across three levels.",
-      "notice": "Five pinned master demonstrations are available. Twelve historical review clips still need final-master confirmation. Full workout playback, warm-up/cooldown and progress sync are not enabled here.",
+      "notice": "Guided exercise playback uses five pinned masters only. Twelve historical clips still require final-master confirmation. Unavailable or skipped sets are not counted; no existing plan has complete approved video coverage. Warm-up/cooldown and progress sync remain unavailable.",
       "workouts": [
         {
           "id": "beginner-foundations",

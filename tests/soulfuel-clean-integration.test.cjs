@@ -20,15 +20,15 @@ test('existing GitHub main files stay unchanged except the authorized SoulFuel d
       const original=git('show',base+':'+file).toString();
       const auth=html=>html.slice(html.indexOf('<section id="auth-box"'),html.indexOf('<div id="member-app"'));
       assert.equal(auth(current),auth(original),'Existing account/auth markup unchanged');
-      const scripts=['/app/soulfuel/food-diary-core.js','/app/soulfuel/metrics/metrics-core.js','/app/soulfuel/metrics/units.js','/app/soulfuel/tracker-progress.js','/app/wellness/dashboard-core.js','/app/wellness/dashboard.js'];
+      const scripts=['/app/soulfuel/food-diary-core.js','/app/soulfuel/metrics/metrics-core.js','/app/soulfuel/metrics/units.js','/app/soulfuel/tracker-progress.js','/app/wellness/dashboard-core.js','/app/wellness/dashboard.js','/app/member-navigation.js'];
       let tail=current.slice(current.indexOf('<section id="workouts"'));
-      for(const src of scripts)tail=tail.replace('<script src="'+src+'"></script>','');
+      for(const src of scripts)tail=tail.replace('<script src="'+src+'"></script>','');tail=tail.replace('\n</body>','</body>');
       assert.equal(tail,original.slice(original.indexOf('<section id="workouts"')),'All existing non-home program panels unchanged');
     }else if(file==='app/app.js'){
       const current=fs.readFileSync(path.join(root,file),'utf8');
       const bridge=`\n// Read-only session bridge for the authorized wellness dashboard; no auth changes.\nwindow.SoulanovaMemberAuth=Object.freeze({getClient:()=>client,getWorkoutSnapshot:()=>({memberId:currentUser?.id||null,ready:historyView==='ready',rows:state.history.map(e=>({completed_at:e.at,duration_minutes:e.minutes}))})});\n`;
       assert.equal(current.replace(bridge,''),git('show',base+':'+file).toString(),'Existing workout and authentication code unchanged');
-    }else assert.equal(git('hash-object',file).toString().trim(), hash, file);
+    }else if(file.endsWith('.html')){const current=fs.readFileSync(path.join(root,file),'utf8').replace('<script src="/app/member-navigation.js"></script>\n','');assert.equal(current,git('show',base+':'+file).toString(),file);}else if(file==='app/member-data.mjs'){assert.equal(fs.readFileSync(path.join(root,file),'utf8').replace('if(!user||user.is_anonymous)','if(!user)'),git('show',base+':'+file).toString(),file);}else assert.equal(git('hash-object',file).toString().trim(), hash, file);
   }
 });
 

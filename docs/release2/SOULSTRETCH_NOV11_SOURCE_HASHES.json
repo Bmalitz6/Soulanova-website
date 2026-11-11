@@ -1,0 +1,65 @@
+{
+  "source": "Read-only Session 2 mobile catalog and explicit owner approval manifest, November 11",
+  "sourceCatalogSha256": "0d8b10162deb1e6bb8a1939810d2dd59ed795e82086e34ce65b666f9a29ce8d3",
+  "sourceApprovalSha256": "e9964bda230c29e43b5fb54200c62746679cc82bd8fa602482c5c6c66e9603fd",
+  "changedRoutines": [
+    "full-body-gentle",
+    "easy-chest-and-shoulders",
+    "hips-and-legs",
+    "balanced-full-body-flow",
+    "posterior-chain-mobility",
+    "lateral-hip-flow",
+    "standing-mobility-circuit",
+    "quick-shoulders-chest",
+    "quick-hips",
+    "quick-supported-balance",
+    "quick-hamstrings",
+    "quick-inner-thighs"
+  ],
+  "recordings": [
+    {
+      "movementId": "overhead-reach",
+      "sha256": "af17aca902ea40f7f92e50adc956fc83a95b324e6cc071702a76fa3e2028a146",
+      "approvalStatus": "owner-approved",
+      "ownerApprovalDate": "2026-11-11",
+      "durationSeconds": 23.684354
+    },
+    {
+      "movementId": "shoulder-a",
+      "sha256": "d94519a27e386f80d1a2ce1c4f72b19385bb3e1ec1322d7062efd4746b513621",
+      "approvalStatus": "owner-approved",
+      "ownerApprovalDate": "2026-11-11",
+      "durationSeconds": 22.569796
+    },
+    {
+      "movementId": "shoulder-b",
+      "sha256": "77d2d6b49ef40ce9496e864ee42dcbbbfd8a3201dd25f740aa119148c4a3a5f1",
+      "approvalStatus": "owner-approved",
+      "ownerApprovalDate": "2026-11-11",
+      "durationSeconds": 22.291156
+    },
+    {
+      "movementId": "calf-a",
+      "sha256": "78e1a3444062d750bfab1334c51fb67b6fb258f9f84d579e0c2c6ae02c4826c2",
+      "approvalStatus": "owner-approved",
+      "ownerApprovalDate": "2026-11-11",
+      "durationSeconds": 23.684354
+    },
+    {
+      "movementId": "calf-b",
+      "sha256": "962db26fcd07ef221ac3b55fd4e917537b668fd5e6b1e5e3e7950e601a42e29a",
+      "approvalStatus": "owner-approved",
+      "ownerApprovalDate": "2026-11-11",
+      "durationSeconds": 22.894875
+    }
+  ],
+  "sha256": {
+    "app/stretching/stretchingCatalog.js": "0326fce080656dfaab6ebcc85e7cc1eed2ad2f84d5f8024c4ae3e23fd6947b59",
+    "app/stretching/stretchingGuidance.js": "69203debd4859598f130d33bde5703789d92a889c3441e80b223fdb4a61f2a12",
+    "app/stretching/narration/miriam/overhead-reach.mp3": "af17aca902ea40f7f92e50adc956fc83a95b324e6cc071702a76fa3e2028a146",
+    "app/stretching/narration/miriam/shoulder-a.mp3": "d94519a27e386f80d1a2ce1c4f72b19385bb3e1ec1322d7062efd4746b513621",
+    "app/stretching/narration/miriam/shoulder-b.mp3": "77d2d6b49ef40ce9496e864ee42dcbbbfd8a3201dd25f740aa119148c4a3a5f1",
+    "app/stretching/narration/miriam/calf-a.mp3": "78e1a3444062d750bfab1334c51fb67b6fb258f9f84d579e0c2c6ae02c4826c2",
+    "app/stretching/narration/miriam/calf-b.mp3": "962db26fcd07ef221ac3b55fd4e917537b668fd5e6b1e5e3e7950e601a42e29a"
+  }
+}

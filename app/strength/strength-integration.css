@@ -3,3 +3,4 @@
 @media(max-width:650px){.reference-grid{grid-template-columns:repeat(2,minmax(0,1fr))}.level-tabs [role=tab]{padding:10px 6px;font-size:13px}.level-tabs [role=tab] img{width:64px;height:64px}.level-tabs [role=tab] small{font-size:11px}}
 @media(max-width:380px){.reference-grid{grid-template-columns:1fr}}
 :root{--muted:#465f54}.workout-card small{color:#465f54}.eyebrow{color:#315f50}.hero .eyebrow{color:#bee6da}
+.guided-controls{display:flex;flex-wrap:wrap;gap:10px;margin:16px 0}.guided-controls .button{min-height:44px;flex:1 1 100px}.player-card{min-width:0;overflow-wrap:anywhere}.player-card video{width:100%;max-height:60vh;object-fit:contain}

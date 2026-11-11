@@ -8,7 +8,7 @@
   function movementId(at=index){return playOrder[at]||null;}
   function snapshot(message=''){
    const ids=routine?.ids||[],roundLength=ids.length||1;
-   return {phase,index,token:epoch,movementId:movementId(),nextMovementId:movementId(index+1),countdown,remaining:Math.max(0,playOrder.length-completedSegments.size),completedMovementIds:[...completedMovements],completedSegmentIndexes:[...completedSegments],total:playOrder.length,uniqueMovementCount:new Set(ids).size,round:Math.min(roundsFor(routine),Math.floor(index/roundLength)+1),rounds:roundsFor(routine),movementInRound:index%roundLength+1,requiresResume:phase==='resume-required',message};
+   return {phase,index,token:epoch,movementId:movementId(),nextMovementId:movementId(index+1),countdown,remaining:Math.max(0,playOrder.length-completedSegments.size),completedMovementIds:[...completedMovements],completedSegmentIndexes:[...completedSegments],total:playOrder.length,uniqueMovementCount:new Set(playOrder).size,round:Math.min(roundsFor(routine),Math.floor(index/roundLength)+1),rounds:roundsFor(routine),movementInRound:index%roundLength+1,requiresResume:phase==='resume-required',message};
   }
   function emit(message=''){options.onState?.(snapshot(message));}
   function stop(){epoch++;options.onStopMovement?.();}
@@ -35,7 +35,7 @@
   }
   function choose(item){
    stop();routine=item;const ids=Array.isArray(item?.ids)?item.ids:[],rounds=roundsFor(item);
-   playOrder=Array.from({length:rounds},()=>ids).flat();index=0;countdown=0;completionClaimed=false;completedSegments.clear();completedMovements.clear();phase='ready';emit();
+   playOrder=(item.roundMovementIds||Array.from({length:rounds},()=>ids)).flat();index=0;countdown=0;completionClaimed=false;completedSegments.clear();completedMovements.clear();phase='ready';emit();
   }
   function start(){if(phase==='ready')begin({userGesture:true});else if(phase==='resume-required'||phase==='paused-movement')begin({resume:true,userGesture:true});else if(phase==='paused-transition'){phase='transition';emit();}}
   function videoEnded(){

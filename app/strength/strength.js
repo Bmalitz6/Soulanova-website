@@ -22,6 +22,7 @@
   let restDisplay = null;
   let restAction = null;
   let activeVideo = null;
+  let guidedSession=null;
   let activeAudio = null;
   const internalPauseVideos = new WeakSet();
   let activeCueId = null;
@@ -128,7 +129,7 @@
       const selected = selectedRestSeconds();
       selectionLabel.textContent = selected === null ? `Plan default · ${[...new Set(detailModel.exercises.map(item => item.prescribedRestSeconds))].sort((a,b)=>a-b).join('s, ')}s as prescribed` : `Selected rest · ${selected} seconds between sets and exercises`;
       list.querySelectorAll('[data-plan-exercise]').forEach((row, index) => { const item = detailModel.exercises[index]; row.textContent = `${item.sets} sets · ${item.reps} · ${selected ?? item.prescribedRestSeconds}s rest`; });
-      start.disabled=true;
+      start.disabled=!workout.exercises.some(e=>window.SoulanovaPrograms.media(verifiedMedia.get(e.exerciseId)));
     }
     restOptions.forEach(option => {
       const button = makeButton(option.label, 'rest-setting-choice', () => {
@@ -149,9 +150,9 @@
       const name = document.createElement('strong'); name.textContent = item.name;
       const prescription = document.createElement('small'); prescription.dataset.planExercise = 'true'; prescription.textContent = `${item.sets} sets · ${item.reps} · ${item.restSeconds}s rest`;
       const cue = document.createElement('small'); cue.textContent = item.instruction;
-      const asset=catalog.exercises.find(e=>e.id===item.exerciseId);if(asset){const image=document.createElement('img');image.src=mediaUrl(asset.thumbnail);image.alt=asset.name+' exercise icon';image.className='exercise-icon';li.append(image);}li.append(name,prescription,cue);list.append(li);
+      const asset=catalog.exercises.find(e=>e.id===item.exerciseId);if(asset){const image=document.createElement('img');image.src=mediaUrl(asset.thumbnail);image.alt=asset.name+' exercise icon';image.className='exercise-icon';li.append(image);}li.append(name,prescription,cue);const availability=document.createElement('small');availability.textContent=window.SoulanovaPrograms.media(verifiedMedia.get(item.exerciseId))?'Approved video available in guided session':'Video unavailable · final-master approval required';li.append(availability);list.append(li);
     });
-    const start=makeButton('Guided session unavailable in this Preview','button primary',()=>startWorkout(workout));start.disabled=true;
+    const start=makeButton('Start guided session','button primary',()=>startWorkout(workout));start.disabled=!workout.exercises.some(e=>window.SoulanovaPrograms.media(verifiedMedia.get(e.exerciseId)));
     card.append(back, eyebrow, heading, description, guidance, equipmentSection, restSection, list, start);
     updateRestDetail();
     detail.append(card); detail.scrollIntoView({ behavior: 'smooth', block: 'start' });
@@ -168,7 +169,7 @@
     head.append(copy, exit); card.append(head);
     player.append(card); return { player, card };
   }
-  function startWorkout(){setStatus('Full guided sessions remain paused pending final-master and segment approval.');}
+  async function startWorkout(workout){const revision=authRevision;try{await verifiedOwner();if(revision!==authRevision)return;document.dispatchEvent(new CustomEvent('soulanova:saved',{detail:{scope:$('#workout-detail')}}));stopMedia();selectedWorkout=workout;view='player';$('#library-view').hidden=true;$('#workout-detail').hidden=true;guidedSession=window.SoulanovaStrengthGuided.mount({workout,exercises:catalog.exercises,media:verifiedMedia,container:$('#player-view'),allowed:()=>revision===authRevision&&!!member,exit:()=>renderDetail(workout),restOverride:workoutRestOverride});}catch{if(revision===authRevision)void verifyMember();}}
 
   function formatTime(seconds) { return `${Math.floor(seconds / 60)}:${String(seconds % 60).padStart(2, '0')}`; }
   function narrationForCurrentTime(cues, videoTime) {
@@ -199,6 +200,7 @@
     return cue;
   }
   function stopMedia() {
+    guidedSession?.dispose();guidedSession=null;
     if (timerHandle) { clearInterval(timerHandle); timerHandle = null; }
     if (activeVideo) { activeVideo.pause(); activeVideo.removeAttribute('src'); activeVideo.load(); activeVideo = null; }
     if (activeAudio) { activeAudio.pause(); activeAudio.removeAttribute('src'); activeAudio.load(); activeAudio = null; }
@@ -417,8 +419,8 @@
     $('#hero-image').src=mediaUrl(catalog.hero);
     const tabs=[...document.querySelectorAll('[data-level]')];tabs.forEach((button,index)=>{const image=document.createElement('img');image.src=mediaUrl(catalog.levelThumbnails[button.dataset.level.toLowerCase()]);image.alt='';image.width=76;image.height=76;button.prepend(image);button.tabIndex=index===0?0:-1;button.addEventListener('click',()=>{stopMedia();level=button.dataset.level;tabs.forEach(tab=>{tab.setAttribute('aria-selected',String(tab===button));tab.tabIndex=tab===button?0:-1;});renderLibrary();});button.addEventListener('keydown',event=>{const delta=event.key==='ArrowRight'?1:event.key==='ArrowLeft'?-1:0;const target=event.key==='Home'?0:event.key==='End'?tabs.length-1:delta?(index+delta+tabs.length)%tabs.length:null;if(target!==null){event.preventDefault();tabs[target].click();tabs[target].focus();}});});
     $('#reference-toggle').addEventListener('click',()=>{const open=$('#reference-list').hidden;$('#reference-list').hidden=!open;$('#reference-toggle').setAttribute('aria-expanded',String(open));});
-    $('#sign-out').addEventListener('click',async()=>{clearMember();await client?.auth.signOut();location.href='/app/#home';});document.addEventListener('visibilitychange',()=>{if(document.hidden)stopMedia();});addEventListener('pagehide',stopMedia);
-    const config=window.SOULANOVA_SUPABASE;if(!config?.url||!config?.publishableKey||!window.supabase)throw Error('Existing member authentication is unavailable.');client=window.supabase.createClient(config.url,config.publishableKey,{auth:{flowType:'pkce',persistSession:true,autoRefreshToken:true}});client.auth.onAuthStateChange(()=>{clearMember();setTimeout(verifyMember,0);});void verifyMember();
+    $('#sign-out').addEventListener('click',async()=>{clearMember();await client?.auth.signOut();location.href='/app/#home';});document.addEventListener('visibilitychange',()=>{if(document.hidden){if(guidedSession)guidedSession.pause();else stopMedia();}});addEventListener('pagehide',stopMedia);
+    const config=window.SOULANOVA_SUPABASE;if(!config?.url||!config?.publishableKey||!window.supabase)throw Error('Existing member authentication is unavailable.');client=window.supabase.createClient(config.url,config.publishableKey,{auth:{flowType:'pkce',persistSession:true,autoRefreshToken:true}});client.auth.onAuthStateChange((event,session)=>{if(member&&session?.user?.id===member.id&&['TOKEN_REFRESHED','SIGNED_IN'].includes(event)){const revision=authRevision;setTimeout(()=>verifiedOwner().catch(()=>{if(revision===authRevision)clearMember();}),0);return;}clearMember();setTimeout(verifyMember,0);});void verifyMember();
   }
   Promise.all([fetch('/app/strength/strengthWorkouts.json'),fetch('/app/programs/catalogs/programs.json')].map(async response=>{const r=await response;if(!r.ok)throw Error('Catalog unavailable.');return r.json();})).then(([data,restrictions])=>{
     catalog=data;verifiedMedia=new Map(restrictions.programs.strength.movements.map(m=>[m.id,m]));

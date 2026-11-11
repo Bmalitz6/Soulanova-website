@@ -10,7 +10,9 @@
       "instruction": "Follow the demonstrated shoulder stretch within a comfortable range.",
       "status": "identified",
       "sha256": "de62b10902b60eea026ad970c9577c6c9a8b77a38a00fec74c5da63f06f14042",
-      "approval_status": "Owner-approved for Production — exact reviewed SHA-256"
+      "approval_status": "Owner-approved for Production — exact reviewed SHA-256",
+      "thumbnail": "/app/stretching/thumbnails/overhead-reset.jpg",
+      "identitySource": "owner-confirmed"
     },
     {
       "id": "overhead-shoulder",
@@ -21,18 +23,22 @@
       "instruction": "Reach one arm overhead and gently bend the elbow; use the other hand to guide the stretch.",
       "status": "identified",
       "sha256": "8ea07fdbc8de8f1c30e8c3ca645c00e2903b061753f09c7816c91345800297d6",
-      "approval_status": "Owner-approved for Production — exact reviewed SHA-256"
+      "approval_status": "Owner-approved for Production — exact reviewed SHA-256",
+      "thumbnail": "/app/stretching/thumbnails/overhead-shoulder.jpg"
     },
     {
       "id": "overhead-reach",
-      "name": "Overhead reach",
+      "name": "Standing overhead triceps stretch — left arm",
       "category": "Upper body",
       "file": "IMG_4098.mov",
       "seconds": 29,
-      "instruction": "Reach both arms overhead and lengthen through the sides of the body.",
+      "instruction": "Stand steadily and lift your left arm overhead. Bend the elbow so your hand rests behind your head, then use your right hand to support the elbow gently as shown. Keep the range comfortable, breathe naturally, and lower the arm with control.",
       "status": "identified",
       "sha256": "e5508186a3bed9c7e3868af88800db7bb5673a8cb8b5eb6a559d7d25d50e28a1",
-      "approval_status": "Owner-approved for Production — exact reviewed SHA-256"
+      "approval_status": "Owner-approved for Production — exact reviewed SHA-256",
+      "thumbnail": "/app/stretching/thumbnails/overhead-reach.jpg",
+      "displayName": "Left-Arm Overhead Triceps Stretch",
+      "identitySource": "owner-confirmed"
     },
     {
       "id": "forward-fold",
@@ -43,7 +49,8 @@
       "instruction": "Hinge gently at the hips and fold forward within a comfortable range.",
       "status": "identified",
       "sha256": "420766c54d90a97b78e1e624415d0f415d9ba3e0ac89253eb811129bf83d8e71",
-      "approval_status": "Owner-approved for Production — exact reviewed SHA-256"
+      "approval_status": "Owner-approved for Production — exact reviewed SHA-256",
+      "thumbnail": "/app/stretching/thumbnails/forward-fold.jpg"
     },
     {
       "id": "hamstring-a",
@@ -54,7 +61,9 @@
       "instruction": "Extend one leg forward with the heel down and hinge gently at the hips.",
       "status": "identified",
       "sha256": "51ac818a7a6e6c13a40a67187f319cd5dfca688f13e15637becbebaca81b553f",
-      "approval_status": "Owner-approved for Production — exact reviewed SHA-256"
+      "approval_status": "Owner-approved for Production — exact reviewed SHA-256",
+      "thumbnail": "/app/stretching/thumbnails/hamstring-a.jpg",
+      "displayName": "Right Hamstring Stretch"
     },
     {
       "id": "hip-flexor-a",
@@ -65,7 +74,9 @@
       "instruction": "Use a staggered lunge stance and gently shift the hips forward while staying tall.",
       "status": "identified",
       "sha256": "5dae18420038711226d0867eed9639b555d3a7e20ee4c6b455934ec1e2652359",
-      "approval_status": "Owner-approved for Production — exact reviewed SHA-256"
+      "approval_status": "Owner-approved for Production — exact reviewed SHA-256",
+      "thumbnail": "/app/stretching/thumbnails/hip-flexor-a.jpg",
+      "displayName": "Right Hip Flexor Stretch"
     },
     {
       "id": "hip-flexor-b",
@@ -76,7 +87,9 @@
       "instruction": "Use a staggered lunge stance and gently shift the hips forward while staying tall.",
       "status": "identified",
       "sha256": "e90cb34e31a28cb810011d02b5db0656385beef4a5dcbe5c2df76f3918cf6370",
-      "approval_status": "Owner-approved for Production — exact reviewed SHA-256"
+      "approval_status": "Owner-approved for Production — exact reviewed SHA-256",
+      "thumbnail": "/app/stretching/thumbnails/hip-flexor-b.jpg",
+      "displayName": "Left Hip Flexor Stretch"
     },
     {
       "id": "figure-four-a",
@@ -87,7 +100,8 @@
       "instruction": "Balance comfortably, cross one ankle over the opposite thigh, and sit back slightly.",
       "status": "identified",
       "sha256": "3df3b1e8579b8696a77dcf8a17867ee033ae3197465fc21fafd534fe2a1a6f16",
-      "approval_status": "Owner-approved for Production — exact reviewed SHA-256"
+      "approval_status": "Owner-approved for Production — exact reviewed SHA-256",
+      "thumbnail": "/app/stretching/thumbnails/figure-four-a.jpg"
     },
     {
       "id": "figure-four-b",
@@ -98,7 +112,8 @@
       "instruction": "Balance comfortably, cross one ankle over the opposite thigh, and sit back slightly.",
       "status": "identified",
       "sha256": "55c6cd81b240cfbe192823ffd8b9bcd404e207fb1a72ac5174ddec675dbb87f6",
-      "approval_status": "Owner-approved for Production — exact reviewed SHA-256"
+      "approval_status": "Owner-approved for Production — exact reviewed SHA-256",
+      "thumbnail": "/app/stretching/thumbnails/figure-four-b.jpg"
     },
     {
       "id": "adductor",
@@ -109,51 +124,64 @@
       "instruction": "Shift your hips toward one bent leg while the other leg stays long and comfortable.",
       "status": "identified",
       "sha256": "f979dd234a23dbc3a985dbf3a4ace006a3175f9288e3443306784ea41e7fa7e5",
-      "approval_status": "Owner-approved for Production — exact reviewed SHA-256"
+      "approval_status": "Owner-approved for Production — exact reviewed SHA-256",
+      "thumbnail": "/app/stretching/thumbnails/adductor.jpg"
     },
     {
       "id": "shoulder-a",
-      "name": "Cross-body shoulder stretch, variation A",
-      "category": "Upper body",
+      "name": "Standing wrist stretch — right wrist (variation A)",
+      "category": "Wrists & forearms",
       "file": "IMG_4107.mp4",
       "seconds": 29,
-      "instruction": "Bring one arm across the chest and support it gently with the opposite arm.",
+      "instruction": "Stand tall and extend your right arm forward at a comfortable height. Use your left hand to support and gently guide the right wrist into the position shown. Keep your shoulder relaxed, breathe steadily, and release slowly.",
       "status": "identified",
       "sha256": "59ca2a8c7e6c396b7efcde94689f05a037f673578943b8d1a4a9d5486f80a2f5",
-      "approval_status": "Owner-approved for Production — exact reviewed SHA-256"
+      "approval_status": "Owner-approved for Production — exact reviewed SHA-256",
+      "thumbnail": "/app/stretching/thumbnails/shoulder-a.jpg",
+      "displayName": "Right Wrist Stretch",
+      "identitySource": "owner-confirmed"
     },
     {
       "id": "shoulder-b",
-      "name": "Cross-body shoulder stretch, variation B",
-      "category": "Upper body",
+      "name": "Standing wrist stretch — left wrist (variation B)",
+      "category": "Wrists & forearms",
       "file": "IMG_4108.mov",
       "seconds": 29,
-      "instruction": "Bring one arm across the chest and support it gently with the opposite arm.",
+      "instruction": "Stand tall and extend your left arm forward at a comfortable height. Use your right hand to support and gently guide the left wrist into the position shown. Keep your shoulder relaxed, breathe steadily, and release slowly.",
       "status": "identified",
       "sha256": "0f5cc134cc36bf77138cb30b0eb33b5503e259c73d3b239e91aa1e9da50c51d9",
-      "approval_status": "Owner-approved for Production — exact reviewed SHA-256"
+      "approval_status": "Owner-approved for Production — exact reviewed SHA-256",
+      "thumbnail": "/app/stretching/thumbnails/shoulder-b.jpg",
+      "displayName": "Left Wrist Stretch",
+      "identitySource": "owner-confirmed"
     },
     {
       "id": "calf-a",
-      "name": "Standing calf stretch, variation A",
-      "category": "Lower body",
+      "name": "Standing ankle circles — right ankle (variation A)",
+      "category": "Ankles & feet",
       "file": "IMG_4111.mp4",
       "seconds": 29,
-      "instruction": "Place one foot behind you and press the heel toward the floor as you lean gently forward.",
+      "instruction": "Stand tall near a stable support. Lift your right foot slightly and trace small, comfortable circles with your ankle as shown. Keep your posture steady, breathe naturally, and lower the foot with control.",
       "status": "identified",
       "sha256": "4d688dcacb9e280c8e1a0d87f78af431d5bcf6bc3ad60fe52c6029d38a0b37ee",
-      "approval_status": "Owner-approved for Production — exact reviewed SHA-256"
+      "approval_status": "Owner-approved for Production — exact reviewed SHA-256",
+      "thumbnail": "/app/stretching/thumbnails/calf-a.jpg",
+      "displayName": "Right Ankle Circles",
+      "identitySource": "owner-confirmed"
     },
     {
       "id": "calf-b",
-      "name": "Standing calf stretch, variation B",
-      "category": "Lower body",
+      "name": "Standing ankle circles — left ankle (variation B)",
+      "category": "Ankles & feet",
       "file": "IMG_4112.mp4",
       "seconds": 29,
-      "instruction": "Place one foot behind you and press the heel toward the floor as you lean gently forward.",
+      "instruction": "Stand tall near a stable support. Lift your left foot slightly and trace small, comfortable circles with your ankle as shown. Keep your posture steady, breathe naturally, and lower the foot with control.",
       "status": "identified",
       "sha256": "a664c098552bcbd2096dac8fccb260efce683fdc6f7aa78d6b2a3b38100d1dfe",
-      "approval_status": "Owner-approved for Production — exact reviewed SHA-256"
+      "approval_status": "Owner-approved for Production — exact reviewed SHA-256",
+      "thumbnail": "/app/stretching/thumbnails/calf-b.jpg",
+      "displayName": "Left Ankle Circles",
+      "identitySource": "owner-confirmed"
     },
     {
       "id": "standing-reset-4113",
@@ -164,7 +192,9 @@
       "instruction": "Follow the demonstrated calf raises at a comfortable pace.",
       "status": "identified",
       "sha256": "f1d36d4d25ea76baeb86a5f222f653646a1db6084be7ee1a4d2bed03ddf506b5",
-      "approval_status": "Owner-approved for Production — exact reviewed SHA-256"
+      "approval_status": "Owner-approved for Production — exact reviewed SHA-256",
+      "thumbnail": "/app/stretching/thumbnails/standing-reset-4113.jpg",
+      "identitySource": "owner-confirmed"
     },
     {
       "id": "standing-reset-4114",
@@ -175,7 +205,9 @@
       "instruction": "Follow the demonstrated toe raises at a comfortable pace.",
       "status": "identified",
       "sha256": "2d837888dc6ba43aa822643b7f281b10156a6eb4bb5a9f87085d77ea9111a58f",
-      "approval_status": "Owner-approved for Production — exact reviewed SHA-256"
+      "approval_status": "Owner-approved for Production — exact reviewed SHA-256",
+      "thumbnail": "/app/stretching/thumbnails/standing-reset-4114.jpg",
+      "identitySource": "owner-confirmed"
     },
     {
       "id": "side-bend",
@@ -186,7 +218,9 @@
       "instruction": "Follow the demonstrated hip rotations within a comfortable range.",
       "status": "identified",
       "sha256": "6d2fbd5c7f6a6960b20a3ef85aac972752c6a094e50f1bfa0ba3d84d139c9776",
-      "approval_status": "Owner-approved for Production — exact reviewed SHA-256"
+      "approval_status": "Owner-approved for Production — exact reviewed SHA-256",
+      "thumbnail": "/app/stretching/thumbnails/side-bend.jpg",
+      "identitySource": "owner-confirmed"
     },
     {
       "id": "hip-abduction",
@@ -197,7 +231,9 @@
       "instruction": "Follow the demonstrated hip-flexor movement within a comfortable range.",
       "status": "identified",
       "sha256": "cb5c70acac6366203e147eefcdcf13f0bb872fdfece10ccf2f70b84456a84731",
-      "approval_status": "Owner-approved for Production — exact reviewed SHA-256"
+      "approval_status": "Owner-approved for Production — exact reviewed SHA-256",
+      "thumbnail": "/app/stretching/thumbnails/hip-abduction.jpg",
+      "identitySource": "owner-confirmed"
     },
     {
       "id": "knee-chest",
@@ -208,7 +244,8 @@
       "instruction": "Stand tall with support nearby and gently draw one knee toward the chest.",
       "status": "identified",
       "sha256": "28779359e4eb6bf504bfafc3af85a489007c152bae3f2abc25b51b3f7185823c",
-      "approval_status": "Owner-approved for Production — exact reviewed SHA-256"
+      "approval_status": "Owner-approved for Production — exact reviewed SHA-256",
+      "thumbnail": "/app/stretching/thumbnails/knee-chest.jpg"
     },
     {
       "id": "wide-stance-a",
@@ -219,7 +256,8 @@
       "instruction": "Take a wide stance, bend one knee comfortably, and reach the arms outward.",
       "status": "identified",
       "sha256": "2e6df3e0084b9601dc4eb5df9383b22f8115c7e0cd0e314ec81fd727b8cdbc37",
-      "approval_status": "Owner-approved for Production — exact reviewed SHA-256"
+      "approval_status": "Owner-approved for Production — exact reviewed SHA-256",
+      "thumbnail": "/app/stretching/thumbnails/wide-stance-a.jpg"
     },
     {
       "id": "wide-stance-b",
@@ -230,7 +268,8 @@
       "instruction": "Take a wide stance, bend one knee comfortably, and reach the arms outward.",
       "status": "identified",
       "sha256": "2e5bc8cca60f4abc654a4bc0f27f82526f160d2ea5615156df297a890ba2fc89",
-      "approval_status": "Owner-approved for Production — exact reviewed SHA-256"
+      "approval_status": "Owner-approved for Production — exact reviewed SHA-256",
+      "thumbnail": "/app/stretching/thumbnails/wide-stance-b.jpg"
     },
     {
       "id": "standing-reset-4123",
@@ -241,10 +280,12 @@
       "instruction": "Follow the demonstrated chest stretch within a comfortable range.",
       "status": "identified",
       "sha256": "29f542953962d8c172db79173394cf426f2fa811132e5eda05e2893b0ec72a48",
-      "approval_status": "Owner-approved for Production — exact reviewed SHA-256"
+      "approval_status": "Owner-approved for Production — exact reviewed SHA-256",
+      "thumbnail": "/app/stretching/thumbnails/standing-reset-4123.jpg",
+      "identitySource": "owner-confirmed"
     }
   ],
-  "routines":   [
+  "routines": [
     {
       "id": "full-body-gentle",
       "title": "Gentle Full-Body Foundations",
@@ -264,7 +305,23 @@
       "rounds": 2,
       "collection": "level",
       "uniqueMovementCount": 5,
-      "segmentCount": 10
+      "segmentCount": 10,
+      "roundMovementIds": [
+        [
+          "overhead-reach",
+          "shoulder-a",
+          "hip-flexor-a",
+          "hamstring-a",
+          "calf-a"
+        ],
+        [
+          "overhead-reach",
+          "shoulder-b",
+          "hip-flexor-b",
+          "hamstring-a",
+          "calf-b"
+        ]
+      ]
     },
     {
       "id": "upper-body",
@@ -273,7 +330,7 @@
       "category": "Upper body",
       "minutes": 6,
       "seconds": 333.416,
-      "description": "An unhurried shoulder and chest sequence, including both approved cross-body variations in each round.",
+      "description": "An unhurried shoulder, wrist, and chest sequence, including both approved wrist variations in each round.",
       "difficulty": "Beginner · supported stance and simple transitions",
       "ids": [
         "overhead-shoulder",
@@ -370,7 +427,25 @@
       "rounds": 2,
       "collection": "level",
       "uniqueMovementCount": 6,
-      "segmentCount": 12
+      "segmentCount": 12,
+      "roundMovementIds": [
+        [
+          "overhead-reach",
+          "overhead-shoulder",
+          "hamstring-a",
+          "hip-flexor-b",
+          "knee-chest",
+          "standing-reset-4114"
+        ],
+        [
+          "overhead-reach",
+          "overhead-shoulder",
+          "hamstring-a",
+          "hip-flexor-a",
+          "knee-chest",
+          "standing-reset-4114"
+        ]
+      ]
     },
     {
       "id": "hips-and-legs",
@@ -379,7 +454,7 @@
       "category": "Hips & legs",
       "minutes": 12,
       "seconds": 667.1320000000001,
-      "description": "A fuller lower-body circuit pairing both hip-flexor, figure-four and calf demonstrations across two rounds.",
+      "description": "A fuller lower-body circuit pairing hip-flexor and figure-four variations with ankle circles across two rounds.",
       "difficulty": "Intermediate · bilateral pairings and longer sequence",
       "ids": [
         "hip-flexor-a",
@@ -396,7 +471,33 @@
       "rounds": 2,
       "collection": "level",
       "uniqueMovementCount": 10,
-      "segmentCount": 20
+      "segmentCount": 20,
+      "roundMovementIds": [
+        [
+          "hip-flexor-a",
+          "hip-flexor-b",
+          "figure-four-a",
+          "figure-four-b",
+          "hamstring-a",
+          "calf-a",
+          "calf-b",
+          "knee-chest",
+          "adductor",
+          "wide-stance-a"
+        ],
+        [
+          "hip-flexor-a",
+          "hip-flexor-b",
+          "figure-four-a",
+          "figure-four-b",
+          "hamstring-a",
+          "calf-a",
+          "calf-b",
+          "knee-chest",
+          "adductor",
+          "wide-stance-b"
+        ]
+      ]
     },
     {
       "id": "balanced-full-body-flow",
@@ -422,16 +523,42 @@
       "rounds": 2,
       "collection": "level",
       "uniqueMovementCount": 10,
-      "segmentCount": 20
+      "segmentCount": 20,
+      "roundMovementIds": [
+        [
+          "overhead-reset",
+          "overhead-reach",
+          "shoulder-a",
+          "shoulder-b",
+          "standing-reset-4123",
+          "hip-flexor-a",
+          "hip-flexor-b",
+          "side-bend",
+          "forward-fold",
+          "calf-a"
+        ],
+        [
+          "overhead-reset",
+          "overhead-reach",
+          "shoulder-a",
+          "shoulder-b",
+          "standing-reset-4123",
+          "hip-flexor-a",
+          "hip-flexor-b",
+          "side-bend",
+          "forward-fold",
+          "calf-b"
+        ]
+      ]
     },
     {
       "id": "posterior-chain-mobility",
       "title": "Posterior Chain & Side Body",
       "level": "Intermediate",
-      "category": "Hamstrings & calves",
+      "category": "Hamstrings & ankles",
       "minutes": 12,
       "seconds": 687.0840000000001,
-      "description": "Moves from a gentle hinge through lateral and calf work, with both wide-stance and calf variations.",
+      "description": "Moves from a gentle hinge through lateral and ankle mobility, with both wide-stance and ankle-circle variations.",
       "difficulty": "Intermediate · linked hip, hamstring and calf work",
       "ids": [
         "forward-fold",
@@ -448,7 +575,33 @@
       "rounds": 2,
       "collection": "level",
       "uniqueMovementCount": 10,
-      "segmentCount": 20
+      "segmentCount": 20,
+      "roundMovementIds": [
+        [
+          "forward-fold",
+          "hamstring-a",
+          "wide-stance-a",
+          "wide-stance-b",
+          "hip-flexor-b",
+          "adductor",
+          "calf-a",
+          "calf-b",
+          "side-bend",
+          "standing-reset-4114"
+        ],
+        [
+          "forward-fold",
+          "hamstring-a",
+          "wide-stance-a",
+          "wide-stance-b",
+          "hip-flexor-a",
+          "adductor",
+          "calf-a",
+          "calf-b",
+          "side-bend",
+          "standing-reset-4114"
+        ]
+      ]
     },
     {
       "id": "lateral-hip-flow",
@@ -474,7 +627,33 @@
       "rounds": 2,
       "collection": "level",
       "uniqueMovementCount": 10,
-      "segmentCount": 20
+      "segmentCount": 20,
+      "roundMovementIds": [
+        [
+          "figure-four-a",
+          "figure-four-b",
+          "knee-chest",
+          "hip-abduction",
+          "hip-flexor-a",
+          "hip-flexor-b",
+          "wide-stance-a",
+          "wide-stance-b",
+          "calf-b",
+          "hamstring-a"
+        ],
+        [
+          "figure-four-a",
+          "figure-four-b",
+          "knee-chest",
+          "hip-abduction",
+          "hip-flexor-a",
+          "hip-flexor-b",
+          "wide-stance-a",
+          "wide-stance-b",
+          "calf-a",
+          "hamstring-a"
+        ]
+      ]
     },
     {
       "id": "upper-body-length",
@@ -509,7 +688,7 @@
       "category": "Full body",
       "minutes": 12,
       "seconds": 679.2160000000001,
-      "description": "Links cross-body shoulder and side movement to paired hip stretches and a deliberate closing fold.",
+      "description": "Links wrist and side mobility to paired hip stretches and a deliberate closing fold.",
       "difficulty": "Intermediate · ten ordered movements and two rounds",
       "ids": [
         "overhead-reach",
@@ -526,7 +705,33 @@
       "rounds": 2,
       "collection": "level",
       "uniqueMovementCount": 10,
-      "segmentCount": 20
+      "segmentCount": 20,
+      "roundMovementIds": [
+        [
+          "overhead-reach",
+          "shoulder-a",
+          "side-bend",
+          "hip-flexor-a",
+          "hip-flexor-b",
+          "figure-four-a",
+          "figure-four-b",
+          "adductor",
+          "wide-stance-a",
+          "forward-fold"
+        ],
+        [
+          "overhead-reach",
+          "shoulder-b",
+          "side-bend",
+          "hip-flexor-a",
+          "hip-flexor-b",
+          "figure-four-a",
+          "figure-four-b",
+          "adductor",
+          "wide-stance-b",
+          "forward-fold"
+        ]
+      ]
     },
     {
       "id": "complete-mobility-circuit",
@@ -534,8 +739,8 @@
       "level": "Advanced",
       "category": "Full body",
       "minutes": 20,
-      "seconds": 1154.632,
-      "description": "A 17-movement full-body circuit with both approved hip-flexor, figure-four, shoulder, wide-stance and calf variations across two complete rounds.",
+      "seconds": 1143.414,
+      "description": "A 17-movement full-body circuit with approved hip-flexor, figure-four, wrist, wide-stance, and ankle-circle variations across two complete rounds.",
       "difficulty": "Advanced · two complete rounds · stay within approved demonstrations",
       "ids": [
         "shoulder-a",
@@ -567,8 +772,8 @@
       "level": "Advanced",
       "category": "Hips & legs",
       "minutes": 20,
-      "seconds": 1142.998,
-      "description": "A lower-body emphasis balancing both hip-flexor, figure-four, wide-stance and calf variations with upper-body mobility in two rounds.",
+      "seconds": 1154.632,
+      "description": "A lower-body emphasis balancing hip-flexor, figure-four, and wide-stance variations with ankle-circle work and upper-body mobility in two rounds.",
       "difficulty": "Advanced · two complete rounds · stay within approved demonstrations",
       "ids": [
         "overhead-reach",
@@ -600,7 +805,7 @@
       "level": "Advanced",
       "category": "Full body",
       "minutes": 20,
-      "seconds": 1142.864,
+      "seconds": 1142.414,
       "description": "Begins with overhead and shoulder mobility, then progresses through paired hips and lower legs over two complete rounds.",
       "difficulty": "Advanced · two complete rounds · stay within approved demonstrations",
       "ids": [
@@ -633,8 +838,8 @@
       "level": "Advanced",
       "category": "Hips & balance",
       "minutes": 20,
-      "seconds": 1154.766,
-      "description": "A supported lateral-focused program pairing hip, wide-stance and calf variations while balancing the sequence with overhead and shoulder work.",
+      "seconds": 1153.632,
+      "description": "A supported lateral-focused program pairing hip and wide-stance variations with ankle-circle work, overhead, and wrist mobility.",
       "difficulty": "Advanced · two complete rounds · stay within approved demonstrations",
       "ids": [
         "overhead-reset",
@@ -666,8 +871,8 @@
       "level": "Advanced",
       "category": "Full body",
       "minutes": 20,
-      "seconds": 1155.498,
-      "description": "A steady bilateral flow with paired shoulder, hip-flexor, figure-four, wide-stance and calf demonstrations in two rounds.",
+      "seconds": 1143.548,
+      "description": "A steady flow with paired wrist, hip-flexor, figure-four, wide-stance, and ankle-circle demonstrations in two rounds.",
       "difficulty": "Advanced · two complete rounds · stay within approved demonstrations",
       "ids": [
         "overhead-shoulder",
@@ -699,7 +904,7 @@
       "level": "Advanced",
       "category": "Full body",
       "minutes": 20,
-      "seconds": 1141.548,
+      "seconds": 1154.948,
       "description": "A long, controlled sequence linking upper-body, hips and legs with both approved side variations, repeated once without increasing range.",
       "difficulty": "Advanced · two complete rounds · stay within approved demonstrations",
       "ids": [
@@ -731,19 +936,20 @@
       "title": "Quick Shoulders & Chest",
       "level": "Body Area",
       "collection": "body-area",
-      "category": "Shoulders & chest",
-      "minutes": 2,
-      "description": "A brief upper-body selection covering cross-body shoulders, overhead reach, and chest mobility.",
+      "category": "Shoulders, wrists & chest",
+      "minutes": 3,
+      "description": "A brief upper-body selection covering both approved wrist variations, an overhead shoulder stretch, and chest mobility.",
       "difficulty": "Quick · upper body",
       "ids": [
         "overhead-shoulder",
         "shoulder-b",
+        "shoulder-a",
         "standing-reset-4123"
       ],
-      "seconds": 96.775,
+      "seconds": 130.775,
       "rounds": 1,
-      "uniqueMovementCount": 3,
-      "segmentCount": 3
+      "uniqueMovementCount": 4,
+      "segmentCount": 4
     },
     {
       "id": "quick-hips",
@@ -751,18 +957,19 @@
       "level": "Body Area",
       "collection": "body-area",
       "category": "Hips",
-      "minutes": 2,
-      "description": "A brief supported selection of the approved hip-flexor, hip-rotation, and knee-to-chest demonstrations.",
+      "minutes": 3,
+      "description": "A brief supported selection with both approved hip-flexor variations, hip rotations, and the knee-to-chest demonstration.",
       "difficulty": "Quick · use support as needed",
       "ids": [
         "hip-flexor-a",
+        "hip-flexor-b",
         "side-bend",
         "knee-chest"
       ],
-      "seconds": 97,
+      "seconds": 131,
       "rounds": 1,
-      "uniqueMovementCount": 3,
-      "segmentCount": 3
+      "uniqueMovementCount": 4,
+      "segmentCount": 4
     },
     {
       "id": "quick-supported-balance",
@@ -770,18 +977,19 @@
       "level": "Body Area",
       "collection": "body-area",
       "category": "Balance & hips",
-      "minutes": 2,
-      "description": "A short, supported sequence combining the approved knee-to-chest and figure-four positions with hip movement. Keep a stable support close.",
+      "minutes": 3,
+      "description": "A short supported sequence with both approved figure-four variations, knee-to-chest, and hip movement. Keep stable support close.",
       "difficulty": "Quick · balance support required",
       "ids": [
         "figure-four-b",
+        "figure-four-a",
         "knee-chest",
         "hip-abduction"
       ],
-      "seconds": 94.333,
+      "seconds": 127.066,
       "rounds": 1,
-      "uniqueMovementCount": 3,
-      "segmentCount": 3
+      "uniqueMovementCount": 4,
+      "segmentCount": 4
     },
     {
       "id": "quick-hamstrings",
@@ -789,18 +997,19 @@
       "level": "Body Area",
       "collection": "body-area",
       "category": "Hamstrings",
-      "minutes": 2,
-      "description": "A short hip-hinge and hamstring sequence using the approved forward fold and standing hamstring demonstration.",
+      "minutes": 3,
+      "description": "A short hip-hinge and hamstring sequence, followed by both approved ankle-circle variations.",
       "difficulty": "Quick · back-of-leg focus",
       "ids": [
         "forward-fold",
         "hamstring-a",
-        "calf-a"
+        "calf-a",
+        "calf-b"
       ],
-      "seconds": 103.042,
+      "seconds": 137.042,
       "rounds": 1,
-      "uniqueMovementCount": 3,
-      "segmentCount": 3
+      "uniqueMovementCount": 4,
+      "segmentCount": 4
     },
     {
       "id": "quick-inner-thighs",
@@ -808,18 +1017,20 @@
       "level": "Body Area",
       "collection": "body-area",
       "category": "Inner thighs",
-      "minutes": 2,
-      "description": "A brief supported lateral sequence centered on the approved adductor stretch and one wide-stance demonstration.",
+      "minutes": 3,
+      "description": "A brief supported lateral sequence with both approved wide-stance and hip-flexor variations, plus the approved adductor demonstration.",
       "difficulty": "Quick · comfortable stance width",
       "ids": [
         "adductor",
         "wide-stance-b",
-        "hip-flexor-a"
+        "wide-stance-a",
+        "hip-flexor-a",
+        "hip-flexor-b"
       ],
-      "seconds": 97,
+      "seconds": 165,
       "rounds": 1,
-      "uniqueMovementCount": 3,
-      "segmentCount": 3
+      "uniqueMovementCount": 5,
+      "segmentCount": 5
     },
     {
       "id": "quick-full-body-reset",
@@ -847,9 +1058,9 @@ for(const movement of catalog.movements){movement.thumbnail='/app/stretching/thu
 // Timings use exact approved clip durations and the player's five-second transition.
 for(const routine of catalog.routines){
   routine.rounds=Number.isInteger(routine.rounds)&&routine.rounds>0?routine.rounds:1;
-  routine.uniqueMovementCount=new Set(routine.ids).size;
-  routine.segmentCount=routine.ids.length*routine.rounds;
-  routine.seconds=routine.ids.reduce((sum,id)=>sum+(catalog.movements.find(m=>m.id===id)?.seconds||0),0)*routine.rounds+Math.max(0,routine.segmentCount-1)*5;
+  routine.uniqueMovementCount=new Set((routine.roundMovementIds||Array.from({length:routine.rounds},()=>routine.ids)).flat()).size;
+  routine.segmentCount=(routine.roundMovementIds||Array.from({length:routine.rounds},()=>routine.ids)).flat().length;
+  routine.seconds=(routine.roundMovementIds||Array.from({length:routine.rounds},()=>routine.ids)).flat().reduce((sum,id)=>sum+(catalog.movements.find(m=>m.id===id)?.seconds||0),0)+Math.max(0,routine.segmentCount-1)*5;
   routine.minutes=Math.ceil(routine.seconds/60);
 }
 catalog.mediaUrl=function(file,sha256,publicBase){

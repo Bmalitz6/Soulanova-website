@@ -1,0 +1,23 @@
+{
+  "source": "/Users/bob/Documents/Soulanova/Soulanova-SoulFuel-nutrition-foundation-2026-11-09/app/walking",
+  "sourceSha256": {
+    "index.html": "4e420e7cac1eb62866711bc16c89fe9bbdde939594b0d71f1a335e461280bb64",
+    "walking.css": "c005ce0b865f041e7c442cc761d1d3b30d6f20a95c505aa0547d7965edf43f43",
+    "walking.js": "afc9db9c9a01b606d8046befbcb2b6735df8d3bb628e5c73a8272244e2770982",
+    "training.mjs": "b9293faae3f08bfa7ece23bd6c6123ad1fe1af7810b8e0782e6f55ed7727c4c2",
+    "save.mjs": "487098b22428469aef5bf5b1815bd9b4d9b949e314bd1f037b614ae89f3a0c54",
+    "audio/start.mp3": "59e7033c28f31712650f6d86dca8660c1c090dac49b5541b2af2145eac22bc91",
+    "audio/brisk.mp3": "b7f72eae91d521566fddbd8b1952a2ef5eef7e5f406ad8e3a8b322485c2dd76c",
+    "audio/halfway.mp3": "f0df77872f11c7e9ea6b0fb08d76624fe45a48435d3580b3f8182987128c24cb",
+    "audio/cooldown.mp3": "71cf2f1ed1c0291231ee6da45dab466e77dac341490a83798acbb098dff03269",
+    "audio/finish.mp3": "24e33054da5ed23b4368cdb3b97d7292b6396e3f580dd48c10aceec47d347dc6"
+  },
+  "portedFiles": [
+    "index.html",
+    "walking.css",
+    "walking.js",
+    "training.mjs",
+    "save.mjs"
+  ],
+  "excludedAudio": "Five recovered audio cue files inventoried but NOT ported: no exact owner approval receipt established. Optional browser speech only."
+}

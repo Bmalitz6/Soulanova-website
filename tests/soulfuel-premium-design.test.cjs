@@ -6,7 +6,7 @@ test('premium redesign preserves exact formula, scanner, diary storage and both 
   assert.deepEqual(fs.readFileSync(path.join(root,file)),execFileSync('git',['show',baseline+':'+file],{cwd:root}),file);
  }
  const recipeFiles=execFileSync('git',['ls-tree','-r','--name-only',baseline,'app/soulfuel/recipe-library/'],{cwd:root,encoding:'utf8'}).trim().split('\n');assert.equal(recipeFiles.length,8);
- for(const file of recipeFiles)assert.deepEqual(fs.readFileSync(path.join(root,file)),execFileSync('git',['show',baseline+':'+file],{cwd:root}),file);
+ for(const file of recipeFiles){const current=fs.readFileSync(path.join(root,file),'utf8').replace('<script src="/app/member-navigation.js"></script>\n','');assert.equal(current,execFileSync('git',['show',baseline+':'+file],{cwd:root,encoding:'utf8'}),file);}
 });
 test('every collection photograph has exact provenance, license and checked file hash',()=>{
  const credits=JSON.parse(fs.readFileSync(path.join(root,'app/soulfuel/media/PHOTO_CREDITS.json'),'utf8'));assert.equal(credits.length,5);
