@@ -86,8 +86,8 @@ test('SoulFuel exposes manual diary actions, date navigation and six local goal 
   const script = fs.readFileSync(path.resolve(__dirname, '../app/soulfuel/foodscore.js'), 'utf8');
   const gate = fs.readFileSync(path.resolve(__dirname, '../app/soulfuel/foodscore-availability.js'), 'utf8');
   for (const id of ['manual-entry-form', 'entry-name', 'entry-meal', 'diary-date', 'previous-day', 'next-day', 'today-day', 'nutrition-goals-form', 'goal-calories', 'goal-protein', 'goal-carbs', 'goal-fat', 'goal-fiber', 'goal-water']) assert.match(page, new RegExp(`id="${id}"`));
-  assert.match(script, /Diary\.saveEntry\(localStorage,memberId/);
-  assert.match(script, /Diary\.deleteEntry\(localStorage,memberId/);
-  assert.match(script, /authRevision/);
+  assert.match(script, /Diary\.saveEntry\(localStorage,owner/);
+  assert.match(script, /Diary\.deleteEntry\(localStorage,owner/);
+  assert.match(script, /authRevision/);assert.match(script, /client\.auth\.getUser\(/);assert.match(script,/user\?\.is_anonymous/);assert.doesNotMatch(script,/client\.auth\.getSession\(/);
   assert.match(gate, /enabled:\s*false/);
 });
