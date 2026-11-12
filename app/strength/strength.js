@@ -6,6 +6,7 @@
   const loadError = $('#load-error');
   const storagePrefix = 'soulanova-strength-web-v1:';
   let catalog;
+  let activeWorkouts;
   let verifiedMedia;
   let authRevision=0;
   let client;
@@ -68,7 +69,7 @@
   function renderLibrary() {
     view = 'library'; $('#library-view').hidden = false; $('#workout-detail').hidden = true; $('#player-view').hidden = true;
     const list = $('#workout-list'); list.replaceChildren();
-    const workouts = catalog.workouts.filter(workout => workout.level === level);
+    const workouts = activeWorkouts.filter(workout => workout.level === level);
     const recommended = progressTools?.getRecommendedWorkout(workouts, localCompletions);
     const counts = progressTools?.completionCounts(localCompletions) || {};
     workouts.forEach(workout => {
@@ -422,9 +423,10 @@
     $('#sign-out').addEventListener('click',async()=>{clearMember();await client?.auth.signOut();location.href='/app/#home';});document.addEventListener('visibilitychange',()=>{if(document.hidden){if(guidedSession)guidedSession.pause();else stopMedia();}});addEventListener('pagehide',stopMedia);
     const config=window.SOULANOVA_SUPABASE;if(!config?.url||!config?.publishableKey||!window.supabase)throw Error('Existing member authentication is unavailable.');client=window.supabase.createClient(config.url,config.publishableKey,{auth:{flowType:'pkce',persistSession:true,autoRefreshToken:true}});client.auth.onAuthStateChange((event,session)=>{if(member&&session?.user?.id===member.id&&['TOKEN_REFRESHED','SIGNED_IN'].includes(event)){const revision=authRevision;setTimeout(()=>verifiedOwner().catch(()=>{if(revision===authRevision)clearMember();}),0);return;}clearMember();setTimeout(verifyMember,0);});void verifyMember();
   }
-  Promise.all([fetch('/app/strength/strengthWorkouts.json'),fetch('/app/programs/catalogs/programs.json')].map(async response=>{const r=await response;if(!r.ok)throw Error('Catalog unavailable.');return r.json();})).then(([data,restrictions])=>{
+  Promise.all([fetch('/app/strength/strengthWorkouts.json'),fetch('/app/programs/catalogs/programs.json'),fetch('/app/strength/strength-demonstration-mappings.json')].map(async response=>{const r=await response;if(!r.ok)throw Error('Catalog unavailable.');return r.json();})).then(([data,restrictions,mappings])=>{
     catalog=data;verifiedMedia=new Map(restrictions.programs.strength.movements.map(m=>[m.id,m]));
     if (catalog.workouts.length !== 36 || catalog.exercises.length !== 17 || ['Beginner', 'Intermediate', 'Advanced'].some(name => catalog.workouts.filter(workout => workout.level === name).length !== 12)) throw Error('The approved SoulStrength catalog failed validation.');
+    activeWorkouts=window.SoulanovaStrengthRelease.applyDemonstrationMappings(catalog.workouts,mappings);
     setup();
   }).catch(error => { loadError.textContent = 'SoulStrength could not load its approved workout library. Please try again later.'; loadError.hidden = false; console.error('SoulStrength library load failed.', error); });
 })();

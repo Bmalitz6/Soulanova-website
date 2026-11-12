@@ -123,35 +123,41 @@
       "finding": "Commercial use requires qualifying paid subscription, credit purchase or agreed paid usage arrangement, subject to input/content rights. Actual service/entitlement for IMG_4058 not established."
     }
   ],
-  "remainingEvidence": [
-    "Actual performance-driving video identity and ownership/commercial AI-processing permission; see focused export resolution."
-  ],
-  "mappingsApplied": 0,
+  "remainingEvidence": [],
+  "mappingsApplied": 10,
   "STR053Blocked": true,
   "activeCoverage": {
-    "Beginner": 10,
-    "Intermediate": 8,
-    "Advanced": 8,
-    "total": 26,
+    "Beginner": 12,
+    "Intermediate": 12,
+    "Advanced": 12,
+    "total": 36,
     "workouts": 36
   },
   "conditionalCoverageAfterSufficientEvidenceAndTenMappings": 36,
   "validation": {
-    "fullRegressionPassed": 224,
+    "fullRegressionPassed": 226,
     "failed": 0,
     "skipped": 0,
-    "nativeChromeMediaPlaybackPassed": 17,
-    "mediaSourceAndBuildOutputHashesMatched": 17,
-    "syntaxChecksPassed": 68,
-    "localProductionModeBuild": "PASS \u2014 local empty environment only; no deployment",
-    "workoutsPerLevel": [
-      12,
-      12,
-      12
+    "tenAffectedPlansBrowserMappingChecksPassed": 10,
+    "responsiveWidths": [
+      1280,
+      390,
+      320
     ],
-    "actualActiveCovered": 26,
-    "mappingsApplied": 0,
-    "applicationChanges": false
+    "nativeChromeDecodePlaybackPassed": 17,
+    "sourceAndBuildOutputMediaHashesMatched": 17,
+    "syntaxChecksPassed": 68,
+    "localProductionModeBuild": "PASS \u2014 local empty environment, no deployment",
+    "activeMappingFilePackaged": true,
+    "originalDefinitionsHashUnchanged": true,
+    "STR053StillExcluded": true,
+    "actualActiveCoverage": {
+      "Beginner": 12,
+      "Intermediate": 12,
+      "Advanced": 12,
+      "total": 36
+    },
+    "noPushOrDeployment": true
   },
   "latestOwnerSyntheticCharacterAttestation": {
     "source": "Owner message in Session 3",
@@ -170,5 +176,54 @@
     "Final IMG_4058 generation/export service; if Magic Hour, qualifying commercial entitlement associated with the generation/export",
     "Actual motion input provenance/permission only if the raw recording or another external clip was used"
   ],
-  "currentExportEvidence": "Content-bound Runway Performance Capture action, recorded Runway signature issuer; signature and BMFF hash pass, overall credential validation fails (untrusted signer/missing EKU)."
+  "currentExportEvidence": "Content-bound Runway Performance Capture action, recorded Runway signature issuer; signature and BMFF hash pass, overall credential validation fails (untrusted signer/missing EKU).",
+  "finalOwnerAttestation": {
+    "source": "Owner message in Session 3",
+    "classification": "OWNER_PROVIDED_FACTUAL_ATTESTATION \u2014 not independently verified generation metadata",
+    "performanceVideo": "Owner personally recorded or created the original performance-driving movement video for IMG_4058",
+    "instructorCharacter": "Entirely AI-generated; no real-person photograph or likeness used as instructor-character reference",
+    "experienceApproval": "Owner previously reviewed and approved the full 36-workout experience"
+  },
+  "latestDisposition": "ADEQUATE_DOCUMENTED_BASIS_FOR_SCOPED_MAPPING",
+  "supersededRightsBlocker": "Closed by the owner performance-video creation/ownership attestation; see final disposition. Historical findings retained below.",
+  "finalDispositionReport": "STR_112_FINAL_RIGHTS_DISPOSITION_AND_MAPPINGS_2026-11-11.md",
+  "priorActiveStateBeforeFinalOwnerAttestation": {
+    "mappingsApplied": 0,
+    "activeCoverage": {
+      "Beginner": 10,
+      "Intermediate": 8,
+      "Advanced": 8,
+      "total": 26,
+      "workouts": 36
+    },
+    "remainingEvidence": [
+      "Actual performance-driving video identity and ownership/commercial AI-processing permission; see focused export resolution."
+    ]
+  },
+  "status": "ADEQUATE_DOCUMENTED_BASIS_FOR_SCOPED_MAPPING",
+  "latestActiveCoverage": {
+    "Beginner": 12,
+    "Intermediate": 12,
+    "Advanced": 12,
+    "total": 36,
+    "originalWorkouts": 36
+  },
+  "currentDispositionRecord": "STR_112_FINAL_RIGHTS_DISPOSITION_AND_MAPPINGS_2026-11-11.json",
+  "priorValidationBeforeFinalMapping": {
+    "fullRegressionPassed": 224,
+    "failed": 0,
+    "skipped": 0,
+    "nativeChromeMediaPlaybackPassed": 17,
+    "mediaSourceAndBuildOutputHashesMatched": 17,
+    "syntaxChecksPassed": 68,
+    "localProductionModeBuild": "PASS \u2014 local empty environment only; no deployment",
+    "workoutsPerLevel": [
+      12,
+      12,
+      12
+    ],
+    "actualActiveCovered": 26,
+    "mappingsApplied": 0,
+    "applicationChanges": false
+  }
 }

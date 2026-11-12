@@ -102,11 +102,10 @@
     }
   ],
   "commercialDecision": {
-    "runwayOutputCommercialPermission": "General commercial output permission established in current official Runway guidance, subject to agreement and input rights",
-    "modelReleaseForSyntheticInstructor": "NOT REQUESTED; owner attestation accepted as factual production provenance",
-    "assetClearance": "NOT YET SUFFICIENT for activating the ten substitutions",
-    "specificOutstandingFact": "Ownership or commercial AI-processing permission for the actual performance-driving video, and any additional non-character media inputs actually used. A related raw MOV exists, but its use and rights are not established.",
-    "infringementFinding": "No affirmative evidence of infringement identified; the documentary/input permission gap is not evidence of infringement.",
+    "assetClearance": "ADEQUATE_DOCUMENTED_BASIS_FOR_SCOPED_MAPPING",
+    "basis": "Final specific owner input-creation and synthetic/no-likeness attestations, independently verified approved asset and documented Runway evidence/commercial permission. See final disposition.",
+    "specificOutstandingFact": null,
+    "retainedUncertainty": "C2PA credential trust/EKU limitations remain documented, not represented as fixed. This disposition is not a guarantee of legal title/exclusivity.",
     "noReapprovalOrRebuildRequested": true
   },
   "rightsReferences": [
@@ -116,23 +115,96 @@
   "actualCoverage": {
     "Beginner": {
       "workouts": 12,
-      "fullyCovered": 10
+      "fullyCovered": 12
     },
     "Intermediate": {
       "workouts": 12,
-      "fullyCovered": 8
+      "fullyCovered": 12
     },
     "Advanced": {
       "workouts": 12,
-      "fullyCovered": 8
+      "fullyCovered": 12
     },
     "totalWorkouts": 36,
-    "fullyCovered": 26,
-    "mappingsApplied": 0,
+    "fullyCovered": 36,
+    "mappingsApplied": 10,
     "STR053Blocked": true
   },
   "conditionalCoverageAfterSufficientInputRightsAndTenMappings": 36,
   "validation": {
+    "fullRegressionPassed": 226,
+    "failed": 0,
+    "skipped": 0,
+    "tenAffectedPlansBrowserMappingChecksPassed": 10,
+    "responsiveWidths": [
+      1280,
+      390,
+      320
+    ],
+    "nativeChromeDecodePlaybackPassed": 17,
+    "sourceAndBuildOutputMediaHashesMatched": 17,
+    "syntaxChecksPassed": 68,
+    "localProductionModeBuild": "PASS \u2014 local empty environment, no deployment",
+    "activeMappingFilePackaged": true,
+    "originalDefinitionsHashUnchanged": true,
+    "STR053StillExcluded": true,
+    "actualActiveCoverage": {
+      "Beginner": 12,
+      "Intermediate": 12,
+      "Advanced": 12,
+      "total": 36
+    },
+    "noPushOrDeployment": true
+  },
+  "finalOwnerAttestation": {
+    "source": "Owner message in Session 3",
+    "classification": "OWNER_PROVIDED_FACTUAL_ATTESTATION \u2014 not independently verified generation metadata",
+    "performanceVideo": "Owner personally recorded or created the original performance-driving movement video for IMG_4058",
+    "instructorCharacter": "Entirely AI-generated; no real-person photograph or likeness used as instructor-character reference",
+    "experienceApproval": "Owner previously reviewed and approved the full 36-workout experience"
+  },
+  "latestDisposition": "ADEQUATE_DOCUMENTED_BASIS_FOR_SCOPED_MAPPING",
+  "supersededRightsBlocker": "Closed by the owner performance-video creation/ownership attestation; see final disposition. Historical findings retained below.",
+  "finalDispositionReport": "STR_112_FINAL_RIGHTS_DISPOSITION_AND_MAPPINGS_2026-11-11.md",
+  "priorActiveStateBeforeFinalOwnerAttestation": {
+    "actualCoverage": {
+      "Beginner": {
+        "workouts": 12,
+        "fullyCovered": 10
+      },
+      "Intermediate": {
+        "workouts": 12,
+        "fullyCovered": 8
+      },
+      "Advanced": {
+        "workouts": 12,
+        "fullyCovered": 8
+      },
+      "totalWorkouts": 36,
+      "fullyCovered": 26,
+      "mappingsApplied": 0,
+      "STR053Blocked": true
+    },
+    "commercialDecision": {
+      "runwayOutputCommercialPermission": "General commercial output permission established in current official Runway guidance, subject to agreement and input rights",
+      "modelReleaseForSyntheticInstructor": "NOT REQUESTED; owner attestation accepted as factual production provenance",
+      "assetClearance": "NOT YET SUFFICIENT for activating the ten substitutions",
+      "specificOutstandingFact": "Ownership or commercial AI-processing permission for the actual performance-driving video, and any additional non-character media inputs actually used. A related raw MOV exists, but its use and rights are not established.",
+      "infringementFinding": "No affirmative evidence of infringement identified; the documentary/input permission gap is not evidence of infringement.",
+      "noReapprovalOrRebuildRequested": true
+    }
+  },
+  "status": "ADEQUATE_DOCUMENTED_BASIS_FOR_SCOPED_MAPPING",
+  "mappingsApplied": 10,
+  "latestActiveCoverage": {
+    "Beginner": 12,
+    "Intermediate": 12,
+    "Advanced": 12,
+    "total": 36,
+    "originalWorkouts": 36
+  },
+  "currentDispositionRecord": "STR_112_FINAL_RIGHTS_DISPOSITION_AND_MAPPINGS_2026-11-11.json",
+  "priorValidationBeforeFinalMapping": {
     "fullRegressionPassed": 224,
     "failed": 0,
     "skipped": 0,

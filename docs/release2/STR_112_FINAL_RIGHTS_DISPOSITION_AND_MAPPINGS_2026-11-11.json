@@ -1,0 +1,146 @@
+{
+  "status": "ADEQUATE_DOCUMENTED_BASIS_FOR_SCOPED_MAPPING",
+  "baselineCommit": "ec6127d694dc14c6a1a077a6b4b01a1351a44bc2",
+  "ownerAttestation": {
+    "source": "Owner message in Session 3",
+    "classification": "OWNER_PROVIDED_FACTUAL_ATTESTATION — not independently verified generation metadata",
+    "performanceVideo": "Owner personally recorded or created the original performance-driving movement video for IMG_4058",
+    "instructorCharacter": "Entirely AI-generated; no real-person photograph or likeness used as instructor-character reference",
+    "experienceApproval": "Owner previously reviewed and approved the full 36-workout experience"
+  },
+  "independentEvidence": {
+    "assetSha256": "ef0433a6e4f1b889b5bf183715c139d0bb96a797728f126651907fb65fbc9705",
+    "historicalMediaApproval": "Pinned approved master STR-112 / Review #09",
+    "movement": "Verified bilateral Incline Dumbbell Press",
+    "exportEvidence": "Content-bound Runway Performance Capture claim; recorded Runway issuer; signature and BMFF checks passed",
+    "retainedLimitations": "C2PA overall credential validation Invalid: untrusted signer/missing EKU; not described as fully trusted publisher/account certification"
+  },
+  "commercialTerms": {
+    "guidance": "https://help.runwayml.com/hc/en-us/articles/21668707517587-Can-I-use-the-content-I-made-in-Runway-for-commercial-purposes",
+    "terms": "https://runway.com/terms-ofuse",
+    "assessment": "Runway commercial-output permission plus specific owner-created performance/synthetic-character attestations and verified approved asset provide an adequate documented basis for this scoped candidate mapping. No identified additional third-party input or platform-tier restriction blocks it. This is not a guarantee of legal title, copyright exclusivity or certification of the provenance trust chain."
+  },
+  "modelRelease": "No traditional model release requested for the entirely synthetic instructor",
+  "scope": "Ten technically compatible step-level STR-053 to STR-112 demonstration replacements; no new media, movement approval, backend activation or deployment",
+  "mappingFile": "app/strength/strength-demonstration-mappings.json",
+  "mappingFileSha256": "3845c488a3034b7b5326e8566ba252bdca91823d7e1ee38676f3b6bcddc466bf",
+  "sourceCatalogSha256": "9f97600ea8792b2d1034a735caea4a24504aded1ee2af0367ba2cc6fecde6a44",
+  "originalDefinitionsUnchanged": true,
+  "mappingsApplied": [
+    {
+      "workoutId": "beginner-chest-and-arms",
+      "stepIndex": 1,
+      "fromExerciseId": "STR-053",
+      "toExerciseId": "STR-112",
+      "sha256": "ef0433a6e4f1b889b5bf183715c139d0bb96a797728f126651907fb65fbc9705"
+    },
+    {
+      "workoutId": "beginner-pressing-practice",
+      "stepIndex": 1,
+      "fromExerciseId": "STR-053",
+      "toExerciseId": "STR-112",
+      "sha256": "ef0433a6e4f1b889b5bf183715c139d0bb96a797728f126651907fb65fbc9705"
+    },
+    {
+      "workoutId": "intermediate-strength-balance",
+      "stepIndex": 2,
+      "fromExerciseId": "STR-053",
+      "toExerciseId": "STR-112",
+      "sha256": "ef0433a6e4f1b889b5bf183715c139d0bb96a797728f126651907fb65fbc9705"
+    },
+    {
+      "workoutId": "intermediate-lower-body-mix",
+      "stepIndex": 1,
+      "fromExerciseId": "STR-053",
+      "toExerciseId": "STR-112",
+      "sha256": "ef0433a6e4f1b889b5bf183715c139d0bb96a797728f126651907fb65fbc9705"
+    },
+    {
+      "workoutId": "intermediate-side-to-side",
+      "stepIndex": 2,
+      "fromExerciseId": "STR-053",
+      "toExerciseId": "STR-112",
+      "sha256": "ef0433a6e4f1b889b5bf183715c139d0bb96a797728f126651907fb65fbc9705"
+    },
+    {
+      "workoutId": "intermediate-total-body",
+      "stepIndex": 1,
+      "fromExerciseId": "STR-053",
+      "toExerciseId": "STR-112",
+      "sha256": "ef0433a6e4f1b889b5bf183715c139d0bb96a797728f126651907fb65fbc9705"
+    },
+    {
+      "workoutId": "advanced-squat-press",
+      "stepIndex": 1,
+      "fromExerciseId": "STR-053",
+      "toExerciseId": "STR-112",
+      "sha256": "ef0433a6e4f1b889b5bf183715c139d0bb96a797728f126651907fb65fbc9705"
+    },
+    {
+      "workoutId": "advanced-side-balance",
+      "stepIndex": 2,
+      "fromExerciseId": "STR-053",
+      "toExerciseId": "STR-112",
+      "sha256": "ef0433a6e4f1b889b5bf183715c139d0bb96a797728f126651907fb65fbc9705"
+    },
+    {
+      "workoutId": "advanced-core-and-press",
+      "stepIndex": 1,
+      "fromExerciseId": "STR-053",
+      "toExerciseId": "STR-112",
+      "sha256": "ef0433a6e4f1b889b5bf183715c139d0bb96a797728f126651907fb65fbc9705"
+    },
+    {
+      "workoutId": "advanced-balanced-volume",
+      "stepIndex": 2,
+      "fromExerciseId": "STR-053",
+      "toExerciseId": "STR-112",
+      "sha256": "ef0433a6e4f1b889b5bf183715c139d0bb96a797728f126651907fb65fbc9705"
+    }
+  ],
+  "activeCoverage": [
+    {
+      "level": "Beginner",
+      "workouts": 12,
+      "fullyCovered": 12
+    },
+    {
+      "level": "Intermediate",
+      "workouts": 12,
+      "fullyCovered": 12
+    },
+    {
+      "level": "Advanced",
+      "workouts": 12,
+      "fullyCovered": 12
+    }
+  ],
+  "totalFullyCovered": 36,
+  "STR053Excluded": true,
+  "noPushOrDeployment": true,
+  "validation": {
+    "fullRegressionPassed": 226,
+    "failed": 0,
+    "skipped": 0,
+    "tenAffectedPlansBrowserMappingChecksPassed": 10,
+    "responsiveWidths": [
+      1280,
+      390,
+      320
+    ],
+    "nativeChromeDecodePlaybackPassed": 17,
+    "sourceAndBuildOutputMediaHashesMatched": 17,
+    "syntaxChecksPassed": 68,
+    "localProductionModeBuild": "PASS — local empty environment, no deployment",
+    "activeMappingFilePackaged": true,
+    "originalDefinitionsHashUnchanged": true,
+    "STR053StillExcluded": true,
+    "actualActiveCoverage": {
+      "Beginner": 12,
+      "Intermediate": 12,
+      "Advanced": 12,
+      "total": 36
+    },
+    "noPushOrDeployment": true
+  }
+}

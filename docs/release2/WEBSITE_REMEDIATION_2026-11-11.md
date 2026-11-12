@@ -1,5 +1,7 @@
 # Corrective website candidate — November 11, 2026
 
+> Current disposition: the owner attests personal creation of the performance-driving video and a wholly synthetic instructor with no real-person reference. The scoped STR-112 rights gate is satisfied and all ten runtime replacements are applied. Active exercise-demo coverage is now 12/12/12 (36/36); STR-053 stays excluded. See [final disposition and mapping report](STR_112_FINAL_RIGHTS_DISPOSITION_AND_MAPPINGS_2026-11-11.md). Earlier blocked/practice-only findings below are historical, not current status. No push or deployment.
+
 > Strength reconciliation update: the full 36-workout library is restored locally, with original sequences. The reduced practice-only scope below is superseded by [SOULSTRENGTH_36_WORKOUT_RECONCILIATION_2026-11-11.md](SOULSTRENGTH_36_WORKOUT_RECONCILIATION_2026-11-11.md). This correction has not been pushed or deployed.
 
 **Production remains BLOCKED; protected Preview only.** This report supersedes the pre-remediation candidate-hosting failure in the earlier audits. Starting runtime: `4d7a0f49e72c826aefb27a95ccebf2228f975e57`; branch: `feature/soulfuel-clean-preview-2026-11-09`. The immutable delivery SHA and Preview deployment receipt are provided with the final delivery. Stable protected branch URL: https://soulanova-website-git-feature-soulfuel-clean-p-b4fcce-soulanova.vercel.app/app .

@@ -1,5 +1,5 @@
 {
-  "status": "DRAFT_NOT_APPLIED",
+  "status": "APPLIED_AS_SCOPED_RUNTIME_MAPPINGS",
   "baselineCommit": "b157c256b2f2ec24c647af63b8c55bf5544ba5ad",
   "sourceCatalogSha256": "9f97600ea8792b2d1034a735caea4a24504aded1ee2af0367ba2cc6fecde6a44",
   "replacementExerciseId": "STR-112",
@@ -39,12 +39,9 @@
     "scope": "Demonstration identity, not technique certification or proof of completed prescribed reps"
   },
   "rights": {
-    "status": "UNVERIFIED",
-    "providerPermission": "Runway generally permits commercial outputs subject to agreement; this does not establish source-image/likeness rights for this asset",
-    "providerSource": "https://help.runwayml.com/hc/en-us/articles/21668707517587-Can-I-use-the-content-I-made-in-Runway-for-commercial-purposes",
-    "termsSource": "https://runway.com/terms-ofuse",
-    "missing": "Asset-specific creation/input/likeness permission evidence or owner confirmation",
-    "newPermissionInferred": false
+    "status": "ADEQUATE_DOCUMENTED_BASIS_FOR_SCOPED_MAPPING",
+    "record": "STR_112_FINAL_RIGHTS_DISPOSITION_AND_MAPPINGS_2026-11-11.json",
+    "basis": "Owner-created original performance video; entirely synthetic instructor with no real-person likeness reference; verified approved media; documented Runway export evidence and commercial permission. Owner facts and independent evidence remain distinct."
   },
   "steps": [
     {
@@ -62,10 +59,8 @@
       },
       "proposedExerciseId": "STR-112",
       "formCompatibility": "BILATERAL_FORM_COMPATIBLE",
-      "applied": false,
-      "blockers": [
-        "Commercial source-image and instructor-likeness rights not yet confirmed"
-      ]
+      "applied": true,
+      "blockers": []
     },
     {
       "workoutId": "beginner-pressing-practice",
@@ -82,10 +77,8 @@
       },
       "proposedExerciseId": "STR-112",
       "formCompatibility": "BILATERAL_FORM_COMPATIBLE",
-      "applied": false,
-      "blockers": [
-        "Commercial source-image and instructor-likeness rights not yet confirmed"
-      ]
+      "applied": true,
+      "blockers": []
     },
     {
       "workoutId": "intermediate-strength-balance",
@@ -102,10 +95,8 @@
       },
       "proposedExerciseId": "STR-112",
       "formCompatibility": "BILATERAL_FORM_COMPATIBLE",
-      "applied": false,
-      "blockers": [
-        "Commercial source-image and instructor-likeness rights not yet confirmed"
-      ]
+      "applied": true,
+      "blockers": []
     },
     {
       "workoutId": "intermediate-lower-body-mix",
@@ -122,10 +113,8 @@
       },
       "proposedExerciseId": "STR-112",
       "formCompatibility": "BILATERAL_FORM_COMPATIBLE",
-      "applied": false,
-      "blockers": [
-        "Commercial source-image and instructor-likeness rights not yet confirmed"
-      ]
+      "applied": true,
+      "blockers": []
     },
     {
       "workoutId": "intermediate-side-to-side",
@@ -142,10 +131,8 @@
       },
       "proposedExerciseId": "STR-112",
       "formCompatibility": "BILATERAL_FORM_COMPATIBLE",
-      "applied": false,
-      "blockers": [
-        "Commercial source-image and instructor-likeness rights not yet confirmed"
-      ]
+      "applied": true,
+      "blockers": []
     },
     {
       "workoutId": "intermediate-total-body",
@@ -162,10 +149,8 @@
       },
       "proposedExerciseId": "STR-112",
       "formCompatibility": "BILATERAL_FORM_COMPATIBLE",
-      "applied": false,
-      "blockers": [
-        "Commercial source-image and instructor-likeness rights not yet confirmed"
-      ]
+      "applied": true,
+      "blockers": []
     },
     {
       "workoutId": "advanced-squat-press",
@@ -182,10 +167,8 @@
       },
       "proposedExerciseId": "STR-112",
       "formCompatibility": "BILATERAL_FORM_COMPATIBLE",
-      "applied": false,
-      "blockers": [
-        "Commercial source-image and instructor-likeness rights not yet confirmed"
-      ]
+      "applied": true,
+      "blockers": []
     },
     {
       "workoutId": "advanced-side-balance",
@@ -202,10 +185,8 @@
       },
       "proposedExerciseId": "STR-112",
       "formCompatibility": "BILATERAL_FORM_COMPATIBLE",
-      "applied": false,
-      "blockers": [
-        "Commercial source-image and instructor-likeness rights not yet confirmed"
-      ]
+      "applied": true,
+      "blockers": []
     },
     {
       "workoutId": "advanced-core-and-press",
@@ -222,10 +203,8 @@
       },
       "proposedExerciseId": "STR-112",
       "formCompatibility": "BILATERAL_FORM_COMPATIBLE",
-      "applied": false,
-      "blockers": [
-        "Commercial source-image and instructor-likeness rights not yet confirmed"
-      ]
+      "applied": true,
+      "blockers": []
     },
     {
       "workoutId": "advanced-balanced-volume",
@@ -242,18 +221,16 @@
       },
       "proposedExerciseId": "STR-112",
       "formCompatibility": "BILATERAL_FORM_COMPATIBLE",
-      "applied": false,
-      "blockers": [
-        "Commercial source-image and instructor-likeness rights not yet confirmed"
-      ]
+      "applied": true,
+      "blockers": []
     }
   ],
   "coverage": {
     "workouts": 36,
-    "currentFullyCovered": 26,
-    "bilateralFormCompatibleReplacementsPendingRights": 10,
+    "currentFullyCovered": 36,
+    "bilateralFormCompatibleReplacementsPendingRights": 0,
     "unilateralAmbiguities": 0,
-    "actualMappingsChanged": 0,
+    "actualMappingsChanged": 10,
     "STR053Blocked": true,
     "hypotheticalFullyCoveredAfterTenVerifiedReplacements": 36
   },
@@ -289,10 +266,10 @@
       "workoutId": "beginner-chest-and-arms",
       "level": "Beginner",
       "exerciseCount": 5,
-      "currentAvailable": 4,
+      "currentAvailable": 5,
       "hypotheticalAvailableAfterRights": 5,
       "proposedReplacement": true,
-      "applied": false
+      "applied": true
     },
     {
       "workoutId": "beginner-standing-strength",
@@ -343,10 +320,10 @@
       "workoutId": "beginner-pressing-practice",
       "level": "Beginner",
       "exerciseCount": 4,
-      "currentAvailable": 3,
+      "currentAvailable": 4,
       "hypotheticalAvailableAfterRights": 4,
       "proposedReplacement": true,
-      "applied": false
+      "applied": true
     },
     {
       "workoutId": "beginner-supported-strength",
@@ -370,10 +347,10 @@
       "workoutId": "intermediate-strength-balance",
       "level": "Intermediate",
       "exerciseCount": 7,
-      "currentAvailable": 6,
+      "currentAvailable": 7,
       "hypotheticalAvailableAfterRights": 7,
       "proposedReplacement": true,
-      "applied": false
+      "applied": true
     },
     {
       "workoutId": "intermediate-press-and-pull",
@@ -397,10 +374,10 @@
       "workoutId": "intermediate-lower-body-mix",
       "level": "Intermediate",
       "exerciseCount": 5,
-      "currentAvailable": 4,
+      "currentAvailable": 5,
       "hypotheticalAvailableAfterRights": 5,
       "proposedReplacement": true,
-      "applied": false
+      "applied": true
     },
     {
       "workoutId": "intermediate-shoulder-arm",
@@ -433,10 +410,10 @@
       "workoutId": "intermediate-side-to-side",
       "level": "Intermediate",
       "exerciseCount": 6,
-      "currentAvailable": 5,
+      "currentAvailable": 6,
       "hypotheticalAvailableAfterRights": 6,
       "proposedReplacement": true,
-      "applied": false
+      "applied": true
     },
     {
       "workoutId": "intermediate-chest-shoulders",
@@ -469,10 +446,10 @@
       "workoutId": "intermediate-total-body",
       "level": "Intermediate",
       "exerciseCount": 6,
-      "currentAvailable": 5,
+      "currentAvailable": 6,
       "hypotheticalAvailableAfterRights": 6,
       "proposedReplacement": true,
-      "applied": false
+      "applied": true
     },
     {
       "workoutId": "advanced-strength-control",
@@ -487,10 +464,10 @@
       "workoutId": "advanced-squat-press",
       "level": "Advanced",
       "exerciseCount": 8,
-      "currentAvailable": 7,
+      "currentAvailable": 8,
       "hypotheticalAvailableAfterRights": 8,
       "proposedReplacement": true,
-      "applied": false
+      "applied": true
     },
     {
       "workoutId": "advanced-unilateral-volume",
@@ -514,10 +491,10 @@
       "workoutId": "advanced-side-balance",
       "level": "Advanced",
       "exerciseCount": 7,
-      "currentAvailable": 6,
+      "currentAvailable": 7,
       "hypotheticalAvailableAfterRights": 7,
       "proposedReplacement": true,
-      "applied": false
+      "applied": true
     },
     {
       "workoutId": "advanced-pressing-volume",
@@ -541,10 +518,10 @@
       "workoutId": "advanced-core-and-press",
       "level": "Advanced",
       "exerciseCount": 7,
-      "currentAvailable": 6,
+      "currentAvailable": 7,
       "hypotheticalAvailableAfterRights": 7,
       "proposedReplacement": true,
-      "applied": false
+      "applied": true
     },
     {
       "workoutId": "advanced-upper-lower",
@@ -568,10 +545,10 @@
       "workoutId": "advanced-balanced-volume",
       "level": "Advanced",
       "exerciseCount": 8,
-      "currentAvailable": 7,
+      "currentAvailable": 8,
       "hypotheticalAvailableAfterRights": 8,
       "proposedReplacement": true,
-      "applied": false
+      "applied": true
     },
     {
       "workoutId": "advanced-total-body-finish",
@@ -587,19 +564,19 @@
     {
       "level": "Beginner",
       "workouts": 12,
-      "currentFullyCovered": 10,
+      "currentFullyCovered": 12,
       "hypotheticalFullyCoveredAfterRights": 12
     },
     {
       "level": "Intermediate",
       "workouts": 12,
-      "currentFullyCovered": 8,
+      "currentFullyCovered": 12,
       "hypotheticalFullyCoveredAfterRights": 12
     },
     {
       "level": "Advanced",
       "workouts": 12,
-      "currentFullyCovered": 8,
+      "currentFullyCovered": 12,
       "hypotheticalFullyCoveredAfterRights": 12
     }
   ],
@@ -616,7 +593,18 @@
     "runtimeMappingsChanged": false
   },
   "ownerAuthorizedSourceChangesOnly": 2,
-  "validation": {
+  "historicalStatusBeforeFinalAttestation": "DRAFT_NOT_APPLIED",
+  "priorRightsAssessment": {
+    "status": "UNVERIFIED",
+    "providerPermission": "Runway generally permits commercial outputs subject to agreement; this does not establish source-image/likeness rights for this asset",
+    "providerSource": "https://help.runwayml.com/hc/en-us/articles/21668707517587-Can-I-use-the-content-I-made-in-Runway-for-commercial-purposes",
+    "termsSource": "https://runway.com/terms-ofuse",
+    "missing": "Asset-specific creation/input/likeness permission evidence or owner confirmation",
+    "newPermissionInferred": false
+  },
+  "applicationMode": "Separate runtime mapping file; no source-catalog IDs, sequence positions, sets, instructions, rest or repetitions changed.",
+  "supersedingDisposition": "STR_112_FINAL_RIGHTS_DISPOSITION_AND_MAPPINGS_2026-11-11.md",
+  "priorValidationBeforeAppliedMapping": {
     "fullRegressionPassed": 224,
     "failed": 0,
     "skipped": 0,
@@ -635,5 +623,30 @@
     "conditionalDraftCoverageAfterRightsAndApplication": 36,
     "runtimeSubstitutionsApplied": 0,
     "STR053Blocked": true
+  },
+  "validation": {
+    "fullRegressionPassed": 226,
+    "failed": 0,
+    "skipped": 0,
+    "tenAffectedPlansBrowserMappingChecksPassed": 10,
+    "responsiveWidths": [
+      1280,
+      390,
+      320
+    ],
+    "nativeChromeDecodePlaybackPassed": 17,
+    "sourceAndBuildOutputMediaHashesMatched": 17,
+    "syntaxChecksPassed": 68,
+    "localProductionModeBuild": "PASS — local empty environment, no deployment",
+    "activeMappingFilePackaged": true,
+    "originalDefinitionsHashUnchanged": true,
+    "STR053StillExcluded": true,
+    "actualActiveCoverage": {
+      "Beginner": 12,
+      "Intermediate": 12,
+      "Advanced": 12,
+      "total": 36
+    },
+    "noPushOrDeployment": true
   }
 }

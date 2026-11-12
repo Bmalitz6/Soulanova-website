@@ -1,6 +1,6 @@
 {
   "baselineCommit": "69ce8d1aa4c64f71ed9d5e64882c918a7ff82a5b",
-  "status": "BLOCKED_RIGHTS_UNRESOLVED",
+  "status": "ADEQUATE_DOCUMENTED_BASIS_FOR_SCOPED_MAPPING",
   "scope": "Existing local production and project records; read-only source audit",
   "expectedSTR112Sha256": "ef0433a6e4f1b889b5bf183715c139d0bb96a797728f126651907fb65fbc9705",
   "assetsAndEvidence": {
@@ -151,7 +151,7 @@
     }
   ],
   "searchInventory": "STR_112_RIGHTS_SEARCH_INVENTORY_2026-11-11.json",
-  "mappingsApplied": 0,
+  "mappingsApplied": 10,
   "STR053Blocked": true,
   "workoutCounts": {
     "Beginner": 12,
@@ -159,10 +159,11 @@
     "Advanced": 12
   },
   "activeCoverage": {
-    "Beginner": 10,
-    "Intermediate": 8,
-    "Advanced": 8,
-    "total": 26
+    "Beginner": 12,
+    "Intermediate": 12,
+    "Advanced": 12,
+    "total": 36,
+    "workouts": 36
   },
   "conditionalCoverageAfterVerifiedRightsAndApplication": 36,
   "missingDocumentation": [
@@ -236,21 +237,29 @@
     "interpretation": "Copy integrity only, not permissions"
   },
   "validation": {
-    "fullRegressionPassed": 224,
+    "fullRegressionPassed": 226,
     "failed": 0,
     "skipped": 0,
-    "realChromeMediaPlaybackPassed": 17,
+    "tenAffectedPlansBrowserMappingChecksPassed": 10,
+    "responsiveWidths": [
+      1280,
+      390,
+      320
+    ],
+    "nativeChromeDecodePlaybackPassed": 17,
     "sourceAndBuildOutputMediaHashesMatched": 17,
     "syntaxChecksPassed": 68,
-    "localProductionModeBuild": "PASS \u2014 local empty environment only; no Production deployment/staging",
-    "applicationDiff": false,
-    "workoutsPerDifficulty": [
-      12,
-      12,
-      12
-    ],
-    "actualActiveFullyCovered": 26,
-    "proposedMappingsApplied": 0
+    "localProductionModeBuild": "PASS \u2014 local empty environment, no deployment",
+    "activeMappingFilePackaged": true,
+    "originalDefinitionsHashUnchanged": true,
+    "STR053StillExcluded": true,
+    "actualActiveCoverage": {
+      "Beginner": 12,
+      "Intermediate": 12,
+      "Advanced": 12,
+      "total": 36
+    },
+    "noPushOrDeployment": true
   },
   "ownerProvidedProductionProvenance": {
     "source": "Owner message in Session 3",
@@ -277,5 +286,50 @@
     "previousExperienceApproval": "Owner previously reviewed and signed off on the 36-workout experience",
     "effect": "No traditional human model release requested for this instructor character; movement/media approvals are not reopened."
   },
-  "focusedExportFollowup": "STR_112_EXPORT_SOURCE_RESOLUTION_2026-11-11.md"
+  "focusedExportFollowup": "STR_112_EXPORT_SOURCE_RESOLUTION_2026-11-11.md",
+  "finalOwnerAttestation": {
+    "source": "Owner message in Session 3",
+    "classification": "OWNER_PROVIDED_FACTUAL_ATTESTATION \u2014 not independently verified generation metadata",
+    "performanceVideo": "Owner personally recorded or created the original performance-driving movement video for IMG_4058",
+    "instructorCharacter": "Entirely AI-generated; no real-person photograph or likeness used as instructor-character reference",
+    "experienceApproval": "Owner previously reviewed and approved the full 36-workout experience"
+  },
+  "latestDisposition": "ADEQUATE_DOCUMENTED_BASIS_FOR_SCOPED_MAPPING",
+  "supersededRightsBlocker": "Closed by the owner performance-video creation/ownership attestation; see final disposition. Historical findings retained below.",
+  "finalDispositionReport": "STR_112_FINAL_RIGHTS_DISPOSITION_AND_MAPPINGS_2026-11-11.md",
+  "priorActiveStateBeforeFinalOwnerAttestation": {
+    "status": "BLOCKED_RIGHTS_UNRESOLVED",
+    "mappingsApplied": 0,
+    "activeCoverage": {
+      "Beginner": 10,
+      "Intermediate": 8,
+      "Advanced": 8,
+      "total": 26
+    }
+  },
+  "latestActiveCoverage": {
+    "Beginner": 12,
+    "Intermediate": 12,
+    "Advanced": 12,
+    "total": 36,
+    "originalWorkouts": 36
+  },
+  "currentDispositionRecord": "STR_112_FINAL_RIGHTS_DISPOSITION_AND_MAPPINGS_2026-11-11.json",
+  "priorValidationBeforeFinalMapping": {
+    "fullRegressionPassed": 224,
+    "failed": 0,
+    "skipped": 0,
+    "realChromeMediaPlaybackPassed": 17,
+    "sourceAndBuildOutputMediaHashesMatched": 17,
+    "syntaxChecksPassed": 68,
+    "localProductionModeBuild": "PASS \u2014 local empty environment only; no Production deployment/staging",
+    "applicationDiff": false,
+    "workoutsPerDifficulty": [
+      12,
+      12,
+      12
+    ],
+    "actualActiveFullyCovered": 26,
+    "proposedMappingsApplied": 0
+  }
 }

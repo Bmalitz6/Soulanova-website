@@ -1,5 +1,7 @@
 # Owner-confirmed bilateral press prescriptions
 
+> Current disposition: the owner attests personal creation of the performance-driving video and a wholly synthetic instructor with no real-person reference. The scoped STR-112 rights gate is satisfied and all ten runtime replacements are applied. Active exercise-demo coverage is now 12/12/12 (36/36); STR-053 stays excluded. See [final disposition and mapping report](STR_112_FINAL_RIGHTS_DISPOSITION_AND_MAPPINGS_2026-11-11.md). Earlier blocked/practice-only findings below are historical, not current status. No push or deployment.
+
 ## Applied correction
 
 The owner confirms both arms together were intended. Only these two original Incline Dumbbell Press repetition labels were corrected:

@@ -280,47 +280,57 @@
         {
           "position": 1,
           "exerciseId": "STR-058",
+          "originalExerciseId": "STR-058",
           "name": "Goblet Squat",
           "sets": 2,
           "reps": "8–10",
           "restSeconds": 75,
-          "playable": true
+          "playable": true,
+          "demonstrationSha256": "5f11a03fa308ef2f8d132a3572263b4b7714751c6a1a434f2d9d129af9f65ba7"
         },
         {
           "position": 2,
           "exerciseId": "STR-112",
+          "originalExerciseId": "STR-112",
           "name": "Incline Dumbbell Press",
           "sets": 2,
           "reps": "8–10",
           "restSeconds": 75,
-          "playable": true
+          "playable": true,
+          "demonstrationSha256": "ef0433a6e4f1b889b5bf183715c139d0bb96a797728f126651907fb65fbc9705"
         },
         {
           "position": 3,
           "exerciseId": "STR-036",
+          "originalExerciseId": "STR-036",
           "name": "Standing Bicep Curls",
           "sets": 2,
           "reps": "8–10",
           "restSeconds": 60,
-          "playable": true
+          "playable": true,
+          "demonstrationSha256": "3748894f60b8b4112fd31f2bf64606179067852a45d0309ea8c780bbcfd56666"
         },
         {
           "position": 4,
           "exerciseId": "STR-057",
+          "originalExerciseId": "STR-057",
           "name": "Standing Calf Raise",
           "sets": 2,
           "reps": "10–12",
           "restSeconds": 60,
-          "playable": true
+          "playable": true,
+          "demonstrationSha256": "5e9882b6a85fe99d71cf02450a4f129e13f515c237d6142b65ff7cf19cc7667d"
         },
         {
           "position": 5,
           "exerciseId": "STR-092",
+          "originalExerciseId": "STR-092",
           "name": "Russian Twists",
           "sets": 2,
           "reps": "8 each side",
           "restSeconds": 45,
-          "playable": true
+          "playable": true,
+          "demonstrationSha256": "b7be3e113f73276e7f36ad41522c3f2be11772a1ee78fbb0ad8230dc7f7ee159"
         }
       ],
       "available": 5,
@@ -335,47 +345,57 @@
         {
           "position": 1,
           "exerciseId": "STR-058",
+          "originalExerciseId": "STR-058",
           "name": "Goblet Squat",
           "sets": 2,
           "reps": "8–10",
           "restSeconds": 75,
-          "playable": true
+          "playable": true,
+          "demonstrationSha256": "5f11a03fa308ef2f8d132a3572263b4b7714751c6a1a434f2d9d129af9f65ba7"
         },
         {
           "position": 2,
           "exerciseId": "STR-115",
+          "originalExerciseId": "STR-115",
           "name": "Shoulder Press",
           "sets": 1,
           "reps": "8 each side",
           "restSeconds": 60,
-          "playable": true
+          "playable": true,
+          "demonstrationSha256": "f117cccd02af7a98d7df51046430cbfdcf4d0beaabbd74df1c077c981844d9a2"
         },
         {
           "position": 3,
           "exerciseId": "STR-020",
+          "originalExerciseId": "STR-020",
           "name": "Concentration Curl",
           "sets": 1,
           "reps": "8 each side",
           "restSeconds": 60,
-          "playable": true
+          "playable": true,
+          "demonstrationSha256": "1429a26744c5c35054de0e160014991f368f40f55a7d7fc5d6448a32b9264970"
         },
         {
           "position": 4,
           "exerciseId": "STR-087",
+          "originalExerciseId": "STR-087",
           "name": "Side Bend",
           "sets": 1,
           "reps": "8 each side",
           "restSeconds": 60,
-          "playable": true
+          "playable": true,
+          "demonstrationSha256": "aa343b2525aadb0950e4f3abc900089b41862b754456a768e04699e483b4f00e"
         },
         {
           "position": 5,
           "exerciseId": "STR-057",
+          "originalExerciseId": "STR-057",
           "name": "Standing Calf Raise",
           "sets": 1,
           "reps": "8 each side",
           "restSeconds": 60,
-          "playable": true
+          "playable": true,
+          "demonstrationSha256": "5e9882b6a85fe99d71cf02450a4f129e13f515c237d6142b65ff7cf19cc7667d"
         }
       ],
       "available": 5,
@@ -390,47 +410,57 @@
         {
           "position": 1,
           "exerciseId": "STR-091",
+          "originalExerciseId": "STR-091",
           "name": "Bulgarian Split Squat Left",
           "sets": 1,
           "reps": "6 each side",
           "restSeconds": 90,
-          "playable": true
+          "playable": true,
+          "demonstrationSha256": "b47a5ebd2fb84f018f590d98b953ff493a647553f16ca0103a0d1b0f26ba2a56"
         },
         {
           "position": 2,
           "exerciseId": "STR-104",
+          "originalExerciseId": "STR-104",
           "name": "Bulgarian Split Squat Right",
           "sets": 1,
           "reps": "6 each side",
           "restSeconds": 90,
-          "playable": true
+          "playable": true,
+          "demonstrationSha256": "dc2072b81e22f406e3da9d316621d63a4dbbb9a3face020e8c6b9a7858ed1430"
         },
         {
           "position": 3,
           "exerciseId": "STR-112",
+          "originalExerciseId": "STR-112",
           "name": "Incline Dumbbell Press",
           "sets": 2,
           "reps": "8–10",
           "restSeconds": 60,
-          "playable": true
+          "playable": true,
+          "demonstrationSha256": "ef0433a6e4f1b889b5bf183715c139d0bb96a797728f126651907fb65fbc9705"
         },
         {
           "position": 4,
           "exerciseId": "STR-036",
+          "originalExerciseId": "STR-036",
           "name": "Standing Bicep Curls",
           "sets": 2,
           "reps": "8–10",
           "restSeconds": 60,
-          "playable": true
+          "playable": true,
+          "demonstrationSha256": "3748894f60b8b4112fd31f2bf64606179067852a45d0309ea8c780bbcfd56666"
         },
         {
           "position": 5,
           "exerciseId": "STR-057",
+          "originalExerciseId": "STR-057",
           "name": "Standing Calf Raise",
           "sets": 2,
           "reps": "8–10",
           "restSeconds": 60,
-          "playable": true
+          "playable": true,
+          "demonstrationSha256": "5e9882b6a85fe99d71cf02450a4f129e13f515c237d6142b65ff7cf19cc7667d"
         }
       ],
       "available": 5,
@@ -445,50 +475,60 @@
         {
           "position": 1,
           "exerciseId": "STR-058",
+          "originalExerciseId": "STR-058",
           "name": "Goblet Squat",
           "sets": 2,
           "reps": "8",
           "restSeconds": 75,
-          "playable": true
+          "playable": true,
+          "demonstrationSha256": "5f11a03fa308ef2f8d132a3572263b4b7714751c6a1a434f2d9d129af9f65ba7"
         },
         {
           "position": 2,
-          "exerciseId": "STR-053",
+          "exerciseId": "STR-112",
+          "originalExerciseId": "STR-053",
           "name": "Incline Dumbbell Press",
           "sets": 1,
           "reps": "8 total bilateral repetitions",
           "restSeconds": 60,
-          "playable": false
+          "playable": true,
+          "demonstrationSha256": "ef0433a6e4f1b889b5bf183715c139d0bb96a797728f126651907fb65fbc9705"
         },
         {
           "position": 3,
           "exerciseId": "STR-061",
+          "originalExerciseId": "STR-061",
           "name": "Reverse Shoulder Press",
           "sets": 1,
           "reps": "8 each side",
           "restSeconds": 60,
-          "playable": true
+          "playable": true,
+          "demonstrationSha256": "6e251471b41829920987b4fc5abf0828b4e3cf6d45567da5bdbaa9ba3d33101d"
         },
         {
           "position": 4,
           "exerciseId": "STR-020",
+          "originalExerciseId": "STR-020",
           "name": "Concentration Curl",
           "sets": 1,
           "reps": "8 each side",
           "restSeconds": 60,
-          "playable": true
+          "playable": true,
+          "demonstrationSha256": "1429a26744c5c35054de0e160014991f368f40f55a7d7fc5d6448a32b9264970"
         },
         {
           "position": 5,
           "exerciseId": "STR-092",
+          "originalExerciseId": "STR-092",
           "name": "Russian Twists",
           "sets": 1,
           "reps": "8 each side",
           "restSeconds": 60,
-          "playable": true
+          "playable": true,
+          "demonstrationSha256": "b7be3e113f73276e7f36ad41522c3f2be11772a1ee78fbb0ad8230dc7f7ee159"
         }
       ],
-      "available": 4,
+      "available": 5,
       "total": 5,
       "sequencePreserved": true
     },
@@ -500,56 +540,68 @@
         {
           "position": 1,
           "exerciseId": "STR-057",
+          "originalExerciseId": "STR-057",
           "name": "Standing Calf Raise",
           "sets": 1,
           "reps": "8–10",
           "restSeconds": 75,
-          "playable": true
+          "playable": true,
+          "demonstrationSha256": "5e9882b6a85fe99d71cf02450a4f129e13f515c237d6142b65ff7cf19cc7667d"
         },
         {
           "position": 2,
           "exerciseId": "STR-058",
+          "originalExerciseId": "STR-058",
           "name": "Goblet Squat",
           "sets": 2,
           "reps": "8 each side",
           "restSeconds": 60,
-          "playable": true
+          "playable": true,
+          "demonstrationSha256": "5f11a03fa308ef2f8d132a3572263b4b7714751c6a1a434f2d9d129af9f65ba7"
         },
         {
           "position": 3,
           "exerciseId": "STR-056",
+          "originalExerciseId": "STR-056",
           "name": "Lateral Raise",
           "sets": 2,
           "reps": "8 each side",
           "restSeconds": 60,
-          "playable": true
+          "playable": true,
+          "demonstrationSha256": "5cf328461110582f8fc3d7f3ff6104d9cbbc71833d8a91b1ae2ad77f98743c8f"
         },
         {
           "position": 4,
           "exerciseId": "STR-036",
+          "originalExerciseId": "STR-036",
           "name": "Standing Bicep Curls",
           "sets": 2,
           "reps": "8 each side",
           "restSeconds": 60,
-          "playable": true
+          "playable": true,
+          "demonstrationSha256": "3748894f60b8b4112fd31f2bf64606179067852a45d0309ea8c780bbcfd56666"
         },
         {
           "position": 5,
           "exerciseId": "STR-117",
+          "originalExerciseId": "STR-117",
           "name": "Side Bend",
           "sets": 2,
           "reps": "8 each side",
           "restSeconds": 60,
-          "playable": true
+          "playable": true,
+          "demonstrationSha256": "f39b19e27cfa5ae74703aa2451b494d1996d784fe0e2e6b7c421b6cc69e6db3d"
         },
         {
           "position": 6,
           "exerciseId": "STR-087",
+          "originalExerciseId": "STR-087",
           "name": "Side Bend",
           "sets": 2,
           "reps": "8 each side",
           "restSeconds": 60,
-          "playable": true
+          "playable": true,
+          "demonstrationSha256": "aa343b2525aadb0950e4f3abc900089b41862b754456a768e04699e483b4f00e"
         }
       ],
       "available": 6,
@@ -564,38 +616,46 @@
         {
           "position": 1,
           "exerciseId": "STR-058",
+          "originalExerciseId": "STR-058",
           "name": "Goblet Squat",
           "sets": 2,
           "reps": "8–10",
           "restSeconds": 75,
-          "playable": true
+          "playable": true,
+          "demonstrationSha256": "5f11a03fa308ef2f8d132a3572263b4b7714751c6a1a434f2d9d129af9f65ba7"
         },
         {
           "position": 2,
           "exerciseId": "STR-112",
+          "originalExerciseId": "STR-112",
           "name": "Incline Dumbbell Press",
           "sets": 2,
           "reps": "8–10 each arm",
           "restSeconds": 60,
-          "playable": true
+          "playable": true,
+          "demonstrationSha256": "ef0433a6e4f1b889b5bf183715c139d0bb96a797728f126651907fb65fbc9705"
         },
         {
           "position": 3,
           "exerciseId": "STR-045",
+          "originalExerciseId": "STR-045",
           "name": "Reverse Fly",
           "sets": 2,
           "reps": "8–10 each arm",
           "restSeconds": 60,
-          "playable": true
+          "playable": true,
+          "demonstrationSha256": "4664438cb3c466fc6451a6909707c7e9727d2b7a91dacf929bc61bca22dbdd01"
         },
         {
           "position": 4,
           "exerciseId": "STR-020",
+          "originalExerciseId": "STR-020",
           "name": "Concentration Curl",
           "sets": 2,
           "reps": "8–10 each arm",
           "restSeconds": 60,
-          "playable": true
+          "playable": true,
+          "demonstrationSha256": "1429a26744c5c35054de0e160014991f368f40f55a7d7fc5d6448a32b9264970"
         }
       ],
       "available": 4,
@@ -610,47 +670,57 @@
         {
           "position": 1,
           "exerciseId": "STR-091",
+          "originalExerciseId": "STR-091",
           "name": "Bulgarian Split Squat Left",
           "sets": 1,
           "reps": "6 each side",
           "restSeconds": 90,
-          "playable": true
+          "playable": true,
+          "demonstrationSha256": "b47a5ebd2fb84f018f590d98b953ff493a647553f16ca0103a0d1b0f26ba2a56"
         },
         {
           "position": 2,
           "exerciseId": "STR-104",
+          "originalExerciseId": "STR-104",
           "name": "Bulgarian Split Squat Right",
           "sets": 1,
           "reps": "6 each side",
           "restSeconds": 90,
-          "playable": true
+          "playable": true,
+          "demonstrationSha256": "dc2072b81e22f406e3da9d316621d63a4dbbb9a3face020e8c6b9a7858ed1430"
         },
         {
           "position": 3,
           "exerciseId": "STR-115",
+          "originalExerciseId": "STR-115",
           "name": "Shoulder Press",
           "sets": 2,
           "reps": "8–10",
           "restSeconds": 60,
-          "playable": true
+          "playable": true,
+          "demonstrationSha256": "f117cccd02af7a98d7df51046430cbfdcf4d0beaabbd74df1c077c981844d9a2"
         },
         {
           "position": 4,
           "exerciseId": "STR-057",
+          "originalExerciseId": "STR-057",
           "name": "Standing Calf Raise",
           "sets": 2,
           "reps": "8–10",
           "restSeconds": 60,
-          "playable": true
+          "playable": true,
+          "demonstrationSha256": "5e9882b6a85fe99d71cf02450a4f129e13f515c237d6142b65ff7cf19cc7667d"
         },
         {
           "position": 5,
           "exerciseId": "STR-036",
+          "originalExerciseId": "STR-036",
           "name": "Standing Bicep Curls",
           "sets": 2,
           "reps": "8–10",
           "restSeconds": 60,
-          "playable": true
+          "playable": true,
+          "demonstrationSha256": "3748894f60b8b4112fd31f2bf64606179067852a45d0309ea8c780bbcfd56666"
         }
       ],
       "available": 5,
@@ -665,47 +735,57 @@
         {
           "position": 1,
           "exerciseId": "STR-058",
+          "originalExerciseId": "STR-058",
           "name": "Goblet Squat",
           "sets": 2,
           "reps": "8",
           "restSeconds": 75,
-          "playable": true
+          "playable": true,
+          "demonstrationSha256": "5f11a03fa308ef2f8d132a3572263b4b7714751c6a1a434f2d9d129af9f65ba7"
         },
         {
           "position": 2,
           "exerciseId": "STR-061",
+          "originalExerciseId": "STR-061",
           "name": "Reverse Shoulder Press",
           "sets": 1,
           "reps": "8 each side",
           "restSeconds": 60,
-          "playable": true
+          "playable": true,
+          "demonstrationSha256": "6e251471b41829920987b4fc5abf0828b4e3cf6d45567da5bdbaa9ba3d33101d"
         },
         {
           "position": 3,
           "exerciseId": "STR-056",
+          "originalExerciseId": "STR-056",
           "name": "Lateral Raise",
           "sets": 1,
           "reps": "8 each side",
           "restSeconds": 60,
-          "playable": true
+          "playable": true,
+          "demonstrationSha256": "5cf328461110582f8fc3d7f3ff6104d9cbbc71833d8a91b1ae2ad77f98743c8f"
         },
         {
           "position": 4,
           "exerciseId": "STR-020",
+          "originalExerciseId": "STR-020",
           "name": "Concentration Curl",
           "sets": 1,
           "reps": "8 each side",
           "restSeconds": 60,
-          "playable": true
+          "playable": true,
+          "demonstrationSha256": "1429a26744c5c35054de0e160014991f368f40f55a7d7fc5d6448a32b9264970"
         },
         {
           "position": 5,
           "exerciseId": "STR-092",
+          "originalExerciseId": "STR-092",
           "name": "Russian Twists",
           "sets": 1,
           "reps": "8 each side",
           "restSeconds": 60,
-          "playable": true
+          "playable": true,
+          "demonstrationSha256": "b7be3e113f73276e7f36ad41522c3f2be11772a1ee78fbb0ad8230dc7f7ee159"
         }
       ],
       "available": 5,
@@ -720,56 +800,68 @@
         {
           "position": 1,
           "exerciseId": "STR-057",
+          "originalExerciseId": "STR-057",
           "name": "Standing Calf Raise",
           "sets": 2,
           "reps": "8–10",
           "restSeconds": 75,
-          "playable": true
+          "playable": true,
+          "demonstrationSha256": "5e9882b6a85fe99d71cf02450a4f129e13f515c237d6142b65ff7cf19cc7667d"
         },
         {
           "position": 2,
           "exerciseId": "STR-058",
+          "originalExerciseId": "STR-058",
           "name": "Goblet Squat",
           "sets": 1,
           "reps": "8 each side",
           "restSeconds": 60,
-          "playable": true
+          "playable": true,
+          "demonstrationSha256": "5f11a03fa308ef2f8d132a3572263b4b7714751c6a1a434f2d9d129af9f65ba7"
         },
         {
           "position": 3,
           "exerciseId": "STR-112",
+          "originalExerciseId": "STR-112",
           "name": "Incline Dumbbell Press",
           "sets": 1,
           "reps": "8 each side",
           "restSeconds": 60,
-          "playable": true
+          "playable": true,
+          "demonstrationSha256": "ef0433a6e4f1b889b5bf183715c139d0bb96a797728f126651907fb65fbc9705"
         },
         {
           "position": 4,
           "exerciseId": "STR-087",
+          "originalExerciseId": "STR-087",
           "name": "Side Bend",
           "sets": 1,
           "reps": "8 each side",
           "restSeconds": 60,
-          "playable": true
+          "playable": true,
+          "demonstrationSha256": "aa343b2525aadb0950e4f3abc900089b41862b754456a768e04699e483b4f00e"
         },
         {
           "position": 5,
           "exerciseId": "STR-117",
+          "originalExerciseId": "STR-117",
           "name": "Side Bend",
           "sets": 1,
           "reps": "8 each side",
           "restSeconds": 60,
-          "playable": true
+          "playable": true,
+          "demonstrationSha256": "f39b19e27cfa5ae74703aa2451b494d1996d784fe0e2e6b7c421b6cc69e6db3d"
         },
         {
           "position": 6,
           "exerciseId": "STR-036",
+          "originalExerciseId": "STR-036",
           "name": "Standing Bicep Curls",
           "sets": 1,
           "reps": "8 each side",
           "restSeconds": 60,
-          "playable": true
+          "playable": true,
+          "demonstrationSha256": "3748894f60b8b4112fd31f2bf64606179067852a45d0309ea8c780bbcfd56666"
         }
       ],
       "available": 6,
@@ -784,41 +876,49 @@
         {
           "position": 1,
           "exerciseId": "STR-058",
+          "originalExerciseId": "STR-058",
           "name": "Goblet Squat",
           "sets": 2,
           "reps": "8",
           "restSeconds": 75,
-          "playable": true
+          "playable": true,
+          "demonstrationSha256": "5f11a03fa308ef2f8d132a3572263b4b7714751c6a1a434f2d9d129af9f65ba7"
         },
         {
           "position": 2,
-          "exerciseId": "STR-053",
+          "exerciseId": "STR-112",
+          "originalExerciseId": "STR-053",
           "name": "Incline Dumbbell Press",
           "sets": 1,
           "reps": "8–10",
           "restSeconds": 60,
-          "playable": false
+          "playable": true,
+          "demonstrationSha256": "ef0433a6e4f1b889b5bf183715c139d0bb96a797728f126651907fb65fbc9705"
         },
         {
           "position": 3,
           "exerciseId": "STR-045",
+          "originalExerciseId": "STR-045",
           "name": "Reverse Fly",
           "sets": 1,
           "reps": "8–10",
           "restSeconds": 60,
-          "playable": true
+          "playable": true,
+          "demonstrationSha256": "4664438cb3c466fc6451a6909707c7e9727d2b7a91dacf929bc61bca22dbdd01"
         },
         {
           "position": 4,
           "exerciseId": "STR-115",
+          "originalExerciseId": "STR-115",
           "name": "Shoulder Press",
           "sets": 1,
           "reps": "8–10",
           "restSeconds": 60,
-          "playable": true
+          "playable": true,
+          "demonstrationSha256": "f117cccd02af7a98d7df51046430cbfdcf4d0beaabbd74df1c077c981844d9a2"
         }
       ],
-      "available": 3,
+      "available": 4,
       "total": 4,
       "sequencePreserved": true
     },
@@ -830,47 +930,57 @@
         {
           "position": 1,
           "exerciseId": "STR-091",
+          "originalExerciseId": "STR-091",
           "name": "Bulgarian Split Squat Left",
           "sets": 1,
           "reps": "6 each side",
           "restSeconds": 90,
-          "playable": true
+          "playable": true,
+          "demonstrationSha256": "b47a5ebd2fb84f018f590d98b953ff493a647553f16ca0103a0d1b0f26ba2a56"
         },
         {
           "position": 2,
           "exerciseId": "STR-104",
+          "originalExerciseId": "STR-104",
           "name": "Bulgarian Split Squat Right",
           "sets": 1,
           "reps": "6 each side",
           "restSeconds": 90,
-          "playable": true
+          "playable": true,
+          "demonstrationSha256": "dc2072b81e22f406e3da9d316621d63a4dbbb9a3face020e8c6b9a7858ed1430"
         },
         {
           "position": 3,
           "exerciseId": "STR-056",
+          "originalExerciseId": "STR-056",
           "name": "Lateral Raise",
           "sets": 2,
           "reps": "8–10",
           "restSeconds": 60,
-          "playable": true
+          "playable": true,
+          "demonstrationSha256": "5cf328461110582f8fc3d7f3ff6104d9cbbc71833d8a91b1ae2ad77f98743c8f"
         },
         {
           "position": 4,
           "exerciseId": "STR-020",
+          "originalExerciseId": "STR-020",
           "name": "Concentration Curl",
           "sets": 2,
           "reps": "8–10",
           "restSeconds": 60,
-          "playable": true
+          "playable": true,
+          "demonstrationSha256": "1429a26744c5c35054de0e160014991f368f40f55a7d7fc5d6448a32b9264970"
         },
         {
           "position": 5,
           "exerciseId": "STR-057",
+          "originalExerciseId": "STR-057",
           "name": "Standing Calf Raise",
           "sets": 2,
           "reps": "8–10",
           "restSeconds": 60,
-          "playable": true
+          "playable": true,
+          "demonstrationSha256": "5e9882b6a85fe99d71cf02450a4f129e13f515c237d6142b65ff7cf19cc7667d"
         }
       ],
       "available": 5,
@@ -885,56 +995,68 @@
         {
           "position": 1,
           "exerciseId": "STR-058",
+          "originalExerciseId": "STR-058",
           "name": "Goblet Squat",
           "sets": 2,
           "reps": "8–10",
           "restSeconds": 75,
-          "playable": true
+          "playable": true,
+          "demonstrationSha256": "5f11a03fa308ef2f8d132a3572263b4b7714751c6a1a434f2d9d129af9f65ba7"
         },
         {
           "position": 2,
           "exerciseId": "STR-114",
+          "originalExerciseId": "STR-114",
           "name": "Dumbbell Squeeze Press",
           "sets": 1,
           "reps": "8 each side",
           "restSeconds": 60,
-          "playable": true
+          "playable": true,
+          "demonstrationSha256": "ef6e7aa01ecf3e8f9ff75d290078961fd0fad5c2ac280925fae6ae8bc0c6dc4d"
         },
         {
           "position": 3,
           "exerciseId": "STR-036",
+          "originalExerciseId": "STR-036",
           "name": "Standing Bicep Curls",
           "sets": 1,
           "reps": "8 each side",
           "restSeconds": 60,
-          "playable": true
+          "playable": true,
+          "demonstrationSha256": "3748894f60b8b4112fd31f2bf64606179067852a45d0309ea8c780bbcfd56666"
         },
         {
           "position": 4,
           "exerciseId": "STR-117",
+          "originalExerciseId": "STR-117",
           "name": "Side Bend",
           "sets": 1,
           "reps": "8 each side",
           "restSeconds": 60,
-          "playable": true
+          "playable": true,
+          "demonstrationSha256": "f39b19e27cfa5ae74703aa2451b494d1996d784fe0e2e6b7c421b6cc69e6db3d"
         },
         {
           "position": 5,
           "exerciseId": "STR-087",
+          "originalExerciseId": "STR-087",
           "name": "Side Bend",
           "sets": 1,
           "reps": "8 each side",
           "restSeconds": 60,
-          "playable": true
+          "playable": true,
+          "demonstrationSha256": "aa343b2525aadb0950e4f3abc900089b41862b754456a768e04699e483b4f00e"
         },
         {
           "position": 6,
           "exerciseId": "STR-057",
+          "originalExerciseId": "STR-057",
           "name": "Standing Calf Raise",
           "sets": 1,
           "reps": "8 each side",
           "restSeconds": 60,
-          "playable": true
+          "playable": true,
+          "demonstrationSha256": "5e9882b6a85fe99d71cf02450a4f129e13f515c237d6142b65ff7cf19cc7667d"
         }
       ],
       "available": 6,
@@ -949,68 +1071,82 @@
         {
           "position": 1,
           "exerciseId": "STR-091",
+          "originalExerciseId": "STR-091",
           "name": "Bulgarian Split Squat Left",
           "sets": 2,
           "reps": "8 reps · left side",
           "restSeconds": 75,
-          "playable": true
+          "playable": true,
+          "demonstrationSha256": "b47a5ebd2fb84f018f590d98b953ff493a647553f16ca0103a0d1b0f26ba2a56"
         },
         {
           "position": 2,
           "exerciseId": "STR-104",
+          "originalExerciseId": "STR-104",
           "name": "Bulgarian Split Squat Right",
           "sets": 2,
           "reps": "8 reps · right side",
           "restSeconds": 75,
-          "playable": true
+          "playable": true,
+          "demonstrationSha256": "dc2072b81e22f406e3da9d316621d63a4dbbb9a3face020e8c6b9a7858ed1430"
         },
         {
           "position": 3,
-          "exerciseId": "STR-053",
+          "exerciseId": "STR-112",
+          "originalExerciseId": "STR-053",
           "name": "Incline Dumbbell Press",
           "sets": 3,
           "reps": "8–10",
           "restSeconds": 75,
-          "playable": false
+          "playable": true,
+          "demonstrationSha256": "ef0433a6e4f1b889b5bf183715c139d0bb96a797728f126651907fb65fbc9705"
         },
         {
           "position": 4,
           "exerciseId": "STR-115",
+          "originalExerciseId": "STR-115",
           "name": "Shoulder Press",
           "sets": 2,
           "reps": "8–10",
           "restSeconds": 75,
-          "playable": true
+          "playable": true,
+          "demonstrationSha256": "f117cccd02af7a98d7df51046430cbfdcf4d0beaabbd74df1c077c981844d9a2"
         },
         {
           "position": 5,
           "exerciseId": "STR-045",
+          "originalExerciseId": "STR-045",
           "name": "Reverse Fly",
           "sets": 2,
           "reps": "10–12",
           "restSeconds": 60,
-          "playable": true
+          "playable": true,
+          "demonstrationSha256": "4664438cb3c466fc6451a6909707c7e9727d2b7a91dacf929bc61bca22dbdd01"
         },
         {
           "position": 6,
           "exerciseId": "STR-020",
+          "originalExerciseId": "STR-020",
           "name": "Concentration Curl",
           "sets": 2,
           "reps": "8–10 each arm",
           "restSeconds": 60,
-          "playable": true
+          "playable": true,
+          "demonstrationSha256": "1429a26744c5c35054de0e160014991f368f40f55a7d7fc5d6448a32b9264970"
         },
         {
           "position": 7,
           "exerciseId": "STR-087",
+          "originalExerciseId": "STR-087",
           "name": "Side Bend",
           "sets": 2,
           "reps": "8 each side",
           "restSeconds": 45,
-          "playable": true
+          "playable": true,
+          "demonstrationSha256": "aa343b2525aadb0950e4f3abc900089b41862b754456a768e04699e483b4f00e"
         }
       ],
-      "available": 6,
+      "available": 7,
       "total": 7,
       "sequencePreserved": true
     },
@@ -1022,56 +1158,68 @@
         {
           "position": 1,
           "exerciseId": "STR-058",
+          "originalExerciseId": "STR-058",
           "name": "Goblet Squat",
           "sets": 3,
           "reps": "8–10",
           "restSeconds": 75,
-          "playable": true
+          "playable": true,
+          "demonstrationSha256": "5f11a03fa308ef2f8d132a3572263b4b7714751c6a1a434f2d9d129af9f65ba7"
         },
         {
           "position": 2,
           "exerciseId": "STR-114",
+          "originalExerciseId": "STR-114",
           "name": "Dumbbell Squeeze Press",
           "sets": 2,
           "reps": "10",
           "restSeconds": 60,
-          "playable": true
+          "playable": true,
+          "demonstrationSha256": "ef6e7aa01ecf3e8f9ff75d290078961fd0fad5c2ac280925fae6ae8bc0c6dc4d"
         },
         {
           "position": 3,
           "exerciseId": "STR-056",
+          "originalExerciseId": "STR-056",
           "name": "Lateral Raise",
           "sets": 2,
           "reps": "10",
           "restSeconds": 60,
-          "playable": true
+          "playable": true,
+          "demonstrationSha256": "5cf328461110582f8fc3d7f3ff6104d9cbbc71833d8a91b1ae2ad77f98743c8f"
         },
         {
           "position": 4,
           "exerciseId": "STR-020",
+          "originalExerciseId": "STR-020",
           "name": "Concentration Curl",
           "sets": 2,
           "reps": "10",
           "restSeconds": 60,
-          "playable": true
+          "playable": true,
+          "demonstrationSha256": "1429a26744c5c35054de0e160014991f368f40f55a7d7fc5d6448a32b9264970"
         },
         {
           "position": 5,
           "exerciseId": "STR-087",
+          "originalExerciseId": "STR-087",
           "name": "Side Bend",
           "sets": 2,
           "reps": "10 each side",
           "restSeconds": 60,
-          "playable": true
+          "playable": true,
+          "demonstrationSha256": "aa343b2525aadb0950e4f3abc900089b41862b754456a768e04699e483b4f00e"
         },
         {
           "position": 6,
           "exerciseId": "STR-117",
+          "originalExerciseId": "STR-117",
           "name": "Side Bend",
           "sets": 2,
           "reps": "10 each side",
           "restSeconds": 60,
-          "playable": true
+          "playable": true,
+          "demonstrationSha256": "f39b19e27cfa5ae74703aa2451b494d1996d784fe0e2e6b7c421b6cc69e6db3d"
         }
       ],
       "available": 6,
@@ -1086,56 +1234,68 @@
         {
           "position": 1,
           "exerciseId": "STR-091",
+          "originalExerciseId": "STR-091",
           "name": "Bulgarian Split Squat Left",
           "sets": 2,
           "reps": "8 each side",
           "restSeconds": 90,
-          "playable": true
+          "playable": true,
+          "demonstrationSha256": "b47a5ebd2fb84f018f590d98b953ff493a647553f16ca0103a0d1b0f26ba2a56"
         },
         {
           "position": 2,
           "exerciseId": "STR-104",
+          "originalExerciseId": "STR-104",
           "name": "Bulgarian Split Squat Right",
           "sets": 2,
           "reps": "8 each side",
           "restSeconds": 90,
-          "playable": true
+          "playable": true,
+          "demonstrationSha256": "dc2072b81e22f406e3da9d316621d63a4dbbb9a3face020e8c6b9a7858ed1430"
         },
         {
           "position": 3,
           "exerciseId": "STR-112",
+          "originalExerciseId": "STR-112",
           "name": "Incline Dumbbell Press",
           "sets": 3,
           "reps": "10",
           "restSeconds": 60,
-          "playable": true
+          "playable": true,
+          "demonstrationSha256": "ef0433a6e4f1b889b5bf183715c139d0bb96a797728f126651907fb65fbc9705"
         },
         {
           "position": 4,
           "exerciseId": "STR-061",
+          "originalExerciseId": "STR-061",
           "name": "Reverse Shoulder Press",
           "sets": 3,
           "reps": "10",
           "restSeconds": 60,
-          "playable": true
+          "playable": true,
+          "demonstrationSha256": "6e251471b41829920987b4fc5abf0828b4e3cf6d45567da5bdbaa9ba3d33101d"
         },
         {
           "position": 5,
           "exerciseId": "STR-036",
+          "originalExerciseId": "STR-036",
           "name": "Standing Bicep Curls",
           "sets": 3,
           "reps": "10",
           "restSeconds": 60,
-          "playable": true
+          "playable": true,
+          "demonstrationSha256": "3748894f60b8b4112fd31f2bf64606179067852a45d0309ea8c780bbcfd56666"
         },
         {
           "position": 6,
           "exerciseId": "STR-092",
+          "originalExerciseId": "STR-092",
           "name": "Russian Twists",
           "sets": 3,
           "reps": "10 each side",
           "restSeconds": 60,
-          "playable": true
+          "playable": true,
+          "demonstrationSha256": "b7be3e113f73276e7f36ad41522c3f2be11772a1ee78fbb0ad8230dc7f7ee159"
         }
       ],
       "available": 6,
@@ -1150,50 +1310,60 @@
         {
           "position": 1,
           "exerciseId": "STR-058",
+          "originalExerciseId": "STR-058",
           "name": "Goblet Squat",
           "sets": 3,
           "reps": "10",
           "restSeconds": 75,
-          "playable": true
+          "playable": true,
+          "demonstrationSha256": "5f11a03fa308ef2f8d132a3572263b4b7714751c6a1a434f2d9d129af9f65ba7"
         },
         {
           "position": 2,
-          "exerciseId": "STR-053",
+          "exerciseId": "STR-112",
+          "originalExerciseId": "STR-053",
           "name": "Incline Dumbbell Press",
           "sets": 2,
           "reps": "10–12",
           "restSeconds": 60,
-          "playable": false
+          "playable": true,
+          "demonstrationSha256": "ef0433a6e4f1b889b5bf183715c139d0bb96a797728f126651907fb65fbc9705"
         },
         {
           "position": 3,
           "exerciseId": "STR-045",
+          "originalExerciseId": "STR-045",
           "name": "Reverse Fly",
           "sets": 2,
           "reps": "10–12",
           "restSeconds": 60,
-          "playable": true
+          "playable": true,
+          "demonstrationSha256": "4664438cb3c466fc6451a6909707c7e9727d2b7a91dacf929bc61bca22dbdd01"
         },
         {
           "position": 4,
           "exerciseId": "STR-115",
+          "originalExerciseId": "STR-115",
           "name": "Shoulder Press",
           "sets": 2,
           "reps": "10–12",
           "restSeconds": 60,
-          "playable": true
+          "playable": true,
+          "demonstrationSha256": "f117cccd02af7a98d7df51046430cbfdcf4d0beaabbd74df1c077c981844d9a2"
         },
         {
           "position": 5,
           "exerciseId": "STR-057",
+          "originalExerciseId": "STR-057",
           "name": "Standing Calf Raise",
           "sets": 2,
           "reps": "10–12",
           "restSeconds": 60,
-          "playable": true
+          "playable": true,
+          "demonstrationSha256": "5e9882b6a85fe99d71cf02450a4f129e13f515c237d6142b65ff7cf19cc7667d"
         }
       ],
-      "available": 4,
+      "available": 5,
       "total": 5,
       "sequencePreserved": true
     },
@@ -1205,56 +1375,68 @@
         {
           "position": 1,
           "exerciseId": "STR-058",
+          "originalExerciseId": "STR-058",
           "name": "Goblet Squat",
           "sets": 3,
           "reps": "8–10",
           "restSeconds": 75,
-          "playable": true
+          "playable": true,
+          "demonstrationSha256": "5f11a03fa308ef2f8d132a3572263b4b7714751c6a1a434f2d9d129af9f65ba7"
         },
         {
           "position": 2,
           "exerciseId": "STR-061",
+          "originalExerciseId": "STR-061",
           "name": "Reverse Shoulder Press",
           "sets": 2,
           "reps": "10",
           "restSeconds": 60,
-          "playable": true
+          "playable": true,
+          "demonstrationSha256": "6e251471b41829920987b4fc5abf0828b4e3cf6d45567da5bdbaa9ba3d33101d"
         },
         {
           "position": 3,
           "exerciseId": "STR-056",
+          "originalExerciseId": "STR-056",
           "name": "Lateral Raise",
           "sets": 2,
           "reps": "10",
           "restSeconds": 60,
-          "playable": true
+          "playable": true,
+          "demonstrationSha256": "5cf328461110582f8fc3d7f3ff6104d9cbbc71833d8a91b1ae2ad77f98743c8f"
         },
         {
           "position": 4,
           "exerciseId": "STR-020",
+          "originalExerciseId": "STR-020",
           "name": "Concentration Curl",
           "sets": 2,
           "reps": "10",
           "restSeconds": 60,
-          "playable": true
+          "playable": true,
+          "demonstrationSha256": "1429a26744c5c35054de0e160014991f368f40f55a7d7fc5d6448a32b9264970"
         },
         {
           "position": 5,
           "exerciseId": "STR-087",
+          "originalExerciseId": "STR-087",
           "name": "Side Bend",
           "sets": 2,
           "reps": "10 each side",
           "restSeconds": 60,
-          "playable": true
+          "playable": true,
+          "demonstrationSha256": "aa343b2525aadb0950e4f3abc900089b41862b754456a768e04699e483b4f00e"
         },
         {
           "position": 6,
           "exerciseId": "STR-117",
+          "originalExerciseId": "STR-117",
           "name": "Side Bend",
           "sets": 2,
           "reps": "10 each side",
           "restSeconds": 60,
-          "playable": true
+          "playable": true,
+          "demonstrationSha256": "f39b19e27cfa5ae74703aa2451b494d1996d784fe0e2e6b7c421b6cc69e6db3d"
         }
       ],
       "available": 6,
@@ -1269,56 +1451,68 @@
         {
           "position": 1,
           "exerciseId": "STR-091",
+          "originalExerciseId": "STR-091",
           "name": "Bulgarian Split Squat Left",
           "sets": 2,
           "reps": "8 each side",
           "restSeconds": 90,
-          "playable": true
+          "playable": true,
+          "demonstrationSha256": "b47a5ebd2fb84f018f590d98b953ff493a647553f16ca0103a0d1b0f26ba2a56"
         },
         {
           "position": 2,
           "exerciseId": "STR-104",
+          "originalExerciseId": "STR-104",
           "name": "Bulgarian Split Squat Right",
           "sets": 2,
           "reps": "8 each side",
           "restSeconds": 90,
-          "playable": true
+          "playable": true,
+          "demonstrationSha256": "dc2072b81e22f406e3da9d316621d63a4dbbb9a3face020e8c6b9a7858ed1430"
         },
         {
           "position": 3,
           "exerciseId": "STR-114",
+          "originalExerciseId": "STR-114",
           "name": "Dumbbell Squeeze Press",
           "sets": 3,
           "reps": "10",
           "restSeconds": 60,
-          "playable": true
+          "playable": true,
+          "demonstrationSha256": "ef6e7aa01ecf3e8f9ff75d290078961fd0fad5c2ac280925fae6ae8bc0c6dc4d"
         },
         {
           "position": 4,
           "exerciseId": "STR-115",
+          "originalExerciseId": "STR-115",
           "name": "Shoulder Press",
           "sets": 3,
           "reps": "10",
           "restSeconds": 60,
-          "playable": true
+          "playable": true,
+          "demonstrationSha256": "f117cccd02af7a98d7df51046430cbfdcf4d0beaabbd74df1c077c981844d9a2"
         },
         {
           "position": 5,
           "exerciseId": "STR-020",
+          "originalExerciseId": "STR-020",
           "name": "Concentration Curl",
           "sets": 3,
           "reps": "10",
           "restSeconds": 60,
-          "playable": true
+          "playable": true,
+          "demonstrationSha256": "1429a26744c5c35054de0e160014991f368f40f55a7d7fc5d6448a32b9264970"
         },
         {
           "position": 6,
           "exerciseId": "STR-057",
+          "originalExerciseId": "STR-057",
           "name": "Standing Calf Raise",
           "sets": 3,
           "reps": "10",
           "restSeconds": 60,
-          "playable": true
+          "playable": true,
+          "demonstrationSha256": "5e9882b6a85fe99d71cf02450a4f129e13f515c237d6142b65ff7cf19cc7667d"
         }
       ],
       "available": 6,
@@ -1333,56 +1527,68 @@
         {
           "position": 1,
           "exerciseId": "STR-058",
+          "originalExerciseId": "STR-058",
           "name": "Goblet Squat",
           "sets": 3,
           "reps": "8–10",
           "restSeconds": 75,
-          "playable": true
+          "playable": true,
+          "demonstrationSha256": "5f11a03fa308ef2f8d132a3572263b4b7714751c6a1a434f2d9d129af9f65ba7"
         },
         {
           "position": 2,
           "exerciseId": "STR-112",
+          "originalExerciseId": "STR-112",
           "name": "Incline Dumbbell Press",
           "sets": 2,
           "reps": "10",
           "restSeconds": 60,
-          "playable": true
+          "playable": true,
+          "demonstrationSha256": "ef0433a6e4f1b889b5bf183715c139d0bb96a797728f126651907fb65fbc9705"
         },
         {
           "position": 3,
           "exerciseId": "STR-045",
+          "originalExerciseId": "STR-045",
           "name": "Reverse Fly",
           "sets": 2,
           "reps": "10",
           "restSeconds": 60,
-          "playable": true
+          "playable": true,
+          "demonstrationSha256": "4664438cb3c466fc6451a6909707c7e9727d2b7a91dacf929bc61bca22dbdd01"
         },
         {
           "position": 4,
           "exerciseId": "STR-056",
+          "originalExerciseId": "STR-056",
           "name": "Lateral Raise",
           "sets": 2,
           "reps": "10",
           "restSeconds": 60,
-          "playable": true
+          "playable": true,
+          "demonstrationSha256": "5cf328461110582f8fc3d7f3ff6104d9cbbc71833d8a91b1ae2ad77f98743c8f"
         },
         {
           "position": 5,
           "exerciseId": "STR-036",
+          "originalExerciseId": "STR-036",
           "name": "Standing Bicep Curls",
           "sets": 2,
           "reps": "10",
           "restSeconds": 60,
-          "playable": true
+          "playable": true,
+          "demonstrationSha256": "3748894f60b8b4112fd31f2bf64606179067852a45d0309ea8c780bbcfd56666"
         },
         {
           "position": 6,
           "exerciseId": "STR-092",
+          "originalExerciseId": "STR-092",
           "name": "Russian Twists",
           "sets": 2,
           "reps": "10 each side",
           "restSeconds": 60,
-          "playable": true
+          "playable": true,
+          "demonstrationSha256": "b7be3e113f73276e7f36ad41522c3f2be11772a1ee78fbb0ad8230dc7f7ee159"
         }
       ],
       "available": 6,
@@ -1397,59 +1603,71 @@
         {
           "position": 1,
           "exerciseId": "STR-091",
+          "originalExerciseId": "STR-091",
           "name": "Bulgarian Split Squat Left",
           "sets": 2,
           "reps": "8 each side",
           "restSeconds": 90,
-          "playable": true
+          "playable": true,
+          "demonstrationSha256": "b47a5ebd2fb84f018f590d98b953ff493a647553f16ca0103a0d1b0f26ba2a56"
         },
         {
           "position": 2,
           "exerciseId": "STR-104",
+          "originalExerciseId": "STR-104",
           "name": "Bulgarian Split Squat Right",
           "sets": 2,
           "reps": "8 each side",
           "restSeconds": 90,
-          "playable": true
+          "playable": true,
+          "demonstrationSha256": "dc2072b81e22f406e3da9d316621d63a4dbbb9a3face020e8c6b9a7858ed1430"
         },
         {
           "position": 3,
-          "exerciseId": "STR-053",
+          "exerciseId": "STR-112",
+          "originalExerciseId": "STR-053",
           "name": "Incline Dumbbell Press",
           "sets": 3,
           "reps": "10",
           "restSeconds": 60,
-          "playable": false
+          "playable": true,
+          "demonstrationSha256": "ef0433a6e4f1b889b5bf183715c139d0bb96a797728f126651907fb65fbc9705"
         },
         {
           "position": 4,
           "exerciseId": "STR-061",
+          "originalExerciseId": "STR-061",
           "name": "Reverse Shoulder Press",
           "sets": 3,
           "reps": "10",
           "restSeconds": 60,
-          "playable": true
+          "playable": true,
+          "demonstrationSha256": "6e251471b41829920987b4fc5abf0828b4e3cf6d45567da5bdbaa9ba3d33101d"
         },
         {
           "position": 5,
           "exerciseId": "STR-087",
+          "originalExerciseId": "STR-087",
           "name": "Side Bend",
           "sets": 3,
           "reps": "10 each side",
           "restSeconds": 60,
-          "playable": true
+          "playable": true,
+          "demonstrationSha256": "aa343b2525aadb0950e4f3abc900089b41862b754456a768e04699e483b4f00e"
         },
         {
           "position": 6,
           "exerciseId": "STR-117",
+          "originalExerciseId": "STR-117",
           "name": "Side Bend",
           "sets": 3,
           "reps": "10 each side",
           "restSeconds": 60,
-          "playable": true
+          "playable": true,
+          "demonstrationSha256": "f39b19e27cfa5ae74703aa2451b494d1996d784fe0e2e6b7c421b6cc69e6db3d"
         }
       ],
-      "available": 5,
+      "available": 6,
       "total": 6,
       "sequencePreserved": true
     },
@@ -1461,47 +1679,57 @@
         {
           "position": 1,
           "exerciseId": "STR-058",
+          "originalExerciseId": "STR-058",
           "name": "Goblet Squat",
           "sets": 3,
           "reps": "8–10",
           "restSeconds": 75,
-          "playable": true
+          "playable": true,
+          "demonstrationSha256": "5f11a03fa308ef2f8d132a3572263b4b7714751c6a1a434f2d9d129af9f65ba7"
         },
         {
           "position": 2,
           "exerciseId": "STR-114",
+          "originalExerciseId": "STR-114",
           "name": "Dumbbell Squeeze Press",
           "sets": 2,
           "reps": "10–12",
           "restSeconds": 60,
-          "playable": true
+          "playable": true,
+          "demonstrationSha256": "ef6e7aa01ecf3e8f9ff75d290078961fd0fad5c2ac280925fae6ae8bc0c6dc4d"
         },
         {
           "position": 3,
           "exerciseId": "STR-115",
+          "originalExerciseId": "STR-115",
           "name": "Shoulder Press",
           "sets": 2,
           "reps": "10–12",
           "restSeconds": 60,
-          "playable": true
+          "playable": true,
+          "demonstrationSha256": "f117cccd02af7a98d7df51046430cbfdcf4d0beaabbd74df1c077c981844d9a2"
         },
         {
           "position": 4,
           "exerciseId": "STR-045",
+          "originalExerciseId": "STR-045",
           "name": "Reverse Fly",
           "sets": 2,
           "reps": "10–12",
           "restSeconds": 60,
-          "playable": true
+          "playable": true,
+          "demonstrationSha256": "4664438cb3c466fc6451a6909707c7e9727d2b7a91dacf929bc61bca22dbdd01"
         },
         {
           "position": 5,
           "exerciseId": "STR-020",
+          "originalExerciseId": "STR-020",
           "name": "Concentration Curl",
           "sets": 2,
           "reps": "10–12",
           "restSeconds": 60,
-          "playable": true
+          "playable": true,
+          "demonstrationSha256": "1429a26744c5c35054de0e160014991f368f40f55a7d7fc5d6448a32b9264970"
         }
       ],
       "available": 5,
@@ -1516,56 +1744,68 @@
         {
           "position": 1,
           "exerciseId": "STR-057",
+          "originalExerciseId": "STR-057",
           "name": "Standing Calf Raise",
           "sets": 3,
           "reps": "10",
           "restSeconds": 75,
-          "playable": true
+          "playable": true,
+          "demonstrationSha256": "5e9882b6a85fe99d71cf02450a4f129e13f515c237d6142b65ff7cf19cc7667d"
         },
         {
           "position": 2,
           "exerciseId": "STR-058",
+          "originalExerciseId": "STR-058",
           "name": "Goblet Squat",
           "sets": 2,
           "reps": "10 each side",
           "restSeconds": 60,
-          "playable": true
+          "playable": true,
+          "demonstrationSha256": "5f11a03fa308ef2f8d132a3572263b4b7714751c6a1a434f2d9d129af9f65ba7"
         },
         {
           "position": 3,
           "exerciseId": "STR-112",
+          "originalExerciseId": "STR-112",
           "name": "Incline Dumbbell Press",
           "sets": 2,
           "reps": "10 each side",
           "restSeconds": 60,
-          "playable": true
+          "playable": true,
+          "demonstrationSha256": "ef0433a6e4f1b889b5bf183715c139d0bb96a797728f126651907fb65fbc9705"
         },
         {
           "position": 4,
           "exerciseId": "STR-056",
+          "originalExerciseId": "STR-056",
           "name": "Lateral Raise",
           "sets": 2,
           "reps": "10 each side",
           "restSeconds": 60,
-          "playable": true
+          "playable": true,
+          "demonstrationSha256": "5cf328461110582f8fc3d7f3ff6104d9cbbc71833d8a91b1ae2ad77f98743c8f"
         },
         {
           "position": 5,
           "exerciseId": "STR-087",
+          "originalExerciseId": "STR-087",
           "name": "Side Bend",
           "sets": 2,
           "reps": "10 each side",
           "restSeconds": 60,
-          "playable": true
+          "playable": true,
+          "demonstrationSha256": "aa343b2525aadb0950e4f3abc900089b41862b754456a768e04699e483b4f00e"
         },
         {
           "position": 6,
           "exerciseId": "STR-117",
+          "originalExerciseId": "STR-117",
           "name": "Side Bend",
           "sets": 2,
           "reps": "10 each side",
           "restSeconds": 60,
-          "playable": true
+          "playable": true,
+          "demonstrationSha256": "f39b19e27cfa5ae74703aa2451b494d1996d784fe0e2e6b7c421b6cc69e6db3d"
         }
       ],
       "available": 6,
@@ -1580,56 +1820,68 @@
         {
           "position": 1,
           "exerciseId": "STR-091",
+          "originalExerciseId": "STR-091",
           "name": "Bulgarian Split Squat Left",
           "sets": 3,
           "reps": "8 each side",
           "restSeconds": 90,
-          "playable": true
+          "playable": true,
+          "demonstrationSha256": "b47a5ebd2fb84f018f590d98b953ff493a647553f16ca0103a0d1b0f26ba2a56"
         },
         {
           "position": 2,
           "exerciseId": "STR-104",
+          "originalExerciseId": "STR-104",
           "name": "Bulgarian Split Squat Right",
           "sets": 3,
           "reps": "8 each side",
           "restSeconds": 90,
-          "playable": true
+          "playable": true,
+          "demonstrationSha256": "dc2072b81e22f406e3da9d316621d63a4dbbb9a3face020e8c6b9a7858ed1430"
         },
         {
           "position": 3,
           "exerciseId": "STR-061",
+          "originalExerciseId": "STR-061",
           "name": "Reverse Shoulder Press",
           "sets": 2,
           "reps": "10",
           "restSeconds": 60,
-          "playable": true
+          "playable": true,
+          "demonstrationSha256": "6e251471b41829920987b4fc5abf0828b4e3cf6d45567da5bdbaa9ba3d33101d"
         },
         {
           "position": 4,
           "exerciseId": "STR-115",
+          "originalExerciseId": "STR-115",
           "name": "Shoulder Press",
           "sets": 2,
           "reps": "10",
           "restSeconds": 60,
-          "playable": true
+          "playable": true,
+          "demonstrationSha256": "f117cccd02af7a98d7df51046430cbfdcf4d0beaabbd74df1c077c981844d9a2"
         },
         {
           "position": 5,
           "exerciseId": "STR-036",
+          "originalExerciseId": "STR-036",
           "name": "Standing Bicep Curls",
           "sets": 2,
           "reps": "10",
           "restSeconds": 60,
-          "playable": true
+          "playable": true,
+          "demonstrationSha256": "3748894f60b8b4112fd31f2bf64606179067852a45d0309ea8c780bbcfd56666"
         },
         {
           "position": 6,
           "exerciseId": "STR-092",
+          "originalExerciseId": "STR-092",
           "name": "Russian Twists",
           "sets": 2,
           "reps": "10 each side",
           "restSeconds": 60,
-          "playable": true
+          "playable": true,
+          "demonstrationSha256": "b7be3e113f73276e7f36ad41522c3f2be11772a1ee78fbb0ad8230dc7f7ee159"
         }
       ],
       "available": 6,
@@ -1644,59 +1896,71 @@
         {
           "position": 1,
           "exerciseId": "STR-058",
+          "originalExerciseId": "STR-058",
           "name": "Goblet Squat",
           "sets": 3,
           "reps": "8–10",
           "restSeconds": 75,
-          "playable": true
+          "playable": true,
+          "demonstrationSha256": "5f11a03fa308ef2f8d132a3572263b4b7714751c6a1a434f2d9d129af9f65ba7"
         },
         {
           "position": 2,
-          "exerciseId": "STR-053",
+          "exerciseId": "STR-112",
+          "originalExerciseId": "STR-053",
           "name": "Incline Dumbbell Press",
           "sets": 2,
           "reps": "10–12",
           "restSeconds": 60,
-          "playable": false
+          "playable": true,
+          "demonstrationSha256": "ef0433a6e4f1b889b5bf183715c139d0bb96a797728f126651907fb65fbc9705"
         },
         {
           "position": 3,
           "exerciseId": "STR-114",
+          "originalExerciseId": "STR-114",
           "name": "Dumbbell Squeeze Press",
           "sets": 2,
           "reps": "10–12",
           "restSeconds": 60,
-          "playable": true
+          "playable": true,
+          "demonstrationSha256": "ef6e7aa01ecf3e8f9ff75d290078961fd0fad5c2ac280925fae6ae8bc0c6dc4d"
         },
         {
           "position": 4,
           "exerciseId": "STR-045",
+          "originalExerciseId": "STR-045",
           "name": "Reverse Fly",
           "sets": 2,
           "reps": "10–12",
           "restSeconds": 60,
-          "playable": true
+          "playable": true,
+          "demonstrationSha256": "4664438cb3c466fc6451a6909707c7e9727d2b7a91dacf929bc61bca22dbdd01"
         },
         {
           "position": 5,
           "exerciseId": "STR-020",
+          "originalExerciseId": "STR-020",
           "name": "Concentration Curl",
           "sets": 2,
           "reps": "10–12",
           "restSeconds": 60,
-          "playable": true
+          "playable": true,
+          "demonstrationSha256": "1429a26744c5c35054de0e160014991f368f40f55a7d7fc5d6448a32b9264970"
         },
         {
           "position": 6,
           "exerciseId": "STR-057",
+          "originalExerciseId": "STR-057",
           "name": "Standing Calf Raise",
           "sets": 2,
           "reps": "10–12",
           "restSeconds": 60,
-          "playable": true
+          "playable": true,
+          "demonstrationSha256": "5e9882b6a85fe99d71cf02450a4f129e13f515c237d6142b65ff7cf19cc7667d"
         }
       ],
-      "available": 5,
+      "available": 6,
       "total": 6,
       "sequencePreserved": true
     },
@@ -1708,74 +1972,90 @@
         {
           "position": 1,
           "exerciseId": "STR-091",
+          "originalExerciseId": "STR-091",
           "name": "Bulgarian Split Squat Left",
           "sets": 3,
           "reps": "8 reps · left side",
           "restSeconds": 90,
-          "playable": true
+          "playable": true,
+          "demonstrationSha256": "b47a5ebd2fb84f018f590d98b953ff493a647553f16ca0103a0d1b0f26ba2a56"
         },
         {
           "position": 2,
           "exerciseId": "STR-104",
+          "originalExerciseId": "STR-104",
           "name": "Bulgarian Split Squat Right",
           "sets": 3,
           "reps": "8 reps · right side",
           "restSeconds": 90,
-          "playable": true
+          "playable": true,
+          "demonstrationSha256": "dc2072b81e22f406e3da9d316621d63a4dbbb9a3face020e8c6b9a7858ed1430"
         },
         {
           "position": 3,
           "exerciseId": "STR-114",
+          "originalExerciseId": "STR-114",
           "name": "Dumbbell Squeeze Press",
           "sets": 3,
           "reps": "8–10",
           "restSeconds": 90,
-          "playable": true
+          "playable": true,
+          "demonstrationSha256": "ef6e7aa01ecf3e8f9ff75d290078961fd0fad5c2ac280925fae6ae8bc0c6dc4d"
         },
         {
           "position": 4,
           "exerciseId": "STR-115",
+          "originalExerciseId": "STR-115",
           "name": "Shoulder Press",
           "sets": 3,
           "reps": "8–10",
           "restSeconds": 90,
-          "playable": true
+          "playable": true,
+          "demonstrationSha256": "f117cccd02af7a98d7df51046430cbfdcf4d0beaabbd74df1c077c981844d9a2"
         },
         {
           "position": 5,
           "exerciseId": "STR-056",
+          "originalExerciseId": "STR-056",
           "name": "Lateral Raise",
           "sets": 3,
           "reps": "10–12",
           "restSeconds": 60,
-          "playable": true
+          "playable": true,
+          "demonstrationSha256": "5cf328461110582f8fc3d7f3ff6104d9cbbc71833d8a91b1ae2ad77f98743c8f"
         },
         {
           "position": 6,
           "exerciseId": "STR-045",
+          "originalExerciseId": "STR-045",
           "name": "Reverse Fly",
           "sets": 3,
           "reps": "10–12",
           "restSeconds": 60,
-          "playable": true
+          "playable": true,
+          "demonstrationSha256": "4664438cb3c466fc6451a6909707c7e9727d2b7a91dacf929bc61bca22dbdd01"
         },
         {
           "position": 7,
           "exerciseId": "STR-092",
+          "originalExerciseId": "STR-092",
           "name": "Russian Twists",
           "sets": 3,
           "reps": "10 each side",
           "restSeconds": 45,
-          "playable": true
+          "playable": true,
+          "demonstrationSha256": "b7be3e113f73276e7f36ad41522c3f2be11772a1ee78fbb0ad8230dc7f7ee159"
         },
         {
           "position": 8,
           "exerciseId": "STR-001",
+          "originalExerciseId": "STR-001",
           "name": "Dumbbell Shrug",
           "sets": 3,
           "reps": "10–12",
           "restSeconds": 60,
-          "playable": true
+          "playable": true,
+          "demonstrationSha256": "0299813d5ca1af94a8f7be04676b19b304dacb300b487269ef5ffb2b14801572"
         }
       ],
       "available": 8,
@@ -1790,77 +2070,93 @@
         {
           "position": 1,
           "exerciseId": "STR-058",
+          "originalExerciseId": "STR-058",
           "name": "Goblet Squat",
           "sets": 4,
           "reps": "8–10",
           "restSeconds": 90,
-          "playable": true
+          "playable": true,
+          "demonstrationSha256": "5f11a03fa308ef2f8d132a3572263b4b7714751c6a1a434f2d9d129af9f65ba7"
         },
         {
           "position": 2,
-          "exerciseId": "STR-053",
+          "exerciseId": "STR-112",
+          "originalExerciseId": "STR-053",
           "name": "Incline Dumbbell Press",
           "sets": 3,
           "reps": "10–12",
           "restSeconds": 60,
-          "playable": false
+          "playable": true,
+          "demonstrationSha256": "ef0433a6e4f1b889b5bf183715c139d0bb96a797728f126651907fb65fbc9705"
         },
         {
           "position": 3,
           "exerciseId": "STR-061",
+          "originalExerciseId": "STR-061",
           "name": "Reverse Shoulder Press",
           "sets": 3,
           "reps": "10–12",
           "restSeconds": 60,
-          "playable": true
+          "playable": true,
+          "demonstrationSha256": "6e251471b41829920987b4fc5abf0828b4e3cf6d45567da5bdbaa9ba3d33101d"
         },
         {
           "position": 4,
           "exerciseId": "STR-056",
+          "originalExerciseId": "STR-056",
           "name": "Lateral Raise",
           "sets": 3,
           "reps": "10–12",
           "restSeconds": 60,
-          "playable": true
+          "playable": true,
+          "demonstrationSha256": "5cf328461110582f8fc3d7f3ff6104d9cbbc71833d8a91b1ae2ad77f98743c8f"
         },
         {
           "position": 5,
           "exerciseId": "STR-020",
+          "originalExerciseId": "STR-020",
           "name": "Concentration Curl",
           "sets": 3,
           "reps": "10–12",
           "restSeconds": 60,
-          "playable": true
+          "playable": true,
+          "demonstrationSha256": "1429a26744c5c35054de0e160014991f368f40f55a7d7fc5d6448a32b9264970"
         },
         {
           "position": 6,
           "exerciseId": "STR-087",
+          "originalExerciseId": "STR-087",
           "name": "Side Bend",
           "sets": 3,
           "reps": "10–12 each side",
           "restSeconds": 60,
-          "playable": true
+          "playable": true,
+          "demonstrationSha256": "aa343b2525aadb0950e4f3abc900089b41862b754456a768e04699e483b4f00e"
         },
         {
           "position": 7,
           "exerciseId": "STR-117",
+          "originalExerciseId": "STR-117",
           "name": "Side Bend",
           "sets": 3,
           "reps": "10–12 each side",
           "restSeconds": 60,
-          "playable": true
+          "playable": true,
+          "demonstrationSha256": "f39b19e27cfa5ae74703aa2451b494d1996d784fe0e2e6b7c421b6cc69e6db3d"
         },
         {
           "position": 8,
           "exerciseId": "STR-057",
+          "originalExerciseId": "STR-057",
           "name": "Standing Calf Raise",
           "sets": 3,
           "reps": "10–12",
           "restSeconds": 60,
-          "playable": true
+          "playable": true,
+          "demonstrationSha256": "5e9882b6a85fe99d71cf02450a4f129e13f515c237d6142b65ff7cf19cc7667d"
         }
       ],
-      "available": 7,
+      "available": 8,
       "total": 8,
       "sequencePreserved": true
     },
@@ -1872,65 +2168,79 @@
         {
           "position": 1,
           "exerciseId": "STR-091",
+          "originalExerciseId": "STR-091",
           "name": "Bulgarian Split Squat Left",
           "sets": 3,
           "reps": "8 each side",
           "restSeconds": 90,
-          "playable": true
+          "playable": true,
+          "demonstrationSha256": "b47a5ebd2fb84f018f590d98b953ff493a647553f16ca0103a0d1b0f26ba2a56"
         },
         {
           "position": 2,
           "exerciseId": "STR-104",
+          "originalExerciseId": "STR-104",
           "name": "Bulgarian Split Squat Right",
           "sets": 3,
           "reps": "8 each side",
           "restSeconds": 90,
-          "playable": true
+          "playable": true,
+          "demonstrationSha256": "dc2072b81e22f406e3da9d316621d63a4dbbb9a3face020e8c6b9a7858ed1430"
         },
         {
           "position": 3,
           "exerciseId": "STR-112",
+          "originalExerciseId": "STR-112",
           "name": "Incline Dumbbell Press",
           "sets": 4,
           "reps": "10–12",
           "restSeconds": 60,
-          "playable": true
+          "playable": true,
+          "demonstrationSha256": "ef0433a6e4f1b889b5bf183715c139d0bb96a797728f126651907fb65fbc9705"
         },
         {
           "position": 4,
           "exerciseId": "STR-115",
+          "originalExerciseId": "STR-115",
           "name": "Shoulder Press",
           "sets": 4,
           "reps": "10–12",
           "restSeconds": 60,
-          "playable": true
+          "playable": true,
+          "demonstrationSha256": "f117cccd02af7a98d7df51046430cbfdcf4d0beaabbd74df1c077c981844d9a2"
         },
         {
           "position": 5,
           "exerciseId": "STR-045",
+          "originalExerciseId": "STR-045",
           "name": "Reverse Fly",
           "sets": 4,
           "reps": "10–12",
           "restSeconds": 60,
-          "playable": true
+          "playable": true,
+          "demonstrationSha256": "4664438cb3c466fc6451a6909707c7e9727d2b7a91dacf929bc61bca22dbdd01"
         },
         {
           "position": 6,
           "exerciseId": "STR-036",
+          "originalExerciseId": "STR-036",
           "name": "Standing Bicep Curls",
           "sets": 4,
           "reps": "10–12",
           "restSeconds": 60,
-          "playable": true
+          "playable": true,
+          "demonstrationSha256": "3748894f60b8b4112fd31f2bf64606179067852a45d0309ea8c780bbcfd56666"
         },
         {
           "position": 7,
           "exerciseId": "STR-092",
+          "originalExerciseId": "STR-092",
           "name": "Russian Twists",
           "sets": 4,
           "reps": "10–12 each side",
           "restSeconds": 60,
-          "playable": true
+          "playable": true,
+          "demonstrationSha256": "b7be3e113f73276e7f36ad41522c3f2be11772a1ee78fbb0ad8230dc7f7ee159"
         }
       ],
       "available": 7,
@@ -1945,65 +2255,79 @@
         {
           "position": 1,
           "exerciseId": "STR-058",
+          "originalExerciseId": "STR-058",
           "name": "Goblet Squat",
           "sets": 4,
           "reps": "8–10",
           "restSeconds": 90,
-          "playable": true
+          "playable": true,
+          "demonstrationSha256": "5f11a03fa308ef2f8d132a3572263b4b7714751c6a1a434f2d9d129af9f65ba7"
         },
         {
           "position": 2,
           "exerciseId": "STR-114",
+          "originalExerciseId": "STR-114",
           "name": "Dumbbell Squeeze Press",
           "sets": 3,
           "reps": "10–12",
           "restSeconds": 60,
-          "playable": true
+          "playable": true,
+          "demonstrationSha256": "ef6e7aa01ecf3e8f9ff75d290078961fd0fad5c2ac280925fae6ae8bc0c6dc4d"
         },
         {
           "position": 3,
           "exerciseId": "STR-056",
+          "originalExerciseId": "STR-056",
           "name": "Lateral Raise",
           "sets": 3,
           "reps": "10–12",
           "restSeconds": 60,
-          "playable": true
+          "playable": true,
+          "demonstrationSha256": "5cf328461110582f8fc3d7f3ff6104d9cbbc71833d8a91b1ae2ad77f98743c8f"
         },
         {
           "position": 4,
           "exerciseId": "STR-045",
+          "originalExerciseId": "STR-045",
           "name": "Reverse Fly",
           "sets": 3,
           "reps": "10–12",
           "restSeconds": 60,
-          "playable": true
+          "playable": true,
+          "demonstrationSha256": "4664438cb3c466fc6451a6909707c7e9727d2b7a91dacf929bc61bca22dbdd01"
         },
         {
           "position": 5,
           "exerciseId": "STR-020",
+          "originalExerciseId": "STR-020",
           "name": "Concentration Curl",
           "sets": 3,
           "reps": "10–12",
           "restSeconds": 60,
-          "playable": true
+          "playable": true,
+          "demonstrationSha256": "1429a26744c5c35054de0e160014991f368f40f55a7d7fc5d6448a32b9264970"
         },
         {
           "position": 6,
           "exerciseId": "STR-001",
+          "originalExerciseId": "STR-001",
           "name": "Dumbbell Shrug",
           "sets": 3,
           "reps": "10–12",
           "restSeconds": 60,
-          "playable": true
+          "playable": true,
+          "demonstrationSha256": "0299813d5ca1af94a8f7be04676b19b304dacb300b487269ef5ffb2b14801572"
         },
         {
           "position": 7,
           "exerciseId": "STR-057",
+          "originalExerciseId": "STR-057",
           "name": "Standing Calf Raise",
           "sets": 3,
           "reps": "10–12",
           "restSeconds": 60,
-          "playable": true
+          "playable": true,
+          "demonstrationSha256": "5e9882b6a85fe99d71cf02450a4f129e13f515c237d6142b65ff7cf19cc7667d"
         }
       ],
       "available": 7,
@@ -2018,68 +2342,82 @@
         {
           "position": 1,
           "exerciseId": "STR-091",
+          "originalExerciseId": "STR-091",
           "name": "Bulgarian Split Squat Left",
           "sets": 3,
           "reps": "8 each side",
           "restSeconds": 90,
-          "playable": true
+          "playable": true,
+          "demonstrationSha256": "b47a5ebd2fb84f018f590d98b953ff493a647553f16ca0103a0d1b0f26ba2a56"
         },
         {
           "position": 2,
           "exerciseId": "STR-104",
+          "originalExerciseId": "STR-104",
           "name": "Bulgarian Split Squat Right",
           "sets": 3,
           "reps": "8 each side",
           "restSeconds": 90,
-          "playable": true
+          "playable": true,
+          "demonstrationSha256": "dc2072b81e22f406e3da9d316621d63a4dbbb9a3face020e8c6b9a7858ed1430"
         },
         {
           "position": 3,
-          "exerciseId": "STR-053",
+          "exerciseId": "STR-112",
+          "originalExerciseId": "STR-053",
           "name": "Incline Dumbbell Press",
           "sets": 4,
           "reps": "10",
           "restSeconds": 60,
-          "playable": false
+          "playable": true,
+          "demonstrationSha256": "ef0433a6e4f1b889b5bf183715c139d0bb96a797728f126651907fb65fbc9705"
         },
         {
           "position": 4,
           "exerciseId": "STR-061",
+          "originalExerciseId": "STR-061",
           "name": "Reverse Shoulder Press",
           "sets": 4,
           "reps": "10",
           "restSeconds": 60,
-          "playable": true
+          "playable": true,
+          "demonstrationSha256": "6e251471b41829920987b4fc5abf0828b4e3cf6d45567da5bdbaa9ba3d33101d"
         },
         {
           "position": 5,
           "exerciseId": "STR-087",
+          "originalExerciseId": "STR-087",
           "name": "Side Bend",
           "sets": 4,
           "reps": "10 each side",
           "restSeconds": 60,
-          "playable": true
+          "playable": true,
+          "demonstrationSha256": "aa343b2525aadb0950e4f3abc900089b41862b754456a768e04699e483b4f00e"
         },
         {
           "position": 6,
           "exerciseId": "STR-117",
+          "originalExerciseId": "STR-117",
           "name": "Side Bend",
           "sets": 4,
           "reps": "10 each side",
           "restSeconds": 60,
-          "playable": true
+          "playable": true,
+          "demonstrationSha256": "f39b19e27cfa5ae74703aa2451b494d1996d784fe0e2e6b7c421b6cc69e6db3d"
         },
         {
           "position": 7,
           "exerciseId": "STR-036",
+          "originalExerciseId": "STR-036",
           "name": "Standing Bicep Curls",
           "sets": 4,
           "reps": "10",
           "restSeconds": 60,
-          "playable": true
+          "playable": true,
+          "demonstrationSha256": "3748894f60b8b4112fd31f2bf64606179067852a45d0309ea8c780bbcfd56666"
         }
       ],
-      "available": 6,
+      "available": 7,
       "total": 7,
       "sequencePreserved": true
     },
@@ -2091,65 +2429,79 @@
         {
           "position": 1,
           "exerciseId": "STR-058",
+          "originalExerciseId": "STR-058",
           "name": "Goblet Squat",
           "sets": 4,
           "reps": "8–10",
           "restSeconds": 90,
-          "playable": true
+          "playable": true,
+          "demonstrationSha256": "5f11a03fa308ef2f8d132a3572263b4b7714751c6a1a434f2d9d129af9f65ba7"
         },
         {
           "position": 2,
           "exerciseId": "STR-112",
+          "originalExerciseId": "STR-112",
           "name": "Incline Dumbbell Press",
           "sets": 3,
           "reps": "10–12",
           "restSeconds": 60,
-          "playable": true
+          "playable": true,
+          "demonstrationSha256": "ef0433a6e4f1b889b5bf183715c139d0bb96a797728f126651907fb65fbc9705"
         },
         {
           "position": 3,
           "exerciseId": "STR-114",
+          "originalExerciseId": "STR-114",
           "name": "Dumbbell Squeeze Press",
           "sets": 3,
           "reps": "10–12",
           "restSeconds": 60,
-          "playable": true
+          "playable": true,
+          "demonstrationSha256": "ef6e7aa01ecf3e8f9ff75d290078961fd0fad5c2ac280925fae6ae8bc0c6dc4d"
         },
         {
           "position": 4,
           "exerciseId": "STR-115",
+          "originalExerciseId": "STR-115",
           "name": "Shoulder Press",
           "sets": 3,
           "reps": "10–12",
           "restSeconds": 60,
-          "playable": true
+          "playable": true,
+          "demonstrationSha256": "f117cccd02af7a98d7df51046430cbfdcf4d0beaabbd74df1c077c981844d9a2"
         },
         {
           "position": 5,
           "exerciseId": "STR-056",
+          "originalExerciseId": "STR-056",
           "name": "Lateral Raise",
           "sets": 3,
           "reps": "10–12",
           "restSeconds": 60,
-          "playable": true
+          "playable": true,
+          "demonstrationSha256": "5cf328461110582f8fc3d7f3ff6104d9cbbc71833d8a91b1ae2ad77f98743c8f"
         },
         {
           "position": 6,
           "exerciseId": "STR-020",
+          "originalExerciseId": "STR-020",
           "name": "Concentration Curl",
           "sets": 3,
           "reps": "10–12",
           "restSeconds": 60,
-          "playable": true
+          "playable": true,
+          "demonstrationSha256": "1429a26744c5c35054de0e160014991f368f40f55a7d7fc5d6448a32b9264970"
         },
         {
           "position": 7,
           "exerciseId": "STR-092",
+          "originalExerciseId": "STR-092",
           "name": "Russian Twists",
           "sets": 3,
           "reps": "10–12 each side",
           "restSeconds": 60,
-          "playable": true
+          "playable": true,
+          "demonstrationSha256": "b7be3e113f73276e7f36ad41522c3f2be11772a1ee78fbb0ad8230dc7f7ee159"
         }
       ],
       "available": 7,
@@ -2164,65 +2516,79 @@
         {
           "position": 1,
           "exerciseId": "STR-091",
+          "originalExerciseId": "STR-091",
           "name": "Bulgarian Split Squat Left",
           "sets": 3,
           "reps": "8 each side",
           "restSeconds": 90,
-          "playable": true
+          "playable": true,
+          "demonstrationSha256": "b47a5ebd2fb84f018f590d98b953ff493a647553f16ca0103a0d1b0f26ba2a56"
         },
         {
           "position": 2,
           "exerciseId": "STR-104",
+          "originalExerciseId": "STR-104",
           "name": "Bulgarian Split Squat Right",
           "sets": 3,
           "reps": "8 each side",
           "restSeconds": 90,
-          "playable": true
+          "playable": true,
+          "demonstrationSha256": "dc2072b81e22f406e3da9d316621d63a4dbbb9a3face020e8c6b9a7858ed1430"
         },
         {
           "position": 3,
           "exerciseId": "STR-061",
+          "originalExerciseId": "STR-061",
           "name": "Reverse Shoulder Press",
           "sets": 4,
           "reps": "10–12",
           "restSeconds": 60,
-          "playable": true
+          "playable": true,
+          "demonstrationSha256": "6e251471b41829920987b4fc5abf0828b4e3cf6d45567da5bdbaa9ba3d33101d"
         },
         {
           "position": 4,
           "exerciseId": "STR-056",
+          "originalExerciseId": "STR-056",
           "name": "Lateral Raise",
           "sets": 4,
           "reps": "10–12",
           "restSeconds": 60,
-          "playable": true
+          "playable": true,
+          "demonstrationSha256": "5cf328461110582f8fc3d7f3ff6104d9cbbc71833d8a91b1ae2ad77f98743c8f"
         },
         {
           "position": 5,
           "exerciseId": "STR-045",
+          "originalExerciseId": "STR-045",
           "name": "Reverse Fly",
           "sets": 4,
           "reps": "10–12",
           "restSeconds": 60,
-          "playable": true
+          "playable": true,
+          "demonstrationSha256": "4664438cb3c466fc6451a6909707c7e9727d2b7a91dacf929bc61bca22dbdd01"
         },
         {
           "position": 6,
           "exerciseId": "STR-001",
+          "originalExerciseId": "STR-001",
           "name": "Dumbbell Shrug",
           "sets": 4,
           "reps": "10–12",
           "restSeconds": 60,
-          "playable": true
+          "playable": true,
+          "demonstrationSha256": "0299813d5ca1af94a8f7be04676b19b304dacb300b487269ef5ffb2b14801572"
         },
         {
           "position": 7,
           "exerciseId": "STR-057",
+          "originalExerciseId": "STR-057",
           "name": "Standing Calf Raise",
           "sets": 4,
           "reps": "10–12",
           "restSeconds": 60,
-          "playable": true
+          "playable": true,
+          "demonstrationSha256": "5e9882b6a85fe99d71cf02450a4f129e13f515c237d6142b65ff7cf19cc7667d"
         }
       ],
       "available": 7,
@@ -2237,68 +2603,82 @@
         {
           "position": 1,
           "exerciseId": "STR-058",
+          "originalExerciseId": "STR-058",
           "name": "Goblet Squat",
           "sets": 4,
           "reps": "8–10",
           "restSeconds": 90,
-          "playable": true
+          "playable": true,
+          "demonstrationSha256": "5f11a03fa308ef2f8d132a3572263b4b7714751c6a1a434f2d9d129af9f65ba7"
         },
         {
           "position": 2,
-          "exerciseId": "STR-053",
+          "exerciseId": "STR-112",
+          "originalExerciseId": "STR-053",
           "name": "Incline Dumbbell Press",
           "sets": 3,
           "reps": "10 total bilateral repetitions",
           "restSeconds": 60,
-          "playable": false
+          "playable": true,
+          "demonstrationSha256": "ef0433a6e4f1b889b5bf183715c139d0bb96a797728f126651907fb65fbc9705"
         },
         {
           "position": 3,
           "exerciseId": "STR-114",
+          "originalExerciseId": "STR-114",
           "name": "Dumbbell Squeeze Press",
           "sets": 3,
           "reps": "10 each side",
           "restSeconds": 60,
-          "playable": true
+          "playable": true,
+          "demonstrationSha256": "ef6e7aa01ecf3e8f9ff75d290078961fd0fad5c2ac280925fae6ae8bc0c6dc4d"
         },
         {
           "position": 4,
           "exerciseId": "STR-036",
+          "originalExerciseId": "STR-036",
           "name": "Standing Bicep Curls",
           "sets": 3,
           "reps": "10 each side",
           "restSeconds": 60,
-          "playable": true
+          "playable": true,
+          "demonstrationSha256": "3748894f60b8b4112fd31f2bf64606179067852a45d0309ea8c780bbcfd56666"
         },
         {
           "position": 5,
           "exerciseId": "STR-087",
+          "originalExerciseId": "STR-087",
           "name": "Side Bend",
           "sets": 3,
           "reps": "10 each side",
           "restSeconds": 60,
-          "playable": true
+          "playable": true,
+          "demonstrationSha256": "aa343b2525aadb0950e4f3abc900089b41862b754456a768e04699e483b4f00e"
         },
         {
           "position": 6,
           "exerciseId": "STR-117",
+          "originalExerciseId": "STR-117",
           "name": "Side Bend",
           "sets": 3,
           "reps": "10 each side",
           "restSeconds": 60,
-          "playable": true
+          "playable": true,
+          "demonstrationSha256": "f39b19e27cfa5ae74703aa2451b494d1996d784fe0e2e6b7c421b6cc69e6db3d"
         },
         {
           "position": 7,
           "exerciseId": "STR-092",
+          "originalExerciseId": "STR-092",
           "name": "Russian Twists",
           "sets": 3,
           "reps": "10 each side",
           "restSeconds": 60,
-          "playable": true
+          "playable": true,
+          "demonstrationSha256": "b7be3e113f73276e7f36ad41522c3f2be11772a1ee78fbb0ad8230dc7f7ee159"
         }
       ],
-      "available": 6,
+      "available": 7,
       "total": 7,
       "sequencePreserved": true
     },
@@ -2310,65 +2690,79 @@
         {
           "position": 1,
           "exerciseId": "STR-091",
+          "originalExerciseId": "STR-091",
           "name": "Bulgarian Split Squat Left",
           "sets": 3,
           "reps": "8 each side",
           "restSeconds": 90,
-          "playable": true
+          "playable": true,
+          "demonstrationSha256": "b47a5ebd2fb84f018f590d98b953ff493a647553f16ca0103a0d1b0f26ba2a56"
         },
         {
           "position": 2,
           "exerciseId": "STR-104",
+          "originalExerciseId": "STR-104",
           "name": "Bulgarian Split Squat Right",
           "sets": 3,
           "reps": "8 each side",
           "restSeconds": 90,
-          "playable": true
+          "playable": true,
+          "demonstrationSha256": "dc2072b81e22f406e3da9d316621d63a4dbbb9a3face020e8c6b9a7858ed1430"
         },
         {
           "position": 3,
           "exerciseId": "STR-112",
+          "originalExerciseId": "STR-112",
           "name": "Incline Dumbbell Press",
           "sets": 4,
           "reps": "10–12",
           "restSeconds": 60,
-          "playable": true
+          "playable": true,
+          "demonstrationSha256": "ef0433a6e4f1b889b5bf183715c139d0bb96a797728f126651907fb65fbc9705"
         },
         {
           "position": 4,
           "exerciseId": "STR-115",
+          "originalExerciseId": "STR-115",
           "name": "Shoulder Press",
           "sets": 4,
           "reps": "10–12",
           "restSeconds": 60,
-          "playable": true
+          "playable": true,
+          "demonstrationSha256": "f117cccd02af7a98d7df51046430cbfdcf4d0beaabbd74df1c077c981844d9a2"
         },
         {
           "position": 5,
           "exerciseId": "STR-056",
+          "originalExerciseId": "STR-056",
           "name": "Lateral Raise",
           "sets": 4,
           "reps": "10–12",
           "restSeconds": 60,
-          "playable": true
+          "playable": true,
+          "demonstrationSha256": "5cf328461110582f8fc3d7f3ff6104d9cbbc71833d8a91b1ae2ad77f98743c8f"
         },
         {
           "position": 6,
           "exerciseId": "STR-045",
+          "originalExerciseId": "STR-045",
           "name": "Reverse Fly",
           "sets": 4,
           "reps": "10–12",
           "restSeconds": 60,
-          "playable": true
+          "playable": true,
+          "demonstrationSha256": "4664438cb3c466fc6451a6909707c7e9727d2b7a91dacf929bc61bca22dbdd01"
         },
         {
           "position": 7,
           "exerciseId": "STR-020",
+          "originalExerciseId": "STR-020",
           "name": "Concentration Curl",
           "sets": 4,
           "reps": "10–12",
           "restSeconds": 60,
-          "playable": true
+          "playable": true,
+          "demonstrationSha256": "1429a26744c5c35054de0e160014991f368f40f55a7d7fc5d6448a32b9264970"
         }
       ],
       "available": 7,
@@ -2383,65 +2777,79 @@
         {
           "position": 1,
           "exerciseId": "STR-058",
+          "originalExerciseId": "STR-058",
           "name": "Goblet Squat",
           "sets": 4,
           "reps": "8–10",
           "restSeconds": 90,
-          "playable": true
+          "playable": true,
+          "demonstrationSha256": "5f11a03fa308ef2f8d132a3572263b4b7714751c6a1a434f2d9d129af9f65ba7"
         },
         {
           "position": 2,
           "exerciseId": "STR-061",
+          "originalExerciseId": "STR-061",
           "name": "Reverse Shoulder Press",
           "sets": 3,
           "reps": "10–12",
           "restSeconds": 60,
-          "playable": true
+          "playable": true,
+          "demonstrationSha256": "6e251471b41829920987b4fc5abf0828b4e3cf6d45567da5bdbaa9ba3d33101d"
         },
         {
           "position": 3,
           "exerciseId": "STR-114",
+          "originalExerciseId": "STR-114",
           "name": "Dumbbell Squeeze Press",
           "sets": 3,
           "reps": "10–12",
           "restSeconds": 60,
-          "playable": true
+          "playable": true,
+          "demonstrationSha256": "ef6e7aa01ecf3e8f9ff75d290078961fd0fad5c2ac280925fae6ae8bc0c6dc4d"
         },
         {
           "position": 4,
           "exerciseId": "STR-056",
+          "originalExerciseId": "STR-056",
           "name": "Lateral Raise",
           "sets": 3,
           "reps": "10–12",
           "restSeconds": 60,
-          "playable": true
+          "playable": true,
+          "demonstrationSha256": "5cf328461110582f8fc3d7f3ff6104d9cbbc71833d8a91b1ae2ad77f98743c8f"
         },
         {
           "position": 5,
           "exerciseId": "STR-036",
+          "originalExerciseId": "STR-036",
           "name": "Standing Bicep Curls",
           "sets": 3,
           "reps": "10–12",
           "restSeconds": 60,
-          "playable": true
+          "playable": true,
+          "demonstrationSha256": "3748894f60b8b4112fd31f2bf64606179067852a45d0309ea8c780bbcfd56666"
         },
         {
           "position": 6,
           "exerciseId": "STR-001",
+          "originalExerciseId": "STR-001",
           "name": "Dumbbell Shrug",
           "sets": 3,
           "reps": "10–12",
           "restSeconds": 60,
-          "playable": true
+          "playable": true,
+          "demonstrationSha256": "0299813d5ca1af94a8f7be04676b19b304dacb300b487269ef5ffb2b14801572"
         },
         {
           "position": 7,
           "exerciseId": "STR-057",
+          "originalExerciseId": "STR-057",
           "name": "Standing Calf Raise",
           "sets": 3,
           "reps": "10–12",
           "restSeconds": 60,
-          "playable": true
+          "playable": true,
+          "demonstrationSha256": "5e9882b6a85fe99d71cf02450a4f129e13f515c237d6142b65ff7cf19cc7667d"
         }
       ],
       "available": 7,
@@ -2456,77 +2864,93 @@
         {
           "position": 1,
           "exerciseId": "STR-091",
+          "originalExerciseId": "STR-091",
           "name": "Bulgarian Split Squat Left",
           "sets": 3,
           "reps": "8 each side",
           "restSeconds": 90,
-          "playable": true
+          "playable": true,
+          "demonstrationSha256": "b47a5ebd2fb84f018f590d98b953ff493a647553f16ca0103a0d1b0f26ba2a56"
         },
         {
           "position": 2,
           "exerciseId": "STR-104",
+          "originalExerciseId": "STR-104",
           "name": "Bulgarian Split Squat Right",
           "sets": 3,
           "reps": "8 each side",
           "restSeconds": 90,
-          "playable": true
+          "playable": true,
+          "demonstrationSha256": "dc2072b81e22f406e3da9d316621d63a4dbbb9a3face020e8c6b9a7858ed1430"
         },
         {
           "position": 3,
-          "exerciseId": "STR-053",
+          "exerciseId": "STR-112",
+          "originalExerciseId": "STR-053",
           "name": "Incline Dumbbell Press",
           "sets": 4,
           "reps": "10–12",
           "restSeconds": 60,
-          "playable": false
+          "playable": true,
+          "demonstrationSha256": "ef0433a6e4f1b889b5bf183715c139d0bb96a797728f126651907fb65fbc9705"
         },
         {
           "position": 4,
           "exerciseId": "STR-115",
+          "originalExerciseId": "STR-115",
           "name": "Shoulder Press",
           "sets": 4,
           "reps": "10–12",
           "restSeconds": 60,
-          "playable": true
+          "playable": true,
+          "demonstrationSha256": "f117cccd02af7a98d7df51046430cbfdcf4d0beaabbd74df1c077c981844d9a2"
         },
         {
           "position": 5,
           "exerciseId": "STR-045",
+          "originalExerciseId": "STR-045",
           "name": "Reverse Fly",
           "sets": 4,
           "reps": "10–12",
           "restSeconds": 60,
-          "playable": true
+          "playable": true,
+          "demonstrationSha256": "4664438cb3c466fc6451a6909707c7e9727d2b7a91dacf929bc61bca22dbdd01"
         },
         {
           "position": 6,
           "exerciseId": "STR-087",
+          "originalExerciseId": "STR-087",
           "name": "Side Bend",
           "sets": 4,
           "reps": "10–12 each side",
           "restSeconds": 60,
-          "playable": true
+          "playable": true,
+          "demonstrationSha256": "aa343b2525aadb0950e4f3abc900089b41862b754456a768e04699e483b4f00e"
         },
         {
           "position": 7,
           "exerciseId": "STR-117",
+          "originalExerciseId": "STR-117",
           "name": "Side Bend",
           "sets": 4,
           "reps": "10–12 each side",
           "restSeconds": 60,
-          "playable": true
+          "playable": true,
+          "demonstrationSha256": "f39b19e27cfa5ae74703aa2451b494d1996d784fe0e2e6b7c421b6cc69e6db3d"
         },
         {
           "position": 8,
           "exerciseId": "STR-092",
+          "originalExerciseId": "STR-092",
           "name": "Russian Twists",
           "sets": 4,
           "reps": "10–12 each side",
           "restSeconds": 60,
-          "playable": true
+          "playable": true,
+          "demonstrationSha256": "b7be3e113f73276e7f36ad41522c3f2be11772a1ee78fbb0ad8230dc7f7ee159"
         }
       ],
-      "available": 7,
+      "available": 8,
       "total": 8,
       "sequencePreserved": true
     },
@@ -2538,74 +2962,90 @@
         {
           "position": 1,
           "exerciseId": "STR-058",
+          "originalExerciseId": "STR-058",
           "name": "Goblet Squat",
           "sets": 4,
           "reps": "8–10",
           "restSeconds": 90,
-          "playable": true
+          "playable": true,
+          "demonstrationSha256": "5f11a03fa308ef2f8d132a3572263b4b7714751c6a1a434f2d9d129af9f65ba7"
         },
         {
           "position": 2,
           "exerciseId": "STR-112",
+          "originalExerciseId": "STR-112",
           "name": "Incline Dumbbell Press",
           "sets": 3,
           "reps": "10–12",
           "restSeconds": 60,
-          "playable": true
+          "playable": true,
+          "demonstrationSha256": "ef0433a6e4f1b889b5bf183715c139d0bb96a797728f126651907fb65fbc9705"
         },
         {
           "position": 3,
           "exerciseId": "STR-061",
+          "originalExerciseId": "STR-061",
           "name": "Reverse Shoulder Press",
           "sets": 3,
           "reps": "10–12",
           "restSeconds": 60,
-          "playable": true
+          "playable": true,
+          "demonstrationSha256": "6e251471b41829920987b4fc5abf0828b4e3cf6d45567da5bdbaa9ba3d33101d"
         },
         {
           "position": 4,
           "exerciseId": "STR-114",
+          "originalExerciseId": "STR-114",
           "name": "Dumbbell Squeeze Press",
           "sets": 3,
           "reps": "10–12",
           "restSeconds": 60,
-          "playable": true
+          "playable": true,
+          "demonstrationSha256": "ef6e7aa01ecf3e8f9ff75d290078961fd0fad5c2ac280925fae6ae8bc0c6dc4d"
         },
         {
           "position": 5,
           "exerciseId": "STR-056",
+          "originalExerciseId": "STR-056",
           "name": "Lateral Raise",
           "sets": 3,
           "reps": "10–12",
           "restSeconds": 60,
-          "playable": true
+          "playable": true,
+          "demonstrationSha256": "5cf328461110582f8fc3d7f3ff6104d9cbbc71833d8a91b1ae2ad77f98743c8f"
         },
         {
           "position": 6,
           "exerciseId": "STR-020",
+          "originalExerciseId": "STR-020",
           "name": "Concentration Curl",
           "sets": 3,
           "reps": "10–12",
           "restSeconds": 60,
-          "playable": true
+          "playable": true,
+          "demonstrationSha256": "1429a26744c5c35054de0e160014991f368f40f55a7d7fc5d6448a32b9264970"
         },
         {
           "position": 7,
           "exerciseId": "STR-057",
+          "originalExerciseId": "STR-057",
           "name": "Standing Calf Raise",
           "sets": 3,
           "reps": "10–12",
           "restSeconds": 60,
-          "playable": true
+          "playable": true,
+          "demonstrationSha256": "5e9882b6a85fe99d71cf02450a4f129e13f515c237d6142b65ff7cf19cc7667d"
         },
         {
           "position": 8,
           "exerciseId": "STR-001",
+          "originalExerciseId": "STR-001",
           "name": "Dumbbell Shrug",
           "sets": 3,
           "reps": "10–12",
           "restSeconds": 60,
-          "playable": true
+          "playable": true,
+          "demonstrationSha256": "0299813d5ca1af94a8f7be04676b19b304dacb300b487269ef5ffb2b14801572"
         }
       ],
       "available": 8,
@@ -2617,15 +3057,15 @@
   "summaryByLevel": {
     "Beginner": {
       "workouts": 12,
-      "completeDemonstrationCoverage": 10
+      "completeDemonstrationCoverage": 12
     },
     "Intermediate": {
       "workouts": 12,
-      "completeDemonstrationCoverage": 8
+      "completeDemonstrationCoverage": 12
     },
     "Advanced": {
       "workouts": 12,
-      "completeDemonstrationCoverage": 8
+      "completeDemonstrationCoverage": 12
     }
   },
   "identityConflictEvidence": {
@@ -3071,7 +3511,7 @@
     ],
     "deployed": false
   },
-  "validation": {
+  "priorValidationBeforeMapping": {
     "fullRegressionPassed": 224,
     "failed": 0,
     "skipped": 0,
@@ -3090,5 +3530,33 @@
     "conditionalDraftCoverageAfterRightsAndApplication": 36,
     "runtimeSubstitutionsApplied": 0,
     "STR053Blocked": true
+  },
+  "activeMappingFile": "app/strength/strength-demonstration-mappings.json",
+  "activeMappingFileSha256": "3845c488a3034b7b5326e8566ba252bdca91823d7e1ee38676f3b6bcddc466bf",
+  "finalRightsDisposition": "STR_112_FINAL_RIGHTS_DISPOSITION_AND_MAPPINGS_2026-11-11.json",
+  "validation": {
+    "fullRegressionPassed": 226,
+    "failed": 0,
+    "skipped": 0,
+    "tenAffectedPlansBrowserMappingChecksPassed": 10,
+    "responsiveWidths": [
+      1280,
+      390,
+      320
+    ],
+    "nativeChromeDecodePlaybackPassed": 17,
+    "sourceAndBuildOutputMediaHashesMatched": 17,
+    "syntaxChecksPassed": 68,
+    "localProductionModeBuild": "PASS — local empty environment, no deployment",
+    "activeMappingFilePackaged": true,
+    "originalDefinitionsHashUnchanged": true,
+    "STR053StillExcluded": true,
+    "actualActiveCoverage": {
+      "Beginner": 12,
+      "Intermediate": 12,
+      "Advanced": 12,
+      "total": 36
+    },
+    "noPushOrDeployment": true
   }
 }
