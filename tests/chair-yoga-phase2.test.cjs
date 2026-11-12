@@ -38,7 +38,7 @@ test('all 36 draft scripts are movement-specific, cue-timed, and fit within thei
   }
 });
 
-test('12 workouts replay the exact movement once, then transition for five seconds before auto-starting the next', () => {
+test('each movement replays automatically, then waits indefinitely for manual Next Movement', () => {
   const calls = [];
   const ctl = player.createChairYogaPlayback({ levels: plan.levels, movements: catalog.movements, effects: {
     startPass: (workout, info) => calls.push(['start', workout.id, info.pass]),
@@ -52,27 +52,29 @@ test('12 workouts replay the exact movement once, then transition for five secon
   s = ctl.getSnapshot(); assert.equal(s.pass, 2); assert.equal(s.phase, 'playing');
   ctl.markVideoPlaying(s.generation, s.currentWorkout.id);
   assert.equal(ctl.videoEnded(s.generation, s.currentWorkout.id), true);
-  s = ctl.getSnapshot(); assert.equal(s.phase, 'transition'); assert.equal(s.transitionSecondsRemaining, 5); assert.equal(s.completedCount, 1);
+  s = ctl.getSnapshot(); assert.equal(s.phase, 'movement-complete'); assert.equal(s.completedCount, 1);
+  assert.equal(s.currentWorkout.id, 'IMG_4285'); assert.equal(s.nextWorkout.id, 'IMG_4297');
   assert.equal(ctl.videoEnded(s.generation, s.currentWorkout.id), false);
-  for (let i = 0; i < 4; i++) ctl.tickTransition();
+  assert.equal(typeof ctl.tickTransition, 'undefined');
   assert.equal(ctl.getSnapshot().workoutIndex, 0);
-  ctl.tickTransition(); s = ctl.getSnapshot();
+  assert.equal(ctl.getSnapshot().phase, 'movement-complete');
+  assert.equal(ctl.next(), true); s = ctl.getSnapshot();
   assert.equal(s.workoutIndex, 1); assert.equal(s.pass, 1); assert.equal(s.phase, 'playing');
   assert.deepEqual(calls.filter(row => ['start','replay'].includes(row[0])).slice(0,3), [['start','IMG_4285',1],['replay','IMG_4285',2],['start','IMG_4297',1]]);
 });
 
-test('two-pass timing uses each exact approved clip duration and includes the configured transition intervals', () => {
-  const ctl = player.createChairYogaPlayback({ levels: plan.levels, movements: catalog.movements, transitionSeconds: 5 });
+test('two-pass estimates use exact clip durations and exclude member-controlled pauses', () => {
+  const ctl = player.createChairYogaPlayback({ levels: plan.levels, movements: catalog.movements });
   const beginner = ctl.getLevelSummary('beginner');
   const intermediate = ctl.getLevelSummary('intermediate');
   const advanced = ctl.getLevelSummary('advanced');
-  assert.equal(beginner.workoutCount, 12); assert.equal(beginner.estimatedTotalSeconds, 751);
-  assert.equal(intermediate.workoutCount, 12); assert.equal(intermediate.estimatedTotalSeconds, 753.4);
-  assert.equal(advanced.workoutCount, 12); assert.equal(advanced.estimatedTotalSeconds, 751);
+  assert.equal(beginner.workoutCount, 12); assert.equal(beginner.estimatedTotalSeconds, 696);
+  assert.equal(intermediate.workoutCount, 12); assert.equal(intermediate.estimatedTotalSeconds, 698.4);
+  assert.equal(advanced.workoutCount, 12); assert.equal(advanced.estimatedTotalSeconds, 696);
   assert.equal(catalog.movements.find(item => item.id === 'IMG_4286').durationSeconds * 2, 60.4);
 });
 
-test('pause and resume work during movement and during a transition without advancing early', () => {
+test('pause and resume retain pass and movement; completion waits for explicit Next', () => {
   const calls = [];
   const ctl = player.createChairYogaPlayback({ levels: plan.levels, movements: catalog.movements, effects: {
     startPass: () => calls.push('start'), replayPass: () => calls.push('replay'), pauseMedia: () => calls.push('pause'), resumeMedia: () => calls.push('resume')
@@ -80,11 +82,11 @@ test('pause and resume work during movement and during a transition without adva
   ctl.selectLevel('beginner'); ctl.start();
   assert.equal(ctl.pause(), true); assert.equal(ctl.getSnapshot().phase, 'paused');
   assert.equal(ctl.resume(), true); assert.equal(ctl.getSnapshot().phase, 'playing');
-  let s = ctl.getSnapshot(); ctl.videoEnded(s.generation, s.currentWorkout.id); s = ctl.getSnapshot(); ctl.markVideoPlaying(s.generation, s.currentWorkout.id); ctl.videoEnded(s.generation, s.currentWorkout.id);
-  assert.equal(ctl.getSnapshot().phase, 'transition');
-  ctl.pause(); assert.equal(ctl.getSnapshot().phase, 'transition-paused');
-  ctl.tickTransition(); assert.equal(ctl.getSnapshot().transitionSecondsRemaining, 5);
-  ctl.resume(); assert.equal(ctl.getSnapshot().phase, 'transition');
+  let s = ctl.getSnapshot(); ctl.videoEnded(s.generation, s.currentWorkout.id); s = ctl.getSnapshot();
+  assert.equal(s.pass, 2); assert.equal(s.workoutIndex, 0);
+  ctl.markVideoPlaying(s.generation, s.currentWorkout.id); ctl.videoEnded(s.generation, s.currentWorkout.id);
+  s = ctl.getSnapshot(); assert.equal(s.phase, 'movement-complete'); assert.equal(s.workoutIndex, 0);
+  assert.equal(ctl.next(), true); assert.equal(ctl.getSnapshot().workoutIndex, 1);
   assert.ok(calls.includes('pause')); assert.ok(calls.includes('resume'));
 });
 
@@ -124,8 +126,13 @@ test('final workout reaches completion only after both passes and does not creat
   assert.doesNotMatch(ui,/insert\(|\.from\([^)]*workout/i);
 });
 
-test('mobile player has current/next thumbnails, Pause screen, Resume/Next, and responsive level playlists', () => {
-  for (const id of ['transition-screen','transition-current','transition-next','transition-thumbnail','transition-resume','transition-next-button','completion-screen','previous-workout','next-workout','restart-workout','narration-volume']) assert.match(html, new RegExp(`id="${id}"`));
+test('manual movement screen has completed title, Up Next, thumbnail, Resume and Next Movement', () => {
+  for (const id of ['transition-screen','transition-current','transition-up-next-label','transition-next','transition-thumbnail','transition-resume','transition-next-button','transition-status','completion-screen','previous-workout','next-workout','restart-workout','narration-volume']) assert.match(html, new RegExp(`id="${id}"`));
+  assert.match(html, /Next Movement/);
+  assert.match(html, /Next Movement →/);
+  assert.doesNotMatch(ui, /setInterval\(|tickTransition|transitionSecondsRemaining/);
+  assert.match(ui, /phase === 'movement-complete'/);
+  assert.match(ui, /Press Next Movement to continue/);
   assert.match(css, /@media\(max-width:760px\)/); assert.match(css, /@media\(max-width:400px\)/);
   assert.match(html, /playsinline/); assert.match(ui, /client\.auth\.getUser\(\)/); assert.match(ui, /crypto\.subtle\.digest\('SHA-256'/);
 });

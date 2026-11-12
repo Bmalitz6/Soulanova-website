@@ -32,7 +32,7 @@
         <div>
           <p class="eyebrow">SOULANOVA · YOGA</p>
           <h1>Chair Yoga <em>with Miriam</em></h1>
-          <p>Choose a proposed level and follow its 12-workout playlist. Each movement demonstration plays twice, with a short pause before the next workout.</p>
+          <p>Choose a proposed level and follow its 12-workout playlist. Each movement demonstration plays twice. You choose when to continue to the next movement.</p>
         </div>
         <img src="/app/images/chair-yoga/IMG_4285.jpg" width="480" height="270" alt="Miriam seated in the Soulanova Chair Yoga studio">
       </section>
@@ -64,11 +64,11 @@
           <div id="transition-screen" class="transition-screen" hidden aria-live="polite">
             <p id="transition-eyebrow" class="eyebrow">PAUSED</p>
             <h3 id="transition-current"></h3>
-            <p class="up-next-label">UP NEXT</p>
+            <p id="transition-up-next-label" class="up-next-label">UP NEXT</p>
             <img id="transition-thumbnail" alt="">
             <h2 id="transition-next"></h2>
-            <p id="transition-countdown" class="transition-hint"></p>
-            <div class="transition-controls"><button id="transition-resume" class="button primary" type="button">Resume</button><button id="transition-next-button" class="button secondary" type="button">Next workout</button></div>
+            <p id="transition-status" class="transition-hint"></p>
+            <div class="transition-controls"><button id="transition-resume" class="button primary" type="button">Resume</button><button id="transition-next-button" class="button secondary" type="button">Next Movement</button></div>
           </div>
           <div id="completion-screen" class="completion-screen" hidden>
             <p class="eyebrow">PLAYLIST COMPLETE</p><h2>Level complete</h2><p id="completion-summary"></p><button id="completion-levels" class="button primary" type="button">Choose another level</button>
@@ -77,7 +77,7 @@
         </div>
         <div class="progress-summary"><span id="pass-label">Pass 1 of 2</span><progress id="workout-progress" max="1" value="0" aria-label="Current workout progress"></progress><span id="completed-count">0 of 12 workouts completed</span></div>
         <div class="player-controls" aria-label="Workout controls">
-          <button id="previous-workout" type="button">← Previous</button><button id="pause-workout" class="primary" type="button">Pause</button><button id="restart-workout" type="button">Restart workout</button><button id="next-workout" type="button">Next →</button>
+          <button id="previous-workout" type="button">← Previous Movement</button><button id="pause-workout" class="primary" type="button">Pause</button><button id="restart-workout" type="button">Restart Movement</button><button id="next-workout" type="button">Next Movement →</button>
         </div>
         <section class="narration-panel" aria-labelledby="narration-heading">
           <audio id="chair-yoga-narration" preload="metadata"></audio>

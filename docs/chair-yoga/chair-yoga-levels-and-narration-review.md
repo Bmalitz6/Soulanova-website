@@ -2,7 +2,7 @@
 
 ## Status and assumptions
 
-This is a proposal for review, not approved difficulty metadata. All 36 catalog names, IDs, video URLs, catalog order and video SHA-256 values remain unchanged. A workout uses one video twice; no media copies are duplicated. Most clips play for 29 seconds per pass (~58 seconds total); `IMG_4286` is 30.2 seconds, so two passes are ~60.4 seconds. The playlist uses a five-second transition between workouts; a level is approximately 12 minutes 31 seconds, or 12 minutes 33 seconds for Intermediate because it includes the 30.2-second `IMG_4286` clip, plus any browser startup delay.
+This is a proposal for review, not approved difficulty metadata. All 36 catalog names, IDs, video URLs, catalog order and video SHA-256 values remain unchanged. A workout uses one video twice; no media copies are duplicated. Most clips play for 29 seconds per pass (~58 seconds total); `IMG_4286` is 30.2 seconds, so two passes are ~60.4 seconds. After each non-final movement, playback stops on a persistent manual Next Movement screen. Video-only level time is about 11 minutes 36 seconds for Beginner and Advanced, and 11 minutes 38.4 seconds for Intermediate because it includes the 30.2-second `IMG_4286` clip. Actual elapsed time includes the member’s pauses between movements.
 
 All clips remain candidate media pending owner review. The 36 scripts below are drafts only. No audio has been generated. The visual instructor is Miriam, but the Chair Yoga narrator voice/configuration still requires approval before synthesis. The earlier SoulStretch voice can be proposed for reuse, but it is not presumed approved here.
 

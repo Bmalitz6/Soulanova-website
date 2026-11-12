@@ -4,8 +4,7 @@
   "programTitle": "Chair Yoga with Miriam",
   "playback": {
     "passesPerWorkout": 2,
-    "transitionSeconds": 5,
-    "progression": "video-ended event after pass 2, followed by a five-second transition"
+    "progression": "video-ended event after pass 2; hold a persistent manual Next Movement screen until the member chooses to continue"
   },
   "levels": [
     {

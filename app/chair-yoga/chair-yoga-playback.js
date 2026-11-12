@@ -14,14 +14,14 @@
     return true;
   }
 
-  function createChairYogaPlayback({ levels, movements, effects = {}, passesPerWorkout = 2, transitionSeconds = 5 }) {
+  function createChairYogaPlayback({ levels, movements, effects = {}, passesPerWorkout = 2 }) {
     validatePlaylist(levels, movements);
     const movementById = new Map(movements.map(movement => [movement.id, movement]));
     const levelById = new Map(levels.map(level => [level.id, level]));
     const completed = new Set();
     let current = {
       phase: 'level-selection', levelId: null, workoutIndex: -1, pass: 0,
-      transitionSecondsRemaining: 0, error: null, generation: 0
+      error: null, generation: 0
     };
     let endedHandledForPass = 0;
     let videoReadyForEnd = true;
@@ -54,7 +54,6 @@
       current.workoutIndex = index;
       current.pass = 1;
       current.phase = 'playing';
-      current.transitionSecondsRemaining = 0;
       current.error = null;
       endedHandledForPass = 0;
       videoReadyForEnd = true;
@@ -85,7 +84,7 @@
     function selectLevel(levelId) {
       if (!levelById.has(levelId)) return false;
       stopMedia();
-      current = { ...current, phase: 'playlist', levelId, workoutIndex: -1, pass: 0, transitionSecondsRemaining: 0, error: null, generation: current.generation + 1 };
+      current = { ...current, phase: 'playlist', levelId, workoutIndex: -1, pass: 0, error: null, generation: current.generation + 1 };
       endedHandledForPass = 0;
       emit();
       return true;
@@ -101,19 +100,9 @@
         emit();
         return true;
       }
-      if (current.phase === 'transition') {
-        current.phase = 'transition-paused';
-        emit();
-        return true;
-      }
       return false;
     }
     function resume() {
-      if (current.phase === 'transition-paused') {
-        current.phase = 'transition';
-        emit();
-        return true;
-      }
       if (current.phase === 'paused' || current.phase === 'resume-required') {
         current.phase = 'playing';
         current.error = null;
@@ -125,11 +114,11 @@
       return false;
     }
     function next() {
-      if (!['playing', 'paused', 'resume-required', 'transition', 'transition-paused'].includes(current.phase)) return false;
+      if (!['playing', 'paused', 'resume-required', 'movement-complete'].includes(current.phase)) return false;
       return startAt(current.workoutIndex + 1);
     }
     function previous() {
-      if (!['playing', 'paused', 'resume-required', 'transition', 'transition-paused'].includes(current.phase)) return false;
+      if (!['playing', 'paused', 'resume-required', 'movement-complete'].includes(current.phase)) return false;
       return startAt(current.workoutIndex - 1);
     }
     function restart() {
@@ -158,24 +147,15 @@
       current.error = null;
       if (current.workoutIndex === workoutList().length - 1) {
         current.phase = 'complete';
-        current.transitionSecondsRemaining = 0;
       } else {
-        current.phase = 'transition';
-        current.transitionSecondsRemaining = transitionSeconds;
+        current.phase = 'movement-complete';
       }
-      emit();
-      return true;
-    }
-    function tickTransition() {
-      if (current.phase !== 'transition') return false;
-      current.transitionSecondsRemaining = Math.max(0, current.transitionSecondsRemaining - 1);
-      if (current.transitionSecondsRemaining === 0) return startAt(current.workoutIndex + 1);
       emit();
       return true;
     }
     function backToLevels() {
       stopMedia();
-      current = { ...current, phase: 'level-selection', levelId: null, workoutIndex: -1, pass: 0, transitionSecondsRemaining: 0, error: null, generation: current.generation + 1 };
+      current = { ...current, phase: 'level-selection', levelId: null, workoutIndex: -1, pass: 0, error: null, generation: current.generation + 1 };
       emit();
       return true;
     }
@@ -184,12 +164,11 @@
       if (!level) return null;
       const list = level.workoutIds.map(id => movementById.get(id));
       const mediaSeconds = list.reduce((sum, item) => sum + item.durationSeconds * passesPerWorkout, 0);
-      const transitions = (list.length - 1) * transitionSeconds;
-      return { workoutCount: list.length, passesPerWorkout, mediaSeconds, transitionSeconds: transitions, estimatedTotalSeconds: mediaSeconds + transitions };
+      return { workoutCount: list.length, passesPerWorkout, mediaSeconds, estimatedTotalSeconds: mediaSeconds };
     }
     function getSnapshot() { return snapshot(); }
 
-    return Object.freeze({ selectLevel, start, pause, resume, next, previous, restart, markVideoPlaying, videoEnded, playbackBlocked, tickTransition, backToLevels, getLevelSummary, getSnapshot });
+    return Object.freeze({ selectLevel, start, pause, resume, next, previous, restart, markVideoPlaying, videoEnded, playbackBlocked, backToLevels, getLevelSummary, getSnapshot });
   }
 
   return Object.freeze({ createChairYogaPlayback, validatePlaylist });
