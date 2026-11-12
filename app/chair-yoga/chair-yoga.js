@@ -192,7 +192,7 @@
     $('#next-workout').addEventListener('click', () => controller.next());
     $('#pause-workout').addEventListener('click', () => {
       const phase = controller.getSnapshot().phase;
-      if (phase === 'playing') controller.pause();
+      if (phase === 'playing' || phase === 'transitioning') controller.pause();
       else controller.resume();
     });
     $('#restart-workout').addEventListener('click', () => controller.restart());
@@ -212,7 +212,7 @@
       $('#narration-mute').textContent = narrationMuted ? 'Unmute narration' : 'Mute narration';
     });
     document.addEventListener('visibilitychange', () => {
-      if (document.visibilityState === 'hidden' && controller?.getSnapshot().phase === 'playing') controller.pause();
+      if (document.visibilityState === 'hidden' && ['playing', 'transitioning'].includes(controller?.getSnapshot().phase)) controller.pause();
     });
   }
   function syncNarrationToVideo() {
@@ -231,9 +231,9 @@
     const snap = controller?.getSnapshot();
     const workout = snap?.currentWorkout;
     if (!workout || !Number.isFinite(video.duration) || video.duration <= 0) return;
-    const ratio = (Math.max(0, snap.pass - 1) + Math.min(1, video.currentTime / video.duration)) / 2;
+    const ratio = (Math.max(0, snap.pass - 1) + Math.min(1, video.currentTime / video.duration)) / snap.passesPerWorkout;
     $('#workout-progress').value = ratio;
-    $('#pass-label').textContent = `Pass ${snap.pass} of 2 · ${formatTime(Math.max(0, video.duration - video.currentTime))} left in this pass`;
+    $('#pass-label').textContent = `Loop ${snap.pass} of ${snap.passesPerWorkout} · ${formatTime(Math.max(0, video.duration - video.currentTime))} left in this loop`;
   }
   function renderLevelCards() {
     levelList.replaceChildren();
@@ -246,7 +246,7 @@
       const copy = document.createElement('div'); copy.className = 'level-card-copy';
       const heading = document.createElement('h3'); heading.textContent = level.name;
       const description = document.createElement('p'); description.textContent = level.description;
-      const meta = document.createElement('p'); meta.textContent = `12 movements · 2 passes each · video time about ${formatTime(summary.estimatedTotalSeconds)}, plus your pauses`;
+      const meta = document.createElement('p'); meta.textContent = `12 movements · ${summary.loopsPerMovement} loops each · about ${formatTime(summary.estimatedTotalSeconds)} including transitions`;
       const button = document.createElement('button'); button.type = 'button'; button.className = 'button primary'; button.textContent = 'View 12-workout playlist';
       button.addEventListener('click', () => openPlaylist(level.id));
       copy.append(heading, description, meta, button); card.append(image, copy); levelList.append(card);
@@ -259,17 +259,17 @@
     const summary = controller.getLevelSummary(levelId);
     $('#playlist-heading').textContent = `${currentLevel.name} Chair Yoga`;
     $('#playlist-eyebrow').textContent = 'PROPOSED LEVEL · 12 WORKOUTS';
-    $('#playlist-summary').textContent = `${currentLevel.description} · Video time about ${formatTime(summary.estimatedTotalSeconds)}, plus your pauses. Each movement plays twice.`;
+    $('#playlist-summary').textContent = `${currentLevel.description} · About ${formatTime(summary.estimatedTotalSeconds)} including eleven 5-second transitions. Each movement loops ${summary.loopsPerMovement} times.`;
     workoutList.replaceChildren();
     currentLevel.workoutIds.forEach((id, index) => {
       const movement = byId(id);
       const card = document.createElement('button'); card.type = 'button'; card.className = 'workout-card';
-      card.setAttribute('aria-label', `Start at workout ${index + 1}, ${movement.name}, two passes, about ${formatTime(movement.durationSeconds * 2)}`);
+      card.setAttribute('aria-label', `Start at workout ${index + 1}, ${movement.name}, ${summary.loopsPerMovement} loops, about ${formatTime(movement.durationSeconds * summary.loopsPerMovement)}`);
       const img = document.createElement('img'); img.src = movement.thumbnailUrl; img.alt = '';
       const copy = document.createElement('div'); copy.className = 'workout-card-copy';
       const order = document.createElement('small'); order.textContent = `WORKOUT ${index + 1} OF 12`;
       const title = document.createElement('h3'); title.textContent = movement.name;
-      const duration = document.createElement('small'); duration.textContent = `2 passes · about ${formatTime(movement.durationSeconds * 2)}`;
+      const duration = document.createElement('small'); duration.textContent = `${summary.loopsPerMovement} loops · about ${formatTime(movement.durationSeconds * summary.loopsPerMovement)}`;
       copy.append(order, title, duration); card.append(img, copy);
       card.addEventListener('click', () => startPlaylistAt(index));
       workoutList.append(card);
@@ -288,7 +288,7 @@
     controller.start(index);
   }
   function showLevelSelection() {
-    if (controller && ['playing','paused','resume-required'].includes(controller.getSnapshot().phase)) controller.backToLevels();
+    if (controller && ['playing','paused','transitioning','resume-required'].includes(controller.getSnapshot().phase)) controller.backToLevels();
     playerView.hidden = true;
     playlistView.hidden = true;
     levelSelection.hidden = false;
@@ -304,7 +304,7 @@
       item.setAttribute('aria-current', String(index === snap.workoutIndex));
       const img = document.createElement('img'); img.src = m.thumbnailUrl; img.alt = '';
       const title = document.createElement('strong'); title.textContent = `${index + 1}. ${m.name}`;
-      const meta = document.createElement('small'); meta.textContent = snap.completedWorkoutIds.includes(id) ? 'Completed' : `${formatTime(m.durationSeconds * 2)} · 2 passes`;
+      const meta = document.createElement('small'); meta.textContent = snap.completedWorkoutIds.includes(id) ? 'Completed' : `${formatTime(m.durationSeconds * snap.passesPerWorkout)} · ${snap.passesPerWorkout} loops`;
       item.append(img, title, meta); strip.append(item);
     });
   }
@@ -329,31 +329,36 @@
     if (!workout) return;
     $('#player-heading').textContent = workout.name;
     $('#player-eyebrow').textContent = `${currentLevel?.name || 'CHAIR YOGA'} · WORKOUT ${snap.workoutIndex + 1} OF 12`;
-    $('#player-meta').textContent = `2 passes · about ${formatTime(workout.durationSeconds * 2)} · Miriam demonstration`;
+    $('#player-meta').textContent = `${snap.passesPerWorkout} loops · about ${formatTime(workout.durationSeconds * snap.passesPerWorkout)} · Miriam demonstration`;
     $('#player-position').textContent = `${snap.completedCount} of 12 complete`;
-    $('#pass-label').textContent = `Pass ${snap.pass || 1} of 2`;
+    $('#pass-label').textContent = `Loop ${snap.pass || 1} of ${snap.passesPerWorkout}`;
     $('#completed-count').textContent = `${snap.completedCount} of 12 workouts completed`;
-    $('#workout-progress').value = snap.pass === 2 ? 0.5 : 0;
+    $('#workout-progress').value = Math.max(0, snap.pass - 1) / snap.passesPerWorkout;
     previousButton.disabled = snap.workoutIndex <= 0;
     nextButton.disabled = snap.workoutIndex >= snap.workoutsTotal - 1;
     $('#pause-workout').textContent = snap.phase === 'paused' || snap.phase === 'resume-required' ? 'Resume' : 'Pause';
     $('#pause-workout').disabled = snap.phase === 'complete';
     $('#restart-workout').disabled = false;
-    const isOverlay = snap.phase === 'paused';
-    transitionScreen.hidden = !isOverlay || snap.phase === 'resume-required';
+    const isPaused = snap.phase === 'paused';
+    const isTransitioning = snap.phase === 'transitioning';
+    transitionScreen.hidden = !(isPaused || isTransitioning);
     playbackError.hidden = snap.phase !== 'resume-required';
     $('#playback-error-message').textContent = snap.error || 'Playback needs a tap to resume.';
-    $('#transition-eyebrow').textContent = 'MOVEMENT PAUSED';
-    $('#transition-current').textContent = `CURRENT MOVEMENT: ${workout.name}`;
+    $('#transition-eyebrow').textContent = isTransitioning ? 'MOVEMENT COMPLETE' : 'MOVEMENT PAUSED';
+    $('#transition-current').textContent = isTransitioning ? `COMPLETED: ${workout.name}` : `CURRENT MOVEMENT: ${workout.name}`;
     $('#transition-up-next-label').textContent = snap.nextWorkout ? 'UP NEXT' : 'FINAL MOVEMENT IN THIS LEVEL';
     $('#transition-next').textContent = snap.nextWorkout?.name || 'Level completion';
     const nextImage = $('#transition-thumbnail');
     if (snap.nextWorkout) { nextImage.src = snap.nextWorkout.thumbnailUrl; nextImage.alt = `Next workout: ${snap.nextWorkout.name}`; nextImage.hidden = false; }
     else { nextImage.hidden = true; nextImage.removeAttribute('src'); nextImage.alt = ''; }
-    $('#transition-status').textContent = `Pass ${snap.pass} of 2 · Playback position is preserved.`;
-    $('#transition-resume').hidden = snap.phase !== 'paused';
-    $('#transition-resume').textContent = 'Resume movement';
-    $('#transition-next-button').hidden = !snap.nextWorkout || snap.phase !== 'paused';
+    $('#transition-status').textContent = isTransitioning
+      ? `Next movement starts in ${snap.transitionSecondsRemaining} seconds.`
+      : snap.pausedFrom === 'transitioning'
+        ? `Transition paused with ${snap.transitionSecondsRemaining} seconds remaining.`
+        : `Loop ${snap.pass} of ${snap.passesPerWorkout} · Playback position is preserved.`;
+    $('#transition-resume').hidden = !isPaused;
+    $('#transition-resume').textContent = snap.pausedFrom === 'transitioning' ? 'Resume transition' : 'Resume movement';
+    $('#transition-next-button').hidden = !snap.nextWorkout || !(isPaused || isTransitioning);
     $('#transition-next-button').textContent = 'Next Movement';
     renderSequence(snap);
     updateProgress();
@@ -381,7 +386,8 @@
       controller = window.SoulanovaChairYogaPlayback.createChairYogaPlayback({
         levels: programs.levels,
         movements: catalog.movements,
-        passesPerWorkout: programs.playback.passesPerWorkout,
+        loopCountsByLevel: programs.playback.loopCountsByLevel,
+        transitionDurationMs: programs.playback.transitionDurationSeconds * 1000,
         effects: {
           onStateChange: renderState,
           startPass: (workout, details) => playMedia(workout, details),

@@ -7,7 +7,7 @@
   "generationProvider": null,
   "generationModel": null,
   "generationSettings": null,
-  "passBehavior": "Repeat the same movement narration from the start on both video passes. Keep a quiet ending so voice completes before the 29-second clip ends.",
+  "passBehavior": "When owner-approved audio exists, restart that movement's matching narration from the beginning with every video loop selected for the level: Beginner 2 loops, Intermediate 3 loops, Advanced 4 loops. Keep narration separate from the video audio. Narration remains ungenerated and pending owner approval.",
   "drafts": [
     {
       "movementId": "IMG_4285",

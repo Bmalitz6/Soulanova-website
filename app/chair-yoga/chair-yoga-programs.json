@@ -3,8 +3,13 @@
   "proposalStatus": "pending_owner_approval",
   "programTitle": "Chair Yoga with Miriam",
   "playback": {
-    "passesPerWorkout": 2,
-    "progression": "video-ended event after pass 2 automatically starts the next movement; Pause exposes Resume and manual Next Movement; the final movement completes the level without changing difficulty"
+    "loopCountsByLevel": {
+      "beginner": 2,
+      "intermediate": 3,
+      "advanced": 4
+    },
+    "transitionDurationSeconds": 5,
+    "progression": "Each movement video loops for the selected level count. After the final loop, a black Up Next screen displays the next movement and thumbnail for five seconds, then automatically starts it. Pause freezes playback or the transition timer; Resume continues; Next Movement can skip ahead. The final movement completes the selected level without changing difficulty."
   },
   "levels": [
     {
