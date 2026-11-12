@@ -1,0 +1,152 @@
+{
+  "baselineCommit": "be4d0be13c7031678195ec12d93953f982a4fcce",
+  "ownerAttestation": {
+    "source": "Owner message in Session 3",
+    "classification": "OWNER_PROVIDED_FACTUAL_PROVENANCE \u2014 not independently verified generation metadata",
+    "scope": "STR-112 / IMG_4058 instructor character",
+    "entirelySyntheticCharacter": true,
+    "realPersonPhotoFaceOrLikenessUsedAsInstructorReference": false,
+    "exportServiceOwnerKnowledge": "Unknown; Runway or Magic Hour",
+    "previousExperienceApproval": "Owner previously reviewed and signed off on the 36-workout experience",
+    "effect": "No traditional human model release requested for this instructor character; movement/media approvals are not reopened."
+  },
+  "outputSha256": "ef0433a6e4f1b889b5bf183715c139d0bb96a797728f126651907fb65fbc9705",
+  "focusedSearch": "Exact IMG_4058 MP4 container metadata, existing matching-hash export records, timestamps and bounded read-only recent Runway asset metadata; no broad library inventory repeated.",
+  "mp4ContainerEvidence": {
+    "manifestLocation": "MP4 UUID d8fec3d61b0e483c92975828877ec481, byte offsets 32\u201314223",
+    "action": {
+      "action": "c2pa.created",
+      "softwareAgent": {
+        "name": "Runway Performance Capture",
+        "version": "1.0.0-turbo"
+      },
+      "digitalSourceType": "http://cv.iptc.org/newscodes/digitalsourcetype/trainedAlgorithmicMedia"
+    },
+    "claimGenerator": [
+      {
+        "name": "c2pa-rs",
+        "version": "0.90.5",
+        "org.contentauth.c2pa_rs": "0.90.5"
+      }
+    ],
+    "signatureInfo": {
+      "alg": "Es256",
+      "issuer": "Runway AI, Inc.",
+      "common_name": "Runway",
+      "time": "2026-11-04T16:01:05+00:00"
+    },
+    "ingredientCount": 0
+  },
+  "validator": {
+    "tool": "Official contentauth/c2patool",
+    "downloadVerification": {
+      "repository": "contentauth/c2patool",
+      "release": "v0.28.6",
+      "archive": "v0.28.6-universal-apple-darwin.zip",
+      "archiveSha256": "d627f7481b8095e3046db02364e02429efb9c5b79310fb43509a37b1d72871b5",
+      "githubDigestMatched": true,
+      "binarySha256": "a7429dd024aa11f62531aef74c26861663a81307fb5aeb7732b321d5ccc1fc43"
+    },
+    "mode": "Read and validate only; no write/sign/repair option",
+    "validationState": "Invalid",
+    "successCodes": [
+      "timeStamp.validated",
+      "claimSignature.insideValidity",
+      "assertion.hashedURI.match",
+      "assertion.hashedURI.match",
+      "assertion.bmffHash.match"
+    ],
+    "informationalCodes": [
+      "signingCredential.ocsp.skipped",
+      "timeStamp.untrusted",
+      "assertion.bmffHash.additionalExclusionsPresent"
+    ],
+    "failureCodes": [
+      "signingCredential.untrusted",
+      "signingCredential.invalid"
+    ],
+    "limitation": "Signature and BMFF binding checks passed, but full credential validation did not. Signing credential untrusted and missing required EKU; timestamp trust not established. Do not describe as fully trusted provenance or infer infringement."
+  },
+  "serviceFinding": "Runway Performance Capture is strongly supported by the content-bound signed claim and recorded Runway issuer, independently of filename; fully trusted publisher/account identity remains unestablished. No affirmative Magic Hour final-export evidence found.",
+  "connectorCheck": {
+    "service": "Runway connected recent-assets list",
+    "requestedLimit": 50,
+    "returned": 46,
+    "matchingIMG4058OrSTR112Names": 0,
+    "limitation": "Recent bounded listing has no hash search/history proof; no asset URLs, tokens or unrelated records copied into report. No generation/modification performed."
+  },
+  "fileChecks": [
+    {
+      "path": "/Users/bob/Downloads/Act-Two%20-%20IMG_4058_Runway_Ready_Cropped_Focused%20Dumbbell%20Press%20in%20Soulanova%20Gym.mp4",
+      "sha256": "ef0433a6e4f1b889b5bf183715c139d0bb96a797728f126651907fb65fbc9705",
+      "bytes": 4846536,
+      "localFileModifiedUTC": "2026-11-04T16:01:29.715937+00:00",
+      "localFileBirthUTC": "2026-11-04T16:01:29.424821+00:00",
+      "timestampMeaning": "Local copy/filesystem timestamps, not independently authenticated generation time."
+    },
+    {
+      "path": "/Users/bob/Desktop/Soulanova/10 Strength/03 Final Approved/Soulanova_Strength_IMG_4058_Incline_Dumbbell_Press_APPROVED.mp4",
+      "sha256": "ef0433a6e4f1b889b5bf183715c139d0bb96a797728f126651907fb65fbc9705",
+      "bytes": 4846536,
+      "localFileModifiedUTC": "2026-11-05T01:02:13.869807+00:00",
+      "localFileBirthUTC": "2026-11-05T01:02:13.869807+00:00",
+      "timestampMeaning": "Local copy/filesystem timestamps, not independently authenticated generation time."
+    },
+    {
+      "path": "app/strength/media/exercises/ef0433a6e4f1b889b5bf183715c139d0bb96a797728f126651907fb65fbc9705/Soulanova_Strength_IMG_4058_Incline_Dumbbell_Press_APPROVED.mp4",
+      "sha256": "ef0433a6e4f1b889b5bf183715c139d0bb96a797728f126651907fb65fbc9705",
+      "bytes": 4846536,
+      "localFileModifiedUTC": "2026-11-11T23:59:30.400352+00:00",
+      "localFileBirthUTC": "2026-11-11T23:59:30.399236+00:00",
+      "timestampMeaning": "Local copy/filesystem timestamps, not independently authenticated generation time."
+    }
+  ],
+  "commercialDecision": {
+    "runwayOutputCommercialPermission": "General commercial output permission established in current official Runway guidance, subject to agreement and input rights",
+    "modelReleaseForSyntheticInstructor": "NOT REQUESTED; owner attestation accepted as factual production provenance",
+    "assetClearance": "NOT YET SUFFICIENT for activating the ten substitutions",
+    "specificOutstandingFact": "Ownership or commercial AI-processing permission for the actual performance-driving video, and any additional non-character media inputs actually used. A related raw MOV exists, but its use and rights are not established.",
+    "infringementFinding": "No affirmative evidence of infringement identified; the documentary/input permission gap is not evidence of infringement.",
+    "noReapprovalOrRebuildRequested": true
+  },
+  "rightsReferences": [
+    "https://help.runwayml.com/hc/en-us/articles/21668707517587-Can-I-use-the-content-I-made-in-Runway-for-commercial-purposes",
+    "https://runway.com/terms-ofuse"
+  ],
+  "actualCoverage": {
+    "Beginner": {
+      "workouts": 12,
+      "fullyCovered": 10
+    },
+    "Intermediate": {
+      "workouts": 12,
+      "fullyCovered": 8
+    },
+    "Advanced": {
+      "workouts": 12,
+      "fullyCovered": 8
+    },
+    "totalWorkouts": 36,
+    "fullyCovered": 26,
+    "mappingsApplied": 0,
+    "STR053Blocked": true
+  },
+  "conditionalCoverageAfterSufficientInputRightsAndTenMappings": 36,
+  "validation": {
+    "fullRegressionPassed": 224,
+    "failed": 0,
+    "skipped": 0,
+    "nativeChromeMediaPlaybackPassed": 17,
+    "sourceAndBuildOutputHashesMatched": 17,
+    "syntaxChecksPassed": 68,
+    "localProductionModeBuild": "PASS \u2014 local empty environment only, no deployment",
+    "workoutsPerLevel": [
+      12,
+      12,
+      12
+    ],
+    "activeCovered": 26,
+    "proposedSubstitutionsApplied": 0,
+    "applicationChanges": false
+  }
+}

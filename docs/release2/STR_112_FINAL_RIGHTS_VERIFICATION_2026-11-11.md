@@ -1,5 +1,7 @@
 # STR-112 final local rights audit
 
+> Latest owner/export update: the owner specifically confirms a wholly synthetic instructor with no real-person photo/face/likeness reference. No fictional-character model release is requested. A newly inspected, content-bound MP4 provenance claim identifies Runway Performance Capture, with documented certificate trust/EKU limitations. Only the actual performance-input permission remains material. See [focused export-source resolution](STR_112_EXPORT_SOURCE_RESOLUTION_2026-11-11.md). Earlier uncertainties below are retained as historical context.
+
 > Owner provenance update: the owner confirms the Strength instructor was AI-generated using Runway or Magic Hour. This is recorded as owner-provided production provenance. A wholly synthetic character does not require a traditional model release merely because it depicts a person. The remaining question is the actual input/reference chain and applicable commercial export entitlement. See [targeted AI-generation follow-up](STR_112_AI_GENERATION_PROVENANCE_2026-11-11.md), including new embedded image claims; earlier broad audit findings below are historical context.
 
 **BLOCKED — asset-specific input/commercial/likeness rights are not established by the available records. The ten prepared substitutions remain inactive.** This is a local evidence audit, not a finding that rights do not exist and not legal approval.

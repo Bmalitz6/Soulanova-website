@@ -266,5 +266,16 @@
     "traditionalModelRelease": "Not required for a wholly synthetic character merely because it depicts a person; assess actual reference/input circumstances.",
     "targetedEvidenceNote": "Two candidate PNGs contain unvalidated embedded ChatGPT/gpt-image trainedAlgorithmicMedia claims; actual IMG_4058 input linkage and human-reference history remain unestablished."
   },
-  "targetedFollowup": "STR_112_AI_GENERATION_PROVENANCE_2026-11-11.md"
+  "targetedFollowup": "STR_112_AI_GENERATION_PROVENANCE_2026-11-11.md",
+  "latestOwnerSyntheticCharacterAttestation": {
+    "source": "Owner message in Session 3",
+    "classification": "OWNER_PROVIDED_FACTUAL_PROVENANCE \u2014 not independently verified generation metadata",
+    "scope": "STR-112 / IMG_4058 instructor character",
+    "entirelySyntheticCharacter": true,
+    "realPersonPhotoFaceOrLikenessUsedAsInstructorReference": false,
+    "exportServiceOwnerKnowledge": "Unknown; Runway or Magic Hour",
+    "previousExperienceApproval": "Owner previously reviewed and signed off on the 36-workout experience",
+    "effect": "No traditional human model release requested for this instructor character; movement/media approvals are not reopened."
+  },
+  "focusedExportFollowup": "STR_112_EXPORT_SOURCE_RESOLUTION_2026-11-11.md"
 }

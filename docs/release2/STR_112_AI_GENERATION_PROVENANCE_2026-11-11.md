@@ -1,5 +1,7 @@
 # STR-112 — targeted AI-generation provenance update
 
+> Latest owner/export update: the owner specifically confirms a wholly synthetic instructor with no real-person photo/face/likeness reference. No fictional-character model release is requested. A newly inspected, content-bound MP4 provenance claim identifies Runway Performance Capture, with documented certificate trust/EKU limitations. Only the actual performance-input permission remains material. See [focused export-source resolution](STR_112_EXPORT_SOURCE_RESOLUTION_2026-11-11.md). Earlier uncertainties below are retained as historical context.
+
 **Status: AI generation is owner-confirmed; wholly synthetic/no-real-person input history and exact commercial export entitlement remain unresolved. No substitutions applied.** This is a targeted follow-up, not a repeat of the previous broad audit.
 
 ## Owner confirmation recorded

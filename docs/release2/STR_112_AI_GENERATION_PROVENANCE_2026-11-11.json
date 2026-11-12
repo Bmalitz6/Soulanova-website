@@ -108,7 +108,7 @@
   ],
   "method": "Targeted local metadata/PNG embedded-claim inspection, archive member-name inspection and relevant master-handoff records only. No broad audit repeated. No biometric identity inference, credentials or provider-account access. No cryptographic C2PA validation performed.",
   "actualGenerationProjectRecordLocated": false,
-  "recognizableRealPersonInputStatus": "UNKNOWN \u2014 cannot establish input use/non-use from visual appearance or missing ingredient claims",
+  "recognizableRealPersonInputStatus": "OWNER_ATTESTED_NONE for instructor photo/face/likeness references; not independently authenticated input metadata.",
   "traditionalModelReleaseRequirement": "No blanket requirement for a wholly synthetic character. Establish actual input provenance; seek applicable permission only if real-person/source circumstances warrant it.",
   "providerTerms": [
     {
@@ -124,9 +124,7 @@
     }
   ],
   "remainingEvidence": [
-    "Project/generation record or asset-specific owner account identifying the character input and whether any real-person photo/face/likeness reference was used",
-    "Final IMG_4058 generation/export service; if Magic Hour, qualifying commercial entitlement associated with the generation/export",
-    "Actual motion input provenance/permission only if the raw recording or another external clip was used"
+    "Actual performance-driving video identity and ownership/commercial AI-processing permission; see focused export resolution."
   ],
   "mappingsApplied": 0,
   "STR053Blocked": true,
@@ -154,5 +152,23 @@
     "actualActiveCovered": 26,
     "mappingsApplied": 0,
     "applicationChanges": false
-  }
+  },
+  "latestOwnerSyntheticCharacterAttestation": {
+    "source": "Owner message in Session 3",
+    "classification": "OWNER_PROVIDED_FACTUAL_PROVENANCE \u2014 not independently verified generation metadata",
+    "scope": "STR-112 / IMG_4058 instructor character",
+    "entirelySyntheticCharacter": true,
+    "realPersonPhotoFaceOrLikenessUsedAsInstructorReference": false,
+    "exportServiceOwnerKnowledge": "Unknown; Runway or Magic Hour",
+    "previousExperienceApproval": "Owner previously reviewed and signed off on the 36-workout experience",
+    "effect": "No traditional human model release requested for this instructor character; movement/media approvals are not reopened."
+  },
+  "focusedExportFollowup": "STR_112_EXPORT_SOURCE_RESOLUTION_2026-11-11.md",
+  "previousRealPersonInputStatusBeforeSpecificOwnerAttestation": "UNKNOWN \u2014 cannot establish input use/non-use from visual appearance or missing ingredient claims",
+  "previousRemainingEvidenceBeforeFocusedExportCheck": [
+    "Project/generation record or asset-specific owner account identifying the character input and whether any real-person photo/face/likeness reference was used",
+    "Final IMG_4058 generation/export service; if Magic Hour, qualifying commercial entitlement associated with the generation/export",
+    "Actual motion input provenance/permission only if the raw recording or another external clip was used"
+  ],
+  "currentExportEvidence": "Content-bound Runway Performance Capture action, recorded Runway signature issuer; signature and BMFF hash pass, overall credential validation fails (untrusted signer/missing EKU)."
 }
