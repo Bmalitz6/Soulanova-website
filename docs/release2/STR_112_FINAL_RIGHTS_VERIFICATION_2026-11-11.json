@@ -251,5 +251,20 @@
     ],
     "actualActiveFullyCovered": 26,
     "proposedMappingsApplied": 0
-  }
+  },
+  "ownerProvidedProductionProvenance": {
+    "source": "Owner message in Session 3",
+    "statement": "The Strength instructor was AI-generated using Runway or Magic Hour.",
+    "classification": "OWNER_PROVIDED_PRODUCTION_PROVENANCE",
+    "establishes": "Owner-confirmed AI generation process for the Strength instructor",
+    "doesNotEstablish": [
+      "Specific provider/job used for IMG_4058",
+      "Whether uploaded photo/face/likeness references were used",
+      "Whether any actual motion input was owner-created or licensed",
+      "Exact export entitlement if a commercial-use plan was required"
+    ],
+    "traditionalModelRelease": "Not required for a wholly synthetic character merely because it depicts a person; assess actual reference/input circumstances.",
+    "targetedEvidenceNote": "Two candidate PNGs contain unvalidated embedded ChatGPT/gpt-image trainedAlgorithmicMedia claims; actual IMG_4058 input linkage and human-reference history remain unestablished."
+  },
+  "targetedFollowup": "STR_112_AI_GENERATION_PROVENANCE_2026-11-11.md"
 }

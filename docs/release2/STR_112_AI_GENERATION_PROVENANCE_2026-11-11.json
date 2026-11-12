@@ -1,0 +1,158 @@
+{
+  "baselineCommit": "cd9dfa12664bef9fee3b72c9b854b341d04497b6",
+  "ownerProvenance": {
+    "source": "Owner message in Session 3",
+    "statement": "The Strength instructor was AI-generated using Runway or Magic Hour.",
+    "classification": "OWNER_PROVIDED_PRODUCTION_PROVENANCE",
+    "establishes": "Owner-confirmed AI generation process for the Strength instructor",
+    "doesNotEstablish": [
+      "Specific provider/job used for IMG_4058",
+      "Whether uploaded photo/face/likeness references were used",
+      "Whether any actual motion input was owner-created or licensed",
+      "Exact export entitlement if a commercial-use plan was required"
+    ],
+    "traditionalModelRelease": "Not required for a wholly synthetic character merely because it depicts a person; assess actual reference/input circumstances."
+  },
+  "embeddedClaimEvidence": "STR_112_AI_IMAGE_EMBEDDED_PROVENANCE_2026-11-11.json",
+  "candidateImageFindings": [
+    {
+      "file": "/Users/bob/Downloads/Professional Gym Instructor Profile.png",
+      "sha256": "564a8b2578c4f3f725450c7fde8780b15bbc73139a4b07242a85f77972a1e7c0",
+      "claimLabels": [
+        "c2pa.actions.v2",
+        "c2pa.hash.data",
+        "c2pa.claim.v2",
+        "c2pa.signature"
+      ],
+      "actions": [
+        {
+          "action": "c2pa.created",
+          "digitalSourceType": "http://cv.iptc.org/newscodes/digitalsourcetype/trainedAlgorithmicMedia",
+          "softwareAgent": {
+            "name": "ChatGPT",
+            "version": "gpt-image"
+          }
+        },
+        {
+          "action": "c2pa.converted"
+        },
+        {
+          "action": "c2pa.watermarked.unbound"
+        }
+      ],
+      "ingredientClaimsPresent": false,
+      "cryptographicValidation": "NOT PERFORMED; embedded claim inspection only",
+      "limits": "No prompt/reference inputs established; no real-person identity inferred from image appearance."
+    },
+    {
+      "file": "/Users/bob/Downloads/Confident Soulanova Wellness Instructor.png",
+      "sha256": "c07f4a82a10da6032466ac0525ad89c927c0c5d277879e6566be6aacd9707bfb",
+      "claimLabels": [
+        "c2pa.actions.v2",
+        "c2pa.hash.data",
+        "c2pa.claim.v2",
+        "c2pa.signature"
+      ],
+      "actions": [
+        {
+          "action": "c2pa.created",
+          "digitalSourceType": "http://cv.iptc.org/newscodes/digitalsourcetype/trainedAlgorithmicMedia",
+          "softwareAgent": {
+            "name": "ChatGPT",
+            "version": "gpt-image"
+          }
+        },
+        {
+          "action": "c2pa.converted"
+        },
+        {
+          "action": "c2pa.watermarked.unbound"
+        }
+      ],
+      "ingredientClaimsPresent": false,
+      "cryptographicValidation": "NOT PERFORMED; embedded claim inspection only",
+      "limits": "No prompt/reference inputs established; no real-person identity inferred from image appearance."
+    }
+  ],
+  "candidateJPG": {
+    "path": "/Users/bob/Downloads/Soulanova_Strength_Instructor.jpg",
+    "sha256": "33d54e0d4543daf85c507c06ee2dfd1d264b84c5a9cd938f2e4b18842abc7934",
+    "finding": "Existing approved hero image per master handoff; no embedded prompt/ingredient provenance found. Its use as IMG_4058 character reference is not established."
+  },
+  "archiveMemberChecks": [
+    {
+      "path": "/Users/bob/Downloads/Soulanova_002_003_004_Clean_MagicHour_Sources_FINAL.zip",
+      "memberCount": 4,
+      "IMG4058OrInstructorProjectRecordMembers": []
+    },
+    {
+      "path": "/Users/bob/Downloads/Soulanova_048_052_054_Clean_MagicHour_Sources.zip",
+      "memberCount": 4,
+      "IMG4058OrInstructorProjectRecordMembers": []
+    },
+    {
+      "path": "/Users/bob/Downloads/Soulanova_MagicHour_Glitches_Removed_REVIEW.zip",
+      "memberCount": 2,
+      "IMG4058OrInstructorProjectRecordMembers": []
+    },
+    {
+      "path": "/Users/bob/Downloads/Soulanova_027_MagicHour_Clean_Source.zip",
+      "memberCount": 1,
+      "IMG4058OrInstructorProjectRecordMembers": []
+    },
+    {
+      "path": "/Users/bob/Downloads/Soulanova_038_Gazing_Into_the_Distant_Past_MagicHour_Source.zip",
+      "memberCount": 2,
+      "IMG4058OrInstructorProjectRecordMembers": []
+    }
+  ],
+  "method": "Targeted local metadata/PNG embedded-claim inspection, archive member-name inspection and relevant master-handoff records only. No broad audit repeated. No biometric identity inference, credentials or provider-account access. No cryptographic C2PA validation performed.",
+  "actualGenerationProjectRecordLocated": false,
+  "recognizableRealPersonInputStatus": "UNKNOWN \u2014 cannot establish input use/non-use from visual appearance or missing ingredient claims",
+  "traditionalModelReleaseRequirement": "No blanket requirement for a wholly synthetic character. Establish actual input provenance; seek applicable permission only if real-person/source circumstances warrant it.",
+  "providerTerms": [
+    {
+      "provider": "Runway",
+      "source": "https://help.runwayml.com/hc/en-us/articles/21668707517587-Can-I-use-the-content-I-made-in-Runway-for-commercial-purposes",
+      "finding": "Commercial outputs generally permitted under agreement; does not prove rights to actual inputs."
+    },
+    {
+      "provider": "Magic Hour",
+      "source": "https://magichour.ai/terms-of-service",
+      "support": "https://help.magichour.ai/en/articles/12613246-commercial-use-watermarks-and-your-rights",
+      "finding": "Commercial use requires qualifying paid subscription, credit purchase or agreed paid usage arrangement, subject to input/content rights. Actual service/entitlement for IMG_4058 not established."
+    }
+  ],
+  "remainingEvidence": [
+    "Project/generation record or asset-specific owner account identifying the character input and whether any real-person photo/face/likeness reference was used",
+    "Final IMG_4058 generation/export service; if Magic Hour, qualifying commercial entitlement associated with the generation/export",
+    "Actual motion input provenance/permission only if the raw recording or another external clip was used"
+  ],
+  "mappingsApplied": 0,
+  "STR053Blocked": true,
+  "activeCoverage": {
+    "Beginner": 10,
+    "Intermediate": 8,
+    "Advanced": 8,
+    "total": 26,
+    "workouts": 36
+  },
+  "conditionalCoverageAfterSufficientEvidenceAndTenMappings": 36,
+  "validation": {
+    "fullRegressionPassed": 224,
+    "failed": 0,
+    "skipped": 0,
+    "nativeChromeMediaPlaybackPassed": 17,
+    "mediaSourceAndBuildOutputHashesMatched": 17,
+    "syntaxChecksPassed": 68,
+    "localProductionModeBuild": "PASS \u2014 local empty environment only; no deployment",
+    "workoutsPerLevel": [
+      12,
+      12,
+      12
+    ],
+    "actualActiveCovered": 26,
+    "mappingsApplied": 0,
+    "applicationChanges": false
+  }
+}

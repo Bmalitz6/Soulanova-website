@@ -1,5 +1,7 @@
 # STR-112 final local rights audit
 
+> Owner provenance update: the owner confirms the Strength instructor was AI-generated using Runway or Magic Hour. This is recorded as owner-provided production provenance. A wholly synthetic character does not require a traditional model release merely because it depicts a person. The remaining question is the actual input/reference chain and applicable commercial export entitlement. See [targeted AI-generation follow-up](STR_112_AI_GENERATION_PROVENANCE_2026-11-11.md), including new embedded image claims; earlier broad audit findings below are historical context.
+
 **BLOCKED — asset-specific input/commercial/likeness rights are not established by the available records. The ten prepared substitutions remain inactive.** This is a local evidence audit, not a finding that rights do not exist and not legal approval.
 
 Baseline: `69ce8d1aa4c64f71ed9d5e64882c918a7ff82a5b`. All 36 original workouts remain: 12 Beginner, 12 Intermediate, 12 Advanced. The two owner-approved bilateral repetition corrections remain intact. STR-053 / Review #10 remains blocked, with all identity/frame evidence preserved. No application file or mapping was changed during this audit.

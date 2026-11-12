@@ -1,0 +1,60 @@
+[
+  {
+    "file": "/Users/bob/Downloads/Professional Gym Instructor Profile.png",
+    "sha256": "564a8b2578c4f3f725450c7fde8780b15bbc73139a4b07242a85f77972a1e7c0",
+    "claimLabels": [
+      "c2pa.actions.v2",
+      "c2pa.hash.data",
+      "c2pa.claim.v2",
+      "c2pa.signature"
+    ],
+    "actions": [
+      {
+        "action": "c2pa.created",
+        "digitalSourceType": "http://cv.iptc.org/newscodes/digitalsourcetype/trainedAlgorithmicMedia",
+        "softwareAgent": {
+          "name": "ChatGPT",
+          "version": "gpt-image"
+        }
+      },
+      {
+        "action": "c2pa.converted"
+      },
+      {
+        "action": "c2pa.watermarked.unbound"
+      }
+    ],
+    "ingredientClaimsPresent": false,
+    "cryptographicValidation": "NOT PERFORMED; embedded claim inspection only",
+    "limits": "No prompt/reference inputs established; no real-person identity inferred from image appearance."
+  },
+  {
+    "file": "/Users/bob/Downloads/Confident Soulanova Wellness Instructor.png",
+    "sha256": "c07f4a82a10da6032466ac0525ad89c927c0c5d277879e6566be6aacd9707bfb",
+    "claimLabels": [
+      "c2pa.actions.v2",
+      "c2pa.hash.data",
+      "c2pa.claim.v2",
+      "c2pa.signature"
+    ],
+    "actions": [
+      {
+        "action": "c2pa.created",
+        "digitalSourceType": "http://cv.iptc.org/newscodes/digitalsourcetype/trainedAlgorithmicMedia",
+        "softwareAgent": {
+          "name": "ChatGPT",
+          "version": "gpt-image"
+        }
+      },
+      {
+        "action": "c2pa.converted"
+      },
+      {
+        "action": "c2pa.watermarked.unbound"
+      }
+    ],
+    "ingredientClaimsPresent": false,
+    "cryptographicValidation": "NOT PERFORMED; embedded claim inspection only",
+    "limits": "No prompt/reference inputs established; no real-person identity inferred from image appearance."
+  }
+]
