@@ -68,7 +68,9 @@
   function renderLibrary() {
     view = 'library'; $('#library-view').hidden = false; $('#workout-detail').hidden = true; $('#player-view').hidden = true;
     const list = $('#workout-list'); list.replaceChildren();
-    const workouts = catalog.workouts.filter(workout => workout.level === level);
+    const released = window.SoulanovaStrengthRelease.library(catalog.workouts, id=>!!window.SoulanovaPrograms.media(verifiedMedia.get(id)));
+    document.querySelectorAll('[data-level]').forEach(tab=>{tab.querySelector('small').textContent=`${released.filter(w=>w.level===tab.dataset.level).length} practice selections`;});
+    const workouts = released.filter(workout=>workout.level===level);
     const recommended = progressTools?.getRecommendedWorkout(workouts, localCompletions);
     const counts = progressTools?.completionCounts(localCompletions) || {};
     workouts.forEach(workout => {
@@ -77,11 +79,11 @@
       const copy = document.createElement('div');
       const title = document.createElement('h3'); title.textContent = workout.title;
       const desc = document.createElement('p'); desc.textContent = workout.description;
-      const meta = document.createElement('small'); meta.textContent = `${workout.level} · ${workout.exercises.length} exercises · ${workout.estimatedMinutes} min`;
+      const meta = document.createElement('small'); meta.textContent = `${workout.level} · ${workout.exercises.length} approved ${workout.exercises.length===1?'movement':'movements'} · ${workout.exercises.reduce((n,e)=>n+e.sets,0)} sets`;
       const progress = document.createElement('small');
       const count = counts[workout.id] || 0;
       progress.className = 'workout-progress';
-      progress.textContent='Progress recording paused · Existing history unchanged';
+      progress.textContent=`Practice selection · ${workout.exercises.length} of ${workout.originalMovementCount} original movements · History unchanged`;
       const open = makeButton('View workout →', 'card-open', () => renderDetail(workout));
       copy.append(title, desc, meta, document.createElement('br'), progress, document.createElement('br'), open);
       const image = document.createElement('img'); image.src = mediaUrl(featured.thumbnail); image.alt = `${featured.name} exercise still`; image.loading = 'lazy';
@@ -104,10 +106,10 @@
     }
     const card = document.createElement('article'); card.className = 'detail-card';
     const back = makeButton('← Workout list', 'button secondary', renderLibrary);
-    const eyebrow = document.createElement('p'); eyebrow.className = 'eyebrow'; eyebrow.textContent = `${detailModel.level.toUpperCase()} · ${detailModel.estimatedMinutes} MINUTES`;
+    const eyebrow = document.createElement('p'); eyebrow.className = 'eyebrow'; eyebrow.textContent = `${detailModel.level.toUpperCase()} · APPROVED MOVEMENT PRACTICE`;
     const heading = document.createElement('h2'); heading.textContent = detailModel.title;
     const description = document.createElement('p'); description.textContent = detailModel.description;
-    const guidance = document.createElement('p'); guidance.textContent = detailModel.guidance;
+    const guidance = document.createElement('p'); guidance.textContent = `${workout.exercises.length} of ${workout.originalMovementCount} original movements. This is an approved-video practice selection, not the full plan. ${detailModel.guidance}`;
     const equipment = detailModel.equipment;
     const equipmentSection = document.createElement('section'); equipmentSection.className = 'equipment-summary';
     const equipmentTitle = document.createElement('h3'); equipmentTitle.textContent = 'Equipment You’ll Need';
@@ -152,7 +154,7 @@
       const cue = document.createElement('small'); cue.textContent = item.instruction;
       const asset=catalog.exercises.find(e=>e.id===item.exerciseId);if(asset){const image=document.createElement('img');image.src=mediaUrl(asset.thumbnail);image.alt=asset.name+' exercise icon';image.className='exercise-icon';li.append(image);}li.append(name,prescription,cue);const availability=document.createElement('small');availability.textContent=window.SoulanovaPrograms.media(verifiedMedia.get(item.exerciseId))?'Approved video available in guided session':'Video unavailable · final-master approval required';li.append(availability);list.append(li);
     });
-    const start=makeButton('Start guided session','button primary',()=>startWorkout(workout));start.disabled=!workout.exercises.some(e=>window.SoulanovaPrograms.media(verifiedMedia.get(e.exerciseId)));
+    const start=makeButton('Start approved practice','button primary',()=>startWorkout(workout));start.disabled=!workout.exercises.some(e=>window.SoulanovaPrograms.media(verifiedMedia.get(e.exerciseId)));
     card.append(back, eyebrow, heading, description, guidance, equipmentSection, restSection, list, start);
     updateRestDetail();
     detail.append(card); detail.scrollIntoView({ behavior: 'smooth', block: 'start' });
@@ -412,7 +414,7 @@
 
   async function verifiedOwner(){const expected=member?.id,revision=authRevision;if(!expected||!client)throw Error('Sign in required.');const {data,error}=await client.auth.getUser();if(error||data?.user?.is_anonymous||data?.user?.id!==expected||revision!==authRevision)throw Error('Member verification changed.');return expected;}
   async function showApprovedDemo(id){const revision=authRevision;try{await verifiedOwner();if(revision!==authRevision)return;const m=verifiedMedia.get(id),url=window.SoulanovaPrograms.media(m);if(!url)return;stopMedia();view='player';$('#library-view').hidden=true;$('#workout-detail').hidden=true;const {card}=appendPlayerShell(m.name,'APPROVED FINAL-MASTER DEMONSTRATION');const video=document.createElement('video');video.className='player-media';video.controls=true;video.playsInline=true;video.preload='metadata';video.src=url;video.setAttribute('aria-label',m.name+' approved demonstration');activeVideo=video;video.addEventListener('error',()=>setStatus('This demonstration could not load. No playback or completion is claimed.'));const note=document.createElement('p');note.textContent='Individual demonstration only. Use play, pause, seeking and volume. No completion is recorded.';card.append(video,note);card.scrollIntoView({block:'start'});}catch{if(revision===authRevision)void verifyMember();}}
-  function renderReference(){const list=$('#reference-list');list.replaceChildren();for(const e of catalog.exercises){const card=document.createElement('article');card.className='reference-card';card.dataset.exerciseId=e.id;const image=document.createElement('img');image.src=mediaUrl(e.thumbnail);image.alt=e.name+' exercise icon';image.loading='lazy';const h=document.createElement('h3');h.textContent=e.name;const note=document.createElement('p');note.textContent=e.muscleGroup;card.append(image,h,note);list.append(card);}}
+  function renderReference(){const list=$('#reference-list');list.replaceChildren();for(const e of catalog.exercises.filter(e=>window.SoulanovaPrograms.media(verifiedMedia.get(e.id)))){const card=document.createElement('article');card.className='reference-card';card.dataset.exerciseId=e.id;const image=document.createElement('img');image.src=mediaUrl(e.thumbnail);image.alt=e.name+' exercise icon';image.loading='lazy';const h=document.createElement('h3');h.textContent=e.name;const note=document.createElement('p');note.textContent=e.muscleGroup;card.append(image,h,note);list.append(card);}}
   function clearMember(){stopMedia();authRevision++;member=null;root.hidden=true;authRequired.hidden=false;$('#workout-list').replaceChildren();$('#workout-detail').replaceChildren();$('#player-view').replaceChildren();$('#reference-list').replaceChildren();$('#reference-list').hidden=true;$('#reference-toggle').setAttribute('aria-expanded','false');}
   async function verifyMember(){clearMember();const revision=authRevision;try{const {data,error}=await client.auth.getUser();if(revision!==authRevision)return;if(error||!data?.user||data.user.is_anonymous)return;member=data.user;$('#member-name').textContent='Verified Soulanova member';authRequired.hidden=true;root.hidden=false;renderLibrary();renderReference();renderProgress();}catch{if(revision===authRevision){loadError.textContent='Existing member session could not be verified. Return to Overview to sign in.';loadError.hidden=false;}}}
   function setup(){

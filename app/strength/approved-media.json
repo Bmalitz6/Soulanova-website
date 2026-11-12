@@ -1,0 +1,50 @@
+{
+  "schema": 1,
+  "assets": [
+    {
+      "id": "STR-114",
+      "name": "Dumbbell Squeeze Press",
+      "sha256": "ef6e7aa01ecf3e8f9ff75d290078961fd0fad5c2ac280925fae6ae8bc0c6dc4d",
+      "file": "app/strength/media/exercises/ef6e7aa01ecf3e8f9ff75d290078961fd0fad5c2ac280925fae6ae8bc0c6dc4d/Soulanova_Strength_IMG_4061_Dumbbell_Squeeze_Press_APPROVED.mp4",
+      "bytes": 5370883,
+      "approvedSource": "https://www.soulanova.com/app/strength/media/exercises/Soulanova_Strength_IMG_4061_Dumbbell_Squeeze_Press_APPROVED.mp4",
+      "approval": "APPROVED MASTER — pinned SHA-256 verified"
+    },
+    {
+      "id": "STR-053",
+      "name": "Incline Dumbbell Press",
+      "sha256": "560de86d0dfd8b4db9d6a24512114048ee6ac91309739e146bc65667c8f503a7",
+      "file": "app/strength/media/exercises/560de86d0dfd8b4db9d6a24512114048ee6ac91309739e146bc65667c8f503a7/Soulanova_Strength_IMG_4059_Incline_Dumbbell_Press_APPROVED.mp4",
+      "bytes": 5109669,
+      "approvedSource": "https://www.soulanova.com/app/strength/media/exercises/Soulanova_Strength_IMG_4059_Incline_Dumbbell_Press_APPROVED.mp4",
+      "approval": "APPROVED MASTER — pinned SHA-256 verified"
+    },
+    {
+      "id": "STR-112",
+      "name": "Incline Dumbbell Press",
+      "sha256": "ef0433a6e4f1b889b5bf183715c139d0bb96a797728f126651907fb65fbc9705",
+      "file": "app/strength/media/exercises/ef0433a6e4f1b889b5bf183715c139d0bb96a797728f126651907fb65fbc9705/Soulanova_Strength_IMG_4058_Incline_Dumbbell_Press_APPROVED.mp4",
+      "bytes": 4846536,
+      "approvedSource": "https://www.soulanova.com/app/strength/media/exercises/Soulanova_Strength_IMG_4058_Incline_Dumbbell_Press_APPROVED.mp4",
+      "approval": "APPROVED MASTER — pinned SHA-256 verified"
+    },
+    {
+      "id": "STR-061",
+      "name": "Reverse Shoulder Press",
+      "sha256": "6e251471b41829920987b4fc5abf0828b4e3cf6d45567da5bdbaa9ba3d33101d",
+      "file": "app/strength/media/exercises/6e251471b41829920987b4fc5abf0828b4e3cf6d45567da5bdbaa9ba3d33101d/Soulanova_Strength_IMG_4048_Reverse_Shoulder_Press_APPROVED.mp4",
+      "bytes": 4313116,
+      "approvedSource": "https://www.soulanova.com/app/strength/media/exercises/Soulanova_Strength_IMG_4048_Reverse_Shoulder_Press_APPROVED.mp4",
+      "approval": "APPROVED MASTER — pinned SHA-256 verified"
+    },
+    {
+      "id": "STR-115",
+      "name": "Shoulder Press",
+      "sha256": "f117cccd02af7a98d7df51046430cbfdcf4d0beaabbd74df1c077c981844d9a2",
+      "file": "app/strength/media/exercises/f117cccd02af7a98d7df51046430cbfdcf4d0beaabbd74df1c077c981844d9a2/Soulanova_Strength_IMG_4044_Shoulder_Press_APPROVED.mp4",
+      "bytes": 6404638,
+      "approvedSource": "https://www.soulanova.com/app/strength/media/exercises/Soulanova_Strength_IMG_4044_Shoulder_Press_APPROVED.mp4",
+      "approval": "APPROVED MASTER — pinned SHA-256 verified"
+    }
+  ]
+}

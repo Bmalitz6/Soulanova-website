@@ -90,7 +90,7 @@ test('browser: premium hierarchy keeps four primary metrics and reveals secondar
  assert.deepEqual(await page.locator('main > section[id]').evaluateAll(els=>els.map(e=>e.id)),['program-overview','diary','foodscore','recipe-library','nutrition-goals']);
  assert.equal(await page.locator('.hero-actions a').count(),2);assert.equal(await page.locator('.fuel-grid').count(),0);
  assert.equal(await page.locator('#diary-totals > .total-item').count(),4);assert.equal(await page.locator('#secondary-totals > .total-item').count(),2);
- assert.equal(await page.locator('#secondary-totals').isVisible(),false);await page.locator('.secondary-metrics > summary').focus();await page.keyboard.press('Enter');assert.equal(await page.locator('#secondary-totals').isVisible(),true);
+ assert.equal(await page.locator('#secondary-totals').isVisible(),false);await page.locator('.secondary-metrics').filter({has:page.locator('#secondary-totals')}).locator(':scope > summary').focus();await page.keyboard.press('Enter');assert.equal(await page.locator('#secondary-totals').isVisible(),true);
  assert.equal(await page.locator('#entry-name').isVisible(),false);await page.locator('#scan-tab').focus();await page.keyboard.press('ArrowRight');assert.equal(await page.locator('#entry-name').isVisible(),true);
  assert.equal(await page.locator('#entry-fiber').isVisible(),false);await page.locator('#manual-entry-form .secondary-fields > summary').click();assert.equal(await page.locator('#entry-fiber').isVisible(),true);
  assert.equal(await page.locator('#goal-calories').isVisible(),false);await expand(page,'goal-editor');assert.equal(await page.locator('#goal-calories').isVisible(),true);assert.equal(await page.locator('#goal-water').isVisible(),false);

@@ -1,5 +1,7 @@
 # Four-program website candidate — November 11, 2026
 
+> Current readiness assessment: [WEBSITE_PRODUCTION_READINESS_2026-11-11.md](WEBSITE_PRODUCTION_READINESS_2026-11-11.md). This file retains the original integration inventory; later acceptance evidence supersedes its initial test/setup assumptions.
+
 **Production staging: BLOCKED. No Production deployment or promotion is authorized by a passing gate yet.** Existing rollback deployment and both public domains remain `dpl_A3N468HfccoSDiZvJhDgPJHmwB9T`.
 
 ## Implementation
@@ -19,13 +21,13 @@ Read-only metadata queries against the existing configured Supabase project conf
 - Authenticated role has INSERT/SELECT privileges. Anonymous role has neither privilege.
 - Existing schema supports the actual duration (numeric), member UUID, week, mode, level, optional readings and sources. No schema/policy changes were made.
 
-The new table-specific save adapter verifies `auth.getUser()` before inserting and before readback, rejects anonymous or switched identities, uses stable UUIDs, confirms the stored owner/duration, and safely checks duplicate conflicts against the same member. A failed or unconfirmed save is never announced as saved. Live two-account acceptance is still required: schema inspection and mocked tests do not establish a successful real save or adversarial RLS test.
+The table-specific save adapter verifies `auth.getUser()` before inserting and before readback, rejects anonymous or switched identities, uses stable UUIDs, confirms submitted fields and safely checks duplicate conflicts against the same member. Real A/B walking saves, reload, failed-readback retry and cross-account SELECT isolation subsequently passed. Direct routes and genuine expiry remain pending; see the current assessment for exact provenance and limits.
 
 ## Validation evidence
 
 See `FOUR_PROGRAM_MEDIA_VERIFICATION_2026-11-11.json`: **27/27 streamed hashes match**, and **32/32 native Chrome playback checks pass** (27 videos and five replacement narration files). Large archives were not copied or modified.
 
-**Final automated result: 142/142 passed, zero failures/skips. JavaScript syntax: 62/62 files passed.**
+**Initial integration result: 142/142 passed. Later unchanged-runtime evidence at `4d7a0f4`: 151/151 passed, zero failures/skips; 62/62 syntax checks. Nine real automated checks and three owner-observed visible checks are recorded separately in the current assessment.**
 
 Automated coverage includes exact A/B schedules and completion, guided controls and incomplete reporting, walking validation/idempotence/readback, account switching, FoodScore Production denial, mocked nutrition/diary flows, navigation, storage failures, accessibility and desktop/390px/320px responsive layouts. Auth providers and backend writes in browser tests are explicitly mocked; no fabricated identity was used against Supabase. No external barcode lookup occurred.
 
@@ -33,7 +35,7 @@ No npm package, lint script, TypeScript project or local application build comma
 
 ## Remaining release gates
 
-1. **Two real disposable accounts:** Owner supplies a secure interactive sign-in setup or performs the acceptance below. No passwords/tokens should be sent in chat. Verify login/logout, walking save/readback/reload, history and direct cross-account RLS denial with both accounts. Confirm SoulFuel local history isolation on the physical browsers. No owner's actual diary may be used.
+1. **Remaining member acceptance:** Do not repeat the nine completed automated live checks. Owner-observed normal navigation after logout and same-window walking/diary visibility also passed. Finish only the unresolved direct-route, goals-switch/return and genuine-expiry checks; keep provenance explicit. No owner's personal diary may be used.
 2. **Strength scope/media:** None of the 36 original plans has approved media for every movement. Five masters are usable; twelve historical clips still require explicit exact-file approval. Warm-up/cool-down remains unavailable. Do not advertise this as a fully playable 36-workout release. Owner must resolve these media requirements or approve an explicitly limited scope before Production acceptance.
 3. **Strength hosting continuity:** Current master URLs use `www.soulanova.com/app/strength/media/exercises/`. The candidate intentionally does not duplicate the old Production media archive. All five URLs currently pass hash/playback tests, but replacement Production must preserve their availability or provide approved stable hosting before promotion. Do not assume old-domain assets survive replacement.
 4. **FoodScore:** Production remains disabled. OFF registration submission is not licensing approval. API/source attribution, ODbL/DbCL/share-alike, retention/privacy and application-specific score disclosures remain separate launch decisions. Preview-only Redis credentials must not be copied to Production.
@@ -106,3 +108,7 @@ For this work: **no Production staging, promotion, domain change, Redis secret a
 - `tests/soulfuel-premium-design.test.cjs`
 - `tests/soulstrength-restored-ui.test.cjs`
 - `tests/soulstretch-approved-progression.test.cjs`
+
+## Corrective development continuation
+
+The latest remediation is recorded in [WEBSITE_REMEDIATION_2026-11-11.md](WEBSITE_REMEDIATION_2026-11-11.md). It supersedes the old candidate hosting failure and incomplete-plan UI: five exact approved masters are now packaged, with legacy redirects, and member-facing Strength selections contain approved movements only. The original full catalogs and SoulStretch remain unchanged. The nutrition adapter is fixture-tested and inactive; no live nutrition writes or migration are enabled. Previous live acceptance receipts remain byte-identical.

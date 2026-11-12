@@ -22,18 +22,18 @@
       </div>
       <div class="member-row"><span id="member-name"></span><button type="button" id="sign-out" class="text-button">Sign out</button></div>
       <section id="library-view" aria-labelledby="library-title">
-        <div class="section-heading"><div><p class="eyebrow">36 WORKOUT PLANS</p><h2 id="library-title">Choose your level</h2><p>Original plans, instructions and exercise icons. Guided playback uses approved videos only. Unavailable movements cannot be counted as completed.</p></div></div>
+        <div class="section-heading"><div><p class="eyebrow">APPROVED MOVEMENT PRACTICE</p><h2 id="library-title">Choose your level</h2><p>Guided playback uses approved videos only. Five approved movements, offered as practice selections from your original plans. Full plans and additional videos are not released.</p></div></div>
         <div class="level-tabs" role="tablist" aria-label="Workout difficulty">
-          <button type="button" role="tab" data-level="Beginner" aria-selected="true">Beginner <small>12 workouts</small></button>
-          <button type="button" role="tab" data-level="Intermediate" aria-selected="false">Intermediate <small>12 workouts</small></button>
-          <button type="button" role="tab" data-level="Advanced" aria-selected="false">Advanced <small>12 workouts</small></button>
+          <button type="button" role="tab" data-level="Beginner" aria-selected="true">Beginner <small>Practice selections</small></button>
+          <button type="button" role="tab" data-level="Intermediate" aria-selected="false">Intermediate <small>Practice selections</small></button>
+          <button type="button" role="tab" data-level="Advanced" aria-selected="false">Advanced <small>Practice selections</small></button>
         </div>
         <div id="workout-list" class="workout-grid"></div>
       </section>
       <section id="workout-detail" hidden></section>
       <section id="player-view" hidden aria-live="polite"></section>
-      <p class="player-help">Workout plans and exercise reference remain available while guided playback is paused.</p>
-      <section id="exercise-reference"><button id="reference-toggle" type="button" class="button secondary" aria-expanded="false" aria-controls="reference-list">Exercise Reference · Browse 17 exercises →</button><div id="reference-list" class="reference-grid" hidden></div></section><section id="member-progress" class="progress-section"><h2>Your SoulStrength progress</h2><p id="progress-status" role="status">Recording remains paused. Existing local and cloud history is not read or changed.</p><div id="progress-list"></div></section>
+      <p class="player-help">Approved-video practice selections are available. Full original plans and progress recording are not released.</p>
+      <section id="exercise-reference"><button id="reference-toggle" type="button" class="button secondary" aria-expanded="false" aria-controls="reference-list">Exercise Reference · Browse 5 approved movements →</button><div id="reference-list" class="reference-grid" hidden></div></section><section id="member-progress" class="progress-section"><h2>Your SoulStrength progress</h2><p id="progress-status" role="status">Recording remains paused. Existing local and cloud history is not read or changed.</p><div id="progress-list"></div></section>
     </section>
     <p id="load-error" class="notice error" role="alert" hidden></p>
   </main>
@@ -42,7 +42,7 @@
   <script src="/app/strength/strengthProgress.js?v=20261107-workout-details"></script>
   <script src="/app/strength/strengthPlayback.js?v=20261107-workout-details"></script>
   <script src="/app/config.js"></script>
-  <script src="/app/programs/program-core.js"></script><script src="/app/strength/strengthGuided.js"></script><script src="/app/strength/strength.js?v=restored-approved-ui"></script>
+  <script src="/app/programs/program-core.js"></script><script src="/app/strength/strengthGuided.js"></script><script src="/app/strength/strengthRelease.js"></script><script src="/app/strength/strength.js?v=restored-approved-ui"></script>
 <script src="/app/member-navigation.js"></script>
 </body>
 </html>
