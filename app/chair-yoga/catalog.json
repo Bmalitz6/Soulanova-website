@@ -1,10 +1,7 @@
 {
   "instructor": "Miriam",
   "libraryStatus": "preview_candidates_pending_owner_review",
-  "excludedOnHold": [
-    "IMG_4321",
-    "IMG_4322"
-  ],
+  "excludedOnHold": [],
   "movements": [
     {
       "id": "IMG_4285",
@@ -500,6 +497,36 @@
       "sourceArchive": "Archive 3.zip",
       "mediaStatus": "candidate_pending_owner_review",
       "mappingStatus": "visually_checked_against_owner_pose_list"
+    },
+    {
+      "id": "IMG_4321",
+      "position": 34,
+      "name": "Calf Stretch Right",
+      "videoUrl": "/app/videos/chair-yoga/IMG_4321.mp4",
+      "thumbnailUrl": "/app/images/chair-yoga/IMG_4321.jpg",
+      "durationSeconds": 29.0,
+      "width": 1264,
+      "height": 720,
+      "codec": "h264",
+      "sha256": "413c38823c0b94092f30d58a4ccf1d7602eeaf2859c9a9a983f544480c69d734",
+      "sourceArchive": "Owner replacement from 11 Yoga/04 Approved Videos",
+      "mediaStatus": "candidate_pending_owner_review",
+      "mappingStatus": "visually_checked_opposite_stance_matches_owner_right_calf_label"
+    },
+    {
+      "id": "IMG_4322",
+      "position": 35,
+      "name": "Calf Stretch Left",
+      "videoUrl": "/app/videos/chair-yoga/IMG_4322.mp4",
+      "thumbnailUrl": "/app/images/chair-yoga/IMG_4322.jpg",
+      "durationSeconds": 29.0,
+      "width": 1264,
+      "height": 720,
+      "codec": "h264",
+      "sha256": "a8d6f6191c370701acd4565710e72cb8fab8dab0ed6e5259fedee9d688d38106",
+      "sourceArchive": "Owner replacement from 11 Yoga/04 Approved Videos",
+      "mediaStatus": "candidate_pending_owner_review",
+      "mappingStatus": "visually_checked_opposite_stance_matches_owner_left_calf_label"
     },
     {
       "id": "IMG_4323",

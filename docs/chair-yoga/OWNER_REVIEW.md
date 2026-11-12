@@ -1,23 +1,15 @@
 # Chair Yoga Preview candidate inventory
 
-This isolated Preview contains 34 candidate Chair Yoga movement videos mapped in the owner-provided pose order. The display names follow the existing 36-pose printable inventory. The mapped frames and supplied list were checked, and the local archive exports were byte-compared with their source ZIP entries and fully decoded.
+The isolated Preview now contains all 36 owner-listed Chair Yoga movement candidates in the supplied order. The 34 original candidate videos are unchanged. `IMG_4321` and `IMG_4322` are the newer files from `11 Yoga/04 Approved Videos`; both replace the earlier standardized candidate renders in this Preview only. All 36 items remain candidates pending owner review and none is marked Production-approved.
 
-The videos are served as the current source MP4 exports. Thirty-three are 29.000 seconds; `IMG_4286.mp4` is 30.200 seconds and 1280×704. The others are 1264×720. All are H.264, have no audio track, and passed a full decode. SHA-256 and per-file mapping details are in `chair-yoga-34-media-validation.csv`.
+## Calf replacement verification
 
-Source groups:
+Both replacements are 29.000-second, 1264×720 H.264 MP4 files and passed full FFmpeg decoding. Sampled frames at 2, 7, 12, 17, 22, and 27 seconds show Miriam in the Soulanova studio, with both hands on the chair back. `IMG_4321` places the chair to her forward side and extends the opposite leg behind; `IMG_4322` reverses the stance and chair position. This is consistent with the owner-provided Right/Left calf labels. The source files were not altered.
 
-- `Archive.zip`: `IMG_4285`–`IMG_4297`, excluding `IMG_4295` (12 recordings).
-- `Archive 2.zip`: `IMG_4298`–`IMG_4311`, excluding `IMG_4301` and `IMG_4302` (12 recordings).
-- `Archive 3.zip`: `IMG_4312`–`IMG_4323`, excluding `IMG_4322` (11 recordings in the archive).
-- `IMG_4322.mp4`: separate upload; held and excluded.
+The replacements have different SHA-256 hashes from the older 29-second candidate renders. Those older renders show a male instructor in a home gym and were not used. See `chair-yoga-replacement-comparison.csv`. Sample contact sheet: `/private/tmp/chair-yoga-replacement-frame-audit-2026-11-12.jpg`.
 
-`IMG_4321` (Calf Stretch Right) is held. `IMG_4322` (Calf Stretch Left) is held. Both require corrected replacements and owner review. Neither file is copied into this Preview. The two held items are listed without a playable path in `chair-yoga-source-validation.csv`.
+## Validation
 
-The library labels all displayed media as preview candidates pending owner review. No completion history is written. Video and thumbnail files are byte-for-byte copies or still images derived from the candidate MP4s; no source media was modified. The active website worktree and supplied archives were left unchanged.
+The full 36-item inventory, movement mapping, deployed URL paths, duration, dimensions, codec, audio-track count, and SHA-256 are listed in `chair-yoga-36-media-validation.csv`. The source-to-website inventory remains in `chair-yoga-source-validation.csv`. The other 34 MP4s and movement order were preserved.
 
-## Remaining acceptance
-
-- Owner should check all labels and the overall movement order in the protected Preview.
-- Owner should test play, pause, seek, previous and next in desktop Safari/Chrome and on iPhone/iPad Safari.
-- `IMG_4286` runs 1.2 seconds longer than the standard 29-second candidates.
-- `IMG_4321` and `IMG_4322` remain excluded until corrected files are supplied and approved.
+The library still requires member sign-in and does not write completion or member history. The protected Preview is for owner acceptance. Production release requires a separate decision after reviewing all movement labels and media.

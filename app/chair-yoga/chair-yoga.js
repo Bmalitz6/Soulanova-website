@@ -133,8 +133,8 @@
       if (catalog.libraryStatus !== 'preview_candidates_pending_owner_review' || !Array.isArray(catalog.movements)) {
         throw new Error('The Chair Yoga candidate catalog is unavailable.');
       }
-      if (catalog.movements.length !== 34 || catalog.movements.some(item => ['IMG_4321', 'IMG_4322'].includes(item.id))) {
-        throw new Error('The Chair Yoga candidate catalog did not pass its holdout check.');
+      if (catalog.movements.length !== 36 || catalog.excludedOnHold?.length || catalog.movements.some(item => ['IMG_4321', 'IMG_4322'].includes(item.id) && !item.videoUrl)) {
+        throw new Error('The Chair Yoga candidate catalog did not pass its 36-movement integrity check.');
       }
       movements = catalog.movements;
       authGate.hidden = true;
