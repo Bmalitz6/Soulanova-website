@@ -4,7 +4,7 @@ const progressWritesEnabled=false;
 let historyView='idle',workoutRevision=0;
 const workouts=[
 {id:'tai',category:'Tai Chi',icon:'☯',title:'Flow & Balance',minutes:30,steps:['5 min gentle warm-up and easy breathing','10 min slow weight shifts and mindful stepping','10 min familiar flowing Tai Chi movements','5 min comfortable cool-down']},
-{id:'yoga',category:'Yoga',icon:'✳',title:'Gentle Yoga Reset',minutes:25,steps:['5 min relaxed breathing','10 min comfortable standing and seated poses','5 min gentle mobility','5 min quiet rest']},
+{id:'yoga',category:'Yoga',icon:'✳',title:'Chair Yoga with Miriam',minutes:17,steps:['34 mapped movement demonstrations','Choose each movement from the Chair Yoga library','Preview candidates are pending owner review']},
 {id:'pilates',category:'Pilates',icon:'◌',title:'Core Foundations',minutes:25,steps:['5 min breathing and posture check','10 min controlled core movements','5 min stability practice','5 min stretching']},
 {id:'strength',category:'Strength',icon:'↗',title:'Everyday Strength',minutes:30,steps:['5 min warm-up','10 min supported lower-body movements','10 min comfortable upper-body movements','5 min cool-down']},
 {id:'mobility',category:'Stretch & Mobility',icon:'〰',title:'Move with Ease',minutes:20,steps:['5 min gentle warm-up','5 min shoulders and upper-back mobility','5 min hip and ankle mobility','5 min easy stretches']},
@@ -30,7 +30,7 @@ const category=document.getElementById('category');[...new Set(workouts.map(w=>w
 
 const workoutCardMeta = {
   tai: {label:'TAI CHI', cta:'View Classes', image:'/app/images/workouts/tai-chi.jpg'},
-  yoga: {label:'YOGA', cta:'View Session', image:'/app/images/workouts/yoga.jpg'},
+  yoga: {label:'CHAIR YOGA', cta:'Explore Library', image:'/app/images/chair-yoga/IMG_4285.jpg'},
   pilates: {label:'PILATES', cta:'View Session', image:'/app/images/workouts/pilates.jpg'},
   strength: {label:'STRENGTH', cta:'View Session', image:'/app/images/workouts/strength.jpg'},
   mobility: {label:'STRETCH & MOBILITY', cta:'View Session', image:'/app/images/workouts/mobility.jpg'},
@@ -41,6 +41,11 @@ const workoutCardMeta = {
 function openWorkout(w){
   state.selected=w.id;
   save();
+
+  if(w.id==='yoga'){
+    window.location.href='/app/chair-yoga/';
+    return;
+  }
 
   if(w.id==='tai' && window.SoulanovaClasses){
     window.SoulanovaClasses.open();

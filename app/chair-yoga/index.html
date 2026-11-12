@@ -1,0 +1,79 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="theme-color" content="#0b4b53">
+  <meta name="description" content="A member Chair Yoga movement library with Miriam, in a protected Soulanova preview.">
+  <title>Chair Yoga with Miriam | Soulanova</title>
+  <link rel="icon" href="/assets/soulanova-logo.png">
+  <link rel="stylesheet" href="/app/chair-yoga/chair-yoga.css">
+</head>
+<body>
+  <a class="skip" href="#main">Skip to content</a>
+  <header class="topbar">
+    <a class="brand" href="/app/">✺ Soulanova</a>
+    <div class="member-tools">
+      <span id="member-status" role="status" aria-live="polite">Checking your member session…</span>
+      <button id="sign-out" type="button" hidden>Sign out</button>
+      <a href="/app/">← Member dashboard</a>
+    </div>
+  </header>
+  <main id="main" class="shell">
+    <section id="auth-gate" class="auth-gate" hidden aria-labelledby="auth-title">
+      <p class="eyebrow">YOUR SOULANOVA ACCOUNT</p>
+      <h1 id="auth-title">Sign in to continue</h1>
+      <p>The Chair Yoga library is available to signed-in members.</p>
+      <a class="button primary" href="/app/?mode=signin">Go to member sign in</a>
+    </section>
+
+    <div id="member-library" hidden>
+      <section class="hero">
+        <div>
+          <p class="eyebrow">SOULANOVA · YOGA</p>
+          <h1>Chair Yoga <em>with Miriam</em></h1>
+          <p>Explore 34 movement demonstrations in the owner’s sequence. Choose a movement to load it, then use the player controls to play, pause, or seek. Previous and Next move through the mapped library.</p>
+        </div>
+        <img src="/app/images/chair-yoga/IMG_4285.jpg" width="480" height="270" alt="Miriam seated in the Soulanova Chair Yoga studio">
+      </section>
+      <p class="preview-notice"><strong>Protected preview candidates:</strong> movement names and media have been checked against the supplied pose list. These recordings are pending owner review and are not Production-approved. Calf Stretch Right and Calf Stretch Left are held and are not included.</p>
+
+      <section class="player-card" aria-labelledby="player-heading">
+        <div class="player-heading">
+          <div>
+            <p class="eyebrow">NOW SELECTED</p>
+            <h2 id="player-heading">Choose a movement</h2>
+            <p id="player-meta" class="player-meta">Select a movement below to load its demonstration.</p>
+          </div>
+          <span id="player-position" class="position" aria-live="polite"></span>
+        </div>
+        <video id="chair-yoga-video" controls playsinline preload="metadata" aria-label="Chair Yoga movement demonstration"></video>
+        <p id="video-error" class="video-error" role="status" aria-live="polite" hidden></p>
+        <div class="player-controls" aria-label="Movement navigation">
+          <button id="previous-movement" type="button" disabled>← Previous</button>
+          <button id="play-movement" class="primary" type="button" disabled>Play</button>
+          <button id="next-movement" class="primary" type="button" disabled>Next →</button>
+        </div>
+      </section>
+
+      <section class="library" aria-labelledby="library-heading">
+        <div class="library-heading">
+          <div>
+            <p class="eyebrow">34 MAPPED MOVEMENTS</p>
+            <h2 id="library-heading">Choose your movement</h2>
+          </div>
+          <label class="search-label">Find a movement
+            <input id="movement-search" type="search" autocomplete="off" placeholder="Search the library">
+          </label>
+        </div>
+        <div id="movement-list" class="movement-grid" aria-label="Chair Yoga movement library"></div>
+        <p id="empty-search" class="empty-search" hidden>No movements match that search.</p>
+      </section>
+    </div>
+  </main>
+  <footer>Soulanova · Move Better • Feel Calmer • Live Fuller</footer>
+  <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2/dist/umd/supabase.js"></script>
+  <script src="/app/config.js"></script>
+  <script src="/app/chair-yoga/chair-yoga.js"></script>
+</body>
+</html>

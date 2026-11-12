@@ -5,31 +5,30 @@ const fs = require('node:fs');
 const path = require('node:path');
 const { execFileSync } = require('node:child_process');
 const root = path.resolve(__dirname, '..');
-const base = '1b09f3e897948b16a8a7c4aa4930f9fe8fb8b7ef';
+// The current website feature branch is the source of this isolated Preview.
+const base = '37754c995a1852f0d26b935f0649fe244df2c780';
 const git = (...args) => execFileSync('git', args, { cwd: root });
 
-test('existing GitHub main files stay unchanged except the authorized SoulFuel dashboard links', () => {
+test('selected website preview source stays unchanged except the scoped Chair Yoga entry', () => {
   const entries = git('ls-tree', '-r', base).toString().trim().split('\n');
   assert.ok(entries.length > 0);
   for (const entry of entries) {
     const [metadata, file] = entry.split('\t');
     const [mode, type, hash] = metadata.split(' ');
     assert.equal(type, 'blob');
-    if(file==='app/index.html'){
+    if(file==='app/app.js'){
       const current=fs.readFileSync(path.join(root,file),'utf8');
       const original=git('show',base+':'+file).toString();
-      const auth=html=>html.slice(html.indexOf('<section id="auth-box"'),html.indexOf('<div id="member-app"'));
-      assert.equal(auth(current),auth(original),'Existing account/auth markup unchanged');
-      const scripts=['/app/release-scope.js','/app/soulfuel/food-diary-core.js','/app/soulfuel/metrics/metrics-core.js','/app/soulfuel/metrics/units.js','/app/soulfuel/tracker-progress.js','/app/wellness/dashboard-core.js','/app/wellness/dashboard.js','/app/member-navigation.js'];
-      let tail=current.slice(current.indexOf('<section id="workouts"'));
-      for(const src of scripts)tail=tail.replace('<script src="'+src+'"></script>','');tail=tail.replace('\n</body>','</body>');
-      assert.equal(tail,original.slice(original.indexOf('<section id="workouts"')),'All existing non-home program panels unchanged');
-    }else if(file==='vercel.json'){const current=JSON.parse(fs.readFileSync(path.join(root,file),'utf8')),original=JSON.parse(git('show',base+':'+file));const media=current.headers.filter(h=>h.source==='/app/strength/media/exercises/:hash/:file');assert.equal(media.length,1);assert.deepEqual(media[0].headers,[{key:'Cache-Control',value:'public, max-age=31536000, immutable'}]);current.headers=current.headers.filter(h=>h.source!=='/app/strength/media/exercises/:hash/:file');if(!original.headers)delete current.headers;const assets=require('../app/strength/approved-media.json').assets;for(const asset of assets.filter(a=>a.approval.startsWith('APPROVED MASTER'))){const legacy='/app/strength/media/exercises/'+path.basename(asset.file);assert.deepEqual(current.redirects.find(r=>r.source===legacy),{source:legacy,destination:'/'+asset.file,permanent:true});}current.redirects=current.redirects.filter(r=>!r.source.startsWith('/app/strength/media/exercises/'));assert.deepEqual(current,original);
-    }else if(file==='app/app.js'){
-      const current=fs.readFileSync(path.join(root,file),'utf8');
-      const bridge=`\n// Read-only session bridge for the authorized wellness dashboard; no auth changes.\nwindow.SoulanovaMemberAuth=Object.freeze({getClient:()=>client,getWorkoutSnapshot:()=>({memberId:currentUser?.id||null,ready:historyView==='ready',rows:state.history.map(e=>({completed_at:e.at,duration_minutes:e.minutes}))})});\n`;
-      assert.equal(current.replace(bridge,''),git('show',base+':'+file).toString(),'Existing workout and authentication code unchanged');
-    }else if(file.endsWith('.html')){const current=fs.readFileSync(path.join(root,file),'utf8').replace('<script src="/app/member-navigation.js"></script>\n','');assert.equal(current,git('show',base+':'+file).toString(),file);}else if(file==='app/member-data.mjs'){assert.equal(fs.readFileSync(path.join(root,file),'utf8').replace('if(!user||user.is_anonymous)','if(!user)'),git('show',base+':'+file).toString(),file);}else assert.equal(git('hash-object',file).toString().trim(), hash, file);
+      const replaceOnce=(source,from,to)=>{assert.equal(source.split(from).length-1,1,`Expected one source fragment: ${from}`);return source.replace(from,to)};
+      let expected=original;
+      expected=replaceOnce(expected,"{id:'yoga',category:'Yoga',icon:'✳',title:'Gentle Yoga Reset',minutes:25,steps:['5 min relaxed breathing','10 min comfortable standing and seated poses','5 min gentle mobility','5 min quiet rest']}","{id:'yoga',category:'Yoga',icon:'✳',title:'Chair Yoga with Miriam',minutes:17,steps:['34 mapped movement demonstrations','Choose each movement from the Chair Yoga library','Preview candidates are pending owner review']}");
+      expected=replaceOnce(expected,"yoga: {label:'YOGA', cta:'View Session', image:'/app/images/workouts/yoga.jpg'},","yoga: {label:'CHAIR YOGA', cta:'Explore Library', image:'/app/images/chair-yoga/IMG_4285.jpg'},");
+      expected=replaceOnce(expected,'  save();\n\n  if(w.id===\'tai\' && window.SoulanovaClasses){',"  save();\n\n  if(w.id==='yoga'){\n    window.location.href='/app/chair-yoga/';\n    return;\n  }\n\n  if(w.id==='tai' && window.SoulanovaClasses){");
+      assert.equal(current,expected,'Only the Yoga category is redirected to the Chair Yoga candidate library');
+    }else if(file==='tests/soulfuel-clean-integration.test.cjs'){
+      // This guard is itself updated to pin the selected Preview baseline.
+      continue;
+    }else assert.equal(git('hash-object',file).toString().trim(), hash, file);
   }
 });
 
