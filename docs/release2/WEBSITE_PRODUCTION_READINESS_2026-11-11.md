@@ -1,5 +1,7 @@
 # Website Production readiness — current assessment, November 11
 
+> **Current release preparation:** [November 12 controlled release plan](PRODUCTION_RELEASE_PLAN_2026-11-12.md) and [remaining acceptance ledger](PRODUCTION_RELEASE_ACCEPTANCE_2026-11-12.json) supersede obsolete coverage/hosting findings below. The protected Preview at `a30111d5e8c6b510208bd91adbc5d810779862f1` now has 36/36 Strength coverage and 17/17 independently packaged, deployed hash-verified videos. Original historical evidence remains intact. Production is unchanged.
+
 > Current disposition: the owner attests personal creation of the performance-driving video and a wholly synthetic instructor with no real-person reference. The scoped STR-112 rights gate is satisfied and all ten runtime replacements are applied. Active exercise-demo coverage is now 12/12/12 (36/36); STR-053 stays excluded. See [final disposition and mapping report](STR_112_FINAL_RIGHTS_DISPOSITION_AND_MAPPINGS_2026-11-11.md). Earlier blocked/practice-only findings below are historical, not current status. No push or deployment.
 
 > Strength reconciliation update: the full 36-workout library is restored locally, with original sequences. The reduced practice-only scope below is superseded by [SOULSTRENGTH_36_WORKOUT_RECONCILIATION_2026-11-11.md](SOULSTRENGTH_36_WORKOUT_RECONCILIATION_2026-11-11.md). This correction has not been pushed or deployed.

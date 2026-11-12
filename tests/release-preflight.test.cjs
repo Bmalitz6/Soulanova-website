@@ -1,0 +1,7 @@
+'use strict';
+const {test}=require('node:test'),assert=require('node:assert/strict');
+const {assess,inspect}=require('../scripts/release/preflight.cjs');
+const evidence=require('../docs/release2/PRODUCTION_RELEASE_ACCEPTANCE_2026-11-12.json');
+test('release preflight verifies immutable packaged program counts, hashes and Production FoodScore denial',()=>{assert.equal(inspect().ok,true);});
+test('missing or mocked acceptance cannot authorise Production',()=>{assert.equal(assess().ready,false);assert.equal(assess(evidence).ready,false);const mocked=Object.fromEntries(assess().gates.map(g=>[g.name,{status:'PASS',provenance:'mocked-auth',receipt:'fixture'}]));assert.equal(assess(mocked).ready,false);});
+test('release preflight requires explicit provenance and a receipt for each remaining gate',()=>{const verified=Object.fromEntries(assess().gates.map(g=>[g.name,{status:'PASS',provenance:g.name==='finalProductionAuthorization'?'owner-authorization':'operator-verified',receipt:'isolated unit fixture; not real acceptance'}]));assert.equal(assess(verified).ready,true);assert.equal(assess({...verified,finalProductionAuthorization:{status:'PASS',provenance:'operator-verified',receipt:'not owner approval'}}).ready,false);for(const name of Object.keys(verified)){const incomplete={...verified,[name]:{...verified[name],receipt:''}};assert.equal(assess(incomplete).ready,false,name);const absent={...verified};delete absent[name];assert.equal(assess(absent).ready,false,name);}});

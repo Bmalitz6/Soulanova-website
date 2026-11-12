@@ -1,5 +1,7 @@
 # Four-program website candidate — November 11, 2026
 
+> **Current release preparation:** [November 12 controlled release plan](PRODUCTION_RELEASE_PLAN_2026-11-12.md) and [remaining acceptance ledger](PRODUCTION_RELEASE_ACCEPTANCE_2026-11-12.json) supersede obsolete coverage/hosting findings below. The protected Preview at `a30111d5e8c6b510208bd91adbc5d810779862f1` now has 36/36 Strength coverage and 17/17 independently packaged, deployed hash-verified videos. Original historical evidence remains intact. Production is unchanged.
+
 > Current readiness assessment: [WEBSITE_PRODUCTION_READINESS_2026-11-11.md](WEBSITE_PRODUCTION_READINESS_2026-11-11.md). This file retains the original integration inventory; later acceptance evidence supersedes its initial test/setup assumptions.
 
 **Production staging: BLOCKED. No Production deployment or promotion is authorized by a passing gate yet.** Existing rollback deployment and both public domains remain `dpl_A3N468HfccoSDiZvJhDgPJHmwB9T`.

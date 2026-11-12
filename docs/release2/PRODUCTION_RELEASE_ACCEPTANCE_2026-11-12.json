@@ -1,0 +1,21 @@
+{
+  "schema": 1,
+  "runtimeCommit": "a30111d5e8c6b510208bd91adbc5d810779862f1",
+  "preview": "https://soulanova-website-ltxi3gsdw-soulanova.vercel.app/app",
+  "preservedEvidence": {
+    "realAutomatedPasses": 9,
+    "ownerObservedManualPasses": 3,
+    "receipt": "WEBSITE_PRODUCTION_READINESS_2026-11-11.md",
+    "note": "Do not repeat prior successful walking saves. These passes do not certify new-origin login, direct routes or genuine expiry."
+  },
+  "currentOriginMemberAcceptance": {"status":"NOT TESTED","provenance":"none","receipt":"No securely controlled authenticated browser context is available."},
+  "directRoutesAfterLogout": {"status":"NOT TESTED","provenance":"none","receipt":"Normal-navigation owner pass retained; direct typed routes still outstanding."},
+  "genuineSessionExpiry": {"status":"NOT TESTED","provenance":"none","receipt":"Mock expiry and logout are not accepted as genuine expiry."},
+  "goalsSwitchAndReturn": {"status":"NOT TESTED","provenance":"none","receipt":"Diary visible isolation passed; same-profile goals and B-to-A return remain outstanding."},
+  "nutritionPrivacyScope": {"status":"BLOCKED","provenance":"none","receipt":"Browser-local unencrypted retention must be explicitly accepted or collection gated in a separately validated release artifact. Cloud adapter remains inactive."},
+  "accessModelAcceptance": {"status":"BLOCKED","provenance":"none","receipt":"Current app exposes free membership; no paid entitlement enforcement implemented. Confirm intended release is free-member access; no payment activation."},
+  "productionConfigurationAcceptance": {"status":"BLOCKED","provenance":"none","receipt":"Existing schema/RLS metadata evidence retained; no production-configured staged artifact tested."},
+  "monitoringOwnerAndAlertTest": {"status":"BLOCKED","provenance":"none","receipt":"No project drains configured. Assign operator and test existing Vercel/Supabase visibility without member payloads."},
+  "stagedProductionAcceptance": {"status":"NOT TESTED","provenance":"none","receipt":"No new Production-target build created; domains preserved."},
+  "finalProductionAuthorization": {"status":"BLOCKED","provenance":"none","receipt":"Owner has authorized preparation only; explicit final authorization required."}
+}
