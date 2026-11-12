@@ -1,0 +1,255 @@
+{
+  "baselineCommit": "69ce8d1aa4c64f71ed9d5e64882c918a7ff82a5b",
+  "status": "BLOCKED_RIGHTS_UNRESOLVED",
+  "scope": "Existing local production and project records; read-only source audit",
+  "expectedSTR112Sha256": "ef0433a6e4f1b889b5bf183715c139d0bb96a797728f126651907fb65fbc9705",
+  "assetsAndEvidence": {
+    "final_master": {
+      "path": "/Users/bob/Desktop/Soulanova/10 Strength/03 Final Approved/Soulanova_Strength_IMG_4058_Incline_Dumbbell_Press_APPROVED.mp4",
+      "exists": true,
+      "bytes": 4846536,
+      "sha256": "ef0433a6e4f1b889b5bf183715c139d0bb96a797728f126651907fb65fbc9705"
+    },
+    "act_two_export": {
+      "path": "/Users/bob/Downloads/Act-Two%20-%20IMG_4058_Runway_Ready_Cropped_Focused%20Dumbbell%20Press%20in%20Soulanova%20Gym.mp4",
+      "exists": true,
+      "bytes": 4846536,
+      "sha256": "ef0433a6e4f1b889b5bf183715c139d0bb96a797728f126651907fb65fbc9705"
+    },
+    "raw_motion_candidate": {
+      "path": "/Users/bob/Desktop/Soulanova/10 Strength/02 Raw Videos/IMG_4058.MOV",
+      "exists": true,
+      "bytes": 26820372,
+      "sha256": "cbcdc36c1a58639b44f25a9dbcc28eb5321eed1477b7ec494ede9c4d2e4930fb"
+    },
+    "cropped_motion_candidate": {
+      "path": "/Users/bob/Downloads/IMG_4058_Runway_Ready_Cropped.mp4",
+      "exists": true,
+      "bytes": 14665586,
+      "sha256": "2b3289e0e2551e136a09c3bd50e34398c23d5860368e58990a02efe8ec00efbc"
+    },
+    "cropped_reference_image": {
+      "path": "/Users/bob/Desktop/Soulanova/10 Strength/01 Images/IMG_4058_Runway_Ready_Cropped.jpg",
+      "exists": true,
+      "bytes": 23802,
+      "sha256": "900153bd2e4a8fb58d8bc3c08e2ef8f641c2e1b50c14352afcf8c25eb9ddd58a"
+    },
+    "instructor_image_candidate": {
+      "path": "/Users/bob/Downloads/Soulanova_Strength_Instructor.jpg",
+      "exists": true,
+      "bytes": 168508,
+      "sha256": "33d54e0d4543daf85c507c06ee2dfd1d264b84c5a9cd938f2e4b18842abc7934"
+    },
+    "master_inventory": {
+      "path": "/Users/bob/Desktop/Soulanova/10 Strength/05 Production Tracking/Strength_Master_Inventory.csv",
+      "exists": true,
+      "bytes": 404478,
+      "sha256": "b078019fac55a3db3518386363fee6480dca91a3ace37cc094fd7187cc1be289"
+    },
+    "production_inventory": {
+      "path": "/Users/bob/Desktop/Soulanova/10 Strength/05 Production Tracking/STRENGTH_PRODUCTION_INVENTORY.csv",
+      "exists": true,
+      "bytes": 94596,
+      "sha256": "3617fbfd6dd517a98f87dce5a1a2affef7cd5b40c04343ab1b7d112717d620c9"
+    },
+    "approved_masters": {
+      "path": "/Users/bob/Desktop/Soulanova/10 Strength/05 Production Tracking/Strength_Approved_Masters.csv",
+      "exists": true,
+      "bytes": 60399,
+      "sha256": "9bdca4bc7cbf271ab913e00d80c20f4fb41c89f65d4fa42fc7c9ca3c01f70240"
+    },
+    "raw_footage_inventory": {
+      "path": "/Users/bob/Desktop/Soulanova/10 Strength/05 Production Tracking/Strength_Raw_Footage_Reference.csv",
+      "exists": true,
+      "bytes": 15197,
+      "sha256": "6ef2fd89a735fcd928ebfa05df87121e29bc65c6f74e9d0c0c46e232025f60b4"
+    },
+    "magic_hour_index": {
+      "path": "/Users/bob/Desktop/Soulanova/07 Documentation/Production_Inventory/MagicHour_Identification/video_index.txt",
+      "exists": true,
+      "bytes": 1556,
+      "sha256": "7d0afd5d80364093d83edf44db1f4a008cc26e0ed9819dac5d5171c0e05031f9"
+    }
+  },
+  "rightsTable": [
+    {
+      "asset": "STR-112 approved master / Review #09",
+      "rightsHolder": "Not established by available approval records",
+      "commercialPermission": "NOT ESTABLISHED \u2014 production approval and integrity verified only",
+      "likenessPermission": "NOT ESTABLISHED",
+      "evidence": [
+        "final_master",
+        "approved_masters",
+        "master_inventory"
+      ],
+      "uncertainty": "No grant/release identifies asset-specific underlying rights; user approval is not treated as legal clearance."
+    },
+    {
+      "asset": "Act-Two IMG_4058 export",
+      "rightsHolder": "Exporting/generation account holder not established",
+      "commercialPermission": "NOT ESTABLISHED asset-specifically",
+      "likenessPermission": "NOT ESTABLISHED",
+      "evidence": [
+        "act_two_export",
+        "master_inventory"
+      ],
+      "uncertainty": "Exact hash matches final master; inventory describes Act-Two replacement, but no generation-job/input manifest, account receipt or rights grant was located."
+    },
+    {
+      "asset": "Raw IMG_4058.MOV (possible motion input)",
+      "rightsHolder": "Recording creator and depicted participant not established",
+      "commercialPermission": "NOT ESTABLISHED",
+      "likenessPermission": "NOT ESTABLISHED",
+      "evidence": [
+        "raw_motion_candidate",
+        "raw_footage_inventory",
+        "production_inventory"
+      ],
+      "uncertainty": "Related filename/duration only; actual use as input not proven. Source inventory marks raw phone footage, not approved finished media."
+    },
+    {
+      "asset": "IMG_4058_Runway_Ready_Cropped.mp4 (possible intermediate)",
+      "rightsHolder": "Not established",
+      "commercialPermission": "NOT ESTABLISHED",
+      "likenessPermission": "NOT ESTABLISHED",
+      "evidence": [
+        "cropped_motion_candidate"
+      ],
+      "uncertainty": "Distinct bytes and encoder metadata are not a derivative-work licence or proof of its place in the generation chain."
+    },
+    {
+      "asset": "IMG_4058_Runway_Ready_Cropped.jpg (reference image)",
+      "rightsHolder": "Photographer/image creator not established",
+      "commercialPermission": "NOT ESTABLISHED",
+      "likenessPermission": "NOT ESTABLISHED",
+      "evidence": [
+        "cropped_reference_image",
+        "production_inventory"
+      ],
+      "uncertainty": "No artist/copyright/usage licence field found in checked metadata. No provenance record links the exact image to the final generation."
+    },
+    {
+      "asset": "Soulanova_Strength_Instructor.jpg (possible character reference)",
+      "rightsHolder": "Creator/licensor and real-or-synthetic identity not established",
+      "commercialPermission": "NOT ESTABLISHED",
+      "likenessPermission": "NOT ESTABLISHED; synthetic provenance also unverified",
+      "evidence": [
+        "instructor_image_candidate"
+      ],
+      "uncertainty": "A named project image is present; no generation/input linkage, creation licence, consent release or documented wholly synthetic provenance found. No inference of real/synthetic identity from appearance."
+    },
+    {
+      "asset": "Magic Hour replacement records/index",
+      "rightsHolder": "Relevant generating account/input owners not established",
+      "commercialPermission": "NOT ESTABLISHED for this master",
+      "likenessPermission": "NOT ESTABLISHED",
+      "evidence": [
+        "magic_hour_index",
+        "master_inventory"
+      ],
+      "uncertainty": "Nineteen export names indexed, but no documented connection to IMG_4058, exact source-image input, paid entitlement or rights clearance. Magic Hour involvement in this specific master is not assumed."
+    }
+  ],
+  "searchInventory": "STR_112_RIGHTS_SEARCH_INVENTORY_2026-11-11.json",
+  "mappingsApplied": 0,
+  "STR053Blocked": true,
+  "workoutCounts": {
+    "Beginner": 12,
+    "Intermediate": 12,
+    "Advanced": 12
+  },
+  "activeCoverage": {
+    "Beginner": 10,
+    "Intermediate": 8,
+    "Advanced": 8,
+    "total": 26
+  },
+  "conditionalCoverageAfterVerifiedRightsAndApplication": 36,
+  "missingDocumentation": [
+    "Actual generation/export record associating IMG_4058 output with its exact motion/image/character inputs and authorized generating account",
+    "Ownership/licence for every actual source photograph/image and motion recording, including commercial website redistribution and AI/derivative transformation permissions as applicable",
+    "Release/consent covering actual real depicted persons/performers or documented wholly synthetic creation and reference-input provenance, as applicable",
+    "Any relevant provider entitlement/licence terms from generation/export time if those tools were used; not a substitute for input/likeness rights"
+  ],
+  "privacy": "No credentials, authentication storage, unrelated personal records, raw participant frames or source-image copies included. Source files never moved/renamed/modified.",
+  "intakeEvidence": {
+    "path": "/Users/bob/Desktop/Soulanova/07 Documentation/Production_Inventory/Downloads_Intake_Verification_20261105_155305.csv",
+    "sha256": "63f1d0d95c6814dc6f26bc0ed8761d4bf5084962a2c2b773d6fc906f5214aa56",
+    "matchingRows": [
+      {
+        "Status": "COPIED_VERIFIED",
+        "Original relative path": "Act-Two%20-%20IMG_4058_Runway_Ready_Cropped_Focused%20Dumbbell%20Press%20in%20Soulanova%20Gym.mp4",
+        "Size bytes": "4846536",
+        "Source SHA256": "ef0433a6e4f1b889b5bf183715c139d0bb96a797728f126651907fb65fbc9705",
+        "Destination SHA256": "ef0433a6e4f1b889b5bf183715c139d0bb96a797728f126651907fb65fbc9705",
+        "Notes": ""
+      },
+      {
+        "Status": "COPIED_VERIFIED",
+        "Original relative path": "IMG_4058.MOV",
+        "Size bytes": "26820372",
+        "Source SHA256": "cbcdc36c1a58639b44f25a9dbcc28eb5321eed1477b7ec494ede9c4d2e4930fb",
+        "Destination SHA256": "cbcdc36c1a58639b44f25a9dbcc28eb5321eed1477b7ec494ede9c4d2e4930fb",
+        "Notes": ""
+      },
+      {
+        "Status": "COPIED_VERIFIED",
+        "Original relative path": "IMG_4058_Runway_Ready_Cropped.mp4",
+        "Size bytes": "14665586",
+        "Source SHA256": "2b3289e0e2551e136a09c3bd50e34398c23d5860368e58990a02efe8ec00efbc",
+        "Destination SHA256": "2b3289e0e2551e136a09c3bd50e34398c23d5860368e58990a02efe8ec00efbc",
+        "Notes": ""
+      },
+      {
+        "Status": "COPIED_VERIFIED",
+        "Original relative path": "Soulanova_Strength_Instructor.jpg",
+        "Size bytes": "168508",
+        "Source SHA256": "33d54e0d4543daf85c507c06ee2dfd1d264b84c5a9cd938f2e4b18842abc7934",
+        "Destination SHA256": "33d54e0d4543daf85c507c06ee2dfd1d264b84c5a9cd938f2e4b18842abc7934",
+        "Notes": ""
+      },
+      {
+        "Status": "COPIED_VERIFIED",
+        "Original relative path": "Soulanova_Strength_Review/Approved_Strength_Package/Strength_Masters/Act-Two%20-%20IMG_4058_Runway_Ready_Cropped_Focused%20Dumbbell%20Press%20in%20Soulanova%20Gym.mp4",
+        "Size bytes": "4846536",
+        "Source SHA256": "ef0433a6e4f1b889b5bf183715c139d0bb96a797728f126651907fb65fbc9705",
+        "Destination SHA256": "ef0433a6e4f1b889b5bf183715c139d0bb96a797728f126651907fb65fbc9705",
+        "Notes": ""
+      },
+      {
+        "Status": "COPIED_VERIFIED",
+        "Original relative path": "Soulanova_Strength_Review/production-gallery-assets/002_3.jpg",
+        "Size bytes": "6326",
+        "Source SHA256": "a1578cd022b5b51e0003630f51ffcc14835e9f10f4a84058117154d49f18778c",
+        "Destination SHA256": "a1578cd022b5b51e0003630f51ffcc14835e9f10f4a84058117154d49f18778c",
+        "Notes": ""
+      },
+      {
+        "Status": "COPIED_VERIFIED",
+        "Original relative path": "VivaFlow/VivaFlow Videos Tai Chi/VivaFlow_Kling_Ready_Part3/videos/VF_KLING_039.mp4",
+        "Size bytes": "7040950",
+        "Source SHA256": "a76e62e4058109888b82a1eb66f038a883542f988c1e8c8afefb766b375ebdc2",
+        "Destination SHA256": "a76e62e4058109888b82a1eb66f038a883542f988c1e8c8afefb766b375ebdc2",
+        "Notes": ""
+      }
+    ],
+    "interpretation": "Copy integrity only, not permissions"
+  },
+  "validation": {
+    "fullRegressionPassed": 224,
+    "failed": 0,
+    "skipped": 0,
+    "realChromeMediaPlaybackPassed": 17,
+    "sourceAndBuildOutputMediaHashesMatched": 17,
+    "syntaxChecksPassed": 68,
+    "localProductionModeBuild": "PASS \u2014 local empty environment only; no Production deployment/staging",
+    "applicationDiff": false,
+    "workoutsPerDifficulty": [
+      12,
+      12,
+      12
+    ],
+    "actualActiveFullyCovered": 26,
+    "proposedMappingsApplied": 0
+  }
+}

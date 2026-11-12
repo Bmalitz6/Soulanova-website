@@ -1,0 +1,172 @@
+{
+  "roots": [
+    "/Users/bob/Desktop/Soulanova/10 Strength",
+    "/Users/bob/Desktop/Soulanova/07 Documentation",
+    "/Users/bob/Desktop/Soulanova/04 Branding",
+    "/Users/bob/Desktop/Soulanova/production",
+    "/Users/bob/Downloads/Soulanova_Strength_Review"
+  ],
+  "metadataFilesEnumerated": 123,
+  "PDFCount": 0,
+  "XMPCount": 0,
+  "identityReferenceFiles": [
+    {
+      "path": "/Users/bob/Desktop/Soulanova/07 Documentation/Soulanova_Master_Handoff_2026-11-05.md",
+      "sha256": "7f0d83c39cf8cfe2045df94ca06fcf5b68d966d392859200d9184290981d21af"
+    },
+    {
+      "path": "/Users/bob/Downloads/Soulanova_Strength_Review/Soulanova_Strength_Approved_Name_Reconciliation_2026-11-04.html",
+      "sha256": "5dc9b085ff53218f7e6e1f73963932036fb2b834c4d04ce1c5205aa2c7d1bbef"
+    },
+    {
+      "path": "/Users/bob/Downloads/Soulanova_Strength_Review/Soulanova_Strength_Approved_Name_Reconciliation_ST_inventory_legacy_v1.csv",
+      "sha256": "21566076baeecd6681d4ca8bdcca360dced0ae2e3a7accd1b9c49c36a9c2ca5c"
+    },
+    {
+      "path": "/Users/bob/Downloads/Soulanova_Strength_Review/Soulanova_Strength_Production_Candidates_2026-11-04.csv",
+      "sha256": "a590000fa56c8b4ef37e8f3b6cd3a943580473c7bd7ff3a44891fd8516fba874"
+    },
+    {
+      "path": "/Users/bob/Downloads/Soulanova_Strength_Review/Soulanova_Strength_Exercise_Mapping_2026-11-04.csv",
+      "sha256": "9ffffee513f1e1b6bea3f02c22f9a9c1271892c36ba9ba88c546123908f31f1c"
+    },
+    {
+      "path": "/Users/bob/Desktop/Soulanova/10 Strength/05 Production Tracking/Strength_Master_Inventory.csv",
+      "sha256": "b078019fac55a3db3518386363fee6480dca91a3ace37cc094fd7187cc1be289"
+    },
+    {
+      "path": "/Users/bob/Desktop/Soulanova/10 Strength/05 Production Tracking/SOULSTRENGTH_WORKOUT_THUMBNAILS.csv",
+      "sha256": "342c1d7e681ed30c47853d343158d8f3814f6ed1cabdb595ec9db8ed40e2ce37"
+    },
+    {
+      "path": "/Users/bob/Desktop/Soulanova/10 Strength/05 Production Tracking/SOULSTRENGTH_MOBILE_INTEGRATION_MANIFEST.csv",
+      "sha256": "05f22bacb8098291f2f0072d1fd88c0a93a44aeab7ed22f5276bdebf811d0580"
+    },
+    {
+      "path": "/Users/bob/Desktop/Soulanova/10 Strength/05 Production Tracking/STRENGTH_PRODUCTION_INVENTORY.csv",
+      "sha256": "3617fbfd6dd517a98f87dce5a1a2affef7cd5b40c04343ab1b7d112717d620c9"
+    },
+    {
+      "path": "/Users/bob/Desktop/Soulanova/10 Strength/05 Production Tracking/Strength_Approved_Masters.csv",
+      "sha256": "9bdca4bc7cbf271ab913e00d80c20f4fb41c89f65d4fa42fc7c9ca3c01f70240"
+    },
+    {
+      "path": "/Users/bob/Desktop/Soulanova/10 Strength/05 Production Tracking/Strength_Production_Status.md",
+      "sha256": "1e99b3bb38ef3f67947bedffc05dcdbabf9b2eac3f98b83a38a5db5713270373"
+    },
+    {
+      "path": "/Users/bob/Desktop/Soulanova/10 Strength/05 Production Tracking/Strength_Raw_Footage_Reference.csv",
+      "sha256": "6ef2fd89a735fcd928ebfa05df87121e29bc65c6f74e9d0c0c46e232025f60b4"
+    },
+    {
+      "path": "/Users/bob/Desktop/Soulanova/10 Strength/05 Production Tracking/Strength_Review_Required.csv",
+      "sha256": "a681fcd9bdceafe97c03899fb68967f1fc62776e6b246c326761c9f295345dc2"
+    },
+    {
+      "path": "/Users/bob/Downloads/Soulanova_Strength_Review/Soulanova_Strength_Approved_Name_Reconciliation_ST_inventory_legacy_v1.html",
+      "sha256": "40d8aaccad2ef1afc975e1f65bb03dd79c34eff941061057f19cdc3c8e22b5fa"
+    },
+    {
+      "path": "/Users/bob/Downloads/Soulanova_Strength_Review/Soulanova_Strength_Approved_Name_Reconciliation_2026-11-04.csv",
+      "sha256": "cee041bba9e25e83478c857f98f2da15620b7c7ccced04593b61b4abe83669ec"
+    },
+    {
+      "path": "/Users/bob/Downloads/Soulanova_Strength_Review/Soulanova_Strength_Production_Review_2026-11-04.html",
+      "sha256": "c9be387f69d8bcb893c0c798f6a191afff12beef7ca1d7cbd8615a7dd1a16d54"
+    },
+    {
+      "path": "/Users/bob/Desktop/Soulanova/07 Documentation/Production_Inventory/Strength_Candidate_Assembly_20261105_161455.csv",
+      "sha256": "65ac71a6d500f1e0d9072a4ffda713387851ac9a7e6d4ff403d5ae4281299411"
+    },
+    {
+      "path": "/Users/bob/Desktop/Soulanova/07 Documentation/Production_Inventory/Organized_Production_Copy_Verification_20261105_155942.csv",
+      "sha256": "94476837549d5a958c6a3cedbd5a91d2c19fbdf6e63a265e9b67c4850dfcb4a7"
+    },
+    {
+      "path": "/Users/bob/Desktop/Soulanova/07 Documentation/Production_Inventory/Downloads_Intake_Verification_20261105_155305.csv",
+      "sha256": "63f1d0d95c6814dc6f26bc0ed8761d4bf5084962a2c2b773d6fc906f5214aa56"
+    },
+    {
+      "path": "/Users/bob/Downloads/Soulanova_Strength_Review/Approved_Strength_Package/production-manifest-v2.json",
+      "sha256": "ff28a25d0dc8f07954b23778bd5f7d550f02169e102f20f653b3bb5a59d59ecc"
+    },
+    {
+      "path": "/Users/bob/Downloads/Soulanova_Strength_Review/Approved_Strength_Package/production-manifest.json",
+      "sha256": "ff28a25d0dc8f07954b23778bd5f7d550f02169e102f20f653b3bb5a59d59ecc"
+    },
+    {
+      "path": "/Users/bob/Downloads/Soulanova_Strength_Review/Approved_Strength_Package/production-manifest_ST_inventory_legacy_v1.json",
+      "sha256": "7f76fb4ed4bcd797b6c2eb31eec7edad6bd47cc7b1803d503d0d3f059d26c552"
+    },
+    {
+      "path": "/Users/bob/Desktop/Soulanova/07 Documentation/Production_Inventory/Strength_Final_Audit/Strength_Master_Inventory.csv",
+      "sha256": "b078019fac55a3db3518386363fee6480dca91a3ace37cc094fd7187cc1be289"
+    },
+    {
+      "path": "/Users/bob/Desktop/Soulanova/07 Documentation/Production_Inventory/Strength_Final_Audit/Strength_Visual_Review_v2/Needs_Review/index.html",
+      "sha256": "1c4073c0db119f1dc468dc1bcb6262d26e1a21f28218780fea582e28a69e3fab"
+    },
+    {
+      "path": "/Users/bob/Desktop/Soulanova/07 Documentation/Production_Inventory/Strength_Final_Audit/Strength_Visual_Review_v2/Raw_Footage_Reference/index.html",
+      "sha256": "6213c17e1d81d52abe00fc1d7940e41d9ac1b1fe30880e734309a26a04cd8851"
+    },
+    {
+      "path": "/Users/bob/Desktop/Soulanova/07 Documentation/Production_Inventory/Pilates_Cleanup_Review/docs/pilates-cleanup-review/deployment-audit.json",
+      "sha256": "5b7e405dbaf7c8cd0f1d7289918c7e623f97c49de0286639d947e4aa6430c35a"
+    },
+    {
+      "path": "/Users/bob/Desktop/Soulanova/07 Documentation/Production_Inventory/Pilates_Cleanup_Review/docs/pilates-cleanup-review/deploy-dry.json",
+      "sha256": "a94d01cc7fc894bdfa3d42516c8f009c9c11fc53a6ec0885fe7accaa9903d57f"
+    },
+    {
+      "path": "/Users/bob/Desktop/Soulanova/07 Documentation/Production_Inventory/Strength_Final_Audit/Strength_Visual_Review_v2/Historical_Approvals/index.html",
+      "sha256": "86bec300bd4847d062f11113d431d5418e4be517fb0d65f8455ef542a09b4dd0"
+    },
+    {
+      "path": "/Users/bob/Desktop/Soulanova/07 Documentation/Production_Inventory/Strength_Final_Audit/Strength_Visual_Review_v2/Production_Review/index.html",
+      "sha256": "9494a9c95a0ccedad280b8e397931b65fdb588be46d2b538eab172bdd5c3de11"
+    },
+    {
+      "path": "/Users/bob/Desktop/Soulanova/07 Documentation/Production_Inventory/Strength_Final_Audit/Strength_Approved_Masters.csv",
+      "sha256": "9bdca4bc7cbf271ab913e00d80c20f4fb41c89f65d4fa42fc7c9ca3c01f70240"
+    },
+    {
+      "path": "/Users/bob/Desktop/Soulanova/07 Documentation/Production_Inventory/Strength_Final_Audit/Strength_Production_Status.md",
+      "sha256": "1e99b3bb38ef3f67947bedffc05dcdbabf9b2eac3f98b83a38a5db5713270373"
+    },
+    {
+      "path": "/Users/bob/Desktop/Soulanova/07 Documentation/Production_Inventory/Strength_Final_Audit/Strength_Raw_Footage_Reference.csv",
+      "sha256": "6ef2fd89a735fcd928ebfa05df87121e29bc65c6f74e9d0c0c46e232025f60b4"
+    },
+    {
+      "path": "/Users/bob/Desktop/Soulanova/07 Documentation/Production_Inventory/Strength_Final_Audit/Strength_Review_Required.csv",
+      "sha256": "a681fcd9bdceafe97c03899fb68967f1fc62776e6b246c326761c9f295345dc2"
+    }
+  ],
+  "explicitRightsWordingFiles": [],
+  "alsoReviewed": [
+    "/Users/bob/Documents/Soulanova/Soulanova-SoulFuel/mobile-app/docs (read-only targeted rights-word search)",
+    "/Users/bob/Documents/Soulanova/Soulanova-SoulFuel-release2-audit/mobile-app/docs (read-only targeted rights-word search)",
+    "/Users/bob/Documents/Soulanova/* relevant documentation filenames (rights/licence/release/provenance discovery only)",
+    "/Users/bob/Desktop/Soulanova relevant production asset filenames across original and backup locations",
+    "/Users/bob/Downloads relevant IMG_4058 and Strength_Instructor filenames only"
+  ],
+  "excluded": [
+    "credentials and environment files",
+    "browser profiles/cookies",
+    "unrelated personal information",
+    "native/mobile changes",
+    "node_modules",
+    "Pods",
+    ".git",
+    "website app copies"
+  ],
+  "limit": "No provider account history, email, or unprovided/offline legal records inspected; absence from these scopes does not prove rights do not exist.",
+  "additionalDocumentDiscovery": {
+    "scope": "Desktop Soulanova and Downloads/Soulanova_Strength_Review filename discovery for DOC/DOCX/RTF/Pages/XLSX/Numbers/EML/MSG and rights/release/licence/job/receipt names",
+    "relevantPagesDocument": "/Users/bob/Desktop/Soulanova/Dumbell Workouts.pages",
+    "relevantPagesSha256": "c4750679425ef42f4b799d2540d8cebe6cb07f242aeafe0bc9e71a0016cd80b1",
+    "pagesSearchableTextAvailable": false,
+    "otherResults": "Other Pages files were recipe/Pilates documents and were not opened as unrelated. No rights/release/job/receipt filename match was located. Pages contents are not claimed exhaustively searched."
+  }
+}
