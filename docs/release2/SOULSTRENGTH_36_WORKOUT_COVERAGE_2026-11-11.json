@@ -456,7 +456,7 @@
           "exerciseId": "STR-053",
           "name": "Incline Dumbbell Press",
           "sets": 1,
-          "reps": "8 each side",
+          "reps": "8 total bilateral repetitions",
           "restSeconds": 60,
           "playable": false
         },
@@ -2248,7 +2248,7 @@
           "exerciseId": "STR-053",
           "name": "Incline Dumbbell Press",
           "sets": 3,
-          "reps": "10 each side",
+          "reps": "10 total bilateral repetitions",
           "restSeconds": 60,
           "playable": false
         },
@@ -2729,21 +2729,6 @@
     "sha256": "05f22bacb8098291f2f0072d1fd88c0a93a44aeab7ed22f5276bdebf811d0580",
     "evidenceCopy": "docs/release2/sources/strength-reconciliation/SOULSTRENGTH_MOBILE_INTEGRATION_MANIFEST.csv"
   },
-  "validation": {
-    "testsPassed": 218,
-    "testsFailed": 0,
-    "testsSkipped": 0,
-    "syntaxChecksPassed": 67,
-    "localProductionModeBuild": "PASS — local only, no live configuration or deployment",
-    "packagedBuildHashesMatched": 17,
-    "realChromeDecodePlaybackPassed": 17,
-    "responsiveWidths": [
-      1280,
-      390,
-      320
-    ],
-    "deployed": false
-  },
   "galleryEntryReconciliation": [
     {
       "reviewNumber": 1,
@@ -3055,5 +3040,55 @@
       "unresolvedIdentity": null,
       "shortLoopOnly": false
     }
-  ]
+  ],
+  "currentCatalogSha256": "9f97600ea8792b2d1034a735caea4a24504aded1ee2af0367ba2cc6fecde6a44",
+  "ownerAuthorizedPrescriptionCorrections": [
+    {
+      "workoutId": "beginner-chest-and-arms",
+      "exerciseId": "STR-053",
+      "before": "8 each side",
+      "after": "8 total bilateral repetitions"
+    },
+    {
+      "workoutId": "advanced-core-and-press",
+      "exerciseId": "STR-053",
+      "before": "10 each side",
+      "after": "10 total bilateral repetitions"
+    }
+  ],
+  "priorValidationBeforeOwnerCorrection": {
+    "testsPassed": 218,
+    "testsFailed": 0,
+    "testsSkipped": 0,
+    "syntaxChecksPassed": 67,
+    "localProductionModeBuild": "PASS — local only, no live configuration or deployment",
+    "packagedBuildHashesMatched": 17,
+    "realChromeDecodePlaybackPassed": 17,
+    "responsiveWidths": [
+      1280,
+      390,
+      320
+    ],
+    "deployed": false
+  },
+  "validation": {
+    "fullRegressionPassed": 224,
+    "failed": 0,
+    "skipped": 0,
+    "realChromeMediaPlaybackPassed": 17,
+    "packagedMediaHashesMatched": 17,
+    "localProductionModeBuild": "PASS — deliberately empty local environment, not a deployment",
+    "buildOutputMediaHashesMatched": 17,
+    "syntaxChecksPassed": 68,
+    "responsiveWidths": [
+      1280,
+      390,
+      320
+    ],
+    "sourceChanges": "Only two owner-authorized repetition labels; parallel program representation mirrors them",
+    "activeDemoCoverage": 26,
+    "conditionalDraftCoverageAfterRightsAndApplication": 36,
+    "runtimeSubstitutionsApplied": 0,
+    "STR053Blocked": true
+  }
 }

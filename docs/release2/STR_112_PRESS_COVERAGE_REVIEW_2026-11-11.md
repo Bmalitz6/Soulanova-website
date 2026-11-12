@@ -1,5 +1,7 @@
 # Incline Dumbbell Press coverage — STR-112 review
 
+> Owner update: both “each side” press prescriptions are now confirmed bilateral and corrected. All ten proposed substitutions are form-compatible but remain unapplied pending source-image/likeness rights. See [current correction and coverage audit](SOULSTRENGTH_BILATERAL_PRESCRIPTION_CORRECTION_2026-11-11.md). Earlier findings below are retained as historical evidence.
+
 **Result: movement/approval/hash verified; substitution not applied pending rights evidence and two prescription clarifications.** All 36 original workouts remain preserved, STR-053 remains blocked, and no application source, Production configuration or deployment changed.
 
 ## Independent video assessment

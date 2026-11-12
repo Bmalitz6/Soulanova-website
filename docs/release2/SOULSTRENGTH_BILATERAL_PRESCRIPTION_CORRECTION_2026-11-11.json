@@ -1,0 +1,48 @@
+{
+  "authority": "Owner confirmation: BOTH ARMS TOGETHER; only the two specified Incline Dumbbell Press prescriptions corrected",
+  "baselineCommit": "e94564bedb428ccefb19c3a9055d3006216fbbbc",
+  "priorCatalogSha256": "9671f1252fcc95a01b7aace32220f8f7766c6d71153694d2d12dcc75a8d9a479",
+  "currentCatalogSha256": "9f97600ea8792b2d1034a735caea4a24504aded1ee2af0367ba2cc6fecde6a44",
+  "corrections": [
+    {
+      "workoutId": "beginner-chest-and-arms",
+      "exerciseId": "STR-053",
+      "before": "8 each side",
+      "after": "8 total bilateral repetitions"
+    },
+    {
+      "workoutId": "advanced-core-and-press",
+      "exerciseId": "STR-053",
+      "before": "10 each side",
+      "after": "10 total bilateral repetitions"
+    }
+  ],
+  "runtimeVideoMappingsChanged": false,
+  "STR053Blocked": true,
+  "STR112RightsStatus": "UNVERIFIED — source-image and instructor-likeness rights confirmation still required",
+  "approvedLibraryCounts": {
+    "Beginner": 12,
+    "Intermediate": 12,
+    "Advanced": 12
+  },
+  "validation": {
+    "fullRegressionPassed": 224,
+    "failed": 0,
+    "skipped": 0,
+    "realChromeMediaPlaybackPassed": 17,
+    "packagedMediaHashesMatched": 17,
+    "localProductionModeBuild": "PASS — deliberately empty local environment, not a deployment",
+    "buildOutputMediaHashesMatched": 17,
+    "syntaxChecksPassed": 68,
+    "responsiveWidths": [
+      1280,
+      390,
+      320
+    ],
+    "sourceChanges": "Only two owner-authorized repetition labels; parallel program representation mirrors them",
+    "activeDemoCoverage": 26,
+    "conditionalDraftCoverageAfterRightsAndApplication": 36,
+    "runtimeSubstitutionsApplied": 0,
+    "STR053Blocked": true
+  }
+}

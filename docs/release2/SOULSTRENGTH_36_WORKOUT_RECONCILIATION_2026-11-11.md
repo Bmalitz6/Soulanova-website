@@ -1,5 +1,7 @@
 # SoulStrength — 36-workout reconciliation, November 11
 
+> Owner update: both “each side” press prescriptions are now confirmed bilateral and corrected. All ten proposed substitutions are form-compatible but remain unapplied pending source-image/likeness rights. See [current correction and coverage audit](SOULSTRENGTH_BILATERAL_PRESCRIPTION_CORRECTION_2026-11-11.md). Earlier findings below are retained as historical evidence.
+
 **Local candidate only. No push or deployment.** This correction supersedes the reduced practice-only presentation in commit `6782e33`. All 36 original definitions are visible again: 12 Beginner, 12 Intermediate, 12 Advanced, with every original exercise position, prescription and instruction preserved byte-for-byte in `app/strength/strengthWorkouts.json` (SHA-256 `9671f1252fcc95a01b7aace32220f8f7766c6d71153694d2d12dcc75a8d9a479`). The raw 36-plan library was never deleted, but filtering it into 34 practice subsets was the wrong presentation for the owner's approved structure. This candidate removes that reduction.
 
 ## Sources and exact approval distinctions

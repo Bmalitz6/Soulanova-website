@@ -306,7 +306,7 @@
             {
               "exerciseId": "STR-053",
               "sets": 1,
-              "reps": "8 each side",
+              "reps": "8 total bilateral repetitions",
               "restSeconds": 60,
               "instruction": "Press both dumbbells smoothly and keep the movement within a comfortable range.",
               "name": "Incline Dumbbell Press"
@@ -350,7 +350,7 @@
               "name": "Incline Dumbbell Press",
               "instruction": "Press both dumbbells smoothly and keep the movement within a comfortable range.",
               "sets": 1,
-              "reps": "8 each side",
+              "reps": "8 total bilateral repetitions",
               "restSeconds": 60
             },
             {
@@ -3358,7 +3358,7 @@
             {
               "exerciseId": "STR-053",
               "sets": 3,
-              "reps": "10 each side",
+              "reps": "10 total bilateral repetitions",
               "restSeconds": 60,
               "instruction": "Press both dumbbells smoothly and keep the movement within a comfortable range.",
               "name": "Incline Dumbbell Press"
@@ -3418,7 +3418,7 @@
               "name": "Incline Dumbbell Press",
               "instruction": "Press both dumbbells smoothly and keep the movement within a comfortable range.",
               "sets": 3,
-              "reps": "10 each side",
+              "reps": "10 total bilateral repetitions",
               "restSeconds": 60
             },
             {

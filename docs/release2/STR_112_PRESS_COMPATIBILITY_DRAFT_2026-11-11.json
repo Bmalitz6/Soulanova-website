@@ -1,7 +1,7 @@
 {
   "status": "DRAFT_NOT_APPLIED",
   "baselineCommit": "b157c256b2f2ec24c647af63b8c55bf5544ba5ad",
-  "sourceCatalogSha256": "9671f1252fcc95a01b7aace32220f8f7766c6d71153694d2d12dcc75a8d9a479",
+  "sourceCatalogSha256": "9f97600ea8792b2d1034a735caea4a24504aded1ee2af0367ba2cc6fecde6a44",
   "replacementExerciseId": "STR-112",
   "replacementSha256": "ef0433a6e4f1b889b5bf183715c139d0bb96a797728f126651907fb65fbc9705",
   "approval": {
@@ -55,17 +55,16 @@
       "originalStep": {
         "exerciseId": "STR-053",
         "sets": 1,
-        "reps": "8 each side",
+        "reps": "8 total bilateral repetitions",
         "restSeconds": 60,
         "instruction": "Press both dumbbells smoothly and keep the movement within a comfortable range.",
         "name": "Incline Dumbbell Press"
       },
       "proposedExerciseId": "STR-112",
-      "formCompatibility": "REQUIRES_UNILATERAL_PRESCRIPTION_REVIEW",
+      "formCompatibility": "BILATERAL_FORM_COMPATIBLE",
       "applied": false,
       "blockers": [
-        "Rights evidence not yet verified",
-        "Meaning of each-side prescription not confirmed"
+        "Commercial source-image and instructor-likeness rights not yet confirmed"
       ]
     },
     {
@@ -85,7 +84,7 @@
       "formCompatibility": "BILATERAL_FORM_COMPATIBLE",
       "applied": false,
       "blockers": [
-        "Rights evidence not yet verified"
+        "Commercial source-image and instructor-likeness rights not yet confirmed"
       ]
     },
     {
@@ -105,7 +104,7 @@
       "formCompatibility": "BILATERAL_FORM_COMPATIBLE",
       "applied": false,
       "blockers": [
-        "Rights evidence not yet verified"
+        "Commercial source-image and instructor-likeness rights not yet confirmed"
       ]
     },
     {
@@ -125,7 +124,7 @@
       "formCompatibility": "BILATERAL_FORM_COMPATIBLE",
       "applied": false,
       "blockers": [
-        "Rights evidence not yet verified"
+        "Commercial source-image and instructor-likeness rights not yet confirmed"
       ]
     },
     {
@@ -145,7 +144,7 @@
       "formCompatibility": "BILATERAL_FORM_COMPATIBLE",
       "applied": false,
       "blockers": [
-        "Rights evidence not yet verified"
+        "Commercial source-image and instructor-likeness rights not yet confirmed"
       ]
     },
     {
@@ -165,7 +164,7 @@
       "formCompatibility": "BILATERAL_FORM_COMPATIBLE",
       "applied": false,
       "blockers": [
-        "Rights evidence not yet verified"
+        "Commercial source-image and instructor-likeness rights not yet confirmed"
       ]
     },
     {
@@ -185,7 +184,7 @@
       "formCompatibility": "BILATERAL_FORM_COMPATIBLE",
       "applied": false,
       "blockers": [
-        "Rights evidence not yet verified"
+        "Commercial source-image and instructor-likeness rights not yet confirmed"
       ]
     },
     {
@@ -205,7 +204,7 @@
       "formCompatibility": "BILATERAL_FORM_COMPATIBLE",
       "applied": false,
       "blockers": [
-        "Rights evidence not yet verified"
+        "Commercial source-image and instructor-likeness rights not yet confirmed"
       ]
     },
     {
@@ -216,17 +215,16 @@
       "originalStep": {
         "exerciseId": "STR-053",
         "sets": 3,
-        "reps": "10 each side",
+        "reps": "10 total bilateral repetitions",
         "restSeconds": 60,
         "instruction": "Press both dumbbells smoothly and keep the movement within a comfortable range.",
         "name": "Incline Dumbbell Press"
       },
       "proposedExerciseId": "STR-112",
-      "formCompatibility": "REQUIRES_UNILATERAL_PRESCRIPTION_REVIEW",
+      "formCompatibility": "BILATERAL_FORM_COMPATIBLE",
       "applied": false,
       "blockers": [
-        "Rights evidence not yet verified",
-        "Meaning of each-side prescription not confirmed"
+        "Commercial source-image and instructor-likeness rights not yet confirmed"
       ]
     },
     {
@@ -246,18 +244,18 @@
       "formCompatibility": "BILATERAL_FORM_COMPATIBLE",
       "applied": false,
       "blockers": [
-        "Rights evidence not yet verified"
+        "Commercial source-image and instructor-likeness rights not yet confirmed"
       ]
     }
   ],
   "coverage": {
     "workouts": 36,
     "currentFullyCovered": 26,
-    "bilateralFormCompatibleReplacementsPendingRights": 8,
-    "unilateralAmbiguities": 2,
-    "hypotheticalFullyCoveredAfterEightVerifiedReplacements": 34,
+    "bilateralFormCompatibleReplacementsPendingRights": 10,
+    "unilateralAmbiguities": 0,
     "actualMappingsChanged": 0,
-    "STR053Blocked": true
+    "STR053Blocked": true,
+    "hypotheticalFullyCoveredAfterTenVerifiedReplacements": 36
   },
   "workoutCoverage": [
     {
@@ -292,8 +290,8 @@
       "level": "Beginner",
       "exerciseCount": 5,
       "currentAvailable": 4,
-      "hypotheticalAvailableAfterRights": 4,
-      "proposedReplacement": false,
+      "hypotheticalAvailableAfterRights": 5,
+      "proposedReplacement": true,
       "applied": false
     },
     {
@@ -544,8 +542,8 @@
       "level": "Advanced",
       "exerciseCount": 7,
       "currentAvailable": 6,
-      "hypotheticalAvailableAfterRights": 6,
-      "proposedReplacement": false,
+      "hypotheticalAvailableAfterRights": 7,
+      "proposedReplacement": true,
       "applied": false
     },
     {
@@ -590,7 +588,7 @@
       "level": "Beginner",
       "workouts": 12,
       "currentFullyCovered": 10,
-      "hypotheticalFullyCoveredAfterRights": 11
+      "hypotheticalFullyCoveredAfterRights": 12
     },
     {
       "level": "Intermediate",
@@ -602,10 +600,12 @@
       "level": "Advanced",
       "workouts": 12,
       "currentFullyCovered": 8,
-      "hypotheticalFullyCoveredAfterRights": 11
+      "hypotheticalFullyCoveredAfterRights": 12
     }
   ],
-  "validation": {
+  "priorSourceCatalogSha256": "9671f1252fcc95a01b7aace32220f8f7766c6d71153694d2d12dcc75a8d9a479",
+  "ownerBilateralConfirmation": "BOTH ARMS TOGETHER intended in the two previously each-side prescriptions; corrected as authorized.",
+  "priorValidationBeforeOwnerCorrection": {
     "fullRegressionPassed": 218,
     "failed": 0,
     "skipped": 0,
@@ -614,5 +614,26 @@
     "outputAssetHashesMatched": 17,
     "sourceCatalogUnchanged": true,
     "runtimeMappingsChanged": false
+  },
+  "ownerAuthorizedSourceChangesOnly": 2,
+  "validation": {
+    "fullRegressionPassed": 224,
+    "failed": 0,
+    "skipped": 0,
+    "realChromeMediaPlaybackPassed": 17,
+    "packagedMediaHashesMatched": 17,
+    "localProductionModeBuild": "PASS — deliberately empty local environment, not a deployment",
+    "buildOutputMediaHashesMatched": 17,
+    "syntaxChecksPassed": 68,
+    "responsiveWidths": [
+      1280,
+      390,
+      320
+    ],
+    "sourceChanges": "Only two owner-authorized repetition labels; parallel program representation mirrors them",
+    "activeDemoCoverage": 26,
+    "conditionalDraftCoverageAfterRightsAndApplication": 36,
+    "runtimeSubstitutionsApplied": 0,
+    "STR053Blocked": true
   }
 }
