@@ -1,0 +1,111 @@
+{
+  "baselineCommit": "b75c5f8d085995fe8f91f025892a449d2ece67da",
+  "originalApprovalManifestSha256": "ff28a25d0dc8f07954b23778bd5f7d550f02169e102f20f653b3bb5a59d59ecc",
+  "records": [
+    {
+      "reviewNumber": 9,
+      "originalApproval": {
+        "review_number": 9,
+        "review_id": "Review #09",
+        "exercise_name_user_confirmed": null,
+        "gallery_suggested_movement": "Dumbbell Press \u2014 exact variation uncertain",
+        "movement_identity_status": "needs_human_movement_identity_review",
+        "source_filename": "Act-Two%20-%20IMG_4058_Runway_Ready_Cropped_Focused%20Dumbbell%20Press%20in%20Soulanova%20Gym.mp4",
+        "source_path": "/Users/bob/Downloads/Act-Two%20-%20IMG_4058_Runway_Ready_Cropped_Focused%20Dumbbell%20Press%20in%20Soulanova%20Gym.mp4",
+        "master_copy": "Strength_Masters/Act-Two%20-%20IMG_4058_Runway_Ready_Cropped_Focused%20Dumbbell%20Press%20in%20Soulanova%20Gym.mp4",
+        "sha256": "ef0433a6e4f1b889b5bf183715c139d0bb96a797728f126651907fb65fbc9705",
+        "size_bytes": 4846536,
+        "duration_seconds": 19.167,
+        "dimensions": "1280\u00d7720",
+        "approval_status": "approved_by_user_review_number",
+        "media_url": null,
+        "visual_review_note": "Focused press candidate; verify angle/grip before mapping to catalog.",
+        "copy_status": "verified_source_and_master_sha256",
+        "source_sha256": "ef0433a6e4f1b889b5bf183715c139d0bb96a797728f126651907fb65fbc9705",
+        "master_sha256": "ef0433a6e4f1b889b5bf183715c139d0bb96a797728f126651907fb65fbc9705",
+        "source_size_bytes": 4846536,
+        "unresolved_reason": "Focused press candidate; verify angle/grip before mapping to catalog."
+      },
+      "sourceAndMasterVerification": [
+        {
+          "locationType": "source_path",
+          "exists": true,
+          "sha256Matches": true
+        },
+        {
+          "locationType": "master_copy",
+          "exists": true,
+          "sha256Matches": true
+        },
+        {
+          "locationType": "website_candidate",
+          "exists": true,
+          "sha256Matches": true
+        },
+        {
+          "locationType": "desktop_approved_master",
+          "exists": true,
+          "sha256Matches": true
+        }
+      ]
+    },
+    {
+      "reviewNumber": 10,
+      "originalApproval": {
+        "review_number": 10,
+        "review_id": "Review #10",
+        "exercise_name_user_confirmed": null,
+        "gallery_suggested_movement": "Incline Dumbbell Press",
+        "movement_identity_status": "gallery_visual_suggestion; full technique review remains required",
+        "source_filename": "Act-Two%20-%20IMG_4059_Runway_Ready_Wide_Safe_Incline%20Dumbbell%20Press%20in%20a%20Modern%20Gym.mp4",
+        "source_path": "/Users/bob/Downloads/Act-Two%20-%20IMG_4059_Runway_Ready_Wide_Safe_Incline%20Dumbbell%20Press%20in%20a%20Modern%20Gym.mp4",
+        "master_copy": "Strength_Masters/Act-Two%20-%20IMG_4059_Runway_Ready_Wide_Safe_Incline%20Dumbbell%20Press%20in%20a%20Modern%20Gym.mp4",
+        "sha256": "560de86d0dfd8b4db9d6a24512114048ee6ac91309739e146bc65667c8f503a7",
+        "size_bytes": 5109669,
+        "duration_seconds": 25.292,
+        "dimensions": "1280\u00d7720",
+        "approval_status": "approved_by_user_review_number",
+        "media_url": null,
+        "visual_review_note": "Filename and incline bench pose align; full motion review required.",
+        "copy_status": "verified_source_and_master_sha256",
+        "source_sha256": "560de86d0dfd8b4db9d6a24512114048ee6ac91309739e146bc65667c8f503a7",
+        "master_sha256": "560de86d0dfd8b4db9d6a24512114048ee6ac91309739e146bc65667c8f503a7",
+        "source_size_bytes": 5109669
+      },
+      "sourceAndMasterVerification": [
+        {
+          "locationType": "source_path",
+          "exists": true,
+          "sha256Matches": true
+        },
+        {
+          "locationType": "master_copy",
+          "exists": true,
+          "sha256Matches": true
+        },
+        {
+          "locationType": "website_candidate",
+          "exists": true,
+          "sha256Matches": true
+        },
+        {
+          "locationType": "desktop_approved_master",
+          "exists": true,
+          "sha256Matches": true
+        }
+      ]
+    }
+  ],
+  "framesMetadata": "docs/release2/artifacts/str-053-identity/frames.json",
+  "finding": "UNRESOLVED \u2014 mixed/ambiguous motion and conflicting approved labels; no runtime mapping changed",
+  "mappingChanged": false,
+  "workoutsPreserved": 36,
+  "prior22FileReceiptLocated": false,
+  "focusedValidation": {
+    "passed": 40,
+    "failed": 0,
+    "skipped": 0,
+    "scope": "original 36-workout sequence/coverage and media restrictions; no application change",
+    "priorFullRegressionPassed": 218
+  }
+}
