@@ -1,0 +1,69 @@
+{
+  "schemaVersion": 1,
+  "proposalStatus": "pending_owner_approval",
+  "programTitle": "Chair Yoga with Miriam",
+  "playback": {
+    "passesPerWorkout": 2,
+    "transitionSeconds": 5,
+    "progression": "video-ended event after pass 2, followed by a five-second transition"
+  },
+  "levels": [
+    {
+      "id": "beginner",
+      "name": "Beginner",
+      "description": "Seated foundations, gentle joint movement and steady support.",
+      "workoutIds": [
+        "IMG_4285",
+        "IMG_4297",
+        "IMG_4298",
+        "IMG_4290",
+        "IMG_4294",
+        "IMG_4296",
+        "IMG_4309",
+        "IMG_4307",
+        "IMG_4308",
+        "IMG_4303",
+        "IMG_4304",
+        "IMG_4323"
+      ]
+    },
+    {
+      "id": "intermediate",
+      "name": "Intermediate",
+      "description": "Seated mobility and flexibility with wider ranges and longer hinges.",
+      "workoutIds": [
+        "IMG_4286",
+        "IMG_4287",
+        "IMG_4288",
+        "IMG_4289",
+        "IMG_4291",
+        "IMG_4292",
+        "IMG_4293",
+        "IMG_4305",
+        "IMG_4306",
+        "IMG_4318",
+        "IMG_4319",
+        "IMG_4320"
+      ]
+    },
+    {
+      "id": "advanced",
+      "name": "Advanced",
+      "description": "More involved hip positions, seated warrior shapes and supported standing balance.",
+      "workoutIds": [
+        "IMG_4299",
+        "IMG_4300",
+        "IMG_4310",
+        "IMG_4311",
+        "IMG_4312",
+        "IMG_4313",
+        "IMG_4314",
+        "IMG_4315",
+        "IMG_4316",
+        "IMG_4317",
+        "IMG_4321",
+        "IMG_4322"
+      ]
+    }
+  ]
+}

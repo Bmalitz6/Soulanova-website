@@ -4,7 +4,7 @@ const progressWritesEnabled=false;
 let historyView='idle',workoutRevision=0;
 const workouts=[
 {id:'tai',category:'Tai Chi',icon:'☯',title:'Flow & Balance',minutes:30,steps:['5 min gentle warm-up and easy breathing','10 min slow weight shifts and mindful stepping','10 min familiar flowing Tai Chi movements','5 min comfortable cool-down']},
-{id:'yoga',category:'Yoga',icon:'✳',title:'Chair Yoga with Miriam',minutes:17,steps:['36 mapped movement demonstrations','Choose each movement from the Chair Yoga library','Preview candidates are pending owner review']},
+{id:'yoga',category:'Yoga',icon:'✳',title:'Chair Yoga with Miriam',minutes:13,steps:['36 movement workouts · 12 per proposed level','Each movement demonstration plays twice','Level assignments and narration await owner review']},
 {id:'pilates',category:'Pilates',icon:'◌',title:'Core Foundations',minutes:25,steps:['5 min breathing and posture check','10 min controlled core movements','5 min stability practice','5 min stretching']},
 {id:'strength',category:'Strength',icon:'↗',title:'Everyday Strength',minutes:30,steps:['5 min warm-up','10 min supported lower-body movements','10 min comfortable upper-body movements','5 min cool-down']},
 {id:'mobility',category:'Stretch & Mobility',icon:'〰',title:'Move with Ease',minutes:20,steps:['5 min gentle warm-up','5 min shoulders and upper-back mobility','5 min hip and ankle mobility','5 min easy stretches']},

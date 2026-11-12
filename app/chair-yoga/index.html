@@ -4,7 +4,7 @@
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <meta name="theme-color" content="#0b4b53">
-  <meta name="description" content="A member Chair Yoga movement library with Miriam, in a protected Soulanova preview.">
+  <meta name="description" content="Three levels of Chair Yoga workouts with Miriam for signed-in Soulanova members.">
   <title>Chair Yoga with Miriam | Soulanova</title>
   <link rel="icon" href="/assets/soulanova-logo.png">
   <link rel="stylesheet" href="/app/chair-yoga/chair-yoga.css">
@@ -23,7 +23,7 @@
     <section id="auth-gate" class="auth-gate" hidden aria-labelledby="auth-title">
       <p class="eyebrow">YOUR SOULANOVA ACCOUNT</p>
       <h1 id="auth-title">Sign in to continue</h1>
-      <p>The Chair Yoga library is available to signed-in members.</p>
+      <p>The Chair Yoga workouts are available to signed-in members.</p>
       <a class="button primary" href="/app/?mode=signin">Go to member sign in</a>
     </section>
 
@@ -32,48 +32,68 @@
         <div>
           <p class="eyebrow">SOULANOVA · YOGA</p>
           <h1>Chair Yoga <em>with Miriam</em></h1>
-          <p>Explore 36 movement demonstrations in the owner’s sequence. Choose a movement to load it, then use the player controls to play, pause, or seek. Previous and Next move through the mapped library.</p>
+          <p>Choose a proposed level and follow its 12-workout playlist. Each movement demonstration plays twice, with a short pause before the next workout.</p>
         </div>
         <img src="/app/images/chair-yoga/IMG_4285.jpg" width="480" height="270" alt="Miriam seated in the Soulanova Chair Yoga studio">
       </section>
-      <p class="preview-notice"><strong>Protected preview candidates:</strong> all 36 movement names and media are included for owner review. These recordings are pending owner review and are not Production-approved.</p>
+      <p class="preview-notice"><strong>Owner review preview:</strong> difficulty levels and narration scripts are proposals pending approval. Videos remain preview candidates. No narration recordings have been generated; player narration controls stay unavailable until recordings and approval are present.</p>
 
-      <section class="player-card" aria-labelledby="player-heading">
-        <div class="player-heading">
-          <div>
-            <p class="eyebrow">NOW SELECTED</p>
-            <h2 id="player-heading">Choose a movement</h2>
-            <p id="player-meta" class="player-meta">Select a movement below to load its demonstration.</p>
-          </div>
-          <span id="player-position" class="position" aria-live="polite"></span>
+      <section id="level-selection" class="library" aria-labelledby="level-heading">
+        <div class="library-heading">
+          <div><p class="eyebrow">THREE PROPOSED LEVELS</p><h2 id="level-heading">Choose your level</h2></div>
         </div>
-        <video id="chair-yoga-video" controls playsinline preload="metadata" aria-label="Chair Yoga movement demonstration"></video>
-        <p id="video-error" class="video-error" role="status" aria-live="polite" hidden></p>
-        <div class="player-controls" aria-label="Movement navigation">
-          <button id="previous-movement" type="button" disabled>← Previous</button>
-          <button id="play-movement" class="primary" type="button" disabled>Play</button>
-          <button id="next-movement" class="primary" type="button" disabled>Next →</button>
-        </div>
+        <div id="level-list" class="level-grid"></div>
       </section>
 
-      <section class="library" aria-labelledby="library-heading">
+      <section id="playlist-view" class="library" aria-labelledby="playlist-heading" hidden>
         <div class="library-heading">
-          <div>
-            <p class="eyebrow">36 MAPPED MOVEMENTS</p>
-            <h2 id="library-heading">Choose your movement</h2>
-          </div>
-          <label class="search-label">Find a movement
-            <input id="movement-search" type="search" autocomplete="off" placeholder="Search the library">
-          </label>
+          <div><p id="playlist-eyebrow" class="eyebrow">12 WORKOUTS</p><h2 id="playlist-heading">Workout playlist</h2><p id="playlist-summary" class="player-meta"></p></div>
+          <button id="back-to-levels" class="secondary" type="button">← Levels</button>
         </div>
-        <div id="movement-list" class="movement-grid" aria-label="Chair Yoga movement library"></div>
-        <p id="empty-search" class="empty-search" hidden>No movements match that search.</p>
+        <button id="start-level" class="button primary" type="button">Start level playlist</button>
+        <div id="workout-list" class="workout-grid" aria-label="Level workout playlist"></div>
+      </section>
+
+      <section id="player-view" class="player-card" aria-labelledby="player-heading" hidden>
+        <div class="player-heading">
+          <div><p id="player-eyebrow" class="eyebrow">BEGINNER · WORKOUT 1 OF 12</p><h2 id="player-heading">Choose a workout</h2><p id="player-meta" class="player-meta"></p></div>
+          <span id="player-position" class="position" aria-live="polite"></span>
+        </div>
+        <div class="video-stage" id="video-stage">
+          <video id="chair-yoga-video" playsinline preload="metadata" aria-label="Chair Yoga workout demonstration by Miriam"></video>
+          <div id="transition-screen" class="transition-screen" hidden aria-live="polite">
+            <p id="transition-eyebrow" class="eyebrow">PAUSED</p>
+            <h3 id="transition-current"></h3>
+            <p class="up-next-label">UP NEXT</p>
+            <img id="transition-thumbnail" alt="">
+            <h2 id="transition-next"></h2>
+            <p id="transition-countdown" class="transition-hint"></p>
+            <div class="transition-controls"><button id="transition-resume" class="button primary" type="button">Resume</button><button id="transition-next-button" class="button secondary" type="button">Next workout</button></div>
+          </div>
+          <div id="completion-screen" class="completion-screen" hidden>
+            <p class="eyebrow">PLAYLIST COMPLETE</p><h2>Level complete</h2><p id="completion-summary"></p><button id="completion-levels" class="button primary" type="button">Choose another level</button>
+          </div>
+          <div id="playback-error" class="playback-error" hidden role="alert"><p id="playback-error-message">Playback needs a tap to resume.</p><button id="error-resume" class="button primary" type="button">Resume</button></div>
+        </div>
+        <div class="progress-summary"><span id="pass-label">Pass 1 of 2</span><progress id="workout-progress" max="1" value="0" aria-label="Current workout progress"></progress><span id="completed-count">0 of 12 workouts completed</span></div>
+        <div class="player-controls" aria-label="Workout controls">
+          <button id="previous-workout" type="button">← Previous</button><button id="pause-workout" class="primary" type="button">Pause</button><button id="restart-workout" type="button">Restart workout</button><button id="next-workout" type="button">Next →</button>
+        </div>
+        <section class="narration-panel" aria-labelledby="narration-heading">
+          <audio id="chair-yoga-narration" preload="metadata"></audio>
+          <div><h3 id="narration-heading">Miriam’s guidance</h3><p id="narration-status" role="status">Narration scripts await owner approval. No audio is available in this preview.</p></div>
+          <label><input id="narration-enabled" type="checkbox" disabled> Narration on</label>
+          <label class="volume-label">Volume <input id="narration-volume" type="range" min="0" max="1" step="0.05" value="0.8" disabled></label>
+          <button id="narration-mute" type="button" disabled>Mute narration</button>
+        </section>
+        <section class="up-next-panel" aria-labelledby="up-next-heading"><h3 id="up-next-heading">Playlist progress</h3><p id="up-next-copy"></p><div id="player-sequence" class="sequence-strip"></div></section>
       </section>
     </div>
   </main>
   <footer>Soulanova · Move Better • Feel Calmer • Live Fuller</footer>
   <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2/dist/umd/supabase.js"></script>
   <script src="/app/config.js"></script>
+  <script src="/app/chair-yoga/chair-yoga-playback.js"></script>
   <script src="/app/chair-yoga/chair-yoga.js"></script>
 </body>
 </html>

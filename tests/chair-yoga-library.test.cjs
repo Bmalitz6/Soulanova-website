@@ -56,7 +56,7 @@ test('direct route requires a validated member and does not load video before au
   assert.match(route, /id="auth-gate"[^>]*hidden/);
   assert.match(route, /id="member-library" hidden/);
   assert.match(route, /href="\/app\/\?mode=signin"/);
-  assert.match(route, /id="chair-yoga-video" controls playsinline preload="metadata"/);
+  assert.match(route, /id="chair-yoga-video" playsinline preload="metadata"/);
   assert.doesNotMatch(route.match(/<video\b[^>]*>/)?.[0] || '', /\bsrc=/i);
   assert.match(player, /client\.auth\.getUser\(\)/);
   assert.match(player, /if \(!user\) return showSignedOut/);
@@ -72,12 +72,12 @@ test('Yoga category opens the dedicated library and keeps direct member navigati
 });
 
 test('player exposes play, pause, seek, previous and next controls', () => {
-  assert.match(route, /controls playsinline/);
-  assert.match(route, /id="previous-movement"/);
-  assert.match(route, /id="next-movement"/);
-  assert.match(route, /id="play-movement"/);
+  assert.match(route, /playsinline/);
+  assert.match(route, /id="previous-workout"/);
+  assert.match(route, /id="next-workout"/);
+  assert.match(route, /id="pause-workout"/);
   assert.match(player, /video\.play\(\)/);
   assert.match(player, /video\.pause\(\)/);
-  assert.match(player, /selectMovement\(currentIndex - 1\)/);
-  assert.match(player, /selectMovement\(currentIndex \+ 1\)/);
+  assert.match(player, /controller\.previous\(\)/);
+  assert.match(player, /controller\.next\(\)/);
 });
