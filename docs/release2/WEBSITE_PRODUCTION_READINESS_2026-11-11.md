@@ -1,5 +1,7 @@
 # Website Production readiness — current assessment, November 11
 
+> Strength reconciliation update: the full 36-workout library is restored locally, with original sequences. The reduced practice-only scope below is superseded by [SOULSTRENGTH_36_WORKOUT_RECONCILIATION_2026-11-11.md](SOULSTRENGTH_36_WORKOUT_RECONCILIATION_2026-11-11.md). This correction has not been pushed or deployed.
+
 **BLOCKED — no Production staging or promotion performed.**
 
 **Corrective development update:** see [WEBSITE_REMEDIATION_2026-11-11.md](WEBSITE_REMEDIATION_2026-11-11.md) for the new packaged Strength media, restricted practice scope, inactive nutrition adapter and fresh validation. The audit below is retained as evidence of the pre-remediation baseline; its candidate-hosting failure is superseded by that report.

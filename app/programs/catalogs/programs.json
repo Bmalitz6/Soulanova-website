@@ -5,7 +5,7 @@
     "strength": {
       "title": "SoulStrength",
       "description": "The existing Soulanova Strength program: 36 workouts across three levels.",
-      "notice": "Five approved movements are available as practice selections from the preserved plans. Full plans, additional videos, warm-up/cool-down and progress sync are not released.",
+      "notice": "All 36 original workouts and sequences are preserved. Approved demonstrations retain their original review status; final-master status is separate. Conflicting movement identities remain unavailable. Progress recording remains paused.",
       "workouts": [
         {
           "id": "beginner-foundations",
@@ -4003,9 +4003,9 @@
           "category": "Lower Body",
           "seconds": 23.583,
           "sha256": "b47a5ebd2fb84f018f590d98b953ff493a647553f16ca0103a0d1b0f26ba2a56",
-          "approval": "HISTORICAL USER-APPROVED REVIEW ASSET — exact SHA-256 matches Review #43; not automatically designated final master",
-          "video": null,
-          "availability": "Final-master confirmation required"
+          "approval": "APPROVED DEMONSTRATION — original user review, not final master",
+          "video": "/app/strength/media/exercises/b47a5ebd2fb84f018f590d98b953ff493a647553f16ca0103a0d1b0f26ba2a56/strength_STR-091.mp4",
+          "availability": "Approved demonstration; final-master designation not established"
         },
         {
           "id": "STR-104",
@@ -4013,9 +4013,9 @@
           "category": "Lower Body",
           "seconds": 22.057,
           "sha256": "dc2072b81e22f406e3da9d316621d63a4dbbb9a3face020e8c6b9a7858ed1430",
-          "approval": "HISTORICAL USER-APPROVED REVIEW ASSET — exact SHA-256 matches Review #44; not automatically designated final master",
-          "video": null,
-          "availability": "Final-master confirmation required"
+          "approval": "APPROVED DEMONSTRATION — original user review, not final master",
+          "video": "/app/strength/media/exercises/dc2072b81e22f406e3da9d316621d63a4dbbb9a3face020e8c6b9a7858ed1430/strength_STR-104.mp4",
+          "availability": "Approved demonstration; final-master designation not established"
         },
         {
           "id": "STR-020",
@@ -4023,9 +4023,9 @@
           "category": "Arms",
           "seconds": 19,
           "sha256": "1429a26744c5c35054de0e160014991f368f40f55a7d7fc5d6448a32b9264970",
-          "approval": "HISTORICAL USER-APPROVED REVIEW ASSET — exact SHA-256 matches Review #06; not automatically designated final master",
-          "video": null,
-          "availability": "Final-master confirmation required"
+          "approval": "APPROVED DEMONSTRATION — original user review, not final master",
+          "video": "/app/strength/media/exercises/1429a26744c5c35054de0e160014991f368f40f55a7d7fc5d6448a32b9264970/strength_STR-020.mp4",
+          "availability": "Approved demonstration; final-master designation not established"
         },
         {
           "id": "STR-001",
@@ -4033,9 +4033,9 @@
           "category": "Back & Shoulders",
           "seconds": 20.417,
           "sha256": "0299813d5ca1af94a8f7be04676b19b304dacb300b487269ef5ffb2b14801572",
-          "approval": "HISTORICAL USER-APPROVED REVIEW ASSET — exact SHA-256 matches Review #22; not automatically designated final master",
-          "video": null,
-          "availability": "Final-master confirmation required"
+          "approval": "APPROVED DEMONSTRATION — original user review, not final master",
+          "video": "/app/strength/media/exercises/0299813d5ca1af94a8f7be04676b19b304dacb300b487269ef5ffb2b14801572/strength_STR-001.mp4",
+          "availability": "Approved demonstration; final-master designation not established"
         },
         {
           "id": "STR-114",
@@ -4053,9 +4053,9 @@
           "category": "Lower Body",
           "seconds": 25.002,
           "sha256": "5f11a03fa308ef2f8d132a3572263b4b7714751c6a1a434f2d9d129af9f65ba7",
-          "approval": "HISTORICAL USER-APPROVED REVIEW ASSET — exact SHA-256 matches Review #08; not automatically designated final master",
-          "video": null,
-          "availability": "Final-master confirmation required"
+          "approval": "APPROVED DEMONSTRATION — original user review, not final master",
+          "video": "/app/strength/media/exercises/5f11a03fa308ef2f8d132a3572263b4b7714751c6a1a434f2d9d129af9f65ba7/strength_STR-058.mp4",
+          "availability": "Approved demonstration; final-master designation not established"
         },
         {
           "id": "STR-053",
@@ -4065,7 +4065,8 @@
           "sha256": "560de86d0dfd8b4db9d6a24512114048ee6ac91309739e146bc65667c8f503a7",
           "approval": "APPROVED MASTER — pinned SHA-256 verified",
           "video": "/app/strength/media/exercises/560de86d0dfd8b4db9d6a24512114048ee6ac91309739e146bc65667c8f503a7/Soulanova_Strength_IMG_4059_Incline_Dumbbell_Press_APPROVED.mp4",
-          "availability": "Approved master"
+          "availability": "Unavailable pending movement identity reconciliation",
+          "mappingStatus": "BLOCKED — later user-confirmed Flyes correction conflicts with original Incline Dumbbell Press definition"
         },
         {
           "id": "STR-112",
@@ -4083,9 +4084,9 @@
           "category": "Shoulders",
           "seconds": 23.417,
           "sha256": "5cf328461110582f8fc3d7f3ff6104d9cbbc71833d8a91b1ae2ad77f98743c8f",
-          "approval": "HISTORICAL USER-APPROVED REVIEW ASSET — exact SHA-256 matches Review #16; not automatically designated final master",
-          "video": null,
-          "availability": "Final-master confirmation required"
+          "approval": "APPROVED DEMONSTRATION — original user review, not final master",
+          "video": "/app/strength/media/exercises/5cf328461110582f8fc3d7f3ff6104d9cbbc71833d8a91b1ae2ad77f98743c8f/strength_STR-056.mp4",
+          "availability": "Approved demonstration; final-master designation not established"
         },
         {
           "id": "STR-045",
@@ -4093,9 +4094,9 @@
           "category": "Back & Shoulders",
           "seconds": 19.292,
           "sha256": "4664438cb3c466fc6451a6909707c7e9727d2b7a91dacf929bc61bca22dbdd01",
-          "approval": "HISTORICAL USER-APPROVED REVIEW ASSET — exact SHA-256 matches Review #20; not automatically designated final master",
-          "video": null,
-          "availability": "Final-master confirmation required"
+          "approval": "APPROVED DEMONSTRATION — original user review, not final master",
+          "video": "/app/strength/media/exercises/4664438cb3c466fc6451a6909707c7e9727d2b7a91dacf929bc61bca22dbdd01/strength_STR-045.mp4",
+          "availability": "Approved demonstration; final-master designation not established"
         },
         {
           "id": "STR-061",
@@ -4113,9 +4114,9 @@
           "category": "Core",
           "seconds": 24.5,
           "sha256": "b7be3e113f73276e7f36ad41522c3f2be11772a1ee78fbb0ad8230dc7f7ee159",
-          "approval": "HISTORICAL USER-APPROVED REVIEW ASSET — exact SHA-256 matches Review #45; not automatically designated final master",
-          "video": null,
-          "availability": "Final-master confirmation required"
+          "approval": "APPROVED DEMONSTRATION — original user review, not final master",
+          "video": "/app/strength/media/exercises/b7be3e113f73276e7f36ad41522c3f2be11772a1ee78fbb0ad8230dc7f7ee159/strength_STR-092.mp4",
+          "availability": "Approved demonstration; final-master designation not established"
         },
         {
           "id": "STR-115",
@@ -4133,9 +4134,9 @@
           "category": "Core",
           "seconds": 24.917,
           "sha256": "aa343b2525aadb0950e4f3abc900089b41862b754456a768e04699e483b4f00e",
-          "approval": "HISTORICAL USER-APPROVED REVIEW ASSET — exact SHA-256 matches Review #24; not automatically designated final master",
-          "video": null,
-          "availability": "Final-master confirmation required"
+          "approval": "APPROVED DEMONSTRATION — original user review, not final master",
+          "video": "/app/strength/media/exercises/aa343b2525aadb0950e4f3abc900089b41862b754456a768e04699e483b4f00e/strength_STR-087.mp4",
+          "availability": "Approved demonstration; final-master designation not established"
         },
         {
           "id": "STR-117",
@@ -4143,9 +4144,9 @@
           "category": "Core",
           "seconds": 24.625,
           "sha256": "f39b19e27cfa5ae74703aa2451b494d1996d784fe0e2e6b7c421b6cc69e6db3d",
-          "approval": "HISTORICAL USER-APPROVED REVIEW ASSET — exact SHA-256 matches Review #23; not automatically designated final master",
-          "video": null,
-          "availability": "Final-master confirmation required"
+          "approval": "APPROVED DEMONSTRATION — original user review, not final master",
+          "video": "/app/strength/media/exercises/f39b19e27cfa5ae74703aa2451b494d1996d784fe0e2e6b7c421b6cc69e6db3d/strength_STR-117.mp4",
+          "availability": "Approved demonstration; final-master designation not established"
         },
         {
           "id": "STR-036",
@@ -4153,9 +4154,9 @@
           "category": "Arms",
           "seconds": 24.083,
           "sha256": "3748894f60b8b4112fd31f2bf64606179067852a45d0309ea8c780bbcfd56666",
-          "approval": "HISTORICAL USER-APPROVED REVIEW ASSET — exact SHA-256 matches Review #47; not automatically designated final master",
-          "video": null,
-          "availability": "Final-master confirmation required"
+          "approval": "APPROVED DEMONSTRATION — original user review, not final master",
+          "video": "/app/strength/media/exercises/3748894f60b8b4112fd31f2bf64606179067852a45d0309ea8c780bbcfd56666/strength_STR-036.mp4",
+          "availability": "Approved demonstration; final-master designation not established"
         },
         {
           "id": "STR-057",
@@ -4163,9 +4164,9 @@
           "category": "Lower Body",
           "seconds": 23.625,
           "sha256": "5e9882b6a85fe99d71cf02450a4f129e13f515c237d6142b65ff7cf19cc7667d",
-          "approval": "HISTORICAL USER-APPROVED REVIEW ASSET — exact SHA-256 matches Review #04; not automatically designated final master",
-          "video": null,
-          "availability": "Final-master confirmation required"
+          "approval": "APPROVED DEMONSTRATION — original user review, not final master",
+          "video": "/app/strength/media/exercises/5e9882b6a85fe99d71cf02450a4f129e13f515c237d6142b65ff7cf19cc7667d/strength_STR-057.mp4",
+          "availability": "Approved demonstration; final-master designation not established"
         }
       ]
     }
