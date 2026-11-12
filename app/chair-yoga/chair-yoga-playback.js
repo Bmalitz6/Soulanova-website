@@ -14,6 +14,18 @@
     return true;
   }
 
+  function createPauseEventGuard() {
+    let expectedPauseEvents = 0;
+    return Object.freeze({
+      expect() { expectedPauseEvents++; },
+      consumeExpected() {
+        if (expectedPauseEvents === 0) return false;
+        expectedPauseEvents--;
+        return true;
+      }
+    });
+  }
+
   function createChairYogaPlayback({ levels, movements, effects = {}, passesPerWorkout = 2 }) {
     validatePlaylist(levels, movements);
     const movementById = new Map(movements.map(movement => [movement.id, movement]));
@@ -114,11 +126,11 @@
       return false;
     }
     function next() {
-      if (!['playing', 'paused', 'resume-required', 'movement-complete'].includes(current.phase)) return false;
+      if (!['playing', 'paused', 'resume-required'].includes(current.phase)) return false;
       return startAt(current.workoutIndex + 1);
     }
     function previous() {
-      if (!['playing', 'paused', 'resume-required', 'movement-complete'].includes(current.phase)) return false;
+      if (!['playing', 'paused', 'resume-required'].includes(current.phase)) return false;
       return startAt(current.workoutIndex - 1);
     }
     function restart() {
@@ -148,7 +160,7 @@
       if (current.workoutIndex === workoutList().length - 1) {
         current.phase = 'complete';
       } else {
-        current.phase = 'movement-complete';
+        return startAt(current.workoutIndex + 1);
       }
       emit();
       return true;
@@ -171,5 +183,5 @@
     return Object.freeze({ selectLevel, start, pause, resume, next, previous, restart, markVideoPlaying, videoEnded, playbackBlocked, backToLevels, getLevelSummary, getSnapshot });
   }
 
-  return Object.freeze({ createChairYogaPlayback, validatePlaylist });
+    return Object.freeze({ createChairYogaPlayback, createPauseEventGuard, validatePlaylist });
 });

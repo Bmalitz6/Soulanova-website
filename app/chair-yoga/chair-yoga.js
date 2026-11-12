@@ -25,6 +25,7 @@
   let currentLevel = null;
   let activeMovementId = null;
   let activeGeneration = 0;
+  let playingGeneration = 0;
   let mediaCommand = false;
   let authRevision = 0;
   let listenersAdded = false;
@@ -32,6 +33,7 @@
   let narrationMuted = false;
   let currentApprovedAudio = null;
   let narrationObjectUrl = null;
+  const pauseEventGuard = window.SoulanovaChairYogaPlayback.createPauseEventGuard();
 
   const $ = (selector) => document.querySelector(selector);
   const byId = (id) => catalog?.movements.find(item => item.id === id) || null;
@@ -40,6 +42,11 @@
     return `${Math.floor(total / 60)}:${String(total % 60).padStart(2, '0')}`;
   };
   const escapeText = value => String(value ?? '');
+  function pauseVideoCommand() {
+    if (video.paused) return;
+    pauseEventGuard.expect();
+    video.pause();
+  }
 
   function clearNarration() {
     narration.pause();
@@ -53,7 +60,7 @@
     authRevision++;
     if (controller) controller.backToLevels();
     mediaCommand = true;
-    video.pause();
+    pauseVideoCommand();
     video.removeAttribute('src');
     video.load();
     mediaCommand = false;
@@ -70,7 +77,7 @@
       return false;
     }
     mediaCommand = true;
-    video.pause();
+    pauseVideoCommand();
     clearNarration();
     activeMovementId = workout.id;
     activeGeneration = generation;
@@ -143,7 +150,7 @@
   function pauseMedia({ generation } = {}) {
     if (generation !== activeGeneration) return;
     mediaCommand = true;
-    video.pause();
+    pauseVideoCommand();
     narration.pause();
     mediaCommand = false;
   }
@@ -157,14 +164,14 @@
   function stopMedia({ generation } = {}) {
     if (generation !== activeGeneration) return;
     mediaCommand = true;
-    video.pause();
+    pauseVideoCommand();
     narration.pause();
     mediaCommand = false;
   }
   function addMediaListeners() {
     if (listenersAdded) return;
     listenersAdded = true;
-    video.addEventListener('playing', () => { const s = controller?.getSnapshot(); if (s?.phase === 'playing') controller.markVideoPlaying(activeGeneration, activeMovementId); });
+    video.addEventListener('playing', () => { playingGeneration = activeGeneration; const s = controller?.getSnapshot(); if (s?.phase === 'playing') controller.markVideoPlaying(activeGeneration, activeMovementId); });
     video.addEventListener('ended', () => controller?.videoEnded(activeGeneration, activeMovementId));
     video.addEventListener('timeupdate', updateProgress);
     video.addEventListener('seeking', syncNarrationToVideo);
@@ -173,7 +180,10 @@
       if (snap?.phase === 'playing') controller.playbackBlocked(snap.generation, new Error('This movement video could not load.'));
     });
     video.addEventListener('pause', () => {
-      if (!mediaCommand && document.visibilityState === 'visible' && controller?.getSnapshot().phase === 'playing') controller.pause();
+      if (pauseEventGuard.consumeExpected()) return;
+      const snap = controller?.getSnapshot();
+      const atEnd = video.ended || (Number.isFinite(video.duration) && video.duration > 0 && video.currentTime >= video.duration - 0.05);
+      if (!atEnd && !mediaCommand && document.visibilityState === 'visible' && snap?.phase === 'playing' && snap.generation === playingGeneration) controller.pause();
     });
     narration.addEventListener('timeupdate', syncVideoToNarration);
     $('#back-to-levels').addEventListener('click', () => showLevelSelection());
@@ -278,7 +288,7 @@
     controller.start(index);
   }
   function showLevelSelection() {
-    if (controller && ['playing','paused','resume-required','movement-complete'].includes(controller.getSnapshot().phase)) controller.backToLevels();
+    if (controller && ['playing','paused','resume-required'].includes(controller.getSnapshot().phase)) controller.backToLevels();
     playerView.hidden = true;
     playlistView.hidden = true;
     levelSelection.hidden = false;
@@ -327,25 +337,23 @@
     previousButton.disabled = snap.workoutIndex <= 0;
     nextButton.disabled = snap.workoutIndex >= snap.workoutsTotal - 1;
     $('#pause-workout').textContent = snap.phase === 'paused' || snap.phase === 'resume-required' ? 'Resume' : 'Pause';
-    $('#pause-workout').disabled = snap.phase === 'movement-complete';
+    $('#pause-workout').disabled = snap.phase === 'complete';
     $('#restart-workout').disabled = false;
-    const isOverlay = ['paused','movement-complete'].includes(snap.phase);
+    const isOverlay = snap.phase === 'paused';
     transitionScreen.hidden = !isOverlay || snap.phase === 'resume-required';
     playbackError.hidden = snap.phase !== 'resume-required';
     $('#playback-error-message').textContent = snap.error || 'Playback needs a tap to resume.';
-    $('#transition-eyebrow').textContent = snap.phase === 'movement-complete' ? 'MOVEMENT COMPLETE' : 'MOVEMENT PAUSED';
-    $('#transition-current').textContent = `${snap.phase === 'movement-complete' ? 'COMPLETED MOVEMENT' : 'CURRENT MOVEMENT'}: ${workout.name}`;
+    $('#transition-eyebrow').textContent = 'MOVEMENT PAUSED';
+    $('#transition-current').textContent = `CURRENT MOVEMENT: ${workout.name}`;
     $('#transition-up-next-label').textContent = snap.nextWorkout ? 'UP NEXT' : 'FINAL MOVEMENT IN THIS LEVEL';
     $('#transition-next').textContent = snap.nextWorkout?.name || 'Level completion';
     const nextImage = $('#transition-thumbnail');
     if (snap.nextWorkout) { nextImage.src = snap.nextWorkout.thumbnailUrl; nextImage.alt = `Next workout: ${snap.nextWorkout.name}`; nextImage.hidden = false; }
     else { nextImage.hidden = true; nextImage.removeAttribute('src'); nextImage.alt = ''; }
-    $('#transition-status').textContent = snap.phase === 'movement-complete'
-      ? 'Ready when you are. Press Next Movement to continue.'
-      : `Pass ${snap.pass} of 2 · Playback position is preserved.`;
+    $('#transition-status').textContent = `Pass ${snap.pass} of 2 · Playback position is preserved.`;
     $('#transition-resume').hidden = snap.phase !== 'paused';
     $('#transition-resume').textContent = 'Resume movement';
-    $('#transition-next-button').hidden = !snap.nextWorkout || !['paused', 'movement-complete'].includes(snap.phase);
+    $('#transition-next-button').hidden = !snap.nextWorkout || snap.phase !== 'paused';
     $('#transition-next-button').textContent = 'Next Movement';
     renderSequence(snap);
     updateProgress();

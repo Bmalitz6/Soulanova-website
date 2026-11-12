@@ -5,7 +5,6 @@ let historyView='idle',workoutRevision=0;
 const workouts=[
 {id:'tai',category:'Tai Chi',icon:'☯',title:'Flow & Balance',minutes:30,steps:['5 min gentle warm-up and easy breathing','10 min slow weight shifts and mindful stepping','10 min familiar flowing Tai Chi movements','5 min comfortable cool-down']},
 {id:'yoga',category:'Yoga',icon:'✳',title:'Chair Yoga with Miriam',minutes:13,steps:['36 movement workouts · 12 per proposed level','Each movement demonstration plays twice','Level assignments and narration await owner review']},
-{id:'pilates',category:'Pilates',icon:'◌',title:'Core Foundations',minutes:25,steps:['5 min breathing and posture check','10 min controlled core movements','5 min stability practice','5 min stretching']},
 {id:'strength',category:'Strength',icon:'↗',title:'Everyday Strength',minutes:30,steps:['5 min warm-up','10 min supported lower-body movements','10 min comfortable upper-body movements','5 min cool-down']},
 {id:'mobility',category:'Stretch & Mobility',icon:'〰',title:'Move with Ease',minutes:20,steps:['5 min gentle warm-up','5 min shoulders and upper-back mobility','5 min hip and ankle mobility','5 min easy stretches']},
 {id:'cardio',category:'Low-Impact Cardio',icon:'♡',title:'Easy Energy',minutes:25,steps:['5 min easy walk in place','10 min comfortable low-impact steps','5 min light movement','5 min cool-down']},
@@ -31,7 +30,6 @@ const category=document.getElementById('category');[...new Set(workouts.map(w=>w
 const workoutCardMeta = {
   tai: {label:'TAI CHI', cta:'View Classes', image:'/app/images/workouts/tai-chi.jpg'},
   yoga: {label:'CHAIR YOGA', cta:'Explore Library', image:'/app/images/chair-yoga/IMG_4285.jpg'},
-  pilates: {label:'PILATES', cta:'View Session', image:'/app/images/workouts/pilates.jpg'},
   strength: {label:'STRENGTH', cta:'View Session', image:'/app/images/workouts/strength.jpg'},
   mobility: {label:'STRETCH & MOBILITY', cta:'View Session', image:'/app/images/workouts/mobility.jpg'},
   cardio: {label:'LOW-IMPACT CARDIO', cta:'View Session', image:'/app/images/workouts/cardio.jpg'},

@@ -38,7 +38,7 @@ test('all 36 draft scripts are movement-specific, cue-timed, and fit within thei
   }
 });
 
-test('each movement replays automatically, then waits indefinitely for manual Next Movement', () => {
+test('each movement replays twice then automatically advances through all 12 and completes once', () => {
   const calls = [];
   const ctl = player.createChairYogaPlayback({ levels: plan.levels, movements: catalog.movements, effects: {
     startPass: (workout, info) => calls.push(['start', workout.id, info.pass]),
@@ -52,15 +52,21 @@ test('each movement replays automatically, then waits indefinitely for manual Ne
   s = ctl.getSnapshot(); assert.equal(s.pass, 2); assert.equal(s.phase, 'playing');
   ctl.markVideoPlaying(s.generation, s.currentWorkout.id);
   assert.equal(ctl.videoEnded(s.generation, s.currentWorkout.id), true);
-  s = ctl.getSnapshot(); assert.equal(s.phase, 'movement-complete'); assert.equal(s.completedCount, 1);
-  assert.equal(s.currentWorkout.id, 'IMG_4285'); assert.equal(s.nextWorkout.id, 'IMG_4297');
-  assert.equal(ctl.videoEnded(s.generation, s.currentWorkout.id), false);
-  assert.equal(typeof ctl.tickTransition, 'undefined');
-  assert.equal(ctl.getSnapshot().workoutIndex, 0);
-  assert.equal(ctl.getSnapshot().phase, 'movement-complete');
-  assert.equal(ctl.next(), true); s = ctl.getSnapshot();
-  assert.equal(s.workoutIndex, 1); assert.equal(s.pass, 1); assert.equal(s.phase, 'playing');
+  s = ctl.getSnapshot(); assert.equal(s.phase, 'playing'); assert.equal(s.completedCount, 1);
+  assert.equal(s.currentWorkout.id, 'IMG_4297'); assert.equal(s.workoutIndex, 1); assert.equal(s.pass, 1);
+  assert.equal(ctl.videoEnded(s.generation - 1, 'IMG_4285'), false);
+  for (let index = 1; index < 12; index++) {
+    s = ctl.getSnapshot(); assert.equal(s.phase, 'playing'); assert.equal(s.workoutIndex, index);
+    assert.equal(ctl.videoEnded(s.generation, s.currentWorkout.id), true);
+    s = ctl.getSnapshot(); assert.equal(s.pass, 2); assert.equal(s.workoutIndex, index);
+    ctl.markVideoPlaying(s.generation, s.currentWorkout.id);
+    assert.equal(ctl.videoEnded(s.generation, s.currentWorkout.id), true);
+  }
+  s = ctl.getSnapshot(); assert.equal(s.phase, 'complete'); assert.equal(s.completedCount, 12);
+  assert.equal(s.workoutIndex, 11); assert.equal(ctl.next(), false);
   assert.deepEqual(calls.filter(row => ['start','replay'].includes(row[0])).slice(0,3), [['start','IMG_4285',1],['replay','IMG_4285',2],['start','IMG_4297',1]]);
+  assert.equal(calls.filter(row => row[0] === 'start').length, 12);
+  assert.equal(calls.filter(row => row[0] === 'replay').length, 12);
 });
 
 test('two-pass estimates use exact clip durations and exclude member-controlled pauses', () => {
@@ -74,7 +80,7 @@ test('two-pass estimates use exact clip durations and exclude member-controlled 
   assert.equal(catalog.movements.find(item => item.id === 'IMG_4286').durationSeconds * 2, 60.4);
 });
 
-test('pause and resume retain pass and movement; completion waits for explicit Next', () => {
+test('pause and resume retain pass and movement; automatic advance resumes after pass two', () => {
   const calls = [];
   const ctl = player.createChairYogaPlayback({ levels: plan.levels, movements: catalog.movements, effects: {
     startPass: () => calls.push('start'), replayPass: () => calls.push('replay'), pauseMedia: () => calls.push('pause'), resumeMedia: () => calls.push('resume')
@@ -85,8 +91,7 @@ test('pause and resume retain pass and movement; completion waits for explicit N
   let s = ctl.getSnapshot(); ctl.videoEnded(s.generation, s.currentWorkout.id); s = ctl.getSnapshot();
   assert.equal(s.pass, 2); assert.equal(s.workoutIndex, 0);
   ctl.markVideoPlaying(s.generation, s.currentWorkout.id); ctl.videoEnded(s.generation, s.currentWorkout.id);
-  s = ctl.getSnapshot(); assert.equal(s.phase, 'movement-complete'); assert.equal(s.workoutIndex, 0);
-  assert.equal(ctl.next(), true); assert.equal(ctl.getSnapshot().workoutIndex, 1);
+  s = ctl.getSnapshot(); assert.equal(s.phase, 'playing'); assert.equal(s.workoutIndex, 1);
   assert.ok(calls.includes('pause')); assert.ok(calls.includes('resume'));
 });
 
@@ -126,15 +131,26 @@ test('final workout reaches completion only after both passes and does not creat
   assert.doesNotMatch(ui,/insert\(|\.from\([^)]*workout/i);
 });
 
-test('manual movement screen has completed title, Up Next, thumbnail, Resume and Next Movement', () => {
+test('pause screen has current/next movement, thumbnail, Resume and manual Next Movement', () => {
   for (const id of ['transition-screen','transition-current','transition-up-next-label','transition-next','transition-thumbnail','transition-resume','transition-next-button','transition-status','completion-screen','previous-workout','next-workout','restart-workout','narration-volume']) assert.match(html, new RegExp(`id="${id}"`));
   assert.match(html, /Next Movement/);
   assert.match(html, /Next Movement →/);
-  assert.doesNotMatch(ui, /setInterval\(|tickTransition|transitionSecondsRemaining/);
-  assert.match(ui, /phase === 'movement-complete'/);
-  assert.match(ui, /Press Next Movement to continue/);
+  assert.doesNotMatch(ui, /setInterval\(|tickTransition|transitionSecondsRemaining|movement-complete/);
+  assert.match(ui, /phase === 'paused'/);
+  assert.match(ui, /CURRENT MOVEMENT/);
+  assert.match(ui, /UP NEXT/);
   assert.match(css, /@media\(max-width:760px\)/); assert.match(css, /@media\(max-width:400px\)/);
   assert.match(html, /playsinline/); assert.match(ui, /client\.auth\.getUser\(\)/); assert.match(ui, /crypto\.subtle\.digest\('SHA-256'/);
+});
+
+test('intentional source/stop pause events are consumed rather than pausing the next movement', () => {
+  const guard = player.createPauseEventGuard();
+  assert.equal(guard.consumeExpected(), false);
+  guard.expect(); assert.equal(guard.consumeExpected(), true);
+  assert.equal(guard.consumeExpected(), false);
+  assert.match(ui, /function pauseVideoCommand\(\)/);
+  assert.match(ui, /if \(pauseEventGuard\.consumeExpected\(\)\) return/);
+  assert.match(ui, /video\.addEventListener\('ended', \(\) => controller\?\.videoEnded/);
 });
 
 test('narration is visibly gated until an approved, hashed audio asset exists', () => {
