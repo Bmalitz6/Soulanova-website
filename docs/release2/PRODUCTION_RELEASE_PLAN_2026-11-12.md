@@ -7,7 +7,7 @@
 - Validated application/runtime commit: `a30111d5e8c6b510208bd91adbc5d810779862f1`.
 - Branch: `feature/soulfuel-clean-preview-2026-11-09`, repository `Bmalitz6/Soulanova-website`.
 - Existing READY protected Preview: https://soulanova-website-ltxi3gsdw-soulanova.vercel.app/app ; deployment `dpl_6wmFz7tJgnd7VUTjpkDzBaEHNrvQ`.
-- This preparation adds a read-only release preflight, evidence ledger and this procedure. It changes no application runtime, media, database or configuration. Its exact preparation commit is recorded in the final delivery; the executable reports HEAD when run. No new Preview is needed to test documentation-only changes.
+- The original preparation added a read-only preflight. The subsequent owner-authorized minimum-release candidate changes UI scope and adds safe health/probe monitoring; approved program definitions/media and all database/configuration settings stay unchanged. Its exact commit is reported at delivery. Original Preview remains on a301 until separately published.
 - Eventual Production target: existing `soulanova-website`, project `prj_dMMzPIdHf9o5dXuGu8qL3db0fu2I`, team `team_DYnxDNYoZHChV2l7Z8GzAqTA`. Do not link/create a project.
 - Existing rollback: `dpl_A3N468HfccoSDiZvJhDgPJHmwB9T`. Both `soulanova.com` and `www.soulanova.com` still alias it. Apex routes redirect to www; www public configuration responds 200.
 
@@ -20,14 +20,14 @@
 | Meditation | 17 existing guided sessions | Existing selection, play/pause, voice/background controls and 20 packaged audio assets preserved. Do not enable the globally paused progress writer. |
 | Tai Chi | Existing approved Foundations destination and previously released lessons | Overview opens Beginner Tai Chi Foundations; its approved 10-minute video is packaged. Do not advertise other cue-only/coming-soon movements in the broader legacy library as finished video lessons. |
 | SoulWalk | Authenticated browser Start/Pause/Resume/Finish/Save/history | Real member-owned saving, retry/readback and cross-account SELECT isolation already passed; no additional QA walk needed. Browser manual readings/GPS are not HealthKit/Watch integrations. Remaining auth acceptance applies. |
-| SoulFuel | 75 approved recipes, existing nutrition UI and four dials | FoodScore OFF. Diary/goals and manual health remain browser-local, unencrypted and unsynced; privacy release scope is not yet accepted. Member-storage adapter is inactive and cannot be activated by this release. |
+| SoulFuel | 75 approved recipes, existing nutrition UI and four dials | FoodScore OFF. Production recipes-only policy blocks diary/goals/manual-health initialization and sensitive dashboard reads. Original local records remain untouched. The inactive cloud adapter is not connected. Feature Preview retains the disclosed local tools. |
 
 SoulGolf and Chair Yoga are excluded. Preserve existing public pages, approved navigation and other working programs; do not relabel unavailable features as complete. No reduced Strength library or replacement videos are proposed.
 
 **What can be promoted immediately?** No site artifact should be promoted before the common authentication gates pass. The five non-nutrition programs above have content ready for that release; their finished media do not need renewed approval. SoulFuel recipes can be included, but the current full application must not be presented as a recipes-only release: diary/health forms are still present. Choose one of these explicit paths before staging:
 
 1. Owner explicitly accepts a limited browser-local nutrition/health release with visible shared-device retention warnings and no secure/cloud-storage claims; finish the outstanding goal-switch/return acceptance. No cloud upload or migration.
-2. Release SoulFuel recipes only: implement and test a release-specific gate that removes diary/goal/manual-health collection and sensitive dashboard reads, preserves existing local records without reading/uploading/deleting them, and labels those features unavailable. **This variant is not yet implemented and must not be inferred from this plan or the preflight.**
+2. Release SoulFuel recipes only: implement and test a release-specific gate that removes diary/goal/manual-health collection and sensitive dashboard reads, preserves existing local records without reading/uploading/deleting them, and labels those features unavailable. **Implemented in the minimum-release candidate:** trusted server Preview identity, conservative static CSS/notice, pre-initialization guards on diary/health/dashboard scripts, no retained-data reads/writes, and explicit unavailable labeling. This is UI release scope, not encryption, record erasure or a replacement for server authorization.
 
 The safer recipes-only variant can avoid a new health backend, but it still requires a separate exact tested commit. Neither path authorizes live nutrition cloud writes, RLS changes or migration. Retain the existing explicit consent-based cloud-adapter proposal for later approval.
 
@@ -87,3 +87,15 @@ No merge, push, deployment, promotion, domain change, subscription activation, c
 - The preflight's content checks pass, while its release disposition correctly returns **BLOCKED / exit 2** for unresolved real acceptance and decisions. No extra QA walking or nutrition records were created.
 
 Detailed non-sensitive test/hosting/preflight receipts are retained locally under `.git/strength-preview-publication-2026-11-12/`; this tracked plan and acceptance ledger are the durable handoff. The earlier publication CLI misroute and verified removal are recorded in the publication receipt; no such command was reused in this preparation.
+
+
+## Minimum-release implementation
+
+`api/member-release-scope.js` and `lib/member-release-scope.js` permit local nutrition tools only for the trusted native Vercel Preview environment in this project and exact feature branch. Production, missing/conflicting identity, alternate branches, spoofed request headers and failed policy loads all select recipes-only. No new environment key or credential is needed. Static CSS and a static availability notice also cover first paint/no JavaScript. `foodscore.js`, metrics and wellness dashboard return before member setup, storage reads or event registration outside the feature Preview. Existing local records are never inspected, migrated or deleted. The Overview program card remains full size and describes recipes. Navigation, media and workout definitions are preserved.
+
+`api/release-health.js` returns only release environment, full valid Git SHA, safe feature states and status; no database requests or member fields. `node scripts/release/monitor.cjs https://<exact-deployment-origin>` provides a bounded operator-run probe. It does not follow login redirects or print protected/error bodies. Protected deployments require the existing supported operator-authenticated Vercel curl workflow; the probe labels protection as requiring authentication instead of reporting success. Healthy/error/protected fixtures pass. No alert service, paid drain or automatic telemetry destination was provisioned. Existing Vercel logs/operator visibility and notification delivery still need acceptance; this endpoint is not a full uptime SLA.
+
+Production-target preparation is a local immutable build with an explicitly empty environment and fixed linked-project metadata. It is not a remote staged deployment or proof of actual Production credentials/runtime. Do not upload/promote this local artifact as if real staged acceptance passed. Real auth and operator monitoring gates remain open.
+
+
+Minimum-release validation completed: 238/238 full sequential tests PASS, no failures/skips; 76/76 syntax checks PASS. Local Production-target build PASS, with all 17 built Strength hashes preserved and seven built-artifact browser/API checks PASS at desktop/390/320. The artifact was not deployed. The recipes-only gate closes nutrition collection/privacy scope for this release; feature-Preview diary/goal return testing is deferred, while real member B-to-A walking-history return remains a launch gate. Monitoring code/probe fixtures are tested, but live operator visibility/alerts are NOT TESTED. Existing nine live and three manual passes remain intact.

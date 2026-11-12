@@ -25,7 +25,7 @@ after(async()=>{if(browser)await browser.close();if(server)await new Promise(res
 async function open({active=true,width=1280,height=900}={}){
  const context=await browser.newContext({viewport:{width,height}});const page=await context.newPage();const errors=[];page.on('pageerror',e=>errors.push(e.message));
  await context.route('**/*',async route=>{
-  const url=route.request().url();
+  const url=route.request().url();if(url.endsWith('/api/member-release-scope'))return route.fulfill({contentType:'application/javascript',body:'globalThis.SoulanovaMemberReleaseScope={nutritionPreview:true};'});
   if(url.includes('cdn.jsdelivr.net')){await route.fulfill({contentType:'application/javascript',body:`let member='test-member-a';window.supabase={createClient:()=>({auth:{onAuthStateChange:fn=>{window.__refreshMember=()=>fn('TOKEN_REFRESHED',{user:{id:member}});window.__switchMember=id=>{member=id;fn(id?'SIGNED_IN':'SIGNED_OUT',id?{user:{id}}:null)}},getUser:async()=>{if(window.__refreshOnSave){window.__refreshOnSave=false;window.__refreshMember();}if(window.__saveAuthGate)await window.__saveAuthGate;return {data:{user:member?{id:member,is_anonymous:window.__anonymous===true}:null},error:window.__authFailed?{message:'Unavailable'}:null}},getSession:async()=>({data:{session:member?{user:{id:member}}:null},error:null})}})};`});return}
   if(url===origin+'/api/foodscore-availability'){await route.fulfill({contentType:'application/javascript',body:`globalThis.SoulanovaFoodScoreAvailability={enabled:${active}};`});return}
   if(!url.startsWith(origin+'/')){await route.abort();throw Error('External network blocked in test')}
@@ -87,7 +87,7 @@ test('browser: default and mock-product states meet automated WCAG A/AA checks',
 });
 test('browser: premium hierarchy keeps four primary metrics and reveals secondary controls by keyboard',opts,async()=>{
  const {page,context}=await open({active:false,width:390,height:844});
- assert.deepEqual(await page.locator('main > section[id]').evaluateAll(els=>els.map(e=>e.id)),['program-overview','diary','foodscore','recipe-library','nutrition-goals']);
+ assert.deepEqual(await page.locator('main > section[id]:not(#nutrition-release-notice)').evaluateAll(els=>els.map(e=>e.id)),['program-overview','diary','foodscore','recipe-library','nutrition-goals']);
  assert.equal(await page.locator('.hero-actions a').count(),2);assert.equal(await page.locator('.fuel-grid').count(),0);
  assert.equal(await page.locator('#diary-totals > .total-item').count(),4);assert.equal(await page.locator('#secondary-totals > .total-item').count(),2);
  assert.equal(await page.locator('#secondary-totals').isVisible(),false);await page.locator('.secondary-metrics').filter({has:page.locator('#secondary-totals')}).locator(':scope > summary').focus();await page.keyboard.press('Enter');assert.equal(await page.locator('#secondary-totals').isVisible(),true);

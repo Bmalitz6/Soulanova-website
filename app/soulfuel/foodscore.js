@@ -1,5 +1,7 @@
 'use strict';
 (() => {
+ if(window.SoulanovaMemberReleaseScope?.nutritionPreview!==true)return;
+
   const $ = (id) => document.getElementById(id);
   const form = $('lookup-form'), input = $('barcode'), button = $('lookup-button');
   const status = $('status'), result = $('result'), authState = $('auth-state'), diaryList = $('diary-list');

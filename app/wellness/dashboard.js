@@ -1,5 +1,7 @@
 'use strict';
 (()=>{
+ if(window.SoulanovaMemberReleaseScope?.nutritionPreview!==true)return;
+
  const $=id=>document.getElementById(id),Core=window.SoulanovaWellness,Diary=window.SoulanovaFoodDiary,Health=window.SoulanovaMetrics,Units=window.SoulanovaHealthUnits,Progress=window.SoulanovaTrackerProgress;
  const icons={steps:'M7 3c-3 0-4 7-1 8s5-7 1-8m9 10c-4-1-6 7-3 8s6-7 3-8',heartRate:'M3 12h4l2-5 4 10 2-5h6',calories:'M13 3c1 5-4 5-3 9 1-2 3-2 3-2 4 4 3 11-2 11S3 16 6 11c0 4 2 4 2 4-1-6 5-7 5-12',protein:'M7 6c-4 0-5 6-1 8l4 5c3 3 8 1 8-3 5-3 1-10-3-7L11 6Z',carbs:'M12 21V4m0 5C5 9 5 4 5 4c7 0 7 5 7 5Zm0 6c7 0 7-5 7-5-7 0-7 5-7 5Z',fat:'M12 3c0 0-7 9-7 13a7 7 0 0 0 14 0c0-4-7-13-7-13Z',exercise:'M9 3h6m-3 3v2m0 4v5l3 1m-3-10a7 7 0 1 0 0 14 7 7 0 0 0 0-14',distance:'M5 19 9 5l6 14 4-14M3 19h4m10-14h4',weight:'M5 4h14v16H5Zm3 4h8m-4 0 2-2',bmi:'M4 4h16v16H4Zm4 4h8m-8 4h8m-8 4h4',pressure:'M12 3v6m-4-6h8M5 11h14v10H5Zm4 4h6m-6 3h3',sleep:'M19 15A8 8 0 0 1 9 5a8 8 0 1 0 10 10Z'};
  const client=window.SoulanovaMemberAuth?.getClient();let member=null,revision=0,prefs=Core.defaults(),data={},goals={},unit='metric',blocked=false,saving=false;

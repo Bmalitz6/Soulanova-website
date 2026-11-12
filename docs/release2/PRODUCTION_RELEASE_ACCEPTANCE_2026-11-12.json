@@ -8,14 +8,60 @@
     "receipt": "WEBSITE_PRODUCTION_READINESS_2026-11-11.md",
     "note": "Do not repeat prior successful walking saves. These passes do not certify new-origin login, direct routes or genuine expiry."
   },
-  "currentOriginMemberAcceptance": {"status":"NOT TESTED","provenance":"none","receipt":"No securely controlled authenticated browser context is available."},
-  "directRoutesAfterLogout": {"status":"NOT TESTED","provenance":"none","receipt":"Normal-navigation owner pass retained; direct typed routes still outstanding."},
-  "genuineSessionExpiry": {"status":"NOT TESTED","provenance":"none","receipt":"Mock expiry and logout are not accepted as genuine expiry."},
-  "goalsSwitchAndReturn": {"status":"NOT TESTED","provenance":"none","receipt":"Diary visible isolation passed; same-profile goals and B-to-A return remain outstanding."},
-  "nutritionPrivacyScope": {"status":"BLOCKED","provenance":"none","receipt":"Browser-local unencrypted retention must be explicitly accepted or collection gated in a separately validated release artifact. Cloud adapter remains inactive."},
-  "accessModelAcceptance": {"status":"BLOCKED","provenance":"none","receipt":"Current app exposes free membership; no paid entitlement enforcement implemented. Confirm intended release is free-member access; no payment activation."},
-  "productionConfigurationAcceptance": {"status":"BLOCKED","provenance":"none","receipt":"Existing schema/RLS metadata evidence retained; no production-configured staged artifact tested."},
-  "monitoringOwnerAndAlertTest": {"status":"BLOCKED","provenance":"none","receipt":"No project drains configured. Assign operator and test existing Vercel/Supabase visibility without member payloads."},
-  "stagedProductionAcceptance": {"status":"NOT TESTED","provenance":"none","receipt":"No new Production-target build created; domains preserved."},
-  "finalProductionAuthorization": {"status":"BLOCKED","provenance":"none","receipt":"Owner has authorized preparation only; explicit final authorization required."}
+  "currentOriginMemberAcceptance": {
+    "status": "NOT TESTED",
+    "provenance": "none",
+    "receipt": "No securely controlled authenticated browser context is available."
+  },
+  "directRoutesAfterLogout": {
+    "status": "NOT TESTED",
+    "provenance": "none",
+    "receipt": "Normal-navigation owner pass retained; direct typed routes still outstanding."
+  },
+  "genuineSessionExpiry": {
+    "status": "NOT TESTED",
+    "provenance": "none",
+    "receipt": "Mock expiry and logout are not accepted as genuine expiry."
+  },
+  "goalsSwitchAndReturn": {
+    "status": "NOT TESTED",
+    "provenance": "none",
+    "receipt": "Deferred from Production release: diary/goals/health tools are gated off. Retain this untested feature-Preview item without treating it as a recipes-only launch requirement."
+  },
+  "nutritionPrivacyScope": {
+    "status": "PASS",
+    "provenance": "owner-authorization",
+    "receipt": "Owner requested recipes-only Production. Implemented default-closed server UI policy plus pre-initialization guards, no retained nutrition/health reads or writes, and explicit unavailability disclosures. Fixture browser checks at 1280/390/320 pass. Cloud adapter remains inactive."
+  },
+  "accessModelAcceptance": {
+    "status": "PASS",
+    "provenance": "operator-verified",
+    "receipt": "Registered free-member scope preserved; no subscription/trial enforcement or payments introduced. Fixture member authentication regressions pass; real new-origin acceptance remains independently NOT TESTED."
+  },
+  "productionConfigurationAcceptance": {
+    "status": "BLOCKED",
+    "provenance": "none",
+    "receipt": "Existing schema/RLS metadata evidence retained; no production-configured staged artifact tested."
+  },
+  "monitoringOwnerAndAlertTest": {
+    "status": "BLOCKED",
+    "provenance": "none",
+    "receipt": "No project drains configured. Assign operator and test existing Vercel/Supabase visibility without member payloads."
+  },
+  "stagedProductionAcceptance": {
+    "status": "NOT TESTED",
+    "provenance": "none",
+    "receipt": "No new Production-target build created; domains preserved."
+  },
+  "finalProductionAuthorization": {
+    "status": "BLOCKED",
+    "provenance": "none",
+    "receipt": "Owner has authorized preparation only; explicit final authorization required."
+  },
+  "releaseScope": "recipes-only",
+  "memberSwitchAndReturn": {
+    "status": "NOT TESTED",
+    "provenance": "none",
+    "receipt": "Prior same-profile B isolation observation preserved. Real B-to-A return of existing walking history on the new origin still requires owner-controlled browser acceptance; no additional saves needed."
+  }
 }

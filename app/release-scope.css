@@ -1,0 +1,11 @@
+/* Conservative first paint and no-JavaScript fallback; existing records are never erased. */
+html:not([data-nutrition-preview]) :is(#wellness-dashboard,#diary,#foodscore,#nutrition-goals,#program-overview,#add-metric,#health-trends,#metric-history,#health-units),
+html:not([data-nutrition-preview]) a[href*="/app/soulfuel/metrics"],
+html:not([data-nutrition-preview]) a[href="#diary"],
+html:not([data-nutrition-preview]) a[href="#foodscore"],
+html:not([data-nutrition-preview]) a[href="#nutrition-goals"] { display:none!important; }
+.release-scope-notice { margin:1rem auto;padding:1.25rem;max-width:70rem;background:#f6f5ec;color:#173f38;border-radius:1rem; }
+
+html[data-health-tools]:not([data-nutrition-preview]) main > :not(#nutrition-release-notice) { display:none!important; }
+
+html[data-nutrition-preview] #nutrition-release-notice { display:none!important; }

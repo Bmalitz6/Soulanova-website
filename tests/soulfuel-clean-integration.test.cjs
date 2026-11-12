@@ -20,7 +20,7 @@ test('existing GitHub main files stay unchanged except the authorized SoulFuel d
       const original=git('show',base+':'+file).toString();
       const auth=html=>html.slice(html.indexOf('<section id="auth-box"'),html.indexOf('<div id="member-app"'));
       assert.equal(auth(current),auth(original),'Existing account/auth markup unchanged');
-      const scripts=['/app/soulfuel/food-diary-core.js','/app/soulfuel/metrics/metrics-core.js','/app/soulfuel/metrics/units.js','/app/soulfuel/tracker-progress.js','/app/wellness/dashboard-core.js','/app/wellness/dashboard.js','/app/member-navigation.js'];
+      const scripts=['/app/release-scope.js','/app/soulfuel/food-diary-core.js','/app/soulfuel/metrics/metrics-core.js','/app/soulfuel/metrics/units.js','/app/soulfuel/tracker-progress.js','/app/wellness/dashboard-core.js','/app/wellness/dashboard.js','/app/member-navigation.js'];
       let tail=current.slice(current.indexOf('<section id="workouts"'));
       for(const src of scripts)tail=tail.replace('<script src="'+src+'"></script>','');tail=tail.replace('\n</body>','</body>');
       assert.equal(tail,original.slice(original.indexOf('<section id="workouts"')),'All existing non-home program panels unchanged');

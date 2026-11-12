@@ -103,7 +103,7 @@ test('disabled client hides lookup and registers no barcode submit handler or ne
   const elements = new Map();
   const element = id => { if (!elements.has(id)) elements.set(id, { id, hidden: false, value: barcode, handlers: {}, classList: { toggle() {} }, addEventListener(type, fn) { this.handlers[type] = fn; }, replaceChildren() {} }); return elements.get(id); };
   const calls = [];
-  const window = { SoulanovaFoodScoreAvailability: { enabled: false }, SoulanovaFoodScore: { normalizeOpenFoodFactsProduct() {} } };
+  const window = { SoulanovaMemberReleaseScope: {nutritionPreview:true}, SoulanovaFoodScoreAvailability: { enabled: false }, SoulanovaFoodScore: { normalizeOpenFoodFactsProduct() {} } };
   vm.runInNewContext(fs.readFileSync(path.resolve(__dirname, '../app/soulfuel/foodscore.js'), 'utf8'), {
     window, document: { getElementById: element }, localStorage: { getItem() { return null; }, setItem() { calls.push('storage write'); } },
     fetch(...args) { calls.push(args); throw Error('disabled lookup must not fetch'); }, Date, Math, AbortSignal, URL, Intl, console,

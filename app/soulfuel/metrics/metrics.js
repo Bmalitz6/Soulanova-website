@@ -1,5 +1,7 @@
 'use strict';
 (()=>{
+ if(window.SoulanovaMemberReleaseScope?.nutritionPreview!==true)return;
+
  const $=id=>document.getElementById(id),Core=window.SoulanovaMetrics,Units=window.SoulanovaHealthUnits,Diary=window.SoulanovaFoodDiary,form=$('metric-form');
  const today=()=>{const d=new Date();return `${d.getFullYear()}-${String(d.getMonth()+1).padStart(2,'0')}-${String(d.getDate()).padStart(2,'0')}`;};
  let client=null,member=null,revision=0,recordId=null,pending=false,storageFailed=false,unitSystem='metric',canonicalDraft={},fieldsEdited=false;
