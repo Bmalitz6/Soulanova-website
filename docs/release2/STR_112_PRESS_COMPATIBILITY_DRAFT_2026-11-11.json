@@ -1,0 +1,618 @@
+{
+  "status": "DRAFT_NOT_APPLIED",
+  "baselineCommit": "b157c256b2f2ec24c647af63b8c55bf5544ba5ad",
+  "sourceCatalogSha256": "9671f1252fcc95a01b7aace32220f8f7766c6d71153694d2d12dcc75a8d9a479",
+  "replacementExerciseId": "STR-112",
+  "replacementSha256": "ef0433a6e4f1b889b5bf183715c139d0bb96a797728f126651907fb65fbc9705",
+  "approval": {
+    "Exercise name": "Incline Dumbbell Press",
+    "File path": "/Users/bob/Desktop/Soulanova/02 Workout Videos/Strength/Approved Masters/Soulanova_Strength_IMG_4058_Incline_Dumbbell_Press_APPROVED.mp4",
+    "Duration seconds": "19.167",
+    "Resolution": "1280x720",
+    "SHA-256": "ef0433a6e4f1b889b5bf183715c139d0bb96a797728f126651907fb65fbc9705",
+    "Approval evidence": "APPROVED MASTER — pinned SHA-256 verified",
+    "Historical review number": "09",
+    "Inventory Ref": "STR-112"
+  },
+  "fileChecks": [
+    {
+      "location": "candidate",
+      "exists": true,
+      "sha256Matches": true
+    },
+    {
+      "location": "Desktop approved master",
+      "exists": true,
+      "sha256Matches": true
+    },
+    {
+      "location": "archived mobile bundle",
+      "exists": true,
+      "sha256Matches": true
+    }
+  ],
+  "visualFinding": {
+    "backrest": "Inclined above seat; exact degrees not measured",
+    "hands": "Two dumbbells start near upper chest; hand positions rise as elbows extend; exact palm rotation not reliably measurable from this view",
+    "motion": "Bilateral pressing/return shown; no wide-arc flyes opening evident in sampled sequence",
+    "sampleMetadata": "artifacts/str-112-prescription-review/samples.json",
+    "scope": "Demonstration identity, not technique certification or proof of completed prescribed reps"
+  },
+  "rights": {
+    "status": "UNVERIFIED",
+    "providerPermission": "Runway generally permits commercial outputs subject to agreement; this does not establish source-image/likeness rights for this asset",
+    "providerSource": "https://help.runwayml.com/hc/en-us/articles/21668707517587-Can-I-use-the-content-I-made-in-Runway-for-commercial-purposes",
+    "termsSource": "https://runway.com/terms-ofuse",
+    "missing": "Asset-specific creation/input/likeness permission evidence or owner confirmation",
+    "newPermissionInferred": false
+  },
+  "steps": [
+    {
+      "workoutId": "beginner-chest-and-arms",
+      "title": "Chest & Arms",
+      "level": "Beginner",
+      "stepIndex": 1,
+      "originalStep": {
+        "exerciseId": "STR-053",
+        "sets": 1,
+        "reps": "8 each side",
+        "restSeconds": 60,
+        "instruction": "Press both dumbbells smoothly and keep the movement within a comfortable range.",
+        "name": "Incline Dumbbell Press"
+      },
+      "proposedExerciseId": "STR-112",
+      "formCompatibility": "REQUIRES_UNILATERAL_PRESCRIPTION_REVIEW",
+      "applied": false,
+      "blockers": [
+        "Rights evidence not yet verified",
+        "Meaning of each-side prescription not confirmed"
+      ]
+    },
+    {
+      "workoutId": "beginner-pressing-practice",
+      "title": "Pressing Practice",
+      "level": "Beginner",
+      "stepIndex": 1,
+      "originalStep": {
+        "exerciseId": "STR-053",
+        "sets": 1,
+        "reps": "8–10",
+        "restSeconds": 60,
+        "instruction": "Press both dumbbells smoothly and keep the movement within a comfortable range.",
+        "name": "Incline Dumbbell Press"
+      },
+      "proposedExerciseId": "STR-112",
+      "formCompatibility": "BILATERAL_FORM_COMPATIBLE",
+      "applied": false,
+      "blockers": [
+        "Rights evidence not yet verified"
+      ]
+    },
+    {
+      "workoutId": "intermediate-strength-balance",
+      "title": "Strength & Balance",
+      "level": "Intermediate",
+      "stepIndex": 2,
+      "originalStep": {
+        "exerciseId": "STR-053",
+        "sets": 3,
+        "reps": "8–10",
+        "restSeconds": 75,
+        "instruction": "Press both dumbbells smoothly; keep shoulders comfortable and avoid bouncing at the bottom.",
+        "name": "Incline Dumbbell Press"
+      },
+      "proposedExerciseId": "STR-112",
+      "formCompatibility": "BILATERAL_FORM_COMPATIBLE",
+      "applied": false,
+      "blockers": [
+        "Rights evidence not yet verified"
+      ]
+    },
+    {
+      "workoutId": "intermediate-lower-body-mix",
+      "title": "Lower-Body Mix",
+      "level": "Intermediate",
+      "stepIndex": 1,
+      "originalStep": {
+        "exerciseId": "STR-053",
+        "sets": 2,
+        "reps": "10–12",
+        "restSeconds": 60,
+        "instruction": "Press both dumbbells smoothly and keep the movement within a comfortable range.",
+        "name": "Incline Dumbbell Press"
+      },
+      "proposedExerciseId": "STR-112",
+      "formCompatibility": "BILATERAL_FORM_COMPATIBLE",
+      "applied": false,
+      "blockers": [
+        "Rights evidence not yet verified"
+      ]
+    },
+    {
+      "workoutId": "intermediate-side-to-side",
+      "title": "Side-to-Side Strength",
+      "level": "Intermediate",
+      "stepIndex": 2,
+      "originalStep": {
+        "exerciseId": "STR-053",
+        "sets": 3,
+        "reps": "10",
+        "restSeconds": 60,
+        "instruction": "Press both dumbbells smoothly and keep the movement within a comfortable range.",
+        "name": "Incline Dumbbell Press"
+      },
+      "proposedExerciseId": "STR-112",
+      "formCompatibility": "BILATERAL_FORM_COMPATIBLE",
+      "applied": false,
+      "blockers": [
+        "Rights evidence not yet verified"
+      ]
+    },
+    {
+      "workoutId": "intermediate-total-body",
+      "title": "Total-Body Builder",
+      "level": "Intermediate",
+      "stepIndex": 1,
+      "originalStep": {
+        "exerciseId": "STR-053",
+        "sets": 2,
+        "reps": "10–12",
+        "restSeconds": 60,
+        "instruction": "Press both dumbbells smoothly and keep the movement within a comfortable range.",
+        "name": "Incline Dumbbell Press"
+      },
+      "proposedExerciseId": "STR-112",
+      "formCompatibility": "BILATERAL_FORM_COMPATIBLE",
+      "applied": false,
+      "blockers": [
+        "Rights evidence not yet verified"
+      ]
+    },
+    {
+      "workoutId": "advanced-squat-press",
+      "title": "Squat & Press Progression",
+      "level": "Advanced",
+      "stepIndex": 1,
+      "originalStep": {
+        "exerciseId": "STR-053",
+        "sets": 3,
+        "reps": "10–12",
+        "restSeconds": 60,
+        "instruction": "Press both dumbbells smoothly and keep the movement within a comfortable range.",
+        "name": "Incline Dumbbell Press"
+      },
+      "proposedExerciseId": "STR-112",
+      "formCompatibility": "BILATERAL_FORM_COMPATIBLE",
+      "applied": false,
+      "blockers": [
+        "Rights evidence not yet verified"
+      ]
+    },
+    {
+      "workoutId": "advanced-side-balance",
+      "title": "Side-to-Side Strength",
+      "level": "Advanced",
+      "stepIndex": 2,
+      "originalStep": {
+        "exerciseId": "STR-053",
+        "sets": 4,
+        "reps": "10",
+        "restSeconds": 60,
+        "instruction": "Press both dumbbells smoothly and keep the movement within a comfortable range.",
+        "name": "Incline Dumbbell Press"
+      },
+      "proposedExerciseId": "STR-112",
+      "formCompatibility": "BILATERAL_FORM_COMPATIBLE",
+      "applied": false,
+      "blockers": [
+        "Rights evidence not yet verified"
+      ]
+    },
+    {
+      "workoutId": "advanced-core-and-press",
+      "title": "Core & Press Strength",
+      "level": "Advanced",
+      "stepIndex": 1,
+      "originalStep": {
+        "exerciseId": "STR-053",
+        "sets": 3,
+        "reps": "10 each side",
+        "restSeconds": 60,
+        "instruction": "Press both dumbbells smoothly and keep the movement within a comfortable range.",
+        "name": "Incline Dumbbell Press"
+      },
+      "proposedExerciseId": "STR-112",
+      "formCompatibility": "REQUIRES_UNILATERAL_PRESCRIPTION_REVIEW",
+      "applied": false,
+      "blockers": [
+        "Rights evidence not yet verified",
+        "Meaning of each-side prescription not confirmed"
+      ]
+    },
+    {
+      "workoutId": "advanced-balanced-volume",
+      "title": "Balanced Strength Volume",
+      "level": "Advanced",
+      "stepIndex": 2,
+      "originalStep": {
+        "exerciseId": "STR-053",
+        "sets": 4,
+        "reps": "10–12",
+        "restSeconds": 60,
+        "instruction": "Press both dumbbells smoothly and keep the movement within a comfortable range.",
+        "name": "Incline Dumbbell Press"
+      },
+      "proposedExerciseId": "STR-112",
+      "formCompatibility": "BILATERAL_FORM_COMPATIBLE",
+      "applied": false,
+      "blockers": [
+        "Rights evidence not yet verified"
+      ]
+    }
+  ],
+  "coverage": {
+    "workouts": 36,
+    "currentFullyCovered": 26,
+    "bilateralFormCompatibleReplacementsPendingRights": 8,
+    "unilateralAmbiguities": 2,
+    "hypotheticalFullyCoveredAfterEightVerifiedReplacements": 34,
+    "actualMappingsChanged": 0,
+    "STR053Blocked": true
+  },
+  "workoutCoverage": [
+    {
+      "workoutId": "beginner-foundations",
+      "level": "Beginner",
+      "exerciseCount": 5,
+      "currentAvailable": 5,
+      "hypotheticalAvailableAfterRights": 5,
+      "proposedReplacement": false,
+      "applied": false
+    },
+    {
+      "workoutId": "beginner-squat-and-press",
+      "level": "Beginner",
+      "exerciseCount": 5,
+      "currentAvailable": 5,
+      "hypotheticalAvailableAfterRights": 5,
+      "proposedReplacement": false,
+      "applied": false
+    },
+    {
+      "workoutId": "beginner-balanced-legs",
+      "level": "Beginner",
+      "exerciseCount": 5,
+      "currentAvailable": 5,
+      "hypotheticalAvailableAfterRights": 5,
+      "proposedReplacement": false,
+      "applied": false
+    },
+    {
+      "workoutId": "beginner-chest-and-arms",
+      "level": "Beginner",
+      "exerciseCount": 5,
+      "currentAvailable": 4,
+      "hypotheticalAvailableAfterRights": 4,
+      "proposedReplacement": false,
+      "applied": false
+    },
+    {
+      "workoutId": "beginner-standing-strength",
+      "level": "Beginner",
+      "exerciseCount": 6,
+      "currentAvailable": 6,
+      "hypotheticalAvailableAfterRights": 6,
+      "proposedReplacement": false,
+      "applied": false
+    },
+    {
+      "workoutId": "beginner-back-and-chest",
+      "level": "Beginner",
+      "exerciseCount": 4,
+      "currentAvailable": 4,
+      "hypotheticalAvailableAfterRights": 4,
+      "proposedReplacement": false,
+      "applied": false
+    },
+    {
+      "workoutId": "beginner-single-side",
+      "level": "Beginner",
+      "exerciseCount": 5,
+      "currentAvailable": 5,
+      "hypotheticalAvailableAfterRights": 5,
+      "proposedReplacement": false,
+      "applied": false
+    },
+    {
+      "workoutId": "beginner-shoulder-control",
+      "level": "Beginner",
+      "exerciseCount": 5,
+      "currentAvailable": 5,
+      "hypotheticalAvailableAfterRights": 5,
+      "proposedReplacement": false,
+      "applied": false
+    },
+    {
+      "workoutId": "beginner-calf-and-core",
+      "level": "Beginner",
+      "exerciseCount": 6,
+      "currentAvailable": 6,
+      "hypotheticalAvailableAfterRights": 6,
+      "proposedReplacement": false,
+      "applied": false
+    },
+    {
+      "workoutId": "beginner-pressing-practice",
+      "level": "Beginner",
+      "exerciseCount": 4,
+      "currentAvailable": 3,
+      "hypotheticalAvailableAfterRights": 4,
+      "proposedReplacement": true,
+      "applied": false
+    },
+    {
+      "workoutId": "beginner-supported-strength",
+      "level": "Beginner",
+      "exerciseCount": 5,
+      "currentAvailable": 5,
+      "hypotheticalAvailableAfterRights": 5,
+      "proposedReplacement": false,
+      "applied": false
+    },
+    {
+      "workoutId": "beginner-full-body-flow",
+      "level": "Beginner",
+      "exerciseCount": 6,
+      "currentAvailable": 6,
+      "hypotheticalAvailableAfterRights": 6,
+      "proposedReplacement": false,
+      "applied": false
+    },
+    {
+      "workoutId": "intermediate-strength-balance",
+      "level": "Intermediate",
+      "exerciseCount": 7,
+      "currentAvailable": 6,
+      "hypotheticalAvailableAfterRights": 7,
+      "proposedReplacement": true,
+      "applied": false
+    },
+    {
+      "workoutId": "intermediate-press-and-pull",
+      "level": "Intermediate",
+      "exerciseCount": 6,
+      "currentAvailable": 6,
+      "hypotheticalAvailableAfterRights": 6,
+      "proposedReplacement": false,
+      "applied": false
+    },
+    {
+      "workoutId": "intermediate-unilateral-control",
+      "level": "Intermediate",
+      "exerciseCount": 6,
+      "currentAvailable": 6,
+      "hypotheticalAvailableAfterRights": 6,
+      "proposedReplacement": false,
+      "applied": false
+    },
+    {
+      "workoutId": "intermediate-lower-body-mix",
+      "level": "Intermediate",
+      "exerciseCount": 5,
+      "currentAvailable": 4,
+      "hypotheticalAvailableAfterRights": 5,
+      "proposedReplacement": true,
+      "applied": false
+    },
+    {
+      "workoutId": "intermediate-shoulder-arm",
+      "level": "Intermediate",
+      "exerciseCount": 6,
+      "currentAvailable": 6,
+      "hypotheticalAvailableAfterRights": 6,
+      "proposedReplacement": false,
+      "applied": false
+    },
+    {
+      "workoutId": "intermediate-full-body-pairing",
+      "level": "Intermediate",
+      "exerciseCount": 6,
+      "currentAvailable": 6,
+      "hypotheticalAvailableAfterRights": 6,
+      "proposedReplacement": false,
+      "applied": false
+    },
+    {
+      "workoutId": "intermediate-chest-back",
+      "level": "Intermediate",
+      "exerciseCount": 6,
+      "currentAvailable": 6,
+      "hypotheticalAvailableAfterRights": 6,
+      "proposedReplacement": false,
+      "applied": false
+    },
+    {
+      "workoutId": "intermediate-side-to-side",
+      "level": "Intermediate",
+      "exerciseCount": 6,
+      "currentAvailable": 5,
+      "hypotheticalAvailableAfterRights": 6,
+      "proposedReplacement": true,
+      "applied": false
+    },
+    {
+      "workoutId": "intermediate-chest-shoulders",
+      "level": "Intermediate",
+      "exerciseCount": 5,
+      "currentAvailable": 5,
+      "hypotheticalAvailableAfterRights": 5,
+      "proposedReplacement": false,
+      "applied": false
+    },
+    {
+      "workoutId": "intermediate-legs-core",
+      "level": "Intermediate",
+      "exerciseCount": 6,
+      "currentAvailable": 6,
+      "hypotheticalAvailableAfterRights": 6,
+      "proposedReplacement": false,
+      "applied": false
+    },
+    {
+      "workoutId": "intermediate-strength-control",
+      "level": "Intermediate",
+      "exerciseCount": 6,
+      "currentAvailable": 6,
+      "hypotheticalAvailableAfterRights": 6,
+      "proposedReplacement": false,
+      "applied": false
+    },
+    {
+      "workoutId": "intermediate-total-body",
+      "level": "Intermediate",
+      "exerciseCount": 6,
+      "currentAvailable": 5,
+      "hypotheticalAvailableAfterRights": 6,
+      "proposedReplacement": true,
+      "applied": false
+    },
+    {
+      "workoutId": "advanced-strength-control",
+      "level": "Advanced",
+      "exerciseCount": 8,
+      "currentAvailable": 8,
+      "hypotheticalAvailableAfterRights": 8,
+      "proposedReplacement": false,
+      "applied": false
+    },
+    {
+      "workoutId": "advanced-squat-press",
+      "level": "Advanced",
+      "exerciseCount": 8,
+      "currentAvailable": 7,
+      "hypotheticalAvailableAfterRights": 8,
+      "proposedReplacement": true,
+      "applied": false
+    },
+    {
+      "workoutId": "advanced-unilateral-volume",
+      "level": "Advanced",
+      "exerciseCount": 7,
+      "currentAvailable": 7,
+      "hypotheticalAvailableAfterRights": 7,
+      "proposedReplacement": false,
+      "applied": false
+    },
+    {
+      "workoutId": "advanced-shoulder-complex",
+      "level": "Advanced",
+      "exerciseCount": 7,
+      "currentAvailable": 7,
+      "hypotheticalAvailableAfterRights": 7,
+      "proposedReplacement": false,
+      "applied": false
+    },
+    {
+      "workoutId": "advanced-side-balance",
+      "level": "Advanced",
+      "exerciseCount": 7,
+      "currentAvailable": 6,
+      "hypotheticalAvailableAfterRights": 7,
+      "proposedReplacement": true,
+      "applied": false
+    },
+    {
+      "workoutId": "advanced-pressing-volume",
+      "level": "Advanced",
+      "exerciseCount": 7,
+      "currentAvailable": 7,
+      "hypotheticalAvailableAfterRights": 7,
+      "proposedReplacement": false,
+      "applied": false
+    },
+    {
+      "workoutId": "advanced-full-body-balance",
+      "level": "Advanced",
+      "exerciseCount": 7,
+      "currentAvailable": 7,
+      "hypotheticalAvailableAfterRights": 7,
+      "proposedReplacement": false,
+      "applied": false
+    },
+    {
+      "workoutId": "advanced-core-and-press",
+      "level": "Advanced",
+      "exerciseCount": 7,
+      "currentAvailable": 6,
+      "hypotheticalAvailableAfterRights": 6,
+      "proposedReplacement": false,
+      "applied": false
+    },
+    {
+      "workoutId": "advanced-upper-lower",
+      "level": "Advanced",
+      "exerciseCount": 7,
+      "currentAvailable": 7,
+      "hypotheticalAvailableAfterRights": 7,
+      "proposedReplacement": false,
+      "applied": false
+    },
+    {
+      "workoutId": "advanced-standing-power",
+      "level": "Advanced",
+      "exerciseCount": 7,
+      "currentAvailable": 7,
+      "hypotheticalAvailableAfterRights": 7,
+      "proposedReplacement": false,
+      "applied": false
+    },
+    {
+      "workoutId": "advanced-balanced-volume",
+      "level": "Advanced",
+      "exerciseCount": 8,
+      "currentAvailable": 7,
+      "hypotheticalAvailableAfterRights": 8,
+      "proposedReplacement": true,
+      "applied": false
+    },
+    {
+      "workoutId": "advanced-total-body-finish",
+      "level": "Advanced",
+      "exerciseCount": 8,
+      "currentAvailable": 8,
+      "hypotheticalAvailableAfterRights": 8,
+      "proposedReplacement": false,
+      "applied": false
+    }
+  ],
+  "coverageByLevel": [
+    {
+      "level": "Beginner",
+      "workouts": 12,
+      "currentFullyCovered": 10,
+      "hypotheticalFullyCoveredAfterRights": 11
+    },
+    {
+      "level": "Intermediate",
+      "workouts": 12,
+      "currentFullyCovered": 8,
+      "hypotheticalFullyCoveredAfterRights": 12
+    },
+    {
+      "level": "Advanced",
+      "workouts": 12,
+      "currentFullyCovered": 8,
+      "hypotheticalFullyCoveredAfterRights": 11
+    }
+  ],
+  "validation": {
+    "fullRegressionPassed": 218,
+    "failed": 0,
+    "skipped": 0,
+    "nativeChromeMediaPlaybackPassed": 17,
+    "localProductionModeBuild": "PASS — local empty environment, no deployment",
+    "outputAssetHashesMatched": 17,
+    "sourceCatalogUnchanged": true,
+    "runtimeMappingsChanged": false
+  }
+}

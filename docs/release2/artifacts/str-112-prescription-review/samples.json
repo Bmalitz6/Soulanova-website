@@ -1,0 +1,21 @@
+{
+  "source": "app/strength/media/exercises/ef0433a6e4f1b889b5bf183715c139d0bb96a797728f126651907fb65fbc9705/Soulanova_Strength_IMG_4058_Incline_Dumbbell_Press_APPROVED.mp4",
+  "sha256": "ef0433a6e4f1b889b5bf183715c139d0bb96a797728f126651907fb65fbc9705",
+  "requestedSeekTimesSeconds": [
+    0,
+    1.5,
+    3,
+    4.5,
+    6,
+    7.5,
+    9,
+    10.5,
+    12,
+    13.5,
+    15,
+    16.5,
+    18
+  ],
+  "contactLayout": "4 columns; row-major; last 3 cells blank",
+  "processing": "Original frames extracted; contact sheet resized/tiled only; no generated content."
+}
