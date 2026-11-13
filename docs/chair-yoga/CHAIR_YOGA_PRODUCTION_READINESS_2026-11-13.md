@@ -13,7 +13,9 @@ Per-track `audioStatus`, `ownerApproved`, script, task ID, and generated-file re
 - Isolated worktree: `/private/tmp/soulanova-chair-yoga-preview-2026-11-12`
 - Branch: `preview/chair-yoga-website-2026-11-12`
 - Starting HEAD for this work: `c8ae31b0469c21cdcd1adea792f39c182a17df55`
-- Candidate changes are local and uncommitted at report time.
+- Candidate commit: `561ce1506c683dcb2a7b8f9b7a576f40e8e6f000`.
+- Protected Preview deployment: `dpl_Gs3J4anK7S7xhNnEYqc8gKA2Uc98`, `https://soulanova-website-ftf1tgte4-soulanova.vercel.app`, READY, `target:null`, branch alias only.
+- Authenticated Vercel fetch returned HTTP 200 for the Chair Yoga page, approval manifest, and a representative Miriam MP3 (response starts with an ID3 MP3 header). This verifies deployed HTTP availability, not interactive browser playback or member authentication.
 - The branch descends from the website Release 2 source lineage (`feature/soulfuel-clean-preview-2026-11-09`, including the `37754c9` release candidate); it preserves the prior live Pilates removal.
 - The 36 Chair Yoga videos, 142 generated narration files, approved sample/demo tracks, scripts, hashes, and workout sequences are preserved. Batch verification compares all 142 local audio files to the generated manifest.
 - Chair Yoga still uses the existing Supabase `auth.getUser()` member gate. Member playback of pending individual tracks requires both the batch authorization and a client-side SHA-256 match of fetched bytes. Missing or mismatched approval data fails closed for narration.
