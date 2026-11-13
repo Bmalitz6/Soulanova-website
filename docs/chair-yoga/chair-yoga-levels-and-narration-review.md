@@ -2,9 +2,9 @@
 
 ## Status and assumptions
 
-This remains a proposal for review; all three movement assignments remain `pending_owner_approval`. All 36 catalog names, IDs, video URLs, catalog order and video SHA-256 values remain unchanged. One video file is looped in place; media files are not duplicated. Beginner loops each movement twice, Intermediate three times and Advanced four times. After each non-final movement's last loop, a black Up Next screen shows the following movement and its real thumbnail for five seconds, then starts it automatically. Pause freezes either the media or countdown; Resume continues; Next Movement skips ahead. The final movement ends on completion without changing levels. Estimated total class durations use the exact clip durations plus eleven five-second transitions: Beginner 12:31, Intermediate 18:23 and Advanced 24:07. These estimates exclude member pauses and narration. Narration scripts remain ungenerated and pending approval; no narration is presented as active in this preview.
+This remains a proposal for review; all three movement assignments remain `pending_owner_approval`. All 36 catalog names, IDs, video URLs, catalog order and video SHA-256 values remain unchanged. One video file is looped in place; media files are not duplicated. Beginner loops each movement twice, Intermediate three times and Advanced four times. After each non-final movement's last loop, a black Up Next screen shows the following movement and its real thumbnail for five seconds, then starts it automatically. Pause freezes either the media or countdown; Resume continues; Next Movement skips ahead. The final movement ends on completion without changing levels. Estimated total class durations use the exact clip durations plus eleven five-second transitions: Beginner 12:31, Intermediate 18:23 and Advanced 24:07. These estimates exclude member pauses and narration. **Phase 5 update:** a Paula stock-voice sample and one-movement Beginner demo have now been generated for owner review. Bulk movement narration remains ungenerated, pending owner listening/voice approval, and no generated review audio is active in member workouts.
 
-All clips remain candidate media pending owner review. The 36 scripts below are drafts only. No audio has been generated. The visual instructor is Miriam, but the Chair Yoga narrator voice/configuration still requires approval before synthesis. The earlier SoulStretch voice can be proposed for reuse, but it is not presumed approved here.
+All clips remain candidate media pending owner review. The movement scripts remain drafts. The visual instructor is Miriam, but the Chair Yoga narrator voice/configuration remains unapproved. The sample uses the Runway stock preset Paula, not a clone or imitation of Miriam. See the [narration script and timing review](chair-yoga-narration-production-review.md), [listening demo](narration-audio-review.html), and [generated audio manifest](../../app/chair-yoga/narration/review-2026-11-12-paula/review-manifest.json). The earlier SoulStretch voice is not presumed approved for this program.
 
 ## Proposed 12 / 12 / 12 assignment
 
@@ -364,3 +364,10 @@ Cue guide: 00:02 Sit comfortably with your feet supported. · 00:08 Rest your ha
 - Approve the narration voice and exact generation provider/model/settings for Chair Yoga.
 - After audio is generated, review the actual 36 recordings and approve them before they become playable.
 - Test the protected Preview in desktop Safari/Chrome and iPhone/iPad Safari, including supported narration playback.
+
+
+---
+
+## Phase 5 narration production addendum
+
+The 36 workout movement assignments remain pending owner approval. See [Chair Yoga Narration Production Review](chair-yoga-narration-production-review.md) for the catalog cross-check, voice audition status, complete loop-by-loop scripts, timing estimates and opening/closing narration. The sample/demo voice is an unapproved stock voice candidate, not an imitation of Miriam. Production audio remains disabled unless each loop asset is owner-approved and hash-verified.

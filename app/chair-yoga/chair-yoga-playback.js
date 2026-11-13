@@ -76,6 +76,12 @@
     return { currentMovementNumber, movementLabel, completedCount, totalMovements, progress };
   }
 
+  function getApprovedNarrationForPass(movementRecord, pass) {
+    const asset = movementRecord?.loopScripts?.[String(pass)];
+    return asset && asset.audioStatus === 'owner-approved' && asset.audioUrl
+      && /^[a-f0-9]{64}$/i.test(asset.audioSha256 || '') ? asset : null;
+  }
+
   function createChairYogaPlayback({
     levels,
     movements,
@@ -352,5 +358,5 @@
     return Object.freeze({ selectLevel, start, pause, resume, next, previous, restart, markVideoPlaying, videoEnded, playbackBlocked, backToWorkouts, backToLevels, getWorkoutSummary, getLevelSummary, getSnapshot });
   }
 
-  return Object.freeze({ createChairYogaPlayback, createPauseEventGuard, getWorkoutProgress, validatePlaylist });
+  return Object.freeze({ createChairYogaPlayback, createPauseEventGuard, getWorkoutProgress, getApprovedNarrationForPass, validatePlaylist });
 });

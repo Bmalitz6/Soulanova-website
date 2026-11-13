@@ -3,6 +3,7 @@ const { test } = require('node:test');
 const assert = require('node:assert/strict');
 const fs = require('node:fs');
 const path = require('node:path');
+const crypto = require('node:crypto');
 const catalog = require('../app/chair-yoga/catalog.json');
 const plan = require('../app/chair-yoga/chair-yoga-programs.json');
 const narration = require('../app/chair-yoga/narration-drafts.json');
@@ -13,6 +14,8 @@ const route = fs.readFileSync(path.join(__dirname, '../app/chair-yoga/index.html
 const ui = fs.readFileSync(path.join(__dirname, '../app/chair-yoga/chair-yoga.js'), 'utf8');
 const css = fs.readFileSync(path.join(__dirname, '../app/chair-yoga/chair-yoga.css'), 'utf8');
 const dashboard = fs.readFileSync(path.join(__dirname, '../app/index.html'), 'utf8');
+const narrationReviewPage = fs.readFileSync(path.join(__dirname, '../docs/chair-yoga/narration-audio-review.html'), 'utf8');
+const narrationAudioManifest = require('../app/chair-yoga/narration/review-2026-11-12-paula/review-manifest.json');
 
 function fakeClock() {
   let time = 0;
@@ -356,12 +359,90 @@ test('pause/Up Next and completion screens use actual selected-workout movement 
   assert.match(route, /playsinline/);
 });
 
-test('all 36 Miriam script drafts remain unsynthesized and narration playback stays approval-gated', () => {
-  assert.equal(narration.generationStatus, 'not_generated');
-  assert.equal(narration.voiceApprovalStatus, 'pending_owner_approval');
+test('all 36 movement scripts provide four distinct, duration-bounded loop cues keyed to catalog IDs', () => {
+  assert.equal(narration.schemaVersion, 2);
   assert.equal(narration.drafts.length, 36);
-  assert.match(route, /Narration has not been synthesized/);
-  assert.match(ui, /record\.audioStatus === 'owner-approved'/);
+  assert.equal(new Set(plan.levels.flatMap(level => level.workouts.flatMap(workout => workout.movementIds))).size, 36, 'the proposed matrix uses all 36 catalog movements');
+  for (const movement of catalog.movements) {
+    const record = narration.drafts.find(item => item.movementId === movement.id);
+    assert.ok(record, `${movement.id} has narration scripts`);
+    assert.equal(record.movementName, movement.name);
+    assert.equal(record.videoUrl, movement.videoUrl);
+    assert.equal(record.videoDurationSeconds, movement.durationSeconds);
+    assert.deepEqual(Object.keys(record.loopScripts), ['1','2','3','4']);
+    assert.equal(new Set(Object.values(record.loopScripts).map(loop => loop.script)).size, 4, `${movement.id} has a distinct cue for every loop`);
+    for (let pass = 1; pass <= 4; pass++) {
+      const loop = record.loopScripts[String(pass)];
+      assert.ok(loop.script.length > 0);
+      assert.equal(loop.cuePlan[0].atSeconds, 0);
+      assert.ok(loop.estimatedSpokenSeconds < movement.durationSeconds, `${movement.id} loop ${pass} leaves quiet time`);
+      assert.equal(loop.expectedAudioFilename, `${movement.id}_loop-${pass}.mp3`);
+      assert.equal(loop.audioStatus, 'not_generated_pending_owner_review');
+      assert.equal(loop.audioUrl, null);
+      assert.equal(loop.audioSha256, null);
+    }
+    assert.equal(record.loopScripts['1'].script, record.script);
+  }
+  const rightSideIds = ['IMG_4286','IMG_4288','IMG_4294','IMG_4299','IMG_4303','IMG_4305','IMG_4307','IMG_4310','IMG_4312','IMG_4314','IMG_4316','IMG_4321'];
+  const leftSideIds = ['IMG_4287','IMG_4289','IMG_4296','IMG_4300','IMG_4304','IMG_4306','IMG_4308','IMG_4311','IMG_4313','IMG_4315','IMG_4317','IMG_4322'];
+  for (const id of rightSideIds) for (const loop of Object.values(narration.drafts.find(item => item.movementId === id).loopScripts)) assert.doesNotMatch(loop.script, /\bleft\b/i, `${id} must not narrate the opposite side`);
+  for (const id of leftSideIds) for (const loop of Object.values(narration.drafts.find(item => item.movementId === id).loopScripts)) assert.doesNotMatch(loop.script, /\bright\b/i, `${id} must not narrate the opposite side`);
+  for (const level of ['beginner','intermediate','advanced']) {
+    assert.equal(narration.levelOpenings[level].audioStatus, 'not_generated_pending_owner_review');
+    assert.equal(narration.levelClosings[level].audioStatus, 'not_generated_pending_owner_review');
+    assert.ok(narration.levelOpenings[level].estimatedSpokenSeconds < 29);
+    assert.ok(narration.levelClosings[level].estimatedSpokenSeconds < 29);
+  }
+});
+
+test('narration remains separate, hash-gated and loop-specific; workout assignments remain pending approval', () => {
+  assert.equal(narration.voiceApprovalStatus, 'pending_owner_approval');
+  assert.equal(narration.bulkAudioStatus, 'not_started_pending_owner_review_of_voice_and_scripts');
+  assert.equal(plan.proposalStatus, 'pending_owner_approval');
+  assert.match(route, /member narration remains disabled until each loop recording is approved/);
+  assert.match(ui, /getApprovedNarrationForPass\(narrationRecord\(workout\), pass\)/);
+  assert.match(ui, /asset\.audioSha256\.toLowerCase\(\)/);
   assert.match(ui, /audioSha256/);
   assert.equal(narration.drafts.some(item => item.audioStatus === 'owner-approved'), false);
+  assert.equal(narration.drafts.some(item => Object.values(item.loopScripts).some(loop => loop.audioStatus === 'owner-approved')), false);
+});
+
+test('narration resolver selects only the matching owner-approved loop recording with a valid hash', () => {
+  const loop1 = { audioUrl: '/review/loop1.mp3', audioSha256: 'a'.repeat(64), audioStatus: 'owner-approved' };
+  const loop2 = { audioUrl: '/review/loop2.mp3', audioSha256: 'b'.repeat(64), audioStatus: 'owner-approved' };
+  const record = { loopScripts: { '1': loop1, '2': loop2 } };
+  assert.equal(player.getApprovedNarrationForPass(record, 1), loop1);
+  assert.equal(player.getApprovedNarrationForPass(record, 2), loop2);
+  assert.equal(player.getApprovedNarrationForPass(record, 3), null);
+  assert.equal(player.getApprovedNarrationForPass({ loopScripts: { '1': { ...loop1, audioStatus: 'pending' } } }, 1), null);
+  assert.equal(player.getApprovedNarrationForPass({ loopScripts: { '1': { ...loop1, audioSha256: 'bad' } } }, 1), null);
+});
+
+test('Paula audition and Beginner demo files match review hashes and stay out of active workout mappings', () => {
+  assert.equal(narrationAudioManifest.reviewStatus, 'pending_owner_listening_review');
+  assert.equal(narrationAudioManifest.activeMemberAudio, false);
+  assert.equal(narrationAudioManifest.creditAccounting.totalCreditsUsed, 17);
+  assert.equal(narrationAudioManifest.creditAccounting.bulkNarrationGenerated, false);
+  assert.equal(narrationAudioManifest.voice.preset, 'Paula');
+  assert.equal(narrationAudioManifest.voice.model, 'eleven_multilingual_v2');
+  assert.equal(narrationAudioManifest.demo.movementId, 'IMG_4285');
+  assert.equal(narrationAudioManifest.demo.loopTracksAreDistinct, true);
+  for (const asset of narrationAudioManifest.assets) {
+    const file = path.join(__dirname, '../app/chair-yoga/narration/review-2026-11-12-paula', asset.filename);
+    const bytes = fs.readFileSync(file);
+    assert.equal(bytes.length, asset.bytes, `${asset.filename} size`);
+    assert.equal(crypto.createHash('sha256').update(bytes).digest('hex'), asset.sha256, `${asset.filename} hash`);
+    assert.equal(asset.audioStatus, 'review_only_not_owner_approved');
+  }
+  for (const movement of narration.drafts) for (const loop of Object.values(movement.loopScripts)) {
+    assert.equal(loop.audioStatus, 'not_generated_pending_owner_review');
+    assert.equal(loop.audioUrl, null);
+    assert.equal(loop.audioSha256, null);
+  }
+  assert.match(narrationReviewPage, /OWNER LISTENING REVIEW · NOT MEMBER NARRATION/);
+  assert.match(narrationReviewPage, /Play complete Beginner demo/);
+  assert.match(narrationReviewPage, /Include narration/);
+  assert.match(narrationReviewPage, /Narration volume/);
+  assert.match(narrationReviewPage, /video only; narration is off/);
+  assert.match(narrationReviewPage, /video and matching narration starting together/);
 });

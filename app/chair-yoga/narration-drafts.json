@@ -1,44 +1,121 @@
 {
-  "schemaVersion": 1,
-  "instructor": "Miriam",
-  "proposedNarrator": "Miriam (owner approval required for Chair Yoga voice/configuration)",
+  "schemaVersion": 2,
+  "instructor": "Miriam (video instructor only)",
+  "proposedNarrator": "Paula, Runway preset (audition candidate only; not approved for bulk use)",
   "voiceApprovalStatus": "pending_owner_approval",
-  "generationStatus": "not_generated",
-  "generationProvider": null,
-  "generationModel": null,
-  "generationSettings": null,
-  "passBehavior": "When owner-approved audio exists, restart that movement's matching narration from the beginning with every video loop selected for the level: Beginner 2 loops, Intermediate 3 loops, Advanced 4 loops. Keep narration separate from the video audio. Narration remains ungenerated and pending owner approval.",
+  "generationStatus": "audition_demo_generated_pending_owner_review",
+  "generationProvider": "Runway",
+  "generationModel": "eleven_multilingual_v2",
+  "generationSettings": {
+    "voice": "Paula (stock preset; no voice cloning)",
+    "voiceId": "sIak7pFapfSLCfctxdOu",
+    "speed": 0.92,
+    "delivery": "warm, calm, conversational British English; moderate pace; pauses from punctuation; narration kept separate from source video"
+  },
+  "passBehavior": "Each movement uses distinct loop-specific narration selected by movement ID and loop number. Only SHA-256-verified owner-approved loop audio may play. Each track starts with its movement/video pass; any quiet tail remains silent. Narration pauses/resumes/seeks with the video, stops before transitions, and is never sourced from the original video audio.",
   "drafts": [
     {
       "movementId": "IMG_4285",
       "movementName": "Seated Mountain Pose",
       "levelProposal": "beginner",
       "videoUrl": "/app/videos/chair-yoga/IMG_4285.mp4",
-      "videoDurationSeconds": 29.0,
-      "script": "Sit near the front of your chair with both feet grounded. Grow tall through the crown of your head, soften your shoulders, and rest your hands on your thighs. Breathe slowly; release your jaw.",
-      "wordCount": 34,
-      "estimatedSpokenSeconds": 22,
+      "videoDurationSeconds": 29,
+      "script": "Sit near the front of your chair with both feet grounded. Lengthen through your spine, soften your shoulders, and rest your hands on your thighs. Breathe gently.",
+      "wordCount": 27,
+      "estimatedSpokenSeconds": 17,
       "cuePlan": [
-        [
-          "00:02",
-          "Sit securely; place both feet on the floor."
-        ],
-        [
-          "00:07",
-          "Lengthen gently through the spine and soften shoulders."
-        ],
-        [
-          "00:14",
-          "Keep the breath easy and the face relaxed."
-        ],
-        [
-          "00:22",
-          "Stay tall, then release any effort."
-        ]
+        {
+          "at": "00:00",
+          "text": "Sit near the front of your chair with both feet grounded. Lengthen through your spine, soften your shoulders, and rest your hands on your thighs. Breathe gently.",
+          "estimatedSpokenSeconds": 17
+        }
       ],
-      "expectedAudioUrl": "/app/chair-yoga/narration/miriam/IMG_4285.mp3",
+      "expectedAudioUrl": null,
       "audioSha256": null,
-      "audioStatus": "not_generated_pending_owner_approval"
+      "audioStatus": "not_generated_pending_owner_review",
+      "loopScripts": {
+        "1": {
+          "pass": 1,
+          "label": "Loop 1",
+          "script": "Sit near the front of your chair with both feet grounded. Lengthen through your spine, soften your shoulders, and rest your hands on your thighs. Breathe gently.",
+          "wordCount": 27,
+          "estimatedSpokenSeconds": 17,
+          "videoDurationSeconds": 29,
+          "silentTailEstimateSeconds": 12,
+          "cuePlan": [
+            {
+              "atSeconds": 0,
+              "text": "Sit near the front of your chair with both feet grounded. Lengthen through your spine, soften your shoulders, and rest your hands on your thighs. Breathe gently.",
+              "estimatedSpokenSeconds": 17
+            }
+          ],
+          "expectedAudioFilename": "IMG_4285_loop-1.mp3",
+          "audioUrl": null,
+          "audioSha256": null,
+          "audioStatus": "not_generated_pending_owner_review"
+        },
+        "2": {
+          "pass": 2,
+          "label": "Loop 2",
+          "script": "Keep both feet steady as you breathe. Let your shoulders soften and your jaw relax; there is no need to hold yourself rigid.",
+          "wordCount": 23,
+          "estimatedSpokenSeconds": 14,
+          "videoDurationSeconds": 29,
+          "silentTailEstimateSeconds": 15,
+          "cuePlan": [
+            {
+              "atSeconds": 0,
+              "text": "Keep both feet steady as you breathe. Let your shoulders soften and your jaw relax; there is no need to hold yourself rigid.",
+              "estimatedSpokenSeconds": 14
+            }
+          ],
+          "expectedAudioFilename": "IMG_4285_loop-2.mp3",
+          "audioUrl": null,
+          "audioSha256": null,
+          "audioStatus": "not_generated_pending_owner_review"
+        },
+        "3": {
+          "pass": 3,
+          "label": "Loop 3",
+          "script": "Notice your sit bones supported by the chair. Grow tall through the crown of your head, then ease back to your natural posture.",
+          "wordCount": 23,
+          "estimatedSpokenSeconds": 14,
+          "videoDurationSeconds": 29,
+          "silentTailEstimateSeconds": 15,
+          "cuePlan": [
+            {
+              "atSeconds": 0,
+              "text": "Notice your sit bones supported by the chair. Grow tall through the crown of your head, then ease back to your natural posture.",
+              "estimatedSpokenSeconds": 14
+            }
+          ],
+          "expectedAudioFilename": "IMG_4285_loop-3.mp3",
+          "audioUrl": null,
+          "audioSha256": null,
+          "audioStatus": "not_generated_pending_owner_review"
+        },
+        "4": {
+          "pass": 4,
+          "label": "Loop 4",
+          "script": "Let one easy breath come and go. Keep your hands resting and your shoulders quiet.",
+          "wordCount": 15,
+          "estimatedSpokenSeconds": 10,
+          "videoDurationSeconds": 29,
+          "silentTailEstimateSeconds": 19,
+          "cuePlan": [
+            {
+              "atSeconds": 0,
+              "text": "Let one easy breath come and go. Keep your hands resting and your shoulders quiet.",
+              "estimatedSpokenSeconds": 10
+            }
+          ],
+          "expectedAudioFilename": "IMG_4285_loop-4.mp3",
+          "audioUrl": null,
+          "audioSha256": null,
+          "audioStatus": "not_generated_pending_owner_review"
+        }
+      },
+      "audioUrl": null
     },
     {
       "movementId": "IMG_4286",
@@ -46,1084 +123,3700 @@
       "levelProposal": "intermediate",
       "videoUrl": "/app/videos/chair-yoga/IMG_4286.mp4",
       "videoDurationSeconds": 30.2,
-      "script": "Stay seated with both feet grounded. Lift your right arm as shown and lengthen through your side without lifting your shoulder. Keep your hips heavy. Breathe into the stretch, then return upright with control.",
-      "wordCount": 34,
-      "estimatedSpokenSeconds": 22,
+      "script": "Keep both feet grounded. Lift your right arm as shown and lengthen your right side, keeping the shoulder soft. Breathe comfortably, then return upright.",
+      "wordCount": 24,
+      "estimatedSpokenSeconds": 15,
       "cuePlan": [
-        [
-          "00:02",
-          "Ground both feet and sit tall."
-        ],
-        [
-          "00:07",
-          "Raise the right arm as demonstrated; keep the shoulder soft."
-        ],
-        [
-          "00:14",
-          "Breathe gently into the side body."
-        ],
-        [
-          "00:22",
-          "Return upright with control."
-        ]
+        {
+          "at": "00:00",
+          "text": "Keep both feet grounded. Lift your right arm as shown and lengthen your right side, keeping the shoulder soft. Breathe comfortably, then return upright.",
+          "estimatedSpokenSeconds": 15
+        }
       ],
-      "expectedAudioUrl": "/app/chair-yoga/narration/miriam/IMG_4286.mp3",
+      "expectedAudioUrl": null,
       "audioSha256": null,
-      "audioStatus": "not_generated_pending_owner_approval"
+      "audioStatus": "not_generated_pending_owner_review",
+      "loopScripts": {
+        "1": {
+          "pass": 1,
+          "label": "Loop 1",
+          "script": "Keep both feet grounded. Lift your right arm as shown and lengthen your right side, keeping the shoulder soft. Breathe comfortably, then return upright.",
+          "wordCount": 24,
+          "estimatedSpokenSeconds": 15,
+          "videoDurationSeconds": 30.2,
+          "silentTailEstimateSeconds": 15.2,
+          "cuePlan": [
+            {
+              "atSeconds": 0,
+              "text": "Keep both feet grounded. Lift your right arm as shown and lengthen your right side, keeping the shoulder soft. Breathe comfortably, then return upright.",
+              "estimatedSpokenSeconds": 15
+            }
+          ],
+          "expectedAudioFilename": "IMG_4286_loop-1.mp3",
+          "audioUrl": null,
+          "audioSha256": null,
+          "audioStatus": "not_generated_pending_owner_review"
+        },
+        "2": {
+          "pass": 2,
+          "label": "Loop 2",
+          "script": "Let your hips stay heavy as you reach to the right. Breathe into the side of your ribs without forcing the stretch.",
+          "wordCount": 22,
+          "estimatedSpokenSeconds": 14,
+          "videoDurationSeconds": 30.2,
+          "silentTailEstimateSeconds": 16.2,
+          "cuePlan": [
+            {
+              "atSeconds": 0,
+              "text": "Let your hips stay heavy as you reach to the right. Breathe into the side of your ribs without forcing the stretch.",
+              "estimatedSpokenSeconds": 14
+            }
+          ],
+          "expectedAudioFilename": "IMG_4286_loop-2.mp3",
+          "audioUrl": null,
+          "audioSha256": null,
+          "audioStatus": "not_generated_pending_owner_review"
+        },
+        "3": {
+          "pass": 3,
+          "label": "Loop 3",
+          "script": "Keep the right shoulder away from your ear. Make the side bend only as wide as the demonstration feels comfortable.",
+          "wordCount": 20,
+          "estimatedSpokenSeconds": 12,
+          "videoDurationSeconds": 30.2,
+          "silentTailEstimateSeconds": 18.2,
+          "cuePlan": [
+            {
+              "atSeconds": 0,
+              "text": "Keep the right shoulder away from your ear. Make the side bend only as wide as the demonstration feels comfortable.",
+              "estimatedSpokenSeconds": 12
+            }
+          ],
+          "expectedAudioFilename": "IMG_4286_loop-3.mp3",
+          "audioUrl": null,
+          "audioSha256": null,
+          "audioStatus": "not_generated_pending_owner_review"
+        },
+        "4": {
+          "pass": 4,
+          "label": "Loop 4",
+          "script": "Notice the breath along your right side, then return toward center when ready.",
+          "wordCount": 13,
+          "estimatedSpokenSeconds": 8,
+          "videoDurationSeconds": 30.2,
+          "silentTailEstimateSeconds": 22.2,
+          "cuePlan": [
+            {
+              "atSeconds": 0,
+              "text": "Notice the breath along your right side, then return toward center when ready.",
+              "estimatedSpokenSeconds": 8
+            }
+          ],
+          "expectedAudioFilename": "IMG_4286_loop-4.mp3",
+          "audioUrl": null,
+          "audioSha256": null,
+          "audioStatus": "not_generated_pending_owner_review"
+        }
+      },
+      "audioUrl": null
     },
     {
       "movementId": "IMG_4287",
       "movementName": "Seated Side Bend Left",
       "levelProposal": "intermediate",
       "videoUrl": "/app/videos/chair-yoga/IMG_4287.mp4",
-      "videoDurationSeconds": 29.0,
-      "script": "Stay seated with both feet grounded. Lift your left arm as shown and lengthen through your side without lifting your shoulder. Keep your hips heavy. Breathe into the stretch, then return upright with control.",
-      "wordCount": 34,
-      "estimatedSpokenSeconds": 22,
+      "videoDurationSeconds": 29,
+      "script": "Keep both feet grounded. Lift your left arm as shown and lengthen your left side, keeping the shoulder soft. Breathe comfortably, then return upright.",
+      "wordCount": 24,
+      "estimatedSpokenSeconds": 15,
       "cuePlan": [
-        [
-          "00:02",
-          "Ground both feet and sit tall."
-        ],
-        [
-          "00:07",
-          "Raise the left arm as demonstrated; keep the shoulder soft."
-        ],
-        [
-          "00:14",
-          "Breathe gently into the side body."
-        ],
-        [
-          "00:22",
-          "Return upright with control."
-        ]
+        {
+          "at": "00:00",
+          "text": "Keep both feet grounded. Lift your left arm as shown and lengthen your left side, keeping the shoulder soft. Breathe comfortably, then return upright.",
+          "estimatedSpokenSeconds": 15
+        }
       ],
-      "expectedAudioUrl": "/app/chair-yoga/narration/miriam/IMG_4287.mp3",
+      "expectedAudioUrl": null,
       "audioSha256": null,
-      "audioStatus": "not_generated_pending_owner_approval"
+      "audioStatus": "not_generated_pending_owner_review",
+      "loopScripts": {
+        "1": {
+          "pass": 1,
+          "label": "Loop 1",
+          "script": "Keep both feet grounded. Lift your left arm as shown and lengthen your left side, keeping the shoulder soft. Breathe comfortably, then return upright.",
+          "wordCount": 24,
+          "estimatedSpokenSeconds": 15,
+          "videoDurationSeconds": 29,
+          "silentTailEstimateSeconds": 14,
+          "cuePlan": [
+            {
+              "atSeconds": 0,
+              "text": "Keep both feet grounded. Lift your left arm as shown and lengthen your left side, keeping the shoulder soft. Breathe comfortably, then return upright.",
+              "estimatedSpokenSeconds": 15
+            }
+          ],
+          "expectedAudioFilename": "IMG_4287_loop-1.mp3",
+          "audioUrl": null,
+          "audioSha256": null,
+          "audioStatus": "not_generated_pending_owner_review"
+        },
+        "2": {
+          "pass": 2,
+          "label": "Loop 2",
+          "script": "Let your hips stay heavy as you reach to the left. Breathe into the side of your ribs without forcing the stretch.",
+          "wordCount": 22,
+          "estimatedSpokenSeconds": 14,
+          "videoDurationSeconds": 29,
+          "silentTailEstimateSeconds": 15,
+          "cuePlan": [
+            {
+              "atSeconds": 0,
+              "text": "Let your hips stay heavy as you reach to the left. Breathe into the side of your ribs without forcing the stretch.",
+              "estimatedSpokenSeconds": 14
+            }
+          ],
+          "expectedAudioFilename": "IMG_4287_loop-2.mp3",
+          "audioUrl": null,
+          "audioSha256": null,
+          "audioStatus": "not_generated_pending_owner_review"
+        },
+        "3": {
+          "pass": 3,
+          "label": "Loop 3",
+          "script": "Keep the left shoulder away from your ear. Make the side bend only as wide as the demonstration feels comfortable.",
+          "wordCount": 20,
+          "estimatedSpokenSeconds": 12,
+          "videoDurationSeconds": 29,
+          "silentTailEstimateSeconds": 17,
+          "cuePlan": [
+            {
+              "atSeconds": 0,
+              "text": "Keep the left shoulder away from your ear. Make the side bend only as wide as the demonstration feels comfortable.",
+              "estimatedSpokenSeconds": 12
+            }
+          ],
+          "expectedAudioFilename": "IMG_4287_loop-3.mp3",
+          "audioUrl": null,
+          "audioSha256": null,
+          "audioStatus": "not_generated_pending_owner_review"
+        },
+        "4": {
+          "pass": 4,
+          "label": "Loop 4",
+          "script": "Notice the breath along your left side, then return toward center when ready.",
+          "wordCount": 13,
+          "estimatedSpokenSeconds": 8,
+          "videoDurationSeconds": 29,
+          "silentTailEstimateSeconds": 21,
+          "cuePlan": [
+            {
+              "atSeconds": 0,
+              "text": "Notice the breath along your left side, then return toward center when ready.",
+              "estimatedSpokenSeconds": 8
+            }
+          ],
+          "expectedAudioFilename": "IMG_4287_loop-4.mp3",
+          "audioUrl": null,
+          "audioSha256": null,
+          "audioStatus": "not_generated_pending_owner_review"
+        }
+      },
+      "audioUrl": null
     },
     {
       "movementId": "IMG_4288",
       "movementName": "Seated Twist Right",
       "levelProposal": "intermediate",
       "videoUrl": "/app/videos/chair-yoga/IMG_4288.mp4",
-      "videoDurationSeconds": 29.0,
-      "script": "Sit tall and keep your feet grounded. Turn your chest gently to the right, using the chair for light support as shown. Keep your hips facing forward and breathe without forcing the twist. Return to center.",
-      "wordCount": 36,
-      "estimatedSpokenSeconds": 23,
+      "videoDurationSeconds": 29,
+      "script": "Sit tall with your feet grounded. Turn your chest gently to the right, using the chair for light support. Keep your hips forward, breathe, then return to center.",
+      "wordCount": 28,
+      "estimatedSpokenSeconds": 18,
       "cuePlan": [
-        [
-          "00:02",
-          "Sit tall, feet grounded."
-        ],
-        [
-          "00:07",
-          "Turn gently to the right as shown; use light chair support."
-        ],
-        [
-          "00:14",
-          "Breathe without forcing the twist."
-        ],
-        [
-          "00:22",
-          "Return to center slowly."
-        ]
+        {
+          "at": "00:00",
+          "text": "Sit tall with your feet grounded. Turn your chest gently to the right, using the chair for light support. Keep your hips forward, breathe, then return to center.",
+          "estimatedSpokenSeconds": 18
+        }
       ],
-      "expectedAudioUrl": "/app/chair-yoga/narration/miriam/IMG_4288.mp3",
+      "expectedAudioUrl": null,
       "audioSha256": null,
-      "audioStatus": "not_generated_pending_owner_approval"
+      "audioStatus": "not_generated_pending_owner_review",
+      "loopScripts": {
+        "1": {
+          "pass": 1,
+          "label": "Loop 1",
+          "script": "Sit tall with your feet grounded. Turn your chest gently to the right, using the chair for light support. Keep your hips forward, breathe, then return to center.",
+          "wordCount": 28,
+          "estimatedSpokenSeconds": 18,
+          "videoDurationSeconds": 29,
+          "silentTailEstimateSeconds": 11,
+          "cuePlan": [
+            {
+              "atSeconds": 0,
+              "text": "Sit tall with your feet grounded. Turn your chest gently to the right, using the chair for light support. Keep your hips forward, breathe, then return to center.",
+              "estimatedSpokenSeconds": 18
+            }
+          ],
+          "expectedAudioFilename": "IMG_4288_loop-1.mp3",
+          "audioUrl": null,
+          "audioSha256": null,
+          "audioStatus": "not_generated_pending_owner_review"
+        },
+        "2": {
+          "pass": 2,
+          "label": "Loop 2",
+          "script": "Let your gaze follow the comfortable turn to the right. Keep your pelvis facing forward and your breath easy.",
+          "wordCount": 19,
+          "estimatedSpokenSeconds": 12,
+          "videoDurationSeconds": 29,
+          "silentTailEstimateSeconds": 17,
+          "cuePlan": [
+            {
+              "atSeconds": 0,
+              "text": "Let your gaze follow the comfortable turn to the right. Keep your pelvis facing forward and your breath easy.",
+              "estimatedSpokenSeconds": 12
+            }
+          ],
+          "expectedAudioFilename": "IMG_4288_loop-2.mp3",
+          "audioUrl": null,
+          "audioSha256": null,
+          "audioStatus": "not_generated_pending_owner_review"
+        },
+        "3": {
+          "pass": 3,
+          "label": "Loop 3",
+          "script": "Lengthen through the spine before turning. Use only light chair support, then unwind slowly without pushing farther.",
+          "wordCount": 17,
+          "estimatedSpokenSeconds": 11,
+          "videoDurationSeconds": 29,
+          "silentTailEstimateSeconds": 18,
+          "cuePlan": [
+            {
+              "atSeconds": 0,
+              "text": "Lengthen through the spine before turning. Use only light chair support, then unwind slowly without pushing farther.",
+              "estimatedSpokenSeconds": 11
+            }
+          ],
+          "expectedAudioFilename": "IMG_4288_loop-3.mp3",
+          "audioUrl": null,
+          "audioSha256": null,
+          "audioStatus": "not_generated_pending_owner_review"
+        },
+        "4": {
+          "pass": 4,
+          "label": "Loop 4",
+          "script": "Stay with a small, comfortable turn. Soften back toward center on an easy breath.",
+          "wordCount": 14,
+          "estimatedSpokenSeconds": 9,
+          "videoDurationSeconds": 29,
+          "silentTailEstimateSeconds": 20,
+          "cuePlan": [
+            {
+              "atSeconds": 0,
+              "text": "Stay with a small, comfortable turn. Soften back toward center on an easy breath.",
+              "estimatedSpokenSeconds": 9
+            }
+          ],
+          "expectedAudioFilename": "IMG_4288_loop-4.mp3",
+          "audioUrl": null,
+          "audioSha256": null,
+          "audioStatus": "not_generated_pending_owner_review"
+        }
+      },
+      "audioUrl": null
     },
     {
       "movementId": "IMG_4289",
       "movementName": "Seated Twist Left",
       "levelProposal": "intermediate",
       "videoUrl": "/app/videos/chair-yoga/IMG_4289.mp4",
-      "videoDurationSeconds": 29.0,
-      "script": "Sit tall and keep your feet grounded. Turn your chest gently to the left, using the chair for light support as shown. Keep your hips facing forward and breathe without forcing the twist. Return to center.",
-      "wordCount": 36,
-      "estimatedSpokenSeconds": 23,
+      "videoDurationSeconds": 29,
+      "script": "Sit tall with your feet grounded. Turn your chest gently to the left, using the chair for light support. Keep your hips forward, breathe, then return to center.",
+      "wordCount": 28,
+      "estimatedSpokenSeconds": 18,
       "cuePlan": [
-        [
-          "00:02",
-          "Sit tall, feet grounded."
-        ],
-        [
-          "00:07",
-          "Turn gently to the left as shown; use light chair support."
-        ],
-        [
-          "00:14",
-          "Breathe without forcing the twist."
-        ],
-        [
-          "00:22",
-          "Return to center slowly."
-        ]
+        {
+          "at": "00:00",
+          "text": "Sit tall with your feet grounded. Turn your chest gently to the left, using the chair for light support. Keep your hips forward, breathe, then return to center.",
+          "estimatedSpokenSeconds": 18
+        }
       ],
-      "expectedAudioUrl": "/app/chair-yoga/narration/miriam/IMG_4289.mp3",
+      "expectedAudioUrl": null,
       "audioSha256": null,
-      "audioStatus": "not_generated_pending_owner_approval"
+      "audioStatus": "not_generated_pending_owner_review",
+      "loopScripts": {
+        "1": {
+          "pass": 1,
+          "label": "Loop 1",
+          "script": "Sit tall with your feet grounded. Turn your chest gently to the left, using the chair for light support. Keep your hips forward, breathe, then return to center.",
+          "wordCount": 28,
+          "estimatedSpokenSeconds": 18,
+          "videoDurationSeconds": 29,
+          "silentTailEstimateSeconds": 11,
+          "cuePlan": [
+            {
+              "atSeconds": 0,
+              "text": "Sit tall with your feet grounded. Turn your chest gently to the left, using the chair for light support. Keep your hips forward, breathe, then return to center.",
+              "estimatedSpokenSeconds": 18
+            }
+          ],
+          "expectedAudioFilename": "IMG_4289_loop-1.mp3",
+          "audioUrl": null,
+          "audioSha256": null,
+          "audioStatus": "not_generated_pending_owner_review"
+        },
+        "2": {
+          "pass": 2,
+          "label": "Loop 2",
+          "script": "Let your gaze follow the comfortable turn to the left. Keep your pelvis facing forward and your breath easy.",
+          "wordCount": 19,
+          "estimatedSpokenSeconds": 12,
+          "videoDurationSeconds": 29,
+          "silentTailEstimateSeconds": 17,
+          "cuePlan": [
+            {
+              "atSeconds": 0,
+              "text": "Let your gaze follow the comfortable turn to the left. Keep your pelvis facing forward and your breath easy.",
+              "estimatedSpokenSeconds": 12
+            }
+          ],
+          "expectedAudioFilename": "IMG_4289_loop-2.mp3",
+          "audioUrl": null,
+          "audioSha256": null,
+          "audioStatus": "not_generated_pending_owner_review"
+        },
+        "3": {
+          "pass": 3,
+          "label": "Loop 3",
+          "script": "Lengthen through the spine before turning. Use only light chair support, then unwind slowly without pushing farther.",
+          "wordCount": 17,
+          "estimatedSpokenSeconds": 11,
+          "videoDurationSeconds": 29,
+          "silentTailEstimateSeconds": 18,
+          "cuePlan": [
+            {
+              "atSeconds": 0,
+              "text": "Lengthen through the spine before turning. Use only light chair support, then unwind slowly without pushing farther.",
+              "estimatedSpokenSeconds": 11
+            }
+          ],
+          "expectedAudioFilename": "IMG_4289_loop-3.mp3",
+          "audioUrl": null,
+          "audioSha256": null,
+          "audioStatus": "not_generated_pending_owner_review"
+        },
+        "4": {
+          "pass": 4,
+          "label": "Loop 4",
+          "script": "Stay with a small, comfortable turn. Soften back toward center on an easy breath.",
+          "wordCount": 14,
+          "estimatedSpokenSeconds": 9,
+          "videoDurationSeconds": 29,
+          "silentTailEstimateSeconds": 20,
+          "cuePlan": [
+            {
+              "atSeconds": 0,
+              "text": "Stay with a small, comfortable turn. Soften back toward center on an easy breath.",
+              "estimatedSpokenSeconds": 9
+            }
+          ],
+          "expectedAudioFilename": "IMG_4289_loop-4.mp3",
+          "audioUrl": null,
+          "audioSha256": null,
+          "audioStatus": "not_generated_pending_owner_review"
+        }
+      },
+      "audioUrl": null
     },
     {
       "movementId": "IMG_4290",
       "movementName": "Seated Cat-Cow",
       "levelProposal": "beginner",
       "videoUrl": "/app/videos/chair-yoga/IMG_4290.mp4",
-      "videoDurationSeconds": 29.0,
-      "script": "Place your hands on your thighs. Inhale, gently lift your chest and lengthen your spine; exhale, round your back and soften your head. Move slowly within comfort. Let each breath guide the shape, then return to neutral.",
-      "wordCount": 37,
-      "estimatedSpokenSeconds": 24,
+      "videoDurationSeconds": 29,
+      "script": "Rest your hands on your thighs. Inhale and lift your chest; exhale and round gently, moving within comfort. Return to a neutral seat.",
+      "wordCount": 23,
+      "estimatedSpokenSeconds": 15,
       "cuePlan": [
-        [
-          "00:02",
-          "Rest your hands on your thighs."
-        ],
-        [
-          "00:07",
-          "Inhale, lift the chest; exhale, round gently."
-        ],
-        [
-          "00:14",
-          "Let your breathing guide a comfortable range."
-        ],
-        [
-          "00:23",
-          "Return to a neutral seated posture."
-        ]
+        {
+          "at": "00:00",
+          "text": "Rest your hands on your thighs. Inhale and lift your chest; exhale and round gently, moving within comfort. Return to a neutral seat.",
+          "estimatedSpokenSeconds": 15
+        }
       ],
-      "expectedAudioUrl": "/app/chair-yoga/narration/miriam/IMG_4290.mp3",
+      "expectedAudioUrl": null,
       "audioSha256": null,
-      "audioStatus": "not_generated_pending_owner_approval"
+      "audioStatus": "not_generated_pending_owner_review",
+      "loopScripts": {
+        "1": {
+          "pass": 1,
+          "label": "Loop 1",
+          "script": "Rest your hands on your thighs. Inhale and lift your chest; exhale and round gently, moving within comfort. Return to a neutral seat.",
+          "wordCount": 23,
+          "estimatedSpokenSeconds": 15,
+          "videoDurationSeconds": 29,
+          "silentTailEstimateSeconds": 14,
+          "cuePlan": [
+            {
+              "atSeconds": 0,
+              "text": "Rest your hands on your thighs. Inhale and lift your chest; exhale and round gently, moving within comfort. Return to a neutral seat.",
+              "estimatedSpokenSeconds": 15
+            }
+          ],
+          "expectedAudioFilename": "IMG_4290_loop-1.mp3",
+          "audioUrl": null,
+          "audioSha256": null,
+          "audioStatus": "not_generated_pending_owner_review"
+        },
+        "2": {
+          "pass": 2,
+          "label": "Loop 2",
+          "script": "Let the breath guide the shape: open gently as you inhale, round softly as you exhale.",
+          "wordCount": 16,
+          "estimatedSpokenSeconds": 10,
+          "videoDurationSeconds": 29,
+          "silentTailEstimateSeconds": 19,
+          "cuePlan": [
+            {
+              "atSeconds": 0,
+              "text": "Let the breath guide the shape: open gently as you inhale, round softly as you exhale.",
+              "estimatedSpokenSeconds": 10
+            }
+          ],
+          "expectedAudioFilename": "IMG_4290_loop-2.mp3",
+          "audioUrl": null,
+          "audioSha256": null,
+          "audioStatus": "not_generated_pending_owner_review"
+        },
+        "3": {
+          "pass": 3,
+          "label": "Loop 3",
+          "script": "Move like a slow wave through your spine. Keep your shoulders relaxed and use a range that feels easy.",
+          "wordCount": 19,
+          "estimatedSpokenSeconds": 12,
+          "videoDurationSeconds": 29,
+          "silentTailEstimateSeconds": 17,
+          "cuePlan": [
+            {
+              "atSeconds": 0,
+              "text": "Move like a slow wave through your spine. Keep your shoulders relaxed and use a range that feels easy.",
+              "estimatedSpokenSeconds": 12
+            }
+          ],
+          "expectedAudioFilename": "IMG_4290_loop-3.mp3",
+          "audioUrl": null,
+          "audioSha256": null,
+          "audioStatus": "not_generated_pending_owner_review"
+        },
+        "4": {
+          "pass": 4,
+          "label": "Loop 4",
+          "script": "One soft breath for each shape. Return to neutral when the movement ends.",
+          "wordCount": 13,
+          "estimatedSpokenSeconds": 8,
+          "videoDurationSeconds": 29,
+          "silentTailEstimateSeconds": 21,
+          "cuePlan": [
+            {
+              "atSeconds": 0,
+              "text": "One soft breath for each shape. Return to neutral when the movement ends.",
+              "estimatedSpokenSeconds": 8
+            }
+          ],
+          "expectedAudioFilename": "IMG_4290_loop-4.mp3",
+          "audioUrl": null,
+          "audioSha256": null,
+          "audioStatus": "not_generated_pending_owner_review"
+        }
+      },
+      "audioUrl": null
     },
     {
       "movementId": "IMG_4291",
       "movementName": "Eagle Arms Stretch",
       "levelProposal": "intermediate",
       "videoUrl": "/app/videos/chair-yoga/IMG_4291.mp4",
-      "videoDurationSeconds": 29.0,
-      "script": "Bring your arms into the crossed position shown, keeping elbows comfortable and shoulders low. Sit tall and breathe slowly into the upper back. Ease out of the shape without pulling, then rest your hands.",
-      "wordCount": 34,
-      "estimatedSpokenSeconds": 22,
+      "videoDurationSeconds": 29,
+      "script": "Sit tall and cross your arms into the shape shown. Keep shoulders relaxed and elbows comfortable. Breathe into your upper back, then release gently.",
+      "wordCount": 24,
+      "estimatedSpokenSeconds": 15,
       "cuePlan": [
-        [
-          "00:02",
-          "Sit tall and cross the arms as demonstrated."
-        ],
-        [
-          "00:07",
-          "Keep elbows comfortable and shoulders relaxed."
-        ],
-        [
-          "00:14",
-          "Breathe gently into the upper back."
-        ],
-        [
-          "00:22",
-          "Uncross slowly and rest your hands."
-        ]
+        {
+          "at": "00:00",
+          "text": "Sit tall and cross your arms into the shape shown. Keep shoulders relaxed and elbows comfortable. Breathe into your upper back, then release gently.",
+          "estimatedSpokenSeconds": 15
+        }
       ],
-      "expectedAudioUrl": "/app/chair-yoga/narration/miriam/IMG_4291.mp3",
+      "expectedAudioUrl": null,
       "audioSha256": null,
-      "audioStatus": "not_generated_pending_owner_approval"
+      "audioStatus": "not_generated_pending_owner_review",
+      "loopScripts": {
+        "1": {
+          "pass": 1,
+          "label": "Loop 1",
+          "script": "Sit tall and cross your arms into the shape shown. Keep shoulders relaxed and elbows comfortable. Breathe into your upper back, then release gently.",
+          "wordCount": 24,
+          "estimatedSpokenSeconds": 15,
+          "videoDurationSeconds": 29,
+          "silentTailEstimateSeconds": 14,
+          "cuePlan": [
+            {
+              "atSeconds": 0,
+              "text": "Sit tall and cross your arms into the shape shown. Keep shoulders relaxed and elbows comfortable. Breathe into your upper back, then release gently.",
+              "estimatedSpokenSeconds": 15
+            }
+          ],
+          "expectedAudioFilename": "IMG_4291_loop-1.mp3",
+          "audioUrl": null,
+          "audioSha256": null,
+          "audioStatus": "not_generated_pending_owner_review"
+        },
+        "2": {
+          "pass": 2,
+          "label": "Loop 2",
+          "script": "Let the upper back widen behind you. Keep your hands and elbows relaxed rather than pulling into the shape.",
+          "wordCount": 19,
+          "estimatedSpokenSeconds": 12,
+          "videoDurationSeconds": 29,
+          "silentTailEstimateSeconds": 17,
+          "cuePlan": [
+            {
+              "atSeconds": 0,
+              "text": "Let the upper back widen behind you. Keep your hands and elbows relaxed rather than pulling into the shape.",
+              "estimatedSpokenSeconds": 12
+            }
+          ],
+          "expectedAudioFilename": "IMG_4291_loop-2.mp3",
+          "audioUrl": null,
+          "audioSha256": null,
+          "audioStatus": "not_generated_pending_owner_review"
+        },
+        "3": {
+          "pass": 3,
+          "label": "Loop 3",
+          "script": "Notice whether your shoulders are creeping upward; let them settle while your breath stays smooth.",
+          "wordCount": 15,
+          "estimatedSpokenSeconds": 10,
+          "videoDurationSeconds": 29,
+          "silentTailEstimateSeconds": 19,
+          "cuePlan": [
+            {
+              "atSeconds": 0,
+              "text": "Notice whether your shoulders are creeping upward; let them settle while your breath stays smooth.",
+              "estimatedSpokenSeconds": 10
+            }
+          ],
+          "expectedAudioFilename": "IMG_4291_loop-3.mp3",
+          "audioUrl": null,
+          "audioSha256": null,
+          "audioStatus": "not_generated_pending_owner_review"
+        },
+        "4": {
+          "pass": 4,
+          "label": "Loop 4",
+          "script": "Keep the arms easy. Uncross slowly whenever the demonstration releases.",
+          "wordCount": 10,
+          "estimatedSpokenSeconds": 7,
+          "videoDurationSeconds": 29,
+          "silentTailEstimateSeconds": 22,
+          "cuePlan": [
+            {
+              "atSeconds": 0,
+              "text": "Keep the arms easy. Uncross slowly whenever the demonstration releases.",
+              "estimatedSpokenSeconds": 7
+            }
+          ],
+          "expectedAudioFilename": "IMG_4291_loop-4.mp3",
+          "audioUrl": null,
+          "audioSha256": null,
+          "audioStatus": "not_generated_pending_owner_review"
+        }
+      },
+      "audioUrl": null
     },
     {
       "movementId": "IMG_4292",
       "movementName": "Seated Forward Fold",
       "levelProposal": "intermediate",
       "videoUrl": "/app/videos/chair-yoga/IMG_4292.mp4",
-      "videoDurationSeconds": 29.0,
-      "script": "Place your feet comfortably apart. Hinge forward from your hips, resting your hands on your thighs or reaching only as far as shown. Keep the movement easy and breathe out as you fold; return upright slowly.",
-      "wordCount": 36,
-      "estimatedSpokenSeconds": 23,
+      "videoDurationSeconds": 29,
+      "script": "Set your feet comfortably apart. Hinge forward from your hips, reaching only as shown. Keep your neck easy, breathe out, and return upright slowly.",
+      "wordCount": 24,
+      "estimatedSpokenSeconds": 16,
       "cuePlan": [
-        [
-          "00:02",
-          "Set your feet comfortably apart."
-        ],
-        [
-          "00:07",
-          "Hinge from the hips; reach only as shown."
-        ],
-        [
-          "00:15",
-          "Exhale softly and keep the neck relaxed."
-        ],
-        [
-          "00:23",
-          "Return upright at an easy pace."
-        ]
+        {
+          "at": "00:00",
+          "text": "Set your feet comfortably apart. Hinge forward from your hips, reaching only as shown. Keep your neck easy, breathe out, and return upright slowly.",
+          "estimatedSpokenSeconds": 16
+        }
       ],
-      "expectedAudioUrl": "/app/chair-yoga/narration/miriam/IMG_4292.mp3",
+      "expectedAudioUrl": null,
       "audioSha256": null,
-      "audioStatus": "not_generated_pending_owner_approval"
+      "audioStatus": "not_generated_pending_owner_review",
+      "loopScripts": {
+        "1": {
+          "pass": 1,
+          "label": "Loop 1",
+          "script": "Set your feet comfortably apart. Hinge forward from your hips, reaching only as shown. Keep your neck easy, breathe out, and return upright slowly.",
+          "wordCount": 24,
+          "estimatedSpokenSeconds": 16,
+          "videoDurationSeconds": 29,
+          "silentTailEstimateSeconds": 13,
+          "cuePlan": [
+            {
+              "atSeconds": 0,
+              "text": "Set your feet comfortably apart. Hinge forward from your hips, reaching only as shown. Keep your neck easy, breathe out, and return upright slowly.",
+              "estimatedSpokenSeconds": 16
+            }
+          ],
+          "expectedAudioFilename": "IMG_4292_loop-1.mp3",
+          "audioUrl": null,
+          "audioSha256": null,
+          "audioStatus": "not_generated_pending_owner_review"
+        },
+        "2": {
+          "pass": 2,
+          "label": "Loop 2",
+          "script": "Let the fold come from your hips. Rest your hands where they feel supported and keep your breath flowing.",
+          "wordCount": 19,
+          "estimatedSpokenSeconds": 12,
+          "videoDurationSeconds": 29,
+          "silentTailEstimateSeconds": 17,
+          "cuePlan": [
+            {
+              "atSeconds": 0,
+              "text": "Let the fold come from your hips. Rest your hands where they feel supported and keep your breath flowing.",
+              "estimatedSpokenSeconds": 12
+            }
+          ],
+          "expectedAudioFilename": "IMG_4292_loop-2.mp3",
+          "audioUrl": null,
+          "audioSha256": null,
+          "audioStatus": "not_generated_pending_owner_review"
+        },
+        "3": {
+          "pass": 3,
+          "label": "Loop 3",
+          "script": "Keep the back long and soften the knees if shown. There is no need to reach lower.",
+          "wordCount": 17,
+          "estimatedSpokenSeconds": 11,
+          "videoDurationSeconds": 29,
+          "silentTailEstimateSeconds": 18,
+          "cuePlan": [
+            {
+              "atSeconds": 0,
+              "text": "Keep the back long and soften the knees if shown. There is no need to reach lower.",
+              "estimatedSpokenSeconds": 11
+            }
+          ],
+          "expectedAudioFilename": "IMG_4292_loop-3.mp3",
+          "audioUrl": null,
+          "audioSha256": null,
+          "audioStatus": "not_generated_pending_owner_review"
+        },
+        "4": {
+          "pass": 4,
+          "label": "Loop 4",
+          "script": "Pause in the comfortable range, then rise slowly with support.",
+          "wordCount": 10,
+          "estimatedSpokenSeconds": 7,
+          "videoDurationSeconds": 29,
+          "silentTailEstimateSeconds": 22,
+          "cuePlan": [
+            {
+              "atSeconds": 0,
+              "text": "Pause in the comfortable range, then rise slowly with support.",
+              "estimatedSpokenSeconds": 7
+            }
+          ],
+          "expectedAudioFilename": "IMG_4292_loop-4.mp3",
+          "audioUrl": null,
+          "audioSha256": null,
+          "audioStatus": "not_generated_pending_owner_review"
+        }
+      },
+      "audioUrl": null
     },
     {
       "movementId": "IMG_4293",
       "movementName": "Cactus Arms Chest Opener",
       "levelProposal": "intermediate",
       "videoUrl": "/app/videos/chair-yoga/IMG_4293.mp4",
-      "videoDurationSeconds": 29.0,
-      "script": "Sit tall and open your arms to the cactus shape shown. Gently draw your elbows back without arching your lower back. Let your chest broaden as you breathe in; soften the arms and shoulders as you breathe out.",
-      "wordCount": 38,
-      "estimatedSpokenSeconds": 24,
+      "videoDurationSeconds": 29,
+      "script": "Sit tall in the demonstrated cactus shape. Draw your elbows back gently without arching your lower back. Breathe into the chest, then soften your arms.",
+      "wordCount": 25,
+      "estimatedSpokenSeconds": 16,
       "cuePlan": [
-        [
-          "00:02",
-          "Sit tall and form the demonstrated cactus arms."
-        ],
-        [
-          "00:08",
-          "Draw elbows back gently; keep ribs easy."
-        ],
-        [
-          "00:15",
-          "Breathe in to broaden the chest."
-        ],
-        [
-          "00:23",
-          "Exhale and soften the arms."
-        ]
+        {
+          "at": "00:00",
+          "text": "Sit tall in the demonstrated cactus shape. Draw your elbows back gently without arching your lower back. Breathe into the chest, then soften your arms.",
+          "estimatedSpokenSeconds": 16
+        }
       ],
-      "expectedAudioUrl": "/app/chair-yoga/narration/miriam/IMG_4293.mp3",
+      "expectedAudioUrl": null,
       "audioSha256": null,
-      "audioStatus": "not_generated_pending_owner_approval"
+      "audioStatus": "not_generated_pending_owner_review",
+      "loopScripts": {
+        "1": {
+          "pass": 1,
+          "label": "Loop 1",
+          "script": "Sit tall in the demonstrated cactus shape. Draw your elbows back gently without arching your lower back. Breathe into the chest, then soften your arms.",
+          "wordCount": 25,
+          "estimatedSpokenSeconds": 16,
+          "videoDurationSeconds": 29,
+          "silentTailEstimateSeconds": 13,
+          "cuePlan": [
+            {
+              "atSeconds": 0,
+              "text": "Sit tall in the demonstrated cactus shape. Draw your elbows back gently without arching your lower back. Breathe into the chest, then soften your arms.",
+              "estimatedSpokenSeconds": 16
+            }
+          ],
+          "expectedAudioFilename": "IMG_4293_loop-1.mp3",
+          "audioUrl": null,
+          "audioSha256": null,
+          "audioStatus": "not_generated_pending_owner_review"
+        },
+        "2": {
+          "pass": 2,
+          "label": "Loop 2",
+          "script": "Keep your ribs relaxed as your chest opens. Let your shoulder blades move gently without squeezing hard.",
+          "wordCount": 17,
+          "estimatedSpokenSeconds": 11,
+          "videoDurationSeconds": 29,
+          "silentTailEstimateSeconds": 18,
+          "cuePlan": [
+            {
+              "atSeconds": 0,
+              "text": "Keep your ribs relaxed as your chest opens. Let your shoulder blades move gently without squeezing hard.",
+              "estimatedSpokenSeconds": 11
+            }
+          ],
+          "expectedAudioFilename": "IMG_4293_loop-2.mp3",
+          "audioUrl": null,
+          "audioSha256": null,
+          "audioStatus": "not_generated_pending_owner_review"
+        },
+        "3": {
+          "pass": 3,
+          "label": "Loop 3",
+          "script": "Broaden across the collarbones only as comfortable. Keep the neck long and the breath unforced.",
+          "wordCount": 15,
+          "estimatedSpokenSeconds": 10,
+          "videoDurationSeconds": 29,
+          "silentTailEstimateSeconds": 19,
+          "cuePlan": [
+            {
+              "atSeconds": 0,
+              "text": "Broaden across the collarbones only as comfortable. Keep the neck long and the breath unforced.",
+              "estimatedSpokenSeconds": 10
+            }
+          ],
+          "expectedAudioFilename": "IMG_4293_loop-3.mp3",
+          "audioUrl": null,
+          "audioSha256": null,
+          "audioStatus": "not_generated_pending_owner_review"
+        },
+        "4": {
+          "pass": 4,
+          "label": "Loop 4",
+          "script": "Soften the arms and let the chest return to rest.",
+          "wordCount": 10,
+          "estimatedSpokenSeconds": 6,
+          "videoDurationSeconds": 29,
+          "silentTailEstimateSeconds": 23,
+          "cuePlan": [
+            {
+              "atSeconds": 0,
+              "text": "Soften the arms and let the chest return to rest.",
+              "estimatedSpokenSeconds": 6
+            }
+          ],
+          "expectedAudioFilename": "IMG_4293_loop-4.mp3",
+          "audioUrl": null,
+          "audioSha256": null,
+          "audioStatus": "not_generated_pending_owner_review"
+        }
+      },
+      "audioUrl": null
     },
     {
       "movementId": "IMG_4294",
       "movementName": "Neck Stretch Right",
       "levelProposal": "beginner",
       "videoUrl": "/app/videos/chair-yoga/IMG_4294.mp4",
-      "videoDurationSeconds": 29.0,
-      "script": "Sit upright with your shoulders relaxed. Gently tip your right ear toward your right shoulder without lifting the shoulder or pressing your head. Keep your gaze soft and breathe easily, then bring your head back to center.",
-      "wordCount": 37,
-      "estimatedSpokenSeconds": 24,
+      "videoDurationSeconds": 29,
+      "script": "Sit upright with relaxed shoulders. Tip your right ear toward your right shoulder as shown; keep the movement small. Breathe, then return to center.",
+      "wordCount": 24,
+      "estimatedSpokenSeconds": 15,
       "cuePlan": [
-        [
-          "00:02",
-          "Sit upright and relax your shoulders."
-        ],
-        [
-          "00:07",
-          "Tip the right ear gently toward the right shoulder."
-        ],
-        [
-          "00:15",
-          "Keep the movement small; do not press the head."
-        ],
-        [
-          "00:23",
-          "Return your head to center."
-        ]
+        {
+          "at": "00:00",
+          "text": "Sit upright with relaxed shoulders. Tip your right ear toward your right shoulder as shown; keep the movement small. Breathe, then return to center.",
+          "estimatedSpokenSeconds": 15
+        }
       ],
-      "expectedAudioUrl": "/app/chair-yoga/narration/miriam/IMG_4294.mp3",
+      "expectedAudioUrl": null,
       "audioSha256": null,
-      "audioStatus": "not_generated_pending_owner_approval"
+      "audioStatus": "not_generated_pending_owner_review",
+      "loopScripts": {
+        "1": {
+          "pass": 1,
+          "label": "Loop 1",
+          "script": "Sit upright with relaxed shoulders. Tip your right ear toward your right shoulder as shown; keep the movement small. Breathe, then return to center.",
+          "wordCount": 24,
+          "estimatedSpokenSeconds": 15,
+          "videoDurationSeconds": 29,
+          "silentTailEstimateSeconds": 14,
+          "cuePlan": [
+            {
+              "atSeconds": 0,
+              "text": "Sit upright with relaxed shoulders. Tip your right ear toward your right shoulder as shown; keep the movement small. Breathe, then return to center.",
+              "estimatedSpokenSeconds": 15
+            }
+          ],
+          "expectedAudioFilename": "IMG_4294_loop-1.mp3",
+          "audioUrl": null,
+          "audioSha256": null,
+          "audioStatus": "not_generated_pending_owner_review"
+        },
+        "2": {
+          "pass": 2,
+          "label": "Loop 2",
+          "script": "Keep the right shoulder low and let the head tip gently. Do not press or pull on your head.",
+          "wordCount": 19,
+          "estimatedSpokenSeconds": 12,
+          "videoDurationSeconds": 29,
+          "silentTailEstimateSeconds": 17,
+          "cuePlan": [
+            {
+              "atSeconds": 0,
+              "text": "Keep the right shoulder low and let the head tip gently. Do not press or pull on your head.",
+              "estimatedSpokenSeconds": 12
+            }
+          ],
+          "expectedAudioFilename": "IMG_4294_loop-2.mp3",
+          "audioUrl": null,
+          "audioSha256": null,
+          "audioStatus": "not_generated_pending_owner_review"
+        },
+        "3": {
+          "pass": 3,
+          "label": "Loop 3",
+          "script": "Choose a small, comfortable angle. Keep your face relaxed and breathe without holding.",
+          "wordCount": 13,
+          "estimatedSpokenSeconds": 9,
+          "videoDurationSeconds": 29,
+          "silentTailEstimateSeconds": 20,
+          "cuePlan": [
+            {
+              "atSeconds": 0,
+              "text": "Choose a small, comfortable angle. Keep your face relaxed and breathe without holding.",
+              "estimatedSpokenSeconds": 9
+            }
+          ],
+          "expectedAudioFilename": "IMG_4294_loop-3.mp3",
+          "audioUrl": null,
+          "audioSha256": null,
+          "audioStatus": "not_generated_pending_owner_review"
+        },
+        "4": {
+          "pass": 4,
+          "label": "Loop 4",
+          "script": "Let the head return to center gently when ready.",
+          "wordCount": 9,
+          "estimatedSpokenSeconds": 6,
+          "videoDurationSeconds": 29,
+          "silentTailEstimateSeconds": 23,
+          "cuePlan": [
+            {
+              "atSeconds": 0,
+              "text": "Let the head return to center gently when ready.",
+              "estimatedSpokenSeconds": 6
+            }
+          ],
+          "expectedAudioFilename": "IMG_4294_loop-4.mp3",
+          "audioUrl": null,
+          "audioSha256": null,
+          "audioStatus": "not_generated_pending_owner_review"
+        }
+      },
+      "audioUrl": null
     },
     {
       "movementId": "IMG_4296",
       "movementName": "Neck Stretch Left",
       "levelProposal": "beginner",
       "videoUrl": "/app/videos/chair-yoga/IMG_4296.mp4",
-      "videoDurationSeconds": 29.0,
-      "script": "Sit upright with your shoulders relaxed. Gently tip your left ear toward your left shoulder without lifting the shoulder or pressing your head. Keep your gaze soft and breathe easily, then bring your head back to center.",
-      "wordCount": 37,
-      "estimatedSpokenSeconds": 24,
+      "videoDurationSeconds": 29,
+      "script": "Sit upright with relaxed shoulders. Tip your left ear toward your left shoulder as shown; keep the movement small. Breathe, then return to center.",
+      "wordCount": 24,
+      "estimatedSpokenSeconds": 15,
       "cuePlan": [
-        [
-          "00:02",
-          "Sit upright and relax your shoulders."
-        ],
-        [
-          "00:07",
-          "Tip the left ear gently toward the left shoulder."
-        ],
-        [
-          "00:15",
-          "Keep the movement small; do not press the head."
-        ],
-        [
-          "00:23",
-          "Return your head to center."
-        ]
+        {
+          "at": "00:00",
+          "text": "Sit upright with relaxed shoulders. Tip your left ear toward your left shoulder as shown; keep the movement small. Breathe, then return to center.",
+          "estimatedSpokenSeconds": 15
+        }
       ],
-      "expectedAudioUrl": "/app/chair-yoga/narration/miriam/IMG_4296.mp3",
+      "expectedAudioUrl": null,
       "audioSha256": null,
-      "audioStatus": "not_generated_pending_owner_approval"
+      "audioStatus": "not_generated_pending_owner_review",
+      "loopScripts": {
+        "1": {
+          "pass": 1,
+          "label": "Loop 1",
+          "script": "Sit upright with relaxed shoulders. Tip your left ear toward your left shoulder as shown; keep the movement small. Breathe, then return to center.",
+          "wordCount": 24,
+          "estimatedSpokenSeconds": 15,
+          "videoDurationSeconds": 29,
+          "silentTailEstimateSeconds": 14,
+          "cuePlan": [
+            {
+              "atSeconds": 0,
+              "text": "Sit upright with relaxed shoulders. Tip your left ear toward your left shoulder as shown; keep the movement small. Breathe, then return to center.",
+              "estimatedSpokenSeconds": 15
+            }
+          ],
+          "expectedAudioFilename": "IMG_4296_loop-1.mp3",
+          "audioUrl": null,
+          "audioSha256": null,
+          "audioStatus": "not_generated_pending_owner_review"
+        },
+        "2": {
+          "pass": 2,
+          "label": "Loop 2",
+          "script": "Keep the left shoulder low and let the head tip gently. Do not press or pull on your head.",
+          "wordCount": 19,
+          "estimatedSpokenSeconds": 12,
+          "videoDurationSeconds": 29,
+          "silentTailEstimateSeconds": 17,
+          "cuePlan": [
+            {
+              "atSeconds": 0,
+              "text": "Keep the left shoulder low and let the head tip gently. Do not press or pull on your head.",
+              "estimatedSpokenSeconds": 12
+            }
+          ],
+          "expectedAudioFilename": "IMG_4296_loop-2.mp3",
+          "audioUrl": null,
+          "audioSha256": null,
+          "audioStatus": "not_generated_pending_owner_review"
+        },
+        "3": {
+          "pass": 3,
+          "label": "Loop 3",
+          "script": "Choose a small, comfortable angle. Keep your face relaxed and breathe without holding.",
+          "wordCount": 13,
+          "estimatedSpokenSeconds": 9,
+          "videoDurationSeconds": 29,
+          "silentTailEstimateSeconds": 20,
+          "cuePlan": [
+            {
+              "atSeconds": 0,
+              "text": "Choose a small, comfortable angle. Keep your face relaxed and breathe without holding.",
+              "estimatedSpokenSeconds": 9
+            }
+          ],
+          "expectedAudioFilename": "IMG_4296_loop-3.mp3",
+          "audioUrl": null,
+          "audioSha256": null,
+          "audioStatus": "not_generated_pending_owner_review"
+        },
+        "4": {
+          "pass": 4,
+          "label": "Loop 4",
+          "script": "Let the head return to center gently when ready.",
+          "wordCount": 9,
+          "estimatedSpokenSeconds": 6,
+          "videoDurationSeconds": 29,
+          "silentTailEstimateSeconds": 23,
+          "cuePlan": [
+            {
+              "atSeconds": 0,
+              "text": "Let the head return to center gently when ready.",
+              "estimatedSpokenSeconds": 6
+            }
+          ],
+          "expectedAudioFilename": "IMG_4296_loop-4.mp3",
+          "audioUrl": null,
+          "audioSha256": null,
+          "audioStatus": "not_generated_pending_owner_review"
+        }
+      },
+      "audioUrl": null
     },
     {
       "movementId": "IMG_4297",
       "movementName": "Shoulder Rolls",
       "levelProposal": "beginner",
       "videoUrl": "/app/videos/chair-yoga/IMG_4297.mp4",
-      "videoDurationSeconds": 29.0,
-      "script": "Sit comfortably with your hands relaxed. Circle your shoulders slowly as shown, keeping the range small and smooth. Let your breath stay natural, and release tension in your jaw. Finish with your shoulders resting evenly.",
-      "wordCount": 35,
-      "estimatedSpokenSeconds": 22,
+      "videoDurationSeconds": 29,
+      "script": "Sit comfortably with your hands relaxed. Roll your shoulders slowly as shown, keeping circles smooth and easy. Breathe naturally, then let both shoulders settle.",
+      "wordCount": 24,
+      "estimatedSpokenSeconds": 15,
       "cuePlan": [
-        [
-          "00:02",
-          "Sit comfortably and relax your hands."
-        ],
-        [
-          "00:07",
-          "Circle the shoulders slowly as shown."
-        ],
-        [
-          "00:15",
-          "Keep your breath natural and jaw soft."
-        ],
-        [
-          "00:23",
-          "Settle both shoulders evenly."
-        ]
+        {
+          "at": "00:00",
+          "text": "Sit comfortably with your hands relaxed. Roll your shoulders slowly as shown, keeping circles smooth and easy. Breathe naturally, then let both shoulders settle.",
+          "estimatedSpokenSeconds": 15
+        }
       ],
-      "expectedAudioUrl": "/app/chair-yoga/narration/miriam/IMG_4297.mp3",
+      "expectedAudioUrl": null,
       "audioSha256": null,
-      "audioStatus": "not_generated_pending_owner_approval"
+      "audioStatus": "not_generated_pending_owner_review",
+      "loopScripts": {
+        "1": {
+          "pass": 1,
+          "label": "Loop 1",
+          "script": "Sit comfortably with your hands relaxed. Roll your shoulders slowly as shown, keeping circles smooth and easy. Breathe naturally, then let both shoulders settle.",
+          "wordCount": 24,
+          "estimatedSpokenSeconds": 15,
+          "videoDurationSeconds": 29,
+          "silentTailEstimateSeconds": 14,
+          "cuePlan": [
+            {
+              "atSeconds": 0,
+              "text": "Sit comfortably with your hands relaxed. Roll your shoulders slowly as shown, keeping circles smooth and easy. Breathe naturally, then let both shoulders settle.",
+              "estimatedSpokenSeconds": 15
+            }
+          ],
+          "expectedAudioFilename": "IMG_4297_loop-1.mp3",
+          "audioUrl": null,
+          "audioSha256": null,
+          "audioStatus": "not_generated_pending_owner_review"
+        },
+        "2": {
+          "pass": 2,
+          "label": "Loop 2",
+          "script": "Let the shoulders move at an easy pace. Keep the jaw soft and avoid lifting toward your ears.",
+          "wordCount": 18,
+          "estimatedSpokenSeconds": 11,
+          "videoDurationSeconds": 29,
+          "silentTailEstimateSeconds": 18,
+          "cuePlan": [
+            {
+              "atSeconds": 0,
+              "text": "Let the shoulders move at an easy pace. Keep the jaw soft and avoid lifting toward your ears.",
+              "estimatedSpokenSeconds": 11
+            }
+          ],
+          "expectedAudioFilename": "IMG_4297_loop-2.mp3",
+          "audioUrl": null,
+          "audioSha256": null,
+          "audioStatus": "not_generated_pending_owner_review"
+        },
+        "3": {
+          "pass": 3,
+          "label": "Loop 3",
+          "script": "Make each circle smooth and controlled. Keep your neck relaxed as the shoulders travel.",
+          "wordCount": 14,
+          "estimatedSpokenSeconds": 9,
+          "videoDurationSeconds": 29,
+          "silentTailEstimateSeconds": 20,
+          "cuePlan": [
+            {
+              "atSeconds": 0,
+              "text": "Make each circle smooth and controlled. Keep your neck relaxed as the shoulders travel.",
+              "estimatedSpokenSeconds": 9
+            }
+          ],
+          "expectedAudioFilename": "IMG_4297_loop-3.mp3",
+          "audioUrl": null,
+          "audioSha256": null,
+          "audioStatus": "not_generated_pending_owner_review"
+        },
+        "4": {
+          "pass": 4,
+          "label": "Loop 4",
+          "script": "Finish the circle gently and let the shoulders rest.",
+          "wordCount": 9,
+          "estimatedSpokenSeconds": 6,
+          "videoDurationSeconds": 29,
+          "silentTailEstimateSeconds": 23,
+          "cuePlan": [
+            {
+              "atSeconds": 0,
+              "text": "Finish the circle gently and let the shoulders rest.",
+              "estimatedSpokenSeconds": 6
+            }
+          ],
+          "expectedAudioFilename": "IMG_4297_loop-4.mp3",
+          "audioUrl": null,
+          "audioSha256": null,
+          "audioStatus": "not_generated_pending_owner_review"
+        }
+      },
+      "audioUrl": null
     },
     {
       "movementId": "IMG_4298",
       "movementName": "Wrist Stretch",
       "levelProposal": "beginner",
       "videoUrl": "/app/videos/chair-yoga/IMG_4298.mp4",
-      "videoDurationSeconds": 29.0,
-      "script": "Sit tall and extend your hands as shown. Gently stretch your wrists without pulling hard on the fingers. Keep your elbows soft and shoulders relaxed. Breathe evenly, then release both hands back to your lap.",
-      "wordCount": 35,
-      "estimatedSpokenSeconds": 22,
+      "videoDurationSeconds": 29,
+      "script": "Extend your hands as demonstrated. Gently stretch the wrists without pulling hard on the fingers. Keep your shoulders relaxed, breathe evenly, and release to your lap.",
+      "wordCount": 26,
+      "estimatedSpokenSeconds": 17,
       "cuePlan": [
-        [
-          "00:02",
-          "Sit tall and extend your hands as shown."
-        ],
-        [
-          "00:08",
-          "Move the wrists gently; avoid pulling the fingers."
-        ],
-        [
-          "00:16",
-          "Keep elbows soft and breathe evenly."
-        ],
-        [
-          "00:23",
-          "Release your hands to your lap."
-        ]
+        {
+          "at": "00:00",
+          "text": "Extend your hands as demonstrated. Gently stretch the wrists without pulling hard on the fingers. Keep your shoulders relaxed, breathe evenly, and release to your lap.",
+          "estimatedSpokenSeconds": 17
+        }
       ],
-      "expectedAudioUrl": "/app/chair-yoga/narration/miriam/IMG_4298.mp3",
+      "expectedAudioUrl": null,
       "audioSha256": null,
-      "audioStatus": "not_generated_pending_owner_approval"
+      "audioStatus": "not_generated_pending_owner_review",
+      "loopScripts": {
+        "1": {
+          "pass": 1,
+          "label": "Loop 1",
+          "script": "Extend your hands as demonstrated. Gently stretch the wrists without pulling hard on the fingers. Keep your shoulders relaxed, breathe evenly, and release to your lap.",
+          "wordCount": 26,
+          "estimatedSpokenSeconds": 17,
+          "videoDurationSeconds": 29,
+          "silentTailEstimateSeconds": 12,
+          "cuePlan": [
+            {
+              "atSeconds": 0,
+              "text": "Extend your hands as demonstrated. Gently stretch the wrists without pulling hard on the fingers. Keep your shoulders relaxed, breathe evenly, and release to your lap.",
+              "estimatedSpokenSeconds": 17
+            }
+          ],
+          "expectedAudioFilename": "IMG_4298_loop-1.mp3",
+          "audioUrl": null,
+          "audioSha256": null,
+          "audioStatus": "not_generated_pending_owner_review"
+        },
+        "2": {
+          "pass": 2,
+          "label": "Loop 2",
+          "script": "Keep the wrist stretch light and follow the hand position shown. Let your elbows stay soft and your breath steady.",
+          "wordCount": 20,
+          "estimatedSpokenSeconds": 12,
+          "videoDurationSeconds": 29,
+          "silentTailEstimateSeconds": 17,
+          "cuePlan": [
+            {
+              "atSeconds": 0,
+              "text": "Keep the wrist stretch light and follow the hand position shown. Let your elbows stay soft and your breath steady.",
+              "estimatedSpokenSeconds": 12
+            }
+          ],
+          "expectedAudioFilename": "IMG_4298_loop-2.mp3",
+          "audioUrl": null,
+          "audioSha256": null,
+          "audioStatus": "not_generated_pending_owner_review"
+        },
+        "3": {
+          "pass": 3,
+          "label": "Loop 3",
+          "script": "Notice any unnecessary tension in your fingers. Ease the stretch rather than pulling farther.",
+          "wordCount": 14,
+          "estimatedSpokenSeconds": 9,
+          "videoDurationSeconds": 29,
+          "silentTailEstimateSeconds": 20,
+          "cuePlan": [
+            {
+              "atSeconds": 0,
+              "text": "Notice any unnecessary tension in your fingers. Ease the stretch rather than pulling farther.",
+              "estimatedSpokenSeconds": 9
+            }
+          ],
+          "expectedAudioFilename": "IMG_4298_loop-3.mp3",
+          "audioUrl": null,
+          "audioSha256": null,
+          "audioStatus": "not_generated_pending_owner_review"
+        },
+        "4": {
+          "pass": 4,
+          "label": "Loop 4",
+          "script": "Soften both hands and let them rest when ready.",
+          "wordCount": 9,
+          "estimatedSpokenSeconds": 6,
+          "videoDurationSeconds": 29,
+          "silentTailEstimateSeconds": 23,
+          "cuePlan": [
+            {
+              "atSeconds": 0,
+              "text": "Soften both hands and let them rest when ready.",
+              "estimatedSpokenSeconds": 6
+            }
+          ],
+          "expectedAudioFilename": "IMG_4298_loop-4.mp3",
+          "audioUrl": null,
+          "audioSha256": null,
+          "audioStatus": "not_generated_pending_owner_review"
+        }
+      },
+      "audioUrl": null
     },
     {
       "movementId": "IMG_4299",
       "movementName": "Seated Figure Four Right",
       "levelProposal": "advanced",
       "videoUrl": "/app/videos/chair-yoga/IMG_4299.mp4",
-      "videoDurationSeconds": 29.0,
-      "script": "Sit tall and place your right ankle over the opposite thigh as shown, only if comfortable. Keep your back long and hinge slightly from the hips. Breathe slowly; release the leg with control.",
-      "wordCount": 33,
-      "estimatedSpokenSeconds": 21,
+      "videoDurationSeconds": 29,
+      "script": "Sit tall and place your right ankle over the opposite thigh as shown, only if comfortable. Keep your back long; release the leg with control.",
+      "wordCount": 25,
+      "estimatedSpokenSeconds": 16,
       "cuePlan": [
-        [
-          "00:02",
-          "Sit securely and bring the right ankle across as shown."
-        ],
-        [
-          "00:08",
-          "Choose a comfortable hip position; keep your back long."
-        ],
-        [
-          "00:16",
-          "Breathe softly; do not press the knee."
-        ],
-        [
-          "00:23",
-          "Uncross and place both feet down."
-        ]
+        {
+          "at": "00:00",
+          "text": "Sit tall and place your right ankle over the opposite thigh as shown, only if comfortable. Keep your back long; release the leg with control.",
+          "estimatedSpokenSeconds": 16
+        }
       ],
-      "expectedAudioUrl": "/app/chair-yoga/narration/miriam/IMG_4299.mp3",
+      "expectedAudioUrl": null,
       "audioSha256": null,
-      "audioStatus": "not_generated_pending_owner_approval"
+      "audioStatus": "not_generated_pending_owner_review",
+      "loopScripts": {
+        "1": {
+          "pass": 1,
+          "label": "Loop 1",
+          "script": "Sit tall and place your right ankle over the opposite thigh as shown, only if comfortable. Keep your back long; release the leg with control.",
+          "wordCount": 25,
+          "estimatedSpokenSeconds": 16,
+          "videoDurationSeconds": 29,
+          "silentTailEstimateSeconds": 13,
+          "cuePlan": [
+            {
+              "atSeconds": 0,
+              "text": "Sit tall and place your right ankle over the opposite thigh as shown, only if comfortable. Keep your back long; release the leg with control.",
+              "estimatedSpokenSeconds": 16
+            }
+          ],
+          "expectedAudioFilename": "IMG_4299_loop-1.mp3",
+          "audioUrl": null,
+          "audioSha256": null,
+          "audioStatus": "not_generated_pending_owner_review"
+        },
+        "2": {
+          "pass": 2,
+          "label": "Loop 2",
+          "script": "Let the right hip stay easy. Keep your ankle supported and do not press the knee down.",
+          "wordCount": 17,
+          "estimatedSpokenSeconds": 11,
+          "videoDurationSeconds": 29,
+          "silentTailEstimateSeconds": 18,
+          "cuePlan": [
+            {
+              "atSeconds": 0,
+              "text": "Let the right hip stay easy. Keep your ankle supported and do not press the knee down.",
+              "estimatedSpokenSeconds": 11
+            }
+          ],
+          "expectedAudioFilename": "IMG_4299_loop-2.mp3",
+          "audioUrl": null,
+          "audioSha256": null,
+          "audioStatus": "not_generated_pending_owner_review"
+        },
+        "3": {
+          "pass": 3,
+          "label": "Loop 3",
+          "script": "If the position feels comfortable, hinge only slightly from the hips. Keep the spine long and breath steady.",
+          "wordCount": 18,
+          "estimatedSpokenSeconds": 12,
+          "videoDurationSeconds": 29,
+          "silentTailEstimateSeconds": 17,
+          "cuePlan": [
+            {
+              "atSeconds": 0,
+              "text": "If the position feels comfortable, hinge only slightly from the hips. Keep the spine long and breath steady.",
+              "estimatedSpokenSeconds": 12
+            }
+          ],
+          "expectedAudioFilename": "IMG_4299_loop-3.mp3",
+          "audioUrl": null,
+          "audioSha256": null,
+          "audioStatus": "not_generated_pending_owner_review"
+        },
+        "4": {
+          "pass": 4,
+          "label": "Loop 4",
+          "script": "Uncross the right leg carefully and place both feet down.",
+          "wordCount": 10,
+          "estimatedSpokenSeconds": 6,
+          "videoDurationSeconds": 29,
+          "silentTailEstimateSeconds": 23,
+          "cuePlan": [
+            {
+              "atSeconds": 0,
+              "text": "Uncross the right leg carefully and place both feet down.",
+              "estimatedSpokenSeconds": 6
+            }
+          ],
+          "expectedAudioFilename": "IMG_4299_loop-4.mp3",
+          "audioUrl": null,
+          "audioSha256": null,
+          "audioStatus": "not_generated_pending_owner_review"
+        }
+      },
+      "audioUrl": null
     },
     {
       "movementId": "IMG_4300",
       "movementName": "Seated Figure Four Left",
       "levelProposal": "advanced",
       "videoUrl": "/app/videos/chair-yoga/IMG_4300.mp4",
-      "videoDurationSeconds": 29.0,
-      "script": "Sit tall and place your left ankle over the opposite thigh as shown, only if comfortable. Keep your back long and hinge slightly from the hips. Breathe slowly; release the leg with control.",
-      "wordCount": 33,
-      "estimatedSpokenSeconds": 21,
+      "videoDurationSeconds": 29,
+      "script": "Sit tall and place your left ankle over the opposite thigh as shown, only if comfortable. Keep your back long; release the leg with control.",
+      "wordCount": 25,
+      "estimatedSpokenSeconds": 16,
       "cuePlan": [
-        [
-          "00:02",
-          "Sit securely and bring the left ankle across as shown."
-        ],
-        [
-          "00:08",
-          "Choose a comfortable hip position; keep your back long."
-        ],
-        [
-          "00:16",
-          "Breathe softly; do not press the knee."
-        ],
-        [
-          "00:23",
-          "Uncross and place both feet down."
-        ]
+        {
+          "at": "00:00",
+          "text": "Sit tall and place your left ankle over the opposite thigh as shown, only if comfortable. Keep your back long; release the leg with control.",
+          "estimatedSpokenSeconds": 16
+        }
       ],
-      "expectedAudioUrl": "/app/chair-yoga/narration/miriam/IMG_4300.mp3",
+      "expectedAudioUrl": null,
       "audioSha256": null,
-      "audioStatus": "not_generated_pending_owner_approval"
+      "audioStatus": "not_generated_pending_owner_review",
+      "loopScripts": {
+        "1": {
+          "pass": 1,
+          "label": "Loop 1",
+          "script": "Sit tall and place your left ankle over the opposite thigh as shown, only if comfortable. Keep your back long; release the leg with control.",
+          "wordCount": 25,
+          "estimatedSpokenSeconds": 16,
+          "videoDurationSeconds": 29,
+          "silentTailEstimateSeconds": 13,
+          "cuePlan": [
+            {
+              "atSeconds": 0,
+              "text": "Sit tall and place your left ankle over the opposite thigh as shown, only if comfortable. Keep your back long; release the leg with control.",
+              "estimatedSpokenSeconds": 16
+            }
+          ],
+          "expectedAudioFilename": "IMG_4300_loop-1.mp3",
+          "audioUrl": null,
+          "audioSha256": null,
+          "audioStatus": "not_generated_pending_owner_review"
+        },
+        "2": {
+          "pass": 2,
+          "label": "Loop 2",
+          "script": "Let the left hip stay easy. Keep your ankle supported and do not press the knee down.",
+          "wordCount": 17,
+          "estimatedSpokenSeconds": 11,
+          "videoDurationSeconds": 29,
+          "silentTailEstimateSeconds": 18,
+          "cuePlan": [
+            {
+              "atSeconds": 0,
+              "text": "Let the left hip stay easy. Keep your ankle supported and do not press the knee down.",
+              "estimatedSpokenSeconds": 11
+            }
+          ],
+          "expectedAudioFilename": "IMG_4300_loop-2.mp3",
+          "audioUrl": null,
+          "audioSha256": null,
+          "audioStatus": "not_generated_pending_owner_review"
+        },
+        "3": {
+          "pass": 3,
+          "label": "Loop 3",
+          "script": "If the position feels comfortable, hinge only slightly from the hips. Keep the spine long and breath steady.",
+          "wordCount": 18,
+          "estimatedSpokenSeconds": 12,
+          "videoDurationSeconds": 29,
+          "silentTailEstimateSeconds": 17,
+          "cuePlan": [
+            {
+              "atSeconds": 0,
+              "text": "If the position feels comfortable, hinge only slightly from the hips. Keep the spine long and breath steady.",
+              "estimatedSpokenSeconds": 12
+            }
+          ],
+          "expectedAudioFilename": "IMG_4300_loop-3.mp3",
+          "audioUrl": null,
+          "audioSha256": null,
+          "audioStatus": "not_generated_pending_owner_review"
+        },
+        "4": {
+          "pass": 4,
+          "label": "Loop 4",
+          "script": "Uncross the left leg carefully and place both feet down.",
+          "wordCount": 10,
+          "estimatedSpokenSeconds": 6,
+          "videoDurationSeconds": 29,
+          "silentTailEstimateSeconds": 23,
+          "cuePlan": [
+            {
+              "atSeconds": 0,
+              "text": "Uncross the left leg carefully and place both feet down.",
+              "estimatedSpokenSeconds": 6
+            }
+          ],
+          "expectedAudioFilename": "IMG_4300_loop-4.mp3",
+          "audioUrl": null,
+          "audioSha256": null,
+          "audioStatus": "not_generated_pending_owner_review"
+        }
+      },
+      "audioUrl": null
     },
     {
       "movementId": "IMG_4303",
       "movementName": "Knee-to-Chest Right",
       "levelProposal": "beginner",
       "videoUrl": "/app/videos/chair-yoga/IMG_4303.mp4",
-      "videoDurationSeconds": 29.0,
-      "script": "Sit securely and hold your right knee as shown. Draw it only to a comfortable height, keeping the other foot supported and your back upright. Breathe out gently, then lower the foot with control.",
-      "wordCount": 34,
-      "estimatedSpokenSeconds": 22,
+      "videoDurationSeconds": 29,
+      "script": "Sit securely and bring your right knee up as shown, only to a comfortable height. Keep the other foot supported, breathe out, then lower with control.",
+      "wordCount": 26,
+      "estimatedSpokenSeconds": 17,
       "cuePlan": [
-        [
-          "00:02",
-          "Sit securely with one foot grounded."
-        ],
-        [
-          "00:07",
-          "Bring the right knee up as shown, only comfortably."
-        ],
-        [
-          "00:15",
-          "Keep your chest lifted and breathe gently."
-        ],
-        [
-          "00:23",
-          "Lower the foot with control."
-        ]
+        {
+          "at": "00:00",
+          "text": "Sit securely and bring your right knee up as shown, only to a comfortable height. Keep the other foot supported, breathe out, then lower with control.",
+          "estimatedSpokenSeconds": 17
+        }
       ],
-      "expectedAudioUrl": "/app/chair-yoga/narration/miriam/IMG_4303.mp3",
+      "expectedAudioUrl": null,
       "audioSha256": null,
-      "audioStatus": "not_generated_pending_owner_approval"
+      "audioStatus": "not_generated_pending_owner_review",
+      "loopScripts": {
+        "1": {
+          "pass": 1,
+          "label": "Loop 1",
+          "script": "Sit securely and bring your right knee up as shown, only to a comfortable height. Keep the other foot supported, breathe out, then lower with control.",
+          "wordCount": 26,
+          "estimatedSpokenSeconds": 17,
+          "videoDurationSeconds": 29,
+          "silentTailEstimateSeconds": 12,
+          "cuePlan": [
+            {
+              "atSeconds": 0,
+              "text": "Sit securely and bring your right knee up as shown, only to a comfortable height. Keep the other foot supported, breathe out, then lower with control.",
+              "estimatedSpokenSeconds": 17
+            }
+          ],
+          "expectedAudioFilename": "IMG_4303_loop-1.mp3",
+          "audioUrl": null,
+          "audioSha256": null,
+          "audioStatus": "not_generated_pending_owner_review"
+        },
+        "2": {
+          "pass": 2,
+          "label": "Loop 2",
+          "script": "Keep your chest upright as you hold the right knee. Let the supporting foot stay grounded.",
+          "wordCount": 16,
+          "estimatedSpokenSeconds": 10,
+          "videoDurationSeconds": 29,
+          "silentTailEstimateSeconds": 19,
+          "cuePlan": [
+            {
+              "atSeconds": 0,
+              "text": "Keep your chest upright as you hold the right knee. Let the supporting foot stay grounded.",
+              "estimatedSpokenSeconds": 10
+            }
+          ],
+          "expectedAudioFilename": "IMG_4303_loop-2.mp3",
+          "audioUrl": null,
+          "audioSha256": null,
+          "audioStatus": "not_generated_pending_owner_review"
+        },
+        "3": {
+          "pass": 3,
+          "label": "Loop 3",
+          "script": "Use your hands only as shown and keep your shoulders relaxed. Breathe steadily in the comfortable position.",
+          "wordCount": 17,
+          "estimatedSpokenSeconds": 11,
+          "videoDurationSeconds": 29,
+          "silentTailEstimateSeconds": 18,
+          "cuePlan": [
+            {
+              "atSeconds": 0,
+              "text": "Use your hands only as shown and keep your shoulders relaxed. Breathe steadily in the comfortable position.",
+              "estimatedSpokenSeconds": 11
+            }
+          ],
+          "expectedAudioFilename": "IMG_4303_loop-3.mp3",
+          "audioUrl": null,
+          "audioSha256": null,
+          "audioStatus": "not_generated_pending_owner_review"
+        },
+        "4": {
+          "pass": 4,
+          "label": "Loop 4",
+          "script": "Lower the right foot slowly and let both feet rest.",
+          "wordCount": 10,
+          "estimatedSpokenSeconds": 6,
+          "videoDurationSeconds": 29,
+          "silentTailEstimateSeconds": 23,
+          "cuePlan": [
+            {
+              "atSeconds": 0,
+              "text": "Lower the right foot slowly and let both feet rest.",
+              "estimatedSpokenSeconds": 6
+            }
+          ],
+          "expectedAudioFilename": "IMG_4303_loop-4.mp3",
+          "audioUrl": null,
+          "audioSha256": null,
+          "audioStatus": "not_generated_pending_owner_review"
+        }
+      },
+      "audioUrl": null
     },
     {
       "movementId": "IMG_4304",
       "movementName": "Knee-to-Chest Left",
       "levelProposal": "beginner",
       "videoUrl": "/app/videos/chair-yoga/IMG_4304.mp4",
-      "videoDurationSeconds": 29.0,
-      "script": "Sit securely and hold your left knee as shown. Draw it only to a comfortable height, keeping the other foot supported and your back upright. Breathe out gently, then lower the foot with control.",
-      "wordCount": 34,
-      "estimatedSpokenSeconds": 22,
+      "videoDurationSeconds": 29,
+      "script": "Sit securely and bring your left knee up as shown, only to a comfortable height. Keep the other foot supported, breathe out, then lower with control.",
+      "wordCount": 26,
+      "estimatedSpokenSeconds": 17,
       "cuePlan": [
-        [
-          "00:02",
-          "Sit securely with one foot grounded."
-        ],
-        [
-          "00:07",
-          "Bring the left knee up as shown, only comfortably."
-        ],
-        [
-          "00:15",
-          "Keep your chest lifted and breathe gently."
-        ],
-        [
-          "00:23",
-          "Lower the foot with control."
-        ]
+        {
+          "at": "00:00",
+          "text": "Sit securely and bring your left knee up as shown, only to a comfortable height. Keep the other foot supported, breathe out, then lower with control.",
+          "estimatedSpokenSeconds": 17
+        }
       ],
-      "expectedAudioUrl": "/app/chair-yoga/narration/miriam/IMG_4304.mp3",
+      "expectedAudioUrl": null,
       "audioSha256": null,
-      "audioStatus": "not_generated_pending_owner_approval"
+      "audioStatus": "not_generated_pending_owner_review",
+      "loopScripts": {
+        "1": {
+          "pass": 1,
+          "label": "Loop 1",
+          "script": "Sit securely and bring your left knee up as shown, only to a comfortable height. Keep the other foot supported, breathe out, then lower with control.",
+          "wordCount": 26,
+          "estimatedSpokenSeconds": 17,
+          "videoDurationSeconds": 29,
+          "silentTailEstimateSeconds": 12,
+          "cuePlan": [
+            {
+              "atSeconds": 0,
+              "text": "Sit securely and bring your left knee up as shown, only to a comfortable height. Keep the other foot supported, breathe out, then lower with control.",
+              "estimatedSpokenSeconds": 17
+            }
+          ],
+          "expectedAudioFilename": "IMG_4304_loop-1.mp3",
+          "audioUrl": null,
+          "audioSha256": null,
+          "audioStatus": "not_generated_pending_owner_review"
+        },
+        "2": {
+          "pass": 2,
+          "label": "Loop 2",
+          "script": "Keep your chest upright as you hold the left knee. Let the supporting foot stay grounded.",
+          "wordCount": 16,
+          "estimatedSpokenSeconds": 10,
+          "videoDurationSeconds": 29,
+          "silentTailEstimateSeconds": 19,
+          "cuePlan": [
+            {
+              "atSeconds": 0,
+              "text": "Keep your chest upright as you hold the left knee. Let the supporting foot stay grounded.",
+              "estimatedSpokenSeconds": 10
+            }
+          ],
+          "expectedAudioFilename": "IMG_4304_loop-2.mp3",
+          "audioUrl": null,
+          "audioSha256": null,
+          "audioStatus": "not_generated_pending_owner_review"
+        },
+        "3": {
+          "pass": 3,
+          "label": "Loop 3",
+          "script": "Use your hands only as shown and keep your shoulders relaxed. Breathe steadily in the comfortable position.",
+          "wordCount": 17,
+          "estimatedSpokenSeconds": 11,
+          "videoDurationSeconds": 29,
+          "silentTailEstimateSeconds": 18,
+          "cuePlan": [
+            {
+              "atSeconds": 0,
+              "text": "Use your hands only as shown and keep your shoulders relaxed. Breathe steadily in the comfortable position.",
+              "estimatedSpokenSeconds": 11
+            }
+          ],
+          "expectedAudioFilename": "IMG_4304_loop-3.mp3",
+          "audioUrl": null,
+          "audioSha256": null,
+          "audioStatus": "not_generated_pending_owner_review"
+        },
+        "4": {
+          "pass": 4,
+          "label": "Loop 4",
+          "script": "Lower the left foot slowly and let both feet rest.",
+          "wordCount": 10,
+          "estimatedSpokenSeconds": 6,
+          "videoDurationSeconds": 29,
+          "silentTailEstimateSeconds": 23,
+          "cuePlan": [
+            {
+              "atSeconds": 0,
+              "text": "Lower the left foot slowly and let both feet rest.",
+              "estimatedSpokenSeconds": 6
+            }
+          ],
+          "expectedAudioFilename": "IMG_4304_loop-4.mp3",
+          "audioUrl": null,
+          "audioSha256": null,
+          "audioStatus": "not_generated_pending_owner_review"
+        }
+      },
+      "audioUrl": null
     },
     {
       "movementId": "IMG_4305",
       "movementName": "Seated Hamstring Stretch Right",
       "levelProposal": "intermediate",
       "videoUrl": "/app/videos/chair-yoga/IMG_4305.mp4",
-      "videoDurationSeconds": 29.0,
-      "script": "Sit at the edge of your chair and extend your right leg as shown, keeping a soft bend in the knee. Hinge forward only slightly with a long back. Breathe gently, then return upright and rest.",
-      "wordCount": 36,
-      "estimatedSpokenSeconds": 23,
+      "videoDurationSeconds": 29,
+      "script": "Sit near the chair edge and extend your right leg as shown, keeping the knee soft. Hinge slightly with a long back, then return upright.",
+      "wordCount": 25,
+      "estimatedSpokenSeconds": 16,
       "cuePlan": [
-        [
-          "00:02",
-          "Sit securely and extend the right leg as shown."
-        ],
-        [
-          "00:08",
-          "Keep a soft knee and hinge only slightly."
-        ],
-        [
-          "00:15",
-          "Lengthen your back and breathe slowly."
-        ],
-        [
-          "00:23",
-          "Return upright and rest the leg."
-        ]
+        {
+          "at": "00:00",
+          "text": "Sit near the chair edge and extend your right leg as shown, keeping the knee soft. Hinge slightly with a long back, then return upright.",
+          "estimatedSpokenSeconds": 16
+        }
       ],
-      "expectedAudioUrl": "/app/chair-yoga/narration/miriam/IMG_4305.mp3",
+      "expectedAudioUrl": null,
       "audioSha256": null,
-      "audioStatus": "not_generated_pending_owner_approval"
+      "audioStatus": "not_generated_pending_owner_review",
+      "loopScripts": {
+        "1": {
+          "pass": 1,
+          "label": "Loop 1",
+          "script": "Sit near the chair edge and extend your right leg as shown, keeping the knee soft. Hinge slightly with a long back, then return upright.",
+          "wordCount": 25,
+          "estimatedSpokenSeconds": 16,
+          "videoDurationSeconds": 29,
+          "silentTailEstimateSeconds": 13,
+          "cuePlan": [
+            {
+              "atSeconds": 0,
+              "text": "Sit near the chair edge and extend your right leg as shown, keeping the knee soft. Hinge slightly with a long back, then return upright.",
+              "estimatedSpokenSeconds": 16
+            }
+          ],
+          "expectedAudioFilename": "IMG_4305_loop-1.mp3",
+          "audioUrl": null,
+          "audioSha256": null,
+          "audioStatus": "not_generated_pending_owner_review"
+        },
+        "2": {
+          "pass": 2,
+          "label": "Loop 2",
+          "script": "Keep the right heel supported and toes comfortable. Let the stretch stay behind the leg without rounding forward.",
+          "wordCount": 18,
+          "estimatedSpokenSeconds": 11,
+          "videoDurationSeconds": 29,
+          "silentTailEstimateSeconds": 18,
+          "cuePlan": [
+            {
+              "atSeconds": 0,
+              "text": "Keep the right heel supported and toes comfortable. Let the stretch stay behind the leg without rounding forward.",
+              "estimatedSpokenSeconds": 11
+            }
+          ],
+          "expectedAudioFilename": "IMG_4305_loop-2.mp3",
+          "audioUrl": null,
+          "audioSha256": null,
+          "audioStatus": "not_generated_pending_owner_review"
+        },
+        "3": {
+          "pass": 3,
+          "label": "Loop 3",
+          "script": "Lengthen your spine and hinge only a little from the hips. Ease out if the position feels too strong.",
+          "wordCount": 19,
+          "estimatedSpokenSeconds": 12,
+          "videoDurationSeconds": 29,
+          "silentTailEstimateSeconds": 17,
+          "cuePlan": [
+            {
+              "atSeconds": 0,
+              "text": "Lengthen your spine and hinge only a little from the hips. Ease out if the position feels too strong.",
+              "estimatedSpokenSeconds": 12
+            }
+          ],
+          "expectedAudioFilename": "IMG_4305_loop-3.mp3",
+          "audioUrl": null,
+          "audioSha256": null,
+          "audioStatus": "not_generated_pending_owner_review"
+        },
+        "4": {
+          "pass": 4,
+          "label": "Loop 4",
+          "script": "Bend the right knee gently and sit tall again.",
+          "wordCount": 9,
+          "estimatedSpokenSeconds": 6,
+          "videoDurationSeconds": 29,
+          "silentTailEstimateSeconds": 23,
+          "cuePlan": [
+            {
+              "atSeconds": 0,
+              "text": "Bend the right knee gently and sit tall again.",
+              "estimatedSpokenSeconds": 6
+            }
+          ],
+          "expectedAudioFilename": "IMG_4305_loop-4.mp3",
+          "audioUrl": null,
+          "audioSha256": null,
+          "audioStatus": "not_generated_pending_owner_review"
+        }
+      },
+      "audioUrl": null
     },
     {
       "movementId": "IMG_4306",
       "movementName": "Seated Hamstring Stretch Left",
       "levelProposal": "intermediate",
       "videoUrl": "/app/videos/chair-yoga/IMG_4306.mp4",
-      "videoDurationSeconds": 29.0,
-      "script": "Sit at the edge of your chair and extend your left leg as shown, keeping a soft bend in the knee. Hinge forward only slightly with a long back. Breathe gently, then return upright and rest.",
-      "wordCount": 36,
-      "estimatedSpokenSeconds": 23,
+      "videoDurationSeconds": 29,
+      "script": "Sit near the chair edge and extend your left leg as shown, keeping the knee soft. Hinge slightly with a long back, then return upright.",
+      "wordCount": 25,
+      "estimatedSpokenSeconds": 16,
       "cuePlan": [
-        [
-          "00:02",
-          "Sit securely and extend the left leg as shown."
-        ],
-        [
-          "00:08",
-          "Keep a soft knee and hinge only slightly."
-        ],
-        [
-          "00:15",
-          "Lengthen your back and breathe slowly."
-        ],
-        [
-          "00:23",
-          "Return upright and rest the leg."
-        ]
+        {
+          "at": "00:00",
+          "text": "Sit near the chair edge and extend your left leg as shown, keeping the knee soft. Hinge slightly with a long back, then return upright.",
+          "estimatedSpokenSeconds": 16
+        }
       ],
-      "expectedAudioUrl": "/app/chair-yoga/narration/miriam/IMG_4306.mp3",
+      "expectedAudioUrl": null,
       "audioSha256": null,
-      "audioStatus": "not_generated_pending_owner_approval"
+      "audioStatus": "not_generated_pending_owner_review",
+      "loopScripts": {
+        "1": {
+          "pass": 1,
+          "label": "Loop 1",
+          "script": "Sit near the chair edge and extend your left leg as shown, keeping the knee soft. Hinge slightly with a long back, then return upright.",
+          "wordCount": 25,
+          "estimatedSpokenSeconds": 16,
+          "videoDurationSeconds": 29,
+          "silentTailEstimateSeconds": 13,
+          "cuePlan": [
+            {
+              "atSeconds": 0,
+              "text": "Sit near the chair edge and extend your left leg as shown, keeping the knee soft. Hinge slightly with a long back, then return upright.",
+              "estimatedSpokenSeconds": 16
+            }
+          ],
+          "expectedAudioFilename": "IMG_4306_loop-1.mp3",
+          "audioUrl": null,
+          "audioSha256": null,
+          "audioStatus": "not_generated_pending_owner_review"
+        },
+        "2": {
+          "pass": 2,
+          "label": "Loop 2",
+          "script": "Keep the left heel supported and toes comfortable. Let the stretch stay behind the leg without rounding forward.",
+          "wordCount": 18,
+          "estimatedSpokenSeconds": 11,
+          "videoDurationSeconds": 29,
+          "silentTailEstimateSeconds": 18,
+          "cuePlan": [
+            {
+              "atSeconds": 0,
+              "text": "Keep the left heel supported and toes comfortable. Let the stretch stay behind the leg without rounding forward.",
+              "estimatedSpokenSeconds": 11
+            }
+          ],
+          "expectedAudioFilename": "IMG_4306_loop-2.mp3",
+          "audioUrl": null,
+          "audioSha256": null,
+          "audioStatus": "not_generated_pending_owner_review"
+        },
+        "3": {
+          "pass": 3,
+          "label": "Loop 3",
+          "script": "Lengthen your spine and hinge only a little from the hips. Ease out if the position feels too strong.",
+          "wordCount": 19,
+          "estimatedSpokenSeconds": 12,
+          "videoDurationSeconds": 29,
+          "silentTailEstimateSeconds": 17,
+          "cuePlan": [
+            {
+              "atSeconds": 0,
+              "text": "Lengthen your spine and hinge only a little from the hips. Ease out if the position feels too strong.",
+              "estimatedSpokenSeconds": 12
+            }
+          ],
+          "expectedAudioFilename": "IMG_4306_loop-3.mp3",
+          "audioUrl": null,
+          "audioSha256": null,
+          "audioStatus": "not_generated_pending_owner_review"
+        },
+        "4": {
+          "pass": 4,
+          "label": "Loop 4",
+          "script": "Bend the left knee gently and sit tall again.",
+          "wordCount": 9,
+          "estimatedSpokenSeconds": 6,
+          "videoDurationSeconds": 29,
+          "silentTailEstimateSeconds": 23,
+          "cuePlan": [
+            {
+              "atSeconds": 0,
+              "text": "Bend the left knee gently and sit tall again.",
+              "estimatedSpokenSeconds": 6
+            }
+          ],
+          "expectedAudioFilename": "IMG_4306_loop-4.mp3",
+          "audioUrl": null,
+          "audioSha256": null,
+          "audioStatus": "not_generated_pending_owner_review"
+        }
+      },
+      "audioUrl": null
     },
     {
       "movementId": "IMG_4307",
       "movementName": "Ankle Rolls Right",
       "levelProposal": "beginner",
       "videoUrl": "/app/videos/chair-yoga/IMG_4307.mp4",
-      "videoDurationSeconds": 29.0,
-      "script": "Stay seated with your feet supported. Circle your right ankle slowly through a comfortable range, keeping your thigh relaxed and torso upright. Breathe naturally, pause, then lower the foot and relax.",
-      "wordCount": 31,
-      "estimatedSpokenSeconds": 20,
+      "videoDurationSeconds": 29,
+      "script": "Stay seated with your foot supported. Circle your right ankle slowly through an easy range, keeping your thigh relaxed. Breathe naturally, then rest the foot.",
+      "wordCount": 25,
+      "estimatedSpokenSeconds": 16,
       "cuePlan": [
-        [
-          "00:02",
-          "Stay seated and support your foot."
-        ],
-        [
-          "00:07",
-          "Circle the right ankle slowly."
-        ],
-        [
-          "00:15",
-          "Keep the thigh relaxed and breathe naturally."
-        ],
-        [
-          "00:23",
-          "Rest the foot gently."
-        ]
+        {
+          "at": "00:00",
+          "text": "Stay seated with your foot supported. Circle your right ankle slowly through an easy range, keeping your thigh relaxed. Breathe naturally, then rest the foot.",
+          "estimatedSpokenSeconds": 16
+        }
       ],
-      "expectedAudioUrl": "/app/chair-yoga/narration/miriam/IMG_4307.mp3",
+      "expectedAudioUrl": null,
       "audioSha256": null,
-      "audioStatus": "not_generated_pending_owner_approval"
+      "audioStatus": "not_generated_pending_owner_review",
+      "loopScripts": {
+        "1": {
+          "pass": 1,
+          "label": "Loop 1",
+          "script": "Stay seated with your foot supported. Circle your right ankle slowly through an easy range, keeping your thigh relaxed. Breathe naturally, then rest the foot.",
+          "wordCount": 25,
+          "estimatedSpokenSeconds": 16,
+          "videoDurationSeconds": 29,
+          "silentTailEstimateSeconds": 13,
+          "cuePlan": [
+            {
+              "atSeconds": 0,
+              "text": "Stay seated with your foot supported. Circle your right ankle slowly through an easy range, keeping your thigh relaxed. Breathe naturally, then rest the foot.",
+              "estimatedSpokenSeconds": 16
+            }
+          ],
+          "expectedAudioFilename": "IMG_4307_loop-1.mp3",
+          "audioUrl": null,
+          "audioSha256": null,
+          "audioStatus": "not_generated_pending_owner_review"
+        },
+        "2": {
+          "pass": 2,
+          "label": "Loop 2",
+          "script": "Keep the right thigh quiet while the ankle makes small, smooth circles.",
+          "wordCount": 12,
+          "estimatedSpokenSeconds": 8,
+          "videoDurationSeconds": 29,
+          "silentTailEstimateSeconds": 21,
+          "cuePlan": [
+            {
+              "atSeconds": 0,
+              "text": "Keep the right thigh quiet while the ankle makes small, smooth circles.",
+              "estimatedSpokenSeconds": 8
+            }
+          ],
+          "expectedAudioFilename": "IMG_4307_loop-2.mp3",
+          "audioUrl": null,
+          "audioSha256": null,
+          "audioStatus": "not_generated_pending_owner_review"
+        },
+        "3": {
+          "pass": 3,
+          "label": "Loop 3",
+          "script": "Change direction only as the demonstration does, keeping the movement comfortable and controlled.",
+          "wordCount": 13,
+          "estimatedSpokenSeconds": 8,
+          "videoDurationSeconds": 29,
+          "silentTailEstimateSeconds": 21,
+          "cuePlan": [
+            {
+              "atSeconds": 0,
+              "text": "Change direction only as the demonstration does, keeping the movement comfortable and controlled.",
+              "estimatedSpokenSeconds": 8
+            }
+          ],
+          "expectedAudioFilename": "IMG_4307_loop-3.mp3",
+          "audioUrl": null,
+          "audioSha256": null,
+          "audioStatus": "not_generated_pending_owner_review"
+        },
+        "4": {
+          "pass": 4,
+          "label": "Loop 4",
+          "script": "Pause the ankle circles and let the foot rest.",
+          "wordCount": 9,
+          "estimatedSpokenSeconds": 6,
+          "videoDurationSeconds": 29,
+          "silentTailEstimateSeconds": 23,
+          "cuePlan": [
+            {
+              "atSeconds": 0,
+              "text": "Pause the ankle circles and let the foot rest.",
+              "estimatedSpokenSeconds": 6
+            }
+          ],
+          "expectedAudioFilename": "IMG_4307_loop-4.mp3",
+          "audioUrl": null,
+          "audioSha256": null,
+          "audioStatus": "not_generated_pending_owner_review"
+        }
+      },
+      "audioUrl": null
     },
     {
       "movementId": "IMG_4308",
       "movementName": "Ankle Rolls Left",
       "levelProposal": "beginner",
       "videoUrl": "/app/videos/chair-yoga/IMG_4308.mp4",
-      "videoDurationSeconds": 29.0,
-      "script": "Stay seated with your feet supported. Circle your left ankle slowly through a comfortable range, keeping your thigh relaxed and torso upright. Breathe naturally, pause, then lower the foot and relax.",
-      "wordCount": 31,
-      "estimatedSpokenSeconds": 20,
+      "videoDurationSeconds": 29,
+      "script": "Stay seated with your foot supported. Circle your left ankle slowly through an easy range, keeping your thigh relaxed. Breathe naturally, then rest the foot.",
+      "wordCount": 25,
+      "estimatedSpokenSeconds": 16,
       "cuePlan": [
-        [
-          "00:02",
-          "Stay seated and support your foot."
-        ],
-        [
-          "00:07",
-          "Circle the left ankle slowly."
-        ],
-        [
-          "00:15",
-          "Keep the thigh relaxed and breathe naturally."
-        ],
-        [
-          "00:23",
-          "Rest the foot gently."
-        ]
+        {
+          "at": "00:00",
+          "text": "Stay seated with your foot supported. Circle your left ankle slowly through an easy range, keeping your thigh relaxed. Breathe naturally, then rest the foot.",
+          "estimatedSpokenSeconds": 16
+        }
       ],
-      "expectedAudioUrl": "/app/chair-yoga/narration/miriam/IMG_4308.mp3",
+      "expectedAudioUrl": null,
       "audioSha256": null,
-      "audioStatus": "not_generated_pending_owner_approval"
+      "audioStatus": "not_generated_pending_owner_review",
+      "loopScripts": {
+        "1": {
+          "pass": 1,
+          "label": "Loop 1",
+          "script": "Stay seated with your foot supported. Circle your left ankle slowly through an easy range, keeping your thigh relaxed. Breathe naturally, then rest the foot.",
+          "wordCount": 25,
+          "estimatedSpokenSeconds": 16,
+          "videoDurationSeconds": 29,
+          "silentTailEstimateSeconds": 13,
+          "cuePlan": [
+            {
+              "atSeconds": 0,
+              "text": "Stay seated with your foot supported. Circle your left ankle slowly through an easy range, keeping your thigh relaxed. Breathe naturally, then rest the foot.",
+              "estimatedSpokenSeconds": 16
+            }
+          ],
+          "expectedAudioFilename": "IMG_4308_loop-1.mp3",
+          "audioUrl": null,
+          "audioSha256": null,
+          "audioStatus": "not_generated_pending_owner_review"
+        },
+        "2": {
+          "pass": 2,
+          "label": "Loop 2",
+          "script": "Keep the left thigh quiet while the ankle makes small, smooth circles.",
+          "wordCount": 12,
+          "estimatedSpokenSeconds": 8,
+          "videoDurationSeconds": 29,
+          "silentTailEstimateSeconds": 21,
+          "cuePlan": [
+            {
+              "atSeconds": 0,
+              "text": "Keep the left thigh quiet while the ankle makes small, smooth circles.",
+              "estimatedSpokenSeconds": 8
+            }
+          ],
+          "expectedAudioFilename": "IMG_4308_loop-2.mp3",
+          "audioUrl": null,
+          "audioSha256": null,
+          "audioStatus": "not_generated_pending_owner_review"
+        },
+        "3": {
+          "pass": 3,
+          "label": "Loop 3",
+          "script": "Change direction only as the demonstration does, keeping the movement comfortable and controlled.",
+          "wordCount": 13,
+          "estimatedSpokenSeconds": 8,
+          "videoDurationSeconds": 29,
+          "silentTailEstimateSeconds": 21,
+          "cuePlan": [
+            {
+              "atSeconds": 0,
+              "text": "Change direction only as the demonstration does, keeping the movement comfortable and controlled.",
+              "estimatedSpokenSeconds": 8
+            }
+          ],
+          "expectedAudioFilename": "IMG_4308_loop-3.mp3",
+          "audioUrl": null,
+          "audioSha256": null,
+          "audioStatus": "not_generated_pending_owner_review"
+        },
+        "4": {
+          "pass": 4,
+          "label": "Loop 4",
+          "script": "Pause the ankle circles and let the foot rest.",
+          "wordCount": 9,
+          "estimatedSpokenSeconds": 6,
+          "videoDurationSeconds": 29,
+          "silentTailEstimateSeconds": 23,
+          "cuePlan": [
+            {
+              "atSeconds": 0,
+              "text": "Pause the ankle circles and let the foot rest.",
+              "estimatedSpokenSeconds": 6
+            }
+          ],
+          "expectedAudioFilename": "IMG_4308_loop-4.mp3",
+          "audioUrl": null,
+          "audioSha256": null,
+          "audioStatus": "not_generated_pending_owner_review"
+        }
+      },
+      "audioUrl": null
     },
     {
       "movementId": "IMG_4309",
       "movementName": "Toe-Heel Lift",
       "levelProposal": "beginner",
       "videoUrl": "/app/videos/chair-yoga/IMG_4309.mp4",
-      "videoDurationSeconds": 29.0,
-      "script": "Sit upright with both feet grounded. Lift your toes, then your heels, following the demonstrated rhythm. Keep your knees comfortable and hold the chair if needed. Breathe steadily, then let both feet rest.",
-      "wordCount": 33,
-      "estimatedSpokenSeconds": 21,
+      "videoDurationSeconds": 29,
+      "script": "Sit upright with both feet grounded. Lift your toes, then your heels, following the demonstrated rhythm. Keep knees easy and hold the chair if needed.",
+      "wordCount": 25,
+      "estimatedSpokenSeconds": 16,
       "cuePlan": [
-        [
-          "00:02",
-          "Sit upright with both feet grounded."
-        ],
-        [
-          "00:07",
-          "Lift toes, then heels as shown."
-        ],
-        [
-          "00:15",
-          "Keep your knees comfortable and breathe steadily."
-        ],
-        [
-          "00:23",
-          "Let both feet rest."
-        ]
+        {
+          "at": "00:00",
+          "text": "Sit upright with both feet grounded. Lift your toes, then your heels, following the demonstrated rhythm. Keep knees easy and hold the chair if needed.",
+          "estimatedSpokenSeconds": 16
+        }
       ],
-      "expectedAudioUrl": "/app/chair-yoga/narration/miriam/IMG_4309.mp3",
+      "expectedAudioUrl": null,
       "audioSha256": null,
-      "audioStatus": "not_generated_pending_owner_approval"
+      "audioStatus": "not_generated_pending_owner_review",
+      "loopScripts": {
+        "1": {
+          "pass": 1,
+          "label": "Loop 1",
+          "script": "Sit upright with both feet grounded. Lift your toes, then your heels, following the demonstrated rhythm. Keep knees easy and hold the chair if needed.",
+          "wordCount": 25,
+          "estimatedSpokenSeconds": 16,
+          "videoDurationSeconds": 29,
+          "silentTailEstimateSeconds": 13,
+          "cuePlan": [
+            {
+              "atSeconds": 0,
+              "text": "Sit upright with both feet grounded. Lift your toes, then your heels, following the demonstrated rhythm. Keep knees easy and hold the chair if needed.",
+              "estimatedSpokenSeconds": 16
+            }
+          ],
+          "expectedAudioFilename": "IMG_4309_loop-1.mp3",
+          "audioUrl": null,
+          "audioSha256": null,
+          "audioStatus": "not_generated_pending_owner_review"
+        },
+        "2": {
+          "pass": 2,
+          "label": "Loop 2",
+          "script": "Let the toes and heels alternate smoothly. Keep both knees comfortable and your torso steady.",
+          "wordCount": 15,
+          "estimatedSpokenSeconds": 10,
+          "videoDurationSeconds": 29,
+          "silentTailEstimateSeconds": 19,
+          "cuePlan": [
+            {
+              "atSeconds": 0,
+              "text": "Let the toes and heels alternate smoothly. Keep both knees comfortable and your torso steady.",
+              "estimatedSpokenSeconds": 10
+            }
+          ],
+          "expectedAudioFilename": "IMG_4309_loop-2.mp3",
+          "audioUrl": null,
+          "audioSha256": null,
+          "audioStatus": "not_generated_pending_owner_review"
+        },
+        "3": {
+          "pass": 3,
+          "label": "Loop 3",
+          "script": "Move with control rather than speed. Keep each lift within the range shown.",
+          "wordCount": 13,
+          "estimatedSpokenSeconds": 8,
+          "videoDurationSeconds": 29,
+          "silentTailEstimateSeconds": 21,
+          "cuePlan": [
+            {
+              "atSeconds": 0,
+              "text": "Move with control rather than speed. Keep each lift within the range shown.",
+              "estimatedSpokenSeconds": 8
+            }
+          ],
+          "expectedAudioFilename": "IMG_4309_loop-3.mp3",
+          "audioUrl": null,
+          "audioSha256": null,
+          "audioStatus": "not_generated_pending_owner_review"
+        },
+        "4": {
+          "pass": 4,
+          "label": "Loop 4",
+          "script": "Finish the last lift and let both feet settle.",
+          "wordCount": 9,
+          "estimatedSpokenSeconds": 6,
+          "videoDurationSeconds": 29,
+          "silentTailEstimateSeconds": 23,
+          "cuePlan": [
+            {
+              "atSeconds": 0,
+              "text": "Finish the last lift and let both feet settle.",
+              "estimatedSpokenSeconds": 6
+            }
+          ],
+          "expectedAudioFilename": "IMG_4309_loop-4.mp3",
+          "audioUrl": null,
+          "audioSha256": null,
+          "audioStatus": "not_generated_pending_owner_review"
+        }
+      },
+      "audioUrl": null
     },
     {
       "movementId": "IMG_4310",
       "movementName": "Chair Warrior I Right",
       "levelProposal": "advanced",
       "videoUrl": "/app/videos/chair-yoga/IMG_4310.mp4",
-      "videoDurationSeconds": 29.0,
-      "script": "Sit toward the front of your chair and set your right leg as shown. Keep your front foot stable and lift your arms only as high as comfortable. Sit tall, breathe slowly, then release with control.",
-      "wordCount": 36,
-      "estimatedSpokenSeconds": 23,
+      "videoDurationSeconds": 29,
+      "script": "Sit near the chair front and set your right leg as shown. Keep your foot steady; raise your arms only as comfortable. Breathe, then release.",
+      "wordCount": 25,
+      "estimatedSpokenSeconds": 16,
       "cuePlan": [
-        [
-          "00:02",
-          "Sit securely and set the right leg as shown."
-        ],
-        [
-          "00:08",
-          "Keep your foot grounded; lift arms comfortably."
-        ],
-        [
-          "00:16",
-          "Lengthen through the spine and breathe."
-        ],
-        [
-          "00:23",
-          "Lower the arms and reset."
-        ]
+        {
+          "at": "00:00",
+          "text": "Sit near the chair front and set your right leg as shown. Keep your foot steady; raise your arms only as comfortable. Breathe, then release.",
+          "estimatedSpokenSeconds": 16
+        }
       ],
-      "expectedAudioUrl": "/app/chair-yoga/narration/miriam/IMG_4310.mp3",
+      "expectedAudioUrl": null,
       "audioSha256": null,
-      "audioStatus": "not_generated_pending_owner_approval"
+      "audioStatus": "not_generated_pending_owner_review",
+      "loopScripts": {
+        "1": {
+          "pass": 1,
+          "label": "Loop 1",
+          "script": "Sit near the chair front and set your right leg as shown. Keep your foot steady; raise your arms only as comfortable. Breathe, then release.",
+          "wordCount": 25,
+          "estimatedSpokenSeconds": 16,
+          "videoDurationSeconds": 29,
+          "silentTailEstimateSeconds": 13,
+          "cuePlan": [
+            {
+              "atSeconds": 0,
+              "text": "Sit near the chair front and set your right leg as shown. Keep your foot steady; raise your arms only as comfortable. Breathe, then release.",
+              "estimatedSpokenSeconds": 16
+            }
+          ],
+          "expectedAudioFilename": "IMG_4310_loop-1.mp3",
+          "audioUrl": null,
+          "audioSha256": null,
+          "audioStatus": "not_generated_pending_owner_review"
+        },
+        "2": {
+          "pass": 2,
+          "label": "Loop 2",
+          "script": "Use the chair as demonstrated and keep the right foot supported. Let the arms stay relaxed.",
+          "wordCount": 16,
+          "estimatedSpokenSeconds": 10,
+          "videoDurationSeconds": 29,
+          "silentTailEstimateSeconds": 19,
+          "cuePlan": [
+            {
+              "atSeconds": 0,
+              "text": "Use the chair as demonstrated and keep the right foot supported. Let the arms stay relaxed.",
+              "estimatedSpokenSeconds": 10
+            }
+          ],
+          "expectedAudioFilename": "IMG_4310_loop-2.mp3",
+          "audioUrl": null,
+          "audioSha256": null,
+          "audioStatus": "not_generated_pending_owner_review"
+        },
+        "3": {
+          "pass": 3,
+          "label": "Loop 3",
+          "script": "Lengthen through your torso without forcing the pose. Keep your gaze steady and breath easy.",
+          "wordCount": 15,
+          "estimatedSpokenSeconds": 10,
+          "videoDurationSeconds": 29,
+          "silentTailEstimateSeconds": 19,
+          "cuePlan": [
+            {
+              "atSeconds": 0,
+              "text": "Lengthen through your torso without forcing the pose. Keep your gaze steady and breath easy.",
+              "estimatedSpokenSeconds": 10
+            }
+          ],
+          "expectedAudioFilename": "IMG_4310_loop-3.mp3",
+          "audioUrl": null,
+          "audioSha256": null,
+          "audioStatus": "not_generated_pending_owner_review"
+        },
+        "4": {
+          "pass": 4,
+          "label": "Loop 4",
+          "script": "Lower your arms and release the right leg with care.",
+          "wordCount": 10,
+          "estimatedSpokenSeconds": 6,
+          "videoDurationSeconds": 29,
+          "silentTailEstimateSeconds": 23,
+          "cuePlan": [
+            {
+              "atSeconds": 0,
+              "text": "Lower your arms and release the right leg with care.",
+              "estimatedSpokenSeconds": 6
+            }
+          ],
+          "expectedAudioFilename": "IMG_4310_loop-4.mp3",
+          "audioUrl": null,
+          "audioSha256": null,
+          "audioStatus": "not_generated_pending_owner_review"
+        }
+      },
+      "audioUrl": null
     },
     {
       "movementId": "IMG_4311",
       "movementName": "Chair Warrior I Left",
       "levelProposal": "advanced",
       "videoUrl": "/app/videos/chair-yoga/IMG_4311.mp4",
-      "videoDurationSeconds": 29.0,
-      "script": "Sit toward the front of your chair and set your left leg as shown. Keep your front foot stable and lift your arms only as high as comfortable. Sit tall, breathe slowly, then release with control.",
-      "wordCount": 36,
-      "estimatedSpokenSeconds": 23,
+      "videoDurationSeconds": 29,
+      "script": "Sit near the chair front and set your left leg as shown. Keep your foot steady; raise your arms only as comfortable. Breathe, then release.",
+      "wordCount": 25,
+      "estimatedSpokenSeconds": 16,
       "cuePlan": [
-        [
-          "00:02",
-          "Sit securely and set the left leg as shown."
-        ],
-        [
-          "00:08",
-          "Keep your foot grounded; lift arms comfortably."
-        ],
-        [
-          "00:16",
-          "Lengthen through the spine and breathe."
-        ],
-        [
-          "00:23",
-          "Lower the arms and reset."
-        ]
+        {
+          "at": "00:00",
+          "text": "Sit near the chair front and set your left leg as shown. Keep your foot steady; raise your arms only as comfortable. Breathe, then release.",
+          "estimatedSpokenSeconds": 16
+        }
       ],
-      "expectedAudioUrl": "/app/chair-yoga/narration/miriam/IMG_4311.mp3",
+      "expectedAudioUrl": null,
       "audioSha256": null,
-      "audioStatus": "not_generated_pending_owner_approval"
+      "audioStatus": "not_generated_pending_owner_review",
+      "loopScripts": {
+        "1": {
+          "pass": 1,
+          "label": "Loop 1",
+          "script": "Sit near the chair front and set your left leg as shown. Keep your foot steady; raise your arms only as comfortable. Breathe, then release.",
+          "wordCount": 25,
+          "estimatedSpokenSeconds": 16,
+          "videoDurationSeconds": 29,
+          "silentTailEstimateSeconds": 13,
+          "cuePlan": [
+            {
+              "atSeconds": 0,
+              "text": "Sit near the chair front and set your left leg as shown. Keep your foot steady; raise your arms only as comfortable. Breathe, then release.",
+              "estimatedSpokenSeconds": 16
+            }
+          ],
+          "expectedAudioFilename": "IMG_4311_loop-1.mp3",
+          "audioUrl": null,
+          "audioSha256": null,
+          "audioStatus": "not_generated_pending_owner_review"
+        },
+        "2": {
+          "pass": 2,
+          "label": "Loop 2",
+          "script": "Use the chair as demonstrated and keep the left foot supported. Let the arms stay relaxed.",
+          "wordCount": 16,
+          "estimatedSpokenSeconds": 10,
+          "videoDurationSeconds": 29,
+          "silentTailEstimateSeconds": 19,
+          "cuePlan": [
+            {
+              "atSeconds": 0,
+              "text": "Use the chair as demonstrated and keep the left foot supported. Let the arms stay relaxed.",
+              "estimatedSpokenSeconds": 10
+            }
+          ],
+          "expectedAudioFilename": "IMG_4311_loop-2.mp3",
+          "audioUrl": null,
+          "audioSha256": null,
+          "audioStatus": "not_generated_pending_owner_review"
+        },
+        "3": {
+          "pass": 3,
+          "label": "Loop 3",
+          "script": "Lengthen through your torso without forcing the pose. Keep your gaze steady and breath easy.",
+          "wordCount": 15,
+          "estimatedSpokenSeconds": 10,
+          "videoDurationSeconds": 29,
+          "silentTailEstimateSeconds": 19,
+          "cuePlan": [
+            {
+              "atSeconds": 0,
+              "text": "Lengthen through your torso without forcing the pose. Keep your gaze steady and breath easy.",
+              "estimatedSpokenSeconds": 10
+            }
+          ],
+          "expectedAudioFilename": "IMG_4311_loop-3.mp3",
+          "audioUrl": null,
+          "audioSha256": null,
+          "audioStatus": "not_generated_pending_owner_review"
+        },
+        "4": {
+          "pass": 4,
+          "label": "Loop 4",
+          "script": "Lower your arms and release the left leg with care.",
+          "wordCount": 10,
+          "estimatedSpokenSeconds": 6,
+          "videoDurationSeconds": 29,
+          "silentTailEstimateSeconds": 23,
+          "cuePlan": [
+            {
+              "atSeconds": 0,
+              "text": "Lower your arms and release the left leg with care.",
+              "estimatedSpokenSeconds": 6
+            }
+          ],
+          "expectedAudioFilename": "IMG_4311_loop-4.mp3",
+          "audioUrl": null,
+          "audioSha256": null,
+          "audioStatus": "not_generated_pending_owner_review"
+        }
+      },
+      "audioUrl": null
     },
     {
       "movementId": "IMG_4312",
       "movementName": "Chair Warrior II Right",
       "levelProposal": "advanced",
       "videoUrl": "/app/videos/chair-yoga/IMG_4312.mp4",
-      "videoDurationSeconds": 29.0,
-      "script": "Sit toward the front of the chair, position your right leg as shown, and extend your arms comfortably to the sides. Keep shoulders soft and gaze steady. Breathe slowly, then lower your arms and reset.",
-      "wordCount": 35,
-      "estimatedSpokenSeconds": 22,
+      "videoDurationSeconds": 29,
+      "script": "Sit near the chair front, position your right leg as shown, and open your arms comfortably. Keep shoulders soft and gaze steady. Breathe, then reset.",
+      "wordCount": 25,
+      "estimatedSpokenSeconds": 16,
       "cuePlan": [
-        [
-          "00:02",
-          "Sit securely and set the right side as shown."
-        ],
-        [
-          "00:08",
-          "Extend arms comfortably; soften your shoulders."
-        ],
-        [
-          "00:16",
-          "Keep your gaze steady and breathe slowly."
-        ],
-        [
-          "00:23",
-          "Lower arms and reset."
-        ]
+        {
+          "at": "00:00",
+          "text": "Sit near the chair front, position your right leg as shown, and open your arms comfortably. Keep shoulders soft and gaze steady. Breathe, then reset.",
+          "estimatedSpokenSeconds": 16
+        }
       ],
-      "expectedAudioUrl": "/app/chair-yoga/narration/miriam/IMG_4312.mp3",
+      "expectedAudioUrl": null,
       "audioSha256": null,
-      "audioStatus": "not_generated_pending_owner_approval"
+      "audioStatus": "not_generated_pending_owner_review",
+      "loopScripts": {
+        "1": {
+          "pass": 1,
+          "label": "Loop 1",
+          "script": "Sit near the chair front, position your right leg as shown, and open your arms comfortably. Keep shoulders soft and gaze steady. Breathe, then reset.",
+          "wordCount": 25,
+          "estimatedSpokenSeconds": 16,
+          "videoDurationSeconds": 29,
+          "silentTailEstimateSeconds": 13,
+          "cuePlan": [
+            {
+              "atSeconds": 0,
+              "text": "Sit near the chair front, position your right leg as shown, and open your arms comfortably. Keep shoulders soft and gaze steady. Breathe, then reset.",
+              "estimatedSpokenSeconds": 16
+            }
+          ],
+          "expectedAudioFilename": "IMG_4312_loop-1.mp3",
+          "audioUrl": null,
+          "audioSha256": null,
+          "audioStatus": "not_generated_pending_owner_review"
+        },
+        "2": {
+          "pass": 2,
+          "label": "Loop 2",
+          "script": "Keep your right leg supported as shown. Let the arms reach out without lifting the shoulders.",
+          "wordCount": 16,
+          "estimatedSpokenSeconds": 10,
+          "videoDurationSeconds": 29,
+          "silentTailEstimateSeconds": 19,
+          "cuePlan": [
+            {
+              "atSeconds": 0,
+              "text": "Keep your right leg supported as shown. Let the arms reach out without lifting the shoulders.",
+              "estimatedSpokenSeconds": 10
+            }
+          ],
+          "expectedAudioFilename": "IMG_4312_loop-2.mp3",
+          "audioUrl": null,
+          "audioSha256": null,
+          "audioStatus": "not_generated_pending_owner_review"
+        },
+        "3": {
+          "pass": 3,
+          "label": "Loop 3",
+          "script": "Feel steady through your seat and feet. Keep your chest easy and turn only as demonstrated.",
+          "wordCount": 16,
+          "estimatedSpokenSeconds": 10,
+          "videoDurationSeconds": 29,
+          "silentTailEstimateSeconds": 19,
+          "cuePlan": [
+            {
+              "atSeconds": 0,
+              "text": "Feel steady through your seat and feet. Keep your chest easy and turn only as demonstrated.",
+              "estimatedSpokenSeconds": 10
+            }
+          ],
+          "expectedAudioFilename": "IMG_4312_loop-3.mp3",
+          "audioUrl": null,
+          "audioSha256": null,
+          "audioStatus": "not_generated_pending_owner_review"
+        },
+        "4": {
+          "pass": 4,
+          "label": "Loop 4",
+          "script": "Lower your arms and return the right leg to rest.",
+          "wordCount": 10,
+          "estimatedSpokenSeconds": 6,
+          "videoDurationSeconds": 29,
+          "silentTailEstimateSeconds": 23,
+          "cuePlan": [
+            {
+              "atSeconds": 0,
+              "text": "Lower your arms and return the right leg to rest.",
+              "estimatedSpokenSeconds": 6
+            }
+          ],
+          "expectedAudioFilename": "IMG_4312_loop-4.mp3",
+          "audioUrl": null,
+          "audioSha256": null,
+          "audioStatus": "not_generated_pending_owner_review"
+        }
+      },
+      "audioUrl": null
     },
     {
       "movementId": "IMG_4313",
       "movementName": "Chair Warrior II Left",
       "levelProposal": "advanced",
       "videoUrl": "/app/videos/chair-yoga/IMG_4313.mp4",
-      "videoDurationSeconds": 29.0,
-      "script": "Sit toward the front of the chair, position your left leg as shown, and extend your arms comfortably to the sides. Keep shoulders soft and gaze steady. Breathe slowly, then lower your arms and reset.",
-      "wordCount": 35,
-      "estimatedSpokenSeconds": 22,
+      "videoDurationSeconds": 29,
+      "script": "Sit near the chair front, position your left leg as shown, and open your arms comfortably. Keep shoulders soft and gaze steady. Breathe, then reset.",
+      "wordCount": 25,
+      "estimatedSpokenSeconds": 16,
       "cuePlan": [
-        [
-          "00:02",
-          "Sit securely and set the left side as shown."
-        ],
-        [
-          "00:08",
-          "Extend arms comfortably; soften your shoulders."
-        ],
-        [
-          "00:16",
-          "Keep your gaze steady and breathe slowly."
-        ],
-        [
-          "00:23",
-          "Lower arms and reset."
-        ]
+        {
+          "at": "00:00",
+          "text": "Sit near the chair front, position your left leg as shown, and open your arms comfortably. Keep shoulders soft and gaze steady. Breathe, then reset.",
+          "estimatedSpokenSeconds": 16
+        }
       ],
-      "expectedAudioUrl": "/app/chair-yoga/narration/miriam/IMG_4313.mp3",
+      "expectedAudioUrl": null,
       "audioSha256": null,
-      "audioStatus": "not_generated_pending_owner_approval"
+      "audioStatus": "not_generated_pending_owner_review",
+      "loopScripts": {
+        "1": {
+          "pass": 1,
+          "label": "Loop 1",
+          "script": "Sit near the chair front, position your left leg as shown, and open your arms comfortably. Keep shoulders soft and gaze steady. Breathe, then reset.",
+          "wordCount": 25,
+          "estimatedSpokenSeconds": 16,
+          "videoDurationSeconds": 29,
+          "silentTailEstimateSeconds": 13,
+          "cuePlan": [
+            {
+              "atSeconds": 0,
+              "text": "Sit near the chair front, position your left leg as shown, and open your arms comfortably. Keep shoulders soft and gaze steady. Breathe, then reset.",
+              "estimatedSpokenSeconds": 16
+            }
+          ],
+          "expectedAudioFilename": "IMG_4313_loop-1.mp3",
+          "audioUrl": null,
+          "audioSha256": null,
+          "audioStatus": "not_generated_pending_owner_review"
+        },
+        "2": {
+          "pass": 2,
+          "label": "Loop 2",
+          "script": "Keep your left leg supported as shown. Let the arms reach out without lifting the shoulders.",
+          "wordCount": 16,
+          "estimatedSpokenSeconds": 10,
+          "videoDurationSeconds": 29,
+          "silentTailEstimateSeconds": 19,
+          "cuePlan": [
+            {
+              "atSeconds": 0,
+              "text": "Keep your left leg supported as shown. Let the arms reach out without lifting the shoulders.",
+              "estimatedSpokenSeconds": 10
+            }
+          ],
+          "expectedAudioFilename": "IMG_4313_loop-2.mp3",
+          "audioUrl": null,
+          "audioSha256": null,
+          "audioStatus": "not_generated_pending_owner_review"
+        },
+        "3": {
+          "pass": 3,
+          "label": "Loop 3",
+          "script": "Feel steady through your seat and feet. Keep your chest easy and turn only as demonstrated.",
+          "wordCount": 16,
+          "estimatedSpokenSeconds": 10,
+          "videoDurationSeconds": 29,
+          "silentTailEstimateSeconds": 19,
+          "cuePlan": [
+            {
+              "atSeconds": 0,
+              "text": "Feel steady through your seat and feet. Keep your chest easy and turn only as demonstrated.",
+              "estimatedSpokenSeconds": 10
+            }
+          ],
+          "expectedAudioFilename": "IMG_4313_loop-3.mp3",
+          "audioUrl": null,
+          "audioSha256": null,
+          "audioStatus": "not_generated_pending_owner_review"
+        },
+        "4": {
+          "pass": 4,
+          "label": "Loop 4",
+          "script": "Lower your arms and return the left leg to rest.",
+          "wordCount": 10,
+          "estimatedSpokenSeconds": 6,
+          "videoDurationSeconds": 29,
+          "silentTailEstimateSeconds": 23,
+          "cuePlan": [
+            {
+              "atSeconds": 0,
+              "text": "Lower your arms and return the left leg to rest.",
+              "estimatedSpokenSeconds": 6
+            }
+          ],
+          "expectedAudioFilename": "IMG_4313_loop-4.mp3",
+          "audioUrl": null,
+          "audioSha256": null,
+          "audioStatus": "not_generated_pending_owner_review"
+        }
+      },
+      "audioUrl": null
     },
     {
       "movementId": "IMG_4314",
       "movementName": "Chair Side Angle Right",
       "levelProposal": "advanced",
       "videoUrl": "/app/videos/chair-yoga/IMG_4314.mp4",
-      "videoDurationSeconds": 29.0,
-      "script": "Stay seated and open into the right side angle shown. Keep your chest long and shoulder away from your ear; use the chair to steady yourself. Breathe naturally and return upright slowly.",
-      "wordCount": 32,
-      "estimatedSpokenSeconds": 21,
+      "videoDurationSeconds": 29,
+      "script": "Open into the right side angle shown, staying supported by the chair. Lengthen through your chest, keep the shoulder soft, and return upright slowly.",
+      "wordCount": 24,
+      "estimatedSpokenSeconds": 15,
       "cuePlan": [
-        [
-          "00:02",
-          "Sit securely and open to the right as shown."
-        ],
-        [
-          "00:08",
-          "Lengthen your chest; keep the shoulder relaxed."
-        ],
-        [
-          "00:16",
-          "Use the chair for support and breathe."
-        ],
-        [
-          "00:23",
-          "Return upright slowly."
-        ]
+        {
+          "at": "00:00",
+          "text": "Open into the right side angle shown, staying supported by the chair. Lengthen through your chest, keep the shoulder soft, and return upright slowly.",
+          "estimatedSpokenSeconds": 15
+        }
       ],
-      "expectedAudioUrl": "/app/chair-yoga/narration/miriam/IMG_4314.mp3",
+      "expectedAudioUrl": null,
       "audioSha256": null,
-      "audioStatus": "not_generated_pending_owner_approval"
+      "audioStatus": "not_generated_pending_owner_review",
+      "loopScripts": {
+        "1": {
+          "pass": 1,
+          "label": "Loop 1",
+          "script": "Open into the right side angle shown, staying supported by the chair. Lengthen through your chest, keep the shoulder soft, and return upright slowly.",
+          "wordCount": 24,
+          "estimatedSpokenSeconds": 15,
+          "videoDurationSeconds": 29,
+          "silentTailEstimateSeconds": 14,
+          "cuePlan": [
+            {
+              "atSeconds": 0,
+              "text": "Open into the right side angle shown, staying supported by the chair. Lengthen through your chest, keep the shoulder soft, and return upright slowly.",
+              "estimatedSpokenSeconds": 15
+            }
+          ],
+          "expectedAudioFilename": "IMG_4314_loop-1.mp3",
+          "audioUrl": null,
+          "audioSha256": null,
+          "audioStatus": "not_generated_pending_owner_review"
+        },
+        "2": {
+          "pass": 2,
+          "label": "Loop 2",
+          "script": "Keep the chair close for support. Reach only as far as shown and breathe comfortably along your right side.",
+          "wordCount": 19,
+          "estimatedSpokenSeconds": 12,
+          "videoDurationSeconds": 29,
+          "silentTailEstimateSeconds": 17,
+          "cuePlan": [
+            {
+              "atSeconds": 0,
+              "text": "Keep the chair close for support. Reach only as far as shown and breathe comfortably along your right side.",
+              "estimatedSpokenSeconds": 12
+            }
+          ],
+          "expectedAudioFilename": "IMG_4314_loop-2.mp3",
+          "audioUrl": null,
+          "audioSha256": null,
+          "audioStatus": "not_generated_pending_owner_review"
+        },
+        "3": {
+          "pass": 3,
+          "label": "Loop 3",
+          "script": "Lengthen through the side body without compressing or forcing the position. Let your neck stay easy.",
+          "wordCount": 16,
+          "estimatedSpokenSeconds": 10,
+          "videoDurationSeconds": 29,
+          "silentTailEstimateSeconds": 19,
+          "cuePlan": [
+            {
+              "atSeconds": 0,
+              "text": "Lengthen through the side body without compressing or forcing the position. Let your neck stay easy.",
+              "estimatedSpokenSeconds": 10
+            }
+          ],
+          "expectedAudioFilename": "IMG_4314_loop-3.mp3",
+          "audioUrl": null,
+          "audioSha256": null,
+          "audioStatus": "not_generated_pending_owner_review"
+        },
+        "4": {
+          "pass": 4,
+          "label": "Loop 4",
+          "script": "Use the chair to return upright with control.",
+          "wordCount": 8,
+          "estimatedSpokenSeconds": 5,
+          "videoDurationSeconds": 29,
+          "silentTailEstimateSeconds": 24,
+          "cuePlan": [
+            {
+              "atSeconds": 0,
+              "text": "Use the chair to return upright with control.",
+              "estimatedSpokenSeconds": 5
+            }
+          ],
+          "expectedAudioFilename": "IMG_4314_loop-4.mp3",
+          "audioUrl": null,
+          "audioSha256": null,
+          "audioStatus": "not_generated_pending_owner_review"
+        }
+      },
+      "audioUrl": null
     },
     {
       "movementId": "IMG_4315",
       "movementName": "Chair Side Angle Left",
       "levelProposal": "advanced",
       "videoUrl": "/app/videos/chair-yoga/IMG_4315.mp4",
-      "videoDurationSeconds": 29.0,
-      "script": "Stay seated and open into the left side angle shown. Keep your chest long and shoulder away from your ear; use the chair to steady yourself. Breathe naturally and return upright slowly.",
-      "wordCount": 32,
-      "estimatedSpokenSeconds": 21,
+      "videoDurationSeconds": 29,
+      "script": "Open into the left side angle shown, staying supported by the chair. Lengthen through your chest, keep the shoulder soft, and return upright slowly.",
+      "wordCount": 24,
+      "estimatedSpokenSeconds": 15,
       "cuePlan": [
-        [
-          "00:02",
-          "Sit securely and open to the left as shown."
-        ],
-        [
-          "00:08",
-          "Lengthen your chest; keep the shoulder relaxed."
-        ],
-        [
-          "00:16",
-          "Use the chair for support and breathe."
-        ],
-        [
-          "00:23",
-          "Return upright slowly."
-        ]
+        {
+          "at": "00:00",
+          "text": "Open into the left side angle shown, staying supported by the chair. Lengthen through your chest, keep the shoulder soft, and return upright slowly.",
+          "estimatedSpokenSeconds": 15
+        }
       ],
-      "expectedAudioUrl": "/app/chair-yoga/narration/miriam/IMG_4315.mp3",
+      "expectedAudioUrl": null,
       "audioSha256": null,
-      "audioStatus": "not_generated_pending_owner_approval"
+      "audioStatus": "not_generated_pending_owner_review",
+      "loopScripts": {
+        "1": {
+          "pass": 1,
+          "label": "Loop 1",
+          "script": "Open into the left side angle shown, staying supported by the chair. Lengthen through your chest, keep the shoulder soft, and return upright slowly.",
+          "wordCount": 24,
+          "estimatedSpokenSeconds": 15,
+          "videoDurationSeconds": 29,
+          "silentTailEstimateSeconds": 14,
+          "cuePlan": [
+            {
+              "atSeconds": 0,
+              "text": "Open into the left side angle shown, staying supported by the chair. Lengthen through your chest, keep the shoulder soft, and return upright slowly.",
+              "estimatedSpokenSeconds": 15
+            }
+          ],
+          "expectedAudioFilename": "IMG_4315_loop-1.mp3",
+          "audioUrl": null,
+          "audioSha256": null,
+          "audioStatus": "not_generated_pending_owner_review"
+        },
+        "2": {
+          "pass": 2,
+          "label": "Loop 2",
+          "script": "Keep the chair close for support. Reach only as far as shown and breathe comfortably along your left side.",
+          "wordCount": 19,
+          "estimatedSpokenSeconds": 12,
+          "videoDurationSeconds": 29,
+          "silentTailEstimateSeconds": 17,
+          "cuePlan": [
+            {
+              "atSeconds": 0,
+              "text": "Keep the chair close for support. Reach only as far as shown and breathe comfortably along your left side.",
+              "estimatedSpokenSeconds": 12
+            }
+          ],
+          "expectedAudioFilename": "IMG_4315_loop-2.mp3",
+          "audioUrl": null,
+          "audioSha256": null,
+          "audioStatus": "not_generated_pending_owner_review"
+        },
+        "3": {
+          "pass": 3,
+          "label": "Loop 3",
+          "script": "Lengthen through the side body without compressing or forcing the position. Let your neck stay easy.",
+          "wordCount": 16,
+          "estimatedSpokenSeconds": 10,
+          "videoDurationSeconds": 29,
+          "silentTailEstimateSeconds": 19,
+          "cuePlan": [
+            {
+              "atSeconds": 0,
+              "text": "Lengthen through the side body without compressing or forcing the position. Let your neck stay easy.",
+              "estimatedSpokenSeconds": 10
+            }
+          ],
+          "expectedAudioFilename": "IMG_4315_loop-3.mp3",
+          "audioUrl": null,
+          "audioSha256": null,
+          "audioStatus": "not_generated_pending_owner_review"
+        },
+        "4": {
+          "pass": 4,
+          "label": "Loop 4",
+          "script": "Use the chair to return upright with control.",
+          "wordCount": 8,
+          "estimatedSpokenSeconds": 5,
+          "videoDurationSeconds": 29,
+          "silentTailEstimateSeconds": 24,
+          "cuePlan": [
+            {
+              "atSeconds": 0,
+              "text": "Use the chair to return upright with control.",
+              "estimatedSpokenSeconds": 5
+            }
+          ],
+          "expectedAudioFilename": "IMG_4315_loop-4.mp3",
+          "audioUrl": null,
+          "audioSha256": null,
+          "audioStatus": "not_generated_pending_owner_review"
+        }
+      },
+      "audioUrl": null
     },
     {
       "movementId": "IMG_4316",
       "movementName": "Chair-Supported Tree Right",
       "levelProposal": "advanced",
       "videoUrl": "/app/videos/chair-yoga/IMG_4316.mp4",
-      "videoDurationSeconds": 29.0,
-      "script": "Stand beside your chair and keep one hand on it. Place your right foot at the level shown, never against the knee. Fix your gaze on a steady point, breathe, then lower your foot safely.",
-      "wordCount": 35,
-      "estimatedSpokenSeconds": 22,
+      "videoDurationSeconds": 29,
+      "script": "Stand beside the chair with one hand supported. Place your right foot at the demonstrated level, never at the knee. Breathe steadily, then lower safely.",
+      "wordCount": 25,
+      "estimatedSpokenSeconds": 16,
       "cuePlan": [
-        [
-          "00:02",
-          "Stand beside the chair and hold it."
-        ],
-        [
-          "00:08",
-          "Place the right foot at the demonstrated level, away from the knee."
-        ],
-        [
-          "00:16",
-          "Keep your gaze steady and breathe."
-        ],
-        [
-          "00:23",
-          "Lower the foot and stand evenly."
-        ]
+        {
+          "at": "00:00",
+          "text": "Stand beside the chair with one hand supported. Place your right foot at the demonstrated level, never at the knee. Breathe steadily, then lower safely.",
+          "estimatedSpokenSeconds": 16
+        }
       ],
-      "expectedAudioUrl": "/app/chair-yoga/narration/miriam/IMG_4316.mp3",
+      "expectedAudioUrl": null,
       "audioSha256": null,
-      "audioStatus": "not_generated_pending_owner_approval"
+      "audioStatus": "not_generated_pending_owner_review",
+      "loopScripts": {
+        "1": {
+          "pass": 1,
+          "label": "Loop 1",
+          "script": "Stand beside the chair with one hand supported. Place your right foot at the demonstrated level, never at the knee. Breathe steadily, then lower safely.",
+          "wordCount": 25,
+          "estimatedSpokenSeconds": 16,
+          "videoDurationSeconds": 29,
+          "silentTailEstimateSeconds": 13,
+          "cuePlan": [
+            {
+              "atSeconds": 0,
+              "text": "Stand beside the chair with one hand supported. Place your right foot at the demonstrated level, never at the knee. Breathe steadily, then lower safely.",
+              "estimatedSpokenSeconds": 16
+            }
+          ],
+          "expectedAudioFilename": "IMG_4316_loop-1.mp3",
+          "audioUrl": null,
+          "audioSha256": null,
+          "audioStatus": "not_generated_pending_owner_review"
+        },
+        "2": {
+          "pass": 2,
+          "label": "Loop 2",
+          "script": "Keep one hand on the chair and your gaze on a steady point. Use only the foot position shown.",
+          "wordCount": 19,
+          "estimatedSpokenSeconds": 12,
+          "videoDurationSeconds": 29,
+          "silentTailEstimateSeconds": 17,
+          "cuePlan": [
+            {
+              "atSeconds": 0,
+              "text": "Keep one hand on the chair and your gaze on a steady point. Use only the foot position shown.",
+              "estimatedSpokenSeconds": 12
+            }
+          ],
+          "expectedAudioFilename": "IMG_4316_loop-2.mp3",
+          "audioUrl": null,
+          "audioSha256": null,
+          "audioStatus": "not_generated_pending_owner_review"
+        },
+        "3": {
+          "pass": 3,
+          "label": "Loop 3",
+          "script": "Stay near the chair, keep the standing knee soft, and choose the balance level that feels steady.",
+          "wordCount": 17,
+          "estimatedSpokenSeconds": 11,
+          "videoDurationSeconds": 29,
+          "silentTailEstimateSeconds": 18,
+          "cuePlan": [
+            {
+              "atSeconds": 0,
+              "text": "Stay near the chair, keep the standing knee soft, and choose the balance level that feels steady.",
+              "estimatedSpokenSeconds": 11
+            }
+          ],
+          "expectedAudioFilename": "IMG_4316_loop-3.mp3",
+          "audioUrl": null,
+          "audioSha256": null,
+          "audioStatus": "not_generated_pending_owner_review"
+        },
+        "4": {
+          "pass": 4,
+          "label": "Loop 4",
+          "script": "If balance shifts, lower the right foot and hold the chair.",
+          "wordCount": 11,
+          "estimatedSpokenSeconds": 7,
+          "videoDurationSeconds": 29,
+          "silentTailEstimateSeconds": 22,
+          "cuePlan": [
+            {
+              "atSeconds": 0,
+              "text": "If balance shifts, lower the right foot and hold the chair.",
+              "estimatedSpokenSeconds": 7
+            }
+          ],
+          "expectedAudioFilename": "IMG_4316_loop-4.mp3",
+          "audioUrl": null,
+          "audioSha256": null,
+          "audioStatus": "not_generated_pending_owner_review"
+        }
+      },
+      "audioUrl": null
     },
     {
       "movementId": "IMG_4317",
       "movementName": "Chair-Supported Tree Left",
       "levelProposal": "advanced",
       "videoUrl": "/app/videos/chair-yoga/IMG_4317.mp4",
-      "videoDurationSeconds": 29.0,
-      "script": "Stand beside your chair and keep one hand on it. Place your left foot at the level shown, never against the knee. Fix your gaze on a steady point, breathe, then lower your foot safely.",
-      "wordCount": 35,
-      "estimatedSpokenSeconds": 22,
+      "videoDurationSeconds": 29,
+      "script": "Stand beside the chair with one hand supported. Place your left foot at the demonstrated level, never at the knee. Breathe steadily, then lower safely.",
+      "wordCount": 25,
+      "estimatedSpokenSeconds": 16,
       "cuePlan": [
-        [
-          "00:02",
-          "Stand beside the chair and hold it."
-        ],
-        [
-          "00:08",
-          "Place the left foot at the demonstrated level, away from the knee."
-        ],
-        [
-          "00:16",
-          "Keep your gaze steady and breathe."
-        ],
-        [
-          "00:23",
-          "Lower the foot and stand evenly."
-        ]
+        {
+          "at": "00:00",
+          "text": "Stand beside the chair with one hand supported. Place your left foot at the demonstrated level, never at the knee. Breathe steadily, then lower safely.",
+          "estimatedSpokenSeconds": 16
+        }
       ],
-      "expectedAudioUrl": "/app/chair-yoga/narration/miriam/IMG_4317.mp3",
+      "expectedAudioUrl": null,
       "audioSha256": null,
-      "audioStatus": "not_generated_pending_owner_approval"
+      "audioStatus": "not_generated_pending_owner_review",
+      "loopScripts": {
+        "1": {
+          "pass": 1,
+          "label": "Loop 1",
+          "script": "Stand beside the chair with one hand supported. Place your left foot at the demonstrated level, never at the knee. Breathe steadily, then lower safely.",
+          "wordCount": 25,
+          "estimatedSpokenSeconds": 16,
+          "videoDurationSeconds": 29,
+          "silentTailEstimateSeconds": 13,
+          "cuePlan": [
+            {
+              "atSeconds": 0,
+              "text": "Stand beside the chair with one hand supported. Place your left foot at the demonstrated level, never at the knee. Breathe steadily, then lower safely.",
+              "estimatedSpokenSeconds": 16
+            }
+          ],
+          "expectedAudioFilename": "IMG_4317_loop-1.mp3",
+          "audioUrl": null,
+          "audioSha256": null,
+          "audioStatus": "not_generated_pending_owner_review"
+        },
+        "2": {
+          "pass": 2,
+          "label": "Loop 2",
+          "script": "Keep one hand on the chair and your gaze on a steady point. Use only the foot position shown.",
+          "wordCount": 19,
+          "estimatedSpokenSeconds": 12,
+          "videoDurationSeconds": 29,
+          "silentTailEstimateSeconds": 17,
+          "cuePlan": [
+            {
+              "atSeconds": 0,
+              "text": "Keep one hand on the chair and your gaze on a steady point. Use only the foot position shown.",
+              "estimatedSpokenSeconds": 12
+            }
+          ],
+          "expectedAudioFilename": "IMG_4317_loop-2.mp3",
+          "audioUrl": null,
+          "audioSha256": null,
+          "audioStatus": "not_generated_pending_owner_review"
+        },
+        "3": {
+          "pass": 3,
+          "label": "Loop 3",
+          "script": "Stay near the chair, keep the standing knee soft, and choose the balance level that feels steady.",
+          "wordCount": 17,
+          "estimatedSpokenSeconds": 11,
+          "videoDurationSeconds": 29,
+          "silentTailEstimateSeconds": 18,
+          "cuePlan": [
+            {
+              "atSeconds": 0,
+              "text": "Stay near the chair, keep the standing knee soft, and choose the balance level that feels steady.",
+              "estimatedSpokenSeconds": 11
+            }
+          ],
+          "expectedAudioFilename": "IMG_4317_loop-3.mp3",
+          "audioUrl": null,
+          "audioSha256": null,
+          "audioStatus": "not_generated_pending_owner_review"
+        },
+        "4": {
+          "pass": 4,
+          "label": "Loop 4",
+          "script": "If balance shifts, lower the left foot and hold the chair.",
+          "wordCount": 11,
+          "estimatedSpokenSeconds": 7,
+          "videoDurationSeconds": 29,
+          "silentTailEstimateSeconds": 22,
+          "cuePlan": [
+            {
+              "atSeconds": 0,
+              "text": "If balance shifts, lower the left foot and hold the chair.",
+              "estimatedSpokenSeconds": 7
+            }
+          ],
+          "expectedAudioFilename": "IMG_4317_loop-4.mp3",
+          "audioUrl": null,
+          "audioSha256": null,
+          "audioStatus": "not_generated_pending_owner_review"
+        }
+      },
+      "audioUrl": null
     },
     {
       "movementId": "IMG_4318",
       "movementName": "Seated Wide-Leg Fold",
       "levelProposal": "intermediate",
       "videoUrl": "/app/videos/chair-yoga/IMG_4318.mp4",
-      "videoDurationSeconds": 29.0,
-      "script": "Sit securely with your feet wide apart. Hinge forward from your hips, letting your arms reach only as far as comfortable. Keep your neck relaxed, breathe into your back, and return upright with hands on your thighs.",
-      "wordCount": 37,
-      "estimatedSpokenSeconds": 24,
+      "videoDurationSeconds": 29,
+      "script": "Sit securely with feet wide. Hinge from the hips and reach only as comfortable. Keep your neck relaxed, breathe, then return upright with hands supported.",
+      "wordCount": 25,
+      "estimatedSpokenSeconds": 16,
       "cuePlan": [
-        [
-          "00:02",
-          "Sit securely and widen your feet as shown."
-        ],
-        [
-          "00:08",
-          "Hinge forward only within a comfortable range."
-        ],
-        [
-          "00:16",
-          "Relax your neck and breathe steadily."
-        ],
-        [
-          "00:23",
-          "Return upright with hands on thighs."
-        ]
+        {
+          "at": "00:00",
+          "text": "Sit securely with feet wide. Hinge from the hips and reach only as comfortable. Keep your neck relaxed, breathe, then return upright with hands supported.",
+          "estimatedSpokenSeconds": 16
+        }
       ],
-      "expectedAudioUrl": "/app/chair-yoga/narration/miriam/IMG_4318.mp3",
+      "expectedAudioUrl": null,
       "audioSha256": null,
-      "audioStatus": "not_generated_pending_owner_approval"
+      "audioStatus": "not_generated_pending_owner_review",
+      "loopScripts": {
+        "1": {
+          "pass": 1,
+          "label": "Loop 1",
+          "script": "Sit securely with feet wide. Hinge from the hips and reach only as comfortable. Keep your neck relaxed, breathe, then return upright with hands supported.",
+          "wordCount": 25,
+          "estimatedSpokenSeconds": 16,
+          "videoDurationSeconds": 29,
+          "silentTailEstimateSeconds": 13,
+          "cuePlan": [
+            {
+              "atSeconds": 0,
+              "text": "Sit securely with feet wide. Hinge from the hips and reach only as comfortable. Keep your neck relaxed, breathe, then return upright with hands supported.",
+              "estimatedSpokenSeconds": 16
+            }
+          ],
+          "expectedAudioFilename": "IMG_4318_loop-1.mp3",
+          "audioUrl": null,
+          "audioSha256": null,
+          "audioStatus": "not_generated_pending_owner_review"
+        },
+        "2": {
+          "pass": 2,
+          "label": "Loop 2",
+          "script": "Let your hands rest on your thighs or chair as shown. Keep your back long and the fold easy.",
+          "wordCount": 19,
+          "estimatedSpokenSeconds": 12,
+          "videoDurationSeconds": 29,
+          "silentTailEstimateSeconds": 17,
+          "cuePlan": [
+            {
+              "atSeconds": 0,
+              "text": "Let your hands rest on your thighs or chair as shown. Keep your back long and the fold easy.",
+              "estimatedSpokenSeconds": 12
+            }
+          ],
+          "expectedAudioFilename": "IMG_4318_loop-2.mp3",
+          "audioUrl": null,
+          "audioSha256": null,
+          "audioStatus": "not_generated_pending_owner_review"
+        },
+        "3": {
+          "pass": 3,
+          "label": "Loop 3",
+          "script": "Breathe into the back of your ribs while keeping the movement within the demonstrated range.",
+          "wordCount": 15,
+          "estimatedSpokenSeconds": 9,
+          "videoDurationSeconds": 29,
+          "silentTailEstimateSeconds": 20,
+          "cuePlan": [
+            {
+              "atSeconds": 0,
+              "text": "Breathe into the back of your ribs while keeping the movement within the demonstrated range.",
+              "estimatedSpokenSeconds": 9
+            }
+          ],
+          "expectedAudioFilename": "IMG_4318_loop-3.mp3",
+          "audioUrl": null,
+          "audioSha256": null,
+          "audioStatus": "not_generated_pending_owner_review"
+        },
+        "4": {
+          "pass": 4,
+          "label": "Loop 4",
+          "script": "Press through your feet and return upright slowly.",
+          "wordCount": 8,
+          "estimatedSpokenSeconds": 5,
+          "videoDurationSeconds": 29,
+          "silentTailEstimateSeconds": 24,
+          "cuePlan": [
+            {
+              "atSeconds": 0,
+              "text": "Press through your feet and return upright slowly.",
+              "estimatedSpokenSeconds": 5
+            }
+          ],
+          "expectedAudioFilename": "IMG_4318_loop-4.mp3",
+          "audioUrl": null,
+          "audioSha256": null,
+          "audioStatus": "not_generated_pending_owner_review"
+        }
+      },
+      "audioUrl": null
     },
     {
       "movementId": "IMG_4319",
       "movementName": "Chair Sun Reach",
       "levelProposal": "intermediate",
       "videoUrl": "/app/videos/chair-yoga/IMG_4319.mp4",
-      "videoDurationSeconds": 29.0,
-      "script": "Sit tall with your feet grounded. Sweep both arms upward as shown, keeping your shoulders relaxed and ribs soft. Breathe in as you reach, breathe out as you lower. Stay within a comfortable range.",
-      "wordCount": 34,
-      "estimatedSpokenSeconds": 22,
+      "videoDurationSeconds": 29,
+      "script": "Sit tall with feet grounded. Sweep both arms upward as shown, keeping shoulders relaxed. Breathe in to reach and out to lower comfortably.",
+      "wordCount": 23,
+      "estimatedSpokenSeconds": 15,
       "cuePlan": [
-        [
-          "00:02",
-          "Sit tall with feet grounded."
-        ],
-        [
-          "00:08",
-          "Sweep both arms upward as shown."
-        ],
-        [
-          "00:15",
-          "Breathe in to reach; keep shoulders relaxed."
-        ],
-        [
-          "00:23",
-          "Breathe out and lower your arms."
-        ]
+        {
+          "at": "00:00",
+          "text": "Sit tall with feet grounded. Sweep both arms upward as shown, keeping shoulders relaxed. Breathe in to reach and out to lower comfortably.",
+          "estimatedSpokenSeconds": 15
+        }
       ],
-      "expectedAudioUrl": "/app/chair-yoga/narration/miriam/IMG_4319.mp3",
+      "expectedAudioUrl": null,
       "audioSha256": null,
-      "audioStatus": "not_generated_pending_owner_approval"
+      "audioStatus": "not_generated_pending_owner_review",
+      "loopScripts": {
+        "1": {
+          "pass": 1,
+          "label": "Loop 1",
+          "script": "Sit tall with feet grounded. Sweep both arms upward as shown, keeping shoulders relaxed. Breathe in to reach and out to lower comfortably.",
+          "wordCount": 23,
+          "estimatedSpokenSeconds": 15,
+          "videoDurationSeconds": 29,
+          "silentTailEstimateSeconds": 14,
+          "cuePlan": [
+            {
+              "atSeconds": 0,
+              "text": "Sit tall with feet grounded. Sweep both arms upward as shown, keeping shoulders relaxed. Breathe in to reach and out to lower comfortably.",
+              "estimatedSpokenSeconds": 15
+            }
+          ],
+          "expectedAudioFilename": "IMG_4319_loop-1.mp3",
+          "audioUrl": null,
+          "audioSha256": null,
+          "audioStatus": "not_generated_pending_owner_review"
+        },
+        "2": {
+          "pass": 2,
+          "label": "Loop 2",
+          "script": "Let your arms rise only as high as feels comfortable. Keep your ribs easy and shoulders soft.",
+          "wordCount": 17,
+          "estimatedSpokenSeconds": 11,
+          "videoDurationSeconds": 29,
+          "silentTailEstimateSeconds": 18,
+          "cuePlan": [
+            {
+              "atSeconds": 0,
+              "text": "Let your arms rise only as high as feels comfortable. Keep your ribs easy and shoulders soft.",
+              "estimatedSpokenSeconds": 11
+            }
+          ],
+          "expectedAudioFilename": "IMG_4319_loop-2.mp3",
+          "audioUrl": null,
+          "audioSha256": null,
+          "audioStatus": "not_generated_pending_owner_review"
+        },
+        "3": {
+          "pass": 3,
+          "label": "Loop 3",
+          "script": "Coordinate the reach with a steady breath. Lower with control rather than dropping the arms.",
+          "wordCount": 15,
+          "estimatedSpokenSeconds": 10,
+          "videoDurationSeconds": 29,
+          "silentTailEstimateSeconds": 19,
+          "cuePlan": [
+            {
+              "atSeconds": 0,
+              "text": "Coordinate the reach with a steady breath. Lower with control rather than dropping the arms.",
+              "estimatedSpokenSeconds": 10
+            }
+          ],
+          "expectedAudioFilename": "IMG_4319_loop-3.mp3",
+          "audioUrl": null,
+          "audioSha256": null,
+          "audioStatus": "not_generated_pending_owner_review"
+        },
+        "4": {
+          "pass": 4,
+          "label": "Loop 4",
+          "script": "Let your hands return to rest and breathe naturally.",
+          "wordCount": 9,
+          "estimatedSpokenSeconds": 6,
+          "videoDurationSeconds": 29,
+          "silentTailEstimateSeconds": 23,
+          "cuePlan": [
+            {
+              "atSeconds": 0,
+              "text": "Let your hands return to rest and breathe naturally.",
+              "estimatedSpokenSeconds": 6
+            }
+          ],
+          "expectedAudioFilename": "IMG_4319_loop-4.mp3",
+          "audioUrl": null,
+          "audioSha256": null,
+          "audioStatus": "not_generated_pending_owner_review"
+        }
+      },
+      "audioUrl": null
     },
     {
       "movementId": "IMG_4320",
       "movementName": "Chair-Supported Half Lift",
       "levelProposal": "intermediate",
       "videoUrl": "/app/videos/chair-yoga/IMG_4320.mp4",
-      "videoDurationSeconds": 29.0,
-      "script": "Sit toward the front of the chair with feet grounded. Hinge slightly from your hips and rest your hands on your thighs as shown, lengthening your chest forward. Keep your back long, breathe, then sit upright slowly.",
-      "wordCount": 37,
-      "estimatedSpokenSeconds": 24,
+      "videoDurationSeconds": 29,
+      "script": "Sit toward the chair front with feet grounded. Hinge slightly from the hips, hands on thighs, lengthen your chest forward, then return upright slowly.",
+      "wordCount": 24,
+      "estimatedSpokenSeconds": 15,
       "cuePlan": [
-        [
-          "00:02",
-          "Sit securely near the front of the chair."
-        ],
-        [
-          "00:08",
-          "Hinge gently and place hands on thighs."
-        ],
-        [
-          "00:16",
-          "Lengthen your chest forward and breathe."
-        ],
-        [
-          "00:23",
-          "Sit upright slowly."
-        ]
+        {
+          "at": "00:00",
+          "text": "Sit toward the chair front with feet grounded. Hinge slightly from the hips, hands on thighs, lengthen your chest forward, then return upright slowly.",
+          "estimatedSpokenSeconds": 15
+        }
       ],
-      "expectedAudioUrl": "/app/chair-yoga/narration/miriam/IMG_4320.mp3",
+      "expectedAudioUrl": null,
       "audioSha256": null,
-      "audioStatus": "not_generated_pending_owner_approval"
+      "audioStatus": "not_generated_pending_owner_review",
+      "loopScripts": {
+        "1": {
+          "pass": 1,
+          "label": "Loop 1",
+          "script": "Sit toward the chair front with feet grounded. Hinge slightly from the hips, hands on thighs, lengthen your chest forward, then return upright slowly.",
+          "wordCount": 24,
+          "estimatedSpokenSeconds": 15,
+          "videoDurationSeconds": 29,
+          "silentTailEstimateSeconds": 14,
+          "cuePlan": [
+            {
+              "atSeconds": 0,
+              "text": "Sit toward the chair front with feet grounded. Hinge slightly from the hips, hands on thighs, lengthen your chest forward, then return upright slowly.",
+              "estimatedSpokenSeconds": 15
+            }
+          ],
+          "expectedAudioFilename": "IMG_4320_loop-1.mp3",
+          "audioUrl": null,
+          "audioSha256": null,
+          "audioStatus": "not_generated_pending_owner_review"
+        },
+        "2": {
+          "pass": 2,
+          "label": "Loop 2",
+          "script": "Keep your hands supported on your thighs as shown. Reach your chest forward without rounding or forcing.",
+          "wordCount": 17,
+          "estimatedSpokenSeconds": 11,
+          "videoDurationSeconds": 29,
+          "silentTailEstimateSeconds": 18,
+          "cuePlan": [
+            {
+              "atSeconds": 0,
+              "text": "Keep your hands supported on your thighs as shown. Reach your chest forward without rounding or forcing.",
+              "estimatedSpokenSeconds": 11
+            }
+          ],
+          "expectedAudioFilename": "IMG_4320_loop-2.mp3",
+          "audioUrl": null,
+          "audioSha256": null,
+          "audioStatus": "not_generated_pending_owner_review"
+        },
+        "3": {
+          "pass": 3,
+          "label": "Loop 3",
+          "script": "Lengthen from the crown of your head and keep the hinge small and controlled.",
+          "wordCount": 14,
+          "estimatedSpokenSeconds": 9,
+          "videoDurationSeconds": 29,
+          "silentTailEstimateSeconds": 20,
+          "cuePlan": [
+            {
+              "atSeconds": 0,
+              "text": "Lengthen from the crown of your head and keep the hinge small and controlled.",
+              "estimatedSpokenSeconds": 9
+            }
+          ],
+          "expectedAudioFilename": "IMG_4320_loop-3.mp3",
+          "audioUrl": null,
+          "audioSha256": null,
+          "audioStatus": "not_generated_pending_owner_review"
+        },
+        "4": {
+          "pass": 4,
+          "label": "Loop 4",
+          "script": "Bring your torso back upright and rest your hands.",
+          "wordCount": 9,
+          "estimatedSpokenSeconds": 6,
+          "videoDurationSeconds": 29,
+          "silentTailEstimateSeconds": 23,
+          "cuePlan": [
+            {
+              "atSeconds": 0,
+              "text": "Bring your torso back upright and rest your hands.",
+              "estimatedSpokenSeconds": 6
+            }
+          ],
+          "expectedAudioFilename": "IMG_4320_loop-4.mp3",
+          "audioUrl": null,
+          "audioSha256": null,
+          "audioStatus": "not_generated_pending_owner_review"
+        }
+      },
+      "audioUrl": null
     },
     {
       "movementId": "IMG_4321",
       "movementName": "Calf Stretch Right",
       "levelProposal": "advanced",
       "videoUrl": "/app/videos/chair-yoga/IMG_4321.mp4",
-      "videoDurationSeconds": 29.0,
-      "script": "Stand facing the side of your chair and hold it with both hands. Step into the right calf stretch shown, keeping the heel grounded and the movement comfortable. Breathe slowly, then step in carefully.",
-      "wordCount": 34,
-      "estimatedSpokenSeconds": 22,
+      "videoDurationSeconds": 29,
+      "script": "Stand beside the chair and hold it with both hands. Step into the right calf stretch shown, keeping the heel grounded. Breathe, then step in carefully.",
+      "wordCount": 26,
+      "estimatedSpokenSeconds": 17,
       "cuePlan": [
-        [
-          "00:02",
-          "Face the chair and hold it with both hands."
-        ],
-        [
-          "00:08",
-          "Step into the right calf stretch as shown."
-        ],
-        [
-          "00:16",
-          "Keep the heel grounded and breathe slowly."
-        ],
-        [
-          "00:23",
-          "Step in carefully and reset."
-        ]
+        {
+          "at": "00:00",
+          "text": "Stand beside the chair and hold it with both hands. Step into the right calf stretch shown, keeping the heel grounded. Breathe, then step in carefully.",
+          "estimatedSpokenSeconds": 17
+        }
       ],
-      "expectedAudioUrl": "/app/chair-yoga/narration/miriam/IMG_4321.mp3",
+      "expectedAudioUrl": null,
       "audioSha256": null,
-      "audioStatus": "not_generated_pending_owner_approval"
+      "audioStatus": "not_generated_pending_owner_review",
+      "loopScripts": {
+        "1": {
+          "pass": 1,
+          "label": "Loop 1",
+          "script": "Stand beside the chair and hold it with both hands. Step into the right calf stretch shown, keeping the heel grounded. Breathe, then step in carefully.",
+          "wordCount": 26,
+          "estimatedSpokenSeconds": 17,
+          "videoDurationSeconds": 29,
+          "silentTailEstimateSeconds": 12,
+          "cuePlan": [
+            {
+              "atSeconds": 0,
+              "text": "Stand beside the chair and hold it with both hands. Step into the right calf stretch shown, keeping the heel grounded. Breathe, then step in carefully.",
+              "estimatedSpokenSeconds": 17
+            }
+          ],
+          "expectedAudioFilename": "IMG_4321_loop-1.mp3",
+          "audioUrl": null,
+          "audioSha256": null,
+          "audioStatus": "not_generated_pending_owner_review"
+        },
+        "2": {
+          "pass": 2,
+          "label": "Loop 2",
+          "script": "Keep both hands supported and let the right heel stay heavy only as shown. Do not force the stretch.",
+          "wordCount": 19,
+          "estimatedSpokenSeconds": 12,
+          "videoDurationSeconds": 29,
+          "silentTailEstimateSeconds": 17,
+          "cuePlan": [
+            {
+              "atSeconds": 0,
+              "text": "Keep both hands supported and let the right heel stay heavy only as shown. Do not force the stretch.",
+              "estimatedSpokenSeconds": 12
+            }
+          ],
+          "expectedAudioFilename": "IMG_4321_loop-2.mp3",
+          "audioUrl": null,
+          "audioSha256": null,
+          "audioStatus": "not_generated_pending_owner_review"
+        },
+        "3": {
+          "pass": 3,
+          "label": "Loop 3",
+          "script": "Keep your body steady and use a comfortable step length. Let the calf soften with each breath.",
+          "wordCount": 17,
+          "estimatedSpokenSeconds": 11,
+          "videoDurationSeconds": 29,
+          "silentTailEstimateSeconds": 18,
+          "cuePlan": [
+            {
+              "atSeconds": 0,
+              "text": "Keep your body steady and use a comfortable step length. Let the calf soften with each breath.",
+              "estimatedSpokenSeconds": 11
+            }
+          ],
+          "expectedAudioFilename": "IMG_4321_loop-3.mp3",
+          "audioUrl": null,
+          "audioSha256": null,
+          "audioStatus": "not_generated_pending_owner_review"
+        },
+        "4": {
+          "pass": 4,
+          "label": "Loop 4",
+          "script": "Step in carefully and remain supported by the chair.",
+          "wordCount": 9,
+          "estimatedSpokenSeconds": 6,
+          "videoDurationSeconds": 29,
+          "silentTailEstimateSeconds": 23,
+          "cuePlan": [
+            {
+              "atSeconds": 0,
+              "text": "Step in carefully and remain supported by the chair.",
+              "estimatedSpokenSeconds": 6
+            }
+          ],
+          "expectedAudioFilename": "IMG_4321_loop-4.mp3",
+          "audioUrl": null,
+          "audioSha256": null,
+          "audioStatus": "not_generated_pending_owner_review"
+        }
+      },
+      "audioUrl": null
     },
     {
       "movementId": "IMG_4322",
       "movementName": "Calf Stretch Left",
       "levelProposal": "advanced",
       "videoUrl": "/app/videos/chair-yoga/IMG_4322.mp4",
-      "videoDurationSeconds": 29.0,
-      "script": "Stand facing the side of your chair and hold it with both hands. Step into the left calf stretch shown, keeping the heel grounded and the movement comfortable. Breathe slowly, then step in carefully.",
-      "wordCount": 34,
-      "estimatedSpokenSeconds": 22,
+      "videoDurationSeconds": 29,
+      "script": "Stand beside the chair and hold it with both hands. Step into the left calf stretch shown, keeping the heel grounded. Breathe, then step in carefully.",
+      "wordCount": 26,
+      "estimatedSpokenSeconds": 17,
       "cuePlan": [
-        [
-          "00:02",
-          "Face the chair and hold it with both hands."
-        ],
-        [
-          "00:08",
-          "Step into the left calf stretch as shown."
-        ],
-        [
-          "00:16",
-          "Keep the heel grounded and breathe slowly."
-        ],
-        [
-          "00:23",
-          "Step in carefully and reset."
-        ]
+        {
+          "at": "00:00",
+          "text": "Stand beside the chair and hold it with both hands. Step into the left calf stretch shown, keeping the heel grounded. Breathe, then step in carefully.",
+          "estimatedSpokenSeconds": 17
+        }
       ],
-      "expectedAudioUrl": "/app/chair-yoga/narration/miriam/IMG_4322.mp3",
+      "expectedAudioUrl": null,
       "audioSha256": null,
-      "audioStatus": "not_generated_pending_owner_approval"
+      "audioStatus": "not_generated_pending_owner_review",
+      "loopScripts": {
+        "1": {
+          "pass": 1,
+          "label": "Loop 1",
+          "script": "Stand beside the chair and hold it with both hands. Step into the left calf stretch shown, keeping the heel grounded. Breathe, then step in carefully.",
+          "wordCount": 26,
+          "estimatedSpokenSeconds": 17,
+          "videoDurationSeconds": 29,
+          "silentTailEstimateSeconds": 12,
+          "cuePlan": [
+            {
+              "atSeconds": 0,
+              "text": "Stand beside the chair and hold it with both hands. Step into the left calf stretch shown, keeping the heel grounded. Breathe, then step in carefully.",
+              "estimatedSpokenSeconds": 17
+            }
+          ],
+          "expectedAudioFilename": "IMG_4322_loop-1.mp3",
+          "audioUrl": null,
+          "audioSha256": null,
+          "audioStatus": "not_generated_pending_owner_review"
+        },
+        "2": {
+          "pass": 2,
+          "label": "Loop 2",
+          "script": "Keep both hands supported and let the left heel stay heavy only as shown. Do not force the stretch.",
+          "wordCount": 19,
+          "estimatedSpokenSeconds": 12,
+          "videoDurationSeconds": 29,
+          "silentTailEstimateSeconds": 17,
+          "cuePlan": [
+            {
+              "atSeconds": 0,
+              "text": "Keep both hands supported and let the left heel stay heavy only as shown. Do not force the stretch.",
+              "estimatedSpokenSeconds": 12
+            }
+          ],
+          "expectedAudioFilename": "IMG_4322_loop-2.mp3",
+          "audioUrl": null,
+          "audioSha256": null,
+          "audioStatus": "not_generated_pending_owner_review"
+        },
+        "3": {
+          "pass": 3,
+          "label": "Loop 3",
+          "script": "Keep your body steady and use a comfortable step length. Let the calf soften with each breath.",
+          "wordCount": 17,
+          "estimatedSpokenSeconds": 11,
+          "videoDurationSeconds": 29,
+          "silentTailEstimateSeconds": 18,
+          "cuePlan": [
+            {
+              "atSeconds": 0,
+              "text": "Keep your body steady and use a comfortable step length. Let the calf soften with each breath.",
+              "estimatedSpokenSeconds": 11
+            }
+          ],
+          "expectedAudioFilename": "IMG_4322_loop-3.mp3",
+          "audioUrl": null,
+          "audioSha256": null,
+          "audioStatus": "not_generated_pending_owner_review"
+        },
+        "4": {
+          "pass": 4,
+          "label": "Loop 4",
+          "script": "Step in carefully and remain supported by the chair.",
+          "wordCount": 9,
+          "estimatedSpokenSeconds": 6,
+          "videoDurationSeconds": 29,
+          "silentTailEstimateSeconds": 23,
+          "cuePlan": [
+            {
+              "atSeconds": 0,
+              "text": "Step in carefully and remain supported by the chair.",
+              "estimatedSpokenSeconds": 6
+            }
+          ],
+          "expectedAudioFilename": "IMG_4322_loop-4.mp3",
+          "audioUrl": null,
+          "audioSha256": null,
+          "audioStatus": "not_generated_pending_owner_review"
+        }
+      },
+      "audioUrl": null
     },
     {
       "movementId": "IMG_4323",
       "movementName": "Seated Meditation",
       "levelProposal": "beginner",
       "videoUrl": "/app/videos/chair-yoga/IMG_4323.mp4",
-      "videoDurationSeconds": 29.0,
-      "script": "Sit comfortably with both feet supported and your hands resting softly. Lengthen through your spine without stiffening. Let your breath settle and keep your face relaxed. Stay still for a few breaths, then gently return your gaze.",
-      "wordCount": 37,
-      "estimatedSpokenSeconds": 24,
+      "videoDurationSeconds": 29,
+      "script": "Sit comfortably with feet supported and hands resting softly. Lengthen your spine without stiffness, let your breath settle, and gently return your gaze.",
+      "wordCount": 23,
+      "estimatedSpokenSeconds": 15,
       "cuePlan": [
-        [
-          "00:02",
-          "Sit comfortably with your feet supported."
-        ],
-        [
-          "00:08",
-          "Rest your hands and lengthen gently through the spine."
-        ],
-        [
-          "00:16",
-          "Let your breath settle; soften your face."
-        ],
-        [
-          "00:23",
-          "Gently return your gaze."
-        ]
+        {
+          "at": "00:00",
+          "text": "Sit comfortably with feet supported and hands resting softly. Lengthen your spine without stiffness, let your breath settle, and gently return your gaze.",
+          "estimatedSpokenSeconds": 15
+        }
       ],
-      "expectedAudioUrl": "/app/chair-yoga/narration/miriam/IMG_4323.mp3",
+      "expectedAudioUrl": null,
       "audioSha256": null,
-      "audioStatus": "not_generated_pending_owner_approval"
+      "audioStatus": "not_generated_pending_owner_review",
+      "loopScripts": {
+        "1": {
+          "pass": 1,
+          "label": "Loop 1",
+          "script": "Sit comfortably with feet supported and hands resting softly. Lengthen your spine without stiffness, let your breath settle, and gently return your gaze.",
+          "wordCount": 23,
+          "estimatedSpokenSeconds": 15,
+          "videoDurationSeconds": 29,
+          "silentTailEstimateSeconds": 14,
+          "cuePlan": [
+            {
+              "atSeconds": 0,
+              "text": "Sit comfortably with feet supported and hands resting softly. Lengthen your spine without stiffness, let your breath settle, and gently return your gaze.",
+              "estimatedSpokenSeconds": 15
+            }
+          ],
+          "expectedAudioFilename": "IMG_4323_loop-1.mp3",
+          "audioUrl": null,
+          "audioSha256": null,
+          "audioStatus": "not_generated_pending_owner_review"
+        },
+        "2": {
+          "pass": 2,
+          "label": "Loop 2",
+          "script": "Keep your hands easy and let your breathing find its own rhythm. Soften your face and shoulders.",
+          "wordCount": 17,
+          "estimatedSpokenSeconds": 11,
+          "videoDurationSeconds": 29,
+          "silentTailEstimateSeconds": 18,
+          "cuePlan": [
+            {
+              "atSeconds": 0,
+              "text": "Keep your hands easy and let your breathing find its own rhythm. Soften your face and shoulders.",
+              "estimatedSpokenSeconds": 11
+            }
+          ],
+          "expectedAudioFilename": "IMG_4323_loop-2.mp3",
+          "audioUrl": null,
+          "audioSha256": null,
+          "audioStatus": "not_generated_pending_owner_review"
+        },
+        "3": {
+          "pass": 3,
+          "label": "Loop 3",
+          "script": "Notice one natural breath at a time. Sit tall without holding tension in your back.",
+          "wordCount": 15,
+          "estimatedSpokenSeconds": 10,
+          "videoDurationSeconds": 29,
+          "silentTailEstimateSeconds": 19,
+          "cuePlan": [
+            {
+              "atSeconds": 0,
+              "text": "Notice one natural breath at a time. Sit tall without holding tension in your back.",
+              "estimatedSpokenSeconds": 10
+            }
+          ],
+          "expectedAudioFilename": "IMG_4323_loop-3.mp3",
+          "audioUrl": null,
+          "audioSha256": null,
+          "audioStatus": "not_generated_pending_owner_review"
+        },
+        "4": {
+          "pass": 4,
+          "label": "Loop 4",
+          "script": "Enjoy a quiet moment, then gently lift your gaze.",
+          "wordCount": 9,
+          "estimatedSpokenSeconds": 6,
+          "videoDurationSeconds": 29,
+          "silentTailEstimateSeconds": 23,
+          "cuePlan": [
+            {
+              "atSeconds": 0,
+              "text": "Enjoy a quiet moment, then gently lift your gaze.",
+              "estimatedSpokenSeconds": 6
+            }
+          ],
+          "expectedAudioFilename": "IMG_4323_loop-4.mp3",
+          "audioUrl": null,
+          "audioSha256": null,
+          "audioStatus": "not_generated_pending_owner_review"
+        }
+      },
+      "audioUrl": null
     }
-  ]
+  ],
+  "bulkAudioStatus": "not_started_pending_owner_review_of_voice_and_scripts",
+  "bulkCreditEstimate": {
+    "rule": "Runway speech: 1 credit per 50 text characters, rounded up per request, minimum 1",
+    "uniqueMovementIds": 36,
+    "movementLoopRequests": 139,
+    "movementLoopCredits": 341,
+    "levelOpeningAndClosingRequests": 6,
+    "levelOpeningAndClosingCredits": 22,
+    "totalEstimatedCredits": 363,
+    "unusedLoopVariantsNotIncluded": 5,
+    "status": "estimate_only_pending_owner_approval"
+  },
+  "levelOpenings": {
+    "beginner": {
+      "script": "Welcome to your Beginner Chair Yoga session. Settle near a stable chair with both feet supported. Move gently within a range that feels comfortable today.",
+      "wordCount": 25,
+      "estimatedSpokenSeconds": 16,
+      "expectedAudioFilename": "opening-beginner.mp3",
+      "audioUrl": null,
+      "audioSha256": null,
+      "audioStatus": "not_generated_pending_owner_review"
+    },
+    "intermediate": {
+      "script": "Welcome to your Intermediate Chair Yoga session. Arrange your chair securely and follow each movement at your own pace. Keep your range comfortable and your breath steady.",
+      "wordCount": 27,
+      "estimatedSpokenSeconds": 17,
+      "expectedAudioFilename": "opening-intermediate.mp3",
+      "audioUrl": null,
+      "audioSha256": null,
+      "audioStatus": "not_generated_pending_owner_review"
+    },
+    "advanced": {
+      "script": "Welcome to your Advanced Chair Yoga session. Keep your chair close and use the support shown. Choose a steady, comfortable range and pause whenever you need.",
+      "wordCount": 26,
+      "estimatedSpokenSeconds": 16,
+      "expectedAudioFilename": "opening-advanced.mp3",
+      "audioUrl": null,
+      "audioSha256": null,
+      "audioStatus": "not_generated_pending_owner_review"
+    }
+  },
+  "levelClosings": {
+    "beginner": {
+      "script": "Your Beginner Chair Yoga session is complete. Let your breathing settle. When ready, return to standing slowly with your chair nearby.",
+      "wordCount": 21,
+      "estimatedSpokenSeconds": 13,
+      "expectedAudioFilename": "closing-beginner.mp3",
+      "audioUrl": null,
+      "audioSha256": null,
+      "audioStatus": "not_generated_pending_owner_review"
+    },
+    "intermediate": {
+      "script": "Your Intermediate Chair Yoga session is complete. Take a moment to breathe naturally, then leave each position carefully and use your chair for support.",
+      "wordCount": 24,
+      "estimatedSpokenSeconds": 15,
+      "expectedAudioFilename": "closing-intermediate.mp3",
+      "audioUrl": null,
+      "audioSha256": null,
+      "audioStatus": "not_generated_pending_owner_review"
+    },
+    "advanced": {
+      "script": "Your Advanced Chair Yoga session is complete. Let your breath return to its natural pace. Move slowly and keep the chair close as you finish.",
+      "wordCount": 25,
+      "estimatedSpokenSeconds": 16,
+      "expectedAudioFilename": "closing-advanced.mp3",
+      "audioUrl": null,
+      "audioSha256": null,
+      "audioStatus": "not_generated_pending_owner_review"
+    }
+  },
+  "sampleDemo": {
+    "voiceSampleScript": "Welcome to Chair Yoga. Settle into a steady, comfortable seat, let your shoulders soften, and allow each breath to arrive naturally.",
+    "voiceSampleFilename": "voice-sample-paula-review.mp3",
+    "demoLevel": "beginner",
+    "demoMovementId": "IMG_4285",
+    "demoPasses": [
+      1,
+      2
+    ],
+    "openingAudioFilename": "opening-beginner-paula-review.mp3",
+    "movementAudioFilenames": [
+      "IMG_4285-loop-1-paula-review.mp3",
+      "IMG_4285-loop-2-paula-review.mp3"
+    ],
+    "closingAudioFilename": "closing-beginner-paula-review.mp3",
+    "reviewManifest": "/app/chair-yoga/narration/review-2026-11-12-paula/review-manifest.json",
+    "voiceSettings": {
+      "provider": "Runway",
+      "voice": "Paula",
+      "voiceId": "sIak7pFapfSLCfctxdOu",
+      "model": "eleven_multilingual_v2",
+      "speed": 0.92
+    },
+    "creditsUsed": 17,
+    "reviewStatus": "pending_owner_listening_review"
+  }
 }

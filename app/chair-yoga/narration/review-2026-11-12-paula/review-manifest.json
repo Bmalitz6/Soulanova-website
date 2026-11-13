@@ -1,0 +1,113 @@
+{
+  "schemaVersion": 1,
+  "reviewStatus": "pending_owner_listening_review",
+  "activeMemberAudio": false,
+  "voice": {
+    "provider": "Runway",
+    "preset": "Paula",
+    "voiceId": "sIak7pFapfSLCfctxdOu",
+    "model": "eleven_multilingual_v2",
+    "speed": 0.92,
+    "style": "Warm, calm, conversational British English",
+    "clonedOrImitatedPerson": null
+  },
+  "creditAccounting": {
+    "pricingRule": "1 credit per 50 text characters, rounded up per request, minimum 1",
+    "requests": [
+      { "filename": "voice-sample-paula-review.mp3", "textCharacters": 132, "credits": 3 },
+      { "filename": "opening-beginner-paula-review.mp3", "textCharacters": 154, "credits": 4 },
+      { "filename": "IMG_4285-loop-1-paula-review.mp3", "textCharacters": 161, "credits": 4 },
+      { "filename": "IMG_4285-loop-2-paula-review.mp3", "textCharacters": 124, "credits": 3 },
+      { "filename": "closing-beginner-paula-review.mp3", "textCharacters": 134, "credits": 3 }
+    ],
+    "totalCreditsUsed": 17,
+    "additionalCreditsPurchased": false,
+    "bulkNarrationGenerated": false
+  },
+  "demo": {
+    "level": "beginner",
+    "movementId": "IMG_4285",
+    "movementName": "Seated Mountain Pose",
+    "videoFilename": "IMG_4285.mp4",
+    "videoSha256": "b13fc1b98649b2d43843d404d5e79637ea0e454f04784abd92577adc047d6769",
+    "videoDurationSeconds": 29,
+    "loops": 2,
+    "demoDurationSecondsExcludingOpeningAndClosing": 58,
+    "loopTracksAreDistinct": true
+  },
+  "assets": [
+    {
+      "purpose": "voice_sample",
+      "filename": "voice-sample-paula-review.mp3",
+      "taskId": "bbde6b78-c1d3-47b4-973f-86f7f41fa357",
+      "assetId": "8255d8d8-3955-4a71-ae42-195a598b63a4",
+      "text": "Welcome to Chair Yoga. Settle into a steady, comfortable seat, let your shoulders soften, and allow each breath to arrive naturally.",
+      "durationSeconds": 11.656,
+      "bytes": 187706,
+      "sha256": "40ec93d3c547d1278872f21c5295453c3c7342599ecb915e5f9bfa06376d56e9",
+      "decodeStatus": "passed",
+      "peakLevel": "-9.5 dBFS",
+      "audioStatus": "review_only_not_owner_approved"
+    },
+    {
+      "purpose": "beginner_opening",
+      "filename": "opening-beginner-paula-review.mp3",
+      "taskId": "8499cf20-92bf-467c-b592-24c44bea3d38",
+      "assetId": "821a9304-799b-4335-8cff-1618f2ae3d6f",
+      "text": "Welcome to your Beginner Chair Yoga session. Settle near a stable chair with both feet supported. Move gently within a range that feels comfortable today.",
+      "durationSeconds": 11.796,
+      "bytes": 189796,
+      "sha256": "af51980aac174e0a950276e832248950559e58586e0c067c72772635b636a7a3",
+      "decodeStatus": "passed",
+      "peakLevel": "-6.1 dBFS",
+      "audioStatus": "review_only_not_owner_approved"
+    },
+    {
+      "purpose": "movement_loop_1",
+      "movementId": "IMG_4285",
+      "movementName": "Seated Mountain Pose",
+      "loop": 1,
+      "filename": "IMG_4285-loop-1-paula-review.mp3",
+      "taskId": "f2bf4234-b317-4a1e-87bd-3800c7826208",
+      "assetId": "2b80c0c5-c6d9-46ee-aa03-9417d7c7d3e5",
+      "text": "Sit near the front of your chair with both feet grounded. Lengthen through your spine, soften your shoulders, and rest your hands on your thighs. Breathe gently.",
+      "durationSeconds": 12.121,
+      "videoDurationSeconds": 29,
+      "bytes": 194812,
+      "sha256": "4d3bbcc9d07cae02c000c8d67567d1161196aef5f449f7b02d7f57fdee836458",
+      "decodeStatus": "passed",
+      "peakLevel": "-7.0 dBFS",
+      "audioStatus": "review_only_not_owner_approved"
+    },
+    {
+      "purpose": "movement_loop_2",
+      "movementId": "IMG_4285",
+      "movementName": "Seated Mountain Pose",
+      "loop": 2,
+      "filename": "IMG_4285-loop-2-paula-review.mp3",
+      "taskId": "087d292b-a865-48bd-8bd8-b981ea3cf56f",
+      "assetId": "1b407d61-18e8-420d-adfe-377bc2370e5c",
+      "text": "Keep both feet steady as you breathe. Let your shoulders soften and your jaw relax; there is no need to hold yourself rigid.",
+      "durationSeconds": 9.102,
+      "videoDurationSeconds": 29,
+      "bytes": 146746,
+      "sha256": "bbda865c77ba9d6662acbdd1c4b3b4fdc94276fe3b8787465d1973088d3008a3",
+      "decodeStatus": "passed",
+      "peakLevel": "-7.5 dBFS",
+      "audioStatus": "review_only_not_owner_approved"
+    },
+    {
+      "purpose": "beginner_closing",
+      "filename": "closing-beginner-paula-review.mp3",
+      "taskId": "065139d6-8d61-4da5-af3e-c5e81f0ba38d",
+      "assetId": "d24c14e7-4217-4865-8f9e-b09e912de68c",
+      "text": "Your Beginner Chair Yoga session is complete. Let your breathing settle. When ready, return to standing slowly with your chair nearby.",
+      "durationSeconds": 9.242,
+      "bytes": 148836,
+      "sha256": "ca491989422a490d32e8a911ed9b52d72ff5997b14f7acb4b28a10651a4084b6",
+      "decodeStatus": "passed",
+      "peakLevel": "-5.9 dBFS",
+      "audioStatus": "review_only_not_owner_approved"
+    }
+  ]
+}

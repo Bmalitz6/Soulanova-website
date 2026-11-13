@@ -32,6 +32,7 @@
   let narrationEnabled = true;
   let narrationMuted = false;
   let currentApprovedAudio = null;
+  let currentApprovedAudioPass = null;
   let narrationObjectUrl = null;
   const pauseEventGuard = window.SoulanovaChairYogaPlayback.createPauseEventGuard();
 
@@ -53,6 +54,7 @@
     narration.removeAttribute('src');
     narration.load();
     currentApprovedAudio = null;
+    currentApprovedAudioPass = null;
     if (narrationObjectUrl) URL.revokeObjectURL(narrationObjectUrl);
     narrationObjectUrl = null;
   }
@@ -92,29 +94,27 @@
   function narrationRecord(workout) {
     return narrationDrafts?.drafts?.find(item => item.movementId === workout.id) || null;
   }
-  function narrationApproved(record) {
-    return Boolean(record && record.audioStatus === 'owner-approved' && record.audioUrl && /^[a-f0-9]{64}$/i.test(record.audioSha256 || ''));
-  }
-  async function verifyNarrationAsset(record, generation) {
-    if (!narrationApproved(record)) return null;
-    const response = await fetch(record.audioUrl, { cache: 'no-store' });
+  async function verifyNarrationAsset(asset, generation, pass) {
+    if (!window.SoulanovaChairYogaPlayback.getApprovedNarrationForPass({ loopScripts: { [String(pass)]: asset } }, pass)) return null;
+    const response = await fetch(asset.audioUrl, { cache: 'no-store' });
     if (!response.ok) throw new Error(`Narration request failed (${response.status}).`);
     const bytes = await response.arrayBuffer();
     const digest = await crypto.subtle.digest('SHA-256', bytes);
     const hash = [...new Uint8Array(digest)].map(byte => byte.toString(16).padStart(2, '0')).join('');
-    if (hash !== record.audioSha256.toLowerCase()) throw new Error('Narration integrity check failed.');
+    if (hash !== asset.audioSha256.toLowerCase()) throw new Error('Narration integrity check failed.');
     if (controller.getSnapshot().generation !== generation) return null;
     const blob = new Blob([bytes], { type: 'audio/mpeg' });
     narrationObjectUrl = URL.createObjectURL(blob);
     return narrationObjectUrl;
   }
-  async function prepareNarration(workout, generation) {
-    const record = narrationRecord(workout);
-    if (!narrationApproved(record)) return false;
+  async function prepareNarration(workout, generation, pass) {
+    const asset = window.SoulanovaChairYogaPlayback.getApprovedNarrationForPass(narrationRecord(workout), pass);
+    if (!asset) return false;
     try {
-      const verifiedUrl = await verifyNarrationAsset(record, generation);
+      const verifiedUrl = await verifyNarrationAsset(asset, generation, pass);
       if (!verifiedUrl || controller.getSnapshot().generation !== generation) return false;
-      currentApprovedAudio = record;
+      currentApprovedAudio = asset;
+      currentApprovedAudioPass = pass;
       narration.src = verifiedUrl;
       narration.load();
       $('#narration-status').textContent = 'Approved narration is available for this movement.';
@@ -133,9 +133,17 @@
     if (controller.getSnapshot().generation !== generation) return false;
     const changed = setVideoSource(workout, generation);
     activeGeneration = generation;
-    if (changed && narrationApproved(narrationRecord(workout))) {
-      const ready = await prepareNarration(workout, generation);
+    if (!changed && currentApprovedAudioPass !== pass) clearNarration();
+    const asset = window.SoulanovaChairYogaPlayback.getApprovedNarrationForPass(narrationRecord(workout), pass);
+    if (asset && (changed || currentApprovedAudioPass !== pass)) {
+      const ready = await prepareNarration(workout, generation, pass);
       if (!ready) throw new Error('Approved narration could not be verified.');
+    } else if (!asset && currentApprovedAudioPass !== pass) {
+      clearNarration();
+      $('#narration-status').textContent = 'Loop-specific narration is pending owner approval.';
+      $('#narration-enabled').disabled = true;
+      $('#narration-volume').disabled = true;
+      $('#narration-mute').disabled = true;
     }
     if (controller.getSnapshot().generation !== generation) return false;
     if (!changed) {
@@ -188,7 +196,6 @@
       const atEnd = video.ended || (Number.isFinite(video.duration) && video.duration > 0 && video.currentTime >= video.duration - 0.05);
       if (!atEnd && !mediaCommand && document.visibilityState === 'visible' && snap?.phase === 'playing' && snap.generation === playingGeneration) controller.pause();
     });
-    narration.addEventListener('timeupdate', syncVideoToNarration);
     $('#back-to-levels').addEventListener('click', () => showLevelSelection());
     $('#back-to-workouts').addEventListener('click', () => showWorkoutSelection());
     $('#completion-workouts').addEventListener('click', () => showWorkoutSelection());
@@ -222,13 +229,6 @@
     if (!currentApprovedAudio || narration.paused || !Number.isFinite(video.currentTime)) return;
     const delta = Math.abs(narration.currentTime - video.currentTime);
     if (delta > 0.35 && narration.duration > 0) narration.currentTime = Math.min(video.currentTime, Math.max(0, narration.duration - 0.05));
-  }
-  function syncVideoToNarration() {
-    if (!currentApprovedAudio || video.paused || !Number.isFinite(narration.currentTime)) return;
-    const delta = Math.abs(video.currentTime - narration.currentTime);
-    if (delta > 0.5 && video.duration > 0) {
-      try { video.currentTime = Math.min(narration.currentTime, video.duration); } catch { /* native seek will be retried on next media event */ }
-    }
   }
   function renderWorkoutProgress(snap) {
     if (!snap?.currentProgram) return;
