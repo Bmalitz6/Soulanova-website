@@ -509,25 +509,19 @@ test('pending tracks are playable only in the SSO-protected Preview review mode,
     for (const [key, value] of Object.entries(previous)) value === undefined ? delete process.env[key] : process.env[key] = value;
     return JSON.parse(body);
   };
-  assert.deepEqual(runApi({ VERCEL_ENV: 'preview', VERCEL_GIT_COMMIT_REF: 'preview/chair-yoga-website-2026-11-12' }), { enabled: true, environment: 'preview', gitRef: 'preview/chair-yoga-website-2026-11-12', commitSha: null });
-  assert.deepEqual(runApi({ VERCEL_ENV: 'production', VERCEL_GIT_COMMIT_REF: 'main' }), { enabled: false, environment: 'production', gitRef: 'main', commitSha: null });
-  assert.deepEqual(runApi({ VERCEL_ENV: 'preview', VERCEL_GIT_COMMIT_REF: 'main' }), { enabled: false, environment: 'preview', gitRef: 'main', commitSha: null });
+  assert.deepEqual(runApi({ VERCEL_ENV: 'preview', VERCEL_GIT_COMMIT_REF: 'preview/chair-yoga-website-2026-11-12' }), { enabled: true });
+  assert.deepEqual(runApi({ VERCEL_ENV: 'production', VERCEL_GIT_COMMIT_REF: 'main' }), { enabled: false });
+  assert.deepEqual(runApi({ VERCEL_ENV: 'preview', VERCEL_GIT_COMMIT_REF: 'main' }), { enabled: false });
   assert.match(playbackSource, /manifest\?\.memberPlaybackEnabled !== true/);
   assert.match(ui, /ownerPreview: ownerAudioReviewMode/);
   assert.match(ui, /owner-audio-review/);
   assert.match(ui, /\/api\/chair-yoga-owner-review/);
   assert.match(ui, /narration-resume/);
   assert.match(route, /id="narration-resume"/);
-  assert.match(route, /owner-audio-diagnostics/);
-  assert.match(ui, /ownerDiagnostic\.audioFetch/);
-  assert.match(ui, /diagAction\('Next Movement'\)/);
-  assert.match(ui, /diagAction\('Play Narration'\)/);
-  assert.match(ui, /ownerReviewConfigPromise/);
-  assert.match(ui, /readyState/);
+  assert.doesNotMatch(route, /owner-audio-diagnostics/);
+  assert.doesNotMatch(ui, /ownerDiagnostic|diagAction|renderOwnerDiagnostics/);
   assert.match(fs.readFileSync(path.join(__dirname, '../app/app.js'), 'utf8'), /safeChairYogaReturn/);
   assert.match(ui, /returnUrl\.searchParams\.set\('owner-audio-review', '1'\)/);
-  assert.match(ui, /narrationToggle: \{ disabled:/);
-  assert.match(ui, /diagAction\('Restart Movement'\)/);
 });
 
 test('narration starts at the video position, handles autoplay blocking, and controls the audio element directly', async () => {
