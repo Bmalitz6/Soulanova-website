@@ -17,7 +17,7 @@
     <header>
       <p class="eyebrow">OWNER LISTENING REVIEW · NOT MEMBER NARRATION</p>
       <h1>Chair Yoga Miriam narration review</h1>
-      <p>This review uses the owner-approved SoulStretch Miriam narrator, selected for Chair Yoga. The generated sample and demo are review-only and are not active member narration. The Chair Yoga workout assignments remain pending owner approval.</p>
+      <p>This review uses the owner-approved SoulStretch Miriam narrator, selected for Chair Yoga. The voice, opening, and both distinct Seated Mountain Pose movement loops are owner-approved. The corrected seated demo segue awaits owner listening. All review audio remains disabled in member workouts; workout assignments remain pending owner approval.</p>
       <p class="meta">Runway preset Miriam · voice ID VhxAIIZM8IRmnl5fyeyk · eleven_multilingual_v2 · speed 0.75 · calm, warm, professional British female narrator.</p>
       <h2>Voice sample</h2>
       <blockquote>“Welcome to Chair Yoga. Settle into a steady, comfortable seat, let your shoulders soften, and allow each breath to arrive naturally.”</blockquote>
@@ -39,11 +39,11 @@
     </section>
     <section aria-labelledby="script-heading">
       <p class="eyebrow">EXACT DEMO SCRIPTS</p>
-      <h2 id="script-heading">Beginner opening, movement loops, and closing</h2>
+      <h2 id="script-heading">Beginner opening, movement loops, and demo segue</h2>
       <div class="script"><strong>Opening · about 15.6 seconds</strong><blockquote>Welcome to your Beginner Chair Yoga session. Settle near a stable chair with both feet supported. Move gently within a range that feels comfortable today.</blockquote></div>
       <div class="script"><strong>IMG_4285 · Loop 1 · about 17.7 seconds</strong><blockquote>Sit near the front of your chair with both feet grounded. Lengthen through your spine, soften your shoulders, and rest your hands on your thighs. Breathe gently.</blockquote></div>
       <div class="script"><strong>IMG_4285 · Loop 2 · about 12.9 seconds</strong><blockquote>Keep both feet steady as you breathe. Let your shoulders soften and your jaw relax; there is no need to hold yourself rigid.</blockquote></div>
-      <div class="script"><strong>Closing · about 15.9 seconds</strong><blockquote>Your Beginner Chair Yoga session is complete. Let your breathing settle. When ready, return to standing slowly with your chair nearby.</blockquote></div>
+      <div class="script"><strong>Demo segue · about 16.4 seconds</strong><blockquote>Wonderful work. Take one more gentle breath, relax your shoulders, and remain comfortably seated as we prepare for our next movement.</blockquote></div>
     </section>
   </main>
   <script>
@@ -59,7 +59,7 @@
         opening: '/app/chair-yoga/narration/review-2026-11-12-miriam/opening-beginner-miriam-review.mp3',
         1: '/app/chair-yoga/narration/review-2026-11-12-miriam/IMG_4285-loop-1-miriam-review.mp3',
         2: '/app/chair-yoga/narration/review-2026-11-12-miriam/IMG_4285-loop-2-miriam-review.mp3',
-        closing: '/app/chair-yoga/narration/review-2026-11-12-miriam/closing-beginner-miriam-review.mp3'
+        closing: '/app/chair-yoga/narration/review-2026-11-12-miriam/closing-beginner-miriam-review-v2.mp3'
       };
       let phase = 'idle';
       let loop = 0;
@@ -87,7 +87,7 @@
         paused = false; video.pause(); stopAudio();
         if (narrationOn.checked) {
           phase = 'closing'; pause.disabled = false; start.disabled = true; pause.textContent = 'Pause';
-          setStatus('Movement complete. Playing the Beginner closing.');
+          setStatus('Movement complete. Playing the Beginner demo segue.');
           await playTrack('closing');
         } else { phase = 'complete'; pause.disabled = true; start.disabled = false; setStatus('Two demonstration loops complete. Narration was off.'); }
       }
@@ -111,7 +111,7 @@
       });
       audio.addEventListener('ended', () => {
         if (phase === 'opening') beginPass(1).catch(() => setStatus('The demonstration video could not start.'));
-        else if (phase === 'closing') { phase = 'complete'; setStatus('Complete Beginner demo finished. Review audio remains separate and pending owner approval.'); start.disabled = false; pause.disabled = true; pause.textContent = 'Pause'; }
+        else if (phase === 'closing') { phase = 'complete'; setStatus('Complete Beginner demo finished. The corrected closing awaits owner review; review audio remains separate from member playback.'); start.disabled = false; pause.disabled = true; pause.textContent = 'Pause'; }
       });
       video.addEventListener('seeking', () => {
         if (phase !== 'movement' || audio.paused || !Number.isFinite(audio.duration)) return;

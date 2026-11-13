@@ -1,8 +1,8 @@
 # Chair Yoga Narration Production Review — Phase 6
 
-Status: owner-approved SoulStretch Miriam voice configuration verified and reused for one Chair Yoga sample plus a complete one-movement Beginner demo. The demo and scripts await owner listening approval; bulk narration is not generated. The 36 workout combinations remain pending_owner_approval.
+Status: owner-approved SoulStretch Miriam voice configuration verified and reused. The owner approved the voice, speed, tone, opening, and both distinct Seated Mountain Pose loops. The corrected demo segue awaits listening review. Bulk narration is not generated. The 36 workout combinations and remaining scripts remain pending_owner_approval.
 
-Generated listening files: [Miriam voice sample and complete one-movement Beginner demo](narration-audio-review.html). File hashes, Runway task IDs, durations, decode evidence, and the 17-credit generation cost are in the [Miriam review audio manifest](../../app/chair-yoga/narration/review-2026-11-12-miriam/review-manifest.json). The recordings await listening approval and are not mapped to member playback. The earlier Paula sample has been superseded and was not selected.
+Generated listening files: [Miriam voice sample and complete one-movement Beginner demo](narration-audio-review.html). The corrected demo follows the exact owner-approved seated segue. File hashes, Runway task IDs, durations, decode evidence, and 20 total credits used for the sample/demo plus the one corrected close are in the [Miriam review audio manifest](../../app/chair-yoga/narration/review-2026-11-12-miriam/review-manifest.json). The prior closing is retained as superseded history; the approved opening and movement loops were preserved byte-for-byte. No review audio is mapped to member playback. The earlier Paula sample has been superseded and was not selected.
 
 ## Source checks
 
@@ -19,11 +19,11 @@ The exact SoulStretch production manifest contains 22 owner-approved generated M
 
 One existing Runway task was independently read back: `cbee1399-e9e3-4b21-9e96-ae4296cb87ad` resolves to voice ID `VhxAIIZM8IRmnl5fyeyk`, model `eleven_multilingual_v2`, speed `0.75`, and the exact matching script in the manifest. The Chair Yoga sample task (`c3d5bf40-f120-4409-b6e5-9fcb15ddea48`) resolves to the same voice ID, model, and speed. The Runway Generate Speech interface uses the preset name “Miriam”; no voice cloning or imitation was used.
 
-The owner directed use of this approved voice for Chair Yoga on November 12. The generated Chair Yoga demo still awaits owner listening approval. All five current MP3s are separate review assets, not member narration. The previous Paula audition is superseded and not selected.
+The owner directed use of this approved voice for Chair Yoga on November 12 and approved the voice, speed, tone, opening, and both Mountain Pose loops on November 13. The replacement demo segue awaits listening approval. All review MP3s remain separate from member narration. The previous Paula audition is superseded and not selected.
 
 ## Miriam sample and demo audio QA
 
-All five requested files are mono 44.1 kHz MP3s and passed full FFmpeg decoding. The source Seated Mountain Pose video remains the existing 29-second approved file with SHA-256 `b13fc1b98649b2d43843d404d5e79637ea0e454f04784abd92577adc047d6769`.
+All six generated files, including the superseded closing retained for history, are mono 44.1 kHz MP3s and passed full FFmpeg decoding. The source Seated Mountain Pose video remains the existing 29-second approved file with SHA-256 `b13fc1b98649b2d43843d404d5e79637ea0e454f04784abd92577adc047d6769`.
 
 | Review item | File | Duration | Size | SHA-256 |
 |---|---|---:|---:|---|
@@ -31,9 +31,16 @@ All five requested files are mono 44.1 kHz MP3s and passed full FFmpeg decoding.
 | Beginner opening | `opening-beginner-miriam-review.mp3` | 15.557 s | 249,982 B | `8f6700b1078777dcb9f000fdeae17859a4a06c00a0f33e49e245ac7a9d8b4efd` |
 | Seated Mountain Pose · Loop 1 | `IMG_4285-loop-1-miriam-review.mp3` | 17.740 s | 285,091 B | `b134d5b0ddb816b49835d0fbea6433294fac8aafa98629c0b9ad1363b1a72053` |
 | Seated Mountain Pose · Loop 2 | `IMG_4285-loop-2-miriam-review.mp3` | 12.864 s | 206,932 B | `b8670bc10d22f1363c4436a918cf1c730321d3703d457d16a9469d35dfae48a5` |
-| Beginner closing | `closing-beginner-miriam-review.mp3` | 15.929 s | 255,834 B | `5e16abb6e6c5762dd2dc1a70020cbb1e7c926f94c9001fa47048a736722943d7` |
+| Superseded demo close | `closing-beginner-miriam-review.mp3` | 15.929 s | 255,834 B | `5e16abb6e6c5762dd2dc1a70020cbb1e7c926f94c9001fa47048a736722943d7` |
+| Corrected demo segue | `closing-beginner-miriam-review-v2.mp3` | 16.440 s | 264,193 B | `bf5be402097c5bb7f7bb1657991f39fb9e01f0f84dbfbd53f3f0be18f708051a` |
 
-The movement tracks finish within their respective video loops, leaving approximately 11.260 seconds and 16.136 seconds of quiet practice. Loop 1 and Loop 2 use different scripts and separate audio files. The five generation requests used 17 Runway credits total; no credits were purchased. The detailed task IDs and per-request accounting are in the review manifest.
+The movement tracks finish within their respective video loops, leaving approximately 11.260 seconds and 16.136 seconds of quiet practice. Loop 1 and Loop 2 use different scripts and separate audio files. The exact corrected demo segue is “Wonderful work. Take one more gentle breath, relax your shoulders, and remain comfortably seated as we prepare for our next movement.” It lasts 16.440 seconds, decodes cleanly, and peaks at -12.6 dBFS. Its Runway task confirms the same voice ID, model, speed, and English setting. The corrected recording used 3 additional credits; 20 total credits have been used for this sample/demo sequence. No bulk generation occurred and no credits were purchased.
+
+## Position-instruction audit — November 13, 2026
+
+Reviewed all 144 loop cues across the 36 mapped movements, plus the three level openings and three planned final-workout closings. There were 63 loop cues with explicit sit/stand/chair/upright/step terms; these cues match their movement mappings. The seated Warrior I, Warrior II, and Side Angle demonstrations were visually checked against IMG_4310–IMG_4315; chair-supported standing Tree and Calf demonstrations were checked against IMG_4316–IMG_4317 and IMG_4321–IMG_4322. No loop cue mismatch was found. The proposed workout matrix currently begins each routine with seated IMG_4285, but the 36 combinations are still pending approval.
+
+The three not-yet-generated final-workout closings remain flagged for contextual owner review: Beginner currently tells members to return to standing; Intermediate says to leave each position without knowing the final movement; Advanced gives a generic movement cue. These are final-class closings, separate from the one-movement demo segue. They were not regenerated or changed as part of this correction. No other position changes should be narrated until the selected workout's next movement and ending are known.
 
 ## Level opening and closing scripts
 
@@ -789,8 +796,8 @@ Video: IMG_4323.mp4 · 29.0 s · SHA-256 4e86fd9b79a385f9628db0934fd26631d66167d
 
 ## Owner decisions before bulk production
 
-1. Listen to and approve or request changes to the Miriam sample and complete one-movement Beginner demo. The voice configuration itself is verified and owner-approved from SoulStretch.
-2. Review/approve the scripts and sample demo; request revisions before bulk generation.
+1. Listen to and approve or request changes to the corrected seated demo segue. The voice, speed, tone, opening and two movement loops are approved.
+2. Review the 144 movement-loop scripts and revise the three flagged final-workout closings before any bulk narration.
 3. After approving the Miriam demo and scripts, review the 363-credit batch estimate before authorizing bulk Runway generation.
 4. Approve narration playback only after generated files pass duration, decoding, clip-fit, hash, movement/side, and synchronization review.
 

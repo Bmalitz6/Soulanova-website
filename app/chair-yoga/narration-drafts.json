@@ -2,8 +2,8 @@
   "schemaVersion": 2,
   "instructor": "Miriam (video instructor and approved narrator identity)",
   "proposedNarrator": "Miriam (owner-approved SoulStretch voice; selected for Chair Yoga demo)",
-  "voiceApprovalStatus": "owner_approved_for_soulstretch_and_selected_for_chair_yoga_demo_pending_review",
-  "generationStatus": "miriam_sample_and_one_movement_demo_generated_pending_owner_review",
+  "voiceApprovalStatus": "owner_approved_voice_settings_opening_and_mountain_loops_corrected_demo_closing_pending_review",
+  "generationStatus": "miriam_sample_and_beginner_demo_generated_corrected_closing_pending_owner_review",
   "generationProvider": "Runway Generate Speech",
   "generationModel": "eleven_multilingual_v2",
   "generationSettings": {
@@ -3775,7 +3775,8 @@
       "expectedAudioFilename": "closing-beginner.mp3",
       "audioUrl": null,
       "audioSha256": null,
-      "audioStatus": "not_generated_pending_owner_review"
+      "audioStatus": "not_generated_pending_owner_review",
+      "positionReviewStatus": "flagged_standing_instruction_for_contextual_owner_review"
     },
     "intermediate": {
       "script": "Your Intermediate Chair Yoga session is complete. Take a moment to breathe naturally, then leave each position carefully and use your chair for support.",
@@ -3784,7 +3785,8 @@
       "expectedAudioFilename": "closing-intermediate.mp3",
       "audioUrl": null,
       "audioSha256": null,
-      "audioStatus": "not_generated_pending_owner_review"
+      "audioStatus": "not_generated_pending_owner_review",
+      "positionReviewStatus": "flagged_generic_position_change_for_contextual_owner_review"
     },
     "advanced": {
       "script": "Your Advanced Chair Yoga session is complete. Let your breath return to its natural pace. Move slowly and keep the chair close as you finish.",
@@ -3793,7 +3795,8 @@
       "expectedAudioFilename": "closing-advanced.mp3",
       "audioUrl": null,
       "audioSha256": null,
-      "audioStatus": "not_generated_pending_owner_review"
+      "audioStatus": "not_generated_pending_owner_review",
+      "positionReviewStatus": "flagged_for_contextual_owner_review"
     }
   },
   "sampleDemo": {
@@ -3811,7 +3814,7 @@
       "IMG_4285-loop-1-miriam-review.mp3",
       "IMG_4285-loop-2-miriam-review.mp3"
     ],
-    "closingAudioFilename": "closing-beginner-miriam-review.mp3",
+    "closingAudioFilename": "closing-beginner-miriam-review-v2.mp3",
     "reviewManifest": "/app/chair-yoga/narration/review-2026-11-12-miriam/review-manifest.json",
     "voiceSettings": {
       "provider": "Runway Generate Speech",
@@ -3822,8 +3825,36 @@
       "language": "English (en)",
       "style": "Calm, warm, professional British female narrator"
     },
-    "creditsUsed": 17,
-    "reviewStatus": "pending_owner_listening_review",
-    "memberPlaybackEnabled": false
+    "creditsUsed": 20,
+    "reviewStatus": "pending_owner_listening_review_of_corrected_demo_closing",
+    "memberPlaybackEnabled": false,
+    "closingScript": "Wonderful work. Take one more gentle breath, relax your shoulders, and remain comfortably seated as we prepare for our next movement.",
+    "closingDurationSeconds": 16.439728
+  },
+  "positionInstructionAudit": {
+    "reviewedAt": "2026-11-13",
+    "movementCount": 36,
+    "loopCueCount": 144,
+    "levelOpeningCount": 3,
+    "levelClosingCount": 3,
+    "positionSpecificCueCount": 63,
+    "findings": "No mismatched sit/stand instructions found in the 144 movement-loop cues after checking cue movement IDs against the approved catalog and position-sensitive demonstrations. The three level openings are neutral or fit the proposed first movement, Seated Mountain Pose; workout assignments remain pending owner approval. Final workout closing scripts remain ungenerated and require contextual review.",
+    "flags": [
+      {
+        "level": "beginner",
+        "issue": "Generic final closing says to return to standing; not appropriate for all proposed final movements.",
+        "status": "needs owner review; no audio generated"
+      },
+      {
+        "level": "intermediate",
+        "issue": "Generic final closing says to leave each position; final movement may be seated or standing.",
+        "status": "needs owner review; no audio generated"
+      },
+      {
+        "level": "advanced",
+        "issue": "Generic final closing says move slowly and keep chair close but does not specify a position; verify against the selected workout ending.",
+        "status": "needs owner review; no audio generated"
+      }
+    ]
   }
 }

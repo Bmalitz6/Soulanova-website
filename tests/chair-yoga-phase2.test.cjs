@@ -397,7 +397,7 @@ test('all 36 movement scripts provide four distinct, duration-bounded loop cues 
 });
 
 test('narration remains separate, hash-gated and loop-specific; workout assignments remain pending approval', () => {
-  assert.equal(narration.voiceApprovalStatus, 'owner_approved_for_soulstretch_and_selected_for_chair_yoga_demo_pending_review');
+  assert.equal(narration.voiceApprovalStatus, 'owner_approved_voice_settings_opening_and_mountain_loops_corrected_demo_closing_pending_review');
   assert.equal(narration.bulkAudioStatus, 'not_started_pending_owner_review_of_miriam_demo_and_scripts');
   assert.equal(plan.proposalStatus, 'pending_owner_approval');
   assert.match(route, /member narration remains disabled until each loop recording is approved/);
@@ -419,10 +419,10 @@ test('narration resolver selects only the matching owner-approved loop recording
   assert.equal(player.getApprovedNarrationForPass({ loopScripts: { '1': { ...loop1, audioSha256: 'bad' } } }, 1), null);
 });
 
-test('Miriam audition and Beginner demo files match verified voice settings and review hashes without entering active workout mappings', () => {
-  assert.equal(narrationAudioManifest.reviewStatus, 'pending_owner_listening_review');
+test('Miriam demo preserves approved opening and loops and gates the corrected closing for owner review', () => {
+  assert.equal(narrationAudioManifest.reviewStatus, 'pending_owner_listening_review_of_corrected_demo_closing');
   assert.equal(narrationAudioManifest.memberPlaybackEnabled, false);
-  assert.equal(narrationAudioManifest.creditAccounting.totalCreditsUsed, 17);
+  assert.equal(narrationAudioManifest.creditAccounting.totalCreditsUsed, 20);
   assert.equal(narrationAudioManifest.creditAccounting.bulkGeneration, false);
   assert.equal(narrationAudioManifest.voice.preset, 'Miriam');
   assert.equal(narrationAudioManifest.voice.voiceId, 'VhxAIIZM8IRmnl5fyeyk');
@@ -439,10 +439,23 @@ test('Miriam audition and Beginner demo files match verified voice settings and 
     const bytes = fs.readFileSync(file);
     assert.equal(bytes.length, asset.bytes, `${asset.filename} size`);
     assert.equal(crypto.createHash('sha256').update(bytes).digest('hex'), asset.sha256, `${asset.filename} hash`);
-    assert.equal(asset.ownerReviewStatus, 'pending_owner_listening');
     assert.equal(asset.memberPlaybackEnabled, false);
+    if (asset.purpose === 'beginner_demo_closing_corrected') assert.equal(asset.ownerReviewStatus, 'pending_owner_listening');
     if (asset.purpose.startsWith('movement_loop')) assert.ok(asset.durationSeconds < asset.videoDurationSeconds);
   }
+  const approvedOpening = narrationAudioManifest.assets.find(asset => asset.purpose === 'beginner_opening');
+  const approvedLoop1 = narrationAudioManifest.assets.find(asset => asset.purpose === 'movement_loop_1');
+  const approvedLoop2 = narrationAudioManifest.assets.find(asset => asset.purpose === 'movement_loop_2');
+  assert.deepEqual([approvedOpening.ownerReviewStatus, approvedLoop1.ownerReviewStatus, approvedLoop2.ownerReviewStatus], ['owner_approved','owner_approved','owner_approved']);
+  assert.equal(narrationAudioManifest.assets.find(asset => asset.purpose === 'superseded_beginner_demo_closing').ownerReviewStatus, 'superseded_by_owner_position_correction');
+  const correctedClose = narrationAudioManifest.assets.find(asset => asset.purpose === 'beginner_demo_closing_corrected');
+  assert.equal(correctedClose.filename, 'closing-beginner-miriam-review-v2.mp3');
+  assert.equal(correctedClose.taskId, '03cec8c9-efd2-4477-8a1c-ca52c542b653');
+  assert.equal(correctedClose.text, 'Wonderful work. Take one more gentle breath, relax your shoulders, and remain comfortably seated as we prepare for our next movement.');
+  assert.ok(correctedClose.durationSeconds < narration.drafts.find(x => x.movementId === 'IMG_4285').videoDurationSeconds);
+  assert.equal(narration.sampleDemo.closingAudioFilename, correctedClose.filename);
+  assert.equal(narration.sampleDemo.closingScript, correctedClose.text);
+  assert.equal(narration.sampleDemo.memberPlaybackEnabled, false);
   for (const movement of narration.drafts) for (const loop of Object.values(movement.loopScripts)) {
     assert.equal(loop.audioStatus, 'not_generated_pending_owner_review');
     assert.equal(loop.audioUrl, null);
@@ -458,4 +471,20 @@ test('Miriam audition and Beginner demo files match verified voice settings and 
   assert.match(narrationReviewPage, /speed 0\.75/);
   assert.match(narrationReviewPage, /review-2026-11-12-miriam/);
   assert.doesNotMatch(narrationReviewPage, /Paula|0\.92/);
+  assert.match(narrationReviewPage, /Wonderful work\. Take one more gentle breath, relax your shoulders, and remain comfortably seated as we prepare for our next movement\./);
+  assert.doesNotMatch(narrationReviewPage, /When ready, return to standing slowly/);
+});
+
+test('position-instruction audit covers all 144 movement cues and keeps final closings context-pending', () => {
+  assert.equal(narration.positionInstructionAudit.movementCount, 36);
+  assert.equal(narration.positionInstructionAudit.loopCueCount, 144);
+  assert.equal(narration.positionInstructionAudit.levelOpeningCount, 3);
+  assert.equal(narration.positionInstructionAudit.levelClosingCount, 3);
+  assert.equal(narration.positionInstructionAudit.positionSpecificCueCount, 63);
+  assert.equal(narration.positionInstructionAudit.flags.length, 3);
+  for (const level of ['beginner','intermediate','advanced']) {
+    assert.equal(narration.levelClosings[level].audioStatus, 'not_generated_pending_owner_review');
+    assert.ok(narration.levelClosings[level].positionReviewStatus);
+  }
+  assert.equal(plan.proposalStatus, 'pending_owner_approval');
 });

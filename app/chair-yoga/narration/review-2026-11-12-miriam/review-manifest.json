@@ -1,6 +1,6 @@
 {
   "schemaVersion": 1,
-  "reviewStatus": "pending_owner_listening_review",
+  "reviewStatus": "pending_owner_listening_review_of_corrected_demo_closing",
   "memberPlaybackEnabled": false,
   "bulkNarrationStarted": false,
   "voice": {
@@ -13,7 +13,8 @@
     "outputFormat": "MP3",
     "style": "Calm, warm, professional British female narrator",
     "sourceApproval": "Owner-approved for SoulStretch on 2026-11-09; owner selected for Chair Yoga sample/demo on 2026-11-12",
-    "voiceIdVerification": "All 22 SoulStretch manifest assets use this same voice ID; prior Runway task cbee1399-e9e3-4b21-9e96-ae4296cb87ad independently returns the same voiceId, modelId, and speed."
+    "voiceIdVerification": "All 22 SoulStretch manifest assets use this same voice ID; prior Runway task cbee1399-e9e3-4b21-9e96-ae4296cb87ad independently returns the same voiceId, modelId, and speed.",
+    "ownerApprovalScope": "Voice identity, speed, tone, Beginner opening and both Seated Mountain Pose movement-loop recordings approved by owner on 2026-11-13. Corrected demo closing remains pending owner listening."
   },
   "sourceProvenance": {
     "manifest": "Existing isolated Release 2 handoff docs/release2/SOULSTRETCH_NARRATION_PRODUCTION_MANIFEST.json",
@@ -51,14 +52,22 @@
       {
         "filename": "closing-beginner-miriam-review.mp3",
         "characters": 134,
-        "credits": 3
+        "credits": 3,
+        "ownerReviewStatus": "superseded_by_owner_position_correction"
+      },
+      {
+        "filename": "closing-beginner-miriam-review-v2.mp3",
+        "characters": 133,
+        "credits": 3,
+        "taskId": "03cec8c9-efd2-4477-8a1c-ca52c542b653"
       }
     ],
-    "totalCreditsUsed": 17,
+    "totalCreditsUsed": 20,
     "previousPaulaSampleCredits": 17,
-    "miriamSampleAndDemoCredits": 17,
+    "miriamSampleAndDemoCredits": 20,
     "purchasedOrToppedUp": false,
-    "bulkGeneration": false
+    "bulkGeneration": false,
+    "correctedClosingCredits": 3
   },
   "demo": {
     "level": "beginner",
@@ -66,11 +75,15 @@
     "movementName": "Seated Mountain Pose",
     "videoFilename": "IMG_4285.mp4",
     "videoSha256": "b13fc1b98649b2d43843d404d5e79637ea0e454f04784abd92577adc047d6769",
-    "videoDurationSeconds": 29.0,
+    "videoDurationSeconds": 29,
     "passes": 2,
     "loop1AndLoop2UseDistinctSpeech": true,
     "fullDemoIncludesOpeningAndClosing": true,
-    "reviewOnly": true
+    "reviewOnly": true,
+    "closingAudioFilename": "closing-beginner-miriam-review-v2.mp3",
+    "closingScript": "Wonderful work. Take one more gentle breath, relax your shoulders, and remain comfortably seated as we prepare for our next movement.",
+    "closingDurationSeconds": 16.439728,
+    "memberPlaybackEnabled": false
   },
   "assets": [
     {
@@ -86,7 +99,7 @@
       "sampleRateHz": 44100,
       "channels": 1,
       "fullDecode": "passed",
-      "ownerReviewStatus": "pending_owner_listening",
+      "ownerReviewStatus": "owner_approved_voice_reference",
       "memberPlaybackEnabled": false
     },
     {
@@ -102,7 +115,7 @@
       "sampleRateHz": 44100,
       "channels": 1,
       "fullDecode": "passed",
-      "ownerReviewStatus": "pending_owner_listening",
+      "ownerReviewStatus": "owner_approved",
       "memberPlaybackEnabled": false
     },
     {
@@ -118,12 +131,12 @@
       "sampleRateHz": 44100,
       "channels": 1,
       "fullDecode": "passed",
-      "ownerReviewStatus": "pending_owner_listening",
+      "ownerReviewStatus": "owner_approved",
       "memberPlaybackEnabled": false,
       "movementId": "IMG_4285",
       "movementName": "Seated Mountain Pose",
       "videoFilename": "IMG_4285.mp4",
-      "videoDurationSeconds": 29.0,
+      "videoDurationSeconds": 29,
       "loop": 1,
       "quietPracticeTailSeconds": 11.26
     },
@@ -140,17 +153,17 @@
       "sampleRateHz": 44100,
       "channels": 1,
       "fullDecode": "passed",
-      "ownerReviewStatus": "pending_owner_listening",
+      "ownerReviewStatus": "owner_approved",
       "memberPlaybackEnabled": false,
       "movementId": "IMG_4285",
       "movementName": "Seated Mountain Pose",
       "videoFilename": "IMG_4285.mp4",
-      "videoDurationSeconds": 29.0,
+      "videoDurationSeconds": 29,
       "loop": 2,
       "quietPracticeTailSeconds": 16.136
     },
     {
-      "purpose": "beginner_closing",
+      "purpose": "superseded_beginner_demo_closing",
       "filename": "closing-beginner-miriam-review.mp3",
       "taskId": "3e77c959-29b9-484d-b8e0-e548ee4f533b",
       "text": "Your Beginner Chair Yoga session is complete. Let your breathing settle. When ready, return to standing slowly with your chair nearby.",
@@ -162,8 +175,41 @@
       "sampleRateHz": 44100,
       "channels": 1,
       "fullDecode": "passed",
+      "ownerReviewStatus": "superseded_by_owner_position_correction",
+      "memberPlaybackEnabled": false
+    },
+    {
+      "purpose": "beginner_demo_closing_corrected",
+      "filename": "closing-beginner-miriam-review-v2.mp3",
+      "taskId": "03cec8c9-efd2-4477-8a1c-ca52c542b653",
+      "text": "Wonderful work. Take one more gentle breath, relax your shoulders, and remain comfortably seated as we prepare for our next movement.",
+      "characters": 133,
+      "durationSeconds": 16.439728,
+      "bytes": 264193,
+      "sha256": "bf5be402097c5bb7f7bb1657991f39fb9e01f0f84dbfbd53f3f0be18f708051a",
+      "codec": "mp3",
+      "sampleRateHz": 44100,
+      "channels": 1,
+      "fullDecode": "passed",
+      "peakLevel": "-12.6 dBFS",
       "ownerReviewStatus": "pending_owner_listening",
       "memberPlaybackEnabled": false
     }
-  ]
+  ],
+  "ownerApproval": {
+    "date": "2026-11-13",
+    "scope": [
+      "Miriam voice identity",
+      "speed 0.75",
+      "narration tone",
+      "Beginner opening",
+      "Seated Mountain Pose Loop 1",
+      "Seated Mountain Pose Loop 2"
+    ],
+    "excludedFromApproval": [
+      "corrected demo closing pending listening review",
+      "unreviewed movement scripts",
+      "all 36 workout combinations"
+    ]
+  }
 }
