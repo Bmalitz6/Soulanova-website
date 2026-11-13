@@ -174,6 +174,9 @@
     video.addEventListener('playing', () => { playingGeneration = activeGeneration; const s = controller?.getSnapshot(); if (s?.phase === 'playing') controller.markVideoPlaying(activeGeneration, activeMovementId); });
     video.addEventListener('ended', () => controller?.videoEnded(activeGeneration, activeMovementId));
     video.addEventListener('timeupdate', updateProgress);
+    video.addEventListener('loadedmetadata', updateProgress);
+    video.addEventListener('durationchange', updateProgress);
+    video.addEventListener('seeked', updateProgress);
     video.addEventListener('seeking', syncNarrationToVideo);
     video.addEventListener('error', () => {
       const snap = controller?.getSnapshot();
@@ -227,13 +230,35 @@
       try { video.currentTime = Math.min(narration.currentTime, video.duration); } catch { /* native seek will be retried on next media event */ }
     }
   }
+  function renderWorkoutProgress(snap) {
+    if (!snap?.currentProgram) return;
+    const movement = snap.currentMovement;
+    const expectedSource = movement?.videoUrl ? new URL(movement.videoUrl, window.location.href).href : '';
+    const mediaMatches = Boolean(expectedSource && activeGeneration === snap.generation && video.currentSrc === expectedSource && video.readyState >= 1);
+    const progress = window.SoulanovaChairYogaPlayback.getWorkoutProgress(snap, {
+      currentTime: video.currentTime,
+      duration: video.duration,
+      mediaMatches
+    });
+    $('#player-position').textContent = `Movement ${progress.currentMovementNumber} of ${progress.totalMovements}`;
+    $('#completed-count').textContent = `${progress.completedCount} of ${progress.totalMovements} movements completed`;
+    const progressBar = $('#workout-progress');
+    progressBar.value = progress.progress;
+    progressBar.setAttribute('aria-valuetext', `${progress.completedCount} of ${progress.totalMovements} movements completed; movement ${progress.currentMovementNumber} of ${progress.totalMovements}`);
+
+    if (snap.phase === 'complete') {
+      $('#pass-label').textContent = 'Workout complete';
+    } else if (snap.phase === 'transitioning' || (snap.phase === 'paused' && snap.pausedFrom === 'transitioning')) {
+      $('#pass-label').textContent = `Movement complete · ${snap.loopsPerMovement} loops`;
+    } else if (mediaMatches) {
+      $('#pass-label').textContent = `Loop ${snap.pass} of ${snap.loopsPerMovement} · ${formatTime(Math.max(0, video.duration - video.currentTime))} left in this loop`;
+    } else {
+      $('#pass-label').textContent = `Loop ${snap.pass || 1} of ${snap.loopsPerMovement} · Loading movement`;
+    }
+  }
   function updateProgress() {
     const snap = controller?.getSnapshot();
-    const movement = snap?.currentMovement;
-    if (!movement || !Number.isFinite(video.duration) || video.duration <= 0) return;
-    const ratio = (Math.max(0, snap.pass - 1) + Math.min(1, video.currentTime / video.duration)) / snap.loopsPerMovement;
-    $('#workout-progress').value = ratio;
-    $('#pass-label').textContent = `Loop ${snap.pass} of ${snap.loopsPerMovement} · ${formatTime(Math.max(0, video.duration - video.currentTime))} left in this loop`;
+    if (snap) renderWorkoutProgress(snap);
   }
   function formatEstimate(summary) {
     const minimum = formatTime(summary.minEstimatedTotalSeconds);
@@ -342,6 +367,7 @@
       $('#completion-summary').textContent = `${snap.currentProgram.title}: all 12 movements completed after ${snap.loopsPerMovement} loops per movement. No member history is written by this Preview.`;
       $('#player-heading').textContent = 'Workout complete';
       $('#player-eyebrow').textContent = `${snap.levelName} · ${snap.currentProgram.title} · COMPLETE`;
+      renderWorkoutProgress(snap);
       renderSequence(snap); return;
     }
     playerView.hidden = false; levelSelection.hidden = true; workoutSelection.hidden = true;
@@ -352,10 +378,7 @@
     $('#player-heading').textContent = movement.name;
     $('#player-eyebrow').textContent = `${snap.levelName} · ${program.title} · MOVEMENT ${snap.movementIndex + 1} OF 12 · PROPOSED`;
     $('#player-meta').textContent = `${snap.loopsPerMovement} loops · ${formatTime(movement.durationSeconds * snap.loopsPerMovement)} video time for this movement · Miriam demonstration`;
-    $('#player-position').textContent = `${snap.completedCount} of 12 movements complete`;
-    $('#pass-label').textContent = `Loop ${snap.pass || 1} of ${snap.loopsPerMovement}`;
-    $('#completed-count').textContent = `${snap.completedCount} of 12 movements completed`;
-    $('#workout-progress').value = Math.max(0, snap.pass - 1) / snap.loopsPerMovement;
+    renderWorkoutProgress(snap);
     previousButton.disabled = snap.movementIndex <= 0;
     nextButton.disabled = snap.movementIndex >= snap.movementsTotal - 1;
     $('#pause-workout').textContent = snap.phase === 'paused' || snap.phase === 'resume-required' ? 'Resume' : 'Pause';
@@ -383,7 +406,6 @@
     $('#transition-next-button').hidden = !snap.nextMovement || !(isPaused || isTransitioning);
     $('#transition-next-button').textContent = 'Next Movement';
     renderSequence(snap);
-    updateProgress();
   }
   function showMemberLibrary(user) {
     authGate.hidden = true; library.hidden = false; status.textContent = user.email || 'Signed in'; signOut.hidden = false;

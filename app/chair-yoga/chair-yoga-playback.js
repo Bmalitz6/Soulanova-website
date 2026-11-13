@@ -48,6 +48,33 @@
     });
   }
 
+  function getWorkoutProgress(snapshot, { currentTime = 0, duration = 0, mediaMatches = false } = {}) {
+    const totalMovements = Math.max(0, Number(snapshot?.movementsTotal) || 0);
+    const completed = new Set(snapshot?.completedMovementIndexes || []);
+    const completedCount = completed.size;
+    const movementIndex = Number(snapshot?.movementIndex);
+    const currentMovementNumber = Number.isInteger(movementIndex) && movementIndex >= 0
+      ? Math.min(totalMovements, movementIndex + 1)
+      : 0;
+    if (!totalMovements) return { currentMovementNumber, completedCount, totalMovements, progress: 0 };
+    if (snapshot.phase === 'complete') return { currentMovementNumber: totalMovements, completedCount, totalMovements, progress: 1 };
+
+    let activeMovementFraction = 0;
+    const canTrackCurrent = ['playing', 'paused', 'resume-required'].includes(snapshot.phase)
+      && snapshot.pausedFrom !== 'transitioning'
+      && Number.isInteger(movementIndex)
+      && movementIndex >= 0
+      && !completed.has(movementIndex);
+    if (canTrackCurrent && mediaMatches && Number.isFinite(currentTime) && Number.isFinite(duration) && duration > 0) {
+      const pass = Math.max(1, Number(snapshot.pass) || 1);
+      const loops = Math.max(1, Number(snapshot.loopsPerMovement) || 1);
+      const videoFraction = Math.max(0, Math.min(1, currentTime / duration));
+      activeMovementFraction = Math.max(0, Math.min(1, (pass - 1 + videoFraction) / loops));
+    }
+    const progress = Math.max(0, Math.min(1, (completedCount + activeMovementFraction) / totalMovements));
+    return { currentMovementNumber, completedCount, totalMovements, progress };
+  }
+
   function createChairYogaPlayback({
     levels,
     movements,
@@ -324,5 +351,5 @@
     return Object.freeze({ selectLevel, start, pause, resume, next, previous, restart, markVideoPlaying, videoEnded, playbackBlocked, backToWorkouts, backToLevels, getWorkoutSummary, getLevelSummary, getSnapshot });
   }
 
-  return Object.freeze({ createChairYogaPlayback, createPauseEventGuard, validatePlaylist });
+  return Object.freeze({ createChairYogaPlayback, createPauseEventGuard, getWorkoutProgress, validatePlaylist });
 });
