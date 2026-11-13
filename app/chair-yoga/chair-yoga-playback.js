@@ -56,8 +56,9 @@
     const currentMovementNumber = Number.isInteger(movementIndex) && movementIndex >= 0
       ? Math.min(totalMovements, movementIndex + 1)
       : 0;
-    if (!totalMovements) return { currentMovementNumber, completedCount, totalMovements, progress: 0 };
-    if (snapshot.phase === 'complete') return { currentMovementNumber: totalMovements, completedCount, totalMovements, progress: 1 };
+    const movementLabel = `Movement ${currentMovementNumber} of ${totalMovements}`;
+    if (!totalMovements) return { currentMovementNumber, movementLabel, completedCount, totalMovements, progress: 0 };
+    if (snapshot.phase === 'complete') return { currentMovementNumber: totalMovements, movementLabel: `Movement ${totalMovements} of ${totalMovements}`, completedCount, totalMovements, progress: 1 };
 
     let activeMovementFraction = 0;
     const canTrackCurrent = ['playing', 'paused', 'resume-required'].includes(snapshot.phase)
@@ -72,7 +73,7 @@
       activeMovementFraction = Math.max(0, Math.min(1, (pass - 1 + videoFraction) / loops));
     }
     const progress = Math.max(0, Math.min(1, (completedCount + activeMovementFraction) / totalMovements));
-    return { currentMovementNumber, completedCount, totalMovements, progress };
+    return { currentMovementNumber, movementLabel, completedCount, totalMovements, progress };
   }
 
   function createChairYogaPlayback({

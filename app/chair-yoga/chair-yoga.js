@@ -241,10 +241,10 @@
       mediaMatches
     });
     $('#player-position').textContent = `Movement ${progress.currentMovementNumber} of ${progress.totalMovements}`;
-    $('#completed-count').textContent = `${progress.completedCount} of ${progress.totalMovements} movements completed`;
+    $('#movement-counter').textContent = progress.movementLabel;
     const progressBar = $('#workout-progress');
     progressBar.value = progress.progress;
-    progressBar.setAttribute('aria-valuetext', `${progress.completedCount} of ${progress.totalMovements} movements completed; movement ${progress.currentMovementNumber} of ${progress.totalMovements}`);
+    progressBar.setAttribute('aria-valuetext', `Movement ${progress.currentMovementNumber} of ${progress.totalMovements}; ${progress.completedCount} movements completed; skipped movements are excluded from progress`);
 
     if (snap.phase === 'complete') {
       $('#pass-label').textContent = 'Workout complete';

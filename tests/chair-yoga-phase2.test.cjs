@@ -187,6 +187,7 @@ test('manual Next synchronizes the active movement counter and progress for all 
     let state = ctl.getSnapshot();
     let progress = player.getWorkoutProgress(state, { currentTime: 14.5, duration: 29, mediaMatches: true });
     assert.equal(progress.currentMovementNumber, 1, `${workout.id} starts at movement 1`);
+    assert.equal(progress.movementLabel, 'Movement 1 of 12', `${workout.id} start label`);
     assert.equal(progress.completedCount, 0, `${workout.id} starts with no completed movements`);
     assert.ok(progress.progress > 0, `${workout.id} active movement advances the progress bar`);
 
@@ -196,6 +197,7 @@ test('manual Next synchronizes the active movement counter and progress for all 
     assert.equal(state.movementIndex, 1);
     assert.equal(state.currentMovement.id, workout.movementIds[1]);
     assert.equal(progress.currentMovementNumber, 2, `${workout.id} immediately displays movement 2`);
+    assert.equal(progress.movementLabel, 'Movement 2 of 12', `${workout.id} Next label`);
     assert.equal(progress.completedCount, 0, `${workout.id} skipped first movement is not completed`);
     assert.equal(progress.progress, 0, `${workout.id} new video resets its active-segment progress`);
   }
@@ -217,8 +219,21 @@ test('manual Next synchronizes the active movement counter and progress for all 
   assert.equal(state.phase, 'playing');
   assert.equal(state.currentMovement.id, workout.movementIds[1]);
   assert.equal(progress.currentMovementNumber, 2);
+  assert.equal(progress.movementLabel, 'Movement 2 of 12');
   assert.equal(progress.completedCount, 1);
   assert.equal(progress.progress, 1 / 12, 'the transition-completed movement remains counted, not the next one');
+});
+
+test('visible movement counter text follows current index exactly through repeated Next clicks', () => {
+  const { ctl } = makeController('beginner');
+  const workout = currentLevel('beginner').workouts[0];
+  ctl.start(workout.id);
+  assert.equal(player.getWorkoutProgress(ctl.getSnapshot()).movementLabel, 'Movement 1 of 12');
+  assert.equal(ctl.next(), true);
+  assert.equal(player.getWorkoutProgress(ctl.getSnapshot()).movementLabel, 'Movement 2 of 12');
+  assert.equal(ctl.next(), true);
+  assert.equal(player.getWorkoutProgress(ctl.getSnapshot()).movementLabel, 'Movement 3 of 12');
+  assert.equal(player.getWorkoutProgress(ctl.getSnapshot()).completedCount, 0, 'skipped movements remain incomplete');
 });
 
 test('complete workouts across all 36 proposals loop correctly, transition, and stop at workout completion', () => {
@@ -287,6 +302,7 @@ test('Previous and Restart preserve the selected workout, and completion does no
   assert.equal(ctl.getSnapshot().programsTotal, 12);
   const finalProgress = player.getWorkoutProgress(ctl.getSnapshot());
   assert.equal(finalProgress.currentMovementNumber, 12);
+  assert.equal(finalProgress.movementLabel, 'Movement 12 of 12');
   assert.equal(finalProgress.completedCount, 12);
   assert.equal(finalProgress.progress, 1);
   assert.equal(ctl.start(currentLevel('advanced').workouts[5].id), true);
@@ -326,7 +342,10 @@ test('pause/Up Next and completion screens use actual selected-workout movement 
   assert.match(ui, /snap\.currentProgram\?\.movementIds/);
   assert.match(ui, /getWorkoutProgress\(snap/);
   assert.match(ui, /Movement \$\{progress\.currentMovementNumber\} of \$\{progress\.totalMovements\}/);
-  assert.match(ui, /\$\('#completed-count'\)\.textContent = `\$\{progress\.completedCount\} of \$\{progress\.totalMovements\} movements completed`/);
+  assert.match(ui, /\$\('#movement-counter'\)\.textContent = progress\.movementLabel/);
+  assert.match(route, /id="movement-counter"[^>]*>Movement 1 of 12<\/span>/);
+  assert.match(route, /aria-label="Workout progress by movement time; skipped movements are excluded"/);
+  assert.match(ui, /Movement \$\{progress\.currentMovementNumber\} of \$\{progress\.totalMovements\}/);
   assert.match(ui, /video\.addEventListener\('loadedmetadata', updateProgress\)/);
   assert.match(ui, /video\.addEventListener\('seeked', updateProgress\)/);
   assert.match(ui, /FINAL MOVEMENT IN THIS WORKOUT/);
