@@ -1,7 +1,11 @@
 {
-  "schemaVersion": 1,
+  "schemaVersion": 2,
   "proposalStatus": "pending_owner_approval",
   "programTitle": "Chair Yoga with Miriam",
+  "movementLibraryCount": 36,
+  "workoutsPerLevel": 12,
+  "movementsPerWorkout": 12,
+  "totalWorkouts": 36,
   "playback": {
     "loopCountsByLevel": {
       "beginner": 2,
@@ -9,64 +13,879 @@
       "advanced": 4
     },
     "transitionDurationSeconds": 5,
-    "progression": "Each movement video loops for the selected level count. After the final loop, a black Up Next screen displays the next movement and thumbnail for five seconds, then automatically starts it. Pause freezes playback or the transition timer; Resume continues; Next Movement can skip ahead. The final movement completes the selected level without changing difficulty."
+    "progression": "Each movement video loops for the selected level count. After its final loop, the black Up Next screen shows the next movement and actual thumbnail for five seconds, then starts it automatically. Pause freezes playback or transition countdown; Resume continues. Next Movement skips ahead. The twelfth movement ends the selected workout. No automatic movement into another workout or difficulty level.",
+    "narrationStatus": "pending_owner_approval"
+  },
+  "assignmentRules": {
+    "status": "proposed_pending_owner_approval",
+    "designPrinciples": [
+      "Every workout has exactly 12 distinct movement segments and a unique ordered sequence.",
+      "Beginner stays seated and omits Warrior I/II, side-angle, chair-supported tree, and standing calf stretches.",
+      "Intermediate may use seated hip/leg work, supported Warrior I/II, and supported calf stretches; side-angle and chair-supported tree remain Advanced-only.",
+      "Advanced uses the approved supported standing demonstrations and keeps bilateral sides together.",
+      "All right/left pairs included in a workout appear right then left as adjacent segments.",
+      "Every workout begins with a stable seated setup and uses a purposeful mobility focus; no randomized shuffling."
+    ],
+    "bilateralPairs": [
+      {
+        "family": "Seated Side Bend",
+        "right": "IMG_4286",
+        "left": "IMG_4287"
+      },
+      {
+        "family": "Seated Twist",
+        "right": "IMG_4288",
+        "left": "IMG_4289"
+      },
+      {
+        "family": "Neck Stretch",
+        "right": "IMG_4294",
+        "left": "IMG_4296"
+      },
+      {
+        "family": "Seated Figure Four",
+        "right": "IMG_4299",
+        "left": "IMG_4300"
+      },
+      {
+        "family": "Knee-to-Chest",
+        "right": "IMG_4303",
+        "left": "IMG_4304"
+      },
+      {
+        "family": "Seated Hamstring Stretch",
+        "right": "IMG_4305",
+        "left": "IMG_4306"
+      },
+      {
+        "family": "Ankle Rolls",
+        "right": "IMG_4307",
+        "left": "IMG_4308"
+      },
+      {
+        "family": "Chair Warrior I",
+        "right": "IMG_4310",
+        "left": "IMG_4311"
+      },
+      {
+        "family": "Chair Warrior II",
+        "right": "IMG_4312",
+        "left": "IMG_4313"
+      },
+      {
+        "family": "Chair Side Angle",
+        "right": "IMG_4314",
+        "left": "IMG_4315"
+      },
+      {
+        "family": "Chair-Supported Tree",
+        "right": "IMG_4316",
+        "left": "IMG_4317"
+      },
+      {
+        "family": "Calf Stretch",
+        "right": "IMG_4321",
+        "left": "IMG_4322"
+      }
+    ],
+    "beginnerExcludedMovementIds": [
+      "IMG_4310",
+      "IMG_4311",
+      "IMG_4312",
+      "IMG_4313",
+      "IMG_4314",
+      "IMG_4315",
+      "IMG_4316",
+      "IMG_4317",
+      "IMG_4321",
+      "IMG_4322"
+    ],
+    "intermediateExcludedMovementIds": [
+      "IMG_4314",
+      "IMG_4315",
+      "IMG_4316",
+      "IMG_4317"
+    ]
   },
   "levels": [
     {
       "id": "beginner",
       "name": "Beginner",
-      "description": "Seated foundations, gentle joint movement and steady support.",
-      "workoutIds": [
-        "IMG_4285",
-        "IMG_4297",
-        "IMG_4298",
-        "IMG_4290",
-        "IMG_4294",
-        "IMG_4296",
-        "IMG_4309",
-        "IMG_4307",
-        "IMG_4308",
-        "IMG_4303",
-        "IMG_4304",
-        "IMG_4323"
+      "description": "Seated, gentle foundations and mobility. No standing balance or Warrior/side-angle shapes.",
+      "assignmentStatus": "pending_owner_approval",
+      "workouts": [
+        {
+          "id": "beginner-01",
+          "title": "Seated Foundations & Breath",
+          "emphasis": "Posture, gentle spine mobility, side-to-side rotation, ankle movement and a quiet finish.",
+          "designNote": "Seated foundations; no standing balance or warrior/side-angle poses.",
+          "movementIds": [
+            "IMG_4285",
+            "IMG_4297",
+            "IMG_4290",
+            "IMG_4319",
+            "IMG_4286",
+            "IMG_4287",
+            "IMG_4288",
+            "IMG_4289",
+            "IMG_4309",
+            "IMG_4307",
+            "IMG_4308",
+            "IMG_4323"
+          ],
+          "approvalStatus": "pending_owner_approval"
+        },
+        {
+          "id": "beginner-02",
+          "title": "Easy Spine and Rotation",
+          "emphasis": "A slow seated spine sequence with matched right/left bends and twists.",
+          "designNote": "Gentle seated spine mobility with a supported forward fold.",
+          "movementIds": [
+            "IMG_4285",
+            "IMG_4297",
+            "IMG_4290",
+            "IMG_4286",
+            "IMG_4287",
+            "IMG_4288",
+            "IMG_4289",
+            "IMG_4292",
+            "IMG_4320",
+            "IMG_4294",
+            "IMG_4296",
+            "IMG_4323"
+          ],
+          "approvalStatus": "pending_owner_approval"
+        },
+        {
+          "id": "beginner-03",
+          "title": "Shoulder Ease & Gentle Reach",
+          "emphasis": "Upper-body mobility and gentle arm movement with an easy seated side bend.",
+          "designNote": "Shoulder and arm focus; no balance poses.",
+          "movementIds": [
+            "IMG_4285",
+            "IMG_4297",
+            "IMG_4293",
+            "IMG_4291",
+            "IMG_4298",
+            "IMG_4319",
+            "IMG_4286",
+            "IMG_4287",
+            "IMG_4290",
+            "IMG_4309",
+            "IMG_4292",
+            "IMG_4323"
+          ],
+          "approvalStatus": "pending_owner_approval"
+        },
+        {
+          "id": "beginner-04",
+          "title": "Hips, Knees & Circulation",
+          "emphasis": "Seated knee and hamstring mobility with ankle rolls and toe-heel movement.",
+          "designNote": "Seated lower-body mobility; no standing balance.",
+          "movementIds": [
+            "IMG_4285",
+            "IMG_4297",
+            "IMG_4319",
+            "IMG_4303",
+            "IMG_4304",
+            "IMG_4305",
+            "IMG_4306",
+            "IMG_4307",
+            "IMG_4308",
+            "IMG_4309",
+            "IMG_4290",
+            "IMG_4323"
+          ],
+          "approvalStatus": "pending_owner_approval"
+        },
+        {
+          "id": "beginner-05",
+          "title": "Neck, Arms & Upright Posture",
+          "emphasis": "Gentle neck range, shoulder opening and wrist mobility between seated posture resets.",
+          "designNote": "Seated upper-body sequence with small, comfortable ranges.",
+          "movementIds": [
+            "IMG_4285",
+            "IMG_4297",
+            "IMG_4294",
+            "IMG_4296",
+            "IMG_4291",
+            "IMG_4298",
+            "IMG_4293",
+            "IMG_4290",
+            "IMG_4319",
+            "IMG_4309",
+            "IMG_4320",
+            "IMG_4323"
+          ],
+          "approvalStatus": "pending_owner_approval"
+        },
+        {
+          "id": "beginner-06",
+          "title": "Side Body & Seated Rotation",
+          "emphasis": "Alternating side bends and twists balanced by seated posture and gentle neck mobility.",
+          "designNote": "Seated side-to-side mobility with a quiet close.",
+          "movementIds": [
+            "IMG_4285",
+            "IMG_4297",
+            "IMG_4290",
+            "IMG_4319",
+            "IMG_4286",
+            "IMG_4287",
+            "IMG_4288",
+            "IMG_4289",
+            "IMG_4294",
+            "IMG_4296",
+            "IMG_4298",
+            "IMG_4323"
+          ],
+          "approvalStatus": "pending_owner_approval"
+        },
+        {
+          "id": "beginner-07",
+          "title": "Lower-Body Comfort",
+          "emphasis": "Seated knee lifts, ankle rolls and hamstring mobility for a gentle lower-body flow.",
+          "designNote": "Seated lower-body focus; no standing poses.",
+          "movementIds": [
+            "IMG_4285",
+            "IMG_4290",
+            "IMG_4319",
+            "IMG_4303",
+            "IMG_4304",
+            "IMG_4307",
+            "IMG_4308",
+            "IMG_4309",
+            "IMG_4297",
+            "IMG_4305",
+            "IMG_4306",
+            "IMG_4323"
+          ],
+          "approvalStatus": "pending_owner_approval"
+        },
+        {
+          "id": "beginner-08",
+          "title": "Supported Folds & Length",
+          "emphasis": "A gradual seated reach, half lift and forward folds followed by leg and ankle mobility.",
+          "designNote": "Seated fold progression; move only within comfortable range.",
+          "movementIds": [
+            "IMG_4285",
+            "IMG_4290",
+            "IMG_4319",
+            "IMG_4320",
+            "IMG_4292",
+            "IMG_4318",
+            "IMG_4305",
+            "IMG_4306",
+            "IMG_4307",
+            "IMG_4308",
+            "IMG_4297",
+            "IMG_4323"
+          ],
+          "approvalStatus": "pending_owner_approval"
+        },
+        {
+          "id": "beginner-09",
+          "title": "Quiet Shoulders & Side Flow",
+          "emphasis": "Neck and shoulder release followed by balanced side bending and a calm finish.",
+          "designNote": "Upper-body and side-body mobility while seated.",
+          "movementIds": [
+            "IMG_4285",
+            "IMG_4297",
+            "IMG_4294",
+            "IMG_4296",
+            "IMG_4291",
+            "IMG_4298",
+            "IMG_4286",
+            "IMG_4287",
+            "IMG_4293",
+            "IMG_4290",
+            "IMG_4319",
+            "IMG_4323"
+          ],
+          "approvalStatus": "pending_owner_approval"
+        },
+        {
+          "id": "beginner-10",
+          "title": "Seated Leg Mobility",
+          "emphasis": "A steady sequence of knee, hamstring and ankle movements with posture resets.",
+          "designNote": "Seated leg mobility; no standing balance.",
+          "movementIds": [
+            "IMG_4285",
+            "IMG_4297",
+            "IMG_4303",
+            "IMG_4304",
+            "IMG_4305",
+            "IMG_4306",
+            "IMG_4307",
+            "IMG_4308",
+            "IMG_4309",
+            "IMG_4290",
+            "IMG_4319",
+            "IMG_4323"
+          ],
+          "approvalStatus": "pending_owner_approval"
+        },
+        {
+          "id": "beginner-11",
+          "title": "Spine Rotation & Reset",
+          "emphasis": "A comfortable rotation sequence with side bends, chest opening and supported folds.",
+          "designNote": "Seated spine and chest mobility; bilateral pairs stay together.",
+          "movementIds": [
+            "IMG_4285",
+            "IMG_4290",
+            "IMG_4286",
+            "IMG_4287",
+            "IMG_4288",
+            "IMG_4289",
+            "IMG_4320",
+            "IMG_4292",
+            "IMG_4293",
+            "IMG_4297",
+            "IMG_4298",
+            "IMG_4323"
+          ],
+          "approvalStatus": "pending_owner_approval"
+        },
+        {
+          "id": "beginner-12",
+          "title": "Morning Seated Flow",
+          "emphasis": "A simple whole-body chair sequence from posture and reach to knees, ankles and rest.",
+          "designNote": "Seated foundations with gentle, paired right/left movement.",
+          "movementIds": [
+            "IMG_4285",
+            "IMG_4297",
+            "IMG_4319",
+            "IMG_4290",
+            "IMG_4286",
+            "IMG_4287",
+            "IMG_4303",
+            "IMG_4304",
+            "IMG_4307",
+            "IMG_4308",
+            "IMG_4309",
+            "IMG_4323"
+          ],
+          "approvalStatus": "pending_owner_approval"
+        }
       ]
     },
     {
       "id": "intermediate",
       "name": "Intermediate",
-      "description": "Seated mobility and flexibility with wider ranges and longer hinges.",
-      "workoutIds": [
-        "IMG_4286",
-        "IMG_4287",
-        "IMG_4288",
-        "IMG_4289",
-        "IMG_4291",
-        "IMG_4292",
-        "IMG_4293",
-        "IMG_4305",
-        "IMG_4306",
-        "IMG_4318",
-        "IMG_4319",
-        "IMG_4320"
+      "description": "Seated mobility with chair-supported Warrior I/II and controlled lower-leg work. Tree balance and side-angle poses are held for Advanced.",
+      "assignmentStatus": "pending_owner_approval",
+      "workouts": [
+        {
+          "id": "intermediate-01",
+          "title": "Balanced Hips & Legs",
+          "emphasis": "Seated hip opening and paired knee/hamstring work with ankle mobility.",
+          "designNote": "Intermediate seated hip and leg mobility; no unsupported balance.",
+          "movementIds": [
+            "IMG_4285",
+            "IMG_4290",
+            "IMG_4319",
+            "IMG_4299",
+            "IMG_4300",
+            "IMG_4303",
+            "IMG_4304",
+            "IMG_4305",
+            "IMG_4306",
+            "IMG_4307",
+            "IMG_4308",
+            "IMG_4323"
+          ],
+          "approvalStatus": "pending_owner_approval"
+        },
+        {
+          "id": "intermediate-02",
+          "title": "Seated-to-Warrior Flow",
+          "emphasis": "Moves from seated preparation into paired, chair-supported Warrior shapes and calf mobility.",
+          "designNote": "Supported Warrior I/II with both sides represented; no tree balance.",
+          "movementIds": [
+            "IMG_4285",
+            "IMG_4297",
+            "IMG_4319",
+            "IMG_4310",
+            "IMG_4311",
+            "IMG_4312",
+            "IMG_4313",
+            "IMG_4321",
+            "IMG_4322",
+            "IMG_4309",
+            "IMG_4290",
+            "IMG_4323"
+          ],
+          "approvalStatus": "pending_owner_approval"
+        },
+        {
+          "id": "intermediate-03",
+          "title": "Posterior Chain & Ankle Mobility",
+          "emphasis": "A progressive fold sequence paired with hamstring, calf and ankle movement.",
+          "designNote": "Seated posterior-chain work followed by supported calf stretches.",
+          "movementIds": [
+            "IMG_4285",
+            "IMG_4290",
+            "IMG_4319",
+            "IMG_4320",
+            "IMG_4292",
+            "IMG_4318",
+            "IMG_4305",
+            "IMG_4306",
+            "IMG_4321",
+            "IMG_4322",
+            "IMG_4307",
+            "IMG_4308"
+          ],
+          "approvalStatus": "pending_owner_approval"
+        },
+        {
+          "id": "intermediate-04",
+          "title": "Seated Core Rotation",
+          "emphasis": "Alternating seated twists and side bends followed by seated hip mobility.",
+          "designNote": "Seated trunk and hip work; all directional pairs are balanced.",
+          "movementIds": [
+            "IMG_4285",
+            "IMG_4290",
+            "IMG_4288",
+            "IMG_4289",
+            "IMG_4286",
+            "IMG_4287",
+            "IMG_4299",
+            "IMG_4300",
+            "IMG_4303",
+            "IMG_4304",
+            "IMG_4297",
+            "IMG_4323"
+          ],
+          "approvalStatus": "pending_owner_approval"
+        },
+        {
+          "id": "intermediate-05",
+          "title": "Upper Body & Warrior Flow",
+          "emphasis": "Shoulder mobility leads into paired supported Warrior shapes and side-body work.",
+          "designNote": "Chair-supported Warrior I/II; standing balance poses excluded.",
+          "movementIds": [
+            "IMG_4285",
+            "IMG_4297",
+            "IMG_4293",
+            "IMG_4291",
+            "IMG_4298",
+            "IMG_4310",
+            "IMG_4311",
+            "IMG_4312",
+            "IMG_4313",
+            "IMG_4286",
+            "IMG_4287",
+            "IMG_4323"
+          ],
+          "approvalStatus": "pending_owner_approval"
+        },
+        {
+          "id": "intermediate-06",
+          "title": "Supported Strength & Balance Prep",
+          "emphasis": "Toe-heel and ankle movement prepare the legs for paired supported Warrior poses.",
+          "designNote": "Stable-chair-supported leg work; no unsupported single-leg balance.",
+          "movementIds": [
+            "IMG_4285",
+            "IMG_4309",
+            "IMG_4307",
+            "IMG_4308",
+            "IMG_4310",
+            "IMG_4311",
+            "IMG_4312",
+            "IMG_4313",
+            "IMG_4321",
+            "IMG_4322",
+            "IMG_4297",
+            "IMG_4323"
+          ],
+          "approvalStatus": "pending_owner_approval"
+        },
+        {
+          "id": "intermediate-07",
+          "title": "Hamstrings & Hip Mobility",
+          "emphasis": "Seated folds and paired hip, hamstring and knee movement with a calm finish.",
+          "designNote": "Intermediate seated hip and posterior-chain mobility.",
+          "movementIds": [
+            "IMG_4285",
+            "IMG_4290",
+            "IMG_4318",
+            "IMG_4320",
+            "IMG_4305",
+            "IMG_4306",
+            "IMG_4299",
+            "IMG_4300",
+            "IMG_4303",
+            "IMG_4304",
+            "IMG_4309",
+            "IMG_4323"
+          ],
+          "approvalStatus": "pending_owner_approval"
+        },
+        {
+          "id": "intermediate-08",
+          "title": "Rotation & Hip Stability",
+          "emphasis": "Seated trunk mobility is followed by matched hip and ankle movements.",
+          "designNote": "Seated rotation with balanced hip and ankle pairs.",
+          "movementIds": [
+            "IMG_4285",
+            "IMG_4297",
+            "IMG_4286",
+            "IMG_4287",
+            "IMG_4288",
+            "IMG_4289",
+            "IMG_4299",
+            "IMG_4300",
+            "IMG_4309",
+            "IMG_4307",
+            "IMG_4308",
+            "IMG_4323"
+          ],
+          "approvalStatus": "pending_owner_approval"
+        },
+        {
+          "id": "intermediate-09",
+          "title": "Chair Warrior Alignment",
+          "emphasis": "A supported Warrior sequence framed by seated mobility and a quiet close.",
+          "designNote": "Paired Warrior I/II shapes, with no tree or side-angle balance.",
+          "movementIds": [
+            "IMG_4285",
+            "IMG_4319",
+            "IMG_4320",
+            "IMG_4310",
+            "IMG_4311",
+            "IMG_4312",
+            "IMG_4313",
+            "IMG_4290",
+            "IMG_4293",
+            "IMG_4321",
+            "IMG_4322",
+            "IMG_4323"
+          ],
+          "approvalStatus": "pending_owner_approval"
+        },
+        {
+          "id": "intermediate-10",
+          "title": "Seated Recovery & Leg Line",
+          "emphasis": "Neck and arm mobility transitions to paired knee and hamstring stretches.",
+          "designNote": "Seated recovery with bilateral neck, knee and hamstring movements.",
+          "movementIds": [
+            "IMG_4285",
+            "IMG_4297",
+            "IMG_4294",
+            "IMG_4296",
+            "IMG_4291",
+            "IMG_4298",
+            "IMG_4290",
+            "IMG_4303",
+            "IMG_4304",
+            "IMG_4305",
+            "IMG_4306",
+            "IMG_4323"
+          ],
+          "approvalStatus": "pending_owner_approval"
+        },
+        {
+          "id": "intermediate-11",
+          "title": "Chest, Side Body & Hips",
+          "emphasis": "Shoulder/chest opening balances paired side bends and hip mobility with supported calves.",
+          "designNote": "Seated upper body and hips followed by supported calf stretches.",
+          "movementIds": [
+            "IMG_4285",
+            "IMG_4297",
+            "IMG_4293",
+            "IMG_4291",
+            "IMG_4286",
+            "IMG_4287",
+            "IMG_4299",
+            "IMG_4300",
+            "IMG_4321",
+            "IMG_4322",
+            "IMG_4319",
+            "IMG_4323"
+          ],
+          "approvalStatus": "pending_owner_approval"
+        },
+        {
+          "id": "intermediate-12",
+          "title": "Full Seated-to-Standing Reset",
+          "emphasis": "A supported fold sequence adds hip, hamstring, ankle and calf mobility.",
+          "designNote": "Seated preparation; supported lower-leg work; no single-leg balance.",
+          "movementIds": [
+            "IMG_4285",
+            "IMG_4290",
+            "IMG_4292",
+            "IMG_4320",
+            "IMG_4299",
+            "IMG_4300",
+            "IMG_4305",
+            "IMG_4306",
+            "IMG_4309",
+            "IMG_4321",
+            "IMG_4322",
+            "IMG_4323"
+          ],
+          "approvalStatus": "pending_owner_approval"
+        }
       ]
     },
     {
       "id": "advanced",
       "name": "Advanced",
-      "description": "More involved hip positions, seated warrior shapes and supported standing balance.",
-      "workoutIds": [
-        "IMG_4299",
-        "IMG_4300",
-        "IMG_4310",
-        "IMG_4311",
-        "IMG_4312",
-        "IMG_4313",
-        "IMG_4314",
-        "IMG_4315",
-        "IMG_4316",
-        "IMG_4317",
-        "IMG_4321",
-        "IMG_4322"
+      "description": "Higher-volume, chair-supported standing, balance and side-angle combinations, without exceeding the approved demonstrations.",
+      "assignmentStatus": "pending_owner_approval",
+      "workouts": [
+        {
+          "id": "advanced-01",
+          "title": "Supported Standing Balance Circuit",
+          "emphasis": "Paired Warrior, side-angle and chair-supported tree shapes with a stable-chair setup.",
+          "designNote": "Standing sequence includes bilateral support-based poses and calf mobility.",
+          "movementIds": [
+            "IMG_4285",
+            "IMG_4297",
+            "IMG_4310",
+            "IMG_4311",
+            "IMG_4312",
+            "IMG_4313",
+            "IMG_4314",
+            "IMG_4315",
+            "IMG_4316",
+            "IMG_4317",
+            "IMG_4321",
+            "IMG_4322"
+          ],
+          "approvalStatus": "pending_owner_approval"
+        },
+        {
+          "id": "advanced-02",
+          "title": "Warrior & Side-Angle Flow",
+          "emphasis": "Chair-supported Warrior and side-angle pairs follow spine preparation and finish seated.",
+          "designNote": "More involved standing lateral poses; both sides are included.",
+          "movementIds": [
+            "IMG_4285",
+            "IMG_4290",
+            "IMG_4320",
+            "IMG_4310",
+            "IMG_4311",
+            "IMG_4312",
+            "IMG_4313",
+            "IMG_4314",
+            "IMG_4315",
+            "IMG_4318",
+            "IMG_4292",
+            "IMG_4323"
+          ],
+          "approvalStatus": "pending_owner_approval"
+        },
+        {
+          "id": "advanced-03",
+          "title": "Tree Balance & Hip Opening",
+          "emphasis": "Chair-supported tree and paired hip work follow a gradual posture and reach warm-up.",
+          "designNote": "Standing balance remains chair-supported; paired hip opening.",
+          "movementIds": [
+            "IMG_4285",
+            "IMG_4297",
+            "IMG_4319",
+            "IMG_4316",
+            "IMG_4317",
+            "IMG_4299",
+            "IMG_4300",
+            "IMG_4310",
+            "IMG_4311",
+            "IMG_4321",
+            "IMG_4322",
+            "IMG_4323"
+          ],
+          "approvalStatus": "pending_owner_approval"
+        },
+        {
+          "id": "advanced-04",
+          "title": "Strong Lateral Line",
+          "emphasis": "Side bends and supported Warrior II/side-angle shapes lead to long-line folds and calves.",
+          "designNote": "Bilateral side-body and standing poses with stable chair support.",
+          "movementIds": [
+            "IMG_4285",
+            "IMG_4290",
+            "IMG_4286",
+            "IMG_4287",
+            "IMG_4312",
+            "IMG_4313",
+            "IMG_4314",
+            "IMG_4315",
+            "IMG_4318",
+            "IMG_4320",
+            "IMG_4321",
+            "IMG_4322"
+          ],
+          "approvalStatus": "pending_owner_approval"
+        },
+        {
+          "id": "advanced-05",
+          "title": "Integrated Warrior Sequence",
+          "emphasis": "Shoulder and reach preparation flows through paired Warrior, side-angle and tree shapes.",
+          "designNote": "Integrated standing practice; only supported demonstrations are used.",
+          "movementIds": [
+            "IMG_4285",
+            "IMG_4297",
+            "IMG_4319",
+            "IMG_4310",
+            "IMG_4311",
+            "IMG_4312",
+            "IMG_4313",
+            "IMG_4314",
+            "IMG_4315",
+            "IMG_4316",
+            "IMG_4317",
+            "IMG_4323"
+          ],
+          "approvalStatus": "pending_owner_approval"
+        },
+        {
+          "id": "advanced-06",
+          "title": "Deep Hip & Long-Line Mobility",
+          "emphasis": "A full seated-to-standing arc connects hips, folds, hamstrings, calves and knees.",
+          "designNote": "Longer-volume hip mobility plus supported lower-leg work.",
+          "movementIds": [
+            "IMG_4285",
+            "IMG_4290",
+            "IMG_4319",
+            "IMG_4299",
+            "IMG_4300",
+            "IMG_4318",
+            "IMG_4305",
+            "IMG_4306",
+            "IMG_4321",
+            "IMG_4322",
+            "IMG_4303",
+            "IMG_4304"
+          ],
+          "approvalStatus": "pending_owner_approval"
+        },
+        {
+          "id": "advanced-07",
+          "title": "Balance & Range Control",
+          "emphasis": "Toe/ankle preparation precedes supported tree and Warrior shapes, then calves and rest.",
+          "designNote": "Supported balance progression; no range beyond the demonstrations.",
+          "movementIds": [
+            "IMG_4285",
+            "IMG_4297",
+            "IMG_4309",
+            "IMG_4316",
+            "IMG_4317",
+            "IMG_4310",
+            "IMG_4311",
+            "IMG_4307",
+            "IMG_4308",
+            "IMG_4321",
+            "IMG_4322",
+            "IMG_4323"
+          ],
+          "approvalStatus": "pending_owner_approval"
+        },
+        {
+          "id": "advanced-08",
+          "title": "Full-Body Standing Series",
+          "emphasis": "A compact standing sequence balances Warrior, side-angle, tree and calf demonstrations.",
+          "designNote": "All standing pairs are included in a stable-chair-supported sequence.",
+          "movementIds": [
+            "IMG_4285",
+            "IMG_4319",
+            "IMG_4310",
+            "IMG_4311",
+            "IMG_4312",
+            "IMG_4313",
+            "IMG_4314",
+            "IMG_4315",
+            "IMG_4316",
+            "IMG_4317",
+            "IMG_4321",
+            "IMG_4322"
+          ],
+          "approvalStatus": "pending_owner_approval"
+        },
+        {
+          "id": "advanced-09",
+          "title": "Strength Through Standing Shapes",
+          "emphasis": "Chair-supported Warrior and tree positions combine with ankle and calf preparation.",
+          "designNote": "Standing strength/control with balanced sides and seated reset.",
+          "movementIds": [
+            "IMG_4285",
+            "IMG_4309",
+            "IMG_4310",
+            "IMG_4311",
+            "IMG_4312",
+            "IMG_4313",
+            "IMG_4316",
+            "IMG_4317",
+            "IMG_4321",
+            "IMG_4322",
+            "IMG_4290",
+            "IMG_4323"
+          ],
+          "approvalStatus": "pending_owner_approval"
+        },
+        {
+          "id": "advanced-10",
+          "title": "Side-Angle & Spine Release",
+          "emphasis": "Seated spine work precedes paired side-angle poses and supported lower-leg mobility.",
+          "designNote": "Bilateral trunk rotation and standing lateral line work.",
+          "movementIds": [
+            "IMG_4285",
+            "IMG_4290",
+            "IMG_4286",
+            "IMG_4287",
+            "IMG_4288",
+            "IMG_4289",
+            "IMG_4314",
+            "IMG_4315",
+            "IMG_4318",
+            "IMG_4321",
+            "IMG_4322",
+            "IMG_4323"
+          ],
+          "approvalStatus": "pending_owner_approval"
+        },
+        {
+          "id": "advanced-11",
+          "title": "Supported Tree Flow",
+          "emphasis": "Supported balance poses alternate with Warrior shapes and ankle control.",
+          "designNote": "Chair-supported balance practice with bilateral ankle work.",
+          "movementIds": [
+            "IMG_4285",
+            "IMG_4297",
+            "IMG_4319",
+            "IMG_4316",
+            "IMG_4317",
+            "IMG_4310",
+            "IMG_4311",
+            "IMG_4312",
+            "IMG_4313",
+            "IMG_4307",
+            "IMG_4308",
+            "IMG_4323"
+          ],
+          "approvalStatus": "pending_owner_approval"
+        },
+        {
+          "id": "advanced-12",
+          "title": "Complete Chair Yoga Integration",
+          "emphasis": "A complete seated-to-standing sequence links folds, Warrior, side-angle and supported calves.",
+          "designNote": "Integrated full-body flow; all unilateral movements appear as paired sides.",
+          "movementIds": [
+            "IMG_4285",
+            "IMG_4290",
+            "IMG_4318",
+            "IMG_4320",
+            "IMG_4310",
+            "IMG_4311",
+            "IMG_4312",
+            "IMG_4313",
+            "IMG_4314",
+            "IMG_4315",
+            "IMG_4321",
+            "IMG_4322"
+          ],
+          "approvalStatus": "pending_owner_approval"
+        }
       ]
     }
   ]

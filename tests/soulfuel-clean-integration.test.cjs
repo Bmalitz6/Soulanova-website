@@ -16,7 +16,14 @@ test('selected website preview source stays unchanged except the scoped Chair Yo
     const [metadata, file] = entry.split('\t');
     const [mode, type, hash] = metadata.split(' ');
     assert.equal(type, 'blob');
-    if(file==='app/app.js'){
+    if(file==='app/index.html'){
+      const current=fs.readFileSync(path.join(root,file),'utf8');
+      const original=git('show',base+':'+file).toString();
+      const from='<a class="member-path wellness-program-card" href="/app/#workouts" data-wellness-category="Yoga"><img src="/app/images/workouts/yoga.jpg" width="600" height="338" alt="" loading="lazy"><div><h3>Yoga</h3><p>Explore your existing program</p><strong>Open program →</strong></div></a>';
+      const to='<a class="member-path wellness-program-card" id="chair-yoga-dashboard-entry" href="/app/chair-yoga/" aria-label="Open Chair Yoga with Miriam: 36 proposed complete workouts"><img src="/app/images/chair-yoga/IMG_4285.jpg" width="600" height="338" alt="Miriam seated in the Soulanova Chair Yoga studio" loading="lazy"><div><h3>Chair Yoga</h3><p>36 proposed complete workouts · 12 per level</p><strong>Choose a Chair Yoga workout →</strong></div></a>';
+      assert.equal(original.split(from).length-1,1,'Expected one generic Yoga card in the verified baseline');
+      assert.equal(current,original.replace(from,to),'Only the dashboard Yoga card changes to direct Chair Yoga navigation');
+    }else if(file==='app/app.js'){
       const current=fs.readFileSync(path.join(root,file),'utf8');
       const original=git('show',base+':'+file).toString();
       const replaceOnce=(source,from,to)=>{assert.equal(source.split(from).length-1,1,`Expected one source fragment: ${from}`);return source.replace(from,to)};
@@ -34,9 +41,17 @@ test('selected website preview source stays unchanged except the scoped Chair Yo
       const current=fs.readFileSync(path.join(root,file),'utf8');
       const original=git('show',base+':'+file).toString();
       const from="  for(const [name,category,title]of [['Yoga','Yoga','Gentle Yoga Reset']]){\n   await card(name).click();assert.equal(await page.locator('#category').inputValue(),category);assert.equal(await page.locator('#workouts .sectionhead h2').textContent(),'Your Workout Library');assert.equal(await page.locator('#workout-list h3').textContent(),title);assert.equal(await page.locator('#workout-list').isVisible(),true);await page.locator('#workout-list button').click();assert.equal(await page.locator('#selected-workout h3').textContent(),'Your plan: '+title);await page.locator('[data-tab=home]').click();assert.equal(await page.locator('#home').isVisible(),true);\n  }";
-      const to="  await card('Yoga').click();assert.equal(await page.locator('#category').inputValue(),'Yoga');assert.equal(await page.locator('#workouts .sectionhead h2').textContent(),'Your Workout Library');assert.equal(await page.locator('#workout-list h3').textContent(),'Chair Yoga with Miriam');assert.equal(await page.locator('#workout-list').isVisible(),true);assert.equal(await page.locator('#category option').allTextContents().then(o=>o.some(x=>/pilates/i.test(x))),false);assert.equal(await page.locator('.workout-pilates').count(),0);await page.locator('#workout-list button').click();await page.waitForURL('**/app/chair-yoga/');assert.equal(await page.locator('#auth-title').count(),1);await page.locator('.topbar a[href=\"/app/\"]').click();await page.waitForURL('**/app/');await page.waitForSelector('#soulfuel-dashboard-entry');";
+      const to="  const chairYoga=card('Chair Yoga');await chairYoga.click();await page.waitForURL('**/app/chair-yoga/');assert.equal(await page.locator('#auth-title').count(),1);assert.equal(await page.locator('#member-library').isVisible(),false);await page.locator('.topbar a[href=\"/app/\"]').click();await page.waitForURL('**/app/');await page.waitForSelector('#soulfuel-dashboard-entry');";
       assert.equal(original.split(from).length-1,1,'Expected the previous Yoga browser flow once');
-      assert.equal(current,original.replace(from,to),'Browser acceptance now checks the Chair Yoga route and absence of Pilates');
+      const expected=original.replace("['SoulWalk','Strength','Yoga','Tai Chi','Meditation','Stretching','SoulFuel']","['SoulWalk','Strength','Chair Yoga','Tai Chi','Meditation','Stretching','SoulFuel']").replace(from,to);
+      assert.equal(current,expected,'Browser acceptance now checks direct Chair Yoga navigation and absence of Pilates');
+    }else if(file==='tests/pilates-removal.test.cjs'){
+      const current=fs.readFileSync(path.join(root,file),'utf8');
+      const original=git('show',base+':'+file).toString();
+      const from="['SoulWalk', 'Strength', 'Yoga', 'Tai Chi', 'Meditation', 'Stretching', 'SoulFuel']";
+      const to="['SoulWalk', 'Strength', 'Chair Yoga', 'Tai Chi', 'Meditation', 'Stretching', 'SoulFuel']";
+      assert.equal(original.split(from).length-1,1);
+      assert.equal(current,original.replace(from,to),'Pilates regression confirms the renamed dashboard Chair Yoga entry');
     }else assert.equal(git('hash-object',file).toString().trim(), hash, file);
   }
 });

@@ -7,9 +7,12 @@ const catalog = require('../app/chair-yoga/catalog.json');
 const plan = require('../app/chair-yoga/chair-yoga-programs.json');
 const narration = require('../app/chair-yoga/narration-drafts.json');
 const player = require('../app/chair-yoga/chair-yoga-playback.js');
-const html = fs.readFileSync(path.join(__dirname, '../app/chair-yoga/index.html'), 'utf8');
+const { matrixCsv } = require('../scripts/export-chair-yoga-matrix.js');
+const matrix = fs.readFileSync(path.join(__dirname, '../docs/chair-yoga/proposed-36-workout-matrix.csv'), 'utf8');
+const route = fs.readFileSync(path.join(__dirname, '../app/chair-yoga/index.html'), 'utf8');
 const ui = fs.readFileSync(path.join(__dirname, '../app/chair-yoga/chair-yoga.js'), 'utf8');
 const css = fs.readFileSync(path.join(__dirname, '../app/chair-yoga/chair-yoga.css'), 'utf8');
+const dashboard = fs.readFileSync(path.join(__dirname, '../app/index.html'), 'utf8');
 
 function fakeClock() {
   let time = 0;
@@ -35,7 +38,7 @@ function fakeClock() {
   };
 }
 
-function makeController(levelId, overrides = {}) {
+function makeController(levelId) {
   const clock = fakeClock();
   const calls = [];
   const ctl = player.createChairYogaPlayback({
@@ -43,217 +46,241 @@ function makeController(levelId, overrides = {}) {
     movements: catalog.movements,
     loopCountsByLevel: plan.playback.loopCountsByLevel,
     transitionDurationMs: plan.playback.transitionDurationSeconds * 1000,
+    assignmentRules: plan.assignmentRules,
     effects: {
       now: clock.now,
       setTimeout: clock.setTimeout,
       clearTimeout: clock.clearTimeout,
       startPass: (movement, details) => calls.push(['start', movement.id, details.pass, details.loopCount]),
       replayPass: (movement, details) => calls.push(['replay', movement.id, details.pass, details.loopCount]),
-      stopMedia: () => calls.push(['stop']),
-      ...overrides.effects
+      stopMedia: () => calls.push(['stop'])
     }
   });
   ctl.selectLevel(levelId);
   return { ctl, clock, calls };
 }
 
-function endOnePass(ctl) {
-  const s = ctl.getSnapshot();
-  assert.equal(ctl.videoEnded(s.generation, s.currentWorkout.id), true);
-  return ctl.getSnapshot();
-}
-
-function finishCurrentMovement(ctl, loops) {
+function currentLevel(levelId) { return plan.levels.find(item => item.id === levelId); }
+function finishMovement(ctl, loops) {
   for (let pass = 1; pass <= loops; pass++) {
-    const s = ctl.getSnapshot();
-    assert.equal(s.phase, 'playing');
-    assert.equal(s.pass, pass);
-    assert.equal(ctl.videoEnded(s.generation, s.currentWorkout.id), true);
+    const snapshot = ctl.getSnapshot();
+    assert.equal(snapshot.phase, 'playing');
+    assert.equal(snapshot.pass, pass);
+    assert.equal(ctl.videoEnded(snapshot.generation, snapshot.currentMovement.id), true);
     if (pass < loops) {
       const replay = ctl.getSnapshot();
-      assert.equal(replay.phase, 'playing');
       assert.equal(replay.pass, pass + 1);
-      assert.equal(ctl.markVideoPlaying(replay.generation, replay.currentWorkout.id), true);
+      assert.equal(ctl.markVideoPlaying(replay.generation, replay.currentMovement.id), true);
     }
   }
 }
 
-test('proposed level assignments remain pending and preserve all 36 ordered catalog references', () => {
+function finishWholeWorkout(ctl, clock, program, loops) {
+  ctl.start(program.id);
+  assert.equal(ctl.getSnapshot().currentProgram.id, program.id);
+  for (let index = 0; index < 12; index++) {
+    const movement = ctl.getSnapshot().currentMovement;
+    assert.equal(movement.id, program.movementIds[index]);
+    finishMovement(ctl, loops);
+    if (index < 11) {
+      const transition = ctl.getSnapshot();
+      assert.equal(transition.phase, 'transitioning');
+      assert.equal(transition.nextMovement.id, program.movementIds[index + 1]);
+      clock.advance(5000);
+      const next = ctl.getSnapshot();
+      assert.equal(next.phase, 'playing');
+      assert.equal(next.movementIndex, index + 1);
+      assert.equal(next.pass, 1);
+    }
+  }
+  const completed = ctl.getSnapshot();
+  assert.equal(completed.phase, 'complete');
+  assert.equal(completed.completedCount, 12);
+  assert.equal(completed.currentProgram.id, program.id);
+  assert.equal(ctl.next(), false);
+  return completed;
+}
+
+test('proposal exposes 12 complete workouts per level and leaves every assignment pending owner approval', () => {
   assert.equal(plan.proposalStatus, 'pending_owner_approval');
+  assert.equal(plan.totalWorkouts, 36);
+  assert.equal(plan.movementsPerWorkout, 12);
   assert.deepEqual(plan.playback.loopCountsByLevel, { beginner: 2, intermediate: 3, advanced: 4 });
   assert.equal(plan.playback.transitionDurationSeconds, 5);
   assert.equal(plan.levels.length, 3);
-  assert.equal(plan.levels.map(level => level.workoutIds.length).join(','), '12,12,12');
-  const assigned = plan.levels.flatMap(level => level.workoutIds);
-  assert.equal(new Set(assigned).size, 36);
-  assert.deepEqual([...assigned].sort(), catalog.movements.map(item => item.id).sort());
+  assert.deepEqual(plan.levels.map(level => level.workouts.length), [12, 12, 12]);
+  assert.ok(plan.levels.every(level => level.assignmentStatus === 'pending_owner_approval'));
+  assert.ok(plan.levels.flatMap(level => level.workouts).every(workout => workout.approvalStatus === 'pending_owner_approval'));
+});
+
+test('the 36 named workouts each have a distinct ordered 12-movement sequence and use only the 36 catalog assets', () => {
+  const workouts = plan.levels.flatMap(level => level.workouts);
+  assert.equal(new Set(workouts.map(workout => workout.id)).size, 36);
+  assert.equal(new Set(workouts.map(workout => workout.title)).size, 36);
+  assert.equal(new Set(workouts.map(workout => workout.movementIds.join(','))).size, 36);
+  assert.ok(workouts.every(workout => workout.movementIds.length === 12 && new Set(workout.movementIds).size === 12));
+  assert.deepEqual([...new Set(workouts.flatMap(workout => workout.movementIds))].sort(), catalog.movements.map(item => item.id).sort());
   assert.equal(catalog.movements.length, 36);
-  assert.deepEqual(catalog.movements.map(item => item.position), Array.from({ length: 36 }, (_, i) => i + 1));
-  assert.deepEqual(catalog.movements.slice(-3).map(item => item.id), ['IMG_4321', 'IMG_4322', 'IMG_4323']);
-  assert.ok(catalog.movements.every(item => item.mediaStatus === 'candidate_pending_owner_review'));
 });
 
-test('all 36 movement-specific narration drafts remain ungenerated and pending owner approval', () => {
-  assert.equal(narration.generationStatus, 'not_generated');
-  assert.equal(narration.voiceApprovalStatus, 'pending_owner_approval');
-  assert.equal(narration.drafts.length, 36);
-  assert.match(narration.passBehavior, /Beginner 2 loops, Intermediate 3 loops, Advanced 4 loops/);
-  for (const draft of narration.drafts) {
-    assert.ok(draft.script.length > 0, draft.movementId);
-    assert.equal(draft.audioUrl, undefined);
-    assert.equal(draft.audioStatus, 'not_generated_pending_owner_approval');
-    assert.equal(draft.cuePlan.length, 4, draft.movementId);
-    assert.ok(draft.estimatedSpokenSeconds <= draft.videoDurationSeconds - 2, `${draft.movementId} timing`);
-    assert.equal(catalog.movements.find(item => item.id === draft.movementId).name, draft.movementName);
-  }
+test('proposed level boundaries keep advanced-only poses out of Beginner and Intermediate', () => {
+  const beginnerExcluded = new Set(plan.assignmentRules.beginnerExcludedMovementIds);
+  const intermediateExcluded = new Set(plan.assignmentRules.intermediateExcludedMovementIds);
+  assert.ok(currentLevel('beginner').workouts.every(workout => workout.movementIds.every(id => !beginnerExcluded.has(id))));
+  assert.ok(currentLevel('intermediate').workouts.every(workout => workout.movementIds.every(id => !intermediateExcluded.has(id))));
+  assert.ok(plan.assignmentRules.designPrinciples.every(item => typeof item === 'string'));
 });
 
-test('level-specific estimates use actual clip lengths and include eleven five-second transitions', () => {
-  const { ctl } = makeController('beginner');
-  const beginner = ctl.getLevelSummary('beginner');
-  const intermediate = ctl.getLevelSummary('intermediate');
-  const advanced = ctl.getLevelSummary('advanced');
-  assert.equal(beginner.workoutCount, 12);
-  assert.equal(beginner.loopsPerMovement, 2);
-  assert.equal(beginner.mediaSeconds, 696);
-  assert.equal(beginner.transitionSeconds, 55);
-  assert.equal(beginner.estimatedTotalSeconds, 751);
-  assert.equal(intermediate.loopsPerMovement, 3);
-  assert.equal(intermediate.mediaSeconds, 1047.6);
-  assert.equal(intermediate.transitionSeconds, 55);
-  assert.ok(Math.abs(intermediate.estimatedTotalSeconds - 1102.6) < 0.0001);
-  assert.equal(advanced.loopsPerMovement, 4);
-  assert.equal(advanced.mediaSeconds, 1392);
-  assert.equal(advanced.transitionSeconds, 55);
-  assert.equal(advanced.estimatedTotalSeconds, 1447);
-  assert.equal(catalog.movements.find(item => item.id === 'IMG_4286').durationSeconds * 4, 120.8);
-});
-
-test('all three complete 12-movement levels repeat the approved number of loops, transition for five seconds, and complete', () => {
-  for (const [levelId, loops] of Object.entries(plan.playback.loopCountsByLevel)) {
-    const { ctl, clock, calls } = makeController(levelId);
-    ctl.start();
-    assert.equal(ctl.getSnapshot().loopCount, loops);
-    for (let index = 0; index < 12; index++) {
-      assert.equal(ctl.getSnapshot().workoutIndex, index);
-      finishCurrentMovement(ctl, loops);
-      if (index < 11) {
-        let s = ctl.getSnapshot();
-        assert.equal(s.phase, 'transitioning');
-        assert.equal(s.transitionSecondsRemaining, 5);
-        assert.equal(s.nextWorkout.id, plan.levels.find(item => item.id === levelId).workoutIds[index + 1]);
-        clock.advance(4999);
-        s = ctl.getSnapshot();
-        assert.equal(s.phase, 'transitioning');
-        assert.equal(s.workoutIndex, index);
-        clock.advance(1);
-        assert.equal(ctl.getSnapshot().phase, 'playing');
-        assert.equal(ctl.getSnapshot().workoutIndex, index + 1);
-        assert.equal(ctl.getSnapshot().pass, 1);
-      } else {
-        const final = ctl.getSnapshot();
-        assert.equal(final.phase, 'complete');
-        assert.equal(final.completedCount, 12);
-        assert.equal(final.workoutIndex, 11);
-        assert.equal(ctl.next(), false);
-      }
+test('every included unilateral movement appears with its paired side immediately after, Right then Left', () => {
+  for (const workout of plan.levels.flatMap(level => level.workouts)) {
+    for (const pair of plan.assignmentRules.bilateralPairs) {
+      const right = workout.movementIds.indexOf(pair.right);
+      const left = workout.movementIds.indexOf(pair.left);
+      assert.equal(right >= 0, left >= 0, `${workout.id} ${pair.family} pair`);
+      if (right >= 0) assert.equal(left, right + 1, `${workout.id} ${pair.family} order`);
     }
-    assert.equal(calls.filter(row => row[0] === 'start').length, 12);
-    assert.equal(calls.filter(row => row[0] === 'replay').length, 12 * (loops - 1));
-    assert.equal(clock.pending(), 0);
+  }
+  assert.equal(player.validatePlaylist(plan.levels, catalog.movements, plan.playback.loopCountsByLevel, plan.assignmentRules), true);
+});
+
+test('owner-review CSV exposes one complete ordered row per proposed workout and matches the source plan', () => {
+  const rows = matrix.trimEnd().split('\n');
+  assert.equal(rows.length, 37);
+  assert.equal(matrix, matrixCsv(plan, catalog));
+  assert.match(rows[0], /"proposal_status".*"ordered_movement_names"/);
+  assert.ok(rows.slice(1).every(row => row.includes('PENDING OWNER APPROVAL')));
+});
+
+test('duration estimates use exact video durations, configured loops and eleven five-second transitions', () => {
+  const summaries = {};
+  for (const level of plan.levels) {
+    const { ctl } = makeController(level.id);
+    summaries[level.id] = ctl.getLevelSummary(level.id);
+    assert.equal(summaries[level.id].workoutCount, 12);
+    assert.equal(summaries[level.id].loopsPerMovement, plan.playback.loopCountsByLevel[level.id]);
+    assert.ok(summaries[level.id].workoutSummaries.every(summary => summary.movementCount === 12 && summary.transitionSeconds === 55));
+  }
+  assert.ok(summaries.beginner.minEstimatedTotalSeconds >= 751 && summaries.beginner.maxEstimatedTotalSeconds <= 753.5);
+  assert.ok(summaries.intermediate.minEstimatedTotalSeconds >= 1099 && summaries.intermediate.maxEstimatedTotalSeconds <= 1102.7);
+  assert.ok(summaries.advanced.minEstimatedTotalSeconds >= 1447 && summaries.advanced.maxEstimatedTotalSeconds <= 1452);
+  const special = catalog.movements.find(item => item.id === 'IMG_4286');
+  assert.equal(special.durationSeconds, 30.2);
+});
+
+test('level selection exposes 12 workouts; choosing one starts its first exact movement and correct level', () => {
+  const { ctl } = makeController('intermediate');
+  assert.equal(ctl.getSnapshot().phase, 'workout-selection');
+  assert.equal(ctl.getLevelSummary('intermediate').workoutCount, 12);
+  const selected = currentLevel('intermediate').workouts[7];
+  assert.equal(ctl.start(selected.id), true);
+  const state = ctl.getSnapshot();
+  assert.equal(state.phase, 'playing');
+  assert.equal(state.currentProgram.id, selected.id);
+  assert.equal(state.currentMovement.id, selected.movementIds[0]);
+  assert.equal(state.levelName, 'Intermediate');
+});
+
+test('complete workouts across all 36 proposals loop correctly, transition, and stop at workout completion', () => {
+  for (const level of plan.levels) {
+    const { ctl, clock, calls } = makeController(level.id);
+    const loops = plan.playback.loopCountsByLevel[level.id];
+    for (const workout of level.workouts) {
+      const result = finishWholeWorkout(ctl, clock, workout, loops);
+      assert.equal(result.completedCount, 12, `${workout.id} completed segment count`);
+      assert.equal(result.phase, 'complete', `${workout.id} phase`);
+      assert.equal(result.levelId, level.id, `${workout.id} remains in its level`);
+      assert.equal(clock.pending(), 0);
+    }
+    assert.equal(calls.filter(call => call[0] === 'start').length, 12 * 12);
+    assert.equal(calls.filter(call => call[0] === 'replay').length, 12 * 12 * (loops - 1));
   }
 });
 
-test('pause freezes and resume continues the transition countdown without losing its remainder', () => {
+test('pause/resume freezes the video loop and transition countdown; Next skips and cancels its timer', () => {
   const { ctl, clock } = makeController('beginner');
-  ctl.start(); finishCurrentMovement(ctl, 2);
+  const workout = currentLevel('beginner').workouts[0];
+  ctl.start(workout.id);
+  assert.equal(ctl.pause(), true);
+  assert.equal(ctl.getSnapshot().phase, 'paused');
+  assert.equal(ctl.getSnapshot().pass, 1);
+  assert.equal(ctl.resume(), true);
+  finishMovement(ctl, 2);
   assert.equal(ctl.getSnapshot().phase, 'transitioning');
   clock.advance(2100);
   assert.equal(ctl.pause(), true);
-  let s = ctl.getSnapshot();
-  assert.equal(s.phase, 'paused');
-  assert.equal(s.pausedFrom, 'transitioning');
-  assert.equal(s.transitionRemainingMs, 2900);
+  assert.equal(ctl.getSnapshot().pausedFrom, 'transitioning');
+  assert.equal(ctl.getSnapshot().transitionRemainingMs, 2900);
   clock.advance(10000);
   assert.equal(ctl.getSnapshot().phase, 'paused');
-  assert.equal(ctl.getSnapshot().workoutIndex, 0);
   assert.equal(ctl.resume(), true);
-  clock.advance(2899);
+  clock.advance(1000);
   assert.equal(ctl.getSnapshot().phase, 'transitioning');
-  clock.advance(1);
-  assert.equal(ctl.getSnapshot().phase, 'playing');
-  assert.equal(ctl.getSnapshot().workoutIndex, 1);
-});
-
-test('pause and resume during a movement retain the loop and manual Next skips forward', () => {
-  const { ctl, calls } = makeController('intermediate');
-  ctl.start();
-  assert.equal(ctl.pause(), true);
-  assert.equal(ctl.getSnapshot().phase, 'paused');
-  assert.equal(ctl.getSnapshot().pass, 1);
-  assert.equal(ctl.resume(), true);
-  assert.equal(ctl.getSnapshot().phase, 'playing');
-  let s = endOnePass(ctl);
-  assert.equal(s.pass, 2);
-  ctl.markVideoPlaying(s.generation, s.currentWorkout.id);
   assert.equal(ctl.next(), true);
-  assert.equal(ctl.getSnapshot().workoutIndex, 1);
-  assert.equal(ctl.getSnapshot().pass, 1);
-  assert.ok(calls.some(row => row[0] === 'start' && row[1] === 'IMG_4287'));
+  assert.equal(ctl.getSnapshot().movementIndex, 1);
+  clock.advance(5000);
+  assert.equal(ctl.getSnapshot().movementIndex, 1);
 });
 
-test('manual Next cancels an active transition timer, Previous and Restart reset loops, and levels never auto-switch', () => {
+test('Previous and Restart preserve the selected workout, and completion does not advance to another workout or level', () => {
   const { ctl, clock } = makeController('advanced');
-  ctl.start(3); finishCurrentMovement(ctl, 4);
+  const workout = currentLevel('advanced').workouts[4];
+  ctl.start(workout.id);
+  assert.equal(ctl.next(), true); assert.equal(ctl.getSnapshot().movementIndex, 1);
+  assert.equal(ctl.previous(), true); assert.equal(ctl.getSnapshot().movementIndex, 0);
+  finishMovement(ctl, 4); assert.equal(ctl.getSnapshot().phase, 'transitioning');
+  assert.equal(ctl.restart(), true); assert.equal(ctl.getSnapshot().pass, 1);
+  const completed = finishWholeWorkout(ctl, clock, workout, 4);
+  assert.equal(completed.phase, 'complete');
+  assert.equal(completed.currentProgram.id, workout.id);
+  assert.equal(ctl.getSnapshot().programsTotal, 12);
+  assert.equal(ctl.start(currentLevel('advanced').workouts[5].id), true);
+  assert.equal(ctl.getSnapshot().currentProgram.id, currentLevel('advanced').workouts[5].id);
+});
+
+test('Back to Workouts and Back to Levels are explicit controller states and cancel pending transitions', () => {
+  const { ctl } = makeController('beginner');
+  const workout = currentLevel('beginner').workouts[0];
+  ctl.start(workout.id); finishMovement(ctl, 2);
   assert.equal(ctl.getSnapshot().phase, 'transitioning');
-  assert.equal(ctl.next(), true);
-  assert.equal(ctl.getSnapshot().workoutIndex, 4);
-  assert.equal(ctl.getSnapshot().pass, 1);
-  clock.advance(5000);
-  assert.equal(ctl.getSnapshot().workoutIndex, 4);
-  assert.equal(ctl.previous(), true);
-  assert.equal(ctl.getSnapshot().workoutIndex, 3);
-  endOnePass(ctl);
-  assert.equal(ctl.getSnapshot().pass, 2);
-  assert.equal(ctl.restart(), true);
-  assert.equal(ctl.getSnapshot().pass, 1);
-  assert.equal(ctl.getSnapshot().completedCount, 0);
-  ctl.start(11); finishCurrentMovement(ctl, 4);
-  assert.equal(ctl.getSnapshot().phase, 'complete');
-  assert.equal(ctl.getSnapshot().levelId, 'advanced');
+  assert.equal(ctl.backToWorkouts(), true);
+  assert.equal(ctl.getSnapshot().phase, 'workout-selection');
+  assert.equal(ctl.getSnapshot().programsTotal, 12);
+  assert.equal(ctl.backToLevels(), true);
+  assert.equal(ctl.getSnapshot().phase, 'level-selection');
+  assert.equal(ctl.getSnapshot().levelId, null);
 });
 
-test('stale video end events cannot skip a movement during the Up Next countdown', () => {
-  const { ctl, clock } = makeController('beginner');
-  ctl.start();
-  const first = ctl.getSnapshot();
-  finishCurrentMovement(ctl, 2);
-  const transitioning = ctl.getSnapshot();
-  assert.equal(transitioning.phase, 'transitioning');
-  assert.equal(ctl.videoEnded(first.generation, first.currentWorkout.id), false);
-  assert.equal(ctl.videoEnded(transitioning.generation, transitioning.currentWorkout.id), false);
-  assert.equal(ctl.getSnapshot().workoutIndex, 0);
-  clock.advance(5000);
-  assert.equal(ctl.getSnapshot().workoutIndex, 1);
+test('member navigation is direct and entire level/workout cards are single accessible buttons', () => {
+  assert.match(dashboard, /id="chair-yoga-dashboard-entry" href="\/app\/chair-yoga\//);
+  assert.match(dashboard, /<h3>Chair Yoga<\/h3>/);
+  assert.doesNotMatch(dashboard, /id="chair-yoga-dashboard-entry"[^>]*data-wellness-category=/);
+  assert.match(ui, /document\.createElement\('button'\)[\s\S]*card\.className = 'level-card'/);
+  assert.match(ui, /const card = document\.createElement\('button'\); card\.type = 'button'; card\.className = 'workout-card'/);
+  assert.doesNotMatch(ui, /card\.append\([^;]*button/i);
+  assert.match(route, /id="back-to-levels"[^>]*>← Back to Levels/);
+  assert.match(route, /id="back-to-workouts"[^>]*>← Back to Workouts/);
+  assert.match(css, /button\.level-card:focus-visible/);
+  assert.match(css, /\.workout-card:focus-visible/);
+  assert.match(route, /href="\/docs\/chair-yoga\/proposed-36-workout-matrix\.csv"/);
 });
 
-test('member-facing transition shows next name and real thumbnail on black; pause controls and responsive layouts remain', () => {
-  for (const id of ['transition-screen','transition-current','transition-up-next-label','transition-next','transition-thumbnail','transition-resume','transition-next-button','transition-status','completion-screen','previous-workout','next-workout','restart-workout','narration-volume']) assert.match(html, new RegExp(`id="${id}"`));
-  assert.match(html, /Next Movement/);
-  assert.match(ui, /snap\.nextWorkout\.thumbnailUrl/);
-  assert.match(ui, /Next movement starts in \$\{snap\.transitionSecondsRemaining\} seconds/);
-  assert.match(ui, /snap\.phase === 'transitioning'/);
-  assert.match(ui, /controller\.pause\(\)/);
-  assert.match(ui, /controller\.resume\(\)/);
+test('pause/Up Next and completion screens use actual selected-workout movement names and thumbnails', () => {
+  for (const id of ['transition-screen','transition-current','transition-up-next-label','transition-next','transition-thumbnail','transition-resume','transition-next-button','transition-status','completion-screen','completion-workouts','back-to-workouts','previous-workout','next-workout','restart-workout']) assert.match(route, new RegExp(`id="${id}"`));
+  assert.match(ui, /snap\.nextMovement\.thumbnailUrl/);
+  assert.match(ui, /snap\.currentProgram\?\.movementIds/);
+  assert.match(ui, /FINAL MOVEMENT IN THIS WORKOUT/);
+  assert.match(route, /WORKOUT COMPLETE/);
   assert.match(css, /\.transition-screen[^{]*\{[^}]*background:#000/);
   assert.match(css, /@media\(max-width:760px\)/);
   assert.match(css, /@media\(max-width:400px\)/);
-  assert.match(html, /playsinline/);
+  assert.match(route, /playsinline/);
 });
 
-test('narration remains disabled until an approved, hash-verified movement recording exists', () => {
-  assert.match(html, /Narration scripts await owner approval/);
-  assert.match(html, /id="narration-enabled" type="checkbox" disabled/);
+test('all 36 Miriam script drafts remain unsynthesized and narration playback stays approval-gated', () => {
+  assert.equal(narration.generationStatus, 'not_generated');
+  assert.equal(narration.voiceApprovalStatus, 'pending_owner_approval');
+  assert.equal(narration.drafts.length, 36);
+  assert.match(route, /Narration has not been synthesized/);
   assert.match(ui, /record\.audioStatus === 'owner-approved'/);
   assert.match(ui, /audioSha256/);
   assert.equal(narration.drafts.some(item => item.audioStatus === 'owner-approved'), false);

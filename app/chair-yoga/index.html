@@ -4,7 +4,7 @@
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <meta name="theme-color" content="#0b4b53">
-  <meta name="description" content="Three levels of Chair Yoga workouts with Miriam for signed-in Soulanova members.">
+  <meta name="description" content="Thirty-six proposed Chair Yoga workouts with Miriam across Beginner, Intermediate and Advanced levels.">
   <title>Chair Yoga with Miriam | Soulanova</title>
   <link rel="icon" href="/assets/soulanova-logo.png">
   <link rel="stylesheet" href="/app/chair-yoga/chair-yoga.css">
@@ -32,32 +32,32 @@
         <div>
           <p class="eyebrow">SOULANOVA · YOGA</p>
           <h1>Chair Yoga <em>with Miriam</em></h1>
-          <p>Choose a proposed 12-movement level. Each movement repeats for the level's loop count, followed by a five-second Up Next transition with the next movement's thumbnail.</p>
+          <p>Choose a level, then one of its 12 proposed complete workouts. Each workout contains 12 ordered movements with a five-second Up Next transition between movements.</p>
         </div>
         <img src="/app/images/chair-yoga/IMG_4285.jpg" width="480" height="270" alt="Miriam seated in the Soulanova Chair Yoga studio">
       </section>
-      <p class="preview-notice"><strong>Owner review preview:</strong> difficulty levels and narration scripts are proposals pending approval. Videos remain preview candidates. No narration recordings have been generated; player narration controls stay unavailable until recordings and approval are present.</p>
+      <p class="preview-notice"><strong>Owner review preview:</strong> all 36 workout sequences and difficulty assignments remain proposed and pending owner approval. The workout matrix is <a href="/docs/chair-yoga/proposed-36-workout-matrix.csv">available as a CSV</a>. The 36 original Miriam videos are unchanged. Narration has not been synthesized.</p>
 
       <section id="level-selection" class="library" aria-labelledby="level-heading">
         <div class="library-heading">
-          <div><p class="eyebrow">THREE PROPOSED LEVELS · ASSIGNMENTS PENDING OWNER APPROVAL</p><h2 id="level-heading">Choose your level</h2></div>
+          <div><p class="eyebrow">36 PROPOSED WORKOUTS · ASSIGNMENTS PENDING OWNER APPROVAL</p><h2 id="level-heading">Choose your level</h2></div>
         </div>
         <div id="level-list" class="level-grid"></div>
       </section>
 
-      <section id="playlist-view" class="library" aria-labelledby="playlist-heading" hidden>
+      <section id="workout-selection" class="library" aria-labelledby="workout-selection-heading" hidden>
         <div class="library-heading">
-          <div><p id="playlist-eyebrow" class="eyebrow">12 WORKOUTS</p><h2 id="playlist-heading">Workout playlist</h2><p id="playlist-summary" class="player-meta"></p></div>
-          <button id="back-to-levels" class="secondary" type="button">← Levels</button>
+          <div><p id="workout-selection-eyebrow" class="eyebrow">12 PROPOSED WORKOUTS</p><h2 id="workout-selection-heading">Beginner Chair Yoga</h2><p id="workout-selection-summary" class="player-meta"></p></div>
+          <button id="back-to-levels" class="secondary" type="button">← Back to Levels</button>
         </div>
-        <button id="start-level" class="button primary" type="button">Start level playlist</button>
-        <div id="workout-list" class="workout-grid" aria-label="Level workout playlist"></div>
+        <div id="workout-list" class="workout-grid" aria-label="Twelve proposed complete workouts"></div>
       </section>
 
       <section id="player-view" class="player-card" aria-labelledby="player-heading" hidden>
         <div class="player-heading">
-          <div><p id="player-eyebrow" class="eyebrow">BEGINNER · WORKOUT 1 OF 12</p><h2 id="player-heading">Choose a workout</h2><p id="player-meta" class="player-meta"></p></div>
+          <div><p id="player-eyebrow" class="eyebrow">BEGINNER · PROPOSED WORKOUT · MOVEMENT 1 OF 12</p><h2 id="player-heading">Choose a workout</h2><p id="player-meta" class="player-meta"></p></div>
           <span id="player-position" class="position" aria-live="polite"></span>
+          <button id="back-to-workouts" class="secondary" type="button">← Back to Workouts</button>
         </div>
         <div class="video-stage" id="video-stage">
           <video id="chair-yoga-video" playsinline preload="metadata" aria-label="Chair Yoga workout demonstration by Miriam"></video>
@@ -71,7 +71,7 @@
             <div class="transition-controls"><button id="transition-resume" class="button primary" type="button">Resume</button><button id="transition-next-button" class="button secondary" type="button">Next Movement</button></div>
           </div>
           <div id="completion-screen" class="completion-screen" hidden>
-            <p class="eyebrow">PLAYLIST COMPLETE</p><h2>Level complete</h2><p id="completion-summary"></p><button id="completion-levels" class="button primary" type="button">Choose another level</button>
+            <p class="eyebrow">WORKOUT COMPLETE</p><h2>Workout complete</h2><p id="completion-summary"></p><button id="completion-workouts" class="button primary" type="button">Back to Workouts</button>
           </div>
           <div id="playback-error" class="playback-error" hidden role="alert"><p id="playback-error-message">Playback needs a tap to resume.</p><button id="error-resume" class="button primary" type="button">Resume</button></div>
         </div>
@@ -86,7 +86,7 @@
           <label class="volume-label">Volume <input id="narration-volume" type="range" min="0" max="1" step="0.05" value="0.8" disabled></label>
           <button id="narration-mute" type="button" disabled>Mute narration</button>
         </section>
-        <section class="up-next-panel" aria-labelledby="up-next-heading"><h3 id="up-next-heading">Playlist progress</h3><p id="up-next-copy"></p><div id="player-sequence" class="sequence-strip"></div></section>
+        <section class="up-next-panel" aria-labelledby="up-next-heading"><h3 id="up-next-heading">Workout progress</h3><p id="up-next-copy"></p><div id="player-sequence" class="sequence-strip"></div></section>
       </section>
     </div>
   </main>

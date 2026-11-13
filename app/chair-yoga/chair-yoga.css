@@ -7,3 +7,13 @@
 @media(max-width:760px){.level-grid{grid-template-columns:1fr}.level-card{display:grid;grid-template-columns:minmax(100px,32%) 1fr}.level-card>img{height:100%;min-height:150px;aspect-ratio:auto}.workout-grid{grid-template-columns:repeat(2,minmax(0,1fr));gap:10px}.workout-card h3{font-size:17px}.workout-card-copy{padding:9px}.video-stage{width:100%;aspect-ratio:4/3;max-height:58vh;margin:12px auto}.progress-summary{grid-template-columns:1fr auto}.progress-summary progress{grid-row:2;grid-column:1/-1}.sequence-strip{grid-template-columns:repeat(3,minmax(0,1fr))}.transition-screen img{width:clamp(112px,34vw,180px);height:clamp(64px,16vh,108px)}}
 @media(max-width:400px){.level-card{grid-template-columns:95px 1fr}.workout-grid{grid-template-columns:1fr}.player-controls button{flex:1;min-width:calc(50% - 8px)}.narration-panel{align-items:flex-start}.sequence-strip{grid-template-columns:repeat(2,minmax(0,1fr))}}
 @media(prefers-reduced-motion:reduce){.workout-card{transition:none}}
+
+/* Phase 4: full-card navigation for all 36 proposed complete workouts. */
+button.level-card{display:flex;width:100%;padding:0;border:1px solid var(--line);border-radius:18px;background:#fff;color:var(--ink);text-align:left;font:inherit;cursor:pointer;overflow:hidden;box-shadow:0 3px 12px #0b4b5308;transition:transform .15s,box-shadow .15s}
+button.level-card:hover{transform:translateY(-2px);box-shadow:0 9px 20px #0b4b5317}
+button.level-card:focus-visible{outline:3px solid #b88223;outline-offset:3px}
+.level-card-copy{min-width:0}
+button.level-card h3{font:400 22px/1.2 Georgia,serif;color:var(--teal)}
+button.level-card p{color:var(--muted);font-size:14px}
+.workout-card{min-height:100%;}
+.workout-card:focus-visible{outline:3px solid #b88223;outline-offset:3px}

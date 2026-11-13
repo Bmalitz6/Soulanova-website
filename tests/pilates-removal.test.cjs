@@ -30,7 +30,7 @@ test('Pilates route is retired while history records remain renderable without a
 });
 
 test('other active member programs remain in the dashboard and workout data', () => {
-  for (const label of ['SoulWalk', 'Strength', 'Yoga', 'Tai Chi', 'Meditation', 'Stretching', 'SoulFuel']) {
+  for (const label of ['SoulWalk', 'Strength', 'Chair Yoga', 'Tai Chi', 'Meditation', 'Stretching', 'SoulFuel']) {
     assert.ok(dashboard.includes(`<h3>${label}</h3>`), `${label} dashboard tile remains`);
   }
   for (const label of ['Tai Chi', 'Yoga', 'Strength', 'Stretch & Mobility', 'Low-Impact Cardio', 'Meditation']) {

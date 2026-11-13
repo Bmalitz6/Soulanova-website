@@ -5,14 +5,33 @@
 })(typeof globalThis !== 'undefined' ? globalThis : this, function () {
   'use strict';
 
-  function validatePlaylist(levels, movements, loopCountsByLevel) {
-    if (!Array.isArray(levels) || levels.length !== 3) throw new Error('Chair Yoga requires three levels.');
-    const ids = levels.flatMap(level => level.workoutIds || []);
-    if (levels.some(level => !level.id || level.workoutIds?.length !== 12)) throw new Error('Each Chair Yoga level must contain 12 workouts.');
-    if (ids.length !== 36 || new Set(ids).size !== 36) throw new Error('The proposed levels must map 36 unique movement workouts.');
-    if (movements.length !== 36 || ids.some(id => !movements.some(item => item.id === id))) throw new Error('A level refers to a missing Chair Yoga movement.');
+  function validatePlaylist(levels, movements, loopCountsByLevel, assignmentRules = {}) {
+    if (!Array.isArray(levels) || levels.length !== 3) throw new Error('Chair Yoga requires three proposed levels.');
+    const movementIds = new Set(movements.map(movement => movement.id));
+    const workoutIds = [];
     for (const level of levels) {
+      if (!level.id || !Array.isArray(level.workouts) || level.workouts.length !== 12) throw new Error('Each proposed level must contain 12 workouts.');
       if (!Number.isInteger(loopCountsByLevel?.[level.id]) || loopCountsByLevel[level.id] < 1) throw new Error(`A valid loop count is required for ${level.id}.`);
+      for (const workout of level.workouts) {
+        workoutIds.push(workout.id);
+        if (workout.approvalStatus !== 'pending_owner_approval') throw new Error(`Workout ${workout.id} must remain pending owner approval.`);
+        if (!Array.isArray(workout.movementIds) || workout.movementIds.length !== 12 || new Set(workout.movementIds).size !== 12) throw new Error(`Workout ${workout.id} must contain 12 distinct movement segments.`);
+        if (workout.movementIds.some(id => !movementIds.has(id))) throw new Error(`Workout ${workout.id} refers to a missing Chair Yoga movement.`);
+        for (const pair of assignmentRules.bilateralPairs || []) {
+          const rightIndex = workout.movementIds.indexOf(pair.right);
+          const leftIndex = workout.movementIds.indexOf(pair.left);
+          if ((rightIndex >= 0) !== (leftIndex >= 0)) throw new Error(`Workout ${workout.id} omits a side of ${pair.family}.`);
+          if (rightIndex >= 0 && leftIndex !== rightIndex + 1) throw new Error(`Workout ${workout.id} must place ${pair.family} right then left as adjacent segments.`);
+        }
+      }
+    }
+    if (workoutIds.length !== 36 || new Set(workoutIds).size !== 36) throw new Error('The proposal must contain 36 distinct complete workouts.');
+    if (movements.length !== 36) throw new Error('Chair Yoga requires its complete 36-movement catalog.');
+    const beginnerExcluded = new Set(assignmentRules.beginnerExcludedMovementIds || []);
+    const intermediateExcluded = new Set(assignmentRules.intermediateExcludedMovementIds || []);
+    for (const level of levels) for (const workout of level.workouts) {
+      const excluded = level.id === 'beginner' ? beginnerExcluded : level.id === 'intermediate' ? intermediateExcluded : null;
+      if (excluded && workout.movementIds.some(id => excluded.has(id))) throw new Error(`${level.name} workout ${workout.id} contains a movement reserved for a higher proposed level.`);
     }
     return true;
   }
@@ -34,9 +53,10 @@
     movements,
     effects = {},
     loopCountsByLevel = { beginner: 2, intermediate: 3, advanced: 4 },
-    transitionDurationMs = 5000
+    transitionDurationMs = 5000,
+    assignmentRules = {}
   }) {
-    validatePlaylist(levels, movements, loopCountsByLevel);
+    validatePlaylist(levels, movements, loopCountsByLevel, assignmentRules);
     const movementById = new Map(movements.map(movement => [movement.id, movement]));
     const levelById = new Map(levels.map(level => [level.id, level]));
     const completed = new Set();
@@ -46,36 +66,41 @@
     let transitionTimer = null;
     let transitionDeadline = 0;
     let current = {
-      phase: 'level-selection', levelId: null, workoutIndex: -1, pass: 0,
+      phase: 'level-selection', levelId: null, programId: null, movementIndex: -1, pass: 0,
       pausedFrom: null, transitionRemainingMs: 0, error: null, generation: 0
     };
     let endedHandledForPass = 0;
     let videoReadyForEnd = true;
 
-    function workoutList() {
-      const level = levelById.get(current.levelId);
-      return level ? level.workoutIds.map(id => movementById.get(id)) : [];
-    }
-    function currentWorkout() { return workoutList()[current.workoutIndex] || null; }
+    function levelWorkouts(levelId = current.levelId) { return levelById.get(levelId)?.workouts || []; }
+    function currentProgram() { return levelWorkouts().find(workout => workout.id === current.programId) || null; }
+    function movementList() { return currentProgram()?.movementIds.map(id => movementById.get(id)) || []; }
+    function currentMovement() { return movementList()[current.movementIndex] || null; }
     function currentLoopCount() { return loopCountsByLevel[current.levelId] || 0; }
     function actualTransitionRemaining() {
       return Math.max(0, current.phase === 'transitioning' ? transitionDeadline - now() : current.transitionRemainingMs);
     }
     function snapshot() {
-      const list = workoutList();
+      const movementsInProgram = movementList();
+      const workouts = levelWorkouts();
+      const programIndex = workouts.findIndex(workout => workout.id === current.programId);
       const remaining = current.phase === 'transitioning' ? actualTransitionRemaining() : current.transitionRemainingMs;
       return Object.freeze({
         ...current,
         transitionRemainingMs: remaining,
         transitionSecondsRemaining: Math.ceil(remaining / 1000),
-        workoutsTotal: list.length,
-        currentWorkout: list[current.workoutIndex] || null,
-        nextWorkout: list[current.workoutIndex + 1] || null,
-        previousWorkout: list[current.workoutIndex - 1] || null,
+        levelName: levelById.get(current.levelId)?.name || null,
+        programsTotal: workouts.length,
+        programIndex,
+        currentProgram: currentProgram(),
+        currentMovement: movementsInProgram[current.movementIndex] || null,
+        nextMovement: movementsInProgram[current.movementIndex + 1] || null,
+        previousMovement: movementsInProgram[current.movementIndex - 1] || null,
+        movementsTotal: movementsInProgram.length,
         completedCount: completed.size,
-        completedWorkoutIds: [...completed],
-        passesPerWorkout: currentLoopCount(),
-        loopCount: currentLoopCount()
+        completedMovementIndexes: [...completed],
+        loopsPerMovement: currentLoopCount(),
+        passesPerWorkout: currentLoopCount()
       });
     }
     function emit() { effects.onStateChange?.(snapshot()); }
@@ -85,12 +110,12 @@
       transitionTimer = null;
     }
     function startAt(index, { removeCurrentCompletion = false } = {}) {
-      const list = workoutList();
+      const list = movementList();
       if (index < 0 || index >= list.length) return false;
       clearTransitionTimer();
       stopMedia();
       current.generation++;
-      current.workoutIndex = index;
+      current.movementIndex = index;
       current.pass = 1;
       current.phase = 'playing';
       current.pausedFrom = null;
@@ -99,16 +124,15 @@
       current.error = null;
       endedHandledForPass = 0;
       videoReadyForEnd = true;
-      const workout = list[index];
-      if (removeCurrentCompletion) completed.delete(workout.id);
+      if (removeCurrentCompletion) completed.delete(index);
       emit();
-      requestPlay('startPass', workout, { pass: 1, loopCount: currentLoopCount(), generation: current.generation, userGesture: true });
+      requestPlay('startPass', list[index], { pass: 1, loopCount: currentLoopCount(), generation: current.generation, userGesture: true });
       return true;
     }
-    function requestPlay(effectName, workout, details) {
+    function requestPlay(effectName, movement, details) {
       const generation = details.generation;
       try {
-        const result = effects[effectName]?.(workout, details);
+        const result = effects[effectName]?.(movement, details);
         if (result && typeof result.then === 'function') {
           result.then(ok => { if (ok === false) playbackBlocked(generation); })
             .catch(error => playbackBlocked(generation, error));
@@ -127,15 +151,28 @@
       if (!levelById.has(levelId)) return false;
       clearTransitionTimer();
       stopMedia();
-      current = { ...current, phase: 'playlist', levelId, workoutIndex: -1, pass: 0, pausedFrom: null, transitionRemainingMs: 0, error: null, generation: current.generation + 1 };
+      completed.clear();
+      current = { ...current, phase: 'workout-selection', levelId, programId: null, movementIndex: -1, pass: 0, pausedFrom: null, transitionRemainingMs: 0, error: null, generation: current.generation + 1 };
       transitionDeadline = 0;
       endedHandledForPass = 0;
       emit();
       return true;
     }
-    function start(index = 0) {
-      if (!levelById.has(current.levelId)) return false;
-      return startAt(index);
+    function start(programId) {
+      const program = levelWorkouts().find(workout => workout.id === programId);
+      if (!program) return false;
+      clearTransitionTimer();
+      stopMedia();
+      completed.clear();
+      current.programId = program.id;
+      current.movementIndex = -1;
+      current.pass = 0;
+      current.phase = 'playing';
+      current.pausedFrom = null;
+      current.transitionRemainingMs = 0;
+      current.error = null;
+      transitionDeadline = 0;
+      return startAt(0);
     }
     function pause() {
       if (current.phase === 'transitioning') {
@@ -161,7 +198,7 @@
       current.transitionRemainingMs = remaining;
       if (remaining <= 0) {
         transitionTimer = null;
-        startAt(current.workoutIndex + 1);
+        startAt(current.movementIndex + 1);
         return;
       }
       transitionTimer = schedule(() => {
@@ -169,7 +206,7 @@
         if (current.phase !== 'transitioning') return;
         current.transitionRemainingMs = actualTransitionRemaining();
         if (current.transitionRemainingMs <= 0) {
-          startAt(current.workoutIndex + 1);
+          startAt(current.movementIndex + 1);
           return;
         }
         emit();
@@ -189,32 +226,31 @@
         current.phase = 'playing';
         current.pausedFrom = null;
         current.error = null;
-        const workout = currentWorkout();
         emit();
-        requestPlay('resumeMedia', workout, { pass: current.pass, loopCount: currentLoopCount(), generation: current.generation, userGesture: true });
+        requestPlay('resumeMedia', currentMovement(), { pass: current.pass, loopCount: currentLoopCount(), generation: current.generation, userGesture: true });
         return true;
       }
       return false;
     }
     function next() {
       if (!['playing', 'paused', 'resume-required', 'transitioning'].includes(current.phase)) return false;
-      return startAt(current.workoutIndex + 1);
+      return startAt(current.movementIndex + 1);
     }
     function previous() {
       if (!['playing', 'paused', 'resume-required', 'transitioning'].includes(current.phase)) return false;
-      return startAt(current.workoutIndex - 1);
+      return startAt(current.movementIndex - 1);
     }
     function restart() {
-      if (!currentWorkout()) return false;
-      return startAt(current.workoutIndex, { removeCurrentCompletion: true });
+      if (!currentMovement()) return false;
+      return startAt(current.movementIndex, { removeCurrentCompletion: true });
     }
-    function markVideoPlaying(generation = current.generation, movementId = currentWorkout()?.id) {
-      if (generation !== current.generation || movementId !== currentWorkout()?.id || current.phase !== 'playing') return false;
+    function markVideoPlaying(generation = current.generation, movementId = currentMovement()?.id) {
+      if (generation !== current.generation || movementId !== currentMovement()?.id || current.phase !== 'playing') return false;
       videoReadyForEnd = true;
       return true;
     }
-    function videoEnded(generation = current.generation, movementId = currentWorkout()?.id) {
-      if (generation !== current.generation || movementId !== currentWorkout()?.id || current.phase !== 'playing' || !videoReadyForEnd) return false;
+    function videoEnded(generation = current.generation, movementId = currentMovement()?.id) {
+      if (generation !== current.generation || movementId !== currentMovement()?.id || current.phase !== 'playing' || !videoReadyForEnd) return false;
       if (endedHandledForPass === current.pass) return false;
       endedHandledForPass = current.pass;
       if (current.pass < currentLoopCount()) {
@@ -222,13 +258,13 @@
         videoReadyForEnd = false;
         current.error = null;
         emit();
-        requestPlay('replayPass', currentWorkout(), { pass: current.pass, loopCount: currentLoopCount(), generation: current.generation, userGesture: false });
+        requestPlay('replayPass', currentMovement(), { pass: current.pass, loopCount: currentLoopCount(), generation: current.generation, userGesture: false });
         return true;
       }
-      completed.add(currentWorkout().id);
+      completed.add(current.movementIndex);
       stopMedia();
       current.error = null;
-      if (current.workoutIndex === workoutList().length - 1) {
+      if (current.movementIndex === movementList().length - 1) {
         clearTransitionTimer();
         current.phase = 'complete';
         current.pausedFrom = null;
@@ -244,26 +280,48 @@
       }
       return true;
     }
+    function backToWorkouts() {
+      clearTransitionTimer();
+      stopMedia();
+      current = { ...current, phase: 'workout-selection', programId: null, movementIndex: -1, pass: 0, pausedFrom: null, transitionRemainingMs: 0, error: null, generation: current.generation + 1 };
+      transitionDeadline = 0;
+      completed.clear();
+      emit();
+      return true;
+    }
     function backToLevels() {
       clearTransitionTimer();
       stopMedia();
-      current = { ...current, phase: 'level-selection', levelId: null, workoutIndex: -1, pass: 0, pausedFrom: null, transitionRemainingMs: 0, error: null, generation: current.generation + 1 };
+      current = { ...current, phase: 'level-selection', levelId: null, programId: null, movementIndex: -1, pass: 0, pausedFrom: null, transitionRemainingMs: 0, error: null, generation: current.generation + 1 };
       transitionDeadline = 0;
+      completed.clear();
       emit();
       return true;
+    }
+    function getWorkoutSummary(levelId, programId) {
+      const level = levelById.get(levelId);
+      const workout = level?.workouts.find(item => item.id === programId);
+      if (!workout) return null;
+      const loopCount = loopCountsByLevel[levelId];
+      const mediaSeconds = workout.movementIds.reduce((sum, id) => sum + movementById.get(id).durationSeconds, 0) * loopCount;
+      const transitionSeconds = (workout.movementIds.length - 1) * transitionDurationMs / 1000;
+      return { movementCount: workout.movementIds.length, loopCount, mediaSeconds, transitionSeconds, estimatedTotalSeconds: mediaSeconds + transitionSeconds };
     }
     function getLevelSummary(levelId) {
       const level = levelById.get(levelId);
       if (!level) return null;
-      const list = level.workoutIds.map(id => movementById.get(id));
-      const loopsPerMovement = loopCountsByLevel[levelId];
-      const mediaSeconds = list.reduce((sum, item) => sum + item.durationSeconds * loopsPerMovement, 0);
-      const transitionSeconds = Math.max(0, list.length - 1) * transitionDurationMs / 1000;
-      return { workoutCount: list.length, loopsPerMovement, passesPerWorkout: loopsPerMovement, mediaSeconds, transitionSeconds, estimatedTotalSeconds: mediaSeconds + transitionSeconds };
+      const workoutSummaries = level.workouts.map(workout => getWorkoutSummary(levelId, workout.id));
+      return {
+        workoutCount: level.workouts.length,
+        loopsPerMovement: loopCountsByLevel[levelId],
+        minEstimatedTotalSeconds: Math.min(...workoutSummaries.map(summary => summary.estimatedTotalSeconds)),
+        maxEstimatedTotalSeconds: Math.max(...workoutSummaries.map(summary => summary.estimatedTotalSeconds)),
+        workoutSummaries
+      };
     }
     function getSnapshot() { return snapshot(); }
 
-    return Object.freeze({ selectLevel, start, pause, resume, next, previous, restart, markVideoPlaying, videoEnded, playbackBlocked, backToLevels, getLevelSummary, getSnapshot });
+    return Object.freeze({ selectLevel, start, pause, resume, next, previous, restart, markVideoPlaying, videoEnded, playbackBlocked, backToWorkouts, backToLevels, getWorkoutSummary, getLevelSummary, getSnapshot });
   }
 
   return Object.freeze({ createChairYogaPlayback, createPauseEventGuard, validatePlaylist });
