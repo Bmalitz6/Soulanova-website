@@ -1,6 +1,6 @@
 {
   "schemaVersion": 1,
-  "reviewStatus": "pending_owner_listening_review",
+  "reviewStatus": "superseded_owner_selected_approved_soulstretch_miriam",
   "activeMemberAudio": false,
   "voice": {
     "provider": "Runway",
@@ -14,11 +14,31 @@
   "creditAccounting": {
     "pricingRule": "1 credit per 50 text characters, rounded up per request, minimum 1",
     "requests": [
-      { "filename": "voice-sample-paula-review.mp3", "textCharacters": 132, "credits": 3 },
-      { "filename": "opening-beginner-paula-review.mp3", "textCharacters": 154, "credits": 4 },
-      { "filename": "IMG_4285-loop-1-paula-review.mp3", "textCharacters": 161, "credits": 4 },
-      { "filename": "IMG_4285-loop-2-paula-review.mp3", "textCharacters": 124, "credits": 3 },
-      { "filename": "closing-beginner-paula-review.mp3", "textCharacters": 134, "credits": 3 }
+      {
+        "filename": "voice-sample-paula-review.mp3",
+        "textCharacters": 132,
+        "credits": 3
+      },
+      {
+        "filename": "opening-beginner-paula-review.mp3",
+        "textCharacters": 154,
+        "credits": 4
+      },
+      {
+        "filename": "IMG_4285-loop-1-paula-review.mp3",
+        "textCharacters": 161,
+        "credits": 4
+      },
+      {
+        "filename": "IMG_4285-loop-2-paula-review.mp3",
+        "textCharacters": 124,
+        "credits": 3
+      },
+      {
+        "filename": "closing-beginner-paula-review.mp3",
+        "textCharacters": 134,
+        "credits": 3
+      }
     ],
     "totalCreditsUsed": 17,
     "additionalCreditsPurchased": false,
@@ -109,5 +129,6 @@
       "peakLevel": "-5.9 dBFS",
       "audioStatus": "review_only_not_owner_approved"
     }
-  ]
+  ],
+  "supersededNote": "Retained as historical review files. Paula was not selected as the Chair Yoga narrator."
 }

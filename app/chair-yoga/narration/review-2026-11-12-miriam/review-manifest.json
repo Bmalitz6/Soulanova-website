@@ -1,0 +1,169 @@
+{
+  "schemaVersion": 1,
+  "reviewStatus": "pending_owner_listening_review",
+  "memberPlaybackEnabled": false,
+  "bulkNarrationStarted": false,
+  "voice": {
+    "provider": "Runway Generate Speech",
+    "preset": "Miriam",
+    "voiceId": "VhxAIIZM8IRmnl5fyeyk",
+    "model": "eleven_multilingual_v2",
+    "speed": 0.75,
+    "language": "English (en)",
+    "outputFormat": "MP3",
+    "style": "Calm, warm, professional British female narrator",
+    "sourceApproval": "Owner-approved for SoulStretch on 2026-11-09; owner selected for Chair Yoga sample/demo on 2026-11-12",
+    "voiceIdVerification": "All 22 SoulStretch manifest assets use this same voice ID; prior Runway task cbee1399-e9e3-4b21-9e96-ae4296cb87ad independently returns the same voiceId, modelId, and speed."
+  },
+  "sourceProvenance": {
+    "manifest": "Existing isolated Release 2 handoff docs/release2/SOULSTRETCH_NARRATION_PRODUCTION_MANIFEST.json",
+    "approvedMovementRecordings": 22,
+    "uniqueVoiceIds": [
+      "VhxAIIZM8IRmnl5fyeyk"
+    ],
+    "model": "eleven_multilingual_v2",
+    "speed": 0.75,
+    "approvalRecord": "voice_approval and audio_owner_approval; approved_count=22; approval date 2026-11-09"
+  },
+  "creditAccounting": {
+    "rule": "1 credit per 50 text characters, rounded up separately per request, minimum 1",
+    "requests": [
+      {
+        "filename": "voice-sample-miriam-review.mp3",
+        "characters": 132,
+        "credits": 3
+      },
+      {
+        "filename": "opening-beginner-miriam-review.mp3",
+        "characters": 154,
+        "credits": 4
+      },
+      {
+        "filename": "IMG_4285-loop-1-miriam-review.mp3",
+        "characters": 161,
+        "credits": 4
+      },
+      {
+        "filename": "IMG_4285-loop-2-miriam-review.mp3",
+        "characters": 124,
+        "credits": 3
+      },
+      {
+        "filename": "closing-beginner-miriam-review.mp3",
+        "characters": 134,
+        "credits": 3
+      }
+    ],
+    "totalCreditsUsed": 17,
+    "previousPaulaSampleCredits": 17,
+    "miriamSampleAndDemoCredits": 17,
+    "purchasedOrToppedUp": false,
+    "bulkGeneration": false
+  },
+  "demo": {
+    "level": "beginner",
+    "movementId": "IMG_4285",
+    "movementName": "Seated Mountain Pose",
+    "videoFilename": "IMG_4285.mp4",
+    "videoSha256": "b13fc1b98649b2d43843d404d5e79637ea0e454f04784abd92577adc047d6769",
+    "videoDurationSeconds": 29.0,
+    "passes": 2,
+    "loop1AndLoop2UseDistinctSpeech": true,
+    "fullDemoIncludesOpeningAndClosing": true,
+    "reviewOnly": true
+  },
+  "assets": [
+    {
+      "purpose": "voice_sample",
+      "filename": "voice-sample-miriam-review.mp3",
+      "taskId": "c3d5bf40-f120-4409-b6e5-9fcb15ddea48",
+      "text": "Welcome to Chair Yoga. Settle into a steady, comfortable seat, let your shoulders soften, and allow each breath to arrive naturally.",
+      "characters": 132,
+      "durationSeconds": 16.439728,
+      "bytes": 264193,
+      "sha256": "521f607aa944a413bb585506c5648791bdab7a8862d2b018a9afb2f31290745b",
+      "codec": "mp3",
+      "sampleRateHz": 44100,
+      "channels": 1,
+      "fullDecode": "passed",
+      "ownerReviewStatus": "pending_owner_listening",
+      "memberPlaybackEnabled": false
+    },
+    {
+      "purpose": "beginner_opening",
+      "filename": "opening-beginner-miriam-review.mp3",
+      "taskId": "b0e2913a-2516-40c0-8cf8-f5b8f8dec3de",
+      "text": "Welcome to your Beginner Chair Yoga session. Settle near a stable chair with both feet supported. Move gently within a range that feels comfortable today.",
+      "characters": 154,
+      "durationSeconds": 15.55737,
+      "bytes": 249982,
+      "sha256": "8f6700b1078777dcb9f000fdeae17859a4a06c00a0f33e49e245ac7a9d8b4efd",
+      "codec": "mp3",
+      "sampleRateHz": 44100,
+      "channels": 1,
+      "fullDecode": "passed",
+      "ownerReviewStatus": "pending_owner_listening",
+      "memberPlaybackEnabled": false
+    },
+    {
+      "purpose": "movement_loop_1",
+      "filename": "IMG_4285-loop-1-miriam-review.mp3",
+      "taskId": "042d372b-6ee6-4538-b7b2-96615147d2f0",
+      "text": "Sit near the front of your chair with both feet grounded. Lengthen through your spine, soften your shoulders, and rest your hands on your thighs. Breathe gently.",
+      "characters": 161,
+      "durationSeconds": 17.740045,
+      "bytes": 285091,
+      "sha256": "b134d5b0ddb816b49835d0fbea6433294fac8aafa98629c0b9ad1363b1a72053",
+      "codec": "mp3",
+      "sampleRateHz": 44100,
+      "channels": 1,
+      "fullDecode": "passed",
+      "ownerReviewStatus": "pending_owner_listening",
+      "memberPlaybackEnabled": false,
+      "movementId": "IMG_4285",
+      "movementName": "Seated Mountain Pose",
+      "videoFilename": "IMG_4285.mp4",
+      "videoDurationSeconds": 29.0,
+      "loop": 1,
+      "quietPracticeTailSeconds": 11.26
+    },
+    {
+      "purpose": "movement_loop_2",
+      "filename": "IMG_4285-loop-2-miriam-review.mp3",
+      "taskId": "50735cfb-f5c6-44d2-b25c-422129fbb93f",
+      "text": "Keep both feet steady as you breathe. Let your shoulders soften and your jaw relax; there is no need to hold yourself rigid.",
+      "characters": 124,
+      "durationSeconds": 12.863855,
+      "bytes": 206932,
+      "sha256": "b8670bc10d22f1363c4436a918cf1c730321d3703d457d16a9469d35dfae48a5",
+      "codec": "mp3",
+      "sampleRateHz": 44100,
+      "channels": 1,
+      "fullDecode": "passed",
+      "ownerReviewStatus": "pending_owner_listening",
+      "memberPlaybackEnabled": false,
+      "movementId": "IMG_4285",
+      "movementName": "Seated Mountain Pose",
+      "videoFilename": "IMG_4285.mp4",
+      "videoDurationSeconds": 29.0,
+      "loop": 2,
+      "quietPracticeTailSeconds": 16.136
+    },
+    {
+      "purpose": "beginner_closing",
+      "filename": "closing-beginner-miriam-review.mp3",
+      "taskId": "3e77c959-29b9-484d-b8e0-e548ee4f533b",
+      "text": "Your Beginner Chair Yoga session is complete. Let your breathing settle. When ready, return to standing slowly with your chair nearby.",
+      "characters": 134,
+      "durationSeconds": 15.928889,
+      "bytes": 255834,
+      "sha256": "5e16abb6e6c5762dd2dc1a70020cbb1e7c926f94c9001fa47048a736722943d7",
+      "codec": "mp3",
+      "sampleRateHz": 44100,
+      "channels": 1,
+      "fullDecode": "passed",
+      "ownerReviewStatus": "pending_owner_listening",
+      "memberPlaybackEnabled": false
+    }
+  ]
+}

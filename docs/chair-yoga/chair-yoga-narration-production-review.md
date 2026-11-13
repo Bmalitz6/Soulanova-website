@@ -1,8 +1,8 @@
-# Chair Yoga Narration Production Review — Phase 5
+# Chair Yoga Narration Production Review — Phase 6
 
-Status: voice audition and one-movement demo generated for owner listening; bulk narration is not generated. The 36 workout combinations remain pending_owner_approval.
+Status: owner-approved SoulStretch Miriam voice configuration verified and reused for one Chair Yoga sample plus a complete one-movement Beginner demo. The demo and scripts await owner listening approval; bulk narration is not generated. The 36 workout combinations remain pending_owner_approval.
 
-Generated listening files: [Paula voice audition and complete one-movement Beginner demo](narration-audio-review.html). File hashes, Runway task IDs, durations, decode evidence, and the 17-credit audition cost are in the [review audio manifest](../../app/chair-yoga/narration/review-2026-11-12-paula/review-manifest.json). None of these files is owner-approved or mapped to member playback.
+Generated listening files: [Miriam voice sample and complete one-movement Beginner demo](narration-audio-review.html). File hashes, Runway task IDs, durations, decode evidence, and the 17-credit generation cost are in the [Miriam review audio manifest](../../app/chair-yoga/narration/review-2026-11-12-miriam/review-manifest.json). The recordings await listening approval and are not mapped to member playback. The earlier Paula sample has been superseded and was not selected.
 
 ## Source checks
 
@@ -13,11 +13,27 @@ Generated listening files: [Paula voice audition and complete one-movement Begin
 - Source videos remain unchanged; every cue is a separate narration asset plan.
 - Loop audio must be selected by movement ID + loop number and pass SHA-256/owner-approval gate. Silence follows each short cue track; no narration plays over five-second black transitions.
 
-## Voice audition
+## Verified Miriam voice and approval provenance
 
-Temporary non-Miriam stock voice: Paula (Runway preset), `eleven_multilingual_v2`, speed 0.92. This is only an audition candidate; it does not imitate or clone Miriam. Voice is pending owner approval. Runway voice descriptions identify Paula as a calm, conversational British female voice. The sample is not active workout audio.
+The exact SoulStretch production manifest contains 22 owner-approved generated Miriam recordings. All 22 entries carry the same Runway voice ID `VhxAIIZM8IRmnl5fyeyk`, model `eleven_multilingual_v2`, and speed `0.75`. The source manifest records English, MP3 output, and “Calm, warm, professional British female narrator.” Owner approval of the voice/settings is recorded in its `voice_approval` and `audio_owner_approval` sections; the owner approved the 22 exact SoulStretch files on November 9, 2026. Source file reviewed: `/Users/bob/Desktop/Soulanova/07 Documentation/Production_Inventory/Release_2_Website_Review/docs/release2/SOULSTRETCH_NARRATION_PRODUCTION_MANIFEST.json`.
 
-The existing Runway workspace also exposes Marlene (British, middle-aged, narrator) and Miriam (British, middle-aged, calm narrator) as presets. Search also returned Becky (British professional narrator) and Emma (British, warm, conversational) in the separate Eleven v4 voice library. No audio was generated with those alternatives. Paula was selected only for this audition; no voice is approved yet.
+One existing Runway task was independently read back: `cbee1399-e9e3-4b21-9e96-ae4296cb87ad` resolves to voice ID `VhxAIIZM8IRmnl5fyeyk`, model `eleven_multilingual_v2`, speed `0.75`, and the exact matching script in the manifest. The Chair Yoga sample task (`c3d5bf40-f120-4409-b6e5-9fcb15ddea48`) resolves to the same voice ID, model, and speed. The Runway Generate Speech interface uses the preset name “Miriam”; no voice cloning or imitation was used.
+
+The owner directed use of this approved voice for Chair Yoga on November 12. The generated Chair Yoga demo still awaits owner listening approval. All five current MP3s are separate review assets, not member narration. The previous Paula audition is superseded and not selected.
+
+## Miriam sample and demo audio QA
+
+All five requested files are mono 44.1 kHz MP3s and passed full FFmpeg decoding. The source Seated Mountain Pose video remains the existing 29-second approved file with SHA-256 `b13fc1b98649b2d43843d404d5e79637ea0e454f04784abd92577adc047d6769`.
+
+| Review item | File | Duration | Size | SHA-256 |
+|---|---|---:|---:|---|
+| Voice sample | `voice-sample-miriam-review.mp3` | 16.440 s | 264,193 B | `521f607aa944a413bb585506c5648791bdab7a8862d2b018a9afb2f31290745b` |
+| Beginner opening | `opening-beginner-miriam-review.mp3` | 15.557 s | 249,982 B | `8f6700b1078777dcb9f000fdeae17859a4a06c00a0f33e49e245ac7a9d8b4efd` |
+| Seated Mountain Pose · Loop 1 | `IMG_4285-loop-1-miriam-review.mp3` | 17.740 s | 285,091 B | `b134d5b0ddb816b49835d0fbea6433294fac8aafa98629c0b9ad1363b1a72053` |
+| Seated Mountain Pose · Loop 2 | `IMG_4285-loop-2-miriam-review.mp3` | 12.864 s | 206,932 B | `b8670bc10d22f1363c4436a918cf1c730321d3703d457d16a9469d35dfae48a5` |
+| Beginner closing | `closing-beginner-miriam-review.mp3` | 15.929 s | 255,834 B | `5e16abb6e6c5762dd2dc1a70020cbb1e7c926f94c9001fa47048a736722943d7` |
+
+The movement tracks finish within their respective video loops, leaving approximately 11.260 seconds and 16.136 seconds of quiet practice. Loop 1 and Loop 2 use different scripts and separate audio files. The five generation requests used 17 Runway credits total; no credits were purchased. The detailed task IDs and per-request accounting are in the review manifest.
 
 ## Level opening and closing scripts
 
@@ -773,11 +789,11 @@ Video: IMG_4323.mp4 · 29.0 s · SHA-256 4e86fd9b79a385f9628db0934fd26631d66167d
 
 ## Owner decisions before bulk production
 
-1. Approve or select the narration voice. Current Paula audio is an unapproved sample/demo only; do not refer to it as Miriam.
+1. Listen to and approve or request changes to the Miriam sample and complete one-movement Beginner demo. The voice configuration itself is verified and owner-approved from SoulStretch.
 2. Review/approve the scripts and sample demo; request revisions before bulk generation.
-3. Authorize the separately calculated bulk Runway credit spend after selecting voice and scripts.
+3. After approving the Miriam demo and scripts, review the 363-credit batch estimate before authorizing bulk Runway generation.
 4. Approve narration playback only after generated files pass duration, decoding, clip-fit, hash, movement/side, and synchronization review.
 
 ## Bulk production estimate
 
-Using the actual draft character lengths and 1 credit per 50 characters rounded up per request, producing only loop variants used by the proposed level matrix requires an estimated 139 movement-loop files / 341 credits, plus 6 level openings and closings / 22 credits: **363 Runway credits total**. The five unused loop variants are excluded. This estimate does not authorize bulk generation; all scripts, the Paula voice, and the final audio need owner review first.
+Using the actual draft character lengths and 1 credit per 50 characters rounded up per request, producing only loop variants used by the proposed level matrix requires an estimated 139 movement-loop files / 341 credits, plus 6 level openings and closings / 22 credits: **363 Runway credits total**. The five unused loop variants are excluded. This estimate does not authorize bulk generation; the Chair Yoga scripts and Miriam demo need owner review before bulk generation.

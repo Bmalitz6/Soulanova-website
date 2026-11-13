@@ -1,16 +1,19 @@
 {
   "schemaVersion": 2,
-  "instructor": "Miriam (video instructor only)",
-  "proposedNarrator": "Paula, Runway preset (audition candidate only; not approved for bulk use)",
-  "voiceApprovalStatus": "pending_owner_approval",
-  "generationStatus": "audition_demo_generated_pending_owner_review",
-  "generationProvider": "Runway",
+  "instructor": "Miriam (video instructor and approved narrator identity)",
+  "proposedNarrator": "Miriam (owner-approved SoulStretch voice; selected for Chair Yoga demo)",
+  "voiceApprovalStatus": "owner_approved_for_soulstretch_and_selected_for_chair_yoga_demo_pending_review",
+  "generationStatus": "miriam_sample_and_one_movement_demo_generated_pending_owner_review",
+  "generationProvider": "Runway Generate Speech",
   "generationModel": "eleven_multilingual_v2",
   "generationSettings": {
-    "voice": "Paula (stock preset; no voice cloning)",
-    "voiceId": "sIak7pFapfSLCfctxdOu",
-    "speed": 0.92,
-    "delivery": "warm, calm, conversational British English; moderate pace; pauses from punctuation; narration kept separate from source video"
+    "voice": "Miriam",
+    "voiceId": "VhxAIIZM8IRmnl5fyeyk",
+    "speed": 0.75,
+    "language": "English (en)",
+    "outputFormat": "MP3",
+    "delivery": "Calm, warm, professional British female narrator; moderate speaking pace with natural breathing space; separate from original video audio.",
+    "provenance": "Verified against all 22 owner-approved SoulStretch manifest voice IDs and original Runway task metadata."
   },
   "passBehavior": "Each movement uses distinct loop-specific narration selected by movement ID and loop number. Only SHA-256-verified owner-approved loop audio may play. Each track starts with its movement/video pass; any quiet tail remains silent. Narration pauses/resumes/seeks with the video, stops before transitions, and is never sourced from the original video audio.",
   "drafts": [
@@ -3723,7 +3726,7 @@
       "audioUrl": null
     }
   ],
-  "bulkAudioStatus": "not_started_pending_owner_review_of_voice_and_scripts",
+  "bulkAudioStatus": "not_started_pending_owner_review_of_miriam_demo_and_scripts",
   "bulkCreditEstimate": {
     "rule": "Runway speech: 1 credit per 50 text characters, rounded up per request, minimum 1",
     "uniqueMovementIds": 36,
@@ -3795,28 +3798,32 @@
   },
   "sampleDemo": {
     "voiceSampleScript": "Welcome to Chair Yoga. Settle into a steady, comfortable seat, let your shoulders soften, and allow each breath to arrive naturally.",
-    "voiceSampleFilename": "voice-sample-paula-review.mp3",
+    "voiceSampleFilename": "voice-sample-miriam-review.mp3",
     "demoLevel": "beginner",
     "demoMovementId": "IMG_4285",
+    "demoMovementName": "Seated Mountain Pose",
     "demoPasses": [
       1,
       2
     ],
-    "openingAudioFilename": "opening-beginner-paula-review.mp3",
+    "openingAudioFilename": "opening-beginner-miriam-review.mp3",
     "movementAudioFilenames": [
-      "IMG_4285-loop-1-paula-review.mp3",
-      "IMG_4285-loop-2-paula-review.mp3"
+      "IMG_4285-loop-1-miriam-review.mp3",
+      "IMG_4285-loop-2-miriam-review.mp3"
     ],
-    "closingAudioFilename": "closing-beginner-paula-review.mp3",
-    "reviewManifest": "/app/chair-yoga/narration/review-2026-11-12-paula/review-manifest.json",
+    "closingAudioFilename": "closing-beginner-miriam-review.mp3",
+    "reviewManifest": "/app/chair-yoga/narration/review-2026-11-12-miriam/review-manifest.json",
     "voiceSettings": {
-      "provider": "Runway",
-      "voice": "Paula",
-      "voiceId": "sIak7pFapfSLCfctxdOu",
+      "provider": "Runway Generate Speech",
+      "voice": "Miriam",
+      "voiceId": "VhxAIIZM8IRmnl5fyeyk",
       "model": "eleven_multilingual_v2",
-      "speed": 0.92
+      "speed": 0.75,
+      "language": "English (en)",
+      "style": "Calm, warm, professional British female narrator"
     },
     "creditsUsed": 17,
-    "reviewStatus": "pending_owner_listening_review"
+    "reviewStatus": "pending_owner_listening_review",
+    "memberPlaybackEnabled": false
   }
 }

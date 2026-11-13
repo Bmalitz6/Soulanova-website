@@ -15,7 +15,8 @@ const ui = fs.readFileSync(path.join(__dirname, '../app/chair-yoga/chair-yoga.js
 const css = fs.readFileSync(path.join(__dirname, '../app/chair-yoga/chair-yoga.css'), 'utf8');
 const dashboard = fs.readFileSync(path.join(__dirname, '../app/index.html'), 'utf8');
 const narrationReviewPage = fs.readFileSync(path.join(__dirname, '../docs/chair-yoga/narration-audio-review.html'), 'utf8');
-const narrationAudioManifest = require('../app/chair-yoga/narration/review-2026-11-12-paula/review-manifest.json');
+const narrationAudioManifest = require('../app/chair-yoga/narration/review-2026-11-12-miriam/review-manifest.json');
+const supersededPaulaAudioManifest = require('../app/chair-yoga/narration/review-2026-11-12-paula/review-manifest.json');
 
 function fakeClock() {
   let time = 0;
@@ -396,8 +397,8 @@ test('all 36 movement scripts provide four distinct, duration-bounded loop cues 
 });
 
 test('narration remains separate, hash-gated and loop-specific; workout assignments remain pending approval', () => {
-  assert.equal(narration.voiceApprovalStatus, 'pending_owner_approval');
-  assert.equal(narration.bulkAudioStatus, 'not_started_pending_owner_review_of_voice_and_scripts');
+  assert.equal(narration.voiceApprovalStatus, 'owner_approved_for_soulstretch_and_selected_for_chair_yoga_demo_pending_review');
+  assert.equal(narration.bulkAudioStatus, 'not_started_pending_owner_review_of_miriam_demo_and_scripts');
   assert.equal(plan.proposalStatus, 'pending_owner_approval');
   assert.match(route, /member narration remains disabled until each loop recording is approved/);
   assert.match(ui, /getApprovedNarrationForPass\(narrationRecord\(workout\), pass\)/);
@@ -418,21 +419,29 @@ test('narration resolver selects only the matching owner-approved loop recording
   assert.equal(player.getApprovedNarrationForPass({ loopScripts: { '1': { ...loop1, audioSha256: 'bad' } } }, 1), null);
 });
 
-test('Paula audition and Beginner demo files match review hashes and stay out of active workout mappings', () => {
+test('Miriam audition and Beginner demo files match verified voice settings and review hashes without entering active workout mappings', () => {
   assert.equal(narrationAudioManifest.reviewStatus, 'pending_owner_listening_review');
-  assert.equal(narrationAudioManifest.activeMemberAudio, false);
+  assert.equal(narrationAudioManifest.memberPlaybackEnabled, false);
   assert.equal(narrationAudioManifest.creditAccounting.totalCreditsUsed, 17);
-  assert.equal(narrationAudioManifest.creditAccounting.bulkNarrationGenerated, false);
-  assert.equal(narrationAudioManifest.voice.preset, 'Paula');
+  assert.equal(narrationAudioManifest.creditAccounting.bulkGeneration, false);
+  assert.equal(narrationAudioManifest.voice.preset, 'Miriam');
+  assert.equal(narrationAudioManifest.voice.voiceId, 'VhxAIIZM8IRmnl5fyeyk');
   assert.equal(narrationAudioManifest.voice.model, 'eleven_multilingual_v2');
+  assert.equal(narrationAudioManifest.voice.speed, 0.75);
+  assert.equal(narrationAudioManifest.sourceProvenance.approvedMovementRecordings, 22);
+  assert.deepEqual(narrationAudioManifest.sourceProvenance.uniqueVoiceIds, ['VhxAIIZM8IRmnl5fyeyk']);
   assert.equal(narrationAudioManifest.demo.movementId, 'IMG_4285');
-  assert.equal(narrationAudioManifest.demo.loopTracksAreDistinct, true);
+  assert.equal(narrationAudioManifest.demo.loop1AndLoop2UseDistinctSpeech, true);
+  assert.equal(supersededPaulaAudioManifest.reviewStatus, 'superseded_owner_selected_approved_soulstretch_miriam');
+  assert.equal(supersededPaulaAudioManifest.activeMemberAudio, false);
   for (const asset of narrationAudioManifest.assets) {
-    const file = path.join(__dirname, '../app/chair-yoga/narration/review-2026-11-12-paula', asset.filename);
+    const file = path.join(__dirname, '../app/chair-yoga/narration/review-2026-11-12-miriam', asset.filename);
     const bytes = fs.readFileSync(file);
     assert.equal(bytes.length, asset.bytes, `${asset.filename} size`);
     assert.equal(crypto.createHash('sha256').update(bytes).digest('hex'), asset.sha256, `${asset.filename} hash`);
-    assert.equal(asset.audioStatus, 'review_only_not_owner_approved');
+    assert.equal(asset.ownerReviewStatus, 'pending_owner_listening');
+    assert.equal(asset.memberPlaybackEnabled, false);
+    if (asset.purpose.startsWith('movement_loop')) assert.ok(asset.durationSeconds < asset.videoDurationSeconds);
   }
   for (const movement of narration.drafts) for (const loop of Object.values(movement.loopScripts)) {
     assert.equal(loop.audioStatus, 'not_generated_pending_owner_review');
@@ -445,4 +454,8 @@ test('Paula audition and Beginner demo files match review hashes and stay out of
   assert.match(narrationReviewPage, /Narration volume/);
   assert.match(narrationReviewPage, /video only; narration is off/);
   assert.match(narrationReviewPage, /video and matching narration starting together/);
+  assert.match(narrationReviewPage, /voice ID VhxAIIZM8IRmnl5fyeyk/);
+  assert.match(narrationReviewPage, /speed 0\.75/);
+  assert.match(narrationReviewPage, /review-2026-11-12-miriam/);
+  assert.doesNotMatch(narrationReviewPage, /Paula|0\.92/);
 });
