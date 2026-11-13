@@ -103,6 +103,24 @@
     return asset;
   }
 
+  function getPlayableSessionNarration(drafts, batchApproval, levelId, kind) {
+    if (!['beginner', 'intermediate', 'advanced'].includes(levelId) || !['opening', 'closing'].includes(kind)) return null;
+    if (drafts?.memberPlaybackEnabled !== true) return null;
+    const record = kind === 'opening' ? drafts.levelOpenings?.[levelId] : drafts.levelClosings?.[levelId];
+    if (!record?.audioUrl || !/^[a-f0-9]{64}$/i.test(record.audioSha256 || '')) return null;
+    const key = `${kind}:${levelId}`;
+    const type = kind === 'opening' ? 'level_opening' : 'level_closing';
+    if (record.audioStatus === 'owner-approved' && record.ownerApproved === true) {
+      const reusable = batchApproval?.previouslyApprovedReusableAssets?.find(item => item.requestKey === key);
+      if (reusable?.ownerIndividuallyApproved === true && reusable.type === type
+        && reusable.audioUrl === record.audioUrl
+        && reusable.sha256?.toLowerCase() === record.audioSha256.toLowerCase()) return record;
+      return null;
+    }
+    const authorized = getBatchApprovedAsset(batchApproval, key, type, record.audioUrl, record.audioSha256);
+    return record.audioStatus === 'generated_pending_owner_review' && authorized ? record : null;
+  }
+
   function getPlayableNarrationForPass(manifest, movementRecord, pass, { ownerPreview = false, batchApproval = null } = {}) {
     if (ownerPreview) return getNarrationForPass(movementRecord, pass, { allowPendingOwnerReview: true });
     if (manifest?.memberPlaybackEnabled !== true) return null;
@@ -416,5 +434,5 @@
     return Object.freeze({ selectLevel, start, pause, resume, next, previous, restart, markVideoPlaying, videoEnded, playbackBlocked, backToWorkouts, backToLevels, getWorkoutSummary, getLevelSummary, getSnapshot });
   }
 
-  return Object.freeze({ createChairYogaPlayback, createPauseEventGuard, getWorkoutProgress, getNarrationForPass, getApprovedNarrationForPass, getBatchApprovedAsset, getPlayableNarrationForPass, playNarrationAligned, setNarrationVolume, setNarrationMuted, validatePlaylist });
+  return Object.freeze({ createChairYogaPlayback, createPauseEventGuard, getWorkoutProgress, getNarrationForPass, getApprovedNarrationForPass, getBatchApprovedAsset, getPlayableNarrationForPass, getPlayableSessionNarration, playNarrationAligned, setNarrationVolume, setNarrationMuted, validatePlaylist });
 });

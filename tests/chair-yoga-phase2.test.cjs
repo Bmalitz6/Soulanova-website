@@ -451,6 +451,13 @@ test('all 36 movement scripts provide four distinct, duration-bounded loop cues 
         assert.equal(draft.audioUrl, `/${request.localPath}`);
         assert.equal(draft.audioSha256, request.sha256);
         assert.equal(draft.ownerApproved, false);
+      } else if (level === 'beginner' && draft === narration.levelOpenings[level]) {
+        const reused = narrationBatch.approvedAssetsReusable.find(asset => asset.key === 'opening:beginner');
+        assert.ok(reused);
+        assert.equal(draft.audioStatus, 'owner-approved');
+        assert.equal(draft.audioUrl, `/${reused.localPath}`);
+        assert.equal(draft.audioSha256, reused.sha256);
+        assert.equal(draft.ownerApproved, true);
       } else {
         assert.equal(draft.audioStatus, 'not_generated_generation_authorized');
       }
@@ -708,4 +715,49 @@ test('production batch is exact and hash-safe under owner batch approval without
   }
   assert.ok(batch.demoSegueNotReusableAsFinalWorkoutClosing);
   assert.match(narrationBatchReviewPage, /production-batch-manifest\.json/);
+});
+
+test('member session openings and closings resolve only the six exact approved assets', () => {
+  assert.equal(narrationApproval.memberPlaybackEnabled, true);
+  assert.equal(narration.memberPlaybackEnabled, true);
+  const expected = [
+    ['beginner', 'opening', 'owner-approved'],
+    ['intermediate', 'opening', 'generated_pending_owner_review'],
+    ['advanced', 'opening', 'generated_pending_owner_review'],
+    ['beginner', 'closing', 'generated_pending_owner_review'],
+    ['intermediate', 'closing', 'generated_pending_owner_review'],
+    ['advanced', 'closing', 'generated_pending_owner_review']
+  ];
+  for (const [level, kind, status] of expected) {
+    const record = kind === 'opening' ? narration.levelOpenings[level] : narration.levelClosings[level];
+    const resolved = player.getPlayableSessionNarration(narration, narrationApproval, level, kind);
+    assert.equal(record.audioStatus, status, `${level} ${kind} retains per-track status`);
+    assert.equal(resolved?.audioUrl, record.audioUrl, `${level} ${kind} resolves the intended track`);
+    assert.equal(resolved?.audioSha256, record.audioSha256, `${level} ${kind} resolves the expected hash`);
+    const bytes = fs.readFileSync(path.join(__dirname, '..', record.audioUrl.slice(1)));
+    assert.equal(crypto.createHash('sha256').update(bytes).digest('hex'), record.audioSha256, `${level} ${kind} local bytes match`);
+  }
+  assert.equal(player.getPlayableSessionNarration({ ...narration, memberPlaybackEnabled: false }, narrationApproval, 'beginner', 'opening'), null);
+  assert.equal(player.getPlayableSessionNarration(narration, { ...narrationApproval, memberPlaybackEnabled: false }, 'intermediate', 'opening'), null);
+  assert.equal(player.getPlayableSessionNarration(narration, narrationApproval, 'beginner', 'invalid'), null);
+  const wrongHash = JSON.parse(JSON.stringify(narrationApproval));
+  wrongHash.previouslyApprovedReusableAssets[0].sha256 = '0'.repeat(64);
+  assert.equal(player.getPlayableSessionNarration(narration, wrongHash, 'beginner', 'opening'), null);
+});
+
+test('session narration is wired once at workout start and once at completion, never at movement transitions', () => {
+  assert.match(ui, /function startWorkout\(workoutId\)[\s\S]*?startOpening\(workoutId\)/);
+  assert.match(ui, /function finishOpeningAndStart\(\)[\s\S]*?controller\.start\(workoutId\)/);
+  assert.match(ui, /if \(active\.kind === 'opening'\) finishOpeningAndStart\(\)/);
+  assert.match(ui, /function startClosing\(snap\)[\s\S]*?kind: 'closing'/);
+  assert.match(ui, /if \(snap\.phase === 'complete'\)[\s\S]*?startClosing\(snap\)/);
+  assert.match(ui, /closingStartedToken === token/);
+  const transitionStart = ui.indexOf("} else if (snap.phase === 'transitioning'");
+  const updateStart = ui.indexOf('function updateProgress', transitionStart);
+  const transitionBranch = ui.slice(transitionStart, updateStart);
+  assert.doesNotMatch(transitionBranch, /startOpening|startClosing|sessionNarration/);
+  assert.match(ui, /narration\.addEventListener\('ended',[\s\S]*?active\.kind === 'opening'[\s\S]*?active\.kind === 'closing'/);
+  assert.match(ui, /setNarrationVolume\(narration, event\.currentTarget\.value\)/);
+  assert.match(ui, /setNarrationMuted\(narration, narrationMuted\)/);
+  assert.match(ui, /if \(sessionNarration\) \{[\s\S]*?narration\.pause\(\)/);
 });

@@ -2290,5 +2290,22 @@
       "timingStatus": "not_applicable",
       "ownerBatchApproved": true
     }
+  ],
+  "previouslyApprovedReusableAssets": [
+    {
+      "requestKey": "opening:beginner",
+      "type": "level_opening",
+      "level": "beginner",
+      "audioUrl": "/app/chair-yoga/narration/review-2026-11-12-miriam/opening-beginner-miriam-review.mp3",
+      "localPath": "app/chair-yoga/narration/review-2026-11-12-miriam/opening-beginner-miriam-review.mp3",
+      "sha256": "8f6700b1078777dcb9f000fdeae17859a4a06c00a0f33e49e245ac7a9d8b4efd",
+      "scriptSha256": "ef68ad717bf52f68fba5b736f7e0580d324aae277b0695caba6133f588ec12c7",
+      "taskId": "b0e2913a-2516-40c0-8cf8-f5b8f8dec3de",
+      "actualDurationSeconds": 15.55737,
+      "bytes": 249982,
+      "decodeStatus": "passed",
+      "approvalSource": "app/chair-yoga/narration/review-2026-11-12-miriam/review-manifest.json",
+      "ownerIndividuallyApproved": true
+    }
   ]
 }

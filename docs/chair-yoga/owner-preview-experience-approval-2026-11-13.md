@@ -6,7 +6,7 @@ The owner reviewed and approved the tested protected Chair Yoga Preview experien
 
 This records approval of the tested Preview experience as a whole. It does not assert that every individual narration recording was separately reviewed or approved. Per-track `audioStatus`, approval flags, hashes, scripts, and provenance remain as recorded in `app/chair-yoga/narration-drafts.json` and the generation manifests; this approval does not change them.
 
-The temporary runtime diagnostic panel was for troubleshooting and is removed from the member-facing release candidate. Member narration remains disabled by the production manifest gate (`memberPlaybackEnabled: false`) pending the required release authorization.
+The temporary runtime diagnostic panel was for troubleshooting and is removed from the member-facing release candidate. At the time of this experience approval, member narration eligibility remained a separate batch decision; the subsequent 2026-11-13 batch authorization is recorded below and in the member-playback approval manifest.
 
 
 ## Later member-playback batch authorization — November 13, 2026

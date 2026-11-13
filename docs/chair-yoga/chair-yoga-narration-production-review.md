@@ -1,6 +1,6 @@
 # Chair Yoga Narration Production Review — Phase 7
 
-Status: The 36-workout matrix was owner-approved on 2026-11-13 after progression, transition and chair-support safety review. The owner-approved 142-request Miriam narration batch is generated and awaiting the owner's listening approval. All new audio files are separate from the videos, hash-recorded and decode-validated. Member playback remains disabled.
+Status (updated 2026-11-13): The 36-workout matrix was owner-approved on 2026-11-13 after progression, transition and chair-support safety review. The 142-request Miriam narration batch is generated and batch-approved for member playback, subject to final Production validation. All new audio files remain separate from the videos, hash-recorded and decode-validated. Batch approval does not claim individual listening approval of every track.
 
 Generated listening files: [Miriam voice sample and complete one-movement Beginner demo](narration-audio-review.html). The corrected demo follows the exact owner-approved seated segue. File hashes, Runway task IDs, durations, decode evidence, and 20 total credits used for the sample/demo plus the one corrected close are in the [Miriam review audio manifest](../../app/chair-yoga/narration/review-2026-11-12-miriam/review-manifest.json). The prior closing is retained as superseded history; the approved opening and movement loops were preserved byte-for-byte. No review audio is mapped to member playback. The earlier Paula sample has been superseded and was not selected.
 
@@ -801,8 +801,8 @@ Video: IMG_4323.mp4 · 29.0 s · SHA-256 4e86fd9b79a385f9628db0934fd26631d66167d
 ## Owner approvals and remaining review gate
 
 1. The owner approved the Miriam voice/settings, Beginner opening, both Seated Mountain Pose loops, corrected seated demo closing, all three full-workout closing scripts, the 36-workout matrix, and the 354-credit generation ceiling.
-2. The 142 generated files are now pending owner listening review. Explicitly approve or request redo for the recordings before any are enabled in the member player.
-3. Keep narration disabled until approval metadata and SHA-256 gates are updated for the exact selected assets.
+2. The 142 generated files received batch-level owner approval for member playback on 2026-11-13. Their per-track generated status remains unchanged; the release does not claim every track was individually listened to.
+3. Keep the member playback resolver fail-closed: a recording is eligible only when its exact approval-manifest key, type, URL, and SHA-256 match. The 142-record batch authorization and separately approved reusable Beginner opening are now recorded.
 
 ## Bulk production estimate
 
@@ -814,4 +814,4 @@ The exact request texts use Runway's 1-credit-per-50-character rule, rounded sep
 - Every file passed full `ffmpeg` decoding; recorded local SHA-256 and byte size match the manifest.
 - All movement-loop narrations fit their respective video durations; the shortest quiet practice tail is preserved as recorded in the manifest. Opening and closing tracks have no associated clip duration.
 - All 36 source video files still match the existing SHA-256 inventory.
-- New audio remains review-only. `memberPlaybackEnabled` is false and the active playback approval/hash gate is unchanged.
+- Member playback is batch-authorized by `app/chair-yoga/narration/member-playback-approval-manifest.json`; the exact-asset SHA-256 gate remains required. The production manifest is the authority for eligibility; the separate sample/demo remains review-only.

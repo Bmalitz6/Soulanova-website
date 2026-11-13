@@ -12,6 +12,7 @@
   const workoutList = document.getElementById('workout-list');
   const video = document.getElementById('chair-yoga-video');
   const narration = document.getElementById('chair-yoga-narration');
+  const openingScreen = document.getElementById('opening-screen');
   const transitionScreen = document.getElementById('transition-screen');
   const completionScreen = document.getElementById('completion-screen');
   const playbackError = document.getElementById('playback-error');
@@ -19,6 +20,7 @@
   const previousButton = document.getElementById('previous-workout');
   const $ = (selector) => document.querySelector(selector);
   let client = null;
+  let activeMemberId = null;
   let catalog = null;
   let programs = null;
   let narrationDrafts = null;
@@ -36,6 +38,11 @@
   let currentApprovedAudio = null;
   let currentApprovedAudioPass = null;
   let narrationObjectUrl = null;
+  let sessionAudioUrls = new Map();
+  let sessionNarration = null;
+  let pendingOpeningWorkoutId = null;
+  let closingStartedToken = null;
+  let sessionNarrationRevision = 0;
   const ownerAudioReviewRequested = window.location.hostname.endsWith('-soulanova.vercel.app')
     && new URLSearchParams(window.location.search).get('owner-audio-review') === '1';
   if (ownerAudioReviewRequested) {
@@ -71,6 +78,135 @@
     if (narrationObjectUrl) URL.revokeObjectURL(narrationObjectUrl);
     narrationObjectUrl = null;
   }
+  function clearSessionNarration({ revoke = true } = {}) {
+    sessionNarrationRevision++;
+    sessionNarration = null;
+    pendingOpeningWorkoutId = null;
+    if (revoke) {
+      for (const url of sessionAudioUrls.values()) URL.revokeObjectURL(url);
+      sessionAudioUrls.clear();
+    }
+  }
+  function sessionNarrationRecord(levelId, kind) {
+    return kind === 'opening' ? narrationDrafts?.levelOpenings?.[levelId] : narrationDrafts?.levelClosings?.[levelId];
+  }
+  function sessionNarrationKey(levelId, kind) { return `${kind}:${levelId}`; }
+  async function preloadSessionNarrationAssets() {
+    for (const url of sessionAudioUrls.values()) URL.revokeObjectURL(url);
+    sessionAudioUrls.clear();
+    const player = window.SoulanovaChairYogaPlayback;
+    for (const levelId of ['beginner', 'intermediate', 'advanced']) {
+      for (const kind of ['opening', 'closing']) {
+        const asset = player.getPlayableSessionNarration(narrationDrafts, narrationBatchApproval, levelId, kind);
+        if (!asset) continue;
+        const key = sessionNarrationKey(levelId, kind);
+        try {
+          const response = await fetch(asset.audioUrl, { cache: 'no-store' });
+          if (!response.ok) throw new Error(`Narration request failed (${response.status}).`);
+          const bytes = await response.arrayBuffer();
+          const digest = await crypto.subtle.digest('SHA-256', bytes);
+          const hash = [...new Uint8Array(digest)].map(byte => byte.toString(16).padStart(2, '0')).join('');
+          if (hash !== asset.audioSha256.toLowerCase()) throw new Error('Session narration integrity check failed.');
+          sessionAudioUrls.set(key, URL.createObjectURL(new Blob([bytes], { type: 'audio/mpeg' })));
+        } catch (error) {
+          sessionAudioUrls.set(key, { error: error.message || 'Narration asset could not be loaded.' });
+        }
+      }
+    }
+  }
+  function configureNarrationControls(asset, statusText) {
+    currentApprovedAudio = asset;
+    currentApprovedAudioPass = null;
+    narration.volume = Number($('#narration-volume').value);
+    narration.muted = narrationMuted;
+    $('#narration-enabled').disabled = false;
+    $('#narration-enabled').checked = narrationEnabled;
+    $('#narration-volume').disabled = false;
+    $('#narration-mute').disabled = false;
+    $('#narration-status').textContent = statusText;
+  }
+  function startOpening(workoutId) {
+    const levelId = controller.getSnapshot().levelId;
+    const asset = window.SoulanovaChairYogaPlayback.getPlayableSessionNarration(narrationDrafts, narrationBatchApproval, levelId, 'opening');
+    const key = sessionNarrationKey(levelId, 'opening');
+    const prepared = sessionAudioUrls.get(key);
+    if (!narrationEnabled || !asset || typeof prepared !== 'string') {
+      if (narrationEnabled && prepared?.error) $('#narration-status').textContent = `${prepared.error} The workout can continue without its opening narration.`;
+      controller.start(workoutId);
+      return;
+    }
+    const revision = ++sessionNarrationRevision;
+    pendingOpeningWorkoutId = workoutId;
+    sessionNarration = { kind: 'opening', levelId, workoutId, revision };
+    playerView.hidden = false;
+    workoutSelection.hidden = true;
+    levelSelection.hidden = true;
+    openingScreen.hidden = false;
+    transitionScreen.hidden = true;
+    completionScreen.hidden = true;
+    playbackError.hidden = true;
+    video.hidden = true;
+    $('#opening-title').textContent = `${levelId[0].toUpperCase()}${levelId.slice(1)} Chair Yoga`;
+    $('#opening-copy').textContent = 'Miriam’s welcome plays once before the first movement. The workout begins when it finishes.';
+    $('#player-heading').textContent = 'Session opening';
+    $('#player-eyebrow').textContent = `${levelId.toUpperCase()} · GET READY`;
+    $('#player-meta').textContent = 'The first movement follows this welcome.';
+    $('#player-position').textContent = '';
+    $('#pass-label').textContent = 'Session opening';
+    $('#movement-counter').textContent = 'Getting ready';
+    $('#workout-progress').value = 0;
+    $('#pause-workout').disabled = false;
+    $('#pause-workout').textContent = 'Pause opening';
+    $('#previous-workout').disabled = true;
+    $('#next-workout').disabled = true;
+    $('#restart-workout').disabled = true;
+    configureNarrationControls(asset, 'Playing the level opening. Movement narration starts after it finishes.');
+    narration.src = prepared;
+    narration.load();
+    narration.play().then(() => {
+      if (sessionNarration?.revision === revision) $('#narration-resume').hidden = true;
+    }).catch(error => {
+      if (sessionNarration?.revision !== revision) return;
+      $('#narration-resume').hidden = false;
+      $('#narration-status').textContent = `The browser blocked the opening narration. Tap “Play narration” to continue. ${error?.message || ''}`.trim();
+    });
+  }
+  function finishOpeningAndStart() {
+    if (sessionNarration?.kind !== 'opening' || !pendingOpeningWorkoutId) return false;
+    const workoutId = pendingOpeningWorkoutId;
+    sessionNarrationRevision++;
+    sessionNarration = null;
+    pendingOpeningWorkoutId = null;
+    controller.start(workoutId);
+    return true;
+  }
+  function startClosing(snap) {
+    const token = `${snap.currentProgram?.id}:${snap.generation}`;
+    if (closingStartedToken === token) return;
+    closingStartedToken = token;
+    if (!narrationEnabled) return;
+    const levelId = snap.levelId;
+    const asset = window.SoulanovaChairYogaPlayback.getPlayableSessionNarration(narrationDrafts, narrationBatchApproval, levelId, 'closing');
+    const prepared = sessionAudioUrls.get(sessionNarrationKey(levelId, 'closing'));
+    if (!asset || typeof prepared !== 'string') {
+      if (prepared?.error) $('#narration-status').textContent = `${prepared.error} The completion screen remains available.`;
+      return;
+    }
+    const revision = ++sessionNarrationRevision;
+    sessionNarration = { kind: 'closing', levelId, revision, token };
+    $('#pause-workout').disabled = false;
+    $('#pause-workout').textContent = 'Pause closing';
+    configureNarrationControls(asset, 'Playing the workout closing. This recording plays once after the final movement.');
+    narration.src = prepared;
+    narration.load();
+    narration.play().then(() => {
+      if (sessionNarration?.revision === revision) $('#narration-resume').hidden = true;
+    }).catch(error => {
+      if (sessionNarration?.revision !== revision) return;
+      $('#narration-resume').hidden = false;
+      $('#narration-status').textContent = `The browser blocked the closing narration. Tap “Play narration” to hear it. ${error?.message || ''}`.trim();
+    });
+  }
   function showSignedOut(message) {
     authRevision++;
     if (controller) controller.backToLevels();
@@ -80,7 +216,11 @@
     video.load();
     mediaCommand = false;
     activeMovementId = null;
+    activeMemberId = null;
     clearNarration();
+    clearSessionNarration();
+    openingScreen.hidden = true;
+    video.hidden = false;
     library.hidden = true;
     authGate.hidden = false;
     status.textContent = message;
@@ -96,6 +236,8 @@
     clearNarration();
     activeMovementId = workout.id;
     activeGeneration = generation;
+    openingScreen.hidden = true;
+    video.hidden = false;
     video.src = workout.videoUrl;
     video.poster = workout.thumbnailUrl;
     video.muted = true;
@@ -209,6 +351,19 @@
   }
   async function playNarrationSafely() {
     if (!currentApprovedAudio || !narrationEnabled) return true;
+    if (sessionNarration) {
+      try {
+        await narration.play();
+        $('#narration-resume').hidden = true;
+        $('#narration-status').textContent = `Playing the workout ${sessionNarration.kind}.`;
+        $('#pause-workout').textContent = `Pause ${sessionNarration.kind}`;
+        return true;
+      } catch (error) {
+        $('#narration-resume').hidden = false;
+        $('#narration-status').textContent = `The browser blocked this session narration. Tap “Play narration” to resume. ${error?.message || ''}`.trim();
+        return false;
+      }
+    }
     const attempt = await window.SoulanovaChairYogaPlayback.playNarrationAligned(narration, video);
     if (attempt.ok) {
       $('#narration-resume').hidden = true;
@@ -233,6 +388,16 @@
     listenersAdded = true;
     video.addEventListener('playing', () => { playingGeneration = activeGeneration; const s = controller?.getSnapshot(); if (s?.phase === 'playing') controller.markVideoPlaying(activeGeneration, activeMovementId); });
     video.addEventListener('ended', () => controller?.videoEnded(activeGeneration, activeMovementId));
+    narration.addEventListener('ended', () => {
+      const active = sessionNarration;
+      if (!active || active.revision !== sessionNarrationRevision) return;
+      if (active.kind === 'opening') finishOpeningAndStart();
+      else if (active.kind === 'closing') {
+        sessionNarration = null;
+        $('#pause-workout').disabled = true;
+        $('#narration-status').textContent = 'Workout closing complete.';
+      }
+    });
     video.addEventListener('timeupdate', updateProgress);
     video.addEventListener('loadedmetadata', updateProgress);
     video.addEventListener('durationchange', updateProgress);
@@ -254,6 +419,14 @@
     $('#previous-workout').addEventListener('click', () => controller.previous());
     $('#next-workout').addEventListener('click', () => controller.next());
     $('#pause-workout').addEventListener('click', () => {
+      if (sessionNarration) {
+        if (narration.paused) playNarrationSafely();
+        else {
+          narration.pause();
+          $('#pause-workout').textContent = `Resume ${sessionNarration.kind}`;
+        }
+        return;
+      }
       const phase = controller.getSnapshot().phase;
       if (phase === 'playing' || phase === 'transitioning') controller.pause();
       else controller.resume();
@@ -264,7 +437,11 @@
     $('#error-resume').addEventListener('click', () => controller.resume());
     $('#narration-enabled').addEventListener('change', event => {
       narrationEnabled = event.currentTarget.checked;
-      if (!narrationEnabled) narration.pause();
+      if (!narrationEnabled) {
+        narration.pause();
+        if (sessionNarration?.kind === 'opening') finishOpeningAndStart();
+      }
+      else if (sessionNarration && narration.paused) playNarrationSafely();
       else if (controller?.getSnapshot().phase === 'playing' && currentApprovedAudio) playNarrationSafely();
     });
     $('#narration-resume').addEventListener('click', () => playNarrationSafely());
@@ -275,10 +452,13 @@
       $('#narration-mute').textContent = narrationMuted ? 'Unmute narration' : 'Mute narration';
     });
     document.addEventListener('visibilitychange', () => {
-      if (document.visibilityState === 'hidden' && ['playing', 'transitioning'].includes(controller?.getSnapshot().phase)) controller.pause();
+      if (document.visibilityState !== 'hidden') return;
+      if (sessionNarration && !narration.paused) narration.pause();
+      if (['playing', 'transitioning'].includes(controller?.getSnapshot().phase)) controller.pause();
     });
   }
   function syncNarrationToVideo() {
+    if (sessionNarration) return;
     if (!currentApprovedAudio || narration.paused || !Number.isFinite(video.currentTime)) return;
     const delta = Math.abs(narration.currentTime - video.currentTime);
     if (delta > 0.35 && narration.duration > 0) narration.currentTime = Math.min(video.currentTime, Math.max(0, narration.duration - 0.05));
@@ -371,18 +551,29 @@
     workoutSelection.hidden = false;
   }
   function startWorkout(workoutId) {
+    closingStartedToken = null;
     workoutSelection.hidden = true;
     levelSelection.hidden = true;
     playerView.hidden = false;
-    controller.start(workoutId);
+    startOpening(workoutId);
   }
   function showLevelSelection() {
+    if (sessionNarration) narration.pause();
+    sessionNarration = null;
+    pendingOpeningWorkoutId = null;
+    openingScreen.hidden = true;
+    video.hidden = false;
     if (controller && controller.getSnapshot().phase !== 'level-selection') controller.backToLevels();
     playerView.hidden = true;
     workoutSelection.hidden = true;
     levelSelection.hidden = false;
   }
   function showWorkoutSelection() {
+    if (sessionNarration) narration.pause();
+    sessionNarration = null;
+    pendingOpeningWorkoutId = null;
+    openingScreen.hidden = true;
+    video.hidden = false;
     if (controller && controller.getSnapshot().levelId) {
       const selectedLevelId = controller.getSnapshot().levelId;
       if (controller.getSnapshot().phase !== 'workout-selection') controller.backToWorkouts();
@@ -417,13 +608,17 @@
     if (snap.phase === 'complete') {
       playerView.hidden = false; workoutSelection.hidden = true; levelSelection.hidden = true;
       transitionScreen.hidden = true; playbackError.hidden = true; completionScreen.hidden = false;
+      openingScreen.hidden = true; video.hidden = false;
       $('#completion-summary').textContent = `${snap.currentProgram.title}: all 12 movements completed after ${snap.loopsPerMovement} loops per movement. No member history is written by this Preview.`;
       $('#player-heading').textContent = 'Workout complete';
       $('#player-eyebrow').textContent = `${snap.levelName} · ${snap.currentProgram.title} · COMPLETE`;
       renderWorkoutProgress(snap);
-      renderSequence(snap); return;
+      renderSequence(snap);
+      startClosing(snap);
+      return;
     }
     playerView.hidden = false; levelSelection.hidden = true; workoutSelection.hidden = true;
+    openingScreen.hidden = true; video.hidden = false;
     completionScreen.hidden = true;
     const movement = snap.currentMovement;
     const program = snap.currentProgram;
@@ -458,6 +653,7 @@
     $('#transition-resume').textContent = snap.pausedFrom === 'transitioning' ? 'Resume transition' : 'Resume movement';
     $('#transition-next-button').hidden = !snap.nextMovement || !(isPaused || isTransitioning);
     $('#transition-next-button').textContent = 'Next Movement';
+    $('#pause-workout').disabled = false;
     renderSequence(snap);
   }
   function showMemberLibrary(user) {
@@ -467,6 +663,18 @@
   }
   async function openMemberLibrary(user) {
     if (!user) return showSignedOut('Not signed in');
+    if (activeMemberId && activeMemberId !== user.id) {
+      if (controller) controller.backToLevels();
+      clearNarration();
+      clearSessionNarration();
+      mediaCommand = true;
+      pauseVideoCommand();
+      video.removeAttribute('src');
+      video.load();
+      mediaCommand = false;
+      activeMovementId = null;
+    }
+    activeMemberId = user.id;
     const revision = ++authRevision;
     try {
       const [catalogResponse, programResponse, narrationResponse, ownerReviewResponse, batchApprovalResponse] = await Promise.all([
@@ -487,6 +695,8 @@
       if (nextPrograms.schemaVersion !== 2 || nextPrograms.proposalStatus !== 'owner_approved_2026-11-13' || nextPrograms.totalWorkouts !== 36 || nextPrograms.movementsPerWorkout !== 12 || nextPrograms.ownerApproval?.status !== 'owner_approved_2026-11-13') throw new Error('The 36-workout matrix is incomplete or is missing final owner approval.');
       catalog = nextCatalog; programs = nextPrograms; narrationDrafts = nextNarration;
       narrationBatchApproval = batchApprovalResponse;
+      await preloadSessionNarrationAssets();
+      if (revision !== authRevision) return;
       narration.volume = Number($('#narration-volume').value);
       $('#narration-status').textContent = ownerAudioReviewMode
         ? 'SSO-protected owner listening mode is active for this Preview.'
@@ -539,11 +749,13 @@
     if (error) status.textContent = 'Sign out failed. Please try again.';
   });
   function seekNarrationToVideo() {
+    if (sessionNarration) return;
     if (!currentApprovedAudio || !Number.isFinite(narration.duration)) return;
     narration.currentTime = Math.min(video.currentTime, Math.max(0, narration.duration - 0.05));
   }
   video.addEventListener('seeking', seekNarrationToVideo);
   video.addEventListener('timeupdate', () => {
+    if (sessionNarration) return;
     if (currentApprovedAudio && !narration.paused && Math.abs(video.currentTime - narration.currentTime) > 0.5) seekNarrationToVideo();
   });
   document.addEventListener('visibilitychange', () => {

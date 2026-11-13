@@ -4323,9 +4323,13 @@
       "wordCount": 25,
       "estimatedSpokenSeconds": 16,
       "expectedAudioFilename": "opening-beginner.mp3",
-      "audioUrl": null,
-      "audioSha256": null,
-      "audioStatus": "not_generated_generation_authorized"
+      "audioUrl": "/app/chair-yoga/narration/review-2026-11-12-miriam/opening-beginner-miriam-review.mp3",
+      "audioSha256": "8f6700b1078777dcb9f000fdeae17859a4a06c00a0f33e49e245ac7a9d8b4efd",
+      "audioStatus": "owner-approved",
+      "audioDurationSeconds": 15.55737,
+      "bytes": 249982,
+      "ownerApproved": true,
+      "taskId": "b0e2913a-2516-40c0-8cf8-f5b8f8dec3de"
     },
     "intermediate": {
       "script": "Welcome to your Intermediate Chair Yoga session. Arrange your chair securely and follow each movement at your own pace. Keep your range comfortable and your breath steady.",

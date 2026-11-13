@@ -18,3 +18,7 @@ button.level-card h3{font:400 22px/1.2 Georgia,serif;color:var(--teal)}
 button.level-card p{color:var(--muted);font-size:14px}
 .workout-card{min-height:100%;}
 .workout-card:focus-visible{outline:3px solid #b88223;outline-offset:3px}
+.session-opening{position:absolute;inset:0;z-index:2;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:12px;padding:clamp(18px,4vw,38px);background:#000;color:#fff;text-align:center}
+.session-opening .eyebrow{color:#beded4}
+.session-opening h2{max-width:22ch;margin:0;color:#fff;font:400 clamp(24px,3vw,36px)/1.12 Georgia,serif}
+.session-opening p:not(.eyebrow){max-width:52ch;margin:0;color:#e2eee9}
