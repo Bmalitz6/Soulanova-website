@@ -76,10 +76,41 @@
     return { currentMovementNumber, movementLabel, completedCount, totalMovements, progress };
   }
 
-  function getApprovedNarrationForPass(movementRecord, pass) {
+  function getNarrationForPass(movementRecord, pass, { allowPendingOwnerReview = false } = {}) {
     const asset = movementRecord?.loopScripts?.[String(pass)];
-    return asset && asset.audioStatus === 'owner-approved' && asset.audioUrl
+    const statusAllowed = asset?.audioStatus === 'owner-approved'
+      || (allowPendingOwnerReview && asset?.audioStatus === 'generated_pending_owner_review');
+    return asset && statusAllowed && asset.audioUrl
       && /^[a-f0-9]{64}$/i.test(asset.audioSha256 || '') ? asset : null;
+  }
+
+  function getApprovedNarrationForPass(movementRecord, pass) {
+    return getNarrationForPass(movementRecord, pass);
+  }
+
+  async function playNarrationAligned(audio, video) {
+    if (!audio || !video) return { ok: false, error: new Error('Narration media is unavailable.') };
+    try {
+      if (Number.isFinite(video.currentTime) && Number.isFinite(audio.duration) && audio.duration > 0) {
+        audio.currentTime = Math.min(video.currentTime, Math.max(0, audio.duration - 0.05));
+      }
+      await audio.play();
+      return { ok: true, error: null };
+    } catch (error) {
+      return { ok: false, error };
+    }
+  }
+
+  function setNarrationVolume(audio, value) {
+    const volume = Math.max(0, Math.min(1, Number(value) || 0));
+    if (audio) audio.volume = volume;
+    return volume;
+  }
+
+  function setNarrationMuted(audio, muted) {
+    const next = Boolean(muted);
+    if (audio) audio.muted = next;
+    return next;
   }
 
   function createChairYogaPlayback({
@@ -358,5 +389,5 @@
     return Object.freeze({ selectLevel, start, pause, resume, next, previous, restart, markVideoPlaying, videoEnded, playbackBlocked, backToWorkouts, backToLevels, getWorkoutSummary, getLevelSummary, getSnapshot });
   }
 
-  return Object.freeze({ createChairYogaPlayback, createPauseEventGuard, getWorkoutProgress, getApprovedNarrationForPass, validatePlaylist });
+  return Object.freeze({ createChairYogaPlayback, createPauseEventGuard, getWorkoutProgress, getNarrationForPass, getApprovedNarrationForPass, playNarrationAligned, setNarrationVolume, setNarrationMuted, validatePlaylist });
 });

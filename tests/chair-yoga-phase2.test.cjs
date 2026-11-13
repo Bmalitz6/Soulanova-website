@@ -18,6 +18,7 @@ const narrationReviewPage = fs.readFileSync(path.join(__dirname, '../docs/chair-
 const narrationBatchReviewPage = fs.readFileSync(path.join(__dirname, '../docs/chair-yoga/narration-batch-review.html'), 'utf8');
 const narrationAudioManifest = require('../app/chair-yoga/narration/review-2026-11-12-miriam/review-manifest.json');
 const supersededPaulaAudioManifest = require('../app/chair-yoga/narration/review-2026-11-12-paula/review-manifest.json');
+const ownerReviewApi = require('../api/chair-yoga-owner-review.js');
 
 function fakeClock() {
   let time = 0;
@@ -454,8 +455,10 @@ test('narration remains separate and hash-gated; matrix approval authorizes gene
   assert.equal(narration.generationStatus, 'completed_pending_owner_listening_review');
   assert.equal(narration.memberPlaybackEnabled, false);
   assert.equal(plan.proposalStatus, 'owner_approved_2026-11-13');
-  assert.match(route, /Member narration remains disabled until those recordings are explicitly approved/);
-  assert.match(ui, /getApprovedNarrationForPass\(narrationRecord\(workout\), pass\)/);
+  assert.match(route, /Member narration remains disabled/);
+  assert.match(ui, /getNarrationForPass\(narrationRecord\(workout\), pass/);
+  assert.match(ui, /setNarrationVolume\(narration, event\.currentTarget\.value\)/);
+  assert.match(ui, /setNarrationMuted\(narration, narrationMuted\)/);
   assert.match(ui, /asset\.audioSha256\.toLowerCase\(\)/);
   assert.match(ui, /audioSha256/);
   assert.equal(narration.drafts.some(item => item.audioStatus === 'owner-approved'), false);
@@ -471,6 +474,51 @@ test('narration resolver selects only the matching owner-approved loop recording
   assert.equal(player.getApprovedNarrationForPass(record, 3), null);
   assert.equal(player.getApprovedNarrationForPass({ loopScripts: { '1': { ...loop1, audioStatus: 'pending' } } }, 1), null);
   assert.equal(player.getApprovedNarrationForPass({ loopScripts: { '1': { ...loop1, audioSha256: 'bad' } } }, 1), null);
+});
+
+test('pending tracks are playable only in the SSO-protected Preview review mode, never in Production', () => {
+  const pending = { audioUrl: '/audio.mp3', audioSha256: 'c'.repeat(64), audioStatus: 'generated_pending_owner_review' };
+  const record = { loopScripts: { '1': pending } };
+  assert.equal(player.getApprovedNarrationForPass(record, 1), null);
+  assert.equal(player.getNarrationForPass(record, 1), null);
+  assert.equal(player.getNarrationForPass(record, 1, { allowPendingOwnerReview: true }), pending);
+  assert.equal(player.getNarrationForPass(record, 2, { allowPendingOwnerReview: true }), null);
+  assert.equal(player.getNarrationForPass({ loopScripts: { '1': { ...pending, audioSha256: 'invalid' } } }, 1, { allowPendingOwnerReview: true }), null);
+
+  const runApi = (env, method = 'GET') => {
+    const previous = { VERCEL_ENV: process.env.VERCEL_ENV, VERCEL_GIT_COMMIT_REF: process.env.VERCEL_GIT_COMMIT_REF };
+    Object.assign(process.env, env);
+    let body = '';
+    const response = { setHeader() {}, end(value) { body = value; } };
+    ownerReviewApi({ method }, response);
+    for (const [key, value] of Object.entries(previous)) value === undefined ? delete process.env[key] : process.env[key] = value;
+    return JSON.parse(body);
+  };
+  assert.deepEqual(runApi({ VERCEL_ENV: 'preview', VERCEL_GIT_COMMIT_REF: 'preview/chair-yoga-website-2026-11-12' }), { enabled: true });
+  assert.deepEqual(runApi({ VERCEL_ENV: 'production', VERCEL_GIT_COMMIT_REF: 'main' }), { enabled: false });
+  assert.deepEqual(runApi({ VERCEL_ENV: 'preview', VERCEL_GIT_COMMIT_REF: 'main' }), { enabled: false });
+  assert.match(ui, /owner-audio-review/);
+  assert.match(ui, /\/api\/chair-yoga-owner-review/);
+  assert.match(ui, /narration-resume/);
+  assert.match(route, /id="narration-resume"/);
+});
+
+test('narration starts at the video position, handles autoplay blocking, and controls the audio element directly', async () => {
+  const audio = { currentTime: 0, duration: 18, volume: 0.8, muted: false, play: async () => {} };
+  const video = { currentTime: 7 };
+  assert.deepEqual(await player.playNarrationAligned(audio, video), { ok: true, error: null });
+  assert.equal(audio.currentTime, 7);
+  audio.play = async () => { throw new Error('NotAllowedError'); };
+  const blocked = await player.playNarrationAligned(audio, video);
+  assert.equal(blocked.ok, false);
+  assert.match(blocked.error.message, /NotAllowedError/);
+  assert.equal(player.setNarrationVolume(audio, 0.25), 0.25);
+  assert.equal(audio.volume, 0.25);
+  assert.equal(player.setNarrationVolume(audio, 2), 1);
+  assert.equal(player.setNarrationMuted(audio, true), true);
+  assert.equal(audio.muted, true);
+  assert.equal(player.setNarrationMuted(audio, false), false);
+  assert.equal(audio.muted, false);
 });
 
 test('Miriam demo preserves the exact owner-approved assets and hashes without enabling member playback', () => {

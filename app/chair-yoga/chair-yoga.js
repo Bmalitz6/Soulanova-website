@@ -34,6 +34,9 @@
   let currentApprovedAudio = null;
   let currentApprovedAudioPass = null;
   let narrationObjectUrl = null;
+  const ownerAudioReviewRequested = window.location.hostname.endsWith('-soulanova.vercel.app')
+    && new URLSearchParams(window.location.search).get('owner-audio-review') === '1';
+  let ownerAudioReviewMode = false;
   const pauseEventGuard = window.SoulanovaChairYogaPlayback.createPauseEventGuard();
 
   const $ = (selector) => document.querySelector(selector);
@@ -53,6 +56,10 @@
     narration.pause();
     narration.removeAttribute('src');
     narration.load();
+    $('#narration-enabled').disabled = true;
+    $('#narration-volume').disabled = true;
+    $('#narration-mute').disabled = true;
+    $('#narration-resume').hidden = true;
     currentApprovedAudio = null;
     currentApprovedAudioPass = null;
     if (narrationObjectUrl) URL.revokeObjectURL(narrationObjectUrl);
@@ -94,8 +101,15 @@
   function narrationRecord(workout) {
     return narrationDrafts?.drafts?.find(item => item.movementId === workout.id) || null;
   }
+  function narrationForPass(workout, pass) {
+    return window.SoulanovaChairYogaPlayback.getNarrationForPass(narrationRecord(workout), pass, {
+      allowPendingOwnerReview: ownerAudioReviewMode
+    });
+  }
   async function verifyNarrationAsset(asset, generation, pass) {
-    if (!window.SoulanovaChairYogaPlayback.getApprovedNarrationForPass({ loopScripts: { [String(pass)]: asset } }, pass)) return null;
+    if (!window.SoulanovaChairYogaPlayback.getNarrationForPass({ loopScripts: { [String(pass)]: asset } }, pass, {
+      allowPendingOwnerReview: ownerAudioReviewMode
+    })) return null;
     const response = await fetch(asset.audioUrl, { cache: 'no-store' });
     if (!response.ok) throw new Error(`Narration request failed (${response.status}).`);
     const bytes = await response.arrayBuffer();
@@ -108,7 +122,7 @@
     return narrationObjectUrl;
   }
   async function prepareNarration(workout, generation, pass) {
-    const asset = window.SoulanovaChairYogaPlayback.getApprovedNarrationForPass(narrationRecord(workout), pass);
+    const asset = narrationForPass(workout, pass);
     if (!asset) return false;
     try {
       const verifiedUrl = await verifyNarrationAsset(asset, generation, pass);
@@ -117,7 +131,9 @@
       currentApprovedAudioPass = pass;
       narration.src = verifiedUrl;
       narration.load();
-      $('#narration-status').textContent = 'Approved narration is available for this movement.';
+      $('#narration-status').textContent = ownerAudioReviewMode
+        ? 'Owner listening review only: this movement and loop narration is loaded and hash-verified. Member playback remains disabled.'
+        : 'Approved narration is available for this movement.';
       $('#narration-enabled').disabled = false;
       $('#narration-volume').disabled = false;
       $('#narration-mute').disabled = false;
@@ -125,6 +141,9 @@
     } catch (error) {
       if (controller.getSnapshot().generation === generation) {
         $('#narration-status').textContent = `${error.message} Narration is unavailable for this movement.`;
+        $('#narration-enabled').disabled = true;
+        $('#narration-volume').disabled = true;
+        $('#narration-mute').disabled = true;
       }
       return false;
     }
@@ -134,13 +153,18 @@
     const changed = setVideoSource(workout, generation);
     activeGeneration = generation;
     if (!changed && currentApprovedAudioPass !== pass) clearNarration();
-    const asset = window.SoulanovaChairYogaPlayback.getApprovedNarrationForPass(narrationRecord(workout), pass);
+    const asset = narrationForPass(workout, pass);
     if (asset && (changed || currentApprovedAudioPass !== pass)) {
       const ready = await prepareNarration(workout, generation, pass);
-      if (!ready) throw new Error('Approved narration could not be verified.');
+      if (!ready) {
+        narrationEnabled = false;
+        $('#narration-enabled').checked = false;
+      }
     } else if (!asset && currentApprovedAudioPass !== pass) {
       clearNarration();
-      $('#narration-status').textContent = 'Loop-specific narration is pending owner approval.';
+      $('#narration-status').textContent = ownerAudioReviewMode
+        ? 'No verified narration exists for this movement and loop.'
+        : 'Loop-specific narration is pending owner approval.';
       $('#narration-enabled').disabled = true;
       $('#narration-volume').disabled = true;
       $('#narration-mute').disabled = true;
@@ -151,7 +175,7 @@
       if (currentApprovedAudio) narration.currentTime = 0;
     }
     const videoPlay = video.play();
-    const audioPlay = currentApprovedAudio && narrationEnabled ? narration.play() : Promise.resolve();
+    const audioPlay = currentApprovedAudio && narrationEnabled ? playNarrationSafely() : Promise.resolve();
     await Promise.all([videoPlay, audioPlay]);
     return controller.getSnapshot().generation === generation;
   }
@@ -165,9 +189,23 @@
   async function resumeMedia(workout, { generation } = {}) {
     if (generation !== activeGeneration || controller.getSnapshot().generation !== generation) return false;
     const videoPlay = video.play();
-    const audioPlay = currentApprovedAudio && narrationEnabled ? narration.play() : Promise.resolve();
+    const audioPlay = currentApprovedAudio && narrationEnabled ? playNarrationSafely() : Promise.resolve();
     await Promise.all([videoPlay, audioPlay]);
     return controller.getSnapshot().generation === generation;
+  }
+  async function playNarrationSafely() {
+    if (!currentApprovedAudio || !narrationEnabled) return true;
+    const attempt = await window.SoulanovaChairYogaPlayback.playNarrationAligned(narration, video);
+    if (attempt.ok) {
+      $('#narration-resume').hidden = true;
+      $('#narration-status').textContent = ownerAudioReviewMode
+        ? 'Owner listening review only: playing hash-verified narration. Member playback remains disabled.'
+        : 'Playing approved movement narration.';
+      return true;
+    }
+    $('#narration-resume').hidden = false;
+    $('#narration-status').textContent = `The browser blocked narration autoplay. Tap “Play narration” to sync it with the current video position. ${attempt.error?.message || ''}`.trim();
+    return false;
   }
   function stopMedia({ generation } = {}) {
     if (generation !== activeGeneration) return;
@@ -213,12 +251,13 @@
     $('#narration-enabled').addEventListener('change', event => {
       narrationEnabled = event.currentTarget.checked;
       if (!narrationEnabled) narration.pause();
-      else if (controller?.getSnapshot().phase === 'playing' && currentApprovedAudio) narration.play().catch(() => {});
+      else if (controller?.getSnapshot().phase === 'playing' && currentApprovedAudio) playNarrationSafely();
     });
-    $('#narration-volume').addEventListener('input', event => { narration.volume = Number(event.currentTarget.value); });
+    $('#narration-resume').addEventListener('click', () => playNarrationSafely());
+    $('#narration-volume').addEventListener('input', event => { window.SoulanovaChairYogaPlayback.setNarrationVolume(narration, event.currentTarget.value); });
     $('#narration-mute').addEventListener('click', () => {
       narrationMuted = !narrationMuted;
-      narration.muted = narrationMuted;
+      narrationMuted = window.SoulanovaChairYogaPlayback.setNarrationMuted(narration, narrationMuted);
       $('#narration-mute').textContent = narrationMuted ? 'Unmute narration' : 'Mute narration';
     });
     document.addEventListener('visibilitychange', () => {
@@ -416,17 +455,27 @@
     if (!user) return showSignedOut('Not signed in');
     const revision = ++authRevision;
     try {
-      const [catalogResponse, programResponse, narrationResponse] = await Promise.all([
+      const [catalogResponse, programResponse, narrationResponse, ownerReviewResponse] = await Promise.all([
         fetch('/app/chair-yoga/catalog.json', { cache: 'no-store' }),
         fetch('/app/chair-yoga/chair-yoga-programs.json', { cache: 'no-store' }),
-        fetch('/app/chair-yoga/narration-drafts.json', { cache: 'no-store' })
+        fetch('/app/chair-yoga/narration-drafts.json', { cache: 'no-store' }),
+        fetch('/api/chair-yoga-owner-review', { cache: 'no-store' }).catch(() => null)
       ]);
       if (![catalogResponse, programResponse, narrationResponse].every(response => response.ok)) throw new Error('The Chair Yoga library files could not be loaded.');
-      const [nextCatalog, nextPrograms, nextNarration] = await Promise.all([catalogResponse.json(), programResponse.json(), narrationResponse.json()]);
+      const [nextCatalog, nextPrograms, nextNarration, ownerReviewConfig] = await Promise.all([
+        catalogResponse.json(), programResponse.json(), narrationResponse.json(),
+        ownerReviewResponse?.ok ? ownerReviewResponse.json() : Promise.resolve({ enabled: false })
+      ]);
+      ownerAudioReviewMode = ownerAudioReviewRequested && ownerReviewConfig.enabled === true;
       if (revision !== authRevision) return;
       if (nextCatalog.libraryStatus !== 'preview_candidates_pending_owner_review' || nextCatalog.movements.length !== 36 || nextCatalog.excludedOnHold?.length) throw new Error('The 36-video movement catalog did not pass its integrity check.');
       if (nextPrograms.schemaVersion !== 2 || nextPrograms.proposalStatus !== 'owner_approved_2026-11-13' || nextPrograms.totalWorkouts !== 36 || nextPrograms.movementsPerWorkout !== 12 || nextPrograms.ownerApproval?.status !== 'owner_approved_2026-11-13') throw new Error('The 36-workout matrix is incomplete or is missing final owner approval.');
       catalog = nextCatalog; programs = nextPrograms; narrationDrafts = nextNarration;
+      narration.volume = Number($('#narration-volume').value);
+      $('#narration-status').textContent = ownerAudioReviewMode
+        ? 'SSO-protected owner listening mode is active for this Preview. Generated narration remains disabled for members until separately approved.'
+        : 'Member narration remains disabled until the generated recordings receive explicit owner approval.';
+      $('#narration-enabled').checked = true;
       controller = window.SoulanovaChairYogaPlayback.createChairYogaPlayback({
         levels: programs.levels,
         movements: catalog.movements,

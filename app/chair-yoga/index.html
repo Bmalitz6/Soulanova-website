@@ -81,10 +81,11 @@
         </div>
         <section class="narration-panel" aria-labelledby="narration-heading">
           <audio id="chair-yoga-narration" preload="metadata"></audio>
-          <div><h3 id="narration-heading">Movement narration</h3><p id="narration-status" role="status">Loop-specific narration is pending owner approval.</p></div>
+          <div><h3 id="narration-heading">Movement narration</h3><p id="narration-status" role="status">Member narration remains disabled until the generated recordings receive explicit owner approval.</p></div>
           <label><input id="narration-enabled" type="checkbox" checked disabled> Narration on</label>
           <label class="volume-label">Volume <input id="narration-volume" type="range" min="0" max="1" step="0.05" value="0.8" disabled></label>
           <button id="narration-mute" type="button" disabled>Mute narration</button>
+          <button id="narration-resume" class="secondary" type="button" hidden>Play narration</button>
         </section>
         <section class="up-next-panel" aria-labelledby="up-next-heading"><h3 id="up-next-heading">Workout progress</h3><p id="up-next-copy"></p><div id="player-sequence" class="sequence-strip"></div></section>
       </section>
