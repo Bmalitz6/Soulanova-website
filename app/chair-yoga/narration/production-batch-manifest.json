@@ -1,6 +1,6 @@
 {
   "schemaVersion": 1,
-  "status": "completed_pending_owner_listening_review",
+  "status": "completed_owner_batch_approved_for_member_playback_2026-11-13",
   "preparedAt": "2026-11-13",
   "voice": {
     "provider": "Runway Generate Speech",
@@ -69,12 +69,13 @@
     "pricingRule": "1 credit per 50 characters, rounded up separately for each request, minimum 1",
     "noGenerationStarted": false,
     "requiresOwnerApproval": false,
-    "memberPlaybackEnabled": false,
+    "memberPlaybackEnabled": true,
     "ownerAuthorization": "owner_authorized_conditional_gates_passed_2026-11-13",
     "finalMatrixApprovalRequiredBeforeGeneration": false,
     "matrixApprovalStatus": "owner_approved_2026-11-13",
     "generationCompletedAt": "2026-11-13",
-    "generatedFilesPendingOwnerReview": 142
+    "generatedFilesPendingOwnerReview": 142,
+    "memberPlaybackApprovalId": "chair-yoga-miriam-batch-member-playback-2026-11-13"
   },
   "transitions": {
     "durationSeconds": 5,
@@ -4309,7 +4310,15 @@
     "maximumEstimatedCredits": 354,
     "generationAllowedNow": true,
     "blockingGate": null,
-    "noPurchaseAuthorized": true
+    "noPurchaseAuthorized": true,
+    "memberPlaybackApproval": {
+      "status": "owner_approved_batch_for_member_playback",
+      "approvalId": "chair-yoga-miriam-batch-member-playback-2026-11-13",
+      "approvalDate": "2026-11-13",
+      "recordingCount": 142,
+      "manifest": "app/chair-yoga/narration/member-playback-approval-manifest.json",
+      "individualTrackListeningClaimed": false
+    }
   },
   "generatedCountSubmitted": 142,
   "creditsSubmitted": 354,
@@ -4332,5 +4341,5 @@
     ]
   },
   "allOutputsOwnerApproved": false,
-  "memberPlaybackEnabled": false
+  "memberPlaybackEnabled": true
 }

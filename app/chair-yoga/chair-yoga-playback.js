@@ -88,10 +88,31 @@
     return getNarrationForPass(movementRecord, pass);
   }
 
-  function getPlayableNarrationForPass(manifest, movementRecord, pass, { ownerPreview = false } = {}) {
+  function getBatchApprovedAsset(batchApproval, requestKey, type, audioUrl, sha256) {
+    if (batchApproval?.memberPlaybackEnabled !== true
+      || batchApproval.approvalStatus !== 'owner_approved_batch_for_member_playback'
+      || batchApproval.approvedAssetCount !== 142
+      || batchApproval.approvalId !== 'chair-yoga-miriam-batch-member-playback-2026-11-13'
+      || batchApproval.voice?.voiceId !== 'VhxAIIZM8IRmnl5fyeyk'
+      || batchApproval.voice?.model !== 'eleven_multilingual_v2'
+      || batchApproval.voice?.speed !== 0.75
+      || !requestKey || !type || !audioUrl || !/^[a-f0-9]{64}$/i.test(sha256 || '')) return null;
+    const asset = batchApproval.approvedAssets?.find(item => item.requestKey === requestKey);
+    if (!asset || asset.ownerBatchApproved !== true || asset.type !== type
+      || asset.audioUrl !== audioUrl || asset.sha256?.toLowerCase() !== sha256.toLowerCase()) return null;
+    return asset;
+  }
+
+  function getPlayableNarrationForPass(manifest, movementRecord, pass, { ownerPreview = false, batchApproval = null } = {}) {
     if (ownerPreview) return getNarrationForPass(movementRecord, pass, { allowPendingOwnerReview: true });
     if (manifest?.memberPlaybackEnabled !== true) return null;
-    return getApprovedNarrationForPass(movementRecord, pass);
+    const approved = getApprovedNarrationForPass(movementRecord, pass);
+    if (approved) return approved;
+    const pending = getNarrationForPass(movementRecord, pass, { allowPendingOwnerReview: true });
+    if (!pending || pending.audioStatus !== 'generated_pending_owner_review' || !movementRecord?.movementId) return null;
+    const requestKey = `${movementRecord.movementId}:${pass}`;
+    if (!getBatchApprovedAsset(batchApproval, requestKey, 'movement_loop', pending.audioUrl, pending.audioSha256)) return null;
+    return pending;
   }
 
   async function playNarrationAligned(audio, video) {
@@ -395,5 +416,5 @@
     return Object.freeze({ selectLevel, start, pause, resume, next, previous, restart, markVideoPlaying, videoEnded, playbackBlocked, backToWorkouts, backToLevels, getWorkoutSummary, getLevelSummary, getSnapshot });
   }
 
-  return Object.freeze({ createChairYogaPlayback, createPauseEventGuard, getWorkoutProgress, getNarrationForPass, getApprovedNarrationForPass, getPlayableNarrationForPass, playNarrationAligned, setNarrationVolume, setNarrationMuted, validatePlaylist });
+  return Object.freeze({ createChairYogaPlayback, createPauseEventGuard, getWorkoutProgress, getNarrationForPass, getApprovedNarrationForPass, getBatchApprovedAsset, getPlayableNarrationForPass, playNarrationAligned, setNarrationVolume, setNarrationMuted, validatePlaylist });
 });

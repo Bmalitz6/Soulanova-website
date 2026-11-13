@@ -7,3 +7,8 @@ The owner reviewed and approved the tested protected Chair Yoga Preview experien
 This records approval of the tested Preview experience as a whole. It does not assert that every individual narration recording was separately reviewed or approved. Per-track `audioStatus`, approval flags, hashes, scripts, and provenance remain as recorded in `app/chair-yoga/narration-drafts.json` and the generation manifests; this approval does not change them.
 
 The temporary runtime diagnostic panel was for troubleshooting and is removed from the member-facing release candidate. Member narration remains disabled by the production manifest gate (`memberPlaybackEnabled: false`) pending the required release authorization.
+
+
+## Later member-playback batch authorization — November 13, 2026
+
+The owner subsequently authorized the 142 generated Miriam recordings for member playback as a batch, contingent on final Production release validation. The authorization is recorded in `app/chair-yoga/narration/member-playback-approval-manifest.json`. It does not claim all tracks were individually listened to. It supersedes only the earlier statement that member playback remained disabled pending that separate batch decision; it does not alter the recorded owner acceptance of the Preview experience or separately approve every track by individual review. Production deployment still requires a separate explicit authorization.

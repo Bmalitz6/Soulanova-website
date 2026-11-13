@@ -22,6 +22,7 @@
   let catalog = null;
   let programs = null;
   let narrationDrafts = null;
+  let narrationBatchApproval = null;
   let controller = null;
   let currentLevel = null;
   let activeMovementId = null;
@@ -107,12 +108,22 @@
     return narrationDrafts?.drafts?.find(item => item.movementId === workout.id) || null;
   }
   function narrationForPass(workout, pass) {
-    return window.SoulanovaChairYogaPlayback.getPlayableNarrationForPass(narrationDrafts, narrationRecord(workout), pass, { ownerPreview: ownerAudioReviewMode });
+    return window.SoulanovaChairYogaPlayback.getPlayableNarrationForPass(narrationDrafts, narrationRecord(workout), pass, {
+      ownerPreview: ownerAudioReviewMode,
+      batchApproval: narrationBatchApproval
+    });
   }
-  async function verifyNarrationAsset(asset, generation, pass) {
-    if (!window.SoulanovaChairYogaPlayback.getNarrationForPass({ loopScripts: { [String(pass)]: asset } }, pass, {
-      allowPendingOwnerReview: ownerAudioReviewMode
-    })) return null;
+  async function verifyNarrationAsset(asset, generation, pass, movementId) {
+    const player = window.SoulanovaChairYogaPlayback;
+    const individuallyApproved = player.getNarrationForPass({ loopScripts: { [String(pass)]: asset } }, pass);
+    const batchAuthorized = player.getBatchApprovedAsset(
+      narrationBatchApproval,
+      `${movementId}:${pass}`,
+      'movement_loop',
+      asset.audioUrl,
+      asset.audioSha256
+    );
+    if (!individuallyApproved && !(ownerAudioReviewMode || batchAuthorized)) return null;
     const response = await fetch(asset.audioUrl, { cache: 'no-store' });
     if (!response.ok) throw new Error(`Narration request failed (${response.status}).`);
     const bytes = await response.arrayBuffer();
@@ -128,15 +139,15 @@
     const asset = narrationForPass(workout, pass);
     if (!asset) return false;
     try {
-      const verifiedUrl = await verifyNarrationAsset(asset, generation, pass);
+      const verifiedUrl = await verifyNarrationAsset(asset, generation, pass, workout.id);
       if (!verifiedUrl || controller.getSnapshot().generation !== generation) return false;
       currentApprovedAudio = asset;
       currentApprovedAudioPass = pass;
       narration.src = verifiedUrl;
       narration.load();
       $('#narration-status').textContent = ownerAudioReviewMode
-        ? 'Owner listening review only: this movement and loop narration is loaded and hash-verified. Member playback remains disabled.'
-        : 'Approved narration is available for this movement.';
+        ? 'Owner preview: this movement and loop narration is loaded and hash-verified.'
+        : 'Miriam narration is available for this movement.';
       $('#narration-enabled').disabled = false;
       $('#narration-volume').disabled = false;
       $('#narration-mute').disabled = false;
@@ -167,7 +178,7 @@
       clearNarration();
       $('#narration-status').textContent = ownerAudioReviewMode
         ? 'No verified narration exists for this movement and loop.'
-        : 'Loop-specific narration is pending owner approval.';
+        : 'No narration recording is available for this movement loop.';
       $('#narration-enabled').disabled = true;
       $('#narration-volume').disabled = true;
       $('#narration-mute').disabled = true;
@@ -202,8 +213,8 @@
     if (attempt.ok) {
       $('#narration-resume').hidden = true;
       $('#narration-status').textContent = ownerAudioReviewMode
-        ? 'Owner listening review only: playing hash-verified narration. Member playback remains disabled.'
-        : 'Playing approved movement narration.';
+        ? 'Owner preview: playing hash-verified narration.'
+        : 'Playing Miriam movement narration.';
       return true;
     }
     $('#narration-resume').hidden = false;
@@ -458,11 +469,12 @@
     if (!user) return showSignedOut('Not signed in');
     const revision = ++authRevision;
     try {
-      const [catalogResponse, programResponse, narrationResponse, ownerReviewResponse] = await Promise.all([
+      const [catalogResponse, programResponse, narrationResponse, ownerReviewResponse, batchApprovalResponse] = await Promise.all([
         fetch('/app/chair-yoga/catalog.json', { cache: 'no-store' }),
         fetch('/app/chair-yoga/chair-yoga-programs.json', { cache: 'no-store' }),
         fetch('/app/chair-yoga/narration-drafts.json', { cache: 'no-store' }),
-        fetch('/api/chair-yoga-owner-review', { cache: 'no-store' }).then(response => response.ok ? response.json() : { enabled: false }).catch(() => ({ enabled: false }))
+        fetch('/api/chair-yoga-owner-review', { cache: 'no-store' }).then(response => response.ok ? response.json() : { enabled: false }).catch(() => ({ enabled: false })),
+        fetch('/app/chair-yoga/narration/member-playback-approval-manifest.json', { cache: 'no-store' }).then(response => response.ok ? response.json() : null).catch(() => null)
       ]);
       if (![catalogResponse, programResponse, narrationResponse].every(response => response.ok)) throw new Error('The Chair Yoga library files could not be loaded.');
       const [nextCatalog, nextPrograms, nextNarration, ownerReviewConfig] = await Promise.all([
@@ -474,10 +486,13 @@
       if (nextCatalog.libraryStatus !== 'preview_candidates_pending_owner_review' || nextCatalog.movements.length !== 36 || nextCatalog.excludedOnHold?.length) throw new Error('The 36-video movement catalog did not pass its integrity check.');
       if (nextPrograms.schemaVersion !== 2 || nextPrograms.proposalStatus !== 'owner_approved_2026-11-13' || nextPrograms.totalWorkouts !== 36 || nextPrograms.movementsPerWorkout !== 12 || nextPrograms.ownerApproval?.status !== 'owner_approved_2026-11-13') throw new Error('The 36-workout matrix is incomplete or is missing final owner approval.');
       catalog = nextCatalog; programs = nextPrograms; narrationDrafts = nextNarration;
+      narrationBatchApproval = batchApprovalResponse;
       narration.volume = Number($('#narration-volume').value);
       $('#narration-status').textContent = ownerAudioReviewMode
-        ? 'SSO-protected owner listening mode is active for this Preview. Generated narration remains disabled for members until separately approved.'
-        : 'Member narration remains disabled until the generated recordings receive explicit owner approval.';
+        ? 'SSO-protected owner listening mode is active for this Preview.'
+        : narrationBatchApproval?.approvalStatus === 'owner_approved_batch_for_member_playback'
+          ? 'Miriam narration is available for this workout. You can turn it off or adjust its volume at any time.'
+          : 'Miriam narration is unavailable until this approved audio batch is loaded.';
       $('#narration-enabled').checked = true;
       controller = window.SoulanovaChairYogaPlayback.createChairYogaPlayback({
         levels: programs.levels,

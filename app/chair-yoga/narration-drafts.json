@@ -2,8 +2,8 @@
   "schemaVersion": 2,
   "instructor": "Miriam (video instructor and approved narrator identity)",
   "proposedNarrator": "Miriam (owner-approved SoulStretch voice; selected for Chair Yoga demo)",
-  "voiceApprovalStatus": "owner_approved_miriam_voice_matrix_and_closings; generated_batch_pending_owner_listening_review",
-  "generationStatus": "completed_pending_owner_listening_review",
+  "voiceApprovalStatus": "owner_approved_miriam_voice_settings_and_batch_member_playback_2026-11-13; individual_track_listening_not_claimed",
+  "generationStatus": "generated_batch_owner_approved_for_member_playback_2026-11-13",
   "generationProvider": "Runway Generate Speech",
   "generationModel": "eleven_multilingual_v2",
   "generationSettings": {
@@ -15,7 +15,7 @@
     "delivery": "Calm, warm, professional British female narrator; moderate speaking pace with natural breathing space; separate from original video audio.",
     "provenance": "Verified against all 22 owner-approved SoulStretch manifest voice IDs and original Runway task metadata."
   },
-  "passBehavior": "Each movement uses distinct loop-specific narration selected by movement ID and loop number. Only SHA-256-verified owner-approved loop audio may play. Each track starts with its movement/video pass; any quiet tail remains silent. Narration pauses/resumes/seeks with the video, stops before transitions, and is never sourced from the original video audio.",
+  "passBehavior": "Loop-specific Miriam narration is eligible for members only when individually owner-approved or included by exact request key, URL and SHA-256 in the owner-approved batch member-playback manifest; the browser verifies the downloaded bytes before playback.",
   "drafts": [
     {
       "movementId": "IMG_4285",
@@ -4278,7 +4278,7 @@
       "audioUrl": null
     }
   ],
-  "bulkAudioStatus": "completed_pending_owner_listening_review",
+  "bulkAudioStatus": "generated_batch_owner_approved_for_member_playback_2026-11-13",
   "bulkCreditEstimate": {
     "rule": "Runway speech: 1 credit per 50 text characters, rounded up separately per request, minimum 1",
     "uniqueMovementIds": 36,
@@ -4473,10 +4473,18 @@
       "Do not spend credits until the final 36-workout matrix has explicit owner approval",
       "Do not exceed the 354-credit production estimate",
       "Exclude the five previously approved/generated audio assets from new requests"
-    ]
+    ],
+    "memberPlayback": {
+      "status": "owner_approved_batch_for_member_playback",
+      "approvalId": "chair-yoga-miriam-batch-member-playback-2026-11-13",
+      "approvalDate": "2026-11-13",
+      "recordingCount": 142,
+      "scope": "Batch-level authorization for the generated 142 recordings. This does not state that every individual track was separately listened to.",
+      "manifest": "app/chair-yoga/narration/member-playback-approval-manifest.json"
+    }
   },
   "proposedWorkoutAssignmentsStatus": "owner_approved_2026-11-13",
   "generatedRequestCount": 142,
   "generatedCreditsConsumed": 354,
-  "memberPlaybackEnabled": false
+  "memberPlaybackEnabled": true
 }

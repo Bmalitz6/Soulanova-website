@@ -7,6 +7,8 @@ const crypto = require('node:crypto');
 const catalog = require('../app/chair-yoga/catalog.json');
 const plan = require('../app/chair-yoga/chair-yoga-programs.json');
 const narration = require('../app/chair-yoga/narration-drafts.json');
+const narrationBatch = require('../app/chair-yoga/narration/production-batch-manifest.json');
+const narrationApproval = require('../app/chair-yoga/narration/member-playback-approval-manifest.json');
 const player = require('../app/chair-yoga/chair-yoga-playback.js');
 const { matrixCsv } = require('../scripts/export-chair-yoga-matrix.js');
 const matrix = fs.readFileSync(path.join(__dirname, '../docs/chair-yoga/proposed-36-workout-matrix.csv'), 'utf8');
@@ -458,21 +460,23 @@ test('all 36 movement scripts provide four distinct, duration-bounded loop cues 
   }
 });
 
-test('narration remains separate and hash-gated; matrix approval authorizes generation but not member playback', () => {
-  assert.equal(narration.voiceApprovalStatus, 'owner_approved_miriam_voice_matrix_and_closings; generated_batch_pending_owner_listening_review');
-  assert.equal(narration.bulkAudioStatus, 'completed_pending_owner_listening_review');
-  assert.equal(narration.generationStatus, 'completed_pending_owner_listening_review');
-  assert.equal(narration.memberPlaybackEnabled, false);
+test('narration remains separate and hash-gated; owner batch approval enables only exact approved assets for members', () => {
+  assert.equal(narration.voiceApprovalStatus, 'owner_approved_miriam_voice_settings_and_batch_member_playback_2026-11-13; individual_track_listening_not_claimed');
+  assert.equal(narration.bulkAudioStatus, 'generated_batch_owner_approved_for_member_playback_2026-11-13');
+  assert.equal(narration.generationStatus, 'generated_batch_owner_approved_for_member_playback_2026-11-13');
+  assert.equal(narration.memberPlaybackEnabled, true);
   assert.equal(plan.proposalStatus, 'owner_approved_2026-11-13');
-  assert.match(route, /Member narration remains disabled/);
+  assert.match(route, /Miriam narration is available for this workout/);
   assert.match(ui, /getPlayableNarrationForPass\(narrationDrafts, narrationRecord\(workout\), pass/);
+  assert.match(ui, /getBatchApprovedAsset\(\s*narrationBatchApproval/);
+  assert.match(ui, /verifyNarrationAsset\(asset, generation, pass, workout\.id\)/);
   assert.match(ui, /setNarrationVolume\(narration, event\.currentTarget\.value\)/);
   assert.match(ui, /setNarrationMuted\(narration, narrationMuted\)/);
   assert.match(ui, /asset\.audioSha256\.toLowerCase\(\)/);
   assert.match(ui, /audioSha256/);
   assert.equal(narration.drafts.some(item => item.audioStatus === 'owner-approved'), false);
   assert.equal(Object.values(narration.drafts.find(item => item.movementId === 'IMG_4285').loopScripts).filter(loop => loop.audioStatus === 'owner-approved').length, 2);
-  assert.equal(narration.memberPlaybackEnabled, false);
+  assert.equal(narration.memberPlaybackEnabled, true);
 });
 
 test('narration resolver selects only the matching owner-approved loop recording with a valid hash', () => {
@@ -486,7 +490,7 @@ test('narration resolver selects only the matching owner-approved loop recording
   assert.equal(player.getApprovedNarrationForPass({ loopScripts: { '1': { ...loop1, audioSha256: 'bad' } } }, 1), null);
 });
 
-test('pending tracks are playable only in the SSO-protected Preview review mode, never in Production', () => {
+test('pending tracks require an exact approved batch hash entry for member playback; owner Preview remains separately gated', () => {
   const pending = { audioUrl: '/audio.mp3', audioSha256: 'c'.repeat(64), audioStatus: 'generated_pending_owner_review' };
   const record = { loopScripts: { '1': pending } };
   assert.equal(player.getApprovedNarrationForPass(record, 1), null);
@@ -494,7 +498,17 @@ test('pending tracks are playable only in the SSO-protected Preview review mode,
   assert.equal(player.getNarrationForPass(record, 1, { allowPendingOwnerReview: true }), pending);
   assert.equal(player.getNarrationForPass(record, 2, { allowPendingOwnerReview: true }), null);
   assert.equal(player.getNarrationForPass({ loopScripts: { '1': { ...pending, audioSha256: 'invalid' } } }, 1, { allowPendingOwnerReview: true }), null);
-  assert.equal(player.getPlayableNarrationForPass({ memberPlaybackEnabled: false }, record, 1), null);
+  const batch = { memberPlaybackEnabled: true, approvalStatus: 'owner_approved_batch_for_member_playback', approvalId: 'chair-yoga-miriam-batch-member-playback-2026-11-13', voice: { voiceId: 'VhxAIIZM8IRmnl5fyeyk', model: 'eleven_multilingual_v2', speed: 0.75 }, approvedAssetCount: 142, approvedAssets: [{ requestKey: 'IMG_4285:3', type: 'movement_loop', audioUrl: pending.audioUrl, sha256: pending.audioSha256, ownerBatchApproved: true }] };
+  const memberManifest = { memberPlaybackEnabled: true };
+  const movementRecord = { movementId: 'IMG_4285', loopScripts: { '1': pending } };
+  assert.equal(player.getPlayableNarrationForPass(memberManifest, movementRecord, 1, { batchApproval: batch }), null);
+  const loop3 = { ...pending };
+  const loop3Record = { movementId: 'IMG_4285', loopScripts: { '3': loop3 } };
+  assert.equal(player.getPlayableNarrationForPass(memberManifest, loop3Record, 3, { batchApproval: batch }), loop3);
+  assert.equal(player.getPlayableNarrationForPass({ memberPlaybackEnabled: false }, loop3Record, 3, { batchApproval: batch }), null);
+  assert.equal(player.getPlayableNarrationForPass(memberManifest, { movementId: 'IMG_4286', loopScripts: { '3': pending } }, 3, { batchApproval: batch }), null);
+  assert.equal(player.getPlayableNarrationForPass(memberManifest, { movementId: 'IMG_4285', loopScripts: { '3': { ...pending, audioSha256: 'f'.repeat(64) } } }, 3, { batchApproval: batch }), null);
+  assert.equal(player.getPlayableNarrationForPass(memberManifest, loop3Record, 3, { batchApproval: { ...batch, approvedAssetCount: 141 } }), null);
   assert.equal(player.getPlayableNarrationForPass({ memberPlaybackEnabled: false }, record, 1, { ownerPreview: true }), pending);
   const approved = { audioUrl: '/ok.mp3', audioSha256: 'd'.repeat(64), audioStatus: 'owner-approved' };
   assert.equal(player.getPlayableNarrationForPass({ memberPlaybackEnabled: false }, { loopScripts: { '1': approved } }, 1), null);
@@ -619,8 +633,8 @@ test('position audit covers all 144 movement cues and final closings stay positi
   assert.equal(plan.proposalStatus, 'owner_approved_2026-11-13');
 });
 
-test('production batch is exact, hash-safe, fully generated, and pending owner listening approval', () => {
-  const batch = JSON.parse(fs.readFileSync(path.join(__dirname, '../app/chair-yoga/narration/production-batch-manifest.json'), 'utf8'));
+test('production batch is exact and hash-safe under owner batch approval without individual listening claims', () => {
+  const batch = narrationBatch;
   assert.equal(batch.voice.voiceId, 'VhxAIIZM8IRmnl5fyeyk');
   assert.equal(batch.voice.model, 'eleven_multilingual_v2');
   assert.equal(batch.voice.speed, 0.75);
@@ -632,12 +646,37 @@ test('production batch is exact, hash-safe, fully generated, and pending owner l
   assert.equal(batch.productionPlan.noGenerationStarted, false);
   assert.equal(batch.ownerAuthorization.generationAllowedNow, true);
   assert.equal(batch.productionPlan.finalMatrixApprovalRequiredBeforeGeneration, false);
-  assert.equal(batch.productionPlan.memberPlaybackEnabled, false);
+  assert.equal(batch.productionPlan.memberPlaybackEnabled, true);
   assert.equal(batch.requests.length, 142);
-  assert.equal(batch.status, 'completed_pending_owner_listening_review');
+  assert.equal(batch.status, 'completed_owner_batch_approved_for_member_playback_2026-11-13');
   assert.equal(batch.generatedCountCompleted, 142);
   assert.equal(batch.creditsCompleted, 354);
   assert.ok(batch.requests.every(request => request.generationStatus === 'downloaded_validated_pending_owner_review' && request.decodeStatus === 'passed' && request.ownerApproved === undefined));
+  assert.equal(batch.memberPlaybackEnabled, true);
+  assert.equal(narrationApproval.approvalStatus, 'owner_approved_batch_for_member_playback');
+  assert.equal(narrationApproval.approvalId, 'chair-yoga-miriam-batch-member-playback-2026-11-13');
+  assert.equal(narrationApproval.approvedAssetCount, 142);
+  assert.deepEqual(narrationApproval.counts, { movement_loop: 137, level_opening: 2, level_closing: 3 });
+  assert.equal(narrationApproval.approvalBasis.includes('does not claim each individual track was separately listened to'), true);
+  assert.equal(narrationApproval.approvedAssets.length, 142);
+  for (const request of batch.requests) {
+    const approved = narrationApproval.approvedAssets.find(asset => asset.requestKey === request.requestKey);
+    assert.ok(approved, `batch approval contains ${request.requestKey}`);
+    assert.equal(approved.type, request.type);
+    assert.equal(approved.audioUrl, `/${request.localPath}`);
+    assert.equal(approved.sha256, request.sha256);
+    assert.equal(approved.taskId, request.taskId);
+    assert.equal(approved.bytes, request.bytes);
+    assert.equal(approved.actualDurationSeconds, request.actualDurationSeconds);
+    assert.equal(approved.scriptSha256, crypto.createHash('sha256').update(request.script).digest('hex'));
+    assert.equal(approved.ownerBatchApproved, true);
+    const bytes = fs.readFileSync(path.join(__dirname, '..', request.localPath));
+    assert.equal(bytes.length, request.bytes);
+    assert.equal(crypto.createHash('sha256').update(bytes).digest('hex'), request.sha256);
+  }
+  assert.equal(narrationApproval.approvedAssets.filter(item => item.type === 'movement_loop').length, 137);
+  assert.equal(narrationApproval.approvedAssets.filter(item => item.type === 'level_opening').length, 2);
+  assert.equal(narrationApproval.approvedAssets.filter(item => item.type === 'level_closing').length, 3);
   assert.equal(batch.requests.reduce((sum, request) => sum + request.credits, 0), 354);
   assert.equal(new Set(batch.requests.map(request => request.requestKey)).size, 142);
   assert.equal(new Set(batch.requests.map(request => request.expectedFilename)).size, 142);
