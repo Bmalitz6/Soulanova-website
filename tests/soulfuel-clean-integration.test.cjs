@@ -33,6 +33,7 @@ test('selected website preview source stays unchanged except the scoped Chair Yo
       expected=replaceOnce(expected,"yoga: {label:'YOGA', cta:'View Session', image:'/app/images/workouts/yoga.jpg'},","yoga: {label:'CHAIR YOGA', cta:'Explore Library', image:'/app/images/chair-yoga/IMG_4285.jpg'},");
       expected=replaceOnce(expected,"  pilates: {label:'PILATES', cta:'View Session', image:'/app/images/workouts/pilates.jpg'},\n",'');
       expected=replaceOnce(expected,'  save();\n\n  if(w.id===\'tai\' && window.SoulanovaClasses){',"  save();\n\n  if(w.id==='yoga'){\n    window.location.href='/app/chair-yoga/';\n    return;\n  }\n\n  if(w.id==='tai' && window.SoulanovaClasses){");
+      expected=replaceOnce(expected," client.auth.onAuthStateChange((event,session)=>{const user=session?.user||null;"," const requestedNext=new URLSearchParams(window.location.search).get('next');\n const safeChairYogaReturn=requestedNext&&requestedNext.startsWith('/app/chair-yoga')&&!requestedNext.startsWith('//')?requestedNext:null;\n if(safeChairYogaReturn)client.auth.onAuthStateChange((event,session)=>{if(event==='SIGNED_IN'&&session?.user)window.location.assign(safeChairYogaReturn)});\n client.auth.onAuthStateChange((event,session)=>{const user=session?.user||null;");
       assert.equal(current,expected,'Only the Yoga category changes and Pilates is removed from active workout listings');
     }else if(file==='tests/soulfuel-clean-integration.test.cjs'){
       // This guard is itself updated to pin the selected Preview baseline.

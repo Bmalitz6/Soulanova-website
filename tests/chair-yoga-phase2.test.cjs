@@ -12,6 +12,7 @@ const { matrixCsv } = require('../scripts/export-chair-yoga-matrix.js');
 const matrix = fs.readFileSync(path.join(__dirname, '../docs/chair-yoga/proposed-36-workout-matrix.csv'), 'utf8');
 const route = fs.readFileSync(path.join(__dirname, '../app/chair-yoga/index.html'), 'utf8');
 const ui = fs.readFileSync(path.join(__dirname, '../app/chair-yoga/chair-yoga.js'), 'utf8');
+const playbackSource = fs.readFileSync(path.join(__dirname, '../app/chair-yoga/chair-yoga-playback.js'), 'utf8');
 const css = fs.readFileSync(path.join(__dirname, '../app/chair-yoga/chair-yoga.css'), 'utf8');
 const dashboard = fs.readFileSync(path.join(__dirname, '../app/index.html'), 'utf8');
 const narrationReviewPage = fs.readFileSync(path.join(__dirname, '../docs/chair-yoga/narration-audio-review.html'), 'utf8');
@@ -420,9 +421,17 @@ test('all 36 movement scripts provide four distinct, duration-bounded loop cues 
         assert.equal(loop.audioSha256, request.sha256);
         assert.equal(loop.ownerApproved, false);
       } else {
-        assert.equal(loop.audioStatus, 'not_generated_generation_authorized');
-        assert.equal(loop.audioUrl, null);
-        assert.equal(loop.audioSha256, null);
+        if (movement.id === 'IMG_4285' && pass <= 2) {
+          assert.equal(loop.audioStatus, 'owner-approved');
+          assert.ok(loop.audioUrl);
+          assert.match(loop.audioSha256, /^[a-f0-9]{64}$/);
+        } else {
+          assert.equal(loop.audioStatus, ['IMG_4291','IMG_4293','IMG_4294','IMG_4296','IMG_4298'].includes(movement.id) && pass === 4 ? 'not_generated_generation_authorized' : 'generated_pending_owner_review');
+          if (loop.audioStatus === 'not_generated_generation_authorized') {
+          assert.equal(loop.audioUrl, null);
+          assert.equal(loop.audioSha256, null);
+          } else { assert.equal(loop.audioUrl, null); assert.equal(loop.audioSha256, null); }
+        }
       }
     }
     assert.equal(record.loopScripts['1'].script, record.script);
@@ -456,13 +465,14 @@ test('narration remains separate and hash-gated; matrix approval authorizes gene
   assert.equal(narration.memberPlaybackEnabled, false);
   assert.equal(plan.proposalStatus, 'owner_approved_2026-11-13');
   assert.match(route, /Member narration remains disabled/);
-  assert.match(ui, /getNarrationForPass\(narrationRecord\(workout\), pass/);
+  assert.match(ui, /getPlayableNarrationForPass\(narrationDrafts, narrationRecord\(workout\), pass/);
   assert.match(ui, /setNarrationVolume\(narration, event\.currentTarget\.value\)/);
   assert.match(ui, /setNarrationMuted\(narration, narrationMuted\)/);
   assert.match(ui, /asset\.audioSha256\.toLowerCase\(\)/);
   assert.match(ui, /audioSha256/);
   assert.equal(narration.drafts.some(item => item.audioStatus === 'owner-approved'), false);
-  assert.equal(narration.drafts.some(item => Object.values(item.loopScripts).some(loop => loop.audioStatus === 'owner-approved')), false);
+  assert.equal(Object.values(narration.drafts.find(item => item.movementId === 'IMG_4285').loopScripts).filter(loop => loop.audioStatus === 'owner-approved').length, 2);
+  assert.equal(narration.memberPlaybackEnabled, false);
 });
 
 test('narration resolver selects only the matching owner-approved loop recording with a valid hash', () => {
@@ -484,6 +494,11 @@ test('pending tracks are playable only in the SSO-protected Preview review mode,
   assert.equal(player.getNarrationForPass(record, 1, { allowPendingOwnerReview: true }), pending);
   assert.equal(player.getNarrationForPass(record, 2, { allowPendingOwnerReview: true }), null);
   assert.equal(player.getNarrationForPass({ loopScripts: { '1': { ...pending, audioSha256: 'invalid' } } }, 1, { allowPendingOwnerReview: true }), null);
+  assert.equal(player.getPlayableNarrationForPass({ memberPlaybackEnabled: false }, record, 1), null);
+  assert.equal(player.getPlayableNarrationForPass({ memberPlaybackEnabled: false }, record, 1, { ownerPreview: true }), pending);
+  const approved = { audioUrl: '/ok.mp3', audioSha256: 'd'.repeat(64), audioStatus: 'owner-approved' };
+  assert.equal(player.getPlayableNarrationForPass({ memberPlaybackEnabled: false }, { loopScripts: { '1': approved } }, 1), null);
+  assert.equal(player.getPlayableNarrationForPass({ memberPlaybackEnabled: true }, { loopScripts: { '1': approved } }, 1), approved);
 
   const runApi = (env, method = 'GET') => {
     const previous = { VERCEL_ENV: process.env.VERCEL_ENV, VERCEL_GIT_COMMIT_REF: process.env.VERCEL_GIT_COMMIT_REF };
@@ -494,13 +509,25 @@ test('pending tracks are playable only in the SSO-protected Preview review mode,
     for (const [key, value] of Object.entries(previous)) value === undefined ? delete process.env[key] : process.env[key] = value;
     return JSON.parse(body);
   };
-  assert.deepEqual(runApi({ VERCEL_ENV: 'preview', VERCEL_GIT_COMMIT_REF: 'preview/chair-yoga-website-2026-11-12' }), { enabled: true });
-  assert.deepEqual(runApi({ VERCEL_ENV: 'production', VERCEL_GIT_COMMIT_REF: 'main' }), { enabled: false });
-  assert.deepEqual(runApi({ VERCEL_ENV: 'preview', VERCEL_GIT_COMMIT_REF: 'main' }), { enabled: false });
+  assert.deepEqual(runApi({ VERCEL_ENV: 'preview', VERCEL_GIT_COMMIT_REF: 'preview/chair-yoga-website-2026-11-12' }), { enabled: true, environment: 'preview', gitRef: 'preview/chair-yoga-website-2026-11-12', commitSha: null });
+  assert.deepEqual(runApi({ VERCEL_ENV: 'production', VERCEL_GIT_COMMIT_REF: 'main' }), { enabled: false, environment: 'production', gitRef: 'main', commitSha: null });
+  assert.deepEqual(runApi({ VERCEL_ENV: 'preview', VERCEL_GIT_COMMIT_REF: 'main' }), { enabled: false, environment: 'preview', gitRef: 'main', commitSha: null });
+  assert.match(playbackSource, /manifest\?\.memberPlaybackEnabled !== true/);
+  assert.match(ui, /ownerPreview: ownerAudioReviewMode/);
   assert.match(ui, /owner-audio-review/);
   assert.match(ui, /\/api\/chair-yoga-owner-review/);
   assert.match(ui, /narration-resume/);
   assert.match(route, /id="narration-resume"/);
+  assert.match(route, /owner-audio-diagnostics/);
+  assert.match(ui, /ownerDiagnostic\.audioFetch/);
+  assert.match(ui, /diagAction\('Next Movement'\)/);
+  assert.match(ui, /diagAction\('Play Narration'\)/);
+  assert.match(ui, /ownerReviewConfigPromise/);
+  assert.match(ui, /readyState/);
+  assert.match(fs.readFileSync(path.join(__dirname, '../app/app.js'), 'utf8'), /safeChairYogaReturn/);
+  assert.match(ui, /returnUrl\.searchParams\.set\('owner-audio-review', '1'\)/);
+  assert.match(ui, /narrationToggle: \{ disabled:/);
+  assert.match(ui, /diagAction\('Restart Movement'\)/);
 });
 
 test('narration starts at the video position, handles autoplay blocking, and controls the audio element directly', async () => {

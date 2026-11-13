@@ -12,8 +12,11 @@ module.exports = function chairYogaOwnerReview(req, res) {
     return;
   }
   const env = process.env;
-  const enabled = env.VERCEL_ENV === 'preview'
-    && env.VERCEL_GIT_COMMIT_REF === 'preview/chair-yoga-website-2026-11-12';
+  const environment = ['production', 'preview', 'development'].includes(env.VERCEL_ENV) ? env.VERCEL_ENV : 'unknown';
+  const gitRef = typeof env.VERCEL_GIT_COMMIT_REF === 'string' ? env.VERCEL_GIT_COMMIT_REF : null;
+  const commitSha = /^[a-f0-9]{40}$/.test(env.VERCEL_GIT_COMMIT_SHA || '') ? env.VERCEL_GIT_COMMIT_SHA : null;
+  const enabled = environment === 'preview'
+    && gitRef === 'preview/chair-yoga-website-2026-11-12';
   res.statusCode = 200;
-  res.end(JSON.stringify({ enabled }));
+  res.end(JSON.stringify({ enabled, environment, gitRef, commitSha }));
 };

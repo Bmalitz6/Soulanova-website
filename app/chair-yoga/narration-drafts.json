@@ -53,9 +53,12 @@
             }
           ],
           "expectedAudioFilename": "IMG_4285_loop-1.mp3",
-          "audioUrl": null,
-          "audioSha256": null,
-          "audioStatus": "not_generated_generation_authorized"
+          "audioUrl": "/app/chair-yoga/narration/review-2026-11-12-miriam/IMG_4285-loop-1-miriam-review.mp3",
+          "audioSha256": "b134d5b0ddb816b49835d0fbea6433294fac8aafa98629c0b9ad1363b1a72053",
+          "audioStatus": "owner-approved",
+          "audioDurationSeconds": 17.740045,
+          "ownerApproved": true,
+          "taskId": "042d372b-6ee6-4538-b7b2-96615147d2f0"
         },
         "2": {
           "pass": 2,
@@ -73,9 +76,12 @@
             }
           ],
           "expectedAudioFilename": "IMG_4285_loop-2.mp3",
-          "audioUrl": null,
-          "audioSha256": null,
-          "audioStatus": "not_generated_generation_authorized"
+          "audioUrl": "/app/chair-yoga/narration/review-2026-11-12-miriam/IMG_4285-loop-2-miriam-review.mp3",
+          "audioSha256": "b8670bc10d22f1363c4436a918cf1c730321d3703d457d16a9469d35dfae48a5",
+          "audioStatus": "owner-approved",
+          "audioDurationSeconds": 12.863855,
+          "ownerApproved": true,
+          "taskId": "50735cfb-f5c6-44d2-b25c-422129fbb93f"
         },
         "3": {
           "pass": 3,

@@ -8,6 +8,10 @@
 @media(max-width:400px){.level-card{grid-template-columns:95px 1fr}.workout-grid{grid-template-columns:1fr}.player-controls button{flex:1;min-width:calc(50% - 8px)}.narration-panel{align-items:flex-start}.sequence-strip{grid-template-columns:repeat(2,minmax(0,1fr))}}
 @media(prefers-reduced-motion:reduce){.workout-card{transition:none}}
 
+.owner-audio-diagnostics{margin:18px 0;padding:14px 18px;background:#eef5f3;border:1px solid #adc8bf;border-radius:12px;font:13px/1.5 ui-monospace,SFMono-Regular,monospace;overflow-wrap:anywhere}
+.owner-audio-diagnostics summary{cursor:pointer;font:700 14px/1.4 system-ui,sans-serif;color:var(--teal)}
+.owner-audio-diagnostics pre{white-space:pre-wrap;max-height:38vh;overflow:auto;margin:12px 0 0}
+
 /* Phase 4: full-card navigation for all 36 proposed complete workouts. */
 button.level-card{display:flex;width:100%;padding:0;border:1px solid var(--line);border-radius:18px;background:#fff;color:var(--ink);text-align:left;font:inherit;cursor:pointer;overflow:hidden;box-shadow:0 3px 12px #0b4b5308;transition:transform .15s,box-shadow .15s}
 button.level-card:hover{transform:translateY(-2px);box-shadow:0 9px 20px #0b4b5317}

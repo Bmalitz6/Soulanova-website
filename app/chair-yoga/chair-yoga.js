@@ -17,6 +17,7 @@
   const playbackError = document.getElementById('playback-error');
   const nextButton = document.getElementById('next-workout');
   const previousButton = document.getElementById('previous-workout');
+  const $ = (selector) => document.querySelector(selector);
   let client = null;
   let catalog = null;
   let programs = null;
@@ -36,10 +37,74 @@
   let narrationObjectUrl = null;
   const ownerAudioReviewRequested = window.location.hostname.endsWith('-soulanova.vercel.app')
     && new URLSearchParams(window.location.search).get('owner-audio-review') === '1';
+  if (ownerAudioReviewRequested) {
+    const returnUrl = new URL('/app/chair-yoga', window.location.origin);
+    returnUrl.searchParams.set('owner-audio-review', '1');
+    $('#auth-gate a.button').href = `/app/?mode=signin&next=${encodeURIComponent(`${returnUrl.pathname}${returnUrl.search}`)}`;
+  }
   let ownerAudioReviewMode = false;
+  const ownerDiagnosticsRequested = window.location.hostname.endsWith('-soulanova.vercel.app');
+  const ownerDiagnostic = {
+    deployment: { checked: false, status: 'pending' },
+    page: { url: `${location.pathname}${location.search}`, ownerQueryPresent: ownerAudioReviewRequested },
+    auth: 'not checked',
+    manifest: { status: 'not loaded' },
+    track: 'none', audioFetch: 'not checked',
+    audio: {}, video: {}, lastAction: 'none', actions: {}, errors: [],
+    updatedAt: null
+  };
+  let ownerReviewConfigPromise = null;
+  const ownerDiagPanel = $('#owner-audio-diagnostics');
+  if (ownerDiagnosticsRequested) ownerDiagPanel.hidden = false;
+  function diagError(message) {
+    if (!ownerDiagnosticsRequested) return;
+    ownerDiagnostic.errors.push(`${new Date().toISOString()} ${String(message).slice(0, 240)}`);
+    ownerDiagnostic.errors = ownerDiagnostic.errors.slice(-8);
+    renderOwnerDiagnostics();
+  }
+  function renderOwnerDiagnostics() {
+    if (!ownerDiagnosticsRequested || ownerDiagPanel.hidden) return;
+    ownerDiagnostic.audio = {
+      src: narration.currentSrc ? new URL(narration.currentSrc, location.href).pathname : (narration.getAttribute('src') || 'none'),
+      readyState: narration.readyState, networkState: narration.networkState,
+      paused: narration.paused, muted: narration.muted, volume: narration.volume,
+      currentTime: Number.isFinite(narration.currentTime) ? Number(narration.currentTime.toFixed(2)) : null,
+      duration: Number.isFinite(narration.duration) ? Number(narration.duration.toFixed(2)) : null,
+      error: narration.error ? { code: narration.error.code, message: narration.error.message || '' } : null
+    };
+    ownerDiagnostic.video = {
+      src: video.currentSrc ? new URL(video.currentSrc, location.href).pathname : (video.getAttribute('src') || 'none'),
+      readyState: video.readyState, networkState: video.networkState, paused: video.paused,
+      currentTime: Number.isFinite(video.currentTime) ? Number(video.currentTime.toFixed(2)) : null,
+      duration: Number.isFinite(video.duration) ? Number(video.duration.toFixed(2)) : null,
+      error: video.error ? { code: video.error.code, message: video.error.message || '' } : null
+    };
+    ownerDiagnostic.controls = {
+      narrationToggle: { disabled: $('#narration-enabled').disabled, checked: $('#narration-enabled').checked },
+      volume: { disabled: $('#narration-volume').disabled, value: $('#narration-volume').value },
+      mute: { disabled: $('#narration-mute').disabled, label: $('#narration-mute').textContent },
+      playNarration: { hidden: $('#narration-resume').hidden, disabled: $('#narration-resume').disabled },
+      pauseResume: { disabled: $('#pause-workout').disabled, label: $('#pause-workout').textContent },
+      nextMovement: { disabled: nextButton.disabled }
+    };
+    const snapshot = controller?.getSnapshot();
+    ownerDiagnostic.playback = snapshot ? { phase: snapshot.phase, movement: snapshot.currentMovement?.id || null, index: snapshot.movementIndex, pass: snapshot.pass, generation: snapshot.generation } : null;
+    ownerDiagnostic.updatedAt = new Date().toISOString();
+    $('#owner-diag-summary').textContent = `Audio review request: ${ownerAudioReviewRequested ? 'present' : 'missing'} · server authorization: ${ownerAudioReviewMode ? 'enabled' : 'not enabled'} · narration track: ${ownerDiagnostic.track}`;
+    $('#owner-diag-details').textContent = JSON.stringify(ownerDiagnostic, null, 2);
+  }
+  function diagAction(name) {
+    if (!ownerDiagnosticsRequested) return;
+    ownerDiagnostic.lastAction = `${name} at ${new Date().toISOString()}`;
+    ownerDiagnostic.actions[name] = (ownerDiagnostic.actions[name] || 0) + 1;
+    renderOwnerDiagnostics();
+  }
+  if (ownerDiagnosticsRequested) {
+    window.addEventListener('error', event => diagError(`JS error: ${event.message || 'unknown'} (${event.filename ? new URL(event.filename, location.href).pathname : 'unknown file'}:${event.lineno || 0})`));
+    window.addEventListener('unhandledrejection', event => diagError(`Unhandled rejection: ${event.reason?.message || String(event.reason || 'unknown')}`));
+  }
   const pauseEventGuard = window.SoulanovaChairYogaPlayback.createPauseEventGuard();
 
-  const $ = (selector) => document.querySelector(selector);
   const byId = (id) => catalog?.movements.find(item => item.id === id) || null;
   const formatTime = seconds => {
     const total = Math.max(0, Math.round(Number(seconds) || 0));
@@ -102,20 +167,20 @@
     return narrationDrafts?.drafts?.find(item => item.movementId === workout.id) || null;
   }
   function narrationForPass(workout, pass) {
-    return window.SoulanovaChairYogaPlayback.getNarrationForPass(narrationRecord(workout), pass, {
-      allowPendingOwnerReview: ownerAudioReviewMode
-    });
+    return window.SoulanovaChairYogaPlayback.getPlayableNarrationForPass(narrationDrafts, narrationRecord(workout), pass, { ownerPreview: ownerAudioReviewMode });
   }
   async function verifyNarrationAsset(asset, generation, pass) {
     if (!window.SoulanovaChairYogaPlayback.getNarrationForPass({ loopScripts: { [String(pass)]: asset } }, pass, {
       allowPendingOwnerReview: ownerAudioReviewMode
     })) return null;
     const response = await fetch(asset.audioUrl, { cache: 'no-store' });
+    if (ownerDiagnosticsRequested) ownerDiagnostic.audioFetch = { url: asset.audioUrl, status: response.status, contentType: response.headers.get('content-type'), ok: response.ok };
     if (!response.ok) throw new Error(`Narration request failed (${response.status}).`);
     const bytes = await response.arrayBuffer();
     const digest = await crypto.subtle.digest('SHA-256', bytes);
     const hash = [...new Uint8Array(digest)].map(byte => byte.toString(16).padStart(2, '0')).join('');
     if (hash !== asset.audioSha256.toLowerCase()) throw new Error('Narration integrity check failed.');
+    if (ownerDiagnosticsRequested) ownerDiagnostic.audioFetch = { ...ownerDiagnostic.audioFetch, bytes: bytes.byteLength, hashMatches: true };
     if (controller.getSnapshot().generation !== generation) return null;
     const blob = new Blob([bytes], { type: 'audio/mpeg' });
     narrationObjectUrl = URL.createObjectURL(blob);
@@ -123,6 +188,8 @@
   }
   async function prepareNarration(workout, generation, pass) {
     const asset = narrationForPass(workout, pass);
+    if (ownerDiagnosticsRequested) ownerDiagnostic.track = asset ? `${asset.expectedAudioFilename || asset.audioUrl} · ${asset.audioStatus} · pass ${pass}` : `unavailable · ${workout.id} · pass ${pass}`;
+    renderOwnerDiagnostics();
     if (!asset) return false;
     try {
       const verifiedUrl = await verifyNarrationAsset(asset, generation, pass);
@@ -140,6 +207,7 @@
       return true;
     } catch (error) {
       if (controller.getSnapshot().generation === generation) {
+        diagError(`Narration preparation failed: ${error.message}`);
         $('#narration-status').textContent = `${error.message} Narration is unavailable for this movement.`;
         $('#narration-enabled').disabled = true;
         $('#narration-volume').disabled = true;
@@ -176,7 +244,7 @@
     }
     const videoPlay = video.play();
     const audioPlay = currentApprovedAudio && narrationEnabled ? playNarrationSafely() : Promise.resolve();
-    await Promise.all([videoPlay, audioPlay]);
+    try { await Promise.all([videoPlay, audioPlay]); } catch (error) { diagError(`Playback rejected: ${error.message}`); throw error; }
     return controller.getSnapshot().generation === generation;
   }
   function pauseMedia({ generation } = {}) {
@@ -217,7 +285,9 @@
   function addMediaListeners() {
     if (listenersAdded) return;
     listenersAdded = true;
-    video.addEventListener('playing', () => { playingGeneration = activeGeneration; const s = controller?.getSnapshot(); if (s?.phase === 'playing') controller.markVideoPlaying(activeGeneration, activeMovementId); });
+    for (const eventName of ['playing','pause','waiting','stalled','canplay','error','ended']) video.addEventListener(eventName, renderOwnerDiagnostics);
+    for (const eventName of ['playing','pause','waiting','stalled','canplay','error','ended','loadedmetadata','seeked']) narration.addEventListener(eventName, renderOwnerDiagnostics);
+    video.addEventListener('playing', () => { playingGeneration = activeGeneration; const s = controller?.getSnapshot(); if (s?.phase === 'playing') controller.markVideoPlaying(activeGeneration, activeMovementId); renderOwnerDiagnostics(); });
     video.addEventListener('ended', () => controller?.videoEnded(activeGeneration, activeMovementId));
     video.addEventListener('timeupdate', updateProgress);
     video.addEventListener('loadedmetadata', updateProgress);
@@ -237,25 +307,28 @@
     $('#back-to-levels').addEventListener('click', () => showLevelSelection());
     $('#back-to-workouts').addEventListener('click', () => showWorkoutSelection());
     $('#completion-workouts').addEventListener('click', () => showWorkoutSelection());
-    $('#previous-workout').addEventListener('click', () => controller.previous());
-    $('#next-workout').addEventListener('click', () => controller.next());
+    $('#previous-workout').addEventListener('click', () => { diagAction('Previous Movement'); controller.previous(); });
+    $('#next-workout').addEventListener('click', () => { diagAction('Next Movement'); controller.next(); });
     $('#pause-workout').addEventListener('click', () => {
       const phase = controller.getSnapshot().phase;
+      diagAction(phase === 'playing' || phase === 'transitioning' ? 'Pause' : 'Resume');
       if (phase === 'playing' || phase === 'transitioning') controller.pause();
       else controller.resume();
     });
-    $('#restart-workout').addEventListener('click', () => controller.restart());
-    $('#transition-resume').addEventListener('click', () => controller.resume());
-    $('#transition-next-button').addEventListener('click', () => controller.next());
-    $('#error-resume').addEventListener('click', () => controller.resume());
+    $('#restart-workout').addEventListener('click', () => { diagAction('Restart Movement'); controller.restart(); });
+    $('#transition-resume').addEventListener('click', () => { diagAction('Transition Resume'); controller.resume(); });
+    $('#transition-next-button').addEventListener('click', () => { diagAction('Transition Next Movement'); controller.next(); });
+    $('#error-resume').addEventListener('click', () => { diagAction('Playback Error Resume'); controller.resume(); });
     $('#narration-enabled').addEventListener('change', event => {
+      diagAction(`Narration toggle ${event.currentTarget.checked ? 'on' : 'off'}`);
       narrationEnabled = event.currentTarget.checked;
       if (!narrationEnabled) narration.pause();
       else if (controller?.getSnapshot().phase === 'playing' && currentApprovedAudio) playNarrationSafely();
     });
-    $('#narration-resume').addEventListener('click', () => playNarrationSafely());
-    $('#narration-volume').addEventListener('input', event => { window.SoulanovaChairYogaPlayback.setNarrationVolume(narration, event.currentTarget.value); });
+    $('#narration-resume').addEventListener('click', () => { diagAction('Play Narration'); playNarrationSafely(); });
+    $('#narration-volume').addEventListener('input', event => { diagAction('Volume'); window.SoulanovaChairYogaPlayback.setNarrationVolume(narration, event.currentTarget.value); renderOwnerDiagnostics(); });
     $('#narration-mute').addEventListener('click', () => {
+      diagAction(narrationMuted ? 'Unmute' : 'Mute');
       narrationMuted = !narrationMuted;
       narrationMuted = window.SoulanovaChairYogaPlayback.setNarrationMuted(narration, narrationMuted);
       $('#narration-mute').textContent = narrationMuted ? 'Unmute narration' : 'Mute narration';
@@ -459,13 +532,18 @@
         fetch('/app/chair-yoga/catalog.json', { cache: 'no-store' }),
         fetch('/app/chair-yoga/chair-yoga-programs.json', { cache: 'no-store' }),
         fetch('/app/chair-yoga/narration-drafts.json', { cache: 'no-store' }),
-        fetch('/api/chair-yoga-owner-review', { cache: 'no-store' }).catch(() => null)
+        (ownerReviewConfigPromise || fetch('/api/chair-yoga-owner-review', { cache: 'no-store' }).then(async response => ({ response, body: response.ok ? await response.json() : null })).catch(error => ({ error })))
       ]);
       if (![catalogResponse, programResponse, narrationResponse].every(response => response.ok)) throw new Error('The Chair Yoga library files could not be loaded.');
       const [nextCatalog, nextPrograms, nextNarration, ownerReviewConfig] = await Promise.all([
         catalogResponse.json(), programResponse.json(), narrationResponse.json(),
-        ownerReviewResponse?.ok ? ownerReviewResponse.json() : Promise.resolve({ enabled: false })
+        Promise.resolve(ownerReviewResponse?.body || { enabled: false })
       ]);
+      if (ownerDiagnosticsRequested) {
+        ownerDiagnostic.manifest = { status: narrationResponse.status, ok: narrationResponse.ok, memberPlaybackEnabled: nextNarration.memberPlaybackEnabled, draftCount: nextNarration.drafts?.length };
+        ownerDiagnostic.deployment = ownerReviewResponse?.body || { enabled: false, error: ownerReviewResponse?.error?.message || `HTTP ${ownerReviewResponse?.response?.status || 'unavailable'}` };
+        renderOwnerDiagnostics();
+      }
       ownerAudioReviewMode = ownerAudioReviewRequested && ownerReviewConfig.enabled === true;
       if (revision !== authRevision) return;
       if (nextCatalog.libraryStatus !== 'preview_candidates_pending_owner_review' || nextCatalog.movements.length !== 36 || nextCatalog.excludedOnHold?.length) throw new Error('The 36-video movement catalog did not pass its integrity check.');
@@ -501,6 +579,15 @@
     }
   }
   async function init() {
+    if (ownerDiagnosticsRequested) {
+      ownerReviewConfigPromise = fetch('/api/chair-yoga-owner-review', { cache: 'no-store' })
+        .then(async response => ({ response, body: response.ok ? await response.json() : null }))
+        .catch(error => ({ error }));
+      ownerReviewConfigPromise.then(result => {
+        ownerDiagnostic.deployment = result.body || { enabled: false, error: result.error?.message || `HTTP ${result.response?.status || 'unavailable'}` };
+        renderOwnerDiagnostics();
+      });
+    }
     const config = window.SOULANOVA_SUPABASE || {};
     if (!config.url || !config.publishableKey || !window.supabase) return showSignedOut('Member sign-in is unavailable right now.');
     client = window.supabase.createClient(config.url, config.publishableKey, { auth: { flowType: 'pkce', detectSessionInUrl: true, autoRefreshToken: true, persistSession: true } });
@@ -511,8 +598,9 @@
     try {
       const { data, error } = await client.auth.getUser();
       if (error) throw error;
+      if (ownerDiagnosticsRequested) ownerDiagnostic.auth = data.user ? 'authenticated member session present' : 'no authenticated member session';
       await openMemberLibrary(data.user);
-    } catch { showSignedOut('Sign in to your Soulanova account to view Chair Yoga.'); }
+    } catch { if (ownerDiagnosticsRequested) ownerDiagnostic.auth = 'no authenticated member session or auth lookup failed'; showSignedOut('Sign in to your Soulanova account to view Chair Yoga.'); renderOwnerDiagnostics(); }
   }
   signOut.addEventListener('click', async () => {
     signOut.disabled = true;
@@ -520,6 +608,8 @@
     signOut.disabled = false;
     if (error) status.textContent = 'Sign out failed. Please try again.';
   });
+  for (const eventName of ['error','stalled','loadedmetadata','canplay','playing','pause','ended','volumechange','timeupdate']) narration.addEventListener(eventName, renderOwnerDiagnostics);
+  setInterval(renderOwnerDiagnostics, 1000);
   function seekNarrationToVideo() {
     if (!currentApprovedAudio || !Number.isFinite(narration.duration)) return;
     narration.currentTime = Math.min(video.currentTime, Math.max(0, narration.duration - 0.05));

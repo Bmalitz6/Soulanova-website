@@ -88,6 +88,12 @@
     return getNarrationForPass(movementRecord, pass);
   }
 
+  function getPlayableNarrationForPass(manifest, movementRecord, pass, { ownerPreview = false } = {}) {
+    if (ownerPreview) return getNarrationForPass(movementRecord, pass, { allowPendingOwnerReview: true });
+    if (manifest?.memberPlaybackEnabled !== true) return null;
+    return getApprovedNarrationForPass(movementRecord, pass);
+  }
+
   async function playNarrationAligned(audio, video) {
     if (!audio || !video) return { ok: false, error: new Error('Narration media is unavailable.') };
     try {
@@ -389,5 +395,5 @@
     return Object.freeze({ selectLevel, start, pause, resume, next, previous, restart, markVideoPlaying, videoEnded, playbackBlocked, backToWorkouts, backToLevels, getWorkoutSummary, getLevelSummary, getSnapshot });
   }
 
-  return Object.freeze({ createChairYogaPlayback, createPauseEventGuard, getWorkoutProgress, getNarrationForPass, getApprovedNarrationForPass, playNarrationAligned, setNarrationVolume, setNarrationMuted, validatePlaylist });
+  return Object.freeze({ createChairYogaPlayback, createPauseEventGuard, getWorkoutProgress, getNarrationForPass, getApprovedNarrationForPass, getPlayableNarrationForPass, playNarrationAligned, setNarrationVolume, setNarrationMuted, validatePlaylist });
 });
