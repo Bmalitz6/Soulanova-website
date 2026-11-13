@@ -1,6 +1,6 @@
 {
   "schemaVersion": 2,
-  "proposalStatus": "pending_owner_approval",
+  "proposalStatus": "owner_approved_2026-11-13",
   "programTitle": "Chair Yoga with Miriam",
   "movementLibraryCount": 36,
   "workoutsPerLevel": 12,
@@ -17,7 +17,7 @@
     "narrationStatus": "pending_owner_approval"
   },
   "assignmentRules": {
-    "status": "proposed_pending_owner_approval",
+    "status": "owner_approved_2026-11-13",
     "designPrinciples": [
       "Every workout has exactly 12 distinct movement segments and a unique ordered sequence.",
       "Beginner stays seated and omits Warrior I/II, side-angle, chair-supported tree, and standing calf stretches.",
@@ -112,7 +112,7 @@
       "id": "beginner",
       "name": "Beginner",
       "description": "Seated, gentle foundations and mobility. No standing balance or Warrior/side-angle shapes.",
-      "assignmentStatus": "pending_owner_approval",
+      "assignmentStatus": "owner_approved_2026-11-13",
       "workouts": [
         {
           "id": "beginner-01",
@@ -133,7 +133,7 @@
             "IMG_4308",
             "IMG_4323"
           ],
-          "approvalStatus": "pending_owner_approval"
+          "approvalStatus": "owner_approved_2026-11-13"
         },
         {
           "id": "beginner-02",
@@ -154,7 +154,7 @@
             "IMG_4296",
             "IMG_4323"
           ],
-          "approvalStatus": "pending_owner_approval"
+          "approvalStatus": "owner_approved_2026-11-13"
         },
         {
           "id": "beginner-03",
@@ -175,7 +175,7 @@
             "IMG_4292",
             "IMG_4323"
           ],
-          "approvalStatus": "pending_owner_approval"
+          "approvalStatus": "owner_approved_2026-11-13"
         },
         {
           "id": "beginner-04",
@@ -196,7 +196,7 @@
             "IMG_4290",
             "IMG_4323"
           ],
-          "approvalStatus": "pending_owner_approval"
+          "approvalStatus": "owner_approved_2026-11-13"
         },
         {
           "id": "beginner-05",
@@ -217,7 +217,7 @@
             "IMG_4320",
             "IMG_4323"
           ],
-          "approvalStatus": "pending_owner_approval"
+          "approvalStatus": "owner_approved_2026-11-13"
         },
         {
           "id": "beginner-06",
@@ -238,7 +238,7 @@
             "IMG_4298",
             "IMG_4323"
           ],
-          "approvalStatus": "pending_owner_approval"
+          "approvalStatus": "owner_approved_2026-11-13"
         },
         {
           "id": "beginner-07",
@@ -259,7 +259,7 @@
             "IMG_4306",
             "IMG_4323"
           ],
-          "approvalStatus": "pending_owner_approval"
+          "approvalStatus": "owner_approved_2026-11-13"
         },
         {
           "id": "beginner-08",
@@ -280,7 +280,7 @@
             "IMG_4297",
             "IMG_4323"
           ],
-          "approvalStatus": "pending_owner_approval"
+          "approvalStatus": "owner_approved_2026-11-13"
         },
         {
           "id": "beginner-09",
@@ -301,7 +301,7 @@
             "IMG_4319",
             "IMG_4323"
           ],
-          "approvalStatus": "pending_owner_approval"
+          "approvalStatus": "owner_approved_2026-11-13"
         },
         {
           "id": "beginner-10",
@@ -322,7 +322,7 @@
             "IMG_4319",
             "IMG_4323"
           ],
-          "approvalStatus": "pending_owner_approval"
+          "approvalStatus": "owner_approved_2026-11-13"
         },
         {
           "id": "beginner-11",
@@ -343,7 +343,7 @@
             "IMG_4298",
             "IMG_4323"
           ],
-          "approvalStatus": "pending_owner_approval"
+          "approvalStatus": "owner_approved_2026-11-13"
         },
         {
           "id": "beginner-12",
@@ -364,7 +364,7 @@
             "IMG_4309",
             "IMG_4323"
           ],
-          "approvalStatus": "pending_owner_approval"
+          "approvalStatus": "owner_approved_2026-11-13"
         }
       ]
     },
@@ -372,7 +372,7 @@
       "id": "intermediate",
       "name": "Intermediate",
       "description": "Seated mobility with chair-supported Warrior I/II and controlled lower-leg work. Tree balance and side-angle poses are held for Advanced.",
-      "assignmentStatus": "pending_owner_approval",
+      "assignmentStatus": "owner_approved_2026-11-13",
       "workouts": [
         {
           "id": "intermediate-01",
@@ -393,7 +393,7 @@
             "IMG_4308",
             "IMG_4323"
           ],
-          "approvalStatus": "pending_owner_approval"
+          "approvalStatus": "owner_approved_2026-11-13"
         },
         {
           "id": "intermediate-02",
@@ -414,7 +414,7 @@
             "IMG_4290",
             "IMG_4323"
           ],
-          "approvalStatus": "pending_owner_approval"
+          "approvalStatus": "owner_approved_2026-11-13"
         },
         {
           "id": "intermediate-03",
@@ -435,7 +435,7 @@
             "IMG_4307",
             "IMG_4308"
           ],
-          "approvalStatus": "pending_owner_approval"
+          "approvalStatus": "owner_approved_2026-11-13"
         },
         {
           "id": "intermediate-04",
@@ -456,7 +456,7 @@
             "IMG_4297",
             "IMG_4323"
           ],
-          "approvalStatus": "pending_owner_approval"
+          "approvalStatus": "owner_approved_2026-11-13"
         },
         {
           "id": "intermediate-05",
@@ -477,7 +477,7 @@
             "IMG_4287",
             "IMG_4323"
           ],
-          "approvalStatus": "pending_owner_approval"
+          "approvalStatus": "owner_approved_2026-11-13"
         },
         {
           "id": "intermediate-06",
@@ -498,7 +498,7 @@
             "IMG_4297",
             "IMG_4323"
           ],
-          "approvalStatus": "pending_owner_approval"
+          "approvalStatus": "owner_approved_2026-11-13"
         },
         {
           "id": "intermediate-07",
@@ -519,7 +519,7 @@
             "IMG_4309",
             "IMG_4323"
           ],
-          "approvalStatus": "pending_owner_approval"
+          "approvalStatus": "owner_approved_2026-11-13"
         },
         {
           "id": "intermediate-08",
@@ -540,7 +540,7 @@
             "IMG_4308",
             "IMG_4323"
           ],
-          "approvalStatus": "pending_owner_approval"
+          "approvalStatus": "owner_approved_2026-11-13"
         },
         {
           "id": "intermediate-09",
@@ -561,7 +561,7 @@
             "IMG_4322",
             "IMG_4323"
           ],
-          "approvalStatus": "pending_owner_approval"
+          "approvalStatus": "owner_approved_2026-11-13"
         },
         {
           "id": "intermediate-10",
@@ -582,7 +582,7 @@
             "IMG_4306",
             "IMG_4323"
           ],
-          "approvalStatus": "pending_owner_approval"
+          "approvalStatus": "owner_approved_2026-11-13"
         },
         {
           "id": "intermediate-11",
@@ -603,7 +603,7 @@
             "IMG_4319",
             "IMG_4323"
           ],
-          "approvalStatus": "pending_owner_approval"
+          "approvalStatus": "owner_approved_2026-11-13"
         },
         {
           "id": "intermediate-12",
@@ -624,7 +624,7 @@
             "IMG_4322",
             "IMG_4323"
           ],
-          "approvalStatus": "pending_owner_approval"
+          "approvalStatus": "owner_approved_2026-11-13"
         }
       ]
     },
@@ -632,7 +632,7 @@
       "id": "advanced",
       "name": "Advanced",
       "description": "Higher-volume, chair-supported standing, balance and side-angle combinations, without exceeding the approved demonstrations.",
-      "assignmentStatus": "pending_owner_approval",
+      "assignmentStatus": "owner_approved_2026-11-13",
       "workouts": [
         {
           "id": "advanced-01",
@@ -653,7 +653,7 @@
             "IMG_4321",
             "IMG_4322"
           ],
-          "approvalStatus": "pending_owner_approval"
+          "approvalStatus": "owner_approved_2026-11-13"
         },
         {
           "id": "advanced-02",
@@ -674,7 +674,7 @@
             "IMG_4292",
             "IMG_4323"
           ],
-          "approvalStatus": "pending_owner_approval"
+          "approvalStatus": "owner_approved_2026-11-13"
         },
         {
           "id": "advanced-03",
@@ -695,7 +695,7 @@
             "IMG_4322",
             "IMG_4323"
           ],
-          "approvalStatus": "pending_owner_approval"
+          "approvalStatus": "owner_approved_2026-11-13"
         },
         {
           "id": "advanced-04",
@@ -716,7 +716,7 @@
             "IMG_4321",
             "IMG_4322"
           ],
-          "approvalStatus": "pending_owner_approval"
+          "approvalStatus": "owner_approved_2026-11-13"
         },
         {
           "id": "advanced-05",
@@ -737,7 +737,7 @@
             "IMG_4317",
             "IMG_4323"
           ],
-          "approvalStatus": "pending_owner_approval"
+          "approvalStatus": "owner_approved_2026-11-13"
         },
         {
           "id": "advanced-06",
@@ -758,7 +758,7 @@
             "IMG_4303",
             "IMG_4304"
           ],
-          "approvalStatus": "pending_owner_approval"
+          "approvalStatus": "owner_approved_2026-11-13"
         },
         {
           "id": "advanced-07",
@@ -779,7 +779,7 @@
             "IMG_4322",
             "IMG_4323"
           ],
-          "approvalStatus": "pending_owner_approval"
+          "approvalStatus": "owner_approved_2026-11-13"
         },
         {
           "id": "advanced-08",
@@ -800,7 +800,7 @@
             "IMG_4321",
             "IMG_4322"
           ],
-          "approvalStatus": "pending_owner_approval"
+          "approvalStatus": "owner_approved_2026-11-13"
         },
         {
           "id": "advanced-09",
@@ -821,7 +821,7 @@
             "IMG_4290",
             "IMG_4323"
           ],
-          "approvalStatus": "pending_owner_approval"
+          "approvalStatus": "owner_approved_2026-11-13"
         },
         {
           "id": "advanced-10",
@@ -842,7 +842,7 @@
             "IMG_4322",
             "IMG_4323"
           ],
-          "approvalStatus": "pending_owner_approval"
+          "approvalStatus": "owner_approved_2026-11-13"
         },
         {
           "id": "advanced-11",
@@ -863,7 +863,7 @@
             "IMG_4308",
             "IMG_4323"
           ],
-          "approvalStatus": "pending_owner_approval"
+          "approvalStatus": "owner_approved_2026-11-13"
         },
         {
           "id": "advanced-12",
@@ -884,9 +884,18 @@
             "IMG_4321",
             "IMG_4322"
           ],
-          "approvalStatus": "pending_owner_approval"
+          "approvalStatus": "owner_approved_2026-11-13"
         }
       ]
     }
-  ]
+  ],
+  "ownerApproval": {
+    "status": "owner_approved_2026-11-13",
+    "date": "2026-11-13",
+    "decision": "Owner approved the exact existing 36-workout matrix as the working program structure: 12 Beginner, 12 Intermediate, and 12 Advanced workouts.",
+    "scope": "Level assignments, workout titles/emphases, exact ordered 12-movement sequences, and existing 2/3/4 loop counts.",
+    "safetyReview": "Verified Beginner remains seated; Intermediate supported Warrior demonstrations are seated and calf stretches specify two-hand chair support; Advanced Tree and Calf cues specify chair support, controlled positioning, and recovery. Paired right/left sequences are adjacent. Five-second transition can be paused before posture changes.",
+    "movementMediaChanged": false,
+    "narrationAssetsChanged": false
+  }
 }

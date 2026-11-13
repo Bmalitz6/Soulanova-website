@@ -1,8 +1,8 @@
 {
   "schemaVersion": 1,
-  "reviewStatus": "pending_owner_listening_review_of_corrected_demo_closing",
+  "reviewStatus": "owner_approved_miriam_voice_and_demo_assets_review_only",
   "memberPlaybackEnabled": false,
-  "bulkNarrationStarted": false,
+  "bulkNarrationStarted": true,
   "voice": {
     "provider": "Runway Generate Speech",
     "preset": "Miriam",
@@ -14,7 +14,7 @@
     "style": "Calm, warm, professional British female narrator",
     "sourceApproval": "Owner-approved for SoulStretch on 2026-11-09; owner selected for Chair Yoga sample/demo on 2026-11-12",
     "voiceIdVerification": "All 22 SoulStretch manifest assets use this same voice ID; prior Runway task cbee1399-e9e3-4b21-9e96-ae4296cb87ad independently returns the same voiceId, modelId, and speed.",
-    "ownerApprovalScope": "Voice identity, speed, tone, Beginner opening and both Seated Mountain Pose movement-loop recordings approved by owner on 2026-11-13. Corrected demo closing remains pending owner listening."
+    "ownerApprovalScope": "Owner-approved on 2026-11-13: exact Miriam voice ID/configuration, speed 0.75, narration tone, Beginner opening, Seated Mountain Pose loops 1 and 2, and corrected seated demo closing v2. These approvals do not approve unreviewed scripts, the proposed workout matrix, or member playback."
   },
   "sourceProvenance": {
     "manifest": "Existing isolated Release 2 handoff docs/release2/SOULSTRETCH_NARRATION_PRODUCTION_MANIFEST.json",
@@ -83,7 +83,8 @@
     "closingAudioFilename": "closing-beginner-miriam-review-v2.mp3",
     "closingScript": "Wonderful work. Take one more gentle breath, relax your shoulders, and remain comfortably seated as we prepare for our next movement.",
     "closingDurationSeconds": 16.439728,
-    "memberPlaybackEnabled": false
+    "memberPlaybackEnabled": false,
+    "reviewStatus": "owner_approved_demo_assets_review_only"
   },
   "assets": [
     {
@@ -192,24 +193,70 @@
       "channels": 1,
       "fullDecode": "passed",
       "peakLevel": "-12.6 dBFS",
-      "ownerReviewStatus": "pending_owner_listening",
+      "ownerReviewStatus": "owner_approved",
       "memberPlaybackEnabled": false
     }
   ],
   "ownerApproval": {
     "date": "2026-11-13",
     "scope": [
-      "Miriam voice identity",
+      "Miriam voice identity VhxAIIZM8IRmnl5fyeyk",
+      "eleven_multilingual_v2 model",
       "speed 0.75",
-      "narration tone",
+      "narration style",
       "Beginner opening",
       "Seated Mountain Pose Loop 1",
-      "Seated Mountain Pose Loop 2"
+      "Seated Mountain Pose Loop 2",
+      "corrected seated demo closing v2",
+      "Beginner full-workout closing script",
+      "Intermediate full-workout closing script",
+      "Advanced full-workout closing script",
+      "Final owner approval of the exact 36-workout matrix on 2026-11-13"
     ],
-    "excludedFromApproval": [
-      "corrected demo closing pending listening review",
-      "unreviewed movement scripts",
-      "all 36 workout combinations"
-    ]
-  }
+    "approvedAssets": [
+      {
+        "filename": "voice-sample-miriam-review.mp3",
+        "sha256": "521f607aa944a413bb585506c5648791bdab7a8862d2b018a9afb2f31290745b",
+        "taskId": "c3d5bf40-f120-4409-b6e5-9fcb15ddea48",
+        "approval": "owner_approved_voice_reference"
+      },
+      {
+        "filename": "opening-beginner-miriam-review.mp3",
+        "sha256": "8f6700b1078777dcb9f000fdeae17859a4a06c00a0f33e49e245ac7a9d8b4efd",
+        "taskId": "b0e2913a-2516-40c0-8cf8-f5b8f8dec3de",
+        "approval": "owner_approved"
+      },
+      {
+        "filename": "IMG_4285-loop-1-miriam-review.mp3",
+        "sha256": "b134d5b0ddb816b49835d0fbea6433294fac8aafa98629c0b9ad1363b1a72053",
+        "taskId": "042d372b-6ee6-4538-b7b2-96615147d2f0",
+        "approval": "owner_approved"
+      },
+      {
+        "filename": "IMG_4285-loop-2-miriam-review.mp3",
+        "sha256": "b8670bc10d22f1363c4436a918cf1c730321d3703d457d16a9469d35dfae48a5",
+        "taskId": "50735cfb-f5c6-44d2-b25c-422129fbb93f",
+        "approval": "owner_approved"
+      },
+      {
+        "filename": "closing-beginner-miriam-review-v2.mp3",
+        "sha256": "bf5be402097c5bb7f7bb1657991f39fb9e01f0f84dbfbd53f3f0be18f708051a",
+        "taskId": "03cec8c9-efd2-4477-8a1c-ca52c542b653",
+        "approval": "owner_approved"
+      }
+    ],
+    "notApproved": [
+      "member playback activation"
+    ],
+    "matrixApproval": {
+      "date": "2026-11-13",
+      "status": "owner_approved_2026-11-13",
+      "scope": "Exact existing 36-workout matrix with 12 Beginner, 12 Intermediate, and 12 Advanced workouts."
+    }
+  },
+  "bulkNarrationStatus": "completed_pending_owner_listening_review",
+  "bulkNarrationRequests": 142,
+  "bulkNarrationCreditsConsumed": 354,
+  "bulkNarrationEndingBalance": 3188,
+  "ownerApprovalScope": "Owner-approved on 2026-11-13: exact Miriam voice ID/configuration, speed 0.75, narration tone, Beginner opening, Seated Mountain Pose loops 1 and 2, corrected seated demo close V2, three final-workout closing scripts, and 36-workout matrix. The 142 generated bulk recordings remain pending owner listening approval; no member playback is enabled."
 }

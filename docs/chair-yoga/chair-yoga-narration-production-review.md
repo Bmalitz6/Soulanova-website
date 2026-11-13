@@ -1,13 +1,15 @@
-# Chair Yoga Narration Production Review — Phase 6
+# Chair Yoga Narration Production Review — Phase 7
 
-Status: owner-approved SoulStretch Miriam voice configuration verified and reused. The owner approved the voice, speed, tone, opening, and both distinct Seated Mountain Pose loops. The corrected demo segue awaits listening review. Bulk narration is not generated. The 36 workout combinations and remaining scripts remain pending_owner_approval.
+Status: The 36-workout matrix was owner-approved on 2026-11-13 after progression, transition and chair-support safety review. The owner-approved 142-request Miriam narration batch is generated and awaiting the owner's listening approval. All new audio files are separate from the videos, hash-recorded and decode-validated. Member playback remains disabled.
 
 Generated listening files: [Miriam voice sample and complete one-movement Beginner demo](narration-audio-review.html). The corrected demo follows the exact owner-approved seated segue. File hashes, Runway task IDs, durations, decode evidence, and 20 total credits used for the sample/demo plus the one corrected close are in the [Miriam review audio manifest](../../app/chair-yoga/narration/review-2026-11-12-miriam/review-manifest.json). The prior closing is retained as superseded history; the approved opening and movement loops were preserved byte-for-byte. No review audio is mapped to member playback. The earlier Paula sample has been superseded and was not selected.
+
+The complete batch can be listened to at [Miriam narration batch review](narration-batch-review.html). This page is for owner review only and does not save approvals. The [production batch manifest](../../app/chair-yoga/narration/production-batch-manifest.json) records all task IDs, request text, file names, byte counts, durations and SHA-256 hashes.
 
 ## Source checks
 
 - Movement catalog: 36 entries; every narration record matched catalog name, video URL, duration and SHA-256.
-- Workout proposal: 36 workouts, 12 per level, 12 movements per workout; all assignments remain pending owner approval.
+- Workout matrix: 36 workouts, 12 per level, 12 movements per workout; assignments owner-approved 2026-11-13 after review of level suitability and position transitions.
 - Scripts are keyed to the stable movement IDs, not workout position.
 - Left/right language is used only where the approved catalog name and movement mapping identify a side. Wrist Stretch IMG_4298 stays side-neutral.
 - Source videos remain unchanged; every cue is a separate narration asset plan.
@@ -19,7 +21,7 @@ The exact SoulStretch production manifest contains 22 owner-approved generated M
 
 One existing Runway task was independently read back: `cbee1399-e9e3-4b21-9e96-ae4296cb87ad` resolves to voice ID `VhxAIIZM8IRmnl5fyeyk`, model `eleven_multilingual_v2`, speed `0.75`, and the exact matching script in the manifest. The Chair Yoga sample task (`c3d5bf40-f120-4409-b6e5-9fcb15ddea48`) resolves to the same voice ID, model, and speed. The Runway Generate Speech interface uses the preset name “Miriam”; no voice cloning or imitation was used.
 
-The owner directed use of this approved voice for Chair Yoga on November 12 and approved the voice, speed, tone, opening, and both Mountain Pose loops on November 13. The replacement demo segue awaits listening approval. All review MP3s remain separate from member narration. The previous Paula audition is superseded and not selected.
+The owner directed use of this approved voice for Chair Yoga on November 12 and approved the voice, speed, tone, opening, and both Mountain Pose loops on November 13. The corrected demo segue is owner-approved for review only. All review MP3s remain separate from member narration. The previous Paula audition is superseded and not selected.
 
 ## Miriam sample and demo audio QA
 
@@ -40,7 +42,7 @@ The movement tracks finish within their respective video loops, leaving approxim
 
 Reviewed all 144 loop cues across the 36 mapped movements, plus the three level openings and three planned final-workout closings. There were 63 loop cues with explicit sit/stand/chair/upright/step terms; these cues match their movement mappings. The seated Warrior I, Warrior II, and Side Angle demonstrations were visually checked against IMG_4310–IMG_4315; chair-supported standing Tree and Calf demonstrations were checked against IMG_4316–IMG_4317 and IMG_4321–IMG_4322. No loop cue mismatch was found. The proposed workout matrix currently begins each routine with seated IMG_4285, but the 36 combinations are still pending approval.
 
-The three not-yet-generated final-workout closings remain flagged for contextual owner review: Beginner currently tells members to return to standing; Intermediate says to leave each position without knowing the final movement; Advanced gives a generic movement cue. These are final-class closings, separate from the one-movement demo segue. They were not regenerated or changed as part of this correction. No other position changes should be narrated until the selected workout's next movement and ending are known.
+No movement-loop cue was found to conflict with its approved video or transition. The earlier three final-workout closings were replaced with position-neutral scripts below; they do not tell members to sit, stand, or change position. The new wording is owner-approved. The approved one-movement demo segue remains separate and is not reused as a class closing. The 36-workout matrix is now owner-approved; do not change its movement order without further approval.
 
 ## Level opening and closing scripts
 
@@ -48,25 +50,27 @@ The three not-yet-generated final-workout closings remain flagged for contextual
 
 > Welcome to your Beginner Chair Yoga session. Settle near a stable chair with both feet supported. Move gently within a range that feels comfortable today.
 
-### Beginner closing
+### Beginner closing · 29 words · estimated 17 seconds
 
-> Your Beginner Chair Yoga session is complete. Let your breathing settle. When ready, return to standing slowly with your chair nearby.
+> Your Beginner Chair Yoga practice is complete. Take one gentle breath and let your shoulders soften. There is no need to move right away; take the time you need.
 
 ### Intermediate opening
 
 > Welcome to your Intermediate Chair Yoga session. Arrange your chair securely and follow each movement at your own pace. Keep your range comfortable and your breath steady.
 
-### Intermediate closing
+### Intermediate closing · 28 words · estimated 16 seconds
 
-> Your Intermediate Chair Yoga session is complete. Take a moment to breathe naturally, then leave each position carefully and use your chair for support.
+> Your Intermediate Chair Yoga practice is complete. Let your breathing return to its natural rhythm. Notice how your body feels, and take your time before ending your practice.
 
 ### Advanced opening
 
 > Welcome to your Advanced Chair Yoga session. Keep your chair close and use the support shown. Choose a steady, comfortable range and pause whenever you need.
 
-### Advanced closing
+### Advanced closing · 27 words · estimated 15 seconds
 
-> Your Advanced Chair Yoga session is complete. Let your breath return to its natural pace. Move slowly and keep the chair close as you finish.
+> Your Advanced Chair Yoga practice is complete. Let your breath settle at its natural pace. Pause for a moment, then finish your practice whenever you feel ready.
+
+These full-workout closings are position-neutral and avoid instructing members to stand or change position. The owner approved the scripts; they have not been recorded. No MP3 exists for any of these three scripts.
 
 ## Recording-ready movement loop table
 
@@ -794,13 +798,20 @@ Video: IMG_4323.mp4 · 29.0 s · SHA-256 4e86fd9b79a385f9628db0934fd26631d66167d
 
 > Enjoy a quiet moment, then gently lift your gaze.
 
-## Owner decisions before bulk production
+## Owner approvals and remaining review gate
 
-1. Listen to and approve or request changes to the corrected seated demo segue. The voice, speed, tone, opening and two movement loops are approved.
-2. Review the 144 movement-loop scripts and revise the three flagged final-workout closings before any bulk narration.
-3. After approving the Miriam demo and scripts, review the 363-credit batch estimate before authorizing bulk Runway generation.
-4. Approve narration playback only after generated files pass duration, decoding, clip-fit, hash, movement/side, and synchronization review.
+1. The owner approved the Miriam voice/settings, Beginner opening, both Seated Mountain Pose loops, corrected seated demo closing, all three full-workout closing scripts, the 36-workout matrix, and the 354-credit generation ceiling.
+2. The 142 generated files are now pending owner listening review. Explicitly approve or request redo for the recordings before any are enabled in the member player.
+3. Keep narration disabled until approval metadata and SHA-256 gates are updated for the exact selected assets.
 
 ## Bulk production estimate
 
-Using the actual draft character lengths and 1 credit per 50 characters rounded up per request, producing only loop variants used by the proposed level matrix requires an estimated 139 movement-loop files / 341 credits, plus 6 level openings and closings / 22 credits: **363 Runway credits total**. The five unused loop variants are excluded. This estimate does not authorize bulk generation; the Chair Yoga scripts and Miriam demo need owner review before bulk generation.
+The exact request texts use Runway's 1-credit-per-50-character rule, rounded separately per request. The 142 requests were generated: 137 movement-loop recordings, two openings and three closings. The approved Beginner opening and two approved Mountain Pose loop tracks were reused and not regenerated. The approved sample, demo segue and demo assets were preserved. Runway balance was 3,542 before and 3,188 after; **354 credits were consumed**, with no purchase. One transient provider connection failure was not charged; that exact request was retried once and completed. See the production batch manifest for per-request accounting. No recording in this batch is owner-approved yet, and no member playback is enabled.
+
+## Generation validation
+
+- 142/142 distinct requested MP3s are present under `app/chair-yoga/narration/production/` with unique filenames and task IDs.
+- Every file passed full `ffmpeg` decoding; recorded local SHA-256 and byte size match the manifest.
+- All movement-loop narrations fit their respective video durations; the shortest quiet practice tail is preserved as recorded in the manifest. Opening and closing tracks have no associated clip duration.
+- All 36 source video files still match the existing SHA-256 inventory.
+- New audio remains review-only. `memberPlaybackEnabled` is false and the active playback approval/hash gate is unchanged.

@@ -15,6 +15,7 @@ const ui = fs.readFileSync(path.join(__dirname, '../app/chair-yoga/chair-yoga.js
 const css = fs.readFileSync(path.join(__dirname, '../app/chair-yoga/chair-yoga.css'), 'utf8');
 const dashboard = fs.readFileSync(path.join(__dirname, '../app/index.html'), 'utf8');
 const narrationReviewPage = fs.readFileSync(path.join(__dirname, '../docs/chair-yoga/narration-audio-review.html'), 'utf8');
+const narrationBatchReviewPage = fs.readFileSync(path.join(__dirname, '../docs/chair-yoga/narration-batch-review.html'), 'utf8');
 const narrationAudioManifest = require('../app/chair-yoga/narration/review-2026-11-12-miriam/review-manifest.json');
 const supersededPaulaAudioManifest = require('../app/chair-yoga/narration/review-2026-11-12-paula/review-manifest.json');
 
@@ -105,16 +106,16 @@ function finishWholeWorkout(ctl, clock, program, loops) {
   return completed;
 }
 
-test('proposal exposes 12 complete workouts per level and leaves every assignment pending owner approval', () => {
-  assert.equal(plan.proposalStatus, 'pending_owner_approval');
+test('owner-approved matrix exposes 12 complete workouts per level with approved assignment metadata', () => {
+  assert.equal(plan.proposalStatus, 'owner_approved_2026-11-13');
   assert.equal(plan.totalWorkouts, 36);
   assert.equal(plan.movementsPerWorkout, 12);
   assert.deepEqual(plan.playback.loopCountsByLevel, { beginner: 2, intermediate: 3, advanced: 4 });
   assert.equal(plan.playback.transitionDurationSeconds, 5);
   assert.equal(plan.levels.length, 3);
   assert.deepEqual(plan.levels.map(level => level.workouts.length), [12, 12, 12]);
-  assert.ok(plan.levels.every(level => level.assignmentStatus === 'pending_owner_approval'));
-  assert.ok(plan.levels.flatMap(level => level.workouts).every(workout => workout.approvalStatus === 'pending_owner_approval'));
+  assert.ok(plan.levels.every(level => level.assignmentStatus === 'owner_approved_2026-11-13'));
+  assert.ok(plan.levels.flatMap(level => level.workouts).every(workout => workout.approvalStatus === 'owner_approved_2026-11-13'));
 });
 
 test('the 36 named workouts each have a distinct ordered 12-movement sequence and use only the 36 catalog assets', () => {
@@ -147,12 +148,44 @@ test('every included unilateral movement appears with its paired side immediatel
   assert.equal(player.validatePlaylist(plan.levels, catalog.movements, plan.playback.loopCountsByLevel, plan.assignmentRules), true);
 });
 
-test('owner-review CSV exposes one complete ordered row per proposed workout and matches the source plan', () => {
+test('approved levels pair supported standing work with chair cues and a pausable setup transition', () => {
+  const treeIds = new Set(['IMG_4316', 'IMG_4317']);
+  const calfIds = new Set(['IMG_4321', 'IMG_4322']);
+  for (const workout of currentLevel('beginner').workouts) assert.ok(workout.movementIds.every(id => !treeIds.has(id) && !calfIds.has(id)));
+  for (const workout of currentLevel('intermediate').workouts) assert.ok(workout.movementIds.every(id => !treeIds.has(id)));
+  assert.ok(currentLevel('advanced').workouts.some(workout => treeIds.size === [...treeIds].filter(id => workout.movementIds.includes(id)).length));
+  assert.ok(currentLevel('advanced').workouts.every(workout => !workout.movementIds.some(id => treeIds.has(id)) || treeIds.size === [...treeIds].filter(id => workout.movementIds.includes(id)).length));
+  assert.ok(currentLevel('intermediate').workouts.some(workout => calfIds.size === [...calfIds].filter(id => workout.movementIds.includes(id)).length));
+  const cue = id => narration.drafts.find(item => item.movementId === id).loopScripts;
+  for (const id of treeIds) {
+    assert.match(cue(id)['1'].script, /stand beside the chair with one hand supported/i);
+    assert.match(cue(id)['1'].script, /never at the knee/i);
+    assert.match(cue(id)['2'].script, /hand on the chair/i);
+    assert.match(cue(id)['3'].script, /stay near the chair/i);
+    assert.match(cue(id)['4'].script, /hold the chair/i);
+  }
+  for (const id of calfIds) {
+    assert.match(cue(id)['1'].script, /stand beside the chair and hold it with both hands/i);
+    assert.match(cue(id)['2'].script, /both hands supported/i);
+    assert.match(cue(id)['4'].script, /supported by the chair/i);
+  }
+  assert.match(narration.levelOpenings.beginner.script, /stable chair/i);
+  assert.match(narration.levelOpenings.intermediate.script, /chair securely/i);
+  assert.match(narration.levelOpenings.advanced.script, /keep your chair close/i);
+  assert.match(route, /Pause if you need more time to change position safely/);
+  const postureChanges = plan.levels.flatMap(level => level.workouts).reduce((sum, workout) => {
+    const standing = id => treeIds.has(id) || calfIds.has(id);
+    return sum + workout.movementIds.slice(0, -1).filter((id, index) => standing(id) !== standing(workout.movementIds[index + 1])).length;
+  }, 0);
+  assert.equal(postureChanges, 34);
+});
+
+test('owner-approved CSV exposes one complete ordered row per workout and matches the source plan', () => {
   const rows = matrix.trimEnd().split('\n');
   assert.equal(rows.length, 37);
   assert.equal(matrix, matrixCsv(plan, catalog));
   assert.match(rows[0], /"proposal_status".*"ordered_movement_names"/);
-  assert.ok(rows.slice(1).every(row => row.includes('PENDING OWNER APPROVAL')));
+  assert.ok(rows.slice(1).every(row => row.includes('OWNER APPROVED 2026-11-13')));
 });
 
 test('duration estimates use exact video durations, configured loops and eleven five-second transitions', () => {
@@ -343,6 +376,7 @@ test('member navigation is direct and entire level/workout cards are single acce
 test('pause/Up Next and completion screens use actual selected-workout movement names and thumbnails', () => {
   for (const id of ['transition-screen','transition-current','transition-up-next-label','transition-next','transition-thumbnail','transition-resume','transition-next-button','transition-status','completion-screen','completion-workouts','back-to-workouts','previous-workout','next-workout','restart-workout']) assert.match(route, new RegExp(`id="${id}"`));
   assert.match(ui, /snap\.nextMovement\.thumbnailUrl/);
+  assert.match(ui, /Pause if you need more time to change position safely/);
   assert.match(ui, /snap\.currentProgram\?\.movementIds/);
   assert.match(ui, /getWorkoutProgress\(snap/);
   assert.match(ui, /Movement \$\{progress\.currentMovementNumber\} of \$\{progress\.totalMovements\}/);
@@ -378,9 +412,17 @@ test('all 36 movement scripts provide four distinct, duration-bounded loop cues 
       assert.equal(loop.cuePlan[0].atSeconds, 0);
       assert.ok(loop.estimatedSpokenSeconds < movement.durationSeconds, `${movement.id} loop ${pass} leaves quiet time`);
       assert.equal(loop.expectedAudioFilename, `${movement.id}_loop-${pass}.mp3`);
-      assert.equal(loop.audioStatus, 'not_generated_pending_owner_review');
-      assert.equal(loop.audioUrl, null);
-      assert.equal(loop.audioSha256, null);
+      const request = JSON.parse(fs.readFileSync(path.join(__dirname, '../app/chair-yoga/narration/production-batch-manifest.json'), 'utf8')).requests.find(item => item.requestKey === `${movement.id}:${pass}`);
+      if (request) {
+        assert.equal(loop.audioStatus, 'generated_pending_owner_review');
+        assert.equal(loop.audioUrl, `/${request.localPath}`);
+        assert.equal(loop.audioSha256, request.sha256);
+        assert.equal(loop.ownerApproved, false);
+      } else {
+        assert.equal(loop.audioStatus, 'not_generated_generation_authorized');
+        assert.equal(loop.audioUrl, null);
+        assert.equal(loop.audioSha256, null);
+      }
     }
     assert.equal(record.loopScripts['1'].script, record.script);
   }
@@ -389,18 +431,30 @@ test('all 36 movement scripts provide four distinct, duration-bounded loop cues 
   for (const id of rightSideIds) for (const loop of Object.values(narration.drafts.find(item => item.movementId === id).loopScripts)) assert.doesNotMatch(loop.script, /\bleft\b/i, `${id} must not narrate the opposite side`);
   for (const id of leftSideIds) for (const loop of Object.values(narration.drafts.find(item => item.movementId === id).loopScripts)) assert.doesNotMatch(loop.script, /\bright\b/i, `${id} must not narrate the opposite side`);
   for (const level of ['beginner','intermediate','advanced']) {
-    assert.equal(narration.levelOpenings[level].audioStatus, 'not_generated_pending_owner_review');
-    assert.equal(narration.levelClosings[level].audioStatus, 'not_generated_pending_owner_review');
+    const openingRequest = JSON.parse(fs.readFileSync(path.join(__dirname, '../app/chair-yoga/narration/production-batch-manifest.json'), 'utf8')).requests.find(item => item.requestKey === `opening:${level}`);
+    const closingRequest = JSON.parse(fs.readFileSync(path.join(__dirname, '../app/chair-yoga/narration/production-batch-manifest.json'), 'utf8')).requests.find(item => item.requestKey === `closing:${level}`);
+    for (const [draft, request] of [[narration.levelOpenings[level], openingRequest], [narration.levelClosings[level], closingRequest]]) {
+      if (request) {
+        assert.equal(draft.audioStatus, 'generated_pending_owner_review');
+        assert.equal(draft.audioUrl, `/${request.localPath}`);
+        assert.equal(draft.audioSha256, request.sha256);
+        assert.equal(draft.ownerApproved, false);
+      } else {
+        assert.equal(draft.audioStatus, 'not_generated_generation_authorized');
+      }
+    }
     assert.ok(narration.levelOpenings[level].estimatedSpokenSeconds < 29);
     assert.ok(narration.levelClosings[level].estimatedSpokenSeconds < 29);
   }
 });
 
-test('narration remains separate, hash-gated and loop-specific; workout assignments remain pending approval', () => {
-  assert.equal(narration.voiceApprovalStatus, 'owner_approved_voice_settings_opening_and_mountain_loops_corrected_demo_closing_pending_review');
-  assert.equal(narration.bulkAudioStatus, 'not_started_pending_owner_review_of_miriam_demo_and_scripts');
-  assert.equal(plan.proposalStatus, 'pending_owner_approval');
-  assert.match(route, /member narration remains disabled until each loop recording is approved/);
+test('narration remains separate and hash-gated; matrix approval authorizes generation but not member playback', () => {
+  assert.equal(narration.voiceApprovalStatus, 'owner_approved_miriam_voice_matrix_and_closings; generated_batch_pending_owner_listening_review');
+  assert.equal(narration.bulkAudioStatus, 'completed_pending_owner_listening_review');
+  assert.equal(narration.generationStatus, 'completed_pending_owner_listening_review');
+  assert.equal(narration.memberPlaybackEnabled, false);
+  assert.equal(plan.proposalStatus, 'owner_approved_2026-11-13');
+  assert.match(route, /Member narration remains disabled until those recordings are explicitly approved/);
   assert.match(ui, /getApprovedNarrationForPass\(narrationRecord\(workout\), pass\)/);
   assert.match(ui, /asset\.audioSha256\.toLowerCase\(\)/);
   assert.match(ui, /audioSha256/);
@@ -419,11 +473,13 @@ test('narration resolver selects only the matching owner-approved loop recording
   assert.equal(player.getApprovedNarrationForPass({ loopScripts: { '1': { ...loop1, audioSha256: 'bad' } } }, 1), null);
 });
 
-test('Miriam demo preserves approved opening and loops and gates the corrected closing for owner review', () => {
-  assert.equal(narrationAudioManifest.reviewStatus, 'pending_owner_listening_review_of_corrected_demo_closing');
+test('Miriam demo preserves the exact owner-approved assets and hashes without enabling member playback', () => {
+  assert.equal(narrationAudioManifest.reviewStatus, 'owner_approved_miriam_voice_and_demo_assets_review_only');
   assert.equal(narrationAudioManifest.memberPlaybackEnabled, false);
-  assert.equal(narrationAudioManifest.creditAccounting.totalCreditsUsed, 20);
-  assert.equal(narrationAudioManifest.creditAccounting.bulkGeneration, false);
+  assert.equal(narrationAudioManifest.bulkNarrationStarted, true);
+  assert.equal(narrationAudioManifest.bulkNarrationStatus, 'completed_pending_owner_listening_review');
+  assert.equal(narrationAudioManifest.bulkNarrationRequests, 142);
+  assert.equal(narrationAudioManifest.bulkNarrationCreditsConsumed, 354);
   assert.equal(narrationAudioManifest.voice.preset, 'Miriam');
   assert.equal(narrationAudioManifest.voice.voiceId, 'VhxAIIZM8IRmnl5fyeyk');
   assert.equal(narrationAudioManifest.voice.model, 'eleven_multilingual_v2');
@@ -440,7 +496,7 @@ test('Miriam demo preserves approved opening and loops and gates the corrected c
     assert.equal(bytes.length, asset.bytes, `${asset.filename} size`);
     assert.equal(crypto.createHash('sha256').update(bytes).digest('hex'), asset.sha256, `${asset.filename} hash`);
     assert.equal(asset.memberPlaybackEnabled, false);
-    if (asset.purpose === 'beginner_demo_closing_corrected') assert.equal(asset.ownerReviewStatus, 'pending_owner_listening');
+    if (asset.purpose === 'beginner_demo_closing_corrected') assert.equal(asset.ownerReviewStatus, 'owner_approved');
     if (asset.purpose.startsWith('movement_loop')) assert.ok(asset.durationSeconds < asset.videoDurationSeconds);
   }
   const approvedOpening = narrationAudioManifest.assets.find(asset => asset.purpose === 'beginner_opening');
@@ -456,11 +512,9 @@ test('Miriam demo preserves approved opening and loops and gates the corrected c
   assert.equal(narration.sampleDemo.closingAudioFilename, correctedClose.filename);
   assert.equal(narration.sampleDemo.closingScript, correctedClose.text);
   assert.equal(narration.sampleDemo.memberPlaybackEnabled, false);
-  for (const movement of narration.drafts) for (const loop of Object.values(movement.loopScripts)) {
-    assert.equal(loop.audioStatus, 'not_generated_pending_owner_review');
-    assert.equal(loop.audioUrl, null);
-    assert.equal(loop.audioSha256, null);
-  }
+  assert.match(narrationBatchReviewPage, /Review only/);
+  assert.match(narrationBatchReviewPage, /does not save approval decisions/);
+  assert.match(narrationBatchReviewPage, /member playback disabled/);
   assert.match(narrationReviewPage, /OWNER LISTENING REVIEW · NOT MEMBER NARRATION/);
   assert.match(narrationReviewPage, /Play complete Beginner demo/);
   assert.match(narrationReviewPage, /Include narration/);
@@ -475,16 +529,75 @@ test('Miriam demo preserves approved opening and loops and gates the corrected c
   assert.doesNotMatch(narrationReviewPage, /When ready, return to standing slowly/);
 });
 
-test('position-instruction audit covers all 144 movement cues and keeps final closings context-pending', () => {
+test('position audit covers all 144 movement cues and final closings stay position-neutral pending audio approval', () => {
   assert.equal(narration.positionInstructionAudit.movementCount, 36);
   assert.equal(narration.positionInstructionAudit.loopCueCount, 144);
   assert.equal(narration.positionInstructionAudit.levelOpeningCount, 3);
   assert.equal(narration.positionInstructionAudit.levelClosingCount, 3);
   assert.equal(narration.positionInstructionAudit.positionSpecificCueCount, 63);
-  assert.equal(narration.positionInstructionAudit.flags.length, 3);
+  assert.equal(narration.positionInstructionAudit.flags.length, 0);
   for (const level of ['beginner','intermediate','advanced']) {
-    assert.equal(narration.levelClosings[level].audioStatus, 'not_generated_pending_owner_review');
-    assert.ok(narration.levelClosings[level].positionReviewStatus);
+    const closing = narration.levelClosings[level];
+    assert.equal(closing.audioStatus, 'generated_pending_owner_review');
+    assert.equal(closing.ownerApproved, false);
+    assert.ok(closing.audioSha256);
+    assert.equal(closing.scriptApprovalStatus, 'owner_approved_2026-11-13');
+    assert.equal(closing.positionReviewStatus, 'owner_approved_position_neutral_script');
+    assert.doesNotMatch(closing.script, /\b(?:stand|standing|sit|seated|step|leave each position)\b/i);
+    assert.equal(closing.estimatedSpokenSeconds, { beginner: 17, intermediate: 16, advanced: 15 }[level]);
+    assert.ok(closing.estimatedSpokenSeconds < 29);
   }
-  assert.equal(plan.proposalStatus, 'pending_owner_approval');
+  assert.equal(plan.proposalStatus, 'owner_approved_2026-11-13');
+});
+
+test('production batch is exact, hash-safe, fully generated, and pending owner listening approval', () => {
+  const batch = JSON.parse(fs.readFileSync(path.join(__dirname, '../app/chair-yoga/narration/production-batch-manifest.json'), 'utf8'));
+  assert.equal(batch.voice.voiceId, 'VhxAIIZM8IRmnl5fyeyk');
+  assert.equal(batch.voice.model, 'eleven_multilingual_v2');
+  assert.equal(batch.voice.speed, 0.75);
+  assert.equal(batch.productionPlan.uniqueMovementLoopVariantsReferenced, 139);
+  assert.equal(batch.productionPlan.remainingMovementLoopRequests, 137);
+  assert.equal(batch.productionPlan.remainingMovementLoopCredits, 334);
+  assert.equal(batch.productionPlan.totalRemainingRequests, 142);
+  assert.equal(batch.productionPlan.totalRemainingCredits, 354);
+  assert.equal(batch.productionPlan.noGenerationStarted, false);
+  assert.equal(batch.ownerAuthorization.generationAllowedNow, true);
+  assert.equal(batch.productionPlan.finalMatrixApprovalRequiredBeforeGeneration, false);
+  assert.equal(batch.productionPlan.memberPlaybackEnabled, false);
+  assert.equal(batch.requests.length, 142);
+  assert.equal(batch.status, 'completed_pending_owner_listening_review');
+  assert.equal(batch.generatedCountCompleted, 142);
+  assert.equal(batch.creditsCompleted, 354);
+  assert.ok(batch.requests.every(request => request.generationStatus === 'downloaded_validated_pending_owner_review' && request.decodeStatus === 'passed' && request.ownerApproved === undefined));
+  assert.equal(batch.requests.reduce((sum, request) => sum + request.credits, 0), 354);
+  assert.equal(new Set(batch.requests.map(request => request.requestKey)).size, 142);
+  assert.equal(new Set(batch.requests.map(request => request.expectedFilename)).size, 142);
+  const draftById = new Map(narration.drafts.map(item => [item.movementId, item]));
+  for (const request of batch.requests) {
+    if (request.type === 'movement_loop') {
+      const movement = draftById.get(request.movementId);
+      assert.ok(movement, `source movement ${request.movementId}`);
+      assert.equal(movement.loopScripts[String(request.loop)].script, request.script, request.requestKey);
+      assert.equal(movement.videoUrl.split('/').pop(), request.videoFilename);
+      assert.equal(movement.videoDurationSeconds, request.videoDurationSeconds);
+    } else if (request.type === 'level_opening') {
+      assert.equal(narration.levelOpenings[request.level].script, request.script);
+    } else if (request.type === 'level_closing') {
+      assert.equal(narration.levelClosings[request.level].script, request.script);
+    } else assert.fail(`unexpected batch request type ${request.type}`);
+  }
+  assert.ok(batch.approvedAssetsReusable.every(asset => !batch.requests.some(request => request.requestKey === asset.key)));
+  const closings = Object.fromEntries(batch.requests.filter(request => request.type === 'level_closing').map(request => [request.level, request]));
+  for (const level of ['beginner','intermediate','advanced']) {
+    assert.equal(closings[level].script, narration.levelClosings[level].script);
+    assert.equal(closings[level].approvalStatus, 'owner_approved_generation_authorized');
+  }
+  for (const reusable of batch.approvedAssetsReusable) {
+    const asset = narrationAudioManifest.assets.find(item => item.filename === reusable.filename);
+    assert.ok(asset, `approved source asset ${reusable.filename}`);
+    assert.equal(asset.sha256, reusable.sha256);
+    assert.equal(asset.ownerReviewStatus, 'owner_approved');
+  }
+  assert.ok(batch.demoSegueNotReusableAsFinalWorkoutClosing);
+  assert.match(narrationBatchReviewPage, /production-batch-manifest\.json/);
 });

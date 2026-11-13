@@ -1,10 +1,10 @@
-# Chair Yoga: proposed 36-workout matrix
+# Chair Yoga: owner-approved 36-workout matrix
 
-**Status: pending owner approval.** The three level assignments, individual workout combinations, names, and emphasis are proposals. Nothing in this matrix is presented as a finalized difficulty assignment.
+**Status: owner-approved 2026-11-13.** The owner approved this exact working structure: 12 Beginner, 12 Intermediate, and 12 Advanced workouts, including their titles, emphasis, level assignments, ordered movements, and level loop counts.
 
-The CSV contains 36 workout rows: 12 proposed Beginner, 12 proposed Intermediate, and 12 proposed Advanced workouts. Each row lists the distinctive workout title and focus, 12 ordered segment IDs and names, configured loop count, and an estimate based on actual source clip durations plus eleven five-second transitions.
+The CSV contains 36 approved workout rows: 12 Beginner, 12 Intermediate, and 12 Advanced workouts. Each row lists the distinctive workout title and focus, 12 ordered segment IDs and names, configured loop count, and an estimate based on actual source clip durations plus eleven five-second transitions.
 
-[Download the proposed 36-workout matrix](proposed-36-workout-matrix.csv)
+[Download the owner-approved 36-workout matrix](proposed-36-workout-matrix.csv)
 
 ## Proposal guardrails
 
@@ -13,7 +13,7 @@ The CSV contains 36 workout rows: 12 proposed Beginner, 12 proposed Intermediate
 - Advanced sequences include the more involved chair-supported standing and balance demonstrations.
 - When a workout includes a movement from a defined right/left family, the adjacent segments show Right then Left. The app validator rejects one-sided or reversed pairs.
 - Each of the 36 sequences has 12 distinct movement IDs. The 36 source video files are referenced in place; no video or audio is copied, regenerated, or altered.
-- All proposed combinations remain review-only pending the owner's decision. Narration remains unsynthesized.
+- All combinations in this matrix are owner-approved. Narration remains in production review and will be generated from the approved scripts; it remains disabled for members until recording review is complete.
 
 ## Playback
 
@@ -24,9 +24,9 @@ The CSV contains 36 workout rows: 12 proposed Beginner, 12 proposed Intermediate
 
 ## Owner review decisions
 
-Review the full CSV and confirm or revise:
+The owner approved this matrix on 2026-11-13. Revisions require a new explicit review. The approved CSV records:
 
-1. The 12 workout titles, emphasis, and ordered movements proposed for each level.
-2. The proposed Beginner and Intermediate movement boundaries, especially whether any higher-challenge chair poses should move between levels.
-3. The proposed level names and descriptions.
+1. All 36 workout titles, emphasis, and ordered movement sequences.
+2. The approved level boundaries: Beginner seated movements; Intermediate seated movements plus supported standing calf stretches; Advanced supported standing balance and Warrior/Side-Angle work.
+3. The approved level names and descriptions; revisions require a new owner decision.
 4. Whether narration should be produced after the movement assignments are finalized.

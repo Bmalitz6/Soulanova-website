@@ -6,15 +6,15 @@
   'use strict';
 
   function validatePlaylist(levels, movements, loopCountsByLevel, assignmentRules = {}) {
-    if (!Array.isArray(levels) || levels.length !== 3) throw new Error('Chair Yoga requires three proposed levels.');
+    if (!Array.isArray(levels) || levels.length !== 3) throw new Error('Chair Yoga requires three approved levels.');
     const movementIds = new Set(movements.map(movement => movement.id));
     const workoutIds = [];
     for (const level of levels) {
-      if (!level.id || !Array.isArray(level.workouts) || level.workouts.length !== 12) throw new Error('Each proposed level must contain 12 workouts.');
+      if (!level.id || !Array.isArray(level.workouts) || level.workouts.length !== 12) throw new Error('Each approved level must contain 12 workouts.');
       if (!Number.isInteger(loopCountsByLevel?.[level.id]) || loopCountsByLevel[level.id] < 1) throw new Error(`A valid loop count is required for ${level.id}.`);
       for (const workout of level.workouts) {
         workoutIds.push(workout.id);
-        if (workout.approvalStatus !== 'pending_owner_approval') throw new Error(`Workout ${workout.id} must remain pending owner approval.`);
+        if (workout.approvalStatus !== 'owner_approved_2026-11-13') throw new Error(`Workout ${workout.id} is missing final owner approval.`);
         if (!Array.isArray(workout.movementIds) || workout.movementIds.length !== 12 || new Set(workout.movementIds).size !== 12) throw new Error(`Workout ${workout.id} must contain 12 distinct movement segments.`);
         if (workout.movementIds.some(id => !movementIds.has(id))) throw new Error(`Workout ${workout.id} refers to a missing Chair Yoga movement.`);
         for (const pair of assignmentRules.bilateralPairs || []) {
@@ -31,7 +31,7 @@
     const intermediateExcluded = new Set(assignmentRules.intermediateExcludedMovementIds || []);
     for (const level of levels) for (const workout of level.workouts) {
       const excluded = level.id === 'beginner' ? beginnerExcluded : level.id === 'intermediate' ? intermediateExcluded : null;
-      if (excluded && workout.movementIds.some(id => excluded.has(id))) throw new Error(`${level.name} workout ${workout.id} contains a movement reserved for a higher proposed level.`);
+      if (excluded && workout.movementIds.some(id => excluded.has(id))) throw new Error(`${level.name} workout ${workout.id} contains a movement reserved for a higher level.`);
     }
     return true;
   }

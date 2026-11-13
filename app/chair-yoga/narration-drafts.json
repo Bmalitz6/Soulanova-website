@@ -2,8 +2,8 @@
   "schemaVersion": 2,
   "instructor": "Miriam (video instructor and approved narrator identity)",
   "proposedNarrator": "Miriam (owner-approved SoulStretch voice; selected for Chair Yoga demo)",
-  "voiceApprovalStatus": "owner_approved_voice_settings_opening_and_mountain_loops_corrected_demo_closing_pending_review",
-  "generationStatus": "miriam_sample_and_beginner_demo_generated_corrected_closing_pending_owner_review",
+  "voiceApprovalStatus": "owner_approved_miriam_voice_matrix_and_closings; generated_batch_pending_owner_listening_review",
+  "generationStatus": "completed_pending_owner_listening_review",
   "generationProvider": "Runway Generate Speech",
   "generationModel": "eleven_multilingual_v2",
   "generationSettings": {
@@ -35,7 +35,7 @@
       ],
       "expectedAudioUrl": null,
       "audioSha256": null,
-      "audioStatus": "not_generated_pending_owner_review",
+      "audioStatus": "not_generated_generation_authorized",
       "loopScripts": {
         "1": {
           "pass": 1,
@@ -55,7 +55,7 @@
           "expectedAudioFilename": "IMG_4285_loop-1.mp3",
           "audioUrl": null,
           "audioSha256": null,
-          "audioStatus": "not_generated_pending_owner_review"
+          "audioStatus": "not_generated_generation_authorized"
         },
         "2": {
           "pass": 2,
@@ -75,7 +75,7 @@
           "expectedAudioFilename": "IMG_4285_loop-2.mp3",
           "audioUrl": null,
           "audioSha256": null,
-          "audioStatus": "not_generated_pending_owner_review"
+          "audioStatus": "not_generated_generation_authorized"
         },
         "3": {
           "pass": 3,
@@ -93,9 +93,13 @@
             }
           ],
           "expectedAudioFilename": "IMG_4285_loop-3.mp3",
-          "audioUrl": null,
-          "audioSha256": null,
-          "audioStatus": "not_generated_pending_owner_review"
+          "audioUrl": "/app/chair-yoga/narration/production/IMG_4285_loop-3.mp3",
+          "audioSha256": "36479e72341954ec123124cf9621c7fd395566ae448da5eeca103e6d056fe4f1",
+          "audioStatus": "generated_pending_owner_review",
+          "audioDurationSeconds": 13.839093,
+          "ownerApproved": false,
+          "generationStatus": "downloaded_validated_pending_owner_review",
+          "taskId": "703aa88a-e680-4773-8f8e-bfd2d4ca2046"
         },
         "4": {
           "pass": 4,
@@ -113,9 +117,13 @@
             }
           ],
           "expectedAudioFilename": "IMG_4285_loop-4.mp3",
-          "audioUrl": null,
-          "audioSha256": null,
-          "audioStatus": "not_generated_pending_owner_review"
+          "audioUrl": "/app/chair-yoga/narration/production/IMG_4285_loop-4.mp3",
+          "audioSha256": "053227d67ff5fa31ce431f9d0c2f48c0a88424aa7904e5df2ffe2fa40149cdec",
+          "audioStatus": "generated_pending_owner_review",
+          "audioDurationSeconds": 8.452063,
+          "ownerApproved": false,
+          "generationStatus": "downloaded_validated_pending_owner_review",
+          "taskId": "5bbe88ef-46e0-4114-9792-2916f62a144c"
         }
       },
       "audioUrl": null
@@ -138,7 +146,7 @@
       ],
       "expectedAudioUrl": null,
       "audioSha256": null,
-      "audioStatus": "not_generated_pending_owner_review",
+      "audioStatus": "not_generated_generation_authorized",
       "loopScripts": {
         "1": {
           "pass": 1,
@@ -156,9 +164,13 @@
             }
           ],
           "expectedAudioFilename": "IMG_4286_loop-1.mp3",
-          "audioUrl": null,
-          "audioSha256": null,
-          "audioStatus": "not_generated_pending_owner_review"
+          "audioUrl": "/app/chair-yoga/narration/production/IMG_4286_loop-1.mp3",
+          "audioSha256": "522e511aa1fa512386f31b7f3a860fe065aecd1532316e755c93cb6233cd53a7",
+          "audioStatus": "generated_pending_owner_review",
+          "audioDurationSeconds": 15.928889,
+          "ownerApproved": false,
+          "generationStatus": "downloaded_validated_pending_owner_review",
+          "taskId": "aab3b37c-8bed-4c7a-83ce-501ecd32a56d"
         },
         "2": {
           "pass": 2,
@@ -176,9 +188,13 @@
             }
           ],
           "expectedAudioFilename": "IMG_4286_loop-2.mp3",
-          "audioUrl": null,
-          "audioSha256": null,
-          "audioStatus": "not_generated_pending_owner_review"
+          "audioUrl": "/app/chair-yoga/narration/production/IMG_4286_loop-2.mp3",
+          "audioSha256": "66b9f5c526a7c2bb0555c97a75de2b5a41b7724673bf9ed68d7c640fb38ff140",
+          "audioStatus": "generated_pending_owner_review",
+          "audioDurationSeconds": 10.588299,
+          "ownerApproved": false,
+          "generationStatus": "downloaded_validated_pending_owner_review",
+          "taskId": "3ccf4197-c649-4e13-a361-0dcb486c6dd1"
         },
         "3": {
           "pass": 3,
@@ -196,9 +212,13 @@
             }
           ],
           "expectedAudioFilename": "IMG_4286_loop-3.mp3",
-          "audioUrl": null,
-          "audioSha256": null,
-          "audioStatus": "not_generated_pending_owner_review"
+          "audioUrl": "/app/chair-yoga/narration/production/IMG_4286_loop-3.mp3",
+          "audioSha256": "0645ba9d5ce5fe6c445707fd60000ba0113d9dffdbc05aa4a2f76b231e5be3a2",
+          "audioStatus": "generated_pending_owner_review",
+          "audioDurationSeconds": 10.774059,
+          "ownerApproved": false,
+          "generationStatus": "downloaded_validated_pending_owner_review",
+          "taskId": "549df4fc-4c0e-44d0-9872-3a3c10eb111c"
         },
         "4": {
           "pass": 4,
@@ -216,9 +236,13 @@
             }
           ],
           "expectedAudioFilename": "IMG_4286_loop-4.mp3",
-          "audioUrl": null,
-          "audioSha256": null,
-          "audioStatus": "not_generated_pending_owner_review"
+          "audioUrl": "/app/chair-yoga/narration/production/IMG_4286_loop-4.mp3",
+          "audioSha256": "8174af181c84f94aa79a8a591c4fc42f3773b06dfbe0b0990234c7b6a0c5674e",
+          "audioStatus": "generated_pending_owner_review",
+          "audioDurationSeconds": 7.801905,
+          "ownerApproved": false,
+          "generationStatus": "downloaded_validated_pending_owner_review",
+          "taskId": "9c7ba043-bfb8-4562-b012-fd024fc71d4b"
         }
       },
       "audioUrl": null
@@ -241,7 +265,7 @@
       ],
       "expectedAudioUrl": null,
       "audioSha256": null,
-      "audioStatus": "not_generated_pending_owner_review",
+      "audioStatus": "not_generated_generation_authorized",
       "loopScripts": {
         "1": {
           "pass": 1,
@@ -259,9 +283,13 @@
             }
           ],
           "expectedAudioFilename": "IMG_4287_loop-1.mp3",
-          "audioUrl": null,
-          "audioSha256": null,
-          "audioStatus": "not_generated_pending_owner_review"
+          "audioUrl": "/app/chair-yoga/narration/production/IMG_4287_loop-1.mp3",
+          "audioSha256": "2434a307ac26cea4e34509a48f283a6710c1dc5aa6b2e94cc9e8f069c42e46e7",
+          "audioStatus": "generated_pending_owner_review",
+          "audioDurationSeconds": 15.000091,
+          "ownerApproved": false,
+          "generationStatus": "downloaded_validated_pending_owner_review",
+          "taskId": "05d9d7ed-04ff-4274-94e7-4baeb664f38a"
         },
         "2": {
           "pass": 2,
@@ -279,9 +307,13 @@
             }
           ],
           "expectedAudioFilename": "IMG_4287_loop-2.mp3",
-          "audioUrl": null,
-          "audioSha256": null,
-          "audioStatus": "not_generated_pending_owner_review"
+          "audioUrl": "/app/chair-yoga/narration/production/IMG_4287_loop-2.mp3",
+          "audioSha256": "75c83d85fd8555e5b963f52a25d16edaf8a8835b05900d79dc2ca46d34a1a4b5",
+          "audioStatus": "generated_pending_owner_review",
+          "audioDurationSeconds": 10.49542,
+          "ownerApproved": false,
+          "generationStatus": "downloaded_validated_pending_owner_review",
+          "taskId": "699294cb-9fb7-4d03-86a2-26916203fab3"
         },
         "3": {
           "pass": 3,
@@ -299,9 +331,13 @@
             }
           ],
           "expectedAudioFilename": "IMG_4287_loop-3.mp3",
-          "audioUrl": null,
-          "audioSha256": null,
-          "audioStatus": "not_generated_pending_owner_review"
+          "audioUrl": "/app/chair-yoga/narration/production/IMG_4287_loop-3.mp3",
+          "audioSha256": "f401390c212fbd5ae2aa93dbb41e530513f41747e5dd80599fc703cb6fde0d0e",
+          "audioStatus": "generated_pending_owner_review",
+          "audioDurationSeconds": 10.44898,
+          "ownerApproved": false,
+          "generationStatus": "downloaded_validated_pending_owner_review",
+          "taskId": "f084397a-f74e-4ad8-9ec2-a38b03fc868f"
         },
         "4": {
           "pass": 4,
@@ -319,9 +355,13 @@
             }
           ],
           "expectedAudioFilename": "IMG_4287_loop-4.mp3",
-          "audioUrl": null,
-          "audioSha256": null,
-          "audioStatus": "not_generated_pending_owner_review"
+          "audioUrl": "/app/chair-yoga/narration/production/IMG_4287_loop-4.mp3",
+          "audioSha256": "6a08eb7195fff4a5ccc095ce093e1236ddfcfddffe6f9957925f1b3f9f247ac0",
+          "audioStatus": "generated_pending_owner_review",
+          "audioDurationSeconds": 8.080544,
+          "ownerApproved": false,
+          "generationStatus": "downloaded_validated_pending_owner_review",
+          "taskId": "af3a2167-72ea-4b31-b684-bccd262d0afb"
         }
       },
       "audioUrl": null
@@ -344,7 +384,7 @@
       ],
       "expectedAudioUrl": null,
       "audioSha256": null,
-      "audioStatus": "not_generated_pending_owner_review",
+      "audioStatus": "not_generated_generation_authorized",
       "loopScripts": {
         "1": {
           "pass": 1,
@@ -362,9 +402,13 @@
             }
           ],
           "expectedAudioFilename": "IMG_4288_loop-1.mp3",
-          "audioUrl": null,
-          "audioSha256": null,
-          "audioStatus": "not_generated_pending_owner_review"
+          "audioUrl": "/app/chair-yoga/narration/production/IMG_4288_loop-1.mp3",
+          "audioSha256": "533b2a57239460a78deac7259c4478f420b2bbab49ed94648f63eeab6f3e2880",
+          "audioStatus": "generated_pending_owner_review",
+          "audioDurationSeconds": 16.671927,
+          "ownerApproved": false,
+          "generationStatus": "downloaded_validated_pending_owner_review",
+          "taskId": "6b1e4f23-782c-4cac-919e-d54e3648b433"
         },
         "2": {
           "pass": 2,
@@ -382,9 +426,13 @@
             }
           ],
           "expectedAudioFilename": "IMG_4288_loop-2.mp3",
-          "audioUrl": null,
-          "audioSha256": null,
-          "audioStatus": "not_generated_pending_owner_review"
+          "audioUrl": "/app/chair-yoga/narration/production/IMG_4288_loop-2.mp3",
+          "audioSha256": "b67864c472c58f7b9dbf3f544c356c3402772afdd361b559de996e56c83fffaf",
+          "audioStatus": "generated_pending_owner_review",
+          "audioDurationSeconds": 12.074376,
+          "ownerApproved": false,
+          "generationStatus": "downloaded_validated_pending_owner_review",
+          "taskId": "a77002ff-f9c9-416b-b848-d26ff20b0fbb"
         },
         "3": {
           "pass": 3,
@@ -402,9 +450,13 @@
             }
           ],
           "expectedAudioFilename": "IMG_4288_loop-3.mp3",
-          "audioUrl": null,
-          "audioSha256": null,
-          "audioStatus": "not_generated_pending_owner_review"
+          "audioUrl": "/app/chair-yoga/narration/production/IMG_4288_loop-3.mp3",
+          "audioSha256": "5a0119c64aedf88a358978dfe8523d3dbb16cb17ec4eaeca4f672af4cee1ca7a",
+          "audioStatus": "generated_pending_owner_review",
+          "audioDurationSeconds": 13.188934,
+          "ownerApproved": false,
+          "generationStatus": "downloaded_validated_pending_owner_review",
+          "taskId": "4b833e61-6559-4071-93a3-4dbf397755ec"
         },
         "4": {
           "pass": 4,
@@ -422,9 +474,13 @@
             }
           ],
           "expectedAudioFilename": "IMG_4288_loop-4.mp3",
-          "audioUrl": null,
-          "audioSha256": null,
-          "audioStatus": "not_generated_pending_owner_review"
+          "audioUrl": "/app/chair-yoga/narration/production/IMG_4288_loop-4.mp3",
+          "audioSha256": "794f82cea467f4896f0ab0d3f08d89e94cb4b89385202028708a0ac97c6b0005",
+          "audioStatus": "generated_pending_owner_review",
+          "audioDurationSeconds": 9.102222,
+          "ownerApproved": false,
+          "generationStatus": "downloaded_validated_pending_owner_review",
+          "taskId": "9e36da67-74d7-4461-b656-cd5aa752b5d8"
         }
       },
       "audioUrl": null
@@ -447,7 +503,7 @@
       ],
       "expectedAudioUrl": null,
       "audioSha256": null,
-      "audioStatus": "not_generated_pending_owner_review",
+      "audioStatus": "not_generated_generation_authorized",
       "loopScripts": {
         "1": {
           "pass": 1,
@@ -465,9 +521,13 @@
             }
           ],
           "expectedAudioFilename": "IMG_4289_loop-1.mp3",
-          "audioUrl": null,
-          "audioSha256": null,
-          "audioStatus": "not_generated_pending_owner_review"
+          "audioUrl": "/app/chair-yoga/narration/production/IMG_4289_loop-1.mp3",
+          "audioSha256": "e44135f40a48f875cdcc13fb193588df699f6e6827ab2c8196ddf690ebd28630",
+          "audioStatus": "generated_pending_owner_review",
+          "audioDurationSeconds": 17.043447,
+          "ownerApproved": false,
+          "generationStatus": "downloaded_validated_pending_owner_review",
+          "taskId": "86fe4aef-633f-4130-becd-7e0abd08b18d"
         },
         "2": {
           "pass": 2,
@@ -485,9 +545,13 @@
             }
           ],
           "expectedAudioFilename": "IMG_4289_loop-2.mp3",
-          "audioUrl": null,
-          "audioSha256": null,
-          "audioStatus": "not_generated_pending_owner_review"
+          "audioUrl": "/app/chair-yoga/narration/production/IMG_4289_loop-2.mp3",
+          "audioSha256": "22819e4a76a24787d3561f40477c23bd8db39da7a8970b42d54dfbdf5ab91e47",
+          "audioStatus": "generated_pending_owner_review",
+          "audioDurationSeconds": 14.210612,
+          "ownerApproved": false,
+          "generationStatus": "downloaded_validated_pending_owner_review",
+          "taskId": "dd617d11-3b36-4bc4-96fc-57b7051c229b"
         },
         "3": {
           "pass": 3,
@@ -505,9 +569,13 @@
             }
           ],
           "expectedAudioFilename": "IMG_4289_loop-3.mp3",
-          "audioUrl": null,
-          "audioSha256": null,
-          "audioStatus": "not_generated_pending_owner_review"
+          "audioUrl": "/app/chair-yoga/narration/production/IMG_4289_loop-3.mp3",
+          "audioSha256": "340f6289e9c0a3a99eea2a167d3fb0b717afed01f89c9d1eaccb4870bcfe74d1",
+          "audioStatus": "generated_pending_owner_review",
+          "audioDurationSeconds": 13.142494,
+          "ownerApproved": false,
+          "generationStatus": "downloaded_validated_pending_owner_review",
+          "taskId": "4aa4f3f0-187b-4d4b-87e5-c8aaf78ab155"
         },
         "4": {
           "pass": 4,
@@ -525,9 +593,13 @@
             }
           ],
           "expectedAudioFilename": "IMG_4289_loop-4.mp3",
-          "audioUrl": null,
-          "audioSha256": null,
-          "audioStatus": "not_generated_pending_owner_review"
+          "audioUrl": "/app/chair-yoga/narration/production/IMG_4289_loop-4.mp3",
+          "audioSha256": "df34f8f6634cad9cab86c5d4324b681bd9f27e7f6042bdbaf2f7f51dcecf7965",
+          "audioStatus": "generated_pending_owner_review",
+          "audioDurationSeconds": 8.684263,
+          "ownerApproved": false,
+          "generationStatus": "downloaded_validated_pending_owner_review",
+          "taskId": "b679902b-e010-4005-923c-d28d346fa195"
         }
       },
       "audioUrl": null
@@ -550,7 +622,7 @@
       ],
       "expectedAudioUrl": null,
       "audioSha256": null,
-      "audioStatus": "not_generated_pending_owner_review",
+      "audioStatus": "not_generated_generation_authorized",
       "loopScripts": {
         "1": {
           "pass": 1,
@@ -568,9 +640,13 @@
             }
           ],
           "expectedAudioFilename": "IMG_4290_loop-1.mp3",
-          "audioUrl": null,
-          "audioSha256": null,
-          "audioStatus": "not_generated_pending_owner_review"
+          "audioUrl": "/app/chair-yoga/narration/production/IMG_4290_loop-1.mp3",
+          "audioSha256": "42ccd8002811ec2f81ac06bbe8ee725c877f0cf898b24f8941e72397a6b6d066",
+          "audioStatus": "generated_pending_owner_review",
+          "audioDurationSeconds": 16.300408,
+          "ownerApproved": false,
+          "generationStatus": "downloaded_validated_pending_owner_review",
+          "taskId": "6c327246-cfb5-42b0-bd39-95d216b486b4"
         },
         "2": {
           "pass": 2,
@@ -588,9 +664,13 @@
             }
           ],
           "expectedAudioFilename": "IMG_4290_loop-2.mp3",
-          "audioUrl": null,
-          "audioSha256": null,
-          "audioStatus": "not_generated_pending_owner_review"
+          "audioUrl": "/app/chair-yoga/narration/production/IMG_4290_loop-2.mp3",
+          "audioSha256": "3a51dcc81b515266ee680c5efdcaa77d5fef3016206c553d87b856f44ffbf59a",
+          "audioStatus": "generated_pending_owner_review",
+          "audioDurationSeconds": 11.052698,
+          "ownerApproved": false,
+          "generationStatus": "downloaded_validated_pending_owner_review",
+          "taskId": "56d6fb1a-7108-46c9-8330-c62e32cc1d6b"
         },
         "3": {
           "pass": 3,
@@ -608,9 +688,13 @@
             }
           ],
           "expectedAudioFilename": "IMG_4290_loop-3.mp3",
-          "audioUrl": null,
-          "audioSha256": null,
-          "audioStatus": "not_generated_pending_owner_review"
+          "audioUrl": "/app/chair-yoga/narration/production/IMG_4290_loop-3.mp3",
+          "audioSha256": "c68b231ccc987aa036d1089966b0ecabd109380a4dd82047c95027a42adb7155",
+          "audioStatus": "generated_pending_owner_review",
+          "audioDurationSeconds": 11.145578,
+          "ownerApproved": false,
+          "generationStatus": "downloaded_validated_pending_owner_review",
+          "taskId": "70d5caae-a689-420d-9518-e50e25b2cf42"
         },
         "4": {
           "pass": 4,
@@ -628,9 +712,13 @@
             }
           ],
           "expectedAudioFilename": "IMG_4290_loop-4.mp3",
-          "audioUrl": null,
-          "audioSha256": null,
-          "audioStatus": "not_generated_pending_owner_review"
+          "audioUrl": "/app/chair-yoga/narration/production/IMG_4290_loop-4.mp3",
+          "audioSha256": "d2bfaa23a5f4026763f7ee759953d54b3954daa99514ffed1de69db31c85677f",
+          "audioStatus": "generated_pending_owner_review",
+          "audioDurationSeconds": 7.755465,
+          "ownerApproved": false,
+          "generationStatus": "downloaded_validated_pending_owner_review",
+          "taskId": "cd000a7b-c710-4316-9b50-8394bd1cea13"
         }
       },
       "audioUrl": null
@@ -653,7 +741,7 @@
       ],
       "expectedAudioUrl": null,
       "audioSha256": null,
-      "audioStatus": "not_generated_pending_owner_review",
+      "audioStatus": "not_generated_generation_authorized",
       "loopScripts": {
         "1": {
           "pass": 1,
@@ -671,9 +759,13 @@
             }
           ],
           "expectedAudioFilename": "IMG_4291_loop-1.mp3",
-          "audioUrl": null,
-          "audioSha256": null,
-          "audioStatus": "not_generated_pending_owner_review"
+          "audioUrl": "/app/chair-yoga/narration/production/IMG_4291_loop-1.mp3",
+          "audioSha256": "09a7f1c52cfaf705ad9e927dca65d2a1f495ddb15cf67b74285c2a511cdc1b9b",
+          "audioStatus": "generated_pending_owner_review",
+          "audioDurationSeconds": 16.114649,
+          "ownerApproved": false,
+          "generationStatus": "downloaded_validated_pending_owner_review",
+          "taskId": "4c8fd7d5-4c09-49da-85e7-97d2d585957a"
         },
         "2": {
           "pass": 2,
@@ -691,9 +783,13 @@
             }
           ],
           "expectedAudioFilename": "IMG_4291_loop-2.mp3",
-          "audioUrl": null,
-          "audioSha256": null,
-          "audioStatus": "not_generated_pending_owner_review"
+          "audioUrl": "/app/chair-yoga/narration/production/IMG_4291_loop-2.mp3",
+          "audioSha256": "633eb218e1c375bc843184272d141a9e83ae8e755e84ed9f7af2d95dbb5a72aa",
+          "audioStatus": "generated_pending_owner_review",
+          "audioDurationSeconds": 11.424218,
+          "ownerApproved": false,
+          "generationStatus": "downloaded_validated_pending_owner_review",
+          "taskId": "e35c85b1-c72a-4b1e-9167-90da28ee2034"
         },
         "3": {
           "pass": 3,
@@ -711,9 +807,13 @@
             }
           ],
           "expectedAudioFilename": "IMG_4291_loop-3.mp3",
-          "audioUrl": null,
-          "audioSha256": null,
-          "audioStatus": "not_generated_pending_owner_review"
+          "audioUrl": "/app/chair-yoga/narration/production/IMG_4291_loop-3.mp3",
+          "audioSha256": "7ff1a0744bd9387834201c8fccbf9c2cb3467621a6a5fb4de3b4ff31a30119aa",
+          "audioStatus": "generated_pending_owner_review",
+          "audioDurationSeconds": 9.938141,
+          "ownerApproved": false,
+          "generationStatus": "downloaded_validated_pending_owner_review",
+          "taskId": "0252c321-0c1e-4e0a-937e-a35383d089c5"
         },
         "4": {
           "pass": 4,
@@ -733,7 +833,7 @@
           "expectedAudioFilename": "IMG_4291_loop-4.mp3",
           "audioUrl": null,
           "audioSha256": null,
-          "audioStatus": "not_generated_pending_owner_review"
+          "audioStatus": "not_generated_generation_authorized"
         }
       },
       "audioUrl": null
@@ -756,7 +856,7 @@
       ],
       "expectedAudioUrl": null,
       "audioSha256": null,
-      "audioStatus": "not_generated_pending_owner_review",
+      "audioStatus": "not_generated_generation_authorized",
       "loopScripts": {
         "1": {
           "pass": 1,
@@ -774,9 +874,13 @@
             }
           ],
           "expectedAudioFilename": "IMG_4292_loop-1.mp3",
-          "audioUrl": null,
-          "audioSha256": null,
-          "audioStatus": "not_generated_pending_owner_review"
+          "audioUrl": "/app/chair-yoga/narration/production/IMG_4292_loop-1.mp3",
+          "audioSha256": "9d011b6d341e3aa9d99976aea95b0f59784d2d39baee5c6c211943fb964fb5ac",
+          "audioStatus": "generated_pending_owner_review",
+          "audioDurationSeconds": 16.950567,
+          "ownerApproved": false,
+          "generationStatus": "downloaded_validated_pending_owner_review",
+          "taskId": "a62b82e1-1201-40e2-9f6b-7e0993a8feef"
         },
         "2": {
           "pass": 2,
@@ -794,9 +898,13 @@
             }
           ],
           "expectedAudioFilename": "IMG_4292_loop-2.mp3",
-          "audioUrl": null,
-          "audioSha256": null,
-          "audioStatus": "not_generated_pending_owner_review"
+          "audioUrl": "/app/chair-yoga/narration/production/IMG_4292_loop-2.mp3",
+          "audioSha256": "ffb97e031ac7113dcf2577a9de709f68714d284086a97997ebfcf1c11d9134f0",
+          "audioStatus": "generated_pending_owner_review",
+          "audioDurationSeconds": 11.052698,
+          "ownerApproved": false,
+          "generationStatus": "downloaded_validated_pending_owner_review",
+          "taskId": "ad8cf879-ec78-4d59-869a-4ef4d4f3d228"
         },
         "3": {
           "pass": 3,
@@ -814,9 +922,13 @@
             }
           ],
           "expectedAudioFilename": "IMG_4292_loop-3.mp3",
-          "audioUrl": null,
-          "audioSha256": null,
-          "audioStatus": "not_generated_pending_owner_review"
+          "audioUrl": "/app/chair-yoga/narration/production/IMG_4292_loop-3.mp3",
+          "audioSha256": "a7321589e71c3e32228887a2bdcff38f3563f07e7f86c070fb748e37a0dccd65",
+          "audioStatus": "generated_pending_owner_review",
+          "audioDurationSeconds": 8.219864,
+          "ownerApproved": false,
+          "generationStatus": "downloaded_validated_pending_owner_review",
+          "taskId": "7505642d-9dd4-4ec5-8ed7-ae4d32191aa1"
         },
         "4": {
           "pass": 4,
@@ -834,9 +946,13 @@
             }
           ],
           "expectedAudioFilename": "IMG_4292_loop-4.mp3",
-          "audioUrl": null,
-          "audioSha256": null,
-          "audioStatus": "not_generated_pending_owner_review"
+          "audioUrl": "/app/chair-yoga/narration/production/IMG_4292_loop-4.mp3",
+          "audioSha256": "282a0de3f177696ba9d2cd57a1f1cde2b4bdba1969744f60a01a57d510ebb161",
+          "audioStatus": "generated_pending_owner_review",
+          "audioDurationSeconds": 6.408707,
+          "ownerApproved": false,
+          "generationStatus": "downloaded_validated_pending_owner_review",
+          "taskId": "87e2e48e-88f9-4703-9421-8bd7cbd0e0c0"
         }
       },
       "audioUrl": null
@@ -859,7 +975,7 @@
       ],
       "expectedAudioUrl": null,
       "audioSha256": null,
-      "audioStatus": "not_generated_pending_owner_review",
+      "audioStatus": "not_generated_generation_authorized",
       "loopScripts": {
         "1": {
           "pass": 1,
@@ -877,9 +993,13 @@
             }
           ],
           "expectedAudioFilename": "IMG_4293_loop-1.mp3",
-          "audioUrl": null,
-          "audioSha256": null,
-          "audioStatus": "not_generated_pending_owner_review"
+          "audioUrl": "/app/chair-yoga/narration/production/IMG_4293_loop-1.mp3",
+          "audioSha256": "2732ae77b037e20cd6e82d4a4154afaaea528d1d926f22c9e2adde4931335805",
+          "audioStatus": "generated_pending_owner_review",
+          "audioDurationSeconds": 16.764807,
+          "ownerApproved": false,
+          "generationStatus": "downloaded_validated_pending_owner_review",
+          "taskId": "437d93f9-4a4f-45d1-9a9c-4ea0906df314"
         },
         "2": {
           "pass": 2,
@@ -897,9 +1017,13 @@
             }
           ],
           "expectedAudioFilename": "IMG_4293_loop-2.mp3",
-          "audioUrl": null,
-          "audioSha256": null,
-          "audioStatus": "not_generated_pending_owner_review"
+          "audioUrl": "/app/chair-yoga/narration/production/IMG_4293_loop-2.mp3",
+          "audioSha256": "c189788c817a3aa3b8c25dc84074e72c15d94d327f451bed6e5ca71acdfc2185",
+          "audioStatus": "generated_pending_owner_review",
+          "audioDurationSeconds": 10.40254,
+          "ownerApproved": false,
+          "generationStatus": "downloaded_validated_pending_owner_review",
+          "taskId": "f81cf277-8541-4e78-afce-c55e43c35912"
         },
         "3": {
           "pass": 3,
@@ -917,9 +1041,13 @@
             }
           ],
           "expectedAudioFilename": "IMG_4293_loop-3.mp3",
-          "audioUrl": null,
-          "audioSha256": null,
-          "audioStatus": "not_generated_pending_owner_review"
+          "audioUrl": "/app/chair-yoga/narration/production/IMG_4293_loop-3.mp3",
+          "audioSha256": "fe79ba3eaf71dcd6e6a3b57ea539e38846ed2563027ea379dbf715fa813bee2d",
+          "audioStatus": "generated_pending_owner_review",
+          "audioDurationSeconds": 10.07746,
+          "ownerApproved": false,
+          "generationStatus": "downloaded_validated_pending_owner_review",
+          "taskId": "5439fd8f-f25e-4e5f-8799-f1d829268c24"
         },
         "4": {
           "pass": 4,
@@ -939,7 +1067,7 @@
           "expectedAudioFilename": "IMG_4293_loop-4.mp3",
           "audioUrl": null,
           "audioSha256": null,
-          "audioStatus": "not_generated_pending_owner_review"
+          "audioStatus": "not_generated_generation_authorized"
         }
       },
       "audioUrl": null
@@ -962,7 +1090,7 @@
       ],
       "expectedAudioUrl": null,
       "audioSha256": null,
-      "audioStatus": "not_generated_pending_owner_review",
+      "audioStatus": "not_generated_generation_authorized",
       "loopScripts": {
         "1": {
           "pass": 1,
@@ -980,9 +1108,13 @@
             }
           ],
           "expectedAudioFilename": "IMG_4294_loop-1.mp3",
-          "audioUrl": null,
-          "audioSha256": null,
-          "audioStatus": "not_generated_pending_owner_review"
+          "audioUrl": "/app/chair-yoga/narration/production/IMG_4294_loop-1.mp3",
+          "audioSha256": "54b1e0853b2ba88bbb94ea9d71ebbe5de0531fc5a762862d0c15715187d21cf5",
+          "audioStatus": "generated_pending_owner_review",
+          "audioDurationSeconds": 19.829841,
+          "ownerApproved": false,
+          "generationStatus": "downloaded_validated_pending_owner_review",
+          "taskId": "8404bcb0-400c-4a97-85fe-25bb358ab1a6"
         },
         "2": {
           "pass": 2,
@@ -1000,9 +1132,13 @@
             }
           ],
           "expectedAudioFilename": "IMG_4294_loop-2.mp3",
-          "audioUrl": null,
-          "audioSha256": null,
-          "audioStatus": "not_generated_pending_owner_review"
+          "audioUrl": "/app/chair-yoga/narration/production/IMG_4294_loop-2.mp3",
+          "audioSha256": "3abd5c3b846b069dfda7e20ecd3e328fc86a4b3b3f6960065e6b144d7ec2e7df",
+          "audioStatus": "generated_pending_owner_review",
+          "audioDurationSeconds": 10.3561,
+          "ownerApproved": false,
+          "generationStatus": "downloaded_validated_pending_owner_review",
+          "taskId": "9a153476-af06-422e-83d8-4854fa68ec1e"
         },
         "3": {
           "pass": 3,
@@ -1020,9 +1156,13 @@
             }
           ],
           "expectedAudioFilename": "IMG_4294_loop-3.mp3",
-          "audioUrl": null,
-          "audioSha256": null,
-          "audioStatus": "not_generated_pending_owner_review"
+          "audioUrl": "/app/chair-yoga/narration/production/IMG_4294_loop-3.mp3",
+          "audioSha256": "c80b9ecdcf25fdc169f1c283eac04d6758944aa1bbb3170cba69e63454394c96",
+          "audioStatus": "generated_pending_owner_review",
+          "audioDurationSeconds": 8.498503,
+          "ownerApproved": false,
+          "generationStatus": "downloaded_validated_pending_owner_review",
+          "taskId": "e185e2b4-db6e-4b2d-88ae-276918091a1e"
         },
         "4": {
           "pass": 4,
@@ -1042,7 +1182,7 @@
           "expectedAudioFilename": "IMG_4294_loop-4.mp3",
           "audioUrl": null,
           "audioSha256": null,
-          "audioStatus": "not_generated_pending_owner_review"
+          "audioStatus": "not_generated_generation_authorized"
         }
       },
       "audioUrl": null
@@ -1065,7 +1205,7 @@
       ],
       "expectedAudioUrl": null,
       "audioSha256": null,
-      "audioStatus": "not_generated_pending_owner_review",
+      "audioStatus": "not_generated_generation_authorized",
       "loopScripts": {
         "1": {
           "pass": 1,
@@ -1083,9 +1223,13 @@
             }
           ],
           "expectedAudioFilename": "IMG_4296_loop-1.mp3",
-          "audioUrl": null,
-          "audioSha256": null,
-          "audioStatus": "not_generated_pending_owner_review"
+          "audioUrl": "/app/chair-yoga/narration/production/IMG_4296_loop-1.mp3",
+          "audioSha256": "4ea479074240db02354befb13ad7359e844b19beb78000091fc5bcc111bea463",
+          "audioStatus": "generated_pending_owner_review",
+          "audioDurationSeconds": 16.671927,
+          "ownerApproved": false,
+          "generationStatus": "downloaded_validated_pending_owner_review",
+          "taskId": "e3065964-ba71-4e88-bb08-bc3cbb27a9d7"
         },
         "2": {
           "pass": 2,
@@ -1103,9 +1247,13 @@
             }
           ],
           "expectedAudioFilename": "IMG_4296_loop-2.mp3",
-          "audioUrl": null,
-          "audioSha256": null,
-          "audioStatus": "not_generated_pending_owner_review"
+          "audioUrl": "/app/chair-yoga/narration/production/IMG_4296_loop-2.mp3",
+          "audioSha256": "cb8f15368751ada792b626795b50c75579a03f2b3cc50c708688eecfe3d3676f",
+          "audioStatus": "generated_pending_owner_review",
+          "audioDurationSeconds": 8.777143,
+          "ownerApproved": false,
+          "generationStatus": "downloaded_validated_pending_owner_review",
+          "taskId": "f2313c81-c03a-4ef9-9c7a-d4e578b813b5"
         },
         "3": {
           "pass": 3,
@@ -1123,9 +1271,13 @@
             }
           ],
           "expectedAudioFilename": "IMG_4296_loop-3.mp3",
-          "audioUrl": null,
-          "audioSha256": null,
-          "audioStatus": "not_generated_pending_owner_review"
+          "audioUrl": "/app/chair-yoga/narration/production/IMG_4296_loop-3.mp3",
+          "audioSha256": "4dfe5dccaf224aee5261d6a794f4f73037344480225482aff9061d1fc649fb3b",
+          "audioStatus": "generated_pending_owner_review",
+          "audioDurationSeconds": 8.591383,
+          "ownerApproved": false,
+          "generationStatus": "downloaded_validated_pending_owner_review",
+          "taskId": "8e49b75f-96c7-4d4b-80e5-21239a7705cd"
         },
         "4": {
           "pass": 4,
@@ -1145,7 +1297,7 @@
           "expectedAudioFilename": "IMG_4296_loop-4.mp3",
           "audioUrl": null,
           "audioSha256": null,
-          "audioStatus": "not_generated_pending_owner_review"
+          "audioStatus": "not_generated_generation_authorized"
         }
       },
       "audioUrl": null
@@ -1168,7 +1320,7 @@
       ],
       "expectedAudioUrl": null,
       "audioSha256": null,
-      "audioStatus": "not_generated_pending_owner_review",
+      "audioStatus": "not_generated_generation_authorized",
       "loopScripts": {
         "1": {
           "pass": 1,
@@ -1186,9 +1338,11 @@
             }
           ],
           "expectedAudioFilename": "IMG_4297_loop-1.mp3",
-          "audioUrl": null,
-          "audioSha256": null,
-          "audioStatus": "not_generated_pending_owner_review"
+          "audioUrl": "/app/chair-yoga/narration/production/IMG_4297_loop-1.mp3",
+          "audioSha256": "ba7b91ebbd759959203d20ed12102b33b91c75a8162b73552a081afbef7b269e",
+          "audioStatus": "generated_pending_owner_review",
+          "audioDurationSeconds": 20.108481,
+          "ownerApproved": false
         },
         "2": {
           "pass": 2,
@@ -1206,9 +1360,13 @@
             }
           ],
           "expectedAudioFilename": "IMG_4297_loop-2.mp3",
-          "audioUrl": null,
-          "audioSha256": null,
-          "audioStatus": "not_generated_pending_owner_review"
+          "audioUrl": "/app/chair-yoga/narration/production/IMG_4297_loop-2.mp3",
+          "audioSha256": "4a55fb567007ac62f381b5cf90eb522a34596a9663d03206c22a2989efdaa1cc",
+          "audioStatus": "generated_pending_owner_review",
+          "generationStatus": "downloaded_validated_pending_owner_review",
+          "taskId": "cdecacc4-8499-41d9-990a-9e2ce3f41e7c",
+          "audioDurationSeconds": 12.724535,
+          "ownerApproved": false
         },
         "3": {
           "pass": 3,
@@ -1226,9 +1384,13 @@
             }
           ],
           "expectedAudioFilename": "IMG_4297_loop-3.mp3",
-          "audioUrl": null,
-          "audioSha256": null,
-          "audioStatus": "not_generated_pending_owner_review"
+          "audioUrl": "/app/chair-yoga/narration/production/IMG_4297_loop-3.mp3",
+          "audioSha256": "0fa71c45b37ad1434e43676f390ab4f3c9a72c06c6168281e46b8d5f978e29cc",
+          "audioStatus": "generated_pending_owner_review",
+          "audioDurationSeconds": 9.752381,
+          "ownerApproved": false,
+          "generationStatus": "downloaded_validated_pending_owner_review",
+          "taskId": "2525eda9-8768-4465-9909-acfeecdf1fbd"
         },
         "4": {
           "pass": 4,
@@ -1246,9 +1408,13 @@
             }
           ],
           "expectedAudioFilename": "IMG_4297_loop-4.mp3",
-          "audioUrl": null,
-          "audioSha256": null,
-          "audioStatus": "not_generated_pending_owner_review"
+          "audioUrl": "/app/chair-yoga/narration/production/IMG_4297_loop-4.mp3",
+          "audioSha256": "76830461aea04704da7966559a47a9ae4dfaa5aff5bccdfea7f55cde03f0a870",
+          "audioStatus": "generated_pending_owner_review",
+          "audioDurationSeconds": 4.690431,
+          "ownerApproved": false,
+          "generationStatus": "downloaded_validated_pending_owner_review",
+          "taskId": "fb41e009-dc8a-49b3-83f2-9117cd8e0e47"
         }
       },
       "audioUrl": null
@@ -1271,7 +1437,7 @@
       ],
       "expectedAudioUrl": null,
       "audioSha256": null,
-      "audioStatus": "not_generated_pending_owner_review",
+      "audioStatus": "not_generated_generation_authorized",
       "loopScripts": {
         "1": {
           "pass": 1,
@@ -1289,9 +1455,13 @@
             }
           ],
           "expectedAudioFilename": "IMG_4298_loop-1.mp3",
-          "audioUrl": null,
-          "audioSha256": null,
-          "audioStatus": "not_generated_pending_owner_review"
+          "audioUrl": "/app/chair-yoga/narration/production/IMG_4298_loop-1.mp3",
+          "audioSha256": "0bf7692e5343f873f5b3b43de7228442c5748cfca42bdd8ca5175e9c2ad76e44",
+          "audioStatus": "generated_pending_owner_review",
+          "audioDurationSeconds": 17.043447,
+          "ownerApproved": false,
+          "generationStatus": "downloaded_validated_pending_owner_review",
+          "taskId": "a484b901-d0b1-4c6a-8a96-f533361650d0"
         },
         "2": {
           "pass": 2,
@@ -1309,9 +1479,13 @@
             }
           ],
           "expectedAudioFilename": "IMG_4298_loop-2.mp3",
-          "audioUrl": null,
-          "audioSha256": null,
-          "audioStatus": "not_generated_pending_owner_review"
+          "audioUrl": "/app/chair-yoga/narration/production/IMG_4298_loop-2.mp3",
+          "audioSha256": "1814a4d36f9c623b9820d4b14bf3cd0071fbe5b3aab45c01b3aef64119411c53",
+          "audioStatus": "generated_pending_owner_review",
+          "audioDurationSeconds": 11.099138,
+          "ownerApproved": false,
+          "generationStatus": "downloaded_validated_pending_owner_review",
+          "taskId": "386010a7-5ae5-4651-a423-7e4b647473da"
         },
         "3": {
           "pass": 3,
@@ -1329,9 +1503,13 @@
             }
           ],
           "expectedAudioFilename": "IMG_4298_loop-3.mp3",
-          "audioUrl": null,
-          "audioSha256": null,
-          "audioStatus": "not_generated_pending_owner_review"
+          "audioUrl": "/app/chair-yoga/narration/production/IMG_4298_loop-3.mp3",
+          "audioSha256": "4ec40d298fc029ddb399ea355ab816b6be1538d46236b75d912395f64d8d4b24",
+          "audioStatus": "generated_pending_owner_review",
+          "audioDurationSeconds": 10.03102,
+          "ownerApproved": false,
+          "generationStatus": "downloaded_validated_pending_owner_review",
+          "taskId": "a83e314f-44f5-4399-97a4-a086029d155a"
         },
         "4": {
           "pass": 4,
@@ -1351,7 +1529,7 @@
           "expectedAudioFilename": "IMG_4298_loop-4.mp3",
           "audioUrl": null,
           "audioSha256": null,
-          "audioStatus": "not_generated_pending_owner_review"
+          "audioStatus": "not_generated_generation_authorized"
         }
       },
       "audioUrl": null
@@ -1374,7 +1552,7 @@
       ],
       "expectedAudioUrl": null,
       "audioSha256": null,
-      "audioStatus": "not_generated_pending_owner_review",
+      "audioStatus": "not_generated_generation_authorized",
       "loopScripts": {
         "1": {
           "pass": 1,
@@ -1392,9 +1570,13 @@
             }
           ],
           "expectedAudioFilename": "IMG_4299_loop-1.mp3",
-          "audioUrl": null,
-          "audioSha256": null,
-          "audioStatus": "not_generated_pending_owner_review"
+          "audioUrl": "/app/chair-yoga/narration/production/IMG_4299_loop-1.mp3",
+          "audioSha256": "4c626a12182cc811356eec6202a559b733ce3a8636d987cb3f05a350722cb264",
+          "audioStatus": "generated_pending_owner_review",
+          "audioDurationSeconds": 15.789569,
+          "ownerApproved": false,
+          "generationStatus": "downloaded_validated_pending_owner_review",
+          "taskId": "a2833d72-b642-4548-ae04-d981e099eca1"
         },
         "2": {
           "pass": 2,
@@ -1412,9 +1594,13 @@
             }
           ],
           "expectedAudioFilename": "IMG_4299_loop-2.mp3",
-          "audioUrl": null,
-          "audioSha256": null,
-          "audioStatus": "not_generated_pending_owner_review"
+          "audioUrl": "/app/chair-yoga/narration/production/IMG_4299_loop-2.mp3",
+          "audioSha256": "000e069660a5ba43a33ac8d9174fe381513d52b79a9cda780bd51da0a80701ff",
+          "audioStatus": "generated_pending_owner_review",
+          "audioDurationSeconds": 9.380862,
+          "ownerApproved": false,
+          "generationStatus": "downloaded_validated_pending_owner_review",
+          "taskId": "aad90846-8da9-4831-ae7f-b4dfb4f7008e"
         },
         "3": {
           "pass": 3,
@@ -1432,9 +1618,13 @@
             }
           ],
           "expectedAudioFilename": "IMG_4299_loop-3.mp3",
-          "audioUrl": null,
-          "audioSha256": null,
-          "audioStatus": "not_generated_pending_owner_review"
+          "audioUrl": "/app/chair-yoga/narration/production/IMG_4299_loop-3.mp3",
+          "audioSha256": "202502041b5173c7536783c442bf6f141c43b606dfaae659578348a4c62705ff",
+          "audioStatus": "generated_pending_owner_review",
+          "audioDurationSeconds": 10.49542,
+          "ownerApproved": false,
+          "generationStatus": "downloaded_validated_pending_owner_review",
+          "taskId": "c27b5c2b-a828-47ee-94c1-52cb444b1d9d"
         },
         "4": {
           "pass": 4,
@@ -1452,9 +1642,13 @@
             }
           ],
           "expectedAudioFilename": "IMG_4299_loop-4.mp3",
-          "audioUrl": null,
-          "audioSha256": null,
-          "audioStatus": "not_generated_pending_owner_review"
+          "audioUrl": "/app/chair-yoga/narration/production/IMG_4299_loop-4.mp3",
+          "audioSha256": "99f091d21158d02c24088d572dde1409719ebe208221e3d9522abc4c4f5f6066",
+          "audioStatus": "generated_pending_owner_review",
+          "audioDurationSeconds": 5.572789,
+          "ownerApproved": false,
+          "generationStatus": "downloaded_validated_pending_owner_review",
+          "taskId": "68eac110-546c-4e75-8d58-7d13b02016b0"
         }
       },
       "audioUrl": null
@@ -1477,7 +1671,7 @@
       ],
       "expectedAudioUrl": null,
       "audioSha256": null,
-      "audioStatus": "not_generated_pending_owner_review",
+      "audioStatus": "not_generated_generation_authorized",
       "loopScripts": {
         "1": {
           "pass": 1,
@@ -1495,9 +1689,13 @@
             }
           ],
           "expectedAudioFilename": "IMG_4300_loop-1.mp3",
-          "audioUrl": null,
-          "audioSha256": null,
-          "audioStatus": "not_generated_pending_owner_review"
+          "audioUrl": "/app/chair-yoga/narration/production/IMG_4300_loop-1.mp3",
+          "audioSha256": "e4e5c9b8c6e3ce732e9f143e65751957c808bc81d0a3cd1ed587440718288db4",
+          "audioStatus": "generated_pending_owner_review",
+          "audioDurationSeconds": 15.55737,
+          "ownerApproved": false,
+          "generationStatus": "downloaded_validated_pending_owner_review",
+          "taskId": "91f9ca2b-6da0-4171-bfd8-b631da4b2d12"
         },
         "2": {
           "pass": 2,
@@ -1515,9 +1713,13 @@
             }
           ],
           "expectedAudioFilename": "IMG_4300_loop-2.mp3",
-          "audioUrl": null,
-          "audioSha256": null,
-          "audioStatus": "not_generated_pending_owner_review"
+          "audioUrl": "/app/chair-yoga/narration/production/IMG_4300_loop-2.mp3",
+          "audioSha256": "dae7235172359a665d6f718b11a103221dd9333f7f5999b9a36140c2c19abc27",
+          "audioStatus": "generated_pending_owner_review",
+          "audioDurationSeconds": 10.541859,
+          "ownerApproved": false,
+          "generationStatus": "downloaded_validated_pending_owner_review",
+          "taskId": "900d479a-fc5c-4004-a2ab-8b571b8594fd"
         },
         "3": {
           "pass": 3,
@@ -1535,9 +1737,13 @@
             }
           ],
           "expectedAudioFilename": "IMG_4300_loop-3.mp3",
-          "audioUrl": null,
-          "audioSha256": null,
-          "audioStatus": "not_generated_pending_owner_review"
+          "audioUrl": "/app/chair-yoga/narration/production/IMG_4300_loop-3.mp3",
+          "audioSha256": "4d1a63ea70b987345953ee5a1e14a7cd67db9b0ffd6feaa2f253dfbf500e5f89",
+          "audioStatus": "generated_pending_owner_review",
+          "audioDurationSeconds": 11.099138,
+          "ownerApproved": false,
+          "generationStatus": "downloaded_validated_pending_owner_review",
+          "taskId": "883ed7fc-1111-4fb8-8f03-7473e0965185"
         },
         "4": {
           "pass": 4,
@@ -1555,9 +1761,13 @@
             }
           ],
           "expectedAudioFilename": "IMG_4300_loop-4.mp3",
-          "audioUrl": null,
-          "audioSha256": null,
-          "audioStatus": "not_generated_pending_owner_review"
+          "audioUrl": "/app/chair-yoga/narration/production/IMG_4300_loop-4.mp3",
+          "audioSha256": "2696066747b133d05552c67361578c4562f0bef63cb3d4e39f32884d37246d96",
+          "audioStatus": "generated_pending_owner_review",
+          "audioDurationSeconds": 5.665669,
+          "ownerApproved": false,
+          "generationStatus": "downloaded_validated_pending_owner_review",
+          "taskId": "fb89ad13-c75d-452e-a784-e350ade618bb"
         }
       },
       "audioUrl": null
@@ -1580,7 +1790,7 @@
       ],
       "expectedAudioUrl": null,
       "audioSha256": null,
-      "audioStatus": "not_generated_pending_owner_review",
+      "audioStatus": "not_generated_generation_authorized",
       "loopScripts": {
         "1": {
           "pass": 1,
@@ -1598,9 +1808,13 @@
             }
           ],
           "expectedAudioFilename": "IMG_4303_loop-1.mp3",
-          "audioUrl": null,
-          "audioSha256": null,
-          "audioStatus": "not_generated_pending_owner_review"
+          "audioUrl": "/app/chair-yoga/narration/production/IMG_4303_loop-1.mp3",
+          "audioSha256": "d9333516854ef3dc141edf97bc9b554fe8bb19f9395cc4b92d34ff8ed53c2604",
+          "audioStatus": "generated_pending_owner_review",
+          "audioDurationSeconds": 17.461406,
+          "ownerApproved": false,
+          "generationStatus": "downloaded_validated_pending_owner_review",
+          "taskId": "97326513-deac-4dea-9e22-617371b18e8b"
         },
         "2": {
           "pass": 2,
@@ -1618,9 +1832,13 @@
             }
           ],
           "expectedAudioFilename": "IMG_4303_loop-2.mp3",
-          "audioUrl": null,
-          "audioSha256": null,
-          "audioStatus": "not_generated_pending_owner_review"
+          "audioUrl": "/app/chair-yoga/narration/production/IMG_4303_loop-2.mp3",
+          "audioSha256": "42d153ebaa1375389fcd3ac81c2cca899e9bf8b6a8fa907f2ee821cf4774afd3",
+          "audioStatus": "generated_pending_owner_review",
+          "audioDurationSeconds": 8.266304,
+          "ownerApproved": false,
+          "generationStatus": "downloaded_validated_pending_owner_review",
+          "taskId": "10170c25-33c7-49ed-bd2b-5c901f39282d"
         },
         "3": {
           "pass": 3,
@@ -1638,9 +1856,13 @@
             }
           ],
           "expectedAudioFilename": "IMG_4303_loop-3.mp3",
-          "audioUrl": null,
-          "audioSha256": null,
-          "audioStatus": "not_generated_pending_owner_review"
+          "audioUrl": "/app/chair-yoga/narration/production/IMG_4303_loop-3.mp3",
+          "audioSha256": "b6840091f060b19f28b1e07b9f37bc07fa711e6bb458a3868c50fb969701794e",
+          "audioStatus": "generated_pending_owner_review",
+          "audioDurationSeconds": 9.705941,
+          "ownerApproved": false,
+          "generationStatus": "downloaded_validated_pending_owner_review",
+          "taskId": "6167875b-6fdd-492a-acb8-5c64d70c4495"
         },
         "4": {
           "pass": 4,
@@ -1658,9 +1880,13 @@
             }
           ],
           "expectedAudioFilename": "IMG_4303_loop-4.mp3",
-          "audioUrl": null,
-          "audioSha256": null,
-          "audioStatus": "not_generated_pending_owner_review"
+          "audioUrl": "/app/chair-yoga/narration/production/IMG_4303_loop-4.mp3",
+          "audioSha256": "2fc5fdbed7bcad322e69917682bc48f307510ac8a1d93ca104d29a7c04d9138b",
+          "audioStatus": "generated_pending_owner_review",
+          "audioDurationSeconds": 5.29415,
+          "ownerApproved": false,
+          "generationStatus": "downloaded_validated_pending_owner_review",
+          "taskId": "0a044b4a-16f0-41e3-938e-316c126e4d4e"
         }
       },
       "audioUrl": null
@@ -1683,7 +1909,7 @@
       ],
       "expectedAudioUrl": null,
       "audioSha256": null,
-      "audioStatus": "not_generated_pending_owner_review",
+      "audioStatus": "not_generated_generation_authorized",
       "loopScripts": {
         "1": {
           "pass": 1,
@@ -1701,9 +1927,13 @@
             }
           ],
           "expectedAudioFilename": "IMG_4304_loop-1.mp3",
-          "audioUrl": null,
-          "audioSha256": null,
-          "audioStatus": "not_generated_pending_owner_review"
+          "audioUrl": "/app/chair-yoga/narration/production/IMG_4304_loop-1.mp3",
+          "audioSha256": "35e43480f7a69e498d56986d1cf6a9cf88c34af4f672e5264a39dbb399c7b15e",
+          "audioStatus": "generated_pending_owner_review",
+          "audioDurationSeconds": 16.718367,
+          "ownerApproved": false,
+          "generationStatus": "downloaded_validated_pending_owner_review",
+          "taskId": "a96e6900-4fa6-4924-aaa3-39a17ad67d0f"
         },
         "2": {
           "pass": 2,
@@ -1721,9 +1951,13 @@
             }
           ],
           "expectedAudioFilename": "IMG_4304_loop-2.mp3",
-          "audioUrl": null,
-          "audioSha256": null,
-          "audioStatus": "not_generated_pending_owner_review"
+          "audioUrl": "/app/chair-yoga/narration/production/IMG_4304_loop-2.mp3",
+          "audioSha256": "e71fa3c1efb032f254228c11187b4099822bdb7a310f77afd802982c536477f0",
+          "audioStatus": "generated_pending_owner_review",
+          "audioDurationSeconds": 8.870023,
+          "ownerApproved": false,
+          "generationStatus": "downloaded_validated_pending_owner_review",
+          "taskId": "ad8d7f40-44ee-4473-ab74-6d67c0f2e3a4"
         },
         "3": {
           "pass": 3,
@@ -1741,9 +1975,13 @@
             }
           ],
           "expectedAudioFilename": "IMG_4304_loop-3.mp3",
-          "audioUrl": null,
-          "audioSha256": null,
-          "audioStatus": "not_generated_pending_owner_review"
+          "audioUrl": "/app/chair-yoga/narration/production/IMG_4304_loop-3.mp3",
+          "audioSha256": "9e16b49d9897505a780102e0b46b50bdd477a78a6ab0b65f5e0de795a99bde94",
+          "audioStatus": "generated_pending_owner_review",
+          "audioDurationSeconds": 9.798821,
+          "ownerApproved": false,
+          "generationStatus": "downloaded_validated_pending_owner_review",
+          "taskId": "44410d3f-1ea0-4ff3-81f2-0b615561f610"
         },
         "4": {
           "pass": 4,
@@ -1761,9 +1999,13 @@
             }
           ],
           "expectedAudioFilename": "IMG_4304_loop-4.mp3",
-          "audioUrl": null,
-          "audioSha256": null,
-          "audioStatus": "not_generated_pending_owner_review"
+          "audioUrl": "/app/chair-yoga/narration/production/IMG_4304_loop-4.mp3",
+          "audioSha256": "920779f9aa8992cd9312c00cfb7f009b9a2dfd60b4e2fdee7220f92e2870c8e8",
+          "audioStatus": "generated_pending_owner_review",
+          "audioDurationSeconds": 5.387029,
+          "ownerApproved": false,
+          "generationStatus": "downloaded_validated_pending_owner_review",
+          "taskId": "b7fd28ae-315a-4a0c-a817-b42be20e3338"
         }
       },
       "audioUrl": null
@@ -1786,7 +2028,7 @@
       ],
       "expectedAudioUrl": null,
       "audioSha256": null,
-      "audioStatus": "not_generated_pending_owner_review",
+      "audioStatus": "not_generated_generation_authorized",
       "loopScripts": {
         "1": {
           "pass": 1,
@@ -1804,9 +2046,13 @@
             }
           ],
           "expectedAudioFilename": "IMG_4305_loop-1.mp3",
-          "audioUrl": null,
-          "audioSha256": null,
-          "audioStatus": "not_generated_pending_owner_review"
+          "audioUrl": "/app/chair-yoga/narration/production/IMG_4305_loop-1.mp3",
+          "audioSha256": "b8064a80663ae52d98fbfd786beaa6be07bf8fbc5dd4bf888402d235a68363b2",
+          "audioStatus": "generated_pending_owner_review",
+          "audioDurationSeconds": 15.46449,
+          "ownerApproved": false,
+          "generationStatus": "downloaded_validated_pending_owner_review",
+          "taskId": "0249e323-6b9d-4c23-b6d1-20c0fa2773ff"
         },
         "2": {
           "pass": 2,
@@ -1824,9 +2070,13 @@
             }
           ],
           "expectedAudioFilename": "IMG_4305_loop-2.mp3",
-          "audioUrl": null,
-          "audioSha256": null,
-          "audioStatus": "not_generated_pending_owner_review"
+          "audioUrl": "/app/chair-yoga/narration/production/IMG_4305_loop-2.mp3",
+          "audioSha256": "e9d8295e87d41af684957e62e8476bba8fc2dd448dc07f7df8e32217854468cf",
+          "audioStatus": "generated_pending_owner_review",
+          "audioDurationSeconds": 10.21678,
+          "ownerApproved": false,
+          "generationStatus": "downloaded_validated_pending_owner_review",
+          "taskId": "8f3c26fd-0fd0-424f-bb78-7c5234af8dec"
         },
         "3": {
           "pass": 3,
@@ -1844,9 +2094,13 @@
             }
           ],
           "expectedAudioFilename": "IMG_4305_loop-3.mp3",
-          "audioUrl": null,
-          "audioSha256": null,
-          "audioStatus": "not_generated_pending_owner_review"
+          "audioUrl": "/app/chair-yoga/narration/production/IMG_4305_loop-3.mp3",
+          "audioSha256": "0281c9bad6bdd3b46ab9d22fb3c7f13b553e54a46b5cf9729d0414f5bbac054e",
+          "audioStatus": "generated_pending_owner_review",
+          "audioDurationSeconds": 11.377778,
+          "ownerApproved": false,
+          "generationStatus": "downloaded_validated_pending_owner_review",
+          "taskId": "cb0df615-d9a8-46fb-b9e6-367b51404ce6"
         },
         "4": {
           "pass": 4,
@@ -1864,9 +2118,13 @@
             }
           ],
           "expectedAudioFilename": "IMG_4305_loop-4.mp3",
-          "audioUrl": null,
-          "audioSha256": null,
-          "audioStatus": "not_generated_pending_owner_review"
+          "audioUrl": "/app/chair-yoga/narration/production/IMG_4305_loop-4.mp3",
+          "audioSha256": "bc007ac6cafc5c8b3fd312a1ce3821039a9e9caf23619bd5d0e5aa2872ba7724",
+          "audioStatus": "generated_pending_owner_review",
+          "audioDurationSeconds": 4.551111,
+          "ownerApproved": false,
+          "generationStatus": "downloaded_validated_pending_owner_review",
+          "taskId": "d94ddf99-2af3-43f5-93a3-d0fae363b26c"
         }
       },
       "audioUrl": null
@@ -1889,7 +2147,7 @@
       ],
       "expectedAudioUrl": null,
       "audioSha256": null,
-      "audioStatus": "not_generated_pending_owner_review",
+      "audioStatus": "not_generated_generation_authorized",
       "loopScripts": {
         "1": {
           "pass": 1,
@@ -1907,9 +2165,13 @@
             }
           ],
           "expectedAudioFilename": "IMG_4306_loop-1.mp3",
-          "audioUrl": null,
-          "audioSha256": null,
-          "audioStatus": "not_generated_pending_owner_review"
+          "audioUrl": "/app/chair-yoga/narration/production/IMG_4306_loop-1.mp3",
+          "audioSha256": "d239f72fe8a96694294bcae7c8920b3a7afbd7985817ee64879b89e0ae859c6e",
+          "audioStatus": "generated_pending_owner_review",
+          "audioDurationSeconds": 14.489252,
+          "ownerApproved": false,
+          "generationStatus": "downloaded_validated_pending_owner_review",
+          "taskId": "7599a678-166f-4b53-ac26-c2355dfe0386"
         },
         "2": {
           "pass": 2,
@@ -1927,9 +2189,13 @@
             }
           ],
           "expectedAudioFilename": "IMG_4306_loop-2.mp3",
-          "audioUrl": null,
-          "audioSha256": null,
-          "audioStatus": "not_generated_pending_owner_review"
+          "audioUrl": "/app/chair-yoga/narration/production/IMG_4306_loop-2.mp3",
+          "audioSha256": "1730edfed91d60fa3297ae92540e46683fb1bb9caf1b44bd2d80738b4ee4bbb1",
+          "audioStatus": "generated_pending_owner_review",
+          "audioDurationSeconds": 10.1239,
+          "ownerApproved": false,
+          "generationStatus": "downloaded_validated_pending_owner_review",
+          "taskId": "e3bcba3d-0af5-4700-b3e6-262590415ced"
         },
         "3": {
           "pass": 3,
@@ -1947,9 +2213,13 @@
             }
           ],
           "expectedAudioFilename": "IMG_4306_loop-3.mp3",
-          "audioUrl": null,
-          "audioSha256": null,
-          "audioStatus": "not_generated_pending_owner_review"
+          "audioUrl": "/app/chair-yoga/narration/production/IMG_4306_loop-3.mp3",
+          "audioSha256": "25cbc0d72e17e3fa801e14b5dd6a32c5abbd8a2b2e3b1d014a706e4eaf3bc557",
+          "audioStatus": "generated_pending_owner_review",
+          "audioDurationSeconds": 11.424218,
+          "ownerApproved": false,
+          "generationStatus": "downloaded_validated_pending_owner_review",
+          "taskId": "71476a47-3866-4932-8d68-341b4f24470a"
         },
         "4": {
           "pass": 4,
@@ -1967,9 +2237,13 @@
             }
           ],
           "expectedAudioFilename": "IMG_4306_loop-4.mp3",
-          "audioUrl": null,
-          "audioSha256": null,
-          "audioStatus": "not_generated_pending_owner_review"
+          "audioUrl": "/app/chair-yoga/narration/production/IMG_4306_loop-4.mp3",
+          "audioSha256": "06ea7e7bfa84ce51342a9ae1398d0303bc217b04b2588dd675bed7abddc4dc23",
+          "audioStatus": "generated_pending_owner_review",
+          "audioDurationSeconds": 4.272472,
+          "ownerApproved": false,
+          "generationStatus": "downloaded_validated_pending_owner_review",
+          "taskId": "43caf46a-8fb8-4a25-9072-b8ccaedf1915"
         }
       },
       "audioUrl": null
@@ -1992,7 +2266,7 @@
       ],
       "expectedAudioUrl": null,
       "audioSha256": null,
-      "audioStatus": "not_generated_pending_owner_review",
+      "audioStatus": "not_generated_generation_authorized",
       "loopScripts": {
         "1": {
           "pass": 1,
@@ -2010,9 +2284,13 @@
             }
           ],
           "expectedAudioFilename": "IMG_4307_loop-1.mp3",
-          "audioUrl": null,
-          "audioSha256": null,
-          "audioStatus": "not_generated_pending_owner_review"
+          "audioUrl": "/app/chair-yoga/narration/production/IMG_4307_loop-1.mp3",
+          "audioSha256": "f2b6d759099a5ac73ab2befc52dc67594a64f55046957cc55945725921d4ae56",
+          "audioStatus": "generated_pending_owner_review",
+          "audioDurationSeconds": 18.947483,
+          "ownerApproved": false,
+          "generationStatus": "downloaded_validated_pending_owner_review",
+          "taskId": "6aeef55f-d656-47cc-ac5c-36a7e5d4ac52"
         },
         "2": {
           "pass": 2,
@@ -2030,9 +2308,13 @@
             }
           ],
           "expectedAudioFilename": "IMG_4307_loop-2.mp3",
-          "audioUrl": null,
-          "audioSha256": null,
-          "audioStatus": "not_generated_pending_owner_review"
+          "audioUrl": "/app/chair-yoga/narration/production/IMG_4307_loop-2.mp3",
+          "audioSha256": "52261cd3f13bb1a324402b9cbae7ef3105e48e9bbf4476b0bff21dac4e7045e4",
+          "audioStatus": "generated_pending_owner_review",
+          "audioDurationSeconds": 7.151746,
+          "ownerApproved": false,
+          "generationStatus": "downloaded_validated_pending_owner_review",
+          "taskId": "085a9e97-55a3-4ad5-b2b6-9edf7f7cd41d"
         },
         "3": {
           "pass": 3,
@@ -2050,9 +2332,13 @@
             }
           ],
           "expectedAudioFilename": "IMG_4307_loop-3.mp3",
-          "audioUrl": null,
-          "audioSha256": null,
-          "audioStatus": "not_generated_pending_owner_review"
+          "audioUrl": "/app/chair-yoga/narration/production/IMG_4307_loop-3.mp3",
+          "audioSha256": "bc3107dbbc49a934cd75e4babfe551742ecd392c6dc2c5408065ae0eeaa5dc94",
+          "audioStatus": "generated_pending_owner_review",
+          "audioDurationSeconds": 8.730703,
+          "ownerApproved": false,
+          "generationStatus": "downloaded_validated_pending_owner_review",
+          "taskId": "5fbad5f1-688d-433e-bb12-2fd2f6a977f4"
         },
         "4": {
           "pass": 4,
@@ -2070,9 +2356,13 @@
             }
           ],
           "expectedAudioFilename": "IMG_4307_loop-4.mp3",
-          "audioUrl": null,
-          "audioSha256": null,
-          "audioStatus": "not_generated_pending_owner_review"
+          "audioUrl": "/app/chair-yoga/narration/production/IMG_4307_loop-4.mp3",
+          "audioSha256": "045431d04edfdc808ec538ba25b3bd07ea35617956fef399b73c994aded5874b",
+          "audioStatus": "generated_pending_owner_review",
+          "audioDurationSeconds": 4.504671,
+          "ownerApproved": false,
+          "generationStatus": "downloaded_validated_pending_owner_review",
+          "taskId": "6a660a52-d196-4708-930e-3d472a6ff7e1"
         }
       },
       "audioUrl": null
@@ -2095,7 +2385,7 @@
       ],
       "expectedAudioUrl": null,
       "audioSha256": null,
-      "audioStatus": "not_generated_pending_owner_review",
+      "audioStatus": "not_generated_generation_authorized",
       "loopScripts": {
         "1": {
           "pass": 1,
@@ -2113,9 +2403,13 @@
             }
           ],
           "expectedAudioFilename": "IMG_4308_loop-1.mp3",
-          "audioUrl": null,
-          "audioSha256": null,
-          "audioStatus": "not_generated_pending_owner_review"
+          "audioUrl": "/app/chair-yoga/narration/production/IMG_4308_loop-1.mp3",
+          "audioSha256": "5a9aab3854c7d6f5063bec8168abfd987cb303a83e53a911db373e1a55225961",
+          "audioStatus": "generated_pending_owner_review",
+          "audioDurationSeconds": 18.715283,
+          "ownerApproved": false,
+          "generationStatus": "downloaded_validated_pending_owner_review",
+          "taskId": "fab256a2-470b-494c-aa5a-08e6fc4cddd4"
         },
         "2": {
           "pass": 2,
@@ -2133,9 +2427,13 @@
             }
           ],
           "expectedAudioFilename": "IMG_4308_loop-2.mp3",
-          "audioUrl": null,
-          "audioSha256": null,
-          "audioStatus": "not_generated_pending_owner_review"
+          "audioUrl": "/app/chair-yoga/narration/production/IMG_4308_loop-2.mp3",
+          "audioSha256": "09c10f5335a3fd7fa34ed44d301f84f5c196c28ae915f68fefc2f91dc003dbc8",
+          "audioStatus": "generated_pending_owner_review",
+          "audioDurationSeconds": 7.291066,
+          "ownerApproved": false,
+          "generationStatus": "downloaded_validated_pending_owner_review",
+          "taskId": "9ceb9189-fb4f-4417-9ce5-c311f26d1cc5"
         },
         "3": {
           "pass": 3,
@@ -2153,9 +2451,13 @@
             }
           ],
           "expectedAudioFilename": "IMG_4308_loop-3.mp3",
-          "audioUrl": null,
-          "audioSha256": null,
-          "audioStatus": "not_generated_pending_owner_review"
+          "audioUrl": "/app/chair-yoga/narration/production/IMG_4308_loop-3.mp3",
+          "audioSha256": "23c80e42dc20d477db8ecaca27e7bdf5d9d9a1fd7c29efbfcc32ec2b54e6a53a",
+          "audioStatus": "generated_pending_owner_review",
+          "audioDurationSeconds": 9.287982,
+          "ownerApproved": false,
+          "generationStatus": "downloaded_validated_pending_owner_review",
+          "taskId": "b868f578-b09a-4fcf-991e-ac35dc517993"
         },
         "4": {
           "pass": 4,
@@ -2173,9 +2475,13 @@
             }
           ],
           "expectedAudioFilename": "IMG_4308_loop-4.mp3",
-          "audioUrl": null,
-          "audioSha256": null,
-          "audioStatus": "not_generated_pending_owner_review"
+          "audioUrl": "/app/chair-yoga/narration/production/IMG_4308_loop-4.mp3",
+          "audioSha256": "0ec31af8af36b149018265e811758018f93d92727a64d259731966353539dffe",
+          "audioStatus": "generated_pending_owner_review",
+          "audioDurationSeconds": 4.643991,
+          "ownerApproved": false,
+          "generationStatus": "downloaded_validated_pending_owner_review",
+          "taskId": "406c0798-acae-42f8-9ed2-2cfbe8ff9833"
         }
       },
       "audioUrl": null
@@ -2198,7 +2504,7 @@
       ],
       "expectedAudioUrl": null,
       "audioSha256": null,
-      "audioStatus": "not_generated_pending_owner_review",
+      "audioStatus": "not_generated_generation_authorized",
       "loopScripts": {
         "1": {
           "pass": 1,
@@ -2216,9 +2522,13 @@
             }
           ],
           "expectedAudioFilename": "IMG_4309_loop-1.mp3",
-          "audioUrl": null,
-          "audioSha256": null,
-          "audioStatus": "not_generated_pending_owner_review"
+          "audioUrl": "/app/chair-yoga/narration/production/IMG_4309_loop-1.mp3",
+          "audioSha256": "b033c1370d078e9ab0f389949a686098fdac909ab18da615140e4a9c2eb41512",
+          "audioStatus": "generated_pending_owner_review",
+          "audioDurationSeconds": 15.55737,
+          "ownerApproved": false,
+          "generationStatus": "downloaded_validated_pending_owner_review",
+          "taskId": "7e92ed40-14db-4735-9c45-9b930fa34211"
         },
         "2": {
           "pass": 2,
@@ -2236,9 +2546,13 @@
             }
           ],
           "expectedAudioFilename": "IMG_4309_loop-2.mp3",
-          "audioUrl": null,
-          "audioSha256": null,
-          "audioStatus": "not_generated_pending_owner_review"
+          "audioUrl": "/app/chair-yoga/narration/production/IMG_4309_loop-2.mp3",
+          "audioSha256": "9e2c61afac991ca9e17e3fc2d6b6de56a37e987d66ecf23a2c0d618408755469",
+          "audioStatus": "generated_pending_owner_review",
+          "audioDurationSeconds": 10.820499,
+          "ownerApproved": false,
+          "generationStatus": "downloaded_validated_pending_owner_review",
+          "taskId": "1028cdd5-4c61-4631-91d8-44530141411d"
         },
         "3": {
           "pass": 3,
@@ -2256,9 +2570,13 @@
             }
           ],
           "expectedAudioFilename": "IMG_4309_loop-3.mp3",
-          "audioUrl": null,
-          "audioSha256": null,
-          "audioStatus": "not_generated_pending_owner_review"
+          "audioUrl": "/app/chair-yoga/narration/production/IMG_4309_loop-3.mp3",
+          "audioSha256": "c46dc9696de5f677f2cbc1224593b55cf1fbe81133bf183e830eb279308237b8",
+          "audioStatus": "generated_pending_owner_review",
+          "audioDurationSeconds": 7.616145,
+          "ownerApproved": false,
+          "generationStatus": "downloaded_validated_pending_owner_review",
+          "taskId": "0416aee7-5305-4561-b994-f066dec8360a"
         },
         "4": {
           "pass": 4,
@@ -2276,9 +2594,13 @@
             }
           ],
           "expectedAudioFilename": "IMG_4309_loop-4.mp3",
-          "audioUrl": null,
-          "audioSha256": null,
-          "audioStatus": "not_generated_pending_owner_review"
+          "audioUrl": "/app/chair-yoga/narration/production/IMG_4309_loop-4.mp3",
+          "audioSha256": "22162df3eb0bf4434d0d08819c7631032c977e987f46efe83eb98e3276879695",
+          "audioStatus": "generated_pending_owner_review",
+          "audioDurationSeconds": 4.690431,
+          "ownerApproved": false,
+          "generationStatus": "downloaded_validated_pending_owner_review",
+          "taskId": "8d3589c6-1f3e-40e5-81d5-38a663e90136"
         }
       },
       "audioUrl": null
@@ -2301,7 +2623,7 @@
       ],
       "expectedAudioUrl": null,
       "audioSha256": null,
-      "audioStatus": "not_generated_pending_owner_review",
+      "audioStatus": "not_generated_generation_authorized",
       "loopScripts": {
         "1": {
           "pass": 1,
@@ -2319,9 +2641,13 @@
             }
           ],
           "expectedAudioFilename": "IMG_4310_loop-1.mp3",
-          "audioUrl": null,
-          "audioSha256": null,
-          "audioStatus": "not_generated_pending_owner_review"
+          "audioUrl": "/app/chair-yoga/narration/production/IMG_4310_loop-1.mp3",
+          "audioSha256": "94244af9a51054c6544f1ae8bb0e3df15acc17abe27b01628dcae61fa5dae672",
+          "audioStatus": "generated_pending_owner_review",
+          "audioDurationSeconds": 15.836009,
+          "ownerApproved": false,
+          "generationStatus": "downloaded_validated_pending_owner_review",
+          "taskId": "d785cfb7-a339-4469-858e-8104bad50648"
         },
         "2": {
           "pass": 2,
@@ -2339,9 +2665,13 @@
             }
           ],
           "expectedAudioFilename": "IMG_4310_loop-2.mp3",
-          "audioUrl": null,
-          "audioSha256": null,
-          "audioStatus": "not_generated_pending_owner_review"
+          "audioUrl": "/app/chair-yoga/narration/production/IMG_4310_loop-2.mp3",
+          "audioSha256": "0b99f85774530c2b5b25f0408854bfca2c4086ff209118f6d5a3fb332570926f",
+          "audioStatus": "generated_pending_owner_review",
+          "audioDurationSeconds": 9.380862,
+          "ownerApproved": false,
+          "generationStatus": "downloaded_validated_pending_owner_review",
+          "taskId": "6c9c94bc-870e-4f8c-936c-1a35538a2dc6"
         },
         "3": {
           "pass": 3,
@@ -2359,9 +2689,13 @@
             }
           ],
           "expectedAudioFilename": "IMG_4310_loop-3.mp3",
-          "audioUrl": null,
-          "audioSha256": null,
-          "audioStatus": "not_generated_pending_owner_review"
+          "audioUrl": "/app/chair-yoga/narration/production/IMG_4310_loop-3.mp3",
+          "audioSha256": "2deaa74b708816cfc85090c522e18ccc19ac3463f3ee20cc3ee1e2c0a848f62a",
+          "audioStatus": "generated_pending_owner_review",
+          "audioDurationSeconds": 9.705941,
+          "ownerApproved": false,
+          "generationStatus": "downloaded_validated_pending_owner_review",
+          "taskId": "5af847c1-5490-47f2-a4be-9f44deabaae6"
         },
         "4": {
           "pass": 4,
@@ -2379,9 +2713,13 @@
             }
           ],
           "expectedAudioFilename": "IMG_4310_loop-4.mp3",
-          "audioUrl": null,
-          "audioSha256": null,
-          "audioStatus": "not_generated_pending_owner_review"
+          "audioUrl": "/app/chair-yoga/narration/production/IMG_4310_loop-4.mp3",
+          "audioSha256": "2bb51e04336d6aa0ee0bacc07ec619732c9459b32187a9ac326e5df8917b3bad",
+          "audioStatus": "generated_pending_owner_review",
+          "audioDurationSeconds": 4.92263,
+          "ownerApproved": false,
+          "generationStatus": "downloaded_validated_pending_owner_review",
+          "taskId": "7a191571-f41f-48a9-ad83-a8507c3643b2"
         }
       },
       "audioUrl": null
@@ -2404,7 +2742,7 @@
       ],
       "expectedAudioUrl": null,
       "audioSha256": null,
-      "audioStatus": "not_generated_pending_owner_review",
+      "audioStatus": "not_generated_generation_authorized",
       "loopScripts": {
         "1": {
           "pass": 1,
@@ -2422,9 +2760,13 @@
             }
           ],
           "expectedAudioFilename": "IMG_4311_loop-1.mp3",
-          "audioUrl": null,
-          "audioSha256": null,
-          "audioStatus": "not_generated_pending_owner_review"
+          "audioUrl": "/app/chair-yoga/narration/production/IMG_4311_loop-1.mp3",
+          "audioSha256": "2e929b2510e161e59f2b65bf016448c4bc14517ff1521fd5e8ae7133ac577f08",
+          "audioStatus": "generated_pending_owner_review",
+          "audioDurationSeconds": 15.27873,
+          "ownerApproved": false,
+          "generationStatus": "downloaded_validated_pending_owner_review",
+          "taskId": "c82b3e9a-4f3c-47c5-a291-4cdb9b35001b"
         },
         "2": {
           "pass": 2,
@@ -2442,9 +2784,13 @@
             }
           ],
           "expectedAudioFilename": "IMG_4311_loop-2.mp3",
-          "audioUrl": null,
-          "audioSha256": null,
-          "audioStatus": "not_generated_pending_owner_review"
+          "audioUrl": "/app/chair-yoga/narration/production/IMG_4311_loop-2.mp3",
+          "audioSha256": "e02dc871ca5ff66f684c882386b16d4978a94c4eb0cd0f1b167b00d15bc86db2",
+          "audioStatus": "generated_pending_owner_review",
+          "audioDurationSeconds": 9.195102,
+          "ownerApproved": false,
+          "generationStatus": "downloaded_validated_pending_owner_review",
+          "taskId": "a9967517-0636-420c-afda-25df1cec4a69"
         },
         "3": {
           "pass": 3,
@@ -2462,9 +2808,13 @@
             }
           ],
           "expectedAudioFilename": "IMG_4311_loop-3.mp3",
-          "audioUrl": null,
-          "audioSha256": null,
-          "audioStatus": "not_generated_pending_owner_review"
+          "audioUrl": "/app/chair-yoga/narration/production/IMG_4311_loop-3.mp3",
+          "audioSha256": "3367240f5ba2465e4690ff710b290ad5603ae0f622a628d4e7a1cfb453ab28b3",
+          "audioStatus": "generated_pending_owner_review",
+          "audioDurationSeconds": 9.055782,
+          "ownerApproved": false,
+          "generationStatus": "downloaded_validated_pending_owner_review",
+          "taskId": "c3043d6b-57b1-49e3-9352-5bd7cdba47cb"
         },
         "4": {
           "pass": 4,
@@ -2482,9 +2832,13 @@
             }
           ],
           "expectedAudioFilename": "IMG_4311_loop-4.mp3",
-          "audioUrl": null,
-          "audioSha256": null,
-          "audioStatus": "not_generated_pending_owner_review"
+          "audioUrl": "/app/chair-yoga/narration/production/IMG_4311_loop-4.mp3",
+          "audioSha256": "a807a76e0d419dd9b03587c189bacb49e535097d4f580ddf515cea8b0c6c60cf",
+          "audioStatus": "generated_pending_owner_review",
+          "audioDurationSeconds": 5.06195,
+          "ownerApproved": false,
+          "generationStatus": "downloaded_validated_pending_owner_review",
+          "taskId": "c8679356-09b6-46f3-8adb-2cc7797a4191"
         }
       },
       "audioUrl": null
@@ -2507,7 +2861,7 @@
       ],
       "expectedAudioUrl": null,
       "audioSha256": null,
-      "audioStatus": "not_generated_pending_owner_review",
+      "audioStatus": "not_generated_generation_authorized",
       "loopScripts": {
         "1": {
           "pass": 1,
@@ -2525,9 +2879,13 @@
             }
           ],
           "expectedAudioFilename": "IMG_4312_loop-1.mp3",
-          "audioUrl": null,
-          "audioSha256": null,
-          "audioStatus": "not_generated_pending_owner_review"
+          "audioUrl": "/app/chair-yoga/narration/production/IMG_4312_loop-1.mp3",
+          "audioSha256": "e32433114d0ce56bb12ac19fc1f2ce1210682db7fc1390b8007b98a98ab43026",
+          "audioStatus": "generated_pending_owner_review",
+          "audioDurationSeconds": 17.740045,
+          "ownerApproved": false,
+          "generationStatus": "downloaded_validated_pending_owner_review",
+          "taskId": "5a74e2ff-c966-4295-adf0-cc9d5dcecf6f"
         },
         "2": {
           "pass": 2,
@@ -2545,9 +2903,13 @@
             }
           ],
           "expectedAudioFilename": "IMG_4312_loop-2.mp3",
-          "audioUrl": null,
-          "audioSha256": null,
-          "audioStatus": "not_generated_pending_owner_review"
+          "audioUrl": "/app/chair-yoga/narration/production/IMG_4312_loop-2.mp3",
+          "audioSha256": "11e834361c33de804cc8337f1857a45f72e7cafc43e51461962ad3aba45223f5",
+          "audioStatus": "generated_pending_owner_review",
+          "audioDurationSeconds": 9.380862,
+          "ownerApproved": false,
+          "generationStatus": "downloaded_validated_pending_owner_review",
+          "taskId": "3789b039-8423-49ef-bff2-ea23631cbeb4"
         },
         "3": {
           "pass": 3,
@@ -2565,9 +2927,13 @@
             }
           ],
           "expectedAudioFilename": "IMG_4312_loop-3.mp3",
-          "audioUrl": null,
-          "audioSha256": null,
-          "audioStatus": "not_generated_pending_owner_review"
+          "audioUrl": "/app/chair-yoga/narration/production/IMG_4312_loop-3.mp3",
+          "audioSha256": "f39b1ee12134d790849baf677d7400a09cd0e90c9e28aff262144c30340dfdd0",
+          "audioStatus": "generated_pending_owner_review",
+          "audioDurationSeconds": 10.820499,
+          "ownerApproved": false,
+          "generationStatus": "downloaded_validated_pending_owner_review",
+          "taskId": "dea526b7-00aa-4639-a5f6-7288f66d21fc"
         },
         "4": {
           "pass": 4,
@@ -2585,9 +2951,13 @@
             }
           ],
           "expectedAudioFilename": "IMG_4312_loop-4.mp3",
-          "audioUrl": null,
-          "audioSha256": null,
-          "audioStatus": "not_generated_pending_owner_review"
+          "audioUrl": "/app/chair-yoga/narration/production/IMG_4312_loop-4.mp3",
+          "audioSha256": "f7c282b19e28f327da9f2d1758355309bf633cc3ffbd9d85a8011ee3612124d4",
+          "audioStatus": "generated_pending_owner_review",
+          "audioDurationSeconds": 4.92263,
+          "ownerApproved": false,
+          "generationStatus": "downloaded_validated_pending_owner_review",
+          "taskId": "6368b510-751e-402a-9b45-83752af534ed"
         }
       },
       "audioUrl": null
@@ -2610,7 +2980,7 @@
       ],
       "expectedAudioUrl": null,
       "audioSha256": null,
-      "audioStatus": "not_generated_pending_owner_review",
+      "audioStatus": "not_generated_generation_authorized",
       "loopScripts": {
         "1": {
           "pass": 1,
@@ -2628,9 +2998,13 @@
             }
           ],
           "expectedAudioFilename": "IMG_4313_loop-1.mp3",
-          "audioUrl": null,
-          "audioSha256": null,
-          "audioStatus": "not_generated_pending_owner_review"
+          "audioUrl": "/app/chair-yoga/narration/production/IMG_4313_loop-1.mp3",
+          "audioSha256": "fce5a874d085015ae5ce6109ecb05a9bc30e95c6b3cfd8a3729bb61e17c23d45",
+          "audioStatus": "generated_pending_owner_review",
+          "audioDurationSeconds": 18.018685,
+          "ownerApproved": false,
+          "generationStatus": "downloaded_validated_pending_owner_review",
+          "taskId": "2fe84037-ce79-4aff-af95-77cba316709d"
         },
         "2": {
           "pass": 2,
@@ -2648,9 +3022,13 @@
             }
           ],
           "expectedAudioFilename": "IMG_4313_loop-2.mp3",
-          "audioUrl": null,
-          "audioSha256": null,
-          "audioStatus": "not_generated_pending_owner_review"
+          "audioUrl": "/app/chair-yoga/narration/production/IMG_4313_loop-2.mp3",
+          "audioSha256": "b734107e56e33747888f1758726717e1a98dc6d9c0cc49fa425e9242139d8999",
+          "audioStatus": "generated_pending_owner_review",
+          "audioDurationSeconds": 9.055782,
+          "ownerApproved": false,
+          "generationStatus": "downloaded_validated_pending_owner_review",
+          "taskId": "b92894ea-d5c9-49b4-a666-bd738ceea5ff"
         },
         "3": {
           "pass": 3,
@@ -2668,9 +3046,13 @@
             }
           ],
           "expectedAudioFilename": "IMG_4313_loop-3.mp3",
-          "audioUrl": null,
-          "audioSha256": null,
-          "audioStatus": "not_generated_pending_owner_review"
+          "audioUrl": "/app/chair-yoga/narration/production/IMG_4313_loop-3.mp3",
+          "audioSha256": "c83e1d9be072d5cecc5f4b5da923ebdfc9da151ea5a8bef346650ce9dc1c3042",
+          "audioStatus": "generated_pending_owner_review",
+          "audioDurationSeconds": 9.473741,
+          "ownerApproved": false,
+          "generationStatus": "downloaded_validated_pending_owner_review",
+          "taskId": "dfcabf64-0081-4976-aabb-25c67999d27c"
         },
         "4": {
           "pass": 4,
@@ -2688,9 +3070,13 @@
             }
           ],
           "expectedAudioFilename": "IMG_4313_loop-4.mp3",
-          "audioUrl": null,
-          "audioSha256": null,
-          "audioStatus": "not_generated_pending_owner_review"
+          "audioUrl": "/app/chair-yoga/narration/production/IMG_4313_loop-4.mp3",
+          "audioSha256": "5f61345c023442fd18d8c09bbdcf938322cdb18a8eecd7a1533d070ae3aa13e4",
+          "audioStatus": "generated_pending_owner_review",
+          "audioDurationSeconds": 4.736871,
+          "ownerApproved": false,
+          "generationStatus": "downloaded_validated_pending_owner_review",
+          "taskId": "5123e13b-670c-4bae-9169-d264f26ddba8"
         }
       },
       "audioUrl": null
@@ -2713,7 +3099,7 @@
       ],
       "expectedAudioUrl": null,
       "audioSha256": null,
-      "audioStatus": "not_generated_pending_owner_review",
+      "audioStatus": "not_generated_generation_authorized",
       "loopScripts": {
         "1": {
           "pass": 1,
@@ -2731,9 +3117,13 @@
             }
           ],
           "expectedAudioFilename": "IMG_4314_loop-1.mp3",
-          "audioUrl": null,
-          "audioSha256": null,
-          "audioStatus": "not_generated_pending_owner_review"
+          "audioUrl": "/app/chair-yoga/narration/production/IMG_4314_loop-1.mp3",
+          "audioSha256": "b090d567a318fd92c98706f9e0c1bf8614517eee0240a60aa1657d77cf0f64c1",
+          "audioStatus": "generated_pending_owner_review",
+          "audioDurationSeconds": 17.275646,
+          "ownerApproved": false,
+          "generationStatus": "downloaded_validated_pending_owner_review",
+          "taskId": "ba775df7-2372-4cbf-9863-1a3cb945928d"
         },
         "2": {
           "pass": 2,
@@ -2751,9 +3141,13 @@
             }
           ],
           "expectedAudioFilename": "IMG_4314_loop-2.mp3",
-          "audioUrl": null,
-          "audioSha256": null,
-          "audioStatus": "not_generated_pending_owner_review"
+          "audioUrl": "/app/chair-yoga/narration/production/IMG_4314_loop-2.mp3",
+          "audioSha256": "0b135c4a7498f2d04441e7465a3bc1475f578dac9237459e7ee4d8cee60cc08b",
+          "audioStatus": "generated_pending_owner_review",
+          "audioDurationSeconds": 11.656417,
+          "ownerApproved": false,
+          "generationStatus": "downloaded_validated_pending_owner_review",
+          "taskId": "f45a342f-a61c-4b5a-aab3-1674f7c02b3e"
         },
         "3": {
           "pass": 3,
@@ -2771,9 +3165,13 @@
             }
           ],
           "expectedAudioFilename": "IMG_4314_loop-3.mp3",
-          "audioUrl": null,
-          "audioSha256": null,
-          "audioStatus": "not_generated_pending_owner_review"
+          "audioUrl": "/app/chair-yoga/narration/production/IMG_4314_loop-3.mp3",
+          "audioSha256": "967ae97b4310637005724b17dfd445b6ed7fcb5f4b270e43c8800a8d9e0f4737",
+          "audioStatus": "generated_pending_owner_review",
+          "audioDurationSeconds": 11.006259,
+          "ownerApproved": false,
+          "generationStatus": "downloaded_validated_pending_owner_review",
+          "taskId": "6ead9185-4811-4482-90b4-321f398e3a9a"
         },
         "4": {
           "pass": 4,
@@ -2791,9 +3189,13 @@
             }
           ],
           "expectedAudioFilename": "IMG_4314_loop-4.mp3",
-          "audioUrl": null,
-          "audioSha256": null,
-          "audioStatus": "not_generated_pending_owner_review"
+          "audioUrl": "/app/chair-yoga/narration/production/IMG_4314_loop-4.mp3",
+          "audioSha256": "7e72514957712bc2ef75b79e45f53bced9a85a3bc0e7eca8bf9b2b25c7cc2e7a",
+          "audioStatus": "generated_pending_owner_review",
+          "audioDurationSeconds": 3.715193,
+          "ownerApproved": false,
+          "generationStatus": "downloaded_validated_pending_owner_review",
+          "taskId": "cb8871ac-1d63-46e9-bbb8-02a845e4097f"
         }
       },
       "audioUrl": null
@@ -2816,7 +3218,7 @@
       ],
       "expectedAudioUrl": null,
       "audioSha256": null,
-      "audioStatus": "not_generated_pending_owner_review",
+      "audioStatus": "not_generated_generation_authorized",
       "loopScripts": {
         "1": {
           "pass": 1,
@@ -2834,9 +3236,13 @@
             }
           ],
           "expectedAudioFilename": "IMG_4315_loop-1.mp3",
-          "audioUrl": null,
-          "audioSha256": null,
-          "audioStatus": "not_generated_pending_owner_review"
+          "audioUrl": "/app/chair-yoga/narration/production/IMG_4315_loop-1.mp3",
+          "audioSha256": "6b42de35cc4cf0748c5dfa2c4b7439ec341bd27db1db25055560d70004ef73d0",
+          "audioStatus": "generated_pending_owner_review",
+          "audioDurationSeconds": 16.904127,
+          "ownerApproved": false,
+          "generationStatus": "downloaded_validated_pending_owner_review",
+          "taskId": "142a2a11-416b-4ab9-b6d8-4af51594ea6c"
         },
         "2": {
           "pass": 2,
@@ -2854,9 +3260,13 @@
             }
           ],
           "expectedAudioFilename": "IMG_4315_loop-2.mp3",
-          "audioUrl": null,
-          "audioSha256": null,
-          "audioStatus": "not_generated_pending_owner_review"
+          "audioUrl": "/app/chair-yoga/narration/production/IMG_4315_loop-2.mp3",
+          "audioSha256": "9da14f848ea624113fd9c5d5c757d43feade6feaf22a27ed279c5a4d7f60369d",
+          "audioStatus": "generated_pending_owner_review",
+          "audioDurationSeconds": 10.820499,
+          "ownerApproved": false,
+          "generationStatus": "downloaded_validated_pending_owner_review",
+          "taskId": "b7a660a3-02a0-4bb5-8942-3c9536231f90"
         },
         "3": {
           "pass": 3,
@@ -2874,9 +3284,13 @@
             }
           ],
           "expectedAudioFilename": "IMG_4315_loop-3.mp3",
-          "audioUrl": null,
-          "audioSha256": null,
-          "audioStatus": "not_generated_pending_owner_review"
+          "audioUrl": "/app/chair-yoga/narration/production/IMG_4315_loop-3.mp3",
+          "audioSha256": "dcc4c1b18b38c7e2dfd8b19a9c7034617d0f7d7b7d0c702bb3a6d658d7ba1ba3",
+          "audioStatus": "generated_pending_owner_review",
+          "audioDurationSeconds": 10.1239,
+          "ownerApproved": false,
+          "generationStatus": "downloaded_validated_pending_owner_review",
+          "taskId": "d2cfeb65-8207-418f-8b17-59f19dcdc22c"
         },
         "4": {
           "pass": 4,
@@ -2894,9 +3308,13 @@
             }
           ],
           "expectedAudioFilename": "IMG_4315_loop-4.mp3",
-          "audioUrl": null,
-          "audioSha256": null,
-          "audioStatus": "not_generated_pending_owner_review"
+          "audioUrl": "/app/chair-yoga/narration/production/IMG_4315_loop-4.mp3",
+          "audioSha256": "2026bec0a3755de271225e46825b8b1482b73b0a2acca45f3cc3cc4387c3e94a",
+          "audioStatus": "generated_pending_owner_review",
+          "audioDurationSeconds": 4.133152,
+          "ownerApproved": false,
+          "generationStatus": "downloaded_validated_pending_owner_review",
+          "taskId": "f861610a-aed6-4bb4-9c1c-2945342be620"
         }
       },
       "audioUrl": null
@@ -2919,7 +3337,7 @@
       ],
       "expectedAudioUrl": null,
       "audioSha256": null,
-      "audioStatus": "not_generated_pending_owner_review",
+      "audioStatus": "not_generated_generation_authorized",
       "loopScripts": {
         "1": {
           "pass": 1,
@@ -2937,9 +3355,13 @@
             }
           ],
           "expectedAudioFilename": "IMG_4316_loop-1.mp3",
-          "audioUrl": null,
-          "audioSha256": null,
-          "audioStatus": "not_generated_pending_owner_review"
+          "audioUrl": "/app/chair-yoga/narration/production/IMG_4316_loop-1.mp3",
+          "audioSha256": "4f50a6677b213cc78d0cf8e1ed9ae04eb45012eb2a6376c54ca1d50dcb6932dd",
+          "audioStatus": "generated_pending_owner_review",
+          "audioDurationSeconds": 17.089887,
+          "ownerApproved": false,
+          "generationStatus": "downloaded_validated_pending_owner_review",
+          "taskId": "1bacf758-4756-45cb-a75a-044a7d53b619"
         },
         "2": {
           "pass": 2,
@@ -2957,9 +3379,13 @@
             }
           ],
           "expectedAudioFilename": "IMG_4316_loop-2.mp3",
-          "audioUrl": null,
-          "audioSha256": null,
-          "audioStatus": "not_generated_pending_owner_review"
+          "audioUrl": "/app/chair-yoga/narration/production/IMG_4316_loop-2.mp3",
+          "audioSha256": "c3188083d31f99f9e40bd4ff03e7e99a37d5045487678879c665703c96707f22",
+          "audioStatus": "generated_pending_owner_review",
+          "audioDurationSeconds": 9.566621,
+          "ownerApproved": false,
+          "generationStatus": "downloaded_validated_pending_owner_review",
+          "taskId": "c353ec2c-982b-4ce4-b1ab-0003858868a7"
         },
         "3": {
           "pass": 3,
@@ -2977,9 +3403,13 @@
             }
           ],
           "expectedAudioFilename": "IMG_4316_loop-3.mp3",
-          "audioUrl": null,
-          "audioSha256": null,
-          "audioStatus": "not_generated_pending_owner_review"
+          "audioUrl": "/app/chair-yoga/narration/production/IMG_4316_loop-3.mp3",
+          "audioSha256": "28f14d889561c1a7ee1380593da2b38c0b60caa2019ff57eb980ccf06e7b663c",
+          "audioStatus": "generated_pending_owner_review",
+          "audioDurationSeconds": 10.959819,
+          "ownerApproved": false,
+          "generationStatus": "downloaded_validated_pending_owner_review",
+          "taskId": "4f4c6602-dc16-42ca-a882-04587ea7b057"
         },
         "4": {
           "pass": 4,
@@ -2997,9 +3427,13 @@
             }
           ],
           "expectedAudioFilename": "IMG_4316_loop-4.mp3",
-          "audioUrl": null,
-          "audioSha256": null,
-          "audioStatus": "not_generated_pending_owner_review"
+          "audioUrl": "/app/chair-yoga/narration/production/IMG_4316_loop-4.mp3",
+          "audioSha256": "0f15d43efdbabf37d80f5169056a69340fb65646ba7e1bc008afe67bc5044b65",
+          "audioStatus": "generated_pending_owner_review",
+          "audioDurationSeconds": 5.712109,
+          "ownerApproved": false,
+          "generationStatus": "downloaded_validated_pending_owner_review",
+          "taskId": "73c5bab3-e0b7-49cc-8ba6-a0eadba3f52c"
         }
       },
       "audioUrl": null
@@ -3022,7 +3456,7 @@
       ],
       "expectedAudioUrl": null,
       "audioSha256": null,
-      "audioStatus": "not_generated_pending_owner_review",
+      "audioStatus": "not_generated_generation_authorized",
       "loopScripts": {
         "1": {
           "pass": 1,
@@ -3040,9 +3474,13 @@
             }
           ],
           "expectedAudioFilename": "IMG_4317_loop-1.mp3",
-          "audioUrl": null,
-          "audioSha256": null,
-          "audioStatus": "not_generated_pending_owner_review"
+          "audioUrl": "/app/chair-yoga/narration/production/IMG_4317_loop-1.mp3",
+          "audioSha256": "dfa279000097e815a751b210648c19322310e3c5b894257d52368f7213aa7ca3",
+          "audioStatus": "generated_pending_owner_review",
+          "audioDurationSeconds": 18.343764,
+          "ownerApproved": false,
+          "generationStatus": "downloaded_validated_pending_owner_review",
+          "taskId": "0adb9a09-7554-4496-ae79-9a6a89f806fd"
         },
         "2": {
           "pass": 2,
@@ -3060,9 +3498,13 @@
             }
           ],
           "expectedAudioFilename": "IMG_4317_loop-2.mp3",
-          "audioUrl": null,
-          "audioSha256": null,
-          "audioStatus": "not_generated_pending_owner_review"
+          "audioUrl": "/app/chair-yoga/narration/production/IMG_4317_loop-2.mp3",
+          "audioSha256": "ad3d8971e8361bc5bf94446b9d924b143be61dda966cd1898f8eb509ef5492b7",
+          "audioStatus": "generated_pending_owner_review",
+          "audioDurationSeconds": 10.681179,
+          "ownerApproved": false,
+          "generationStatus": "downloaded_validated_pending_owner_review",
+          "taskId": "760e2323-7925-45ce-a9fb-7b9c8e45002e"
         },
         "3": {
           "pass": 3,
@@ -3080,9 +3522,13 @@
             }
           ],
           "expectedAudioFilename": "IMG_4317_loop-3.mp3",
-          "audioUrl": null,
-          "audioSha256": null,
-          "audioStatus": "not_generated_pending_owner_review"
+          "audioUrl": "/app/chair-yoga/narration/production/IMG_4317_loop-3.mp3",
+          "audioSha256": "3cba58bc801099c43a8bd5375d402b321551646da57639e774532228a55b81e8",
+          "audioStatus": "generated_pending_owner_review",
+          "audioDurationSeconds": 8.916463,
+          "ownerApproved": false,
+          "generationStatus": "downloaded_validated_pending_owner_review",
+          "taskId": "d0c5ec8c-3060-41cc-91b5-9fac91c4e64b"
         },
         "4": {
           "pass": 4,
@@ -3100,9 +3546,13 @@
             }
           ],
           "expectedAudioFilename": "IMG_4317_loop-4.mp3",
-          "audioUrl": null,
-          "audioSha256": null,
-          "audioStatus": "not_generated_pending_owner_review"
+          "audioUrl": "/app/chair-yoga/narration/production/IMG_4317_loop-4.mp3",
+          "audioSha256": "7b96cbb5623f3fc93fb287399bd4016f3669908d0a4ef0252d44d0186a1ecc16",
+          "audioStatus": "generated_pending_owner_review",
+          "audioDurationSeconds": 6.640907,
+          "ownerApproved": false,
+          "generationStatus": "downloaded_validated_pending_owner_review",
+          "taskId": "d289a6f0-a634-4cc2-ab46-31fc0f5046ed"
         }
       },
       "audioUrl": null
@@ -3125,7 +3575,7 @@
       ],
       "expectedAudioUrl": null,
       "audioSha256": null,
-      "audioStatus": "not_generated_pending_owner_review",
+      "audioStatus": "not_generated_generation_authorized",
       "loopScripts": {
         "1": {
           "pass": 1,
@@ -3143,9 +3593,13 @@
             }
           ],
           "expectedAudioFilename": "IMG_4318_loop-1.mp3",
-          "audioUrl": null,
-          "audioSha256": null,
-          "audioStatus": "not_generated_pending_owner_review"
+          "audioUrl": "/app/chair-yoga/narration/production/IMG_4318_loop-1.mp3",
+          "audioSha256": "2801d52a92a565a422e3c07315959f51b4542a9f9a0c5b87be98c88c283be9e2",
+          "audioStatus": "generated_pending_owner_review",
+          "audioDurationSeconds": 17.043447,
+          "ownerApproved": false,
+          "generationStatus": "downloaded_validated_pending_owner_review",
+          "taskId": "dca5f58d-b629-406f-a856-0143d8696eee"
         },
         "2": {
           "pass": 2,
@@ -3163,9 +3617,13 @@
             }
           ],
           "expectedAudioFilename": "IMG_4318_loop-2.mp3",
-          "audioUrl": null,
-          "audioSha256": null,
-          "audioStatus": "not_generated_pending_owner_review"
+          "audioUrl": "/app/chair-yoga/narration/production/IMG_4318_loop-2.mp3",
+          "audioSha256": "533bf5c7812aa7a0b8ffa52abb8b3c101971cc25908221ce2867bef620b101bc",
+          "audioStatus": "generated_pending_owner_review",
+          "audioDurationSeconds": 9.566621,
+          "ownerApproved": false,
+          "generationStatus": "downloaded_validated_pending_owner_review",
+          "taskId": "fa8c5e86-f73a-4059-ab9d-7ad197d20cf7"
         },
         "3": {
           "pass": 3,
@@ -3183,9 +3641,13 @@
             }
           ],
           "expectedAudioFilename": "IMG_4318_loop-3.mp3",
-          "audioUrl": null,
-          "audioSha256": null,
-          "audioStatus": "not_generated_pending_owner_review"
+          "audioUrl": "/app/chair-yoga/narration/production/IMG_4318_loop-3.mp3",
+          "audioSha256": "d116161c9623563bc8790596237d6f0d6b5091a277b17db8628d76868d7c8fbf",
+          "audioStatus": "generated_pending_owner_review",
+          "audioDurationSeconds": 8.730703,
+          "ownerApproved": false,
+          "generationStatus": "downloaded_validated_pending_owner_review",
+          "taskId": "bf317192-35c6-42f2-b99e-129ffdd9fe6f"
         },
         "4": {
           "pass": 4,
@@ -3203,9 +3665,13 @@
             }
           ],
           "expectedAudioFilename": "IMG_4318_loop-4.mp3",
-          "audioUrl": null,
-          "audioSha256": null,
-          "audioStatus": "not_generated_pending_owner_review"
+          "audioUrl": "/app/chair-yoga/narration/production/IMG_4318_loop-4.mp3",
+          "audioSha256": "181947645e795d20efefb3a9fb79d8efca9f8515dc0d1d9bc63ac82dccee18d0",
+          "audioStatus": "generated_pending_owner_review",
+          "audioDurationSeconds": 4.551111,
+          "ownerApproved": false,
+          "generationStatus": "downloaded_validated_pending_owner_review",
+          "taskId": "b7b46eaa-2b8e-4b52-a2f2-315738e03eb0"
         }
       },
       "audioUrl": null
@@ -3228,7 +3694,7 @@
       ],
       "expectedAudioUrl": null,
       "audioSha256": null,
-      "audioStatus": "not_generated_pending_owner_review",
+      "audioStatus": "not_generated_generation_authorized",
       "loopScripts": {
         "1": {
           "pass": 1,
@@ -3246,9 +3712,13 @@
             }
           ],
           "expectedAudioFilename": "IMG_4319_loop-1.mp3",
-          "audioUrl": null,
-          "audioSha256": null,
-          "audioStatus": "not_generated_pending_owner_review"
+          "audioUrl": "/app/chair-yoga/narration/production/IMG_4319_loop-1.mp3",
+          "audioSha256": "be61fac31ce580aa1b3515498da71a46932a06a5135b5929ec48dd9de84105fe",
+          "audioStatus": "generated_pending_owner_review",
+          "audioDurationSeconds": 16.532608,
+          "ownerApproved": false,
+          "generationStatus": "downloaded_validated_pending_owner_review",
+          "taskId": "df611c42-b74f-496f-ab33-c2ee9e9e8151"
         },
         "2": {
           "pass": 2,
@@ -3266,9 +3736,13 @@
             }
           ],
           "expectedAudioFilename": "IMG_4319_loop-2.mp3",
-          "audioUrl": null,
-          "audioSha256": null,
-          "audioStatus": "not_generated_pending_owner_review"
+          "audioUrl": "/app/chair-yoga/narration/production/IMG_4319_loop-2.mp3",
+          "audioSha256": "a5c1cd4cd2ed853a1a2a7425eed7509db5fc95cf97e7fb5504d35205bf035df7",
+          "audioStatus": "generated_pending_owner_review",
+          "audioDurationSeconds": 10.774059,
+          "ownerApproved": false,
+          "generationStatus": "downloaded_validated_pending_owner_review",
+          "taskId": "1caa6025-1fa6-4f30-abea-68eb38ec72cb"
         },
         "3": {
           "pass": 3,
@@ -3286,9 +3760,13 @@
             }
           ],
           "expectedAudioFilename": "IMG_4319_loop-3.mp3",
-          "audioUrl": null,
-          "audioSha256": null,
-          "audioStatus": "not_generated_pending_owner_review"
+          "audioUrl": "/app/chair-yoga/narration/production/IMG_4319_loop-3.mp3",
+          "audioSha256": "1ad327d841963e3a0095a27bd0f58f59acfed1b3faa1a2378cd4f9ac4fee0278",
+          "audioStatus": "generated_pending_owner_review",
+          "audioDurationSeconds": 8.219864,
+          "ownerApproved": false,
+          "generationStatus": "downloaded_validated_pending_owner_review",
+          "taskId": "cd81916e-3350-4922-95fe-0e6b15820c25"
         },
         "4": {
           "pass": 4,
@@ -3306,9 +3784,13 @@
             }
           ],
           "expectedAudioFilename": "IMG_4319_loop-4.mp3",
-          "audioUrl": null,
-          "audioSha256": null,
-          "audioStatus": "not_generated_pending_owner_review"
+          "audioUrl": "/app/chair-yoga/narration/production/IMG_4319_loop-4.mp3",
+          "audioSha256": "25cce085d9443c91c87a0fcdfaa321c13272952462ec3e149d0837288a16aaba",
+          "audioStatus": "generated_pending_owner_review",
+          "audioDurationSeconds": 4.829751,
+          "ownerApproved": false,
+          "generationStatus": "downloaded_validated_pending_owner_review",
+          "taskId": "1babf7f5-7729-4e34-9817-2b33cd5b7682"
         }
       },
       "audioUrl": null
@@ -3331,7 +3813,7 @@
       ],
       "expectedAudioUrl": null,
       "audioSha256": null,
-      "audioStatus": "not_generated_pending_owner_review",
+      "audioStatus": "not_generated_generation_authorized",
       "loopScripts": {
         "1": {
           "pass": 1,
@@ -3349,9 +3831,13 @@
             }
           ],
           "expectedAudioFilename": "IMG_4320_loop-1.mp3",
-          "audioUrl": null,
-          "audioSha256": null,
-          "audioStatus": "not_generated_pending_owner_review"
+          "audioUrl": "/app/chair-yoga/narration/production/IMG_4320_loop-1.mp3",
+          "audioSha256": "08e7e3142bb3ce540dd8e7e435a36b6e9cff0dcfb81902114a631a3b4263baf9",
+          "audioStatus": "generated_pending_owner_review",
+          "audioDurationSeconds": 16.486168,
+          "ownerApproved": false,
+          "generationStatus": "downloaded_validated_pending_owner_review",
+          "taskId": "527c72f4-b9cc-4f6e-84a0-de52dbebc497"
         },
         "2": {
           "pass": 2,
@@ -3369,9 +3855,13 @@
             }
           ],
           "expectedAudioFilename": "IMG_4320_loop-2.mp3",
-          "audioUrl": null,
-          "audioSha256": null,
-          "audioStatus": "not_generated_pending_owner_review"
+          "audioUrl": "/app/chair-yoga/narration/production/IMG_4320_loop-2.mp3",
+          "audioSha256": "f42237b02ddad6a839dd70a7794db1680fe916389ce636dec365e330319da170",
+          "audioStatus": "generated_pending_owner_review",
+          "audioDurationSeconds": 10.17034,
+          "ownerApproved": false,
+          "generationStatus": "downloaded_validated_pending_owner_review",
+          "taskId": "d1ed23e1-d596-4b77-a44a-4537ddbaa7e5"
         },
         "3": {
           "pass": 3,
@@ -3389,9 +3879,13 @@
             }
           ],
           "expectedAudioFilename": "IMG_4320_loop-3.mp3",
-          "audioUrl": null,
-          "audioSha256": null,
-          "audioStatus": "not_generated_pending_owner_review"
+          "audioUrl": "/app/chair-yoga/narration/production/IMG_4320_loop-3.mp3",
+          "audioSha256": "df09499bf033fd8ca81a8e357c6bddbd883581acff5f406abea6c985ed16014e",
+          "audioStatus": "generated_pending_owner_review",
+          "audioDurationSeconds": 7.105306,
+          "ownerApproved": false,
+          "generationStatus": "downloaded_validated_pending_owner_review",
+          "taskId": "39e4b37b-2780-45aa-811e-a7b4f21c690a"
         },
         "4": {
           "pass": 4,
@@ -3409,9 +3903,13 @@
             }
           ],
           "expectedAudioFilename": "IMG_4320_loop-4.mp3",
-          "audioUrl": null,
-          "audioSha256": null,
-          "audioStatus": "not_generated_pending_owner_review"
+          "audioUrl": "/app/chair-yoga/narration/production/IMG_4320_loop-4.mp3",
+          "audioSha256": "23a53f9eb1b429826679b92225c185fc99985ecab27813e84930816a152edbf0",
+          "audioStatus": "generated_pending_owner_review",
+          "audioDurationSeconds": 4.690431,
+          "ownerApproved": false,
+          "generationStatus": "downloaded_validated_pending_owner_review",
+          "taskId": "f1b971d5-8ded-4747-b5a6-65e4253c56ab"
         }
       },
       "audioUrl": null
@@ -3434,7 +3932,7 @@
       ],
       "expectedAudioUrl": null,
       "audioSha256": null,
-      "audioStatus": "not_generated_pending_owner_review",
+      "audioStatus": "not_generated_generation_authorized",
       "loopScripts": {
         "1": {
           "pass": 1,
@@ -3452,9 +3950,13 @@
             }
           ],
           "expectedAudioFilename": "IMG_4321_loop-1.mp3",
-          "audioUrl": null,
-          "audioSha256": null,
-          "audioStatus": "not_generated_pending_owner_review"
+          "audioUrl": "/app/chair-yoga/narration/production/IMG_4321_loop-1.mp3",
+          "audioSha256": "0d7b2e6c2bd56ffa36cb5975310427b7099c2516396d2925b17e0e85728d0ad7",
+          "audioStatus": "generated_pending_owner_review",
+          "audioDurationSeconds": 17.089887,
+          "ownerApproved": false,
+          "generationStatus": "downloaded_validated_pending_owner_review",
+          "taskId": "cfd5c113-b5e9-48ae-bc6d-89ece6e68540"
         },
         "2": {
           "pass": 2,
@@ -3472,9 +3974,13 @@
             }
           ],
           "expectedAudioFilename": "IMG_4321_loop-2.mp3",
-          "audioUrl": null,
-          "audioSha256": null,
-          "audioStatus": "not_generated_pending_owner_review"
+          "audioUrl": "/app/chair-yoga/narration/production/IMG_4321_loop-2.mp3",
+          "audioSha256": "f5a76c457d362fc9c278f210e7e76a3c66807e7b397de982219731447a2fde9f",
+          "audioStatus": "generated_pending_owner_review",
+          "audioDurationSeconds": 10.820499,
+          "ownerApproved": false,
+          "generationStatus": "downloaded_validated_pending_owner_review",
+          "taskId": "86112695-31fc-4827-95f6-29e9145b6815"
         },
         "3": {
           "pass": 3,
@@ -3492,9 +3998,13 @@
             }
           ],
           "expectedAudioFilename": "IMG_4321_loop-3.mp3",
-          "audioUrl": null,
-          "audioSha256": null,
-          "audioStatus": "not_generated_pending_owner_review"
+          "audioUrl": "/app/chair-yoga/narration/production/IMG_4321_loop-3.mp3",
+          "audioSha256": "ee33c32535ac39af02479a423dcca83615efacc19e988dd15a7c9b34cd6264ea",
+          "audioStatus": "generated_pending_owner_review",
+          "audioDurationSeconds": 10.44898,
+          "ownerApproved": false,
+          "generationStatus": "downloaded_validated_pending_owner_review",
+          "taskId": "6b5cb327-c94b-45b9-ad4c-c4c37a68df71"
         },
         "4": {
           "pass": 4,
@@ -3512,9 +4022,13 @@
             }
           ],
           "expectedAudioFilename": "IMG_4321_loop-4.mp3",
-          "audioUrl": null,
-          "audioSha256": null,
-          "audioStatus": "not_generated_pending_owner_review"
+          "audioUrl": "/app/chair-yoga/narration/production/IMG_4321_loop-4.mp3",
+          "audioSha256": "568944f7bad4f808c2fd4bf40fa654b6241398d1c5552cefcc6c06eeba36975e",
+          "audioStatus": "generated_pending_owner_review",
+          "audioDurationSeconds": 4.643991,
+          "ownerApproved": false,
+          "generationStatus": "downloaded_validated_pending_owner_review",
+          "taskId": "1c9c8d49-9a59-4179-bf50-4a49e002daea"
         }
       },
       "audioUrl": null
@@ -3537,7 +4051,7 @@
       ],
       "expectedAudioUrl": null,
       "audioSha256": null,
-      "audioStatus": "not_generated_pending_owner_review",
+      "audioStatus": "not_generated_generation_authorized",
       "loopScripts": {
         "1": {
           "pass": 1,
@@ -3555,9 +4069,13 @@
             }
           ],
           "expectedAudioFilename": "IMG_4322_loop-1.mp3",
-          "audioUrl": null,
-          "audioSha256": null,
-          "audioStatus": "not_generated_pending_owner_review"
+          "audioUrl": "/app/chair-yoga/narration/production/IMG_4322_loop-1.mp3",
+          "audioSha256": "5838cc69f251cd788cedf003c124fffbcdc22395ffcd27109d30a3dde72d95c8",
+          "audioStatus": "generated_pending_owner_review",
+          "audioDurationSeconds": 18.018685,
+          "ownerApproved": false,
+          "generationStatus": "downloaded_validated_pending_owner_review",
+          "taskId": "954e8540-f6bd-4301-903e-1144b3b3d155"
         },
         "2": {
           "pass": 2,
@@ -3575,9 +4093,13 @@
             }
           ],
           "expectedAudioFilename": "IMG_4322_loop-2.mp3",
-          "audioUrl": null,
-          "audioSha256": null,
-          "audioStatus": "not_generated_pending_owner_review"
+          "audioUrl": "/app/chair-yoga/narration/production/IMG_4322_loop-2.mp3",
+          "audioSha256": "f02c72fca81665669924fae7487c8020e912ab3f586fca66588caba7a8215863",
+          "audioStatus": "generated_pending_owner_review",
+          "audioDurationSeconds": 11.656417,
+          "ownerApproved": false,
+          "generationStatus": "downloaded_validated_pending_owner_review",
+          "taskId": "27a71e77-1c7b-4bc8-867d-e3e7bbe68002"
         },
         "3": {
           "pass": 3,
@@ -3595,9 +4117,13 @@
             }
           ],
           "expectedAudioFilename": "IMG_4322_loop-3.mp3",
-          "audioUrl": null,
-          "audioSha256": null,
-          "audioStatus": "not_generated_pending_owner_review"
+          "audioUrl": "/app/chair-yoga/narration/production/IMG_4322_loop-3.mp3",
+          "audioSha256": "8c19381afe2a79ea29636ae15166bb0f5453705ed3ec7ba1242b7c4edc7bcd9d",
+          "audioStatus": "generated_pending_owner_review",
+          "audioDurationSeconds": 9.148662,
+          "ownerApproved": false,
+          "generationStatus": "downloaded_validated_pending_owner_review",
+          "taskId": "9dae189c-5dd5-406f-9800-f54cbbf01402"
         },
         "4": {
           "pass": 4,
@@ -3615,9 +4141,13 @@
             }
           ],
           "expectedAudioFilename": "IMG_4322_loop-4.mp3",
-          "audioUrl": null,
-          "audioSha256": null,
-          "audioStatus": "not_generated_pending_owner_review"
+          "audioUrl": "/app/chair-yoga/narration/production/IMG_4322_loop-4.mp3",
+          "audioSha256": "e1bb2aa8d93cdd80c1f5da5ff6f573afd6c2db78c72c5b380d0210aec4a01c3d",
+          "audioStatus": "generated_pending_owner_review",
+          "audioDurationSeconds": 5.06195,
+          "ownerApproved": false,
+          "generationStatus": "downloaded_validated_pending_owner_review",
+          "taskId": "903fc6e4-a452-4b4e-9f9b-72f151aaf80a"
         }
       },
       "audioUrl": null
@@ -3640,7 +4170,7 @@
       ],
       "expectedAudioUrl": null,
       "audioSha256": null,
-      "audioStatus": "not_generated_pending_owner_review",
+      "audioStatus": "not_generated_generation_authorized",
       "loopScripts": {
         "1": {
           "pass": 1,
@@ -3658,9 +4188,13 @@
             }
           ],
           "expectedAudioFilename": "IMG_4323_loop-1.mp3",
-          "audioUrl": null,
-          "audioSha256": null,
-          "audioStatus": "not_generated_pending_owner_review"
+          "audioUrl": "/app/chair-yoga/narration/production/IMG_4323_loop-1.mp3",
+          "audioSha256": "c581942467bcf6762ce5d3b9b1212149cb590b04a2ce4389a9ff91146a12a538",
+          "audioStatus": "generated_pending_owner_review",
+          "audioDurationSeconds": 17.275646,
+          "ownerApproved": false,
+          "generationStatus": "downloaded_validated_pending_owner_review",
+          "taskId": "3b38c6b8-0f9f-4713-be56-23dab990a596"
         },
         "2": {
           "pass": 2,
@@ -3678,9 +4212,13 @@
             }
           ],
           "expectedAudioFilename": "IMG_4323_loop-2.mp3",
-          "audioUrl": null,
-          "audioSha256": null,
-          "audioStatus": "not_generated_pending_owner_review"
+          "audioUrl": "/app/chair-yoga/narration/production/IMG_4323_loop-2.mp3",
+          "audioSha256": "b14a62b13f9248625e7a961b025989f323d84aa919c6aac8a6d24a6affb235a4",
+          "audioStatus": "generated_pending_owner_review",
+          "audioDurationSeconds": 10.727619,
+          "ownerApproved": false,
+          "generationStatus": "downloaded_validated_pending_owner_review",
+          "taskId": "002f69e7-8329-403d-badd-765b5832e192"
         },
         "3": {
           "pass": 3,
@@ -3698,9 +4236,13 @@
             }
           ],
           "expectedAudioFilename": "IMG_4323_loop-3.mp3",
-          "audioUrl": null,
-          "audioSha256": null,
-          "audioStatus": "not_generated_pending_owner_review"
+          "audioUrl": "/app/chair-yoga/narration/production/IMG_4323_loop-3.mp3",
+          "audioSha256": "fc1de32dd85ec39cf92c34c95dfe89413d3c981378fdaaf37c1ba2b7d323c532",
+          "audioStatus": "generated_pending_owner_review",
+          "audioDurationSeconds": 8.544943,
+          "ownerApproved": false,
+          "generationStatus": "downloaded_validated_pending_owner_review",
+          "taskId": "17b934c8-8954-4e72-8748-78f22a445f61"
         },
         "4": {
           "pass": 4,
@@ -3718,25 +4260,56 @@
             }
           ],
           "expectedAudioFilename": "IMG_4323_loop-4.mp3",
-          "audioUrl": null,
-          "audioSha256": null,
-          "audioStatus": "not_generated_pending_owner_review"
+          "audioUrl": "/app/chair-yoga/narration/production/IMG_4323_loop-4.mp3",
+          "audioSha256": "f050819985b9b3e4afbb77ca054ecf4645914175fa3f450c551e6abbba2ec559",
+          "audioStatus": "generated_pending_owner_review",
+          "audioDurationSeconds": 6.315828,
+          "ownerApproved": false,
+          "generationStatus": "downloaded_validated_pending_owner_review",
+          "taskId": "fc1846a6-a085-439a-a73f-96f672e580e6"
         }
       },
       "audioUrl": null
     }
   ],
-  "bulkAudioStatus": "not_started_pending_owner_review_of_miriam_demo_and_scripts",
+  "bulkAudioStatus": "completed_pending_owner_listening_review",
   "bulkCreditEstimate": {
-    "rule": "Runway speech: 1 credit per 50 text characters, rounded up per request, minimum 1",
+    "rule": "Runway speech: 1 credit per 50 text characters, rounded up separately per request, minimum 1",
     "uniqueMovementIds": 36,
-    "movementLoopRequests": 139,
-    "movementLoopCredits": 341,
-    "levelOpeningAndClosingRequests": 6,
-    "levelOpeningAndClosingCredits": 22,
-    "totalEstimatedCredits": 363,
+    "proposedWorkoutAssignmentsStatus": "owner_approved_2026-11-13",
+    "grossMovementLoopRequests": 139,
+    "grossMovementLoopCredits": 341,
+    "alreadyApprovedMovementLoopReuse": {
+      "requests": 2,
+      "creditsNotRecharged": 7,
+      "assets": [
+        "IMG_4285 loop 1",
+        "IMG_4285 loop 2"
+      ]
+    },
+    "remainingMovementLoopRequests": 137,
+    "remainingMovementLoopCredits": 334,
+    "grossLevelOpeningAndClosingRequests": 6,
+    "grossLevelOpeningAndClosingCredits": 24,
+    "alreadyApprovedBeginnerOpeningReuse": {
+      "requests": 1,
+      "creditsNotRecharged": 4,
+      "asset": "Beginner opening"
+    },
+    "remainingLevelOpeningAndClosingRequests": 5,
+    "remainingLevelOpeningAndClosingCredits": 20,
+    "remainingCreditsToGenerate": 354,
+    "totalRemainingRequests": 142,
+    "grossAllAudioCreditsIfNoExistingAssets": 365,
     "unusedLoopVariantsNotIncluded": 5,
-    "status": "estimate_only_pending_owner_approval"
+    "previouslySpentSampleAndDemoCredits": 20,
+    "previouslySpentCreditsReusedForBatch": 11,
+    "reviewOnlyAssetsExcludedFromBatch": [
+      "voice sample",
+      "Beginner demo segue closing"
+    ],
+    "status": "estimate_only_pending_owner_batch_approval",
+    "generationAuthorizationStatus": "owner_authorized_conditional_gates_passed"
   },
   "levelOpenings": {
     "beginner": {
@@ -3746,57 +4319,80 @@
       "expectedAudioFilename": "opening-beginner.mp3",
       "audioUrl": null,
       "audioSha256": null,
-      "audioStatus": "not_generated_pending_owner_review"
+      "audioStatus": "not_generated_generation_authorized"
     },
     "intermediate": {
       "script": "Welcome to your Intermediate Chair Yoga session. Arrange your chair securely and follow each movement at your own pace. Keep your range comfortable and your breath steady.",
       "wordCount": 27,
       "estimatedSpokenSeconds": 17,
       "expectedAudioFilename": "opening-intermediate.mp3",
-      "audioUrl": null,
-      "audioSha256": null,
-      "audioStatus": "not_generated_pending_owner_review"
+      "audioUrl": "/app/chair-yoga/narration/production/opening-intermediate.mp3",
+      "audioSha256": "290632377f5cc188d93508d094b69fd5a43830d6ffbe6588c354eb3141a01d72",
+      "audioStatus": "generated_pending_owner_review",
+      "audioDurationSeconds": 16.207528,
+      "ownerApproved": false,
+      "generationStatus": "downloaded_validated_pending_owner_review",
+      "taskId": "0760cd74-68a7-41e4-b2af-d088d086ba98"
     },
     "advanced": {
       "script": "Welcome to your Advanced Chair Yoga session. Keep your chair close and use the support shown. Choose a steady, comfortable range and pause whenever you need.",
       "wordCount": 26,
       "estimatedSpokenSeconds": 16,
       "expectedAudioFilename": "opening-advanced.mp3",
-      "audioUrl": null,
-      "audioSha256": null,
-      "audioStatus": "not_generated_pending_owner_review"
+      "audioUrl": "/app/chair-yoga/narration/production/opening-advanced.mp3",
+      "audioSha256": "2ca78ff7e3df5855c25d323461cb4174e4059ba03cbbad4611f308b43398bfd0",
+      "audioStatus": "generated_pending_owner_review",
+      "audioDurationSeconds": 17.322086,
+      "ownerApproved": false,
+      "generationStatus": "downloaded_validated_pending_owner_review",
+      "taskId": "834b4f79-e0c7-4e3d-ba4e-acc9d3e83060"
     }
   },
   "levelClosings": {
     "beginner": {
-      "script": "Your Beginner Chair Yoga session is complete. Let your breathing settle. When ready, return to standing slowly with your chair nearby.",
-      "wordCount": 21,
-      "estimatedSpokenSeconds": 13,
+      "script": "Your Beginner Chair Yoga practice is complete. Take one gentle breath and let your shoulders soften. There is no need to move right away; take the time you need.",
+      "wordCount": 29,
+      "estimatedSpokenSeconds": 17,
       "expectedAudioFilename": "closing-beginner.mp3",
-      "audioUrl": null,
-      "audioSha256": null,
-      "audioStatus": "not_generated_pending_owner_review",
-      "positionReviewStatus": "flagged_standing_instruction_for_contextual_owner_review"
+      "audioUrl": "/app/chair-yoga/narration/production/closing-beginner.mp3",
+      "audioSha256": "887e594d4a7cd75bcaa457faa158cf79da783001667d506db9bf471e90348691",
+      "audioStatus": "generated_pending_owner_review",
+      "positionReviewStatus": "owner_approved_position_neutral_script",
+      "scriptApprovalStatus": "owner_approved_2026-11-13",
+      "audioDurationSeconds": 18.343764,
+      "ownerApproved": false,
+      "generationStatus": "downloaded_validated_pending_owner_review",
+      "taskId": "9f4352c8-d858-4156-a7f8-44220cf9f46b"
     },
     "intermediate": {
-      "script": "Your Intermediate Chair Yoga session is complete. Take a moment to breathe naturally, then leave each position carefully and use your chair for support.",
-      "wordCount": 24,
-      "estimatedSpokenSeconds": 15,
+      "script": "Your Intermediate Chair Yoga practice is complete. Let your breathing return to its natural rhythm. Notice how your body feels, and take your time before ending your practice.",
+      "wordCount": 28,
+      "estimatedSpokenSeconds": 16,
       "expectedAudioFilename": "closing-intermediate.mp3",
-      "audioUrl": null,
-      "audioSha256": null,
-      "audioStatus": "not_generated_pending_owner_review",
-      "positionReviewStatus": "flagged_generic_position_change_for_contextual_owner_review"
+      "audioUrl": "/app/chair-yoga/narration/production/closing-intermediate.mp3",
+      "audioSha256": "873560a39fb024dc7a15d93b6a98da21402581f986c63e73de8376970d23c510",
+      "audioStatus": "generated_pending_owner_review",
+      "positionReviewStatus": "owner_approved_position_neutral_script",
+      "scriptApprovalStatus": "owner_approved_2026-11-13",
+      "audioDurationSeconds": 18.529524,
+      "ownerApproved": false,
+      "generationStatus": "downloaded_validated_pending_owner_review",
+      "taskId": "35837269-02c5-4e79-bd20-33aad48ccaaa"
     },
     "advanced": {
-      "script": "Your Advanced Chair Yoga session is complete. Let your breath return to its natural pace. Move slowly and keep the chair close as you finish.",
-      "wordCount": 25,
-      "estimatedSpokenSeconds": 16,
+      "script": "Your Advanced Chair Yoga practice is complete. Let your breath settle at its natural pace. Pause for a moment, then finish your practice whenever you feel ready.",
+      "wordCount": 27,
+      "estimatedSpokenSeconds": 15,
       "expectedAudioFilename": "closing-advanced.mp3",
-      "audioUrl": null,
-      "audioSha256": null,
-      "audioStatus": "not_generated_pending_owner_review",
-      "positionReviewStatus": "flagged_for_contextual_owner_review"
+      "audioUrl": "/app/chair-yoga/narration/production/closing-advanced.mp3",
+      "audioSha256": "71949b83aea1ed85f2d3f1a48dd085f9475ef7788346e95bfa1381570ff8a2a7",
+      "audioStatus": "generated_pending_owner_review",
+      "positionReviewStatus": "owner_approved_position_neutral_script",
+      "scriptApprovalStatus": "owner_approved_2026-11-13",
+      "audioDurationSeconds": 18.250884,
+      "ownerApproved": false,
+      "generationStatus": "downloaded_validated_pending_owner_review",
+      "taskId": "0b779346-f587-479c-bd48-89238b05e27f"
     }
   },
   "sampleDemo": {
@@ -3826,7 +4422,7 @@
       "style": "Calm, warm, professional British female narrator"
     },
     "creditsUsed": 20,
-    "reviewStatus": "pending_owner_listening_review_of_corrected_demo_closing",
+    "reviewStatus": "owner_approved_review_only",
     "memberPlaybackEnabled": false,
     "closingScript": "Wonderful work. Take one more gentle breath, relax your shoulders, and remain comfortably seated as we prepare for our next movement.",
     "closingDurationSeconds": 16.439728
@@ -3838,23 +4434,43 @@
     "levelOpeningCount": 3,
     "levelClosingCount": 3,
     "positionSpecificCueCount": 63,
-    "findings": "No mismatched sit/stand instructions found in the 144 movement-loop cues after checking cue movement IDs against the approved catalog and position-sensitive demonstrations. The three level openings are neutral or fit the proposed first movement, Seated Mountain Pose; workout assignments remain pending owner approval. Final workout closing scripts remain ungenerated and require contextual review.",
-    "flags": [
-      {
-        "level": "beginner",
-        "issue": "Generic final closing says to return to standing; not appropriate for all proposed final movements.",
-        "status": "needs owner review; no audio generated"
-      },
-      {
-        "level": "intermediate",
-        "issue": "Generic final closing says to leave each position; final movement may be seated or standing.",
-        "status": "needs owner review; no audio generated"
-      },
-      {
-        "level": "advanced",
-        "issue": "Generic final closing says move slowly and keep chair close but does not specify a position; verify against the selected workout ending.",
-        "status": "needs owner review; no audio generated"
-      }
+    "findings": "All 144 movement-loop cues were checked against their movement IDs, approved video identities, durations, side descriptions, and transition boundaries. No position mismatch was found. The three level openings match the currently proposed seated IMG_4285 start; the 36-workout matrix is owner-approved. The three full-workout closing drafts are position-neutral and do not instruct members to sit, stand, or change position.",
+    "flags": [],
+    "transitionAudit": {
+      "transitionDurationSeconds": 5,
+      "transitionNarration": "none; transition remains silent",
+      "narrationStopsBeforeTransition": true,
+      "loopCueVariantsInProposedPlan": 139,
+      "approvedAudioMatches": 2,
+      "approvedAudioMatchesAreMemberMapped": false,
+      "unusedDraftVariants": [
+        "IMG_4291:4",
+        "IMG_4293:4",
+        "IMG_4294:4",
+        "IMG_4296:4",
+        "IMG_4298:4"
+      ],
+      "finding": "All approved review audio is tied to exact matching movement ID and loop script. The two approved Mountain Pose recordings end within their 29-second clip windows and leave quiet practice; no separate narration is assigned to the black Up Next transitions."
+    }
+  },
+  "ownerApproval": {
+    "date": "2026-11-13",
+    "scope": [
+      "Miriam voice ID VhxAIIZM8IRmnl5fyeyk",
+      "eleven_multilingual_v2 model",
+      "speed 0.75",
+      "approved Chair Yoga opening and Seated Mountain Pose loops",
+      "corrected seated demo closing V2",
+      "Beginner, Intermediate and Advanced full-workout closing scripts"
+    ],
+    "conditions": [
+      "Do not spend credits until the final 36-workout matrix has explicit owner approval",
+      "Do not exceed the 354-credit production estimate",
+      "Exclude the five previously approved/generated audio assets from new requests"
     ]
-  }
+  },
+  "proposedWorkoutAssignmentsStatus": "owner_approved_2026-11-13",
+  "generatedRequestCount": 142,
+  "generatedCreditsConsumed": 354,
+  "memberPlaybackEnabled": false
 }

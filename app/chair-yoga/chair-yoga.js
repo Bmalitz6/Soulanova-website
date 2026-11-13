@@ -274,13 +274,13 @@
       const card = document.createElement('button');
       card.type = 'button';
       card.className = 'level-card';
-      card.setAttribute('aria-label', `Open ${level.name}: 12 proposed complete workouts, 12 movements each, ${summary.loopsPerMovement} loops per movement, about ${formatEstimate(summary)} including transitions`);
+      card.setAttribute('aria-label', `Open ${level.name}: 12 complete workouts, 12 movements each, ${summary.loopsPerMovement} loops per movement, about ${formatEstimate(summary)} including transitions`);
       const image = document.createElement('img'); image.src = first.thumbnailUrl; image.alt = '';
       const copy = document.createElement('div'); copy.className = 'level-card-copy';
       const heading = document.createElement('h3'); heading.textContent = level.name;
       const description = document.createElement('p'); description.textContent = level.description;
-      const meta = document.createElement('p'); meta.textContent = `12 proposed workouts · 12 movements each · ${summary.loopsPerMovement} loops · about ${formatEstimate(summary)} per workout`;
-      const cta = document.createElement('strong'); cta.textContent = 'View 12 proposed workouts →';
+      const meta = document.createElement('p'); meta.textContent = `12 workouts · 12 movements each · ${summary.loopsPerMovement} loops · about ${formatEstimate(summary)} per workout`;
+      const cta = document.createElement('strong'); cta.textContent = 'View 12 workouts →';
       copy.append(heading, description, meta, cta); card.append(image, copy);
       card.addEventListener('click', () => openWorkouts(level.id));
       levelList.append(card);
@@ -292,17 +292,17 @@
     controller.selectLevel(levelId);
     const summary = controller.getLevelSummary(levelId);
     $('#workout-selection-heading').textContent = `${currentLevel.name} Chair Yoga`;
-    $('#workout-selection-eyebrow').textContent = '12 DISTINCT COMPLETE WORKOUTS · PENDING OWNER APPROVAL';
-    $('#workout-selection-summary').textContent = `${currentLevel.description} Each proposed workout contains 12 movements, uses ${summary.loopsPerMovement} loops per movement, and takes about ${formatEstimate(summary)} including eleven five-second transitions.`;
+    $('#workout-selection-eyebrow').textContent = '12 OWNER-APPROVED COMPLETE WORKOUTS';
+    $('#workout-selection-summary').textContent = `${currentLevel.description} Each workout contains 12 movements, uses ${summary.loopsPerMovement} loops per movement, and takes about ${formatEstimate(summary)} including eleven five-second transitions.`;
     workoutList.replaceChildren();
     currentLevel.workouts.forEach((workout, index) => {
       const movement = byId(workout.movementIds[0]);
       const workoutSummary = controller.getWorkoutSummary(levelId, workout.id);
       const card = document.createElement('button'); card.type = 'button'; card.className = 'workout-card';
-      card.setAttribute('aria-label', `Start proposed ${currentLevel.name} workout ${index + 1}: ${workout.title}. ${workout.emphasis} 12 movements, ${summary.loopsPerMovement} loops per movement, about ${formatTime(workoutSummary.estimatedTotalSeconds)} including transitions.`);
+      card.setAttribute('aria-label', `Start ${currentLevel.name} workout ${index + 1}: ${workout.title}. ${workout.emphasis} 12 movements, ${summary.loopsPerMovement} loops per movement, about ${formatTime(workoutSummary.estimatedTotalSeconds)} including transitions.`);
       const img = document.createElement('img'); img.src = movement.thumbnailUrl; img.alt = '';
       const copy = document.createElement('div'); copy.className = 'workout-card-copy';
-      const order = document.createElement('small'); order.textContent = `PROPOSED WORKOUT ${String(index + 1).padStart(2, '0')} OF 12`;
+      const order = document.createElement('small'); order.textContent = `WORKOUT ${String(index + 1).padStart(2, '0')} OF 12`;
       const title = document.createElement('h3'); title.textContent = workout.title;
       const focus = document.createElement('p'); focus.textContent = workout.emphasis;
       const duration = document.createElement('small'); duration.textContent = `12 movements · ${summary.loopsPerMovement} loops each · about ${formatTime(workoutSummary.estimatedTotalSeconds)}`;
@@ -376,7 +376,7 @@
     const program = snap.currentProgram;
     if (!movement || !program) return;
     $('#player-heading').textContent = movement.name;
-    $('#player-eyebrow').textContent = `${snap.levelName} · ${program.title} · MOVEMENT ${snap.movementIndex + 1} OF 12 · PROPOSED`;
+    $('#player-eyebrow').textContent = `${snap.levelName} · ${program.title} · MOVEMENT ${snap.movementIndex + 1} OF 12`;
     $('#player-meta').textContent = `${snap.loopsPerMovement} loops · ${formatTime(movement.durationSeconds * snap.loopsPerMovement)} video time for this movement · Miriam demonstration`;
     renderWorkoutProgress(snap);
     previousButton.disabled = snap.movementIndex <= 0;
@@ -397,7 +397,7 @@
     if (snap.nextMovement) { nextImage.src = snap.nextMovement.thumbnailUrl; nextImage.alt = `Next movement: ${snap.nextMovement.name}`; nextImage.hidden = false; }
     else { nextImage.hidden = true; nextImage.removeAttribute('src'); nextImage.alt = ''; }
     $('#transition-status').textContent = isTransitioning
-      ? `Next movement starts in ${snap.transitionSecondsRemaining} seconds.`
+      ? `Next movement starts in ${snap.transitionSecondsRemaining} seconds. Pause if you need more time to change position safely.`
       : snap.pausedFrom === 'transitioning'
         ? `Transition paused with ${snap.transitionSecondsRemaining} seconds remaining.`
         : `Loop ${snap.pass} of ${snap.passesPerWorkout} · Playback position is preserved.`;
@@ -425,7 +425,7 @@
       const [nextCatalog, nextPrograms, nextNarration] = await Promise.all([catalogResponse.json(), programResponse.json(), narrationResponse.json()]);
       if (revision !== authRevision) return;
       if (nextCatalog.libraryStatus !== 'preview_candidates_pending_owner_review' || nextCatalog.movements.length !== 36 || nextCatalog.excludedOnHold?.length) throw new Error('The 36-video movement catalog did not pass its integrity check.');
-      if (nextPrograms.schemaVersion !== 2 || nextPrograms.proposalStatus !== 'pending_owner_approval' || nextPrograms.totalWorkouts !== 36 || nextPrograms.movementsPerWorkout !== 12) throw new Error('The 36-workout proposal is incomplete or is missing its pending owner approval status.');
+      if (nextPrograms.schemaVersion !== 2 || nextPrograms.proposalStatus !== 'owner_approved_2026-11-13' || nextPrograms.totalWorkouts !== 36 || nextPrograms.movementsPerWorkout !== 12 || nextPrograms.ownerApproval?.status !== 'owner_approved_2026-11-13') throw new Error('The 36-workout matrix is incomplete or is missing final owner approval.');
       catalog = nextCatalog; programs = nextPrograms; narrationDrafts = nextNarration;
       controller = window.SoulanovaChairYogaPlayback.createChairYogaPlayback({
         levels: programs.levels,
